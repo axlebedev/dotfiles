@@ -1,0 +1,8 @@
+[user]
+	email = alexey.broadcast@gmail.com
+	name = alexey-broadcast
+[alias]
+	co = checkout
+	ci = commit
+	st = status
+	hist = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
