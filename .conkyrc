@@ -1,0 +1,75 @@
+out_to_x no
+own_window no
+out_to_console yes
+background no
+max_text_width 0
+double_buffer yes
+# Update interval in seconds
+update_interval 1.0
+
+# This is the number of times Conky will update before quitting.
+# Set to zero to run forever.
+total_run_times 0
+
+# Shortens units to a single character (kiB->k, GiB->G, etc.). Default is off.
+short_units yes
+
+# How strict should if_up be when testing an interface for being up?
+# The value is one of up, link or address, to check for the interface
+# being solely up, being up and having link or being up, having link
+# and an assigned IP address. 
+if_up_strictness address
+
+# Add spaces to keep things from moving about?  This only affects certain objects.
+# use_spacer should have an argument of left, right, or none
+use_spacer left
+
+# Force UTF8? note that UTF8 support required XFT
+override_utf8_locale no
+
+# number of cpu samples to average
+# set to 1 to disable averaging
+cpu_avg_samples 4
+
+
+font pango: FontAwesome 8
+
+template0 ${exec xset -q|grep LED| awk '{ print $10 }'}
+# template1 ${if_match ${cpu \1}<10} "\#00ff00" ${else} ${if_match ${cpu \1}<20} "\#a2ff00" ${else} ${if_match ${cpu \1}<30} "\#d4ff00" ${else} ${if_match ${cpu \1}<50} "\#f6ff00" ${else} ${if_match ${cpu \1}<80} "\#ff9d00" ${else} "\#ff0000" ${endif} ${endif} ${endif} ${endif} ${endif} 
+
+# Stuff after 'TEXT' will be formatted on screen
+TEXT
+
+# JSON for i3bar
+
+[
+# Next block - Num lock indicator
+${if_match "${exec xset q | grep 'Num Lock' | sed 's/.*Num Lock:[ ]*\([^ ]*\).*/\1/'}"=="off"}
+	{ "full_text": "NumLock off", "color": "\#FF0000" },
+${endif}
+# Next block - Caps lock indicator
+${if_match "${exec xset q | grep 'Caps Lock' | sed 's/.*Caps Lock:[ ]*\([^ ]*\).*/\1/'}"=="on"}
+	{ "full_text": "CapsLock", "color": "\#FF0000" },
+${endif}
+# Next block - wi-fi 
+	{ "full_text" : "${downspeed wlan0}/s", "color" : "\#ADCBFF", "separator" : false },
+	{ "full_text" : "${upspeed wlan0}/s", "color" : "\#ffc400" },
+# Next 5 blocks - cpu usage
+	{ "full_text" : "", "separator" : false },
+	{ "full_text" : "${cpu cpu1}", "separator" : false, "color" : ${if_match ${cpu cpu1}<10} "\#00ff00" ${else} ${if_match ${cpu cpu1}<20} "\#a2ff00" ${else} ${if_match ${cpu cpu1}<30} "\#d4ff00" ${else} ${if_match ${cpu cpu1}<50} "\#f6ff00" ${else} ${if_match ${cpu cpu1}<80} "\#ff9d00" ${else} "\#ff0000" ${endif} ${endif} ${endif} ${endif} ${endif} },
+	{ "full_text" : "${cpu cpu2}", "separator" : false, "color" : ${if_match ${cpu cpu2}<10} "\#00ff00" ${else} ${if_match ${cpu cpu2}<20} "\#a2ff00" ${else} ${if_match ${cpu cpu2}<30} "\#d4ff00" ${else} ${if_match ${cpu cpu2}<50} "\#f6ff00" ${else} ${if_match ${cpu cpu2}<80} "\#ff9d00" ${else} "\#ff0000" ${endif} ${endif} ${endif} ${endif} ${endif} },
+	{ "full_text" : "${cpu cpu3}", "separator" : false, "color" : ${if_match ${cpu cpu3}<10} "\#00ff00" ${else} ${if_match ${cpu cpu3}<20} "\#a2ff00" ${else} ${if_match ${cpu cpu3}<30} "\#d4ff00" ${else} ${if_match ${cpu cpu3}<50} "\#f6ff00" ${else} ${if_match ${cpu cpu3}<80} "\#ff9d00" ${else} "\#ff0000" ${endif} ${endif} ${endif} ${endif} ${endif} },
+	{ "full_text" : "${cpu cpu4}", "color" : ${if_match ${cpu cpu3}<10} "\#00ff00" ${else} ${if_match ${cpu cpu3}<20} "\#a2ff00" ${else} ${if_match ${cpu cpu3}<30} "\#d4ff00" ${else} ${if_match ${cpu cpu3}<50} "\#f6ff00" ${else} ${if_match ${cpu cpu3}<80} "\#ff9d00" ${else} "\#ff0000" ${endif} ${endif} ${endif} ${endif} ${endif} },
+# Next block - memory usage
+	{ "full_text" : "", "separator" : false },
+	{ "full_text" : "${memperc}%", "color" : 	${if_match ${memperc}<10} "\#00ff00" ${else} ${if_match ${memperc}<20}	"\#a2ff00" ${else} ${if_match ${memperc}<30} "\#d4ff00" ${else} ${if_match ${memperc}<50}	"\#f6ff00" ${else} ${if_match ${memperc}<80}	"\#ff9d00" ${else} "\#ff0000" ${endif} ${endif} ${endif} ${endif} ${endif} },
+# Next block - main disk free space
+	{ "full_text" : " ${fs_free /home} Free", "color" : "\#d4909b" },
+# Next block - system volume 
+	{ "full_text" : " ${exec ~/.i3/getVolume.sh}", "color" : "\#ffffff" },
+# Next block - keyboard layout
+	{ ${if_match ${template0}<10} "full_text": "EN", "color": "\#00ff00" ${else} "full_text": "RU", "color": "\#ff0000" ${endif} },
+# Next 2 blocks - date and time
+	{ "full_text" : "${time %d.%m.%Y}", "color" : "\#815f8c", "separator" : false },
+	{ "full_text" : "${time  %H:%M:%S}", "color" : "\#93c8d9" }
+],
