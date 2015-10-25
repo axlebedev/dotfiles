@@ -1,13 +1,24 @@
-syntax enable
+syntax on
 colorscheme monokai
+filetype plugin indent on     
 
+set ruler
 set number
 set showcmd
+set tabstop=4
+set shiftwidth=4
+set smarttab
+set hlsearch
+set ignorecase
+set smartcase
+
+set ai "включим автоотступы для новых строк
+set cin "отступы в стиле си
+
 
 "Vundle
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
-filetype plugin indent on     " обязательно!
 
 "репозитории на github
 "Bundle 'scrooloose/nerdcommenter'
@@ -21,6 +32,9 @@ Plugin 'The-NERD-Commenter'
 
 "NERD Comment
 let mapleader = ","
+nnoremap <leader>c<Space> <C-_>
+nmap <C-_> <leader>c<Space>
+vmap <C-_> <leader>c<Space>
 
 if has("autocmd")
     au InsertEnter *
