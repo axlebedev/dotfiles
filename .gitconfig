@@ -10,4 +10,4 @@
 	editor = vim
 	pager = more
 [credential]
-	helper = cache
+	helper = cache --timeout=86400
