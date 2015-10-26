@@ -1,6 +1,16 @@
 syntax on
+"before first start do in terminal:
+"export TERM=xterm-256color
+"for correct colorscheme work
 colorscheme monokai
+let g:molokai_original = 1
+
+filetype off
+call pathogen#helptags()
+call pathogen#infect()
 filetype plugin indent on     
+
+au BufNewFile,BufRead *.{md,mdown,mkd,mkdn,markdown,mdwn} set     filetype=markdown
 
 set ruler
 set number
@@ -17,12 +27,12 @@ set cin "отступы в стиле си
 
 
 "Vundle
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+"set rtp+=~/.vim/bundle/vundle/
+"call vundle#rc()
 
 "репозитории на github
 "Bundle 'scrooloose/nerdcommenter'
-Plugin 'The-NERD-Commenter'
+"Plugin 'The-NERD-Commenter'
 "репозитории vim/scripts
 "Bundle 'L9'
 "git репозитории (не на github)
