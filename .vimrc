@@ -1,7 +1,8 @@
 syntax on
 "before first start do in terminal:
-"export TERM=xterm-256color
+"silent execute export TERM=xterm-256color
 "for correct colorscheme work
+set t_Co=256
 colorscheme monokai
 let g:molokai_original = 1
 
