@@ -82,3 +82,13 @@ let g:airline_symbols.linenr = ''
 
 "tagbar
 nmap <F8> :TagbarToggle<CR>
+
+"markdown for tagbar
+let g:tagbar_type_markdown = {
+	\ 'ctagstype' : 'markdown',
+	\ 'kinds' : [
+		\ 'h:Heading_L1',
+		\ 'i:Heading_L2',
+		\ 'k:Heading_L3'
+	\ ]
+\ }
