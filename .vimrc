@@ -26,7 +26,6 @@ set smartcase
 set ai "включим автоотступы для новых строк
 set cin "отступы в стиле си
 
-
 "Vundle
 "set rtp+=~/.vim/bundle/vundle/
 "call vundle#rc()
@@ -61,3 +60,25 @@ if has("autocmd")
 
     au BufEnter * silent !echo -en "\033]0;VIM: %:t\a" 
 endif
+
+"airline
+set laststatus=2
+let g:airline_powerline_fonts=1
+
+if !exists('g:airline_symbols')
+	let g:airline_symbols = {}
+endif
+
+
+let g:airline_left_sep = ''
+let g:airline_right_sep = ''
+"let g:airline_left_sep = '▶'
+"let g:airline_right_sep = '◀'
+let g:airline_left_alt_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
+
+"tagbar
+nmap <F8> :TagbarToggle<CR>
