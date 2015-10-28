@@ -110,3 +110,7 @@ let g:tagbar_type_markdown = {
 		\ 'k:Heading_L3'
 	\ ]
 \ }
+
+"ctrlP
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
