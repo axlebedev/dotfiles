@@ -22,6 +22,7 @@ set smarttab
 set hlsearch
 set ignorecase
 set smartcase
+set path=.,,**
 
 set ai "включим автоотступы для новых строк
 set cin "отступы в стиле си
@@ -61,11 +62,27 @@ if has("autocmd")
     au BufEnter * silent !echo -en "\033]0;VIM: %:t\a" 
 endif
 
+"NERDTree
+map <C-n> :NERDTreeTabsToggle<CR>
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+let g:NERDTreeDirArrows = 1
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
+let g:NERDTreeShowHidden=1
+let g:nerdtree_tabs_open_on_console_startup=1
+let g:nerdtree_tabs_focus_on_files=1
+let g:nerdtree_tabs_autofind=1
+
+function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
+	exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
+	exec 'autocmd filetype nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+endfunction
+call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', '#151515')
+
 "airline
 set laststatus=2
 let g:airline_powerline_fonts=1
-let g:airline#extensions#tabline#enabled = 1
-
+let g:airline#extensions#tabline#enabled=1
 if !exists('g:airline_symbols')
 	let g:airline_symbols = {}
 endif
