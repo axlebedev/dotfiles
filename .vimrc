@@ -101,16 +101,23 @@ let g:airline_symbols.linenr = ''
 "tagbar
 nmap <F8> :TagbarToggle<CR>
 
-"markdown for tagbar
-let g:tagbar_type_markdown = {
-	\ 'ctagstype' : 'markdown',
-	\ 'kinds' : [
-		\ 'h:Heading_L1',
-		\ 'i:Heading_L2',
-		\ 'k:Heading_L3'
-	\ ]
-\ }
-
 "ctrlP
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
+
+
+" Add support for markdown files in tagbar.
+let g:tagbar_type_markdown = {
+	\ 'ctagstype': 'markdown',
+	\ 'ctagsbin' : '/home/alex/.vim/bundle/markdown2ctags/markdown2ctags.py',
+	\ 'ctagsargs' : '-f - --sort=yes',
+	\ 'kinds' : [
+		\ 's:sections',
+		\ 'i:images'
+	\ ],
+	\ 'sro' : '|',
+	\ 'kind2scope' : {
+		\ 's' : 'section',
+	\ },
+	\ 'sort': 0,
+\ }
