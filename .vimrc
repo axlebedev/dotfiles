@@ -1,6 +1,4 @@
-syntax on
-"before first start do in terminal:
-"silent execute export TERM=xterm-256color
+syntax on 
 "for correct colorscheme work
 set t_Co=256
 colorscheme monokai

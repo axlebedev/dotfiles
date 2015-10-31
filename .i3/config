@@ -165,12 +165,13 @@ mode "Exit (L)ogout, (R)eboot, (P)oweroff" {
 
 bindsym $mod+Shift+e mode "Exit (L)ogout, (R)eboot, (P)oweroff"
 
+assign [class="google-chrome"] 1
 assign [class="Skype"] 2
 assign [class="Telegram"] 2
 
+exec --no-startup-id i3-msg 'workspace 1; exec google-chrome; workspace 1'
 exec --no-startup-id i3-msg 'workspace 2; exec skype; workspace 1'
 exec --no-startup-id i3-msg 'workspace 2; exec Telegram; workspace 1'
-exec --no-startup-id i3-msg 'workspace 1; exec google-chrome'
 
 
 #ass                 border  backgr. text    indicator
