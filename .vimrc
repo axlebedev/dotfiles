@@ -119,3 +119,6 @@ let g:tagbar_type_markdown = {
 	\ },
 	\ 'sort': 0,
 \ }
+
+"vim-xkbswitch
+let g:XkbSwitchEnabled = 1
