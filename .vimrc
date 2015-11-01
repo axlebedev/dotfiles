@@ -1,13 +1,16 @@
+set synmaxcol=150
 syntax on 
 "for correct colorscheme work
 set t_Co=256
 colorscheme monokai
 let g:molokai_original = 1
 
+let g:pathogen_disabled = ['tagbar']
 filetype off
 call pathogen#helptags()
 call pathogen#infect()
 filetype plugin indent on     
+set omnifunc=syntaxcomplete#Complete
 
 au BufNewFile,BufRead *.{md,mdown,mkd,mkdn,markdown,mdwn} set     filetype=markdown
 
@@ -44,6 +47,7 @@ let mapleader = ","
 nnoremap <leader>c<Space> <C-_>
 nmap <C-_> <leader>c<Space>
 vmap <C-_> <leader>c<Space>
+"inoremap <expr> <Tab> pumvisible() ? "\<C-N>" : "\<Tab>"
 
 "if has("autocmd")
     "au InsertEnter *
