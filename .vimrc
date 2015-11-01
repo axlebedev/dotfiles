@@ -4,6 +4,14 @@ syntax on
 set t_Co=256
 colorscheme monokai
 let g:molokai_original = 1
+"set background=dark
+
+
+"vim-indent-guides
+let g:indent_guides_enable_on_vim_startup = 1
+let g:indent_guides_auto_colors = 0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd ctermbg=234
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=235
 
 let g:pathogen_disabled = ['tagbar']
 filetype off
@@ -126,3 +134,4 @@ let g:tagbar_type_markdown = {
 
 "vim-xkbswitch
 let g:XkbSwitchEnabled = 1
+
