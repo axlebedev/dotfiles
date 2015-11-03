@@ -2,6 +2,7 @@ set synmaxcol=150
 syntax on 
 "for correct colorscheme work
 set t_Co=256
+set timeoutlen=300
 colorscheme monokai
 let g:molokai_original = 1
 "set background=dark
@@ -13,12 +14,15 @@ let g:indent_guides_auto_colors = 0
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd ctermbg=234
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=235
 
-let g:pathogen_disabled = ['tagbar']
+"let g:pathogen_disabled = ['tagbar']
 filetype off
 call pathogen#helptags()
 call pathogen#infect()
 filetype plugin indent on     
 set omnifunc=syntaxcomplete#Complete
+
+"Fix of Esc key while autocomplete popup is visible: return to Normal mode
+let g:AutoClosePumvisible = {"ENTER": "\<C-y>", "Esc": "\<C-y>\<Esc>"}
 
 au BufNewFile,BufRead *.{md,mdown,mkd,mkdn,markdown,mdwn} set     filetype=markdown
 
@@ -56,6 +60,7 @@ nnoremap <leader>c<Space> <C-_>
 nmap <C-_> <leader>c<Space>
 vmap <C-_> <leader>c<Space>
 "inoremap <expr> <Tab> pumvisible() ? "\<C-N>" : "\<Tab>"
+
 
 "if has("autocmd")
     "au InsertEnter *
