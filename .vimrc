@@ -8,6 +8,7 @@ hi MatchParen cterm=bold ctermbg=none ctermfg=magenta
 let g:molokai_original = 1
 "set background=dark
 
+nnoremap <silent> <Esc> :noh<Esc>
 
 "vim-indent-guides
 let g:indent_guides_enable_on_vim_startup = 1
