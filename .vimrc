@@ -1,4 +1,5 @@
 set synmaxcol=150
+set history=500
 syntax on 
 "for correct colorscheme work
 set t_Co=256
@@ -9,6 +10,8 @@ let g:molokai_original = 1
 "set background=dark
 
 nnoremap <F12> :noh<CR>
+nnoremap <C-Tab> :bn<CR>
+nnoremap <C-S-Tab> :bp<CR>
 
 "vim-indent-guides
 let g:indent_guides_enable_on_vim_startup = 1
