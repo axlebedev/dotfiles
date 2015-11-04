@@ -4,6 +4,7 @@ syntax on
 set t_Co=256
 set timeoutlen=300
 colorscheme monokai
+hi MatchParen cterm=bold ctermbg=none ctermfg=magenta
 let g:molokai_original = 1
 "set background=dark
 
