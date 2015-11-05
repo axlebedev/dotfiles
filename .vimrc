@@ -8,7 +8,12 @@ colorscheme monokai
 hi MatchParen cterm=bold ctermbg=none ctermfg=magenta
 let g:molokai_original = 1
 "set background=dark
+
+"mouse for gnome-terminal
 se mouse=a
+
+"80 columns highlight
+set cc=80
 
 nnoremap <F12> :noh<CR>
 nnoremap <C-Tab> :bn<CR>
@@ -116,3 +121,7 @@ let g:tagbar_type_markdown = {
 "vim-xkbswitch
 let g:XkbSwitchEnabled = 1
 
+"incsearch plugin
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
