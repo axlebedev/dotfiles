@@ -8,6 +8,7 @@ colorscheme monokai
 hi MatchParen cterm=bold ctermbg=none ctermfg=magenta
 let g:molokai_original = 1
 "set background=dark
+se mouse=a
 
 nnoremap <F12> :noh<CR>
 nnoremap <C-Tab> :bn<CR>
