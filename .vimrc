@@ -16,6 +16,8 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+nnoremap <Space><Space> :
+
 "mouse for gnome-terminal
 se mouse=a
 
@@ -105,7 +107,7 @@ let g:airline_symbols.linenr = ''
 nmap <F8> :TagbarToggle<CR>
 
 "ctrlP
-let g:ctrlp_map = '<c-p>'
+let g:ctrlp_map = '<C-t>'
 let g:ctrlp_cmd = 'CtrlP'
 
 
