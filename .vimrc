@@ -12,6 +12,10 @@ let g:molokai_original = 1
 inoremap jj <Esc>
 inoremap оо <Esc>
 
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 "mouse for gnome-terminal
 se mouse=a
 
