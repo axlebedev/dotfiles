@@ -1,5 +1,6 @@
 set synmaxcol=150
 set history=500
+set gdefault
 syntax on 
 "for correct colorscheme work
 set t_Co=256
@@ -8,6 +9,8 @@ colorscheme monokai
 hi MatchParen cterm=bold ctermbg=none ctermfg=magenta
 let g:molokai_original = 1
 "set background=dark
+inoremap jj <Esc>
+inoremap оо <Esc>
 
 "mouse for gnome-terminal
 se mouse=a
