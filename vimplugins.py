@@ -14,7 +14,8 @@ def gitCmd(dir):
 
 
 def getUrl(dir):
-    command = gitCmd(dir) + 'remote show origin | grep Fetch'
+    grep = 'findstr' if sys.platform == 'win32' else 'grep'
+    command = gitCmd(dir) + 'remote show origin | ' + grep + ' Fetch'
               
     proc = subprocess.Popen([command], 
             stdout=subprocess.PIPE, 
