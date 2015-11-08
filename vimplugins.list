@@ -1,0 +1,31 @@
+https://github.com/vim-scripts/The-NERD-Commenter.git
+https://github.com/tpope/vim-fugitive
+https://github.com/dirkwallenstein/vim-autocomplpop.git
+https://github.com/vim-scripts/a.vim.git
+https://github.com/crusoexia/vim-javascript-lib.git
+https://github.com/jistr/vim-nerdtree-tabs.git
+https://github.com/tpope/vim-repeat.git
+https://github.com/scrooloose/nerdtree.git
+git://github.com/tpope/vim-surround.git
+https://github.com/terryma/vim-multiple-cursors.git
+https://github.com/lyokha/vim-xkbswitch.git
+https://github.com/bling/vim-airline
+https://github.com/haya14busa/incsearch.vim
+https://github.com/pangloss/vim-javascript.git
+https://github.com/ervandew/supertab.git
+https://github.com/plasticboy/vim-markdown.git
+https://github.com/jelera/vim-javascript-syntax.git
+https://github.com/ternjs/tern_for_vim.git
+https://github.com/vim-scripts/YankRing.vim.git
+https://github.com/Townk/vim-autoclose.git
+https://github.com/kien/ctrlp.vim.git
+https://github.com/majutsushi/tagbar.git
+https://github.com/edsono/vim-matchit.git
+https://github.com/jszakmeister/markdown2ctags.git
+https://github.com/ryanoasis/vim-devicons
+https://github.com/nathanaelkane/vim-indent-guides.git
+#errored folders:
+fatal: Not a git repository: '/home/alex/.vim/bundle/vim-l9/.git'
+
+fatal: Not a git repository: '/home/alex/.vim/bundle/.vundle/.git'
+

@@ -1,24 +1,103 @@
 import os
+import sys
+import re
 from os.path import expanduser
 import argparse
 import subprocess
-    
+
+
+
+def gitCmd(dir):
+    return 'git --git-dir=' + dir + \
+           '.git --work-tree=' + dir + ' ' 
+     
+
+
 def getUrl(dir):
-    command = 'git --git-dir=' + dir + '.git --work-tree=' + dir +  ' remote show origin | grep Fetch'
-    #print(command)
-    with subprocess.Popen([command], stdout=subprocess.PIPE, shell=True) as proc:
-        print(proc.stdout.read())
+    command = gitCmd(dir) + 'remote show origin | grep Fetch'
+              
+    proc = subprocess.Popen([command], 
+            stdout=subprocess.PIPE, 
+            stderr = subprocess.STDOUT, 
+            shell=True)
     
+    res = proc.communicate()[0].decode('utf-8')
+    searchRe = '(?<=Fetch URL: )[a-zA-Z0-9\_\-\.\/\:]+'
+    
+    url = re.search(searchRe, res)
+    if(url):
+        print('OK! git remote = ' + url.group(0))
+        return {'ok': True, 'url':url.group(0)}
+    
+    print('Error: ' + res)
+    return {'ok': False, 'url': res}
+    
+
+
 def listPackages(dir):
+    # get folders in ,vim/bundle folder
     print('list packages from ' + dir)
     dirs = [name for name in os.listdir(dir)
             if os.path.isdir(os.path.join(dir, name))] 
-    for d in dirs:
-        getUrl(dir + d + '/')
+    dirCount = len(dirs)
     
+    # get git remote urls for each folder
+    list = []
+    for i in range(0, dirCount):
+        print(str(i+1) + '/' + str(dirCount) + ': ' + dirs[i])
+        list.append(getUrl(dir + dirs[i]  + '/'))
+    
+    # write result in file
+    f = open('vimplugins.list', 'w')
+    errorList = []
+    for record in list:
+        if(record['ok']):
+            f.write(record['url'] + '\n')
+        else:
+            errorList.append(record)
+            
+    f.write('#errored folders:\n')
+    for record in errorList:
+        f.write(record['url'] + '\n')
+        
+    f.close()
+    
+    
+
+def clonePackage(dir, url):
+    searchDir = '((?<=/)[a-zA-Z0-9\_\-\.]+(?=\.git)' + \
+                '|(?<=/)[a-zA-Z0-9\_\-\.]+$)'
+    
+    subdir = re.search(searchDir, url)
+    if(not subdir):
+        print('Error processing ' + url)
+        return
+    
+    dir = dir + subdir.group(0)
+    command = 'git clone ' + url + ' ' + dir 
+    os.system(command)
+    
+    
+
 def getPackages(dir):
     print('get packages into ' + dir)
+    f = open('vimplugins.list')
+    lines = f.read().split('\n')
+    errorLine = 0
+    for i in range(0, len(lines)):
+        if(lines[i].find('#error') == 0):
+            errorLine = i
+            break
+
+    for i in range(0, errorLine):
+        print('\n[' + str(i+1) + '/' + str(errorLine) + \
+                ']: ' + lines[i] +  '\n')
+        clonePackage(dir, lines[i])
     
+    for i in range(errorLine + 1, len(lines)):
+        if(len(lines[i]) > 0):
+            print('\nErrored package, install it manually:\n' + lines[i])
+
 
 def main():
     print('vimplugins started...')
