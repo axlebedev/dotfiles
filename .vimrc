@@ -13,7 +13,11 @@ inoremap jj <Esc>
 inoremap оо <Esc>
 
 if has('gui_running')
+ if has("win32") || has("win16")
   set guifont=Droid\ Sans\ Mono\ for\ Powerline\ P:h10
+ else
+  set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Plus\ Nerd\ File\ Types\ 11
+ endif
   set encoding=utf-8
   set fileencoding=utf-8
   set langmenu=en_US.UTF-8    " sets the language of the menu (gvim)
