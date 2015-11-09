@@ -12,6 +12,19 @@ let g:molokai_original = 1
 inoremap jj <Esc>
 inoremap оо <Esc>
 
+if has('gui_running')
+  set guifont=Droid\ Sans\ Mono\ for\ Powerline\ P:h10
+  set encoding=utf-8
+  set fileencoding=utf-8
+  set langmenu=en_US.UTF-8    " sets the language of the menu (gvim)
+" language en                 " sets the language of the messages / ui (vim)
+"  set guioptions-=m  "remove menu bar
+  set guioptions-=T  "remove toolbar
+  set guioptions-=L  "remove left-hand scroll bar
+endif
+
+"nmap <C-w> tabclose
+nnoremap <C-s> i<CR><Esc>
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
