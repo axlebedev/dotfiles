@@ -14,6 +14,10 @@ inoremap оо <Esc>
 
 "lets backspace to work everywhere
 set backspace=indent,eol,start
+"fix autocompletion of filenames in command-line mode
+set wildmode=longest,list
+"by default `Y` is equal `yy`
+nnoremap Y y$
 
 if has('gui_running')
  if has("win32") || has("win16")
