@@ -222,6 +222,14 @@ endfunction
 
 command!  Kwbd call s:Kwbd(1)
 nnoremap <silent> <Plug>Kwbd :<C-u>Kwbd<CR>
-
-" Create a mapping (e.g.  in your .vimrc) like this:
 nmap <C-w> :Kwbd<CR>
+
+"function below makes easy search of selected visual mode text
+xnoremap * :<C-u>call <SID>VSetSearch()<CR>/<C-R>=@/<CR><CR>
+xnoremap # :<C-u>call <SID>VSetSearch()<CR>?<C-R>=@/<CR><CR>
+function! s:VSetSearch()
+	let temp = @s
+	norm! gv"sy
+	let @/ = '\V' . substitute(escape(@s, '/\'), '\n', '\\n', 'g')
+	let @s = temp
+endfunction
