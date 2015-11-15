@@ -12,6 +12,9 @@ let g:molokai_original = 1
 inoremap jj <Esc>
 inoremap оо <Esc>
 
+"lets backspace to work everywhere
+set backspace=indent,eol,start
+
 if has('gui_running')
  if has("win32") || has("win16")
   set guifont=Droid\ Sans\ Mono\ for\ Powerline\ P:h10
@@ -151,6 +154,9 @@ let g:XkbSwitchEnabled = 1
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
+
+"vim-indexed-search
+let g:indexed_search_dont_move = 1
 
 "delete the buffer; keep windows; create a scratch buffer if no buffers left
 function s:Kwbd(kwbdStage)
