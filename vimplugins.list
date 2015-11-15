@@ -10,8 +10,10 @@ git://github.com/tpope/vim-surround.git
 https://github.com/terryma/vim-multiple-cursors.git
 https://github.com/lyokha/vim-xkbswitch.git
 https://github.com/bling/vim-airline
+https://github.com/henrik/vim-indexed-search.git
 https://github.com/haya14busa/incsearch.vim
 https://github.com/pangloss/vim-javascript.git
+git://github.com/tpope/vim-dispatch.git
 https://github.com/ervandew/supertab.git
 https://github.com/plasticboy/vim-markdown.git
 https://github.com/jelera/vim-javascript-syntax.git
@@ -20,6 +22,7 @@ https://github.com/vim-scripts/YankRing.vim.git
 https://github.com/Townk/vim-autoclose.git
 https://github.com/kien/ctrlp.vim.git
 https://github.com/majutsushi/tagbar.git
+https://github.com/mileszs/ack.vim.git
 https://github.com/edsono/vim-matchit.git
 https://github.com/jszakmeister/markdown2ctags.git
 https://github.com/ryanoasis/vim-devicons
