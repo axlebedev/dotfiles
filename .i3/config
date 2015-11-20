@@ -26,6 +26,7 @@ font pango:Consolas Bold 12
 bindsym XF86AudioLowerVolume exec amixer -D pulse sset Master 2%- & killall -USR1 i3status 
 bindsym XF86AudioRaiseVolume exec amixer -D pulse sset Master 2%+ & killall -USR1 i3status 
 bindsym XF86AudioMute exec amixer -D pulse sset Master toggle & killall -USR1 i3status 
+bindsym $mod+o exec gnome-terminal --tab -e "alsamixer -V all"
 
 #exec --no-startup-id gnome-settings-daemon
 # Use Mouse+$mod to drag floating windows to their wanted position
