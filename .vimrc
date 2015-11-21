@@ -169,6 +169,10 @@ let g:XkbSwitchEnabled = 1
 Plugin 'MatchTag'
 
 " -----------------------------------------------------------------------------
+" autoclose html tags
+Plugin 'alvan/vim-closetag'
+let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.js,*.jsx"
+" -----------------------------------------------------------------------------
 " yank previous registers, more info at https://github.com/svermeulen/vim-easyclip
 "Plugin 'svermeulen/vim-easyclip'
 
@@ -425,6 +429,7 @@ nmap <C-M-j> mz:m+<cr>`z
 nmap <C-M-k> mz:m-2<cr>`z
 vmap <C-M-k> :m'<-2<cr>`>my`<mzgv`yo`z
 vmap <C-M-j> :m'>+<cr>`<my`>mzgv`yo`z
+
 " ========================= KEY BINDINGS end===================================
 " =============================================================================
 
