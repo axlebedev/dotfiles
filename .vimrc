@@ -62,18 +62,19 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " close vim if only window is NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 " some configs of NERDTree
-let g:NERDTreeDirArrows = 1 " allow it to show arrows
-let g:NERDTreeDirArrowExpandable = '▸'
-let g:NERDTreeDirArrowCollapsible = '▾'
-let g:NERDTreeShowHidden=1
-let g:nerdtree_tabs_open_on_console_startup=1
-let g:nerdtree_tabs_focus_on_files=1
-let g:nerdtree_tabs_autofind=1
+let g:NERDTreeDirArrows=1 " allow it to show arrows
+let g:NERDTreeDirArrowExpandable='▸'
+let g:NERDTreeDirArrowCollapsible='▾'
+let g:NERDTreeShowHidden=1 " show hidden files
 " TODO: if needed https://github.com/Xuyuanp/nerdtree-git-plugin
 
 " -----------------------------------------------------------------------------
 " plugin to make nerdtree be same on all tabs
 Bundle 'jistr/vim-nerdtree-tabs'
+let g:nerdtree_tabs_open_on_console_startup=1 " Open NERDTree on console vim startup
+let g:nerdtree_tabs_focus_on_files=1 " When switching into a tab, make sure that focus is on the file window, not in the NERDTree window.
+let g:nerdtree_tabs_autofind=1 " Automatically find and select currently opened file in NERDTree
+
 
 " -----------------------------------------------------------------------------
 " js code analysis tool
@@ -164,20 +165,33 @@ Plugin 'lyokha/vim-xkbswitch'
 let g:XkbSwitchEnabled = 1
 
 " -----------------------------------------------------------------------------
+" Highlight matching html tag
+Plugin 'MatchTag'
+
+" -----------------------------------------------------------------------------
 " yank previous registers, more info at https://github.com/svermeulen/vim-easyclip
 "Plugin 'svermeulen/vim-easyclip'
 
 " -----------------------------------------------------------------------------
 " navigate through previous plugin by <Tab>
-Plugin 'ervandew/supertab'
+"Plugin 'ervandew/supertab'
 " make it go through list from top to bottom
-let g:SuperTabDefaultCompletionType = "<c-n>"
+"let g:SuperTabDefaultCompletionType = "<c-n>"
 "Fix of Esc key while autocomplete popup is visible: return to Normal mode
-let g:AutoClosePumvisible = {"ENTER": "\<C-y>", "Esc": "\<C-e>\<Esc>"}
-
+"let g:AutoClosePumvisible = {"ENTER": "\<C-y>", "Esc": "\<C-e>\<Esc>"}
 " -----------------------------------------------------------------------------
 " autoshow complete pop
-Plugin 'othree/vim-autocomplpop'
+"Plugin 'othree/vim-autocomplpop'
+
+" -----------------------------------------------------------------------------
+" awesome complete features, deprecates supertab and autocomplpop
+Plugin 'Valloric/YouCompleteMe'
+
+" -----------------------------------------------------------------------------
+" jsx syntax highlight
+Plugin 'mxw/vim-jsx'
+" do it for 'js' files too, not only for 'jsx'
+let g:jsx_ext_required = 0
 
 " -----------------------------------------------------------------------------
 "drwxr-xr-x  6 alex alex 4,0K Nov 12 22:49 vim-dispatch
@@ -279,6 +293,9 @@ autocmd BufReadPost *
      \ endif
 " Remember info about open buffers on close
 set viminfo^=%
+
+" Match HTML tags
+runtime macros/matchit.vim
 " ========================= GLOBAL CONFIGS end=================================
 " =============================================================================
 
@@ -404,10 +421,10 @@ vnoremap <silent> * :call VisualSelection('f')<CR>
 vnoremap <silent> # :call VisualSelection('b')<CR>
 
 " Move a line of text using ALT+[jk] or Comamnd+[jk] on mac
-nmap <C-J> mz:m+<cr>`z
-nmap <C-K> mz:m-2<cr>`z
-vmap <C-J> :m'>+<cr>`<my`>mzgv`yo`z
-vmap <C-K> :m'<-2<cr>`>my`<mzgv`yo`z
+nmap <C-M-j> mz:m+<cr>`z
+nmap <C-M-k> mz:m-2<cr>`z
+vmap <C-M-k> :m'<-2<cr>`>my`<mzgv`yo`z
+vmap <C-M-j> :m'>+<cr>`<my`>mzgv`yo`z
 " ========================= KEY BINDINGS end===================================
 " =============================================================================
 
