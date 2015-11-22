@@ -130,7 +130,7 @@ let g:syntastic_check_on_wq = 0
 " autoclose parens on insert
 "Plugin 'LucHermitte/lh-brackets'
 "Plugin 'Townk/vim-autoclose'
-Plugin 'jiangmiao/auto-pairsj'
+Plugin 'jiangmiao/auto-pairs'
 
 " -----------------------------------------------------------------------------
 " used only for filetype icons in ctrlP or nerdtree
