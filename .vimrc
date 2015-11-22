@@ -125,8 +125,12 @@ let g:syntastic_check_on_wq = 0
 " https://github.com/scrooloose/syntastic/wiki/Syntax-Checkers
 
 " -----------------------------------------------------------------------------
+" Some common functions for next plugins
+"Plugin 'LucHermitte/lh-vim-lib'
 " autoclose parens on insert
-Plugin 'Townk/vim-autoclose'
+"Plugin 'LucHermitte/lh-brackets'
+"Plugin 'Townk/vim-autoclose'
+Plugin 'jiangmiao/auto-pairsj'
 
 " -----------------------------------------------------------------------------
 " used only for filetype icons in ctrlP or nerdtree
@@ -181,8 +185,6 @@ let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.js,*.jsx"
 "Plugin 'ervandew/supertab'
 " make it go through list from top to bottom
 "let g:SuperTabDefaultCompletionType = "<c-n>"
-"Fix of Esc key while autocomplete popup is visible: return to Normal mode
-"let g:AutoClosePumvisible = {"ENTER": "\<C-y>", "Esc": "\<C-e>\<Esc>"}
 " -----------------------------------------------------------------------------
 " autoshow complete pop
 "Plugin 'othree/vim-autocomplpop'
@@ -192,10 +194,28 @@ let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.js,*.jsx"
 Plugin 'Valloric/YouCompleteMe'
 
 " -----------------------------------------------------------------------------
+" another autocomplete plugin
+"Plugin 'Shougo/neocomplete.vim'
+
+" -----------------------------------------------------------------------------
 " jsx syntax highlight
 Plugin 'mxw/vim-jsx'
 " do it for 'js' files too, not only for 'jsx'
 let g:jsx_ext_required = 0
+
+" -----------------------------------------------------------------------------
+" Indent guides
+Plugin 'nathanaelkane/vim-indent-guides'
+" indent guides colors
+let g:indent_guides_auto_colors = 0
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=#0f0f0f   ctermbg=3
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=#1f1f1f ctermbg=4
+
+" -----------------------------------------------------------------------------
+" easy motions
+Plugin 'easymotion/vim-easymotion'
 
 " -----------------------------------------------------------------------------
 "drwxr-xr-x  6 alex alex 4,0K Nov 12 22:49 vim-dispatch
@@ -300,6 +320,9 @@ set viminfo^=%
 
 " Match HTML tags
 runtime macros/matchit.vim
+
+"Fix of Esc key while autocomplete popup is visible: return to Normal mode
+let g:AutoClosePumvisible = {"ENTER": "\<C-y>", "Esc": "\<C-e>\<Esc>"}
 " ========================= GLOBAL CONFIGS end=================================
 " =============================================================================
 
@@ -348,7 +371,6 @@ endif "has('gui_running')
 
 " set colors of matching parens
 hi MatchParen cterm=bold ctermbg=none ctermfg=magenta
-
 
 " -----------------------------------------------------------------------------
 " --------------------begin MONOKAI SETTINGS ----------------------------------
