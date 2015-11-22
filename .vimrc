@@ -198,6 +198,11 @@ Plugin 'Valloric/YouCompleteMe'
 "Plugin 'Shougo/neocomplete.vim'
 
 " -----------------------------------------------------------------------------
+" need to install following:
+" npm install -g eslint
+" npm install -g babel-eslint
+" npm install -g eslint-plugin-react
+
 " jsx syntax highlight
 Plugin 'mxw/vim-jsx'
 " do it for 'js' files too, not only for 'jsx'
