@@ -30,6 +30,64 @@ Plugin 'crusoexia/vim-monokai'
 Plugin 'l9'
 
 " -----------------------------------------------------------------------------
+" NERD Tree
+Plugin 'scrooloose/nerdtree'
+" start NERDTree on vim startup
+autocmd vimenter * NERDTree
+" even if we open dir but not file
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" close vim if only window is NERDTree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" some configs of NERDTree
+let g:NERDTreeDirArrows=1 " allow it to show arrows
+let g:NERDTreeDirArrowExpandable='▸'
+let g:NERDTreeDirArrowCollapsible='▾'
+let g:NERDTreeShowHidden=1 " show hidden files
+" TODO: if need https://github.com/Xuyuanp/nerdtree-git-plugin
+
+" -----------------------------------------------------------------------------
+" vim-airline: cute statusbar at bottom
+Plugin 'bling/vim-airline'
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled=1
+if !exists('g:airline_symbols')
+	let g:airline_symbols = {}
+endif
+let g:airline_left_sep = ''
+let g:airline_right_sep = ''
+"let g:airline_left_sep = '▶'
+"let g:airline_right_sep = '◀'
+let g:airline_left_alt_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
+
+" -----------------------------------------------------------------------------
+" syntax checker
+Plugin 'scrooloose/syntastic'
+let g:syntastic_enable_signs=1
+" some default configs
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+let g:syntastic_javascript_checkers = ['eslint']
+" need to install checkers for different languages
+" https://github.com/scrooloose/syntastic/wiki/Syntax-Checkers
+
+
+" -----------------------------------------------------------------------------
+" ctags structure
+Plugin 'majutsushi/tagbar'
+nmap <F8> :TagbarToggle<CR>
+
+" -----------------------------------------------------------------------------
 " Search string or pattern in folder
 " :Ack [options] {pattern} [{directories}]
 " :grep = :Ack, :grepadd = :AckAdd, :lgrep = :LAck, :lgrepadd = :LAckAdd
