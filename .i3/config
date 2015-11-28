@@ -175,6 +175,7 @@ exec --no-startup-id i3-msg 'workspace 1; exec google-chrome; workspace 1'
 exec --no-startup-id i3-msg 'workspace 2; exec skype; workspace 1'
 exec --no-startup-id i3-msg 'workspace 2; exec Telegram; workspace 1'
 exec --no-startup-id joxi
+exec --no-startup-id megasync
 
 
 #ass                 border  backgr. text    indicator
