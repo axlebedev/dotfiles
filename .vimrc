@@ -81,6 +81,22 @@ let g:syntastic_javascript_checkers = ['eslint']
 " need to install checkers for different languages
 " https://github.com/scrooloose/syntastic/wiki/Syntax-Checkers
 
+" -----------------------------------------------------------------------------
+" Generate jsdoc easily
+Plugin 'heavenshell/vim-jsdoc'
+let g:jsdoc_allow_input_prompt = 1
+let g:jsdoc_input_description = 1
+let g:jsdoc_return_description = 1
+let g:jsdoc_param_description_separator = ' - '
+
+" -----------------------------------------------------------------------------
+" One plugin to rule all the languages
+Plugin 'othree/html5.vim'
+
+" -----------------------------------------------------------------------------
+" JavaScript bundle for vim, this bundle provides syntax and indent plugins
+Plugin 'pangloss/vim-javascript'
+let g:javascript_enable_domhtmlcss = 1
 
 " -----------------------------------------------------------------------------
 " ctags structure
@@ -92,6 +108,10 @@ nmap <F8> :TagbarToggle<CR>
 " :Ack [options] {pattern} [{directories}]
 " :grep = :Ack, :grepadd = :AckAdd, :lgrep = :LAck, :lgrepadd = :LAckAdd
 Plugin 'mileszs/ack.vim'
+
+" -----------------------------------------------------------------------------
+" autoclose parens
+Plugin 'Raimondi/delimitMate'
 
 " -----------------------------------------------------------------------------
 " Fuzzy file opener
@@ -152,9 +172,64 @@ Plugin 'YankRing.vim'
 
 " -----------------------------------------------------------------------------
 " awesome complete features
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
+"let g:ycm_add_preview_to_completeopt = 1
+"let g:ycm_collect_identifiers_from_tags_files = 1
+"Plugin 'othree/vim-autocomplpop'
+"let g:acp_behavior-command = <C-x><C-o>
+"Plugin 'ervandew/supertab'
+Plugin 'Shougo/neocomplete.vim'
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 2
+" Define keyword.
+if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+"inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+"function! s:my_cr_function()
+  "return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+  " For no inserting <CR> key.
+  "return pumvisible() ? "\<C-y>" : "\<CR>"
+"endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+"inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+"inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+" Close popup by <Space>.
+inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
 
+" AutoComplPop like behavior.
+let g:neocomplete#enable_auto_select = 1
+
+" Shell like behavior(not recommended).
+"set completeopt+=longest
+"let g:neocomplete#enable_auto_select = 1
+"let g:neocomplete#disable_auto_complete = 1
+"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
+
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+" Enable heavy omni completion.
+"if !exists('g:neocomplete#sources#omni#input_patterns')
+  "let g:neocomplete#sources#omni#input_patterns = {}
+"endif
+"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
 
 " -----------------------------------------------------------------------------
 call vundle#end()            " required
@@ -347,6 +422,9 @@ nmap <space> <leader>
 " fast save file
 nmap <leader>w :w!<cr>
 
+" open file
+nnoremap <Leader>o :CtrlP<CR>
+
 " Fix of Esc key while autocomplete popup is visible: return to Normal mode
 let g:AutoClosePumvisible = {"ENTER": "\<C-y>", "Esc": "\<C-e>\<Esc>"}
 
@@ -382,6 +460,18 @@ nmap <C-M-k> mz:m-2<cr>`z
 vmap <C-M-k> :m'<-2<cr>`>my`<mzgv`yo`z
 vmap <C-M-j> :m'>+<cr>`<my`>mzgv`yo`z
 
+" Copy and paste through system slipboard
+vmap <Leader>y "+y
+vmap <Leader>d "+d
+nmap <Leader>p "+p
+nmap <Leader>P "+P
+vmap <Leader>p "+p
+vmap <Leader>P "+P
+
+" Some convenient file navigation
+map <F2> :NERDTreeToggle<CR>
+nmap <F5> :bprev<CR>
+nmap <F6> :bnext<CR>
 " ========================= KEY BINDINGS end===================================
 " =============================================================================
 
