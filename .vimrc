@@ -333,9 +333,6 @@ set synmaxcol=0
 " enable syntax highlight
 syntax on
 
-" syntax color limit (0 for endless)
-set synmaxcol=0
-
 " 80 columns highlight
 set cc=80
 
@@ -421,9 +418,6 @@ nmap <leader>w :w!<cr>
 
 " open file
 nnoremap <Leader>o :CtrlP<CR>
-
-" Fix of Esc key while autocomplete popup is visible: return to Normal mode
-let g:AutoClosePumvisible = {"ENTER": "\<C-y>", "Esc": "\<C-e>\<Esc>"}
 
 inoremap jj <Esc>
 inoremap оо <Esc>
