@@ -249,6 +249,7 @@ filetype plugin indent on    " required
 
 " =ss2=ssglobals===============================================================
 " ====================begin GLOBAL CONFIGS ====================================
+let s:vimdir = expand("~") . "/.vim"
 
 " where to search files to open
 set path=.,,**
@@ -261,9 +262,9 @@ set backspace=indent,eol,start
 
 " ignore files and folders on search
 " *nix version
-set wildignore+=*/node_modules/*,*/.git/*
+set wildignore+=*/node_modules/*,*/.git/*,*.swp
 " windows version
-set wildignore+=*\\node_modules\\*,*\\.git\\*
+set wildignore+=*\\node_modules\\*,*\\.git\\*,*.swp
 
 " fix autocompletion of filenames in command-line mode
 set wildmode=longest,list
@@ -314,6 +315,31 @@ set gdefault
 set ignorecase
 set smartcase
 
+" store swapfiles in a central location
+set directory=~/.vim/tmp/swap//,.,/var/tmp//,/tmp//
+if !isdirectory(s:vimdir . '/tmp/swap')
+    call mkdir(s:vimdir . '/tmp/swap', 'p')
+endif
+
+" enable persistent undo
+if has('persistent_undo')
+    set undofile
+    set undodir=~/.vim/tmp/undo
+    if !isdirectory(&undodir)
+        call mkdir(&undodir, 'p')
+    endif
+endif
+  
+" windows
+set splitbelow
+set splitright
+
+" make out autocompletion more comfortable
+set iskeyword+=$
+
+" folding
+set foldenable foldmethod=syntax
+autocmd vimrc Syntax * set foldmethod=syntax
 " ========================= GLOBAL CONFIGS end=================================
 " =============================================================================
 
@@ -345,7 +371,7 @@ syntax on
 if has('gui_running')
 
     if has("win32") || has("win16")
-        set guifont=Droid\ Sans\ Mono\ for\ Powerline\ P:h10
+        set guifont=Consolas:h10
     else
         set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Plus\ Nerd\ File\ Types\ 11
     endif "has("win32") || has("win16")
@@ -465,6 +491,28 @@ vmap <Leader>P "+P
 map <F2> :NERDTreeToggle<CR>
 nmap <F5> :bprev<CR>
 nmap <F6> :bnext<CR>
+
+" apply macros with Q (disables the default Ex mode shortcut)
+nnoremap Q @q
+vnoremap Q :norm @q<CR>
+
+" repeat command for each line in selection
+xnoremap . :normal .<CR>
+
+" reselect visual block after indent
+xnoremap <silent> > >gv
+xnoremap <silent> < <gv
+
+" select pasted text
+nmap vp `[v`]
+
+" copy and paste ]
+vnoremap <C-c> "+ygv<Esc>
+vnoremap <C-x> "+d<Esc>
+noremap <C-v>  "+gP
+cnoremap <C-v> <C-r>+
+exe 'inoremap <script> <C-v>' paste#paste_cmd['i']
+exe 'vnoremap <script> <C-v>' paste#paste_cmd['v']
 " ========================= KEY BINDINGS end===================================
 " =============================================================================
 
