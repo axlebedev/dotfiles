@@ -34,6 +34,8 @@ Plugin 'l9'
 Plugin 'scrooloose/nerdtree'
 " start NERDTree on vim startup
 autocmd vimenter * NERDTree
+" focus on editor window instead of NERDTree
+autocmd VimEnter * wincmd p
 " even if we open dir but not file
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
