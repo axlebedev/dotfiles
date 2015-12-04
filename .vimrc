@@ -339,7 +339,7 @@ set iskeyword+=$
 
 " folding
 set foldenable foldmethod=syntax
-autocmd vimrc Syntax * set foldmethod=syntax
+set foldlevelstart=99
 " ========================= GLOBAL CONFIGS end=================================
 " =============================================================================
 
