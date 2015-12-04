@@ -367,7 +367,6 @@ set cc=80
 " enable syntax highlight
 syntax on
 
-
 if has('gui_running')
 
     if has("win32") || has("win16")
@@ -409,6 +408,8 @@ let g:monokai_thick_border = 1 " PAPA doesn't work (
 " ------------------------- MONOKAI SETTINGS end-------------------------------
 " -----------------------------------------------------------------------------
 
+" Color of find result background
+highlight Search guibg='gray30' guifg='NONE'
 
 
 " -----------------------------------------------------------------------------
@@ -513,6 +514,14 @@ noremap <C-v>  "+gP
 cnoremap <C-v> <C-r>+
 exe 'inoremap <script> <C-v>' paste#paste_cmd['i']
 exe 'vnoremap <script> <C-v>' paste#paste_cmd['v']
+
+" center find results
+nnoremap n nzz
+nnoremap N Nzz
+nnoremap * *zz
+nnoremap # #zz
+nnoremap g* g*zz
+nnoremap g# g#zz
 " ========================= KEY BINDINGS end===================================
 " =============================================================================
 
