@@ -115,6 +115,8 @@ let g:javascript_enable_domhtmlcss = 1
 " ctags structure
 Plugin 'majutsushi/tagbar'
 nmap <F8> :TagbarToggle<CR>
+let g:tagbar_width = 80
+let g:tagbar_autofocus = 1
 
 " -----------------------------------------------------------------------------
 " Search string or pattern in folder
