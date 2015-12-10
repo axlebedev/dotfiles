@@ -88,7 +88,7 @@ set statusline+=%*
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+let g:syntastic_check_on_wq = 1
 
 let g:syntastic_javascript_checkers = ['eslint']
 " need to install checkers for different languages
@@ -180,6 +180,7 @@ Plugin 'MatchTag'
 " autoclose html tags
 Plugin 'alvan/vim-closetag'
 let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.js,*.jsx"
+" TODO: doesn't close if we use neocomplete 
 
 " -----------------------------------------------------------------------------
 " yank previous registers
@@ -242,6 +243,11 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 "let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
 "let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
 "let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+
+" -----------------------------------------------------------------------------
+" jsx support
+Plugin 'mxw/vim-jsx'
+let g:jsx_ext_required = 0
 
 " -----------------------------------------------------------------------------
 call vundle#end()            " required
@@ -617,3 +623,20 @@ autocmd BufReadPost *
      \ if line("'\"") > 0 && line("'\"") <= line("$") |
      \   exe "normal! g`\"" |
      \ endif
+
+" Markdown tagbar support
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+let g:tagbar_type_markdown = {
+    \ 'ctagstype': 'markdown',
+    \ 'ctagsbin' : '/home/alex/dotfiles/markdown2ctags.py',
+    \ 'ctagsargs' : '-f - --sort=yes',
+    \ 'kinds' : [
+        \ 's:sections',
+        \ 'i:images'
+    \ ],
+    \ 'sro' : '|',
+    \ 'kind2scope' : {
+        \ 's' : 'section',
+    \ },
+    \ 'sort': 0,
+\ }
