@@ -44,9 +44,9 @@ TEXT
 
 [
 # Next block - Num lock indicator
-${if_match "${exec xset q | grep 'Num Lock' | sed 's/.*Num Lock:[ ]*\([^ ]*\).*/\1/'}"=="off"}
-	{ "full_text": "NumLock off", "color": "\#FF0000" },
-${endif}
+#${if_match "${exec xset q | grep 'Num Lock' | sed 's/.*Num Lock:[ ]*\([^ ]*\).*/\1/'}"=="off"}
+	#{ "full_text": "NumLock off", "color": "\#FF0000" },
+#${endif}
 # Next block - Caps lock indicator
 ${if_match "${exec xset q | grep 'Caps Lock' | sed 's/.*Caps Lock:[ ]*\([^ ]*\).*/\1/'}"=="on"}
 	{ "full_text": "CapsLock", "color": "\#FF0000" },
