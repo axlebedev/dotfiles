@@ -357,7 +357,9 @@ set splitright
 set iskeyword+=$
 
 " folding
-set foldenable foldmethod=syntax
+set foldenable 
+set foldmethod=syntax
+set foldcolumn=0
 set foldlevelstart=99
 " ========================= GLOBAL CONFIGS end=================================
 " =============================================================================
@@ -375,16 +377,13 @@ set foldlevelstart=99
 " ====================begin APPEARANCE ========================================
 
 " syntax color limit (0 for endless)
-set synmaxcol=0
+set synmaxcol=500
 
 " enable syntax highlight
 syntax on
 
 " 80 columns highlight
 set cc=80
-
-" enable syntax highlight
-syntax on
 
 if has('gui_running')
 
@@ -406,9 +405,6 @@ else
 
 endif "has('gui_running')
 
-" set colors of matching parens
-hi MatchParen cterm=bold ctermbg=none ctermfg=magenta
-
 " highlights search results
 set hlsearch
 
@@ -429,6 +425,23 @@ let g:monokai_thick_border = 1 " PAPA doesn't work (
 
 " Color of find result background
 highlight Search guibg='gray30' guifg='NONE'
+
+" set colors of matching parens
+hi MatchParen cterm=bold ctermbg=none ctermfg=magenta
+
+" colors of fold column
+hi FoldColumn guibg=#131411 guifg=#34352E
+
+" colors of error column
+hi SignColumn guibg=#131411
+
+" colors of line number column
+hi LineNr guibg=#131411 guifg=#34352E
+hi CursorLineNr guibg=#ff0000 guifg=#34352E
+
+" colors and appearance of window split column
+set fillchars+=vert:│
+hi VertSplit guibg=#131411 guifg=#131411
 
 
 " -----------------------------------------------------------------------------
@@ -529,10 +542,10 @@ nmap vp `[v`]
 " copy and paste ]
 vnoremap <C-c> "+ygv<Esc>
 vnoremap <C-x> "+d<Esc>
-noremap <C-v>  "+gP
-cnoremap <C-v> <C-r>+
-exe 'inoremap <script> <C-v>' paste#paste_cmd['i']
-exe 'vnoremap <script> <C-v>' paste#paste_cmd['v']
+"noremap <C-v>  "+gP
+"cnoremap <C-v> <C-r>+
+"exe 'inoremap <script> <C-v>' paste#paste_cmd['i']
+"exe 'vnoremap <script> <C-v>' paste#paste_cmd['v']
 
 " center find results
 nnoremap n nzz
@@ -541,6 +554,9 @@ nnoremap * *zz
 nnoremap # #zz
 nnoremap g* g*zz
 nnoremap g# g#zz
+
+" toggle fold on tripleclick
+noremap <3-LeftMouse> za
 " ========================= KEY BINDINGS end===================================
 " =============================================================================
 
@@ -640,3 +656,14 @@ let g:tagbar_type_markdown = {
     \ },
     \ 'sort': 0,
 \ }
+
+" toggle foldColumn
+nnoremap <leader>f :call FoldColumnToggle()<cr>
+
+function! FoldColumnToggle()
+    if &foldcolumn > 0
+        setlocal foldcolumn=0
+    else 
+        setlocal foldcolumn=12
+    endif
+endfunction
