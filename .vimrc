@@ -487,9 +487,6 @@ nnoremap <Leader>o :CtrlP<CR>
 inoremap jj <Esc>
 inoremap оо <Esc>
 
-" by default `Y` is equal `yy`, let it act like 'C' or 'D'
-nnoremap Y y$
-
 " split line
 nnoremap <leader>s i<CR><Esc>
 
@@ -506,7 +503,6 @@ nnoremap <Space><Space> :
 nnoremap <leader>n :noh<CR>
 
 " Visual mode pressing * or # searches for the current selection
-" Super useful! From an idea by Michael Naumann
 vnoremap <silent> * :call VisualSelection('f')<CR>
 vnoremap <silent> # :call VisualSelection('b')<CR>
 
@@ -515,14 +511,6 @@ nmap <C-M-j> mz:m+<cr>`z
 nmap <C-M-k> mz:m-2<cr>`z
 vmap <C-M-k> :m'<-2<cr>`>my`<mzgv`yo`z
 vmap <C-M-j> :m'>+<cr>`<my`>mzgv`yo`z
-
-" Copy and paste through system slipboard
-vmap <Leader>y "+y
-vmap <Leader>d "+d
-nmap <Leader>p "+p
-nmap <Leader>P "+P
-vmap <Leader>p "+p
-vmap <Leader>P "+P
 
 " Some convenient file navigation
 map <F2> :NERDTreeToggle<CR>
@@ -543,13 +531,21 @@ xnoremap <silent> < <gv
 " select pasted text
 nmap vp `[v`]
 
-" copy and paste ]
-vnoremap <C-c> "+ygv<Esc>
-vnoremap <C-x> "+d<Esc>
+" copy and paste ] TODO: make some other bindings?
+"vnoremap <C-c> "+ygv<Esc>
+"vnoremap <C-x> "+d<Esc>
 "noremap <C-v>  "+gP
 "cnoremap <C-v> <C-r>+
 "exe 'inoremap <script> <C-v>' paste#paste_cmd['i']
 "exe 'vnoremap <script> <C-v>' paste#paste_cmd['v']
+" Copy and paste through system slipboard
+vmap <Leader>y "+y
+vmap <Leader>d "+d
+nmap <Leader>p "+p
+nmap <Leader>P "+P
+vmap <Leader>p "+p
+vmap <Leader>P "+P
+
 
 " center find results
 nnoremap n nzz
@@ -638,12 +634,14 @@ nnoremap <silent> <Plug>Kwbd :<C-u>Kwbd<CR>
 nmap <C-w> :Kwbd<CR>
 
 
+" -----------------------------------------------------------------------------
 " Return to last edit position when opening files (You want this!)
 autocmd BufReadPost *
      \ if line("'\"") > 0 && line("'\"") <= line("$") |
      \   exe "normal! g`\"" |
      \ endif
 
+" -----------------------------------------------------------------------------
 " Markdown tagbar support
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 let g:tagbar_type_markdown = {
@@ -661,6 +659,7 @@ let g:tagbar_type_markdown = {
     \ 'sort': 0,
 \ }
 
+" -----------------------------------------------------------------------------
 " toggle foldColumn
 nnoremap <leader>f :call FoldColumnToggle()<cr>
 
@@ -671,3 +670,13 @@ function! FoldColumnToggle()
         setlocal foldcolumn=12
     endif
 endfunction
+
+" -----------------------------------------------------------------------------
+" next functions makes:
+" nnoremap Y y$
+" but in YankRing-compatible way
+function! YRRunAfterMaps()
+    nnoremap Y   :<C-U>YRYankCount 'y$'<CR>
+endfunction
+
+" -----------------------------------------------------------------------------
