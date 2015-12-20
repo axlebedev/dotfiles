@@ -250,6 +250,10 @@ Plugin 'mxw/vim-jsx'
 let g:jsx_ext_required = 0
 
 " -----------------------------------------------------------------------------
+" color highlight in text
+Plugin 'ap/vim-css-color'
+
+" -----------------------------------------------------------------------------
 call vundle#end()            " required
 filetype plugin indent on    " required
 
