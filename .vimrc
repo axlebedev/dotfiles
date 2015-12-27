@@ -130,7 +130,7 @@ Plugin 'Raimondi/delimitMate'
 
 " -----------------------------------------------------------------------------
 " Fuzzy file opener
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 let g:ctrlp_map = '<C-t>'
 let g:ctrlp_cmd = 'CtrlP'
 " search hidden files too
@@ -185,6 +185,7 @@ let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.js,*.jsx"
 " -----------------------------------------------------------------------------
 " yank previous registers
 Plugin 'YankRing.vim'
+nnoremap <silent> <F11> :YRShow<CR>
 
 " -----------------------------------------------------------------------------
 " awesome complete features
@@ -253,6 +254,7 @@ let g:jsx_ext_required = 0
 " color highlight in text
 Plugin 'ap/vim-css-color'
 
+
 " -----------------------------------------------------------------------------
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -285,9 +287,9 @@ set backspace=indent,eol,start
 
 " ignore files and folders on search
 " *nix version
-set wildignore+=*/node_modules/*,*/.git/*,*.swp
+set wildignore+=*/node_modules/*,*/bower_components/*,*/.git/*,*.swp
 " windows version
-set wildignore+=*\\node_modules\\*,*\\.git\\*,*.swp
+set wildignore+=*\\node_modules\\*,*\\bower_components\\*,*\\.git\\*,*.swp
 
 " fix autocompletion of filenames in command-line mode
 set wildmode=longest,list
@@ -365,6 +367,10 @@ set foldenable
 set foldmethod=syntax
 set foldcolumn=0
 set foldlevelstart=99
+" HTML/XML Folding
+au BufNewFile,BufRead *.xml,*.htm,*.html so ~/.vim/bundle/XMLFolding.vim
+autocmd BufNewFile,BufReadPost *.less set filetype=stylesheet
+
 " ========================= GLOBAL CONFIGS end=================================
 " =============================================================================
 
@@ -397,7 +403,7 @@ if has('gui_running')
         set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Plus\ Nerd\ File\ Types\ 11
     endif "has("win32") || has("win16")
 
-    "set guioptions-=m  "remove menu bar
+    set guioptions-=m  "remove menu bar
     set guioptions-=T  "remove toolbar
     set guioptions-=L  "remove left-hand scroll bar
     set guioptions+=e  "PAPA TODO: comment this line, it's about tabs
@@ -441,7 +447,7 @@ hi SignColumn guibg=#131411
 
 " colors of line number column
 hi LineNr guibg=#131411 guifg=#34352E
-hi CursorLineNr guibg=#ff0000 guifg=#34352E
+"hi CursorLineNr guibg=#ff0000 guifg=#34352E
 
 " colors and appearance of window split column
 set fillchars+=vert:│
@@ -484,11 +490,12 @@ nmap <leader>w :w!<cr>
 " open file
 nnoremap <Leader>o :CtrlP<CR>
 
+" return to normal mode by double-j
 inoremap jj <Esc>
 inoremap оо <Esc>
 
 " split line
-nnoremap <leader>s i<CR><Esc>
+nnoremap <leader>s a<CR><Esc>
 
 " comfortable navigation through windows
 nnoremap <C-h> <C-w>h
@@ -668,6 +675,18 @@ function! FoldColumnToggle()
         setlocal foldcolumn=0
     else 
         setlocal foldcolumn=12
+    endif
+endfunction
+
+" -----------------------------------------------------------------------------
+" toggle centering cursor
+nnoremap <leader>c :call CenterCursorToggle()<cr>
+
+function! CenterCursorToggle()
+    if &scrolloff > 0
+        setlocal scrolloff=0
+    else 
+        setlocal scrolloff=999
     endif
 endfunction
 
