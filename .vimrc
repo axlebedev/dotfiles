@@ -468,10 +468,13 @@ call NERDTreeHighlightFile('js', 'red', 'none', '#ffa500', 'NONE')
 " ------------------------- NERDTREE HIGHLIGHT BY FILETYPES end----------------
 " -----------------------------------------------------------------------------
 
+" show invisible chars
+set listchars=eol:¬,tab:→.,trail:·,extends:»,precedes:«,conceal:_,nbsp:•
+"set listchars=eol:¬
+set list
+
 " ========================= APPEARANCE end=====================================
 " =============================================================================
-
-
 
 
 
