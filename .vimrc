@@ -474,6 +474,9 @@ call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', 'NONE')
 call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', 'NONE')
 call NERDTreeHighlightFile('scss', 'cyan', 'none', 'cyan', 'NONE')
 call NERDTreeHighlightFile('js', 'red', 'none', '#ffa500', 'NONE')
+
+" Also, turn off 'Press ? for help' label
+let NERDTreeMinimalUI=1
 " ------------------------- NERDTREE HIGHLIGHT BY FILETYPES end----------------
 " -----------------------------------------------------------------------------
 
