@@ -127,6 +127,7 @@ Plugin 'mileszs/ack.vim'
 " -----------------------------------------------------------------------------
 " autoclose parens
 Plugin 'Raimondi/delimitMate'
+let delimitMate_excluded_ft = 'html'
 
 " -----------------------------------------------------------------------------
 " Fuzzy file opener
@@ -411,6 +412,8 @@ if has('gui_running')
     set guioptions-=L  "remove left-hand scroll bar
     set guioptions+=e  "PAPA TODO: comment this line, it's about tabs
 
+    " Maximize gvim window.
+    set lines=999 columns=999
 else
 
     " number of colors in terminal
@@ -450,12 +453,15 @@ hi SignColumn guibg=#131411
 
 " colors of line number column
 hi LineNr guibg=#131411 guifg=#34352E
-"hi CursorLineNr guibg=#ff0000 guifg=#34352E
+
+" highlight current line number
+set cursorline
+hi clear CursorLine
+hi CursorLineNr guifg=#68705e guibg=#131411
 
 " colors and appearance of window split column
 set fillchars+=vert:│
 hi VertSplit guibg=#131411 guifg=#131411
-
 
 " -----------------------------------------------------------------------------
 " --------------------begin NERDTREE HIGHLIGHT BY FILETYPES -------------------
@@ -472,9 +478,11 @@ call NERDTreeHighlightFile('js', 'red', 'none', '#ffa500', 'NONE')
 " -----------------------------------------------------------------------------
 
 " show invisible chars
-set listchars=eol:¬,tab:→.,trail:·,extends:»,precedes:«,conceal:_,nbsp:•
-"set listchars=eol:¬
+set listchars=tab:↳\ ,trail:·,extends:»,precedes:«,conceal:_,nbsp:•
 set list
+
+" show wrapped line marker
+set showbreak=»
 
 " ========================= APPEARANCE end=====================================
 " =============================================================================
