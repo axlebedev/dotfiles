@@ -1,6 +1,6 @@
 # dotfiles
-.file  
-.fil  
-.fi  
-.f  
-.  
+`.file`  
+`.fil`  
+`.fi`  
+`.f`  
+`.`  
