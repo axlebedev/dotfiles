@@ -1,2 +1,6 @@
 # dotfiles
-Configs for vim, conky etc.
+.file  
+.fil  
+.fi  
+.f  
+.  
