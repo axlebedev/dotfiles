@@ -276,6 +276,9 @@ filetype plugin indent on    " required
 " ====================begin GLOBAL CONFIGS ====================================
 let s:vimdir = expand("~") . "/.vim"
 
+" dont save files on change buffer
+set hidden
+
 " where to search files to open
 set path=.,,**
 
@@ -567,6 +570,10 @@ nnoremap g# g#zz
 
 " toggle fold on tripleclick
 noremap <3-LeftMouse> za
+
+" save file under root
+cmap w!! w !sudo tee % >/dev/null
+
 " ========================= KEY BINDINGS end===================================
 " =============================================================================
 
