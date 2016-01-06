@@ -96,6 +96,9 @@ alias gi="git commit"
 alias go="git checkout"
 alias gp="git pull"
 alias gu="git push"
+
+
+alias lt="tree -a -C -I node_modules\|.git\|bower_components"
 # ======== ALIASES end=====
 
 
