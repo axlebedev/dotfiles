@@ -255,7 +255,6 @@ let g:jsx_ext_required = 0
 " color highlight in text
 Plugin 'ap/vim-css-color'
 
-
 " -----------------------------------------------------------------------------
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -720,3 +719,14 @@ function! YRRunAfterMaps()
 endfunction
 
 " -----------------------------------------------------------------------------
+" Toggle quickfix window
+nnoremap <silent> <leader>b :<C-u>call ToggleErrors()<CR>
+
+function! ToggleErrors()
+    if empty(filter(tabpagebuflist(), 'getbufvar(v:val, "&buftype") is# "quickfix"'))
+         " No location/quickfix list shown, open syntastic error location panel
+         Errors
+    else
+        lclose
+    endif
+endfunction
