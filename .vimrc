@@ -256,11 +256,17 @@ let g:jsx_ext_required = 0
 Plugin 'ap/vim-css-color'
 
 " -----------------------------------------------------------------------------
+" Indent line for leading spaces
+Plugin 'Yggdroot/indentLine'
+" Warning! needed to patch font as described at https://github.com/Yggdroot/indentLine
+let g:indentLine_char = ''
+
+" -----------------------------------------------------------------------------
 call vundle#end()            " required
 filetype plugin indent on    " required
 
 
-" ========================= VUNDLE end=========================================
+" sspe===================== VUNDLE end=========================================
 " =============================================================================
 
 
