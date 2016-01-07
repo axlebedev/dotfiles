@@ -92,10 +92,15 @@ alias v="gvim ."
 
 alias o="xdg-open"
 
+alias ga="git add"
 alias gi="git commit"
 alias go="git checkout"
-alias gp="git pull"
-alias gu="git push"
+alias gs="git status"
+alias gd="git diff"
+alias gh="git hist"
+alias ghs="git hist --stat"
+alias gpl="git pull"
+alias gps="git push"
 
 
 alias lt="tree -a -C -I node_modules\|.git\|bower_components"

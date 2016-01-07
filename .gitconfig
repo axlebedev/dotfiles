@@ -11,3 +11,9 @@
 	pager = more
 [credential]
 	helper = cache --timeout=86400
+[diff]
+	tool = vimdiff
+[merge]
+	tool = vimdiff
+[difftool]
+	prompt = false
