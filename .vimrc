@@ -262,6 +262,11 @@ Plugin 'Yggdroot/indentLine'
 let g:indentLine_char = ''
 
 " -----------------------------------------------------------------------------
+" Smooth scroll
+Plugin 'yonchu/accelerated-smooth-scroll'
+"Plugin 'file:///home/alex/.vim/bundle/smoooth.vim'
+
+" -----------------------------------------------------------------------------
 call vundle#end()            " required
 filetype plugin indent on    " required
 
@@ -449,7 +454,7 @@ let g:monokai_thick_border = 1 " PAPA doesn't work (
 highlight Search guibg='gray30' guifg='NONE'
 
 " set colors of matching parens
-hi MatchParen cterm=bold ctermbg=none ctermfg=magenta
+hi MatchParen cterm=bold ctermbg=none ctermfg=magenta gui=bold guibg=#51535C guifg=NONE
 
 " colors of fold column
 hi FoldColumn guibg=#131411 guifg=#34352E
