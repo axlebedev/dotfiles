@@ -582,8 +582,8 @@ nmap vp `[v`]
 " Copy and paste through system slipboard
 vmap <Leader>y "+y
 vmap <Leader>d "+d
-nmap <Leader>p "+pvp=
-nmap <Leader>P "+Pvp=
+nmap <Leader>p "+pvp=`]
+nmap <Leader>P "+Pvp=`]
 vmap <Leader>p "+p
 vmap <Leader>P "+P
 
