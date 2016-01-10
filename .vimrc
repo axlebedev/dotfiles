@@ -132,7 +132,8 @@ let delimitMate_excluded_ft = 'html'
 " -----------------------------------------------------------------------------
 " Fuzzy file opener
 Plugin 'ctrlpvim/ctrlp.vim'
-let g:ctrlp_map = '<C-t>'
+"let g:ctrlp_map = '<C-t>'
+let g:ctrlp_map = '<leader>t'
 let g:ctrlp_cmd = 'CtrlP'
 " search hidden files too
 let g:ctrlp_show_hidden = 1
@@ -142,6 +143,11 @@ let g:ctrlp_working_path_mode = 'ra'
 if exists("g:ctrl_user_command")
   unlet g:ctrlp_user_command
 endif
+
+" -----------------------------------------------------------------------------
+" Sublime's <C-r> analog
+Plugin 'tacahiroy/ctrlp-funky'
+nnoremap <Leader>r :CtrlPFunky<Cr>
 
 " -----------------------------------------------------------------------------
 " comment lines, uncomment lines
@@ -592,6 +598,11 @@ nnoremap g# g#zz
 
 " toggle fold on tripleclick
 noremap <3-LeftMouse> za
+
+" insert blank line
+nnoremap <leader><CR> o<Esc>
+nnoremap <leader>o o<Esc>
+nnoremap <leader>O O<Esc>
 
 " save file under root
 cmap w!! w !sudo tee % >/dev/null
