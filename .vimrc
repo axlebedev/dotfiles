@@ -265,11 +265,15 @@ Plugin 'ap/vim-css-color'
 " Indent line for leading spaces
 Plugin 'Yggdroot/indentLine'
 " Warning! needed to patch font as described at https://github.com/Yggdroot/indentLine
-let g:indentLine_char = ''
+if has("win32") || has("win16")
+    let g:indentLine_char = '⁞'
+else
+    let g:indentLine_char = ''
+endif "has("win32") || has("win16")
 
 " -----------------------------------------------------------------------------
 " Smooth scroll
-Plugin 'yonchu/accelerated-smooth-scroll'
+"Plugin 'yonchu/accelerated-smooth-scroll'
 "Plugin 'file:///home/alex/.vim/bundle/smoooth.vim'
 
 " -----------------------------------------------------------------------------
@@ -498,7 +502,11 @@ let NERDTreeMinimalUI=1
 " -----------------------------------------------------------------------------
 
 " show invisible chars
-set listchars=tab:↳\ ,trail:·,extends:»,precedes:«,conceal:_,nbsp:•
+if has("win32") || has("win16")
+    set listchars=tab:⁞\ ,trail:·,extends:»,precedes:«,conceal:_,nbsp:•
+else
+    set listchars=tab:↳\ ,trail:·,extends:»,precedes:«,conceal:_,nbsp:•
+endif
 set list
 
 " show wrapped line marker
