@@ -615,6 +615,9 @@ nnoremap <leader>O O<Esc>
 " save file under root
 cmap w!! w !sudo tee % >/dev/null
 
+" replace selection
+vnoremap <C-h> "hy:%s/<C-r>h//gc<left><left><left>
+
 " ========================= KEY BINDINGS end===================================
 " =============================================================================
 
