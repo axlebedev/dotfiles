@@ -595,6 +595,9 @@ nmap <Leader>P "+Pvp=
 vmap <Leader>p "+p
 vmap <Leader>P "+P
 
+" Movement in wrapped lines
+nnoremap j gj
+nnoremap k gk
 
 " center find results
 nnoremap n nzz
