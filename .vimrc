@@ -112,6 +112,11 @@ Plugin 'pangloss/vim-javascript'
 let g:javascript_enable_domhtmlcss = 1
 
 " -----------------------------------------------------------------------------
+" jsx support
+Plugin 'mxw/vim-jsx'
+let g:jsx_ext_required = 0
+
+" -----------------------------------------------------------------------------
 " ctags structure
 Plugin 'majutsushi/tagbar'
 nmap <F8> :TagbarToggle<CR>
@@ -253,11 +258,6 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 "let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
 
 " -----------------------------------------------------------------------------
-" jsx support
-Plugin 'mxw/vim-jsx'
-let g:jsx_ext_required = 0
-
-" -----------------------------------------------------------------------------
 " color highlight in text
 Plugin 'ap/vim-css-color'
 
@@ -389,8 +389,8 @@ set foldmethod=syntax
 set foldcolumn=0
 set foldlevelstart=99
 " HTML/XML Folding
-au BufNewFile,BufRead *.xml,*.htm,*.html so ~/.vim/bundle/XMLFolding.vim
-autocmd BufNewFile,BufReadPost *.less set filetype=stylesheet
+"au BufNewFile,BufRead *.xml,*.htm,*.html so ~/.vim/bundle/XMLFolding.vim
+"autocmd BufNewFile,BufReadPost *.less set filetype=stylesheet
 
 " ========================= GLOBAL CONFIGS end=================================
 " =============================================================================
@@ -521,6 +521,9 @@ nmap <space> <leader>
 " fast save file
 nmap <leader>w :w!<cr>
 
+" fast close
+nmap <leader>q :q<cr>
+
 " open file
 nnoremap <Leader>o :CtrlP<CR>
 
@@ -580,12 +583,9 @@ nmap vp `[v`]
 "exe 'inoremap <script> <C-v>' paste#paste_cmd['i']
 "exe 'vnoremap <script> <C-v>' paste#paste_cmd['v']
 " Copy and paste through system slipboard
-vmap <Leader>y "+y
-vmap <Leader>d "+d
+vmap Y "+y
 nmap <Leader>p "+pvp=`]
 nmap <Leader>P "+Pvp=`]
-vmap <Leader>p "+p
-vmap <Leader>P "+P
 
 
 " center find results
@@ -602,7 +602,6 @@ noremap <3-LeftMouse> za
 " insert blank line
 nnoremap <leader><CR> o<Esc>
 nnoremap <leader>o o<Esc>
-nnoremap <leader>O O<Esc>
 
 " save file under root
 cmap w!! w !sudo tee % >/dev/null
