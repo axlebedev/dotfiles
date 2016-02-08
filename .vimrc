@@ -621,7 +621,7 @@ cmap w!! w !sudo tee % >/dev/null
 vnoremap <C-h> "hy:%s/<C-r>h//gc<left><left><left>
 
 " visual select all
-nnoremap <C-a> ggVG
+nnoremap <M-a> ggVG
 
 " ========================= KEY BINDINGS end===================================
 " =============================================================================
