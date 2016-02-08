@@ -620,6 +620,9 @@ cmap w!! w !sudo tee % >/dev/null
 " replace selection
 vnoremap <C-h> "hy:%s/<C-r>h//gc<left><left><left>
 
+" visual select all
+nnoremap <C-a> ggVG
+
 " ========================= KEY BINDINGS end===================================
 " =============================================================================
 
