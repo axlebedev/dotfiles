@@ -166,16 +166,21 @@ mode "Exit (L)ogout, (R)eboot, (P)oweroff" {
 
 bindsym $mod+Shift+e mode "Exit (L)ogout, (R)eboot, (P)oweroff"
 
+assign [class="google-chrome" instance="crx_clhhggbfdinjmjhajaheehoeibfljjno"] 9
 assign [class="google-chrome"] 1
-assign [class="Skype"] 2
-assign [class="Telegram"] 2
+assign [class="Skype"] 9
+assign [class="Telegram"] 9
+assign [class="Telegram Web"] 9
 for_window [class="VsTranslator" instance="vsTranslator"] floating enable
 for_window [class="Screenruler" instance="screenruler"] border none
 for_window [class="Screenruler" instance="screenruler"] resize set 500 200
 
+
+workspace 9 output DVI-D-0
+
 exec --no-startup-id i3-msg 'workspace 1; exec google-chrome; workspace 1'
-exec --no-startup-id i3-msg 'workspace 2; exec skype; workspace 1'
-exec --no-startup-id i3-msg 'workspace 2; exec Telegram; workspace 1'
+exec --no-startup-id i3-msg 'workspace 9; exec skype; workspace 1'
+exec --no-startup-id i3-msg 'workspace 9; exec /opt/google/chrome/google-chrome --profile-directory=Default --app-id=clhhggbfdinjmjhajaheehoeibfljjno; workspace 1'
 exec --no-startup-id joxi
 exec --no-startup-id megasync
 exec --no-startup-id feh --bg-scale ~/Pictures/518079-background-hd.jpg --bg-scale ~/Pictures/ws_HTC_Sense_Background_1280x1024\ \(1\).jpg 
