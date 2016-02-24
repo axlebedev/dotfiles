@@ -102,6 +102,8 @@ alias ghs="git hist --stat"
 alias gpl="git pull"
 alias gps="git push"
 
+alias nemo="nemo --no-desktop"
+
 
 alias lt="tree -a -C -I node_modules\|.git\|bower_components"
 # ======== ALIASES end=====
