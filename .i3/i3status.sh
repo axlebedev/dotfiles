@@ -5,6 +5,8 @@ echo '[[],'
 
 exec conky -c $HOME/.conkyrc &
 
+# WARNING!!! 'jshon' needed
+
 CAL_PID=0
 NAME="Date"
 
@@ -18,7 +20,8 @@ do
     getname=`echo $line | jshon -e name -u`
     if [ "$getname" = "$NAME" ] 
     then
-        if [[ $CAL_PID -eq 0 ]] 
+        echo "out: 24" >> ~/debug/out
+        if [ $CAL_PID -eq 0 ] 
         then
             gsimplecal &
             CAL_PID=$!
