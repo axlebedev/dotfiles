@@ -1,8 +1,7 @@
 #!/bin/sh
 
 echo '{"version":1, "click_events": true }'
-echo '['
-echo '[],'
+echo '[[],'
 
 exec conky -c $HOME/.conkyrc &
 
