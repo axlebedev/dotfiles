@@ -1,13 +1,31 @@
 #!/bin/sh
 
-# Send the header so that i3bar knows we want to use JSON:
-echo '{"version":1}'
-
-# Begin the endless array.
+echo '{"version":1, "click_events": true }'
 echo '['
-
-# We send an empty first array of blocks to make the loop simpler:
 echo '[],'
 
-# Now send blocks with information forever:
-exec conky -c $HOME/.conkyrc
+exec conky -c $HOME/.conkyrc &
+
+CAL_PID=0
+NAME="Date"
+
+while read -r line
+do
+    if [ "$line" = "[" ]
+    then
+        continue
+    fi
+    line=`echo $line | sed "s/^,//"`
+    getname=`echo $line | jshon -e name -u`
+    if [ "$getname" = "$NAME" ] 
+    then
+        if [[ $CAL_PID -eq 0 ]] 
+        then
+            gsimplecal &
+            CAL_PID=$!
+        else
+            kill $CAL_PID
+            CAL_PID=0
+        fi
+    fi
+done
