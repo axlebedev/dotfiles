@@ -171,8 +171,13 @@ assign [class="google-chrome"] 1
 assign [class="Skype"] 9
 assign [class="Telegram"] 9
 assign [class="Telegram Web"] 9
+
 for_window [class="VsTranslator" instance="vsTranslator"] floating enable
 for_window [class="Gsimplecal" instance="gsimplecal"] floating enable
+for_window [class="Gnome-system-monitor" instance="gnome-system-monitor"] floating enable
+for_window [class="Gnome-alsamixer" instance="gnome-alsamixer"] floating enable
+
+
 for_window [class="Screenruler" instance="screenruler"] border none
 for_window [class="Screenruler" instance="screenruler"] resize set 500 200
 
