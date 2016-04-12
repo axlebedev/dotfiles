@@ -571,6 +571,8 @@ vmap <C-M-j> :m'>+<cr>`<my`>mzgv`yo`z
 map <F2> :NERDTreeToggle<CR>
 nmap <F5> :bprev<CR>
 nmap <F6> :bnext<CR>
+nmap <leader>j :bprev<CR>
+nmap <leader>k :bnext<CR>
 
 " apply macros with Q (disables the default Ex mode shortcut)
 nnoremap Q @q
@@ -621,10 +623,17 @@ nnoremap <leader>o o<Esc>
 cmap w!! w !sudo tee % >/dev/null
 
 " replace selection
-vnoremap <C-h> "hy:%s/<C-r>h//gc<left><left><left><C-r>h
+vnoremap <C-h> "hy:%s/<C-r>h//c<left><left><C-r>h
 
 " visual select all
 nnoremap <M-a> ggVG
+
+" find in current project
+if has("win32") || has("win16")
+    nnoremap <C-S-f> :vim<space><space>src\**<space>\|<space>cw<left><left><left><left><left><left><left><left><left><left><left><left>
+else
+    nnoremap <C-S-f> :vim<space><space>src/**<space>\|<space>cw<left><left><left><left><left><left><left><left><left><left><left><left>
+endif
 
 " ========================= KEY BINDINGS end===================================
 " =============================================================================
