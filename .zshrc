@@ -92,8 +92,6 @@ alias v="gvim ."
 
 alias o="xdg-open"
 
-alias c="gnome-terminal"
-
 alias ga="git add"
 alias gi="git commit"
 alias go="git checkout"
