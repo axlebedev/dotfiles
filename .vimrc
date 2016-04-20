@@ -169,7 +169,7 @@ map g/ <Plug>(incsearch-stay)
 
 " -----------------------------------------------------------------------------
 " multiple cursors on <C-n>
-Plugin 'terryma/vim-multiple-cursors'
+"Plugin 'terryma/vim-multiple-cursors'
 
 " -----------------------------------------------------------------------------
 " Make '.' work on plugin commands (not all maybe)
