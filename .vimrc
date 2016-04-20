@@ -573,6 +573,7 @@ nmap <F5> :bprev<CR>
 nmap <F6> :bnext<CR>
 nmap <leader>j :bprev<CR>
 nmap <leader>k :bnext<CR>
+nmap <leader>tt :NERDTreeFind<CR>
 
 " apply macros with Q (disables the default Ex mode shortcut)
 nnoremap Q @q
@@ -630,10 +631,13 @@ nnoremap <M-a> ggVG
 
 " find in current project
 if has("win32") || has("win16")
-    nnoremap <C-S-f> :vim<space><space>src\**<space>\|<space>cw<left><left><left><left><left><left><left><left><left><left><left><left>
+    nnoremap <C-S-f> :vim<space>//j<space>src\**\|cw<left><left><left><left><left><left><left><left><left><left><left><left>
 else
-    nnoremap <C-S-f> :vim<space><space>src/**<space>\|<space>cw<left><left><left><left><left><left><left><left><left><left><left><left>
+    nnoremap <C-S-f> :vim<space>//j<space>src/**\|cw<left><left><left><left><left><left><left><left><left><left><left><left>
 endif
+
+" add ';' to current line
+nnoremap <leader>; A;<Esc>
 
 " ========================= KEY BINDINGS end===================================
 " =============================================================================
@@ -785,3 +789,31 @@ command! Kwbd call s:Kwbd(1)
 nnoremap <silent> <Plug>Kwbd :<C-u>Kwbd<CR>
 " Create a mapping (e.g. in your .vimrc) like this:
 "nmap <C-W>! <Plug>Kwbd
+
+
+" -----------------------------------------------------------------------------
+" Make a smart console.log
+
+nnoremap <silent> <leader>l :<C-u>call SmartConsoleLog(0)<CR>
+nnoremap <silent> <leader>ll :<C-u>call SmartConsoleLog(1)<CR>
+
+function! SmartConsoleLog(superSmart)
+    let curChar = getline(".")[col(".")-1]
+	if empty(matchstr(curChar, '\S'))
+        :execute "normal! iconsole.log();\<esc>==hf("
+    else
+        if(a:superSmart)
+            :execute "normal! bi(`\<esc>eyiwea=${\<esc>pa}`);\<esc>Iconsole.log"
+        else
+            :execute "normal! biconsole.log(\<esc>ea);"
+        endif
+    endif
+endfunction
+
+function! SmartConsoleLog1()
+    let curChar = getline(".")[col(".")-1]
+	if empty(matchstr(curChar, '\S'))
+        :execute "normal! iconsole.log();\<esc>==hf("
+    else
+    endif
+endfunction
