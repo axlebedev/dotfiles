@@ -418,7 +418,7 @@ set synmaxcol=500
 syntax on
 
 " 80 columns highlight
-set cc=80
+set cc=100
 
 if has('gui_running')
 
