@@ -4,8 +4,6 @@
 " =ss4=sskey=           KEY BINDINGS
 " =ss5=ssfunctions=     FUNCTIONS
 
-
-
 " =ss1=ssvundle================================================================
 " ====================begin VUNDLE ============================================
 
@@ -22,10 +20,6 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim' "required
 
 " -----------------------------------------------------------------------------
-" Color theme
-Plugin 'crusoexia/vim-monokai'
-
-" -----------------------------------------------------------------------------
 " General purpose funcs for other plugins
 Plugin 'l9'
 
@@ -39,6 +33,8 @@ autocmd VimEnter * wincmd p
 " even if we open dir but not file
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" if we open dir - we dont show filetree in empty buffer
+autocmd VimEnter * if argc() == 1 && !filereadable(argv()[0]) | enew | endif
 " close vim if only window is NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 " some configs of NERDTree
@@ -111,6 +107,9 @@ Plugin 'othree/html5.vim'
 Plugin 'pangloss/vim-javascript'
 let g:javascript_enable_domhtmlcss = 1
 
+Plugin 'othree/javascript-libraries-syntax.vim'
+let g:used_javascript_libs = 'underscore,react'
+
 " -----------------------------------------------------------------------------
 " jsx support
 Plugin 'mxw/vim-jsx'
@@ -170,6 +169,12 @@ map g/ <Plug>(incsearch-stay)
 " -----------------------------------------------------------------------------
 " multiple cursors on <C-n>
 "Plugin 'terryma/vim-multiple-cursors'
+"let g:multi_cursor_use_default_mapping=0
+"let g:multi_cursor_next_key='<M-n>'
+"let g:multi_cursor_prev_key='<M-p>'
+"let g:multi_cursor_skip_key='<M-x>'
+"let g:multi_cursor_quit_key='<Esc>'
+"set selection=inclusive
 
 " -----------------------------------------------------------------------------
 " Make '.' work on plugin commands (not all maybe)
@@ -207,6 +212,10 @@ nnoremap <silent> <F11> :YRShow<CR>
 "Plugin 'othree/vim-autocomplpop'
 "let g:acp_behavior-command = <C-x><C-o>
 "Plugin 'ervandew/supertab'
+
+" First, close the foldmethod bug
+Plugin 'Konfekt/FastFold'
+
 Plugin 'Shougo/neocomplete.vim'
 let g:acp_enableAtStartup = 0
 
@@ -257,6 +266,21 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 "let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
 "let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
 
+Plugin 'Shougo/neosnippet'
+Plugin 'Shougo/neosnippet-snippets'
+
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+"imap <expr><TAB>
+" \ pumvisible() ? "\<C-n>" :
+" \ neosnippet#expandable_or_jumpable() ?
+" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+            \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
 " -----------------------------------------------------------------------------
 " color highlight in text
 Plugin 'ap/vim-css-color'
@@ -275,6 +299,10 @@ endif "has("win32") || has("win16")
 " Smooth scroll
 "Plugin 'yonchu/accelerated-smooth-scroll'
 "Plugin 'file:///home/alex/.vim/bundle/smoooth.vim'
+
+" -----------------------------------------------------------------------------
+" Color theme
+Plugin 'crusoexia/vim-monokai'
 
 " -----------------------------------------------------------------------------
 call vundle#end()            " required
@@ -296,6 +324,12 @@ filetype plugin indent on    " required
 " =ss2=ssglobals===============================================================
 " ====================begin GLOBAL CONFIGS ====================================
 let s:vimdir = expand("~") . "/.vim"
+
+" english vim interface language
+set langmenu=en_US
+let $LANG = 'en_US'
+source $VIMRUNTIME/delmenu.vim
+source $VIMRUNTIME/menu.vim
 
 " dont save files on change buffer
 set hidden
@@ -359,7 +393,7 @@ set viminfo^=%
 runtime macros/matchit.vim
 
 "defaults 'g' flag in substitute command
-set gdefault
+"set gdefault
 
 " TODO:? comment following 2 lines
 set ignorecase
@@ -395,6 +429,10 @@ set foldlevelstart=99
 " HTML/XML Folding
 "au BufNewFile,BufRead *.xml,*.htm,*.html so ~/.vim/bundle/XMLFolding.vim
 "autocmd BufNewFile,BufReadPost *.less set filetype=stylesheet
+
+" when quickfix window is opened - it will be at bottom, but keep NERDTree at left
+autocmd FileType qf wincmd J | wincmd k | wincmd H | wincmd L | wincmd H | wincmd l | wincmd j
+
 
 " ========================= GLOBAL CONFIGS end=================================
 " =============================================================================
@@ -448,14 +486,14 @@ set hlsearch
 " -----------------------------------------------------------------------------
 " --------------------begin MONOKAI SETTINGS ----------------------------------
 
-" colorscheme
-colorscheme monokai
-
 " If you are using a font which support italic, you can use below config to enable the italic form
 let g:monokai_italic = 1
 
 " The default window border is narrow dotted line, use below config to turn on the thick one
 let g:monokai_thick_border = 1 " PAPA doesn't work (
+
+" colorscheme
+colorscheme monokai
 
 " ------------------------- MONOKAI SETTINGS end-------------------------------
 " -----------------------------------------------------------------------------
@@ -540,6 +578,7 @@ nnoremap <Leader>o :CtrlP<CR>
 
 " return to normal mode by double-j
 inoremap jj <Esc>
+" same but in cyrillic layout
 inoremap оо <Esc>
 
 " split line
@@ -624,7 +663,7 @@ nnoremap <leader>o o<Esc>
 cmap w!! w !sudo tee % >/dev/null
 
 " replace selection
-vnoremap <C-h> "hy:%s/<C-r>h//c<left><left><C-r>h
+vnoremap <C-h> "hy:%s/<C-r>h//gc<left><left><left><C-r>h
 
 " visual select all
 nnoremap <M-a> ggVG
@@ -632,12 +671,21 @@ nnoremap <M-a> ggVG
 " find in current project
 if has("win32") || has("win16")
     nnoremap <C-S-f> :vim<space>//j<space>src\**\|cw<left><left><left><left><left><left><left><left><left><left><left><left>
+    vnoremap <C-S-f> y:vim<space>//j<space>src\**\|cw<left><left><left><left><left><left><left><left><left><left><left><left><C-r>"
 else
     nnoremap <C-S-f> :vim<space>//j<space>src/**\|cw<left><left><left><left><left><left><left><left><left><left><left><left>
+    vnoremap <C-S-f> y:vim<space>//j<space>src/**\|cw<left><left><left><left><left><left><left><left><left><left><left><left><C-r>"
 endif
 
-" add ';' to current line
+" pretty find
+vnoremap // y/<C-R>"<CR>
+
+" add a symbol to current line
 nnoremap <leader>; A;<Esc>
+nnoremap <leader>, A,<Esc>
+
+" reload all buffers
+nnoremap <M-r> :bufdo<space>e!<CR>
 
 " ========================= KEY BINDINGS end===================================
 " =============================================================================
