@@ -88,7 +88,7 @@ source $ZSH/oh-my-zsh.sh
 alias lg="l | grep -i"
 alias lrg="l -R | grep -i"
 
-alias v="gvim ."
+alias v="gvimopencur"
 
 alias o="xdg-open"
 
@@ -107,6 +107,16 @@ alias nemo="nemo --no-desktop"
 
 alias lt="tree -a -C -I node_modules\|.git\|bower_components"
 # ======== ALIASES end=====
+
+# if we gave a file as arg - open a file, else open current dir
+function gvimopencur () {
+    ARGS="$@"
+    if [ -f "${ARGS}" ] ; then
+        gvim "${ARGS}"
+    else
+        gvim .
+    fi
+}
 
 
 
