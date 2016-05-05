@@ -844,17 +844,31 @@ nnoremap <silent> <Plug>Kwbd :<C-u>Kwbd<CR>
 
 nnoremap <silent> <leader>l :<C-u>call SmartConsoleLog(0)<CR>
 nnoremap <silent> <leader>ll :<C-u>call SmartConsoleLog(1)<CR>
+nnoremap <silent> <leader>ld :<C-u>call SmartConsoleLog(2)<CR>
+nnoremap <silent> <leader>ls :<C-u>call SmartConsoleLog(3)<CR>
 
 function! SmartConsoleLog(superSmart)
     let curChar = getline(".")[col(".")-1]
 	if empty(matchstr(curChar, '\S'))
         :execute "normal! iconsole.log();\<esc>==hf("
     else
-        if(a:superSmart)
-            :execute "normal! bi(`\<esc>eyiwea=${\<esc>pa}`);\<esc>Iconsole.log"
+        if(a:superSmart == 1)
+            " lalka => console.log(`lalka=${lalka}`);
+            :execute "normal! viWdaconsole.log(`\<esc>pa=${JSON.stringify(\<esc>pa)}`);"
         else
-            :execute "normal! biconsole.log(\<esc>ea);"
-        endif
+        if(a:superSmart == 2)
+            " lalka => console.log(Date.now() % 10000 + 'lalka');
+            :execute "normal! viWyoconsole.log(Date.now() % 10000 + ' \<esc>pa');"
+        else
+        if(a:superSmart == 3)
+            " lalka => console.log('lalka');
+            :execute "normal! viWdaconsole.log('\<esc>pa');"
+        else
+            " lalka => console.log(lalka);
+            :execute "normal! viWdaconsole.log(\<esc>pa);"
+        endif " if(a:superSmart == 3)
+        endif " if(a:superSmart == 2)
+        endif " if(a:superSmart == 1)
     endif
 endfunction
 
@@ -865,3 +879,4 @@ function! SmartConsoleLog1()
     else
     endif
 endfunction
+
