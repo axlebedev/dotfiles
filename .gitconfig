@@ -5,15 +5,34 @@
 	co = checkout
 	ci = commit
 	st = status
-	hist = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    hist = log --color --date=format:'%H:%M %d.%m.%Y' --graph --pretty=format:'%C(cyan)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cd) %C(bold blue)<%an>%Creset' --abbrev-commit
 [core]
-	editor = vim
 	pager = more
+	autocrlf = true
 [credential]
 	helper = cache --timeout=86400
 [diff]
-	tool = gvimdiff
+	tool = vimdiff
 [merge]
-	tool = gvimdiff
+	tool = vimdiff
 [difftool]
 	prompt = false
+[color]
+	ui = true
+
+[color "status"]
+;header (the header text of the status message), 
+    ;header = yellow
+;added or updated (files which are added but not committed),
+    ;added = cyan
+;changed (files which are changed but not added in the index),
+    changed = cyan
+;untracked (files which are not tracked by Git),
+    untracked = magenta
+;branch (the current branch),
+    branch = yellow
+;nobranch (the color the no branch warning is shown in, defaulting to red),
+    ;nobranch
+;unmerged (files which have unmerged changes).
+    unmerged = red reverse
+
