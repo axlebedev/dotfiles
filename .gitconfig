@@ -8,7 +8,6 @@
     hist = log --color --date=format:'%H:%M %d.%m.%Y' --graph --pretty=format:'%C(cyan)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cd) %C(bold blue)<%an>%Creset' --abbrev-commit
 [core]
 	pager = more
-	autocrlf = true
 [credential]
 	helper = cache --timeout=86400
 [diff]
