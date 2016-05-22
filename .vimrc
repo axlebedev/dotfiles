@@ -111,9 +111,18 @@ Plugin 'othree/javascript-libraries-syntax.vim'
 let g:used_javascript_libs = 'underscore,react'
 
 " -----------------------------------------------------------------------------
+" Customize colors here
+"Plugin 'othree/yajs.vim'
+"Plugin 'othree/es.next.syntax.vim'
+"Plugin 'bigfish/vim-js-context-coloring'
+" -----------------------------------------------------------------------------
 " jsx support
 Plugin 'mxw/vim-jsx'
 let g:jsx_ext_required = 0
+
+" -----------------------------------------------------------------------------
+"  TODO TODO TODO !!!
+"Plugin 'ternjs/tern_for_vim'
 
 " -----------------------------------------------------------------------------
 " ctags structure
@@ -858,7 +867,9 @@ function! SmartConsoleLog(superSmart)
         else
         if(a:superSmart == 2)
             " lalka => console.log(Date.now() % 10000 + 'lalka');
-            :execute "normal! viWyoconsole.log(Date.now() % 10000 + ' \<esc>pa');"
+            let fname = expand('%:t:r')
+            let command = "normal! viwyoconsole.log(Date.now() % 10000 + ' ".fname."::\<esc>pa');"
+            :execute command
         else
         if(a:superSmart == 3)
             " lalka => console.log('lalka');
@@ -871,12 +882,3 @@ function! SmartConsoleLog(superSmart)
         endif " if(a:superSmart == 1)
     endif
 endfunction
-
-function! SmartConsoleLog1()
-    let curChar = getline(".")[col(".")-1]
-	if empty(matchstr(curChar, '\S'))
-        :execute "normal! iconsole.log();\<esc>==hf("
-    else
-    endif
-endfunction
-
