@@ -696,6 +696,10 @@ nnoremap <leader>, A,<Esc>
 " reload all buffers
 nnoremap <M-r> :bufdo<space>e!<CR>
 
+" λ
+nnoremap <leader>al iλ<Esc>
+nnoremap <leader>aL iΛ<Esc>
+
 " ========================= KEY BINDINGS end===================================
 " =============================================================================
 
