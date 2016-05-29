@@ -442,7 +442,6 @@ set foldlevelstart=99
 " when quickfix window is opened - it will be at bottom, but keep NERDTree at left
 autocmd FileType qf wincmd J | wincmd k | wincmd H | wincmd L | wincmd H | wincmd l | wincmd j
 
-
 " ========================= GLOBAL CONFIGS end=================================
 " =============================================================================
 
@@ -697,8 +696,12 @@ nnoremap <leader>, A,<Esc>
 nnoremap <M-r> :bufdo<space>e!<CR>
 
 " λ
-nnoremap <leader>al iλ<Esc>
-nnoremap <leader>aL iΛ<Esc>
+nnoremap <leader>il iλ<Esc>
+nnoremap <leader>al aλ<Esc>
+
+" β
+nnoremap <leader>ib iβ<Esc>
+nnoremap <leader>ab aβ<Esc>
 
 " ========================= KEY BINDINGS end===================================
 " =============================================================================
@@ -720,6 +723,13 @@ autocmd BufReadPost *
      \ if line("'\"") > 0 && line("'\"") <= line("$") |
      \   exe "normal! g`\"" |
      \ endif
+
+" -----------------------------------------------------------------------------
+" Close empty buffer on leave
+autocmd BufLeave *
+    \ if line('$') == 1 && getline(1) == '' |
+    \     exe 'Kwbd' |
+    \ endif
 
 " -----------------------------------------------------------------------------
 " Markdown tagbar support
