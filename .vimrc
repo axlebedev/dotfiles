@@ -440,7 +440,7 @@ set foldlevelstart=99
 "autocmd BufNewFile,BufReadPost *.less set filetype=stylesheet
 
 " when quickfix window is opened - it will be at bottom, but keep NERDTree at left
-autocmd FileType qf wincmd J | wincmd k | wincmd H | wincmd L | wincmd H | wincmd l | wincmd j
+autocmd FileType qf wincmd J | wincmd k | wincmd H | vertical resize 31 | wincmd l | wincmd j
 
 " ========================= GLOBAL CONFIGS end=================================
 " =============================================================================
