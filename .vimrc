@@ -908,4 +908,23 @@ function! OpenNextBuf(prev)
     endif
 endfunction
 
+" -----------------------------------------------------------------------------
+" make gd to work with import
+nnoremap <F5> :<C-u>call GoToImportDefinition()<CR>
+let s:isGoingToImportDefinition = 0
+function! GoToImportDefinition()
+    let s:isGoingToImportDefinition = 1
+    :execute "normal! gd"
+    let l:isImport = matchstr(getline("."), "import")
+    if empty(l:isImport)
+        " do nothing
+    else
+        :execute "normal! f'gf"
+    endif
+endfunction
 
+autocmd BufEnter *
+\ if s:isGoingToImportDefinition == 1 |
+\   :execute "normal! nzz" |
+\   let s:isGoingToImportDefinition = 0 |
+\ endif
