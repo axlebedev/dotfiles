@@ -616,10 +616,6 @@ vmap <C-M-j> :m'>+<cr>`<my`>mzgv`yo`z
 
 " Some convenient file navigation
 map <F2> :NERDTreeToggle<CR>
-nmap <F5> :bprev<CR>
-nmap <F6> :bnext<CR>
-nmap <leader>j :bprev<CR>
-nmap <leader>k :bnext<CR>
 nmap <leader>tt :NERDTreeFind<CR>
 
 " apply macros with Q (disables the default Ex mode shortcut)
@@ -896,3 +892,20 @@ function! SmartConsoleLog(superSmart)
         endif " if(a:superSmart == 1)
     endif
 endfunction
+
+" -----------------------------------------------------------------------------
+" Skip quickfix on traversing buffers
+nnoremap <leader>j :<C-u>call OpenNextBuf(1)<CR>
+nnoremap <leader>k :<C-u>call OpenNextBuf(0)<CR>
+function! OpenNextBuf(prev)
+    let l:command = "bnext"
+    if(a:prev == 1)
+        let l:command = "bprev"
+    endif
+    :execute l:command
+    if &buftype ==# 'quickfix'
+        :execute l:command
+    endif
+endfunction
+
+
