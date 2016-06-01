@@ -878,12 +878,12 @@ function! SmartConsoleLog(superSmart)
         if(a:superSmart == 2)
             " lalka => console.log(Date.now() % 10000 + 'lalka');
             let fname = expand('%:t:r')
-            let command = "normal! viwyoconsole.log(Date.now() % 10000 + ' ".fname."::\<esc>pa');"
+            let command = "normal! viwyoconsole.log(Date.now() % 10000 + ` ".fname."::\<esc>pa`);"
             :execute command
         else
         if(a:superSmart == 3)
             " lalka => console.log('lalka');
-            :execute "normal! viWdaconsole.log('\<esc>pa');"
+            :execute "normal! viWdaconsole.log(`\<esc>pa`);"
         else
             " lalka => console.log(lalka);
             :execute "normal! viWdaconsole.log(\<esc>pa);"
