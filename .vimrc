@@ -167,13 +167,8 @@ nnoremap <Leader>r :CtrlPFunky<Cr>
 Plugin 'scrooloose/nerdcommenter'
 
 " -----------------------------------------------------------------------------
-" Highlight search matches immediately
-Plugin 'haya14busa/incsearch.vim'
-map /  <Plug>(incsearch-forward)
-map ?  <Plug>(incsearch-backward)
-map g/ <Plug>(incsearch-stay)
-" TODO: maybe interesting plugin: incsearch-easymotion.vim
-" TODO: Plugin 'IndexedSearch' conflicts with it: resolve
+" Show 'n of m' result
+Plugin 'henrik/vim-indexed-search'
 
 " -----------------------------------------------------------------------------
 " multiple cursors on <C-n>
@@ -278,9 +273,9 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 Plugin 'Shougo/neosnippet'
 Plugin 'Shougo/neosnippet-snippets'
 
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
+"imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+"smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+"xmap <C-k>     <Plug>(neosnippet_expand_target)
 
 " SuperTab like snippets behavior.
 "imap <expr><TAB>
@@ -438,6 +433,9 @@ set foldlevelstart=99
 " HTML/XML Folding
 "au BufNewFile,BufRead *.xml,*.htm,*.html so ~/.vim/bundle/XMLFolding.vim
 "autocmd BufNewFile,BufReadPost *.less set filetype=stylesheet
+
+"
+set incsearch
 
 " when quickfix window is opened - it will be at bottom, but keep NERDTree at left
 autocmd FileType qf wincmd J | wincmd k | wincmd H | vertical resize 31 | wincmd l | wincmd j
@@ -928,3 +926,12 @@ autocmd BufEnter *
 \   :execute "normal! nzz" |
 \   let s:isGoingToImportDefinition = 0 |
 \ endif
+
+" -----------------------------------------------------------------------------
+" Delete trailing white space on save
+func! DeleteTrailingWS()
+    exe "normal mz"
+    %s/\s\+$//ge
+    exe "normal `z"
+endfunc
+autocmd BufWrite *.js :call DeleteTrailingWS()
