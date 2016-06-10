@@ -85,6 +85,7 @@ source $ZSH/oh-my-zsh.sh
 #
 
 # ======== ALIASES ========
+alias lr="ls -lrt"
 alias lg="l | grep -i"
 alias lrg="l -R | grep -i"
 
