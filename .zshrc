@@ -88,6 +88,7 @@ source $ZSH/oh-my-zsh.sh
 alias lr="ls -lrt"
 alias lg="l | grep -i"
 alias lrg="l -R | grep -i"
+alias lt="tree -a -C -I node_modules\|.git\|bower_components"
 
 alias v="gvimopencur"
 
@@ -105,8 +106,12 @@ alias gps="git push"
 
 alias nemo="nemo --no-desktop"
 
+alias gt="gnome-terminal"
 
-alias lt="tree -a -C -I node_modules\|.git\|bower_components"
+alias nd="npm run dev"
+alias nb="npm run build"
+alias nl="npm run lint"
+
 # ======== ALIASES end=====
 
 # if we gave a file as arg - open a file, else open current dir
