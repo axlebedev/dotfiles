@@ -309,6 +309,18 @@ endif "has("win32") || has("win16")
 Plugin 'crusoexia/vim-monokai'
 
 " -----------------------------------------------------------------------------
+" Delete all buffers but current
+Plugin 'schickling/vim-bufonly'
+
+" -----------------------------------------------------------------------------
+" Some more text objects
+Plugin 'wellle/targets.vim'
+
+" -----------------------------------------------------------------------------
+" Split/join js-objects (and many more)
+Plugin 'AndrewRadev/splitjoin.vim'
+
+" -----------------------------------------------------------------------------
 call vundle#end()            " required
 filetype plugin indent on    " required
 
@@ -340,6 +352,9 @@ set hidden
 
 " where to search files to open
 set path=.,,**
+
+" Auto reload files on change
+set autoread
 
 " ':' commands; search strings; expressions; input lines, typed for the |input()| function; debug mode commands history saved
 set history=500
@@ -436,6 +451,26 @@ set foldlevelstart=99
 
 "
 set incsearch
+
+" Keep the cursor in the same place when switching buffers
+set nostartofline
+
+" don't add extra space after ., !, etc. when joining
+set nojoinspaces
+
+" Disable error bells
+set noerrorbells
+
+" Don't show the intro message when starting Vim
+" Also suppress several 'Press Enter to continue messages' especially
+" with FZF
+set shortmess=aoOtI
+
+" Override some syntaxes so things look better
+autocmd BufNewFile,BufRead *eslintrc,*babelrc,*conkyrc setlocal syntax=json
+
+" Allow stylesheets to autocomplete hyphenated words
+autocmd FileType css,scss,sass setlocal iskeyword+=-
 
 " when quickfix window is opened - it will be at bottom, but keep NERDTree at left
 autocmd FileType qf wincmd J | wincmd k | wincmd H | vertical resize 31 | wincmd l | wincmd j
@@ -590,6 +625,9 @@ inoremap оо <Esc>
 " split line
 nnoremap <leader>s a<CR><Esc>
 
+" use K to join current line with line above, just like J does with line below
+nnoremap K kJ
+
 " comfortable navigation through windows
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
@@ -642,9 +680,16 @@ vmap Y "+y
 nmap <Leader>p "+pvp=`]
 nmap <Leader>P "+Pvp=`]
 
+" Automatically jump to end of pasted text
+vnoremap <silent> y y`]
+vnoremap <silent> p p`]
+nnoremap <silent> p p`]
+
 " Movement in wrapped lines
 nnoremap j gj
 nnoremap k gk
+vnoremap j gj
+vnoremap k gk
 
 " center find results
 nnoremap n nzz
@@ -692,10 +737,6 @@ nnoremap <M-r> :bufdo<space>e!<CR>
 " λ
 nnoremap <leader>il iλ<Esc>
 nnoremap <leader>al aλ<Esc>
-
-" β
-nnoremap <leader>ib iβ<Esc>
-nnoremap <leader>ab aβ<Esc>
 
 " ========================= KEY BINDINGS end===================================
 " =============================================================================
