@@ -350,11 +350,11 @@ source $VIMRUNTIME/menu.vim
 " dont save files on change buffer
 set hidden
 
+" autoreload files when they're changed on disk
+set autoread
+
 " where to search files to open
 set path=.,,**
-
-" Auto reload files on change
-set autoread
 
 " ':' commands; search strings; expressions; input lines, typed for the |input()| function; debug mode commands history saved
 set history=500
@@ -475,6 +475,11 @@ autocmd FileType css,scss,sass setlocal iskeyword+=-
 " when quickfix window is opened - it will be at bottom, but keep NERDTree at left
 autocmd FileType qf wincmd J | wincmd k | wincmd H | vertical resize 31 | wincmd l | wincmd j
 
+" ignore whitespace in diff mode
+if &diff
+    set diffopt+=iwhite
+endif
+
 " ========================= GLOBAL CONFIGS end=================================
 " =============================================================================
 
@@ -540,10 +545,10 @@ colorscheme monokai
 " -----------------------------------------------------------------------------
 
 " Color of find result background
-highlight Search guibg='gray30' guifg='NONE'
+highlight Search guibg='#4A3F2D' guifg='NONE'
 
 " set colors of matching parens
-hi MatchParen cterm=bold ctermbg=none ctermfg=magenta gui=bold guibg=#51535C guifg=NONE
+hi MatchParen cterm=bold ctermbg=none ctermfg=magenta gui=bold guibg=#8C5669 guifg=NONE
 
 " colors of fold column
 hi FoldColumn guibg=#131411 guifg=#34352E
