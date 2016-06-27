@@ -164,7 +164,7 @@ nnoremap <Leader>r :CtrlPFunky<Cr>
 
 " -----------------------------------------------------------------------------
 " comment lines, uncomment lines
-Plugin 'scrooloose/nerdcommenter'
+Plugin 'tpope/vim-commentary'
 
 " -----------------------------------------------------------------------------
 " Show 'n of m' result
@@ -319,6 +319,14 @@ Plugin 'wellle/targets.vim'
 " -----------------------------------------------------------------------------
 " Split/join js-objects (and many more)
 Plugin 'AndrewRadev/splitjoin.vim'
+
+" -----------------------------------------------------------------------------
+" EasyMotion like in chrome
+Plugin 'easymotion/vim-easymotion'
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+let g:EasyMotion_smartcase = 1 " Turn on case insensitive feature
+nmap t <Plug>(easymotion-overwin-f)
+nmap tt <Plug>(easymotion-overwin-f2)
 
 " -----------------------------------------------------------------------------
 call vundle#end()            " required
@@ -479,6 +487,9 @@ autocmd FileType qf wincmd J | wincmd k | wincmd H | vertical resize 31 | wincmd
 if &diff
     set diffopt+=iwhite
 endif
+
+" some custom digraphs
+digraphs TT 8869
 
 " ========================= GLOBAL CONFIGS end=================================
 " =============================================================================
