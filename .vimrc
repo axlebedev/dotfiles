@@ -693,22 +693,10 @@ xnoremap <silent> < <gv
 " select pasted text
 nmap vp `[v`]
 
-" copy and paste ] TODO: make some other bindings?
-"vnoremap <C-c> "+ygv<Esc>
-"vnoremap <C-x> "+d<Esc>
-"noremap <C-v>  "+gP
-"cnoremap <C-v> <C-r>+
-"exe 'inoremap <script> <C-v>' paste#paste_cmd['i']
-"exe 'vnoremap <script> <C-v>' paste#paste_cmd['v']
 " Copy and paste through system slipboard
 vmap Y "+y
 nmap <Leader>p "+pvp=`]
 nmap <Leader>P "+Pvp=`]
-
-" Automatically jump to end of pasted text
-vnoremap <silent> y y`]
-vnoremap <silent> p p`]
-nnoremap <silent> p p`]
 
 " Movement in wrapped lines
 nnoremap j gj
@@ -839,10 +827,13 @@ endfunction
 
 " -----------------------------------------------------------------------------
 " next functions makes:
-" nnoremap Y y$
-" but in YankRing-compatible way
 function! YRRunAfterMaps()
-    nnoremap Y   :<C-U>YRYankCount 'y$'<CR>
+    " nnoremap Y y$ but in YankRing-compatible way
+    nnoremap Y :<C-U>YRYankCount 'y$'<CR>
+
+    vnoremap <silent> y y`]
+    vmap <silent> p A<space><esc>gv"_dPl"_x`]
+    nnoremap <silent> p p`]
 endfunction
 
 " -----------------------------------------------------------------------------
