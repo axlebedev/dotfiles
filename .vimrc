@@ -106,6 +106,7 @@ Plugin 'othree/html5.vim'
 " JavaScript bundle for vim, this bundle provides syntax and indent plugins
 Plugin 'pangloss/vim-javascript'
 let g:javascript_enable_domhtmlcss = 1
+let g:javascript_plugin_jsdoc = 1
 
 Plugin 'othree/javascript-libraries-syntax.vim'
 let g:used_javascript_libs = 'underscore,react'
@@ -736,11 +737,11 @@ nnoremap <M-a> ggVG
 
 " find in current project
 if has("win32") || has("win16")
-    nnoremap <C-S-f> :vim<space>//j<space>src\**\|cw<left><left><left><left><left><left><left><left><left><left><left><left>
-    vnoremap <C-S-f> y:vim<space>//j<space>src\**\|cw<left><left><left><left><left><left><left><left><left><left><left><left><C-r>"
+    nnoremap <C-f> :vim<space>//j<space>src\**\|cw<left><left><left><left><left><left><left><left><left><left><left><left>
+    vnoremap <C-f> y:vim<space>//j<space>src\**\|cw<left><left><left><left><left><left><left><left><left><left><left><left>\<<C-r>"\>
 else
-    nnoremap <C-S-f> :vim<space>//j<space>src/**\|cw<left><left><left><left><left><left><left><left><left><left><left><left>
-    vnoremap <C-S-f> y:vim<space>//j<space>src/**\|cw<left><left><left><left><left><left><left><left><left><left><left><left><C-r>"
+    nnoremap <C-f> :vim<space>//j<space>src/**\|cw<left><left><left><left><left><left><left><left><left><left><left><left>
+    vnoremap <C-f> y:vim<space>//j<space>src/**\|cw<left><left><left><left><left><left><left><left><left><left><left><left>\<<C-r>"\>
 endif
 
 " pretty find
@@ -923,6 +924,7 @@ nnoremap <silent> <leader>l :<C-u>call SmartConsoleLog(0)<CR>
 nnoremap <silent> <leader>ll :<C-u>call SmartConsoleLog(1)<CR>
 nnoremap <silent> <leader>ld :<C-u>call SmartConsoleLog(2)<CR>
 nnoremap <silent> <leader>ls :<C-u>call SmartConsoleLog(3)<CR>
+nnoremap <silent> <leader>lk :<C-u>call SmartConsoleLog(4)<CR>
 
 function! SmartConsoleLog(superSmart)
     let curChar = getline(".")[col(".")-1]
@@ -942,6 +944,10 @@ function! SmartConsoleLog(superSmart)
         if(a:superSmart == 3)
             " lalka => console.log('lalka');
             :execute "normal! viWdaconsole.log(`\<esc>pa`);"
+        else
+        if(a:superSmart == 4)
+            " lalka => console.log('lalka=', lalka);
+            :execute "normal! viWdaconsole.log('\<esc>pa=', \<esc>pa);"
         else
             " lalka => console.log(lalka);
             :execute "normal! viWdaconsole.log(\<esc>pa);"
