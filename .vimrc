@@ -163,8 +163,9 @@ endif
 
 " -----------------------------------------------------------------------------
 " Sublime's <C-r> analog
-Plugin 'tacahiroy/ctrlp-funky'
-nnoremap <Leader>r :CtrlPFunky<Cr>
+" TODO: wait until es6 supported
+" Plugin 'tacahiroy/ctrlp-funky'
+" nnoremap <Leader>r :CtrlPFunky<Cr>
 
 " -----------------------------------------------------------------------------
 " comment lines, uncomment lines
@@ -331,6 +332,10 @@ let g:EasyMotion_do_mapping = 0 " Disable default mappings
 let g:EasyMotion_smartcase = 1 " Turn on case insensitive feature
 nmap t <Plug>(easymotion-overwin-f)
 nmap tt <Plug>(easymotion-overwin-f2)
+
+" -----------------------------------------------------------------------------
+" :Qdo
+Plugin 'henrik/vim-qargs'
 
 " -----------------------------------------------------------------------------
 call vundle#end()            " required
@@ -735,13 +740,17 @@ vnoremap <C-h> "hy:%s/<C-r>h//gc<left><left><left><C-r>h
 " visual select all
 nnoremap <M-a> ggVG
 
-" find in current project
+" find/replace in current project
 if has("win32") || has("win16")
-    nnoremap <C-f> :vim<space>//j<space>src\**\|cw<left><left><left><left><left><left><left><left><left><left><left><left>
-    vnoremap <C-f> y:vim<space>//j<space>src\**\|cw<left><left><left><left><left><left><left><left><left><left><left><left>\<<C-r>"\>
+    nnoremap <C-f> :vim<space>//j<space>src\**\|cw<left><left><left><left><left><left><left><left><left><left><left><left>\<<C-r><C-w>\>
+    vnoremap <C-f> "fy:vim<space>//j<space>src\**\|cw<left><left><left><left><left><left><left><left><left><left><left><left>\<<C-r>"\>
+    " Plugin 'henrik/vim-qargs' neede for next line
+    nnoremap <M-h> :Qdo %s/<C-r>f//gce\|update<left><left><left><left><left><left><left><left><left><left><left><C-r>f
 else
-    nnoremap <C-f> :vim<space>//j<space>src/**\|cw<left><left><left><left><left><left><left><left><left><left><left><left>
-    vnoremap <C-f> y:vim<space>//j<space>src/**\|cw<left><left><left><left><left><left><left><left><left><left><left><left>\<<C-r>"\>
+    nnoremap <C-f> :vim<space>//j<space>src/**\|cw<left><left><left><left><left><left><left><left><left><left><left><left>\<<C-r><C-w>\>
+    vnoremap <C-f> "fy:vim<space>//j<space>src/**\|cw<left><left><left><left><left><left><left><left><left><left><left><left>\<<C-r>"\>
+    " Plugin 'henrik/vim-qargs' neede for next line
+    nnoremap <M-h> :Qdo %s/\<<C-r>f\>//gce\|update<left><left><left><left><left><left><left><left><left><left><left><C-r>f
 endif
 
 " pretty find
