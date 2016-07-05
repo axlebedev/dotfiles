@@ -141,6 +141,9 @@ Plugin 'mileszs/ack.vim'
 " autoclose parens
 Plugin 'Raimondi/delimitMate'
 let delimitMate_excluded_ft = 'html'
+let delimitMate_nesting_quotes = ['"','`']
+let delimitMate_expand_cr = 2
+let delimitMate_expand_space = 1
 
 " -----------------------------------------------------------------------------
 " Fuzzy file opener
