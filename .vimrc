@@ -755,6 +755,9 @@ nnoremap <M-r> :bufdo<space>e!<CR>
 nnoremap <leader>il iλ<Esc>
 nnoremap <leader>al aλ<Esc>
 
+" type ':S<cr>' to split current buffer to right, and leave it with previous buffer
+command S vs | wincmd h | bprev | wincmd l
+
 " ========================= KEY BINDINGS end===================================
 " =============================================================================
 
