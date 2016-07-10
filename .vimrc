@@ -835,8 +835,19 @@ function! YRRunAfterMaps()
     nnoremap Y :<C-U>YRYankCount 'y$'<CR>
 
     vnoremap <silent> y y`]
-    vmap <silent> p A<space><esc>gv"_dPl"_x`]
+    vmap p :<C-u>call VisualPaste()<cr>
     nnoremap <silent> p p`]
+endfunction
+
+function! VisualPaste()
+    let currentMode = visualmode()
+    if (currentMode ==# 'v')
+        :execute "normal! gv\"_c\<esc>p"
+    elseif (currentMode ==# 'V')
+        :execute "normal! gv\"_dP`]"
+    elseif
+        :execute "normal! gvp"
+    endif
 endfunction
 
 " -----------------------------------------------------------------------------
