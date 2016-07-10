@@ -730,13 +730,13 @@ nnoremap <M-a> ggVG
 
 " find/replace in current project
 if has("win32") || has("win16")
-    nnoremap <C-f> :vim<space>//j<space>src\**\|cw<left><left><left><left><left><left><left><left><left><left><left><left>\<<C-r><C-w>\>
-    vnoremap <C-f> "fy:vim<space>//j<space>src\**\|cw<left><left><left><left><left><left><left><left><left><left><left><left>\<<C-r>"\>
+    nnoremap <C-f> :vim<space>//j<space>src\**\|cw<left><left><left><left><left><left><left><left><left><left><left><left><C-r><C-w>
+    vnoremap <C-f> "fy:vim<space>//j<space>src\**\|cw<left><left><left><left><left><left><left><left><left><left><left><left><C-r>f
     " Plugin 'henrik/vim-qargs' neede for next line
     nnoremap <M-h> :Qdo %s/<C-r>f//gce\|update<left><left><left><left><left><left><left><left><left><left><left><C-r>f
 else
-    nnoremap <C-f> :vim<space>//j<space>src/**\|cw<left><left><left><left><left><left><left><left><left><left><left><left>\<<C-r><C-w>\>
-    vnoremap <C-f> "fy:vim<space>//j<space>src/**\|cw<left><left><left><left><left><left><left><left><left><left><left><left>\<<C-r>"\>
+    nnoremap <C-f> :vim<space>//j<space>src/**\|cw<left><left><left><left><left><left><left><left><left><left><left><left><C-r><C-w>
+    vnoremap <C-f> "fy:vim<space>//j<space>src/**\|cw<left><left><left><left><left><left><left><left><left><left><left><left><C-r>f
     " Plugin 'henrik/vim-qargs' neede for next line
     nnoremap <M-h> :Qdo %s/\<<C-r>f\>//gce\|update<left><left><left><left><left><left><left><left><left><left><left><C-r>f
 endif
@@ -930,30 +930,23 @@ function! SmartConsoleLog(superSmart)
     let curChar = getline(".")[col(".")-1]
 	if empty(matchstr(curChar, '\S'))
         :execute "normal! iconsole.log();\<esc>==hf("
-    else
-        if(a:superSmart == 1)
+    elseif(a:superSmart == 1)
             " lalka => console.log(`lalka=${lalka}`);
             :execute "normal! viWdaconsole.log(`\<esc>pa=${JSON.stringify(\<esc>pa)}`);"
-        else
-        if(a:superSmart == 2)
+    elseif(a:superSmart == 2)
             " lalka => console.log(Date.now() % 10000 + 'lalka');
             let fname = expand('%:t:r')
             let command = "normal! viwyoconsole.log(Date.now() % 10000 + ` ".fname."::\<esc>pa`);"
             :execute command
-        else
-        if(a:superSmart == 3)
+    elseif(a:superSmart == 3)
             " lalka => console.log('lalka');
             :execute "normal! viWdaconsole.log(`\<esc>pa`);"
-        else
-        if(a:superSmart == 4)
+    elseif(a:superSmart == 4)
             " lalka => console.log('lalka=', lalka);
             :execute "normal! viWdaconsole.log('\<esc>pa=', \<esc>pa);"
         else
             " lalka => console.log(lalka);
             :execute "normal! viWdaconsole.log(\<esc>pa);"
-        endif " if(a:superSmart == 3)
-        endif " if(a:superSmart == 2)
-        endif " if(a:superSmart == 1)
     endif
 endfunction
 
