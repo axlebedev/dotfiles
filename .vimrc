@@ -338,6 +338,11 @@ nmap tt <Plug>(easymotion-overwin-f2)
 Plugin 'henrik/vim-qargs'
 
 " -----------------------------------------------------------------------------
+" Pretty work with git
+Plugin 'tpope/vim-fugitive'
+Plugin 'junegunn/gv.vim'
+
+" -----------------------------------------------------------------------------
 call vundle#end()            " required
 filetype plugin indent on    " required
 
