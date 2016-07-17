@@ -375,6 +375,9 @@ set hidden
 " autoreload files when they're changed on disk
 set autoread
 
+" keep lines above/below cursor
+set scrolloff=5
+
 " where to search files to open
 set path=.,,**
 
@@ -826,8 +829,8 @@ endfunction
 nnoremap <leader>c :call CenterCursorToggle()<cr>
 
 function! CenterCursorToggle()
-    if &scrolloff > 0
-        setlocal scrolloff=0
+    if &scrolloff > 10
+        setlocal scrolloff=5
     else 
         setlocal scrolloff=999
     endif
