@@ -859,18 +859,8 @@ function! VisualPaste()
 endfunction
 
 " -----------------------------------------------------------------------------
-" Toggle quickfix window
-nnoremap <silent> <leader>b :<C-u>call ToggleErrors()<CR>
-
-function! ToggleErrors()
-    if empty(filter(tabpagebuflist(), 'getbufvar(v:val, "&buftype") is# "quickfix"'))
-         " No location/quickfix list shown, open syntastic error location panel
-         Errors
-    else
-        lclose
-    endif
-endfunction
-
+" Toggle quickfix/location window
+nnoremap <leader>c :cclose<bar>lclose<cr>
 
 " -----------------------------------------------------------------------------
 "  http://vim.wikia.com/wiki/Deleting_a_buffer_without_closing_the_window
@@ -1016,3 +1006,46 @@ func! DeleteTrailingWS()
     exe "normal `z"
 endfunc
 autocmd BufWrite *.js :call DeleteTrailingWS()
+
+" ----------------------------------------------------------------------------
+" Todo
+" ----------------------------------------------------------------------------
+function! s:todo() abort
+    let entries = []
+    for cmd in ['git grep -n -e TODO -e FIXME -e XXX 2> /dev/null',
+                \ 'grep -rn -e TODO -e FIXME -e XXX * 2> /dev/null']
+        let lines = split(system(cmd), '\n')
+        if v:shell_error != 0 | continue | endif
+        for line in lines
+            let [fname, lno, text] = matchlist(line, '^\([^:]*\):\([^:]*\):\(.*\)')[1:3]
+            call add(entries, { 'filename': fname, 'lnum': lno, 'text': text })
+        endfor
+        break
+    endfor
+
+    if !empty(entries)
+        call setqflist(entries)
+        copen
+    endif
+endfunction
+command! Todo call s:todo()
+
+" ----------------------------------------------------------------------------
+" <Leader>?/! | Google it / Feeling lucky
+" ----------------------------------------------------------------------------
+function! s:goog(pat, lucky)
+    echom 'goog'
+    echom pat
+    let q = '"'.substitute(a:pat, '["\n]', ' ', 'g').'"'
+    echom q
+    let q = substitute(q, '[[:punct:] ]',
+                \ '\=printf("%%%02X", char2nr(submatch(0)))', 'g')
+    echom q
+    call system(printf('xdg-open "https://www.google.com/search?%sq=%s"',
+                \ a:lucky ? 'btnI&' : '', q))
+endfunction
+
+nnoremap <F3> :call <SID>goog(expand("<cWORD>"), 0)<cr>
+" nnoremap <leader>! :call <SID>goog(expand("<cWORD>"), 1)<cr>
+xnoremap <F3> "gy:call <SID>goog(@g, 0)<cr>gv
+" xnoremap <leader>! "gy:call <SID>goog(@g, 1)<cr>gv
