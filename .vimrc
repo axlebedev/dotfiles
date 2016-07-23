@@ -794,7 +794,7 @@ autocmd BufReadPost *
 " -----------------------------------------------------------------------------
 " Close empty buffer on leave
 autocmd BufLeave *
-    \ if line('$') == 1 && getline(1) == '' |
+    \ if line('$') == 1 && getline(1) == '' && expand('%:t') |
     \     exe 'Kwbd' |
     \ endif
 
