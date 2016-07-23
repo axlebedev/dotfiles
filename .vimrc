@@ -436,6 +436,9 @@ set viminfo^=%
 " Match HTML tags
 runtime macros/matchit.vim
 
+" Avoid all the hit-enter prompts
+set shortmess=aAItW
+
 "defaults 'g' flag in substitute command
 "set gdefault
 
@@ -736,19 +739,6 @@ vnoremap <C-h> "hy:%s/<C-r>h//gc<left><left><left><C-r>h
 " visual select all
 nnoremap <M-a> ggVG
 
-" find/replace in current project
-if has("win32") || has("win16")
-    nnoremap <C-f> :vim<space>//j<space>src\**\|cw<left><left><left><left><left><left><left><left><left><left><left><left><C-r><C-w>
-    vnoremap <C-f> "fy:vim<space>//j<space>src\**\|cw<left><left><left><left><left><left><left><left><left><left><left><left><C-r>f
-    " Plugin 'henrik/vim-qargs' neede for next line
-    nnoremap <M-h> :Qdo %s/<C-r>f//gce\|update<left><left><left><left><left><left><left><left><left><left><left><C-r>f
-else
-    nnoremap <C-f> :vim<space>//j<space>src/**\|cw<left><left><left><left><left><left><left><left><left><left><left><left><C-r><C-w>
-    vnoremap <C-f> "fy:vim<space>//j<space>src/**\|cw<left><left><left><left><left><left><left><left><left><left><left><left><C-r>f
-    " Plugin 'henrik/vim-qargs' neede for next line
-    nnoremap <M-h> :Qdo %s/\<<C-r>f\>//gce\|update<left><left><left><left><left><left><left><left><left><left><left><C-r>f
-endif
-
 " pretty find
 vnoremap // y/<C-R>"<CR>
 
@@ -1009,7 +999,6 @@ autocmd BufWrite *.js :call DeleteTrailingWS()
 
 " ----------------------------------------------------------------------------
 " Todo
-" ----------------------------------------------------------------------------
 function! s:todo() abort
     let entries = []
     for cmd in ['git grep -n -e TODO -e FIXME -e XXX 2> /dev/null',
@@ -1032,7 +1021,6 @@ command! Todo call s:todo()
 
 " ----------------------------------------------------------------------------
 " <Leader>?/! | Google it / Feeling lucky
-" ----------------------------------------------------------------------------
 function! s:goog(pat, lucky)
     echom 'goog'
     echom pat
@@ -1049,3 +1037,52 @@ nnoremap <F3> :call <SID>goog(expand("<cWORD>"), 0)<cr>
 " nnoremap <leader>! :call <SID>goog(expand("<cWORD>"), 1)<cr>
 xnoremap <F3> "gy:call <SID>goog(@g, 0)<cr>gv
 " xnoremap <leader>! "gy:call <SID>goog(@g, 1)<cr>gv
+
+
+" ----------------------------------------------------------------------------
+" get visual selection
+function! s:get_visual_selection()
+    " Why is this not a built-in Vim script function?!
+    let [lnum1, col1] = getpos("'<")[1:2]
+    let [lnum2, col2] = getpos("'>")[1:2]
+    let lines = getline(lnum1, lnum2)
+    let lines[-1] = lines[-1][: col2 - (&selection == 'inclusive' ? 1 : 2)]
+    let lines[0] = lines[0][col1 - 1:]
+    return join(lines, "\n")
+endfunction
+
+" ----------------------------------------------------------------------------
+" find word under cursor
+function! s:globalFind()
+    let word = ""
+    if (visualmode() == 'v')
+        let word = s:get_visual_selection()
+    else
+        let word = expand("<cword>")
+    endif
+    let searchingWord = input('Searching text: ', word)
+
+    let delimiter = '/'
+    if has("win32") || has("win16")
+        delimiter = '\'
+    endif
+
+    :execute ':vim /'.searchingWord.'/j src'.delimiter.'** | cw'
+endfunction
+
+nnoremap <C-f> :call <SID>globalFind()<cr>
+xnoremap <C-f> :call <SID>globalFind()<cr>
+
+
+" " find/replace in current project
+if has("win32") || has("win16")
+"     nnoremap <C-f> :vim<space>//j<space>src\**\|cw<left><left><left><left><left><left><left><left><left><left><left><left><C-r><C-w>
+"     vnoremap <C-f> "fy:vim<space>//j<space>src\**\|cw<left><left><left><left><left><left><left><left><left><left><left><left><C-r>f
+"     " Plugin 'henrik/vim-qargs' neede for next line
+    nnoremap <M-h> :Qdo %s/<C-r>f//gce\|update<left><left><left><left><left><left><left><left><left><left><left><C-r>f
+else
+"     nnoremap <C-f> :vim<space>//j<space>src/**\|cw<left><left><left><left><left><left><left><left><left><left><left><left><C-r><C-w>
+"     vnoremap <C-f> "fy:vim<space>//j<space>src/**\|cw<left><left><left><left><left><left><left><left><left><left><left><left><C-r>f
+"     " Plugin 'henrik/vim-qargs' neede for next line
+    nnoremap <M-h> :Qdo %s/\<<C-r>f\>//gce\|update<left><left><left><left><left><left><left><left><left><left><left><C-r>f
+endif
