@@ -24,6 +24,10 @@ Plugin 'VundleVim/Vundle.vim' "required
 Plugin 'l9'
 
 " -----------------------------------------------------------------------------
+" Custom submodes
+Plugin 'kana/vim-submode'
+
+" -----------------------------------------------------------------------------
 " NERD Tree
 Plugin 'scrooloose/nerdtree'
 " start NERDTree on vim startup
@@ -755,6 +759,16 @@ nnoremap <leader>al aλ<Esc>
 
 " type ':S<cr>' to split current buffer to right, and leave it with previous buffer
 command S vs | wincmd h | bprev | wincmd l
+
+" Resize submode
+let g:submode_always_show_submode = 1
+let g:submode_timeout = 0
+let resizeSubmode = 'Resize'
+call submode#enter_with(resizeSubmode, 'n', '', '<M-r>')
+call submode#map(resizeSubmode, 'n', '', 'h', ':vertical resize -1<cr>')
+call submode#map(resizeSubmode, 'n', '', 'l', ':vertical resize +1<cr>')
+call submode#map(resizeSubmode, 'n', '', 'k', ':resize -1<cr>')
+call submode#map(resizeSubmode, 'n', '', 'j', ':resize +1<cr>')
 
 " ========================= KEY BINDINGS end===================================
 " =============================================================================
