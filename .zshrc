@@ -96,6 +96,7 @@ alias o="xdg-open"
 
 alias ga="git add"
 alias gi="git commit"
+alias gia="git commit --amend"
 alias go="git checkout"
 alias gs="git status"
 alias gd="git diff"
@@ -111,6 +112,8 @@ alias gt="gnome-terminal"
 alias nd="npm run dev"
 alias nb="npm run build"
 alias nl="npm run lint"
+
+alias sbe="stack build && stack exec my-project-exe"
 
 # ======== ALIASES end=====
 

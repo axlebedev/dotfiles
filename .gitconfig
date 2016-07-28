@@ -4,6 +4,7 @@
 [alias]
 	co = checkout
 	ci = commit
+	cia = commit --amend
 	st = status
 	hist = log --color --date=format:'%H:%M %d.%m.%Y' --graph --pretty=format:'%C(cyan)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cd) %C(bold blue)<%an>%Creset' --abbrev-commit
 	prbr = for-each-ref —sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(authorname) (%(color:green)%(committerdate)%(color:reset))'
