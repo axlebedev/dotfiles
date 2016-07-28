@@ -705,9 +705,6 @@ xnoremap . :normal .<CR>
 xnoremap <silent> > >gv
 xnoremap <silent> < <gv
 
-" select pasted text
-nmap vp `[v`]
-
 " Copy and paste through system slipboard
 vmap Y "+y
 nmap <Leader>p "+pvp=`]
@@ -848,15 +845,15 @@ function! YRRunAfterMaps()
 
     vnoremap <silent> y y`]
     vmap p :<C-u>call VisualPaste()<cr>
-    nnoremap <silent> p p`]
+    nnoremap <silent> p p`]`[v`]
 endfunction
 
 function! VisualPaste()
     let currentMode = visualmode()
     if (currentMode ==# 'v')
-        :execute "normal! gv\"_c\<esc>p"
+        :execute "normal! gv\"_c\<esc>p`[v`]"
     elseif (currentMode ==# 'V')
-        :execute "normal! gv\"_dP`]"
+        :execute "normal! gv\"_dP`]`[v`]"
     elseif
         :execute "normal! gvp"
     endif
@@ -864,7 +861,7 @@ endfunction
 
 " -----------------------------------------------------------------------------
 " Toggle quickfix/location window
-nnoremap <leader>c :cclose<bar>lclose<cr>
+nnoremap <leader>b :cclose<bar>lclose<cr>
 
 " -----------------------------------------------------------------------------
 "  http://vim.wikia.com/wiki/Deleting_a_buffer_without_closing_the_window
@@ -1074,7 +1071,12 @@ function! s:globalFind()
     else
         let word = expand("<cword>")
     endif
+
     let searchingWord = input('Searching text: ', word)
+
+    if (empty(searchingWord))
+        return
+    endif
 
     let delimiter = '/'
     if has("win32") || has("win16")
