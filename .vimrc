@@ -347,6 +347,10 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'junegunn/gv.vim'
 
 " -----------------------------------------------------------------------------
+" My ^^
+Plugin 'alexey-broadcast/vim-js-fastlog'
+
+" -----------------------------------------------------------------------------
 call vundle#end()            " required
 filetype plugin indent on    " required
 
@@ -767,6 +771,18 @@ call submode#map(resizeSubmode, 'n', '', 'l', ':vertical resize +1<cr>')
 call submode#map(resizeSubmode, 'n', '', 'k', ':resize -1<cr>')
 call submode#map(resizeSubmode, 'n', '', 'j', ':resize +1<cr>')
 
+" JsFastLog mappings
+nnoremap <silent> <leader>l :<C-u>call JsFastLog(0)<CR>
+nnoremap <silent> <leader>ll :<C-u>call JsFastLog_stringify()<CR>
+nnoremap <silent> <leader>ld :<C-u>call JsFastLog_function()<CR>
+nnoremap <silent> <leader>ls :<C-u>call JsFastLog_string()<CR>
+nnoremap <silent> <leader>lk :<C-u>call JsFastLog_dir()<CR>
+xnoremap <silent> <leader>l :<C-u>call JsFastLog(0)<CR>
+xnoremap <silent> <leader>ll :<C-u>call JsFastLog_stringify()<CR>
+xnoremap <silent> <leader>ld :<C-u>call JsFastLog_function()<CR>
+xnoremap <silent> <leader>ls :<C-u>call JsFastLog_string()<CR>
+xnoremap <silent> <leader>lk :<C-u>call JsFastLog_dir()<CR>
+
 " ========================= KEY BINDINGS end===================================
 " =============================================================================
 
@@ -930,38 +946,6 @@ nnoremap <silent> <Plug>Kwbd :<C-u>Kwbd<CR>
 "nmap <C-W>! <Plug>Kwbd
 
 
-" -----------------------------------------------------------------------------
-" Make a smart console.log
-
-nnoremap <silent> <leader>l :<C-u>call SmartConsoleLog(0)<CR>
-nnoremap <silent> <leader>ll :<C-u>call SmartConsoleLog(1)<CR>
-nnoremap <silent> <leader>ld :<C-u>call SmartConsoleLog(2)<CR>
-nnoremap <silent> <leader>ls :<C-u>call SmartConsoleLog(3)<CR>
-nnoremap <silent> <leader>lk :<C-u>call SmartConsoleLog(4)<CR>
-
-function! SmartConsoleLog(superSmart)
-    let curChar = getline(".")[col(".")-1]
-	if empty(matchstr(curChar, '\S'))
-        :execute "normal! iconsole.log();\<esc>==hf("
-    elseif(a:superSmart == 1)
-            " lalka => console.log(`lalka=${lalka}`);
-            :execute "normal! viWdaconsole.log(`\<esc>pa=${JSON.stringify(\<esc>pa)}`);"
-    elseif(a:superSmart == 2)
-            " lalka => console.log(Date.now() % 10000 + 'lalka');
-            let fname = expand('%:t:r')
-            let command = "normal! viwyoconsole.log(Date.now() % 10000 + ` ".fname."::\<esc>pa`);"
-            :execute command
-    elseif(a:superSmart == 3)
-            " lalka => console.log('lalka');
-            :execute "normal! viWdaconsole.log(`\<esc>pa`);"
-    elseif(a:superSmart == 4)
-            " lalka => console.log('lalka=', lalka);
-            :execute "normal! viWdaconsole.log('\<esc>pa=', \<esc>pa);"
-        else
-            " lalka => console.log(lalka);
-            :execute "normal! viWdaconsole.log(\<esc>pa);"
-    endif
-endfunction
 
 " -----------------------------------------------------------------------------
 " Skip quickfix on traversing buffers
