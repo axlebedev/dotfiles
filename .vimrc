@@ -647,7 +647,12 @@ set showbreak=»
 
 " =ss4=sskey===================================================================
 " ====================begin KEY BINDINGS ======================================
+
+" TODO: fix it
+let mapleader = "\<space>"
 nmap <space> <leader>
+vmap <space> <leader>
+xmap <space> <leader>
 
 " fast save file
 nmap <leader>w :w!<cr>
@@ -711,8 +716,8 @@ xnoremap <silent> < <gv
 
 " Copy and paste through system slipboard
 vmap Y "+y
-nmap <Leader>p "+pvp=`]
-nmap <Leader>P "+Pvp=`]
+nmap <Leader>p "+p
+nmap <Leader>P "+P
 
 " Movement in wrapped lines
 nnoremap j gj
@@ -861,15 +866,15 @@ function! YRRunAfterMaps()
 
     vnoremap <silent> y y`]
     vmap p :<C-u>call VisualPaste()<cr>
-    nnoremap <silent> p p`]`[v`]
+    nnoremap <silent> p p`]
 endfunction
 
 function! VisualPaste()
     let currentMode = visualmode()
     if (currentMode ==# 'v')
-        :execute "normal! gv\"_c\<esc>p`[v`]"
+        :execute "normal! gv\"_c\<esc>p"
     elseif (currentMode ==# 'V')
-        :execute "normal! gv\"_dP`]`[v`]"
+        :execute "normal! gv\"_dP`]"
     elseif
         :execute "normal! gvp"
     endif
