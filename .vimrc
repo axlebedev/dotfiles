@@ -347,6 +347,12 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'junegunn/gv.vim'
 
 " -----------------------------------------------------------------------------
+" expand selection
+Plugin 'terryma/vim-expand-region'
+vmap v <Plug>(expand_region_expand)
+vmap <C-v> <Plug>(expand_region_shrink)
+
+" -----------------------------------------------------------------------------
 " My ^^
 Plugin 'alexey-broadcast/vim-js-fastlog'
 
