@@ -525,6 +525,9 @@ endif
 " some custom digraphs
 digraphs TT 8869
 
+" avoid mistypes :)
+abbr funciton function
+
 " ========================= GLOBAL CONFIGS end=================================
 " =============================================================================
 
