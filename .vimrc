@@ -24,6 +24,10 @@ Plugin 'VundleVim/Vundle.vim' "required
 Plugin 'l9'
 
 " -----------------------------------------------------------------------------
+" Funcs maybe
+" Plugin 'vim-scripts/lh-vim-lib'
+
+" -----------------------------------------------------------------------------
 " Custom submodes
 Plugin 'kana/vim-submode'
 
@@ -662,6 +666,10 @@ let mapleader = "\<space>"
 nmap <space> <leader>
 vmap <space> <leader>
 xmap <space> <leader>
+
+" Swap these two
+nnoremap 0 ^
+nnoremap ^ 0
 
 " fast save file
 nmap <leader>w :w!<cr>
