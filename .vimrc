@@ -1044,25 +1044,12 @@ nnoremap <F3> :call <SID>goog(expand("<cWORD>"), 0)<cr>
 xnoremap <F3> "gy:call <SID>goog(@g, 0)<cr>gv
 " xnoremap <leader>! "gy:call <SID>goog(@g, 1)<cr>gv
 
-
-" ----------------------------------------------------------------------------
-" get visual selection
-function! s:get_visual_selection()
-    " Why is this not a built-in Vim script function?!
-    let [lnum1, col1] = getpos("'<")[1:2]
-    let [lnum2, col2] = getpos("'>")[1:2]
-    let lines = getline(lnum1, lnum2)
-    let lines[-1] = lines[-1][: col2 - (&selection == 'inclusive' ? 1 : 2)]
-    let lines[0] = lines[0][col1 - 1:]
-    return join(lines, "\n")
-endfunction
-
 " ----------------------------------------------------------------------------
 " find word under cursor
 function! s:globalFind()
     let word = ""
     if (visualmode() == 'v')
-        let word = s:get_visual_selection()
+        let word = l9#getSelectedText()
     else
         let word = expand("<cword>")
     endif
@@ -1075,7 +1062,7 @@ function! s:globalFind()
 
     let delimiter = '/'
     if has("win32") || has("win16")
-        delimiter = '\'
+        let delimiter = '\'
     endif
 
     :execute ':vim /'.searchingWord.'/j src'.delimiter.'** | cw'
