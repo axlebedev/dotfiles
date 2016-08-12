@@ -429,10 +429,12 @@ set number
 " display currently inputed command
 set showcmd
 
+" indent settings
 set tabstop=4      " width of TAB
 set expandtab      " or 'noexpandtab': if set, inputs spaces instead of tabs
 set softtabstop=4  " how much spaces will be removed on backspace
 set shiftwidth=4   " count of spaces for '<'/'>' commands
+set shiftround     " smart indent for '<'/'>' commands
 au FileType javascript setlocal tabstop=2 softtabstop=2 shiftwidth=2
 
 set autoindent    " autoindents for new lines
