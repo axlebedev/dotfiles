@@ -35,16 +35,19 @@ Plugin 'kana/vim-submode'
 " NERD Tree
 Plugin 'scrooloose/nerdtree'
 " start NERDTree on vim startup
-autocmd vimenter * NERDTree
-" focus on editor window instead of NERDTree
-autocmd VimEnter * wincmd p
-" even if we open dir but not file
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-" if we open dir - we dont show filetree in empty buffer
-autocmd VimEnter * if argc() == 1 && !filereadable(argv()[0]) | enew | endif
-" close vim if only window is NERDTree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+augroup augroup_nerdtree
+    autocmd!
+    autocmd vimenter * NERDTree
+    " focus on editor window instead of NERDTree
+    autocmd VimEnter * wincmd p
+    " even if we open dir but not file
+    autocmd StdinReadPre * let s:std_in=1
+    autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+    " if we open dir - we dont show filetree in empty buffer
+    autocmd VimEnter * if argc() == 1 && !filereadable(argv()[0]) | enew | endif
+    " close vim if only window is NERDTree
+    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+augroup END
 " some configs of NERDTree
 let g:NERDTreeDirArrows=1 " allow it to show arrows
 let g:NERDTreeDirArrowExpandable='▸'
@@ -268,12 +271,15 @@ inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
 "let g:neocomplete#disable_auto_complete = 1
 "inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
 
-" Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+augroup augroup_neocomplete
+    autocmd!
+    " Enable omni completion.
+    autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+    autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+    autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+    autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+augroup END
 
 " Enable heavy omni completion.
 "if !exists('g:neocomplete#sources#omni#input_patterns')
@@ -283,12 +289,6 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 "let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
 "let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
 
-Plugin 'Shougo/neosnippet'
-Plugin 'Shougo/neosnippet-snippets'
-
-"imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-"smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-"xmap <C-k>     <Plug>(neosnippet_expand_target)
 
 " SuperTab like snippets behavior.
 "imap <expr><TAB>
@@ -514,14 +514,21 @@ set noerrorbells
 " with FZF
 set shortmess=aoOtI
 
-" Override some syntaxes so things look better
-autocmd BufNewFile,BufRead *eslintrc,*babelrc,*conkyrc setlocal syntax=json
 
-" Allow stylesheets to autocomplete hyphenated words
-autocmd FileType css,scss,sass setlocal iskeyword+=-
+augroup augroup_settings_global
+    autocmd!
+    " Override some syntaxes so things look better
+    autocmd BufNewFile,BufRead *eslintrc,*babelrc,*conkyrc setlocal syntax=json
 
-" when quickfix window is opened - it will be at bottom, but keep NERDTree at left
-autocmd FileType qf wincmd J | wincmd k | wincmd H | vertical resize 31 | wincmd l | wincmd j
+    " Allow stylesheets to autocomplete hyphenated words
+    autocmd FileType css,scss,sass setlocal iskeyword+=-
+
+    " when quickfix window is opened - it will be at bottom, but keep NERDTree at left
+    autocmd FileType qf wincmd J | wincmd k | wincmd H | vertical resize 31 | wincmd l | wincmd j
+
+    " set filetype for 'md' files
+    autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+augroup END
 
 " ignore whitespace in diff mode
 if &diff
@@ -569,7 +576,6 @@ if has('gui_running')
     set guioptions-=m  "remove menu bar
     set guioptions-=T  "remove toolbar
     set guioptions-=L  "remove left-hand scroll bar
-    set guioptions+=e  "PAPA TODO: comment this line, it's about tabs
 
     " Maximize gvim window.
     set lines=999 columns=999
@@ -625,8 +631,11 @@ hi VertSplit guibg=#131411 guifg=#131411
 " -----------------------------------------------------------------------------
 " --------------------begin NERDTREE HIGHLIGHT BY FILETYPES -------------------
 function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
- exec 'autocmd FileType nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guifg='. a:guifg . ' guibg=' . a:guibg
- exec 'autocmd FileType nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+    exec 'augroup augroup_nerdtree_highlight'
+    exec 'autocmd!'
+    exec 'autocmd FileType nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guifg='. a:guifg . ' guibg=' . a:guibg
+    exec 'autocmd FileType nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+    exec 'augroup END'
 endfunction
 call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', 'NONE')
 call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', 'NONE')
@@ -669,9 +678,14 @@ nmap <space> <leader>
 vmap <space> <leader>
 xmap <space> <leader>
 
+" fast open/reload vimrc
+nnoremap <leader>vo :edit $MYVIMRC<cr>
+nnoremap <leader>vr :source $MYVIMRC<cr>
+
 " Swap these two
 nnoremap 0 ^
 nnoremap ^ 0
+nnoremap 00 0
 
 " fast save file
 nmap <leader>w :w!<cr>
@@ -783,7 +797,7 @@ nnoremap <leader>il iλ<Esc>
 nnoremap <leader>al aλ<Esc>
 
 " type ':S<cr>' to split current buffer to right, and leave it with previous buffer
-command S vs | wincmd h | bprev | wincmd l
+command! S vs | wincmd h | bprev | wincmd l
 
 " Resize submode
 let g:submode_always_show_submode = 1
@@ -822,22 +836,7 @@ xnoremap <silent> <leader>lk :<C-u>call JsFastLog_dir()<CR>
 " ====================begin FUNCTIONS =========================================
 
 " -----------------------------------------------------------------------------
-" Return to last edit position when opening files (You want this!)
-autocmd BufReadPost *
-     \ if line("'\"") > 0 && line("'\"") <= line("$") |
-     \   exe "normal! g`\"" |
-     \ endif
-
-" -----------------------------------------------------------------------------
-" Close empty buffer on leave
-autocmd BufLeave *
-    \ if line('$') == 1 && getline(1) == '' && expand('%:t') |
-    \     exe 'Kwbd' |
-    \ endif
-
-" -----------------------------------------------------------------------------
 " Markdown tagbar support
-autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 let g:tagbar_type_markdown = {
     \ 'ctagstype': 'markdown',
     \ 'ctagsbin' : '/home/alex/dotfiles/markdown2ctags.py',
@@ -907,7 +906,7 @@ nnoremap <leader>b :cclose<bar>lclose<cr>
 "  http://vim.wikia.com/wiki/Deleting_a_buffer_without_closing_the_window
 "here is a more exotic version of my original Kwbd script
 "delete the buffer; keep windows; create a scratch buffer if no buffers left
-function s:Kwbd(kwbdStage)
+function! s:Kwbd(kwbdStage)
     if(a:kwbdStage == 1)
         if(!buflisted(winbufnr(0)))
             bd!
@@ -1014,7 +1013,6 @@ func! DeleteTrailingWS()
     %s/\s\+$//ge
     exe "normal `z"
 endfunc
-autocmd BufWrite *.js :call DeleteTrailingWS()
 
 " ----------------------------------------------------------------------------
 " Todo
@@ -1097,3 +1095,26 @@ else
 "     " Plugin 'henrik/vim-qargs' neede for next line
     nnoremap <M-h> :Qdo %s/\<<C-r>f\>//gce\|update<left><left><left><left><left><left><left><left><left><left><left><C-r>f
 endif
+
+"
+"
+"
+" -----------------------------------------------------------------------------
+augroup augroup_functions
+    autocmd!
+    " -------------------------------------------------------------------------
+    " Return to last edit position when opening files (You want this!)
+    autocmd BufReadPost *
+         \ if line("'\"") > 0 && line("'\"") <= line("$") |
+         \   exe "normal! g`\"" |
+         \ endif
+
+    " -------------------------------------------------------------------------
+    " Close empty buffer on leave
+    autocmd BufLeave *
+        \ if line('$') == 1 && getline(1) == '' && expand('%:t') |
+        \     exe 'Kwbd' |
+        \ endif
+
+    autocmd BufWrite *.js :call DeleteTrailingWS()
+augroup END
