@@ -399,17 +399,15 @@ set scrolloff=5
 " where to search files to open
 set path=.,,**
 
-" ':' commands; search strings; expressions; input lines, typed for the |input()| function; debug mode commands history saved
-set history=500
-
 " lets insert-mode backspace to work everywhere
 set backspace=indent,eol,start
 
 " ignore files and folders on search
+set wildignore+=*.sqp,*.log
 " *nix version
-set wildignore+=*/node_modules/*,*/bower_components/*,*/.git/*,*.swp
+set wildignore+=*/node_modules/*,*/bower_components/*,*/.git/*,*/build/*,*/dist/*
 " windows version
-set wildignore+=*\\node_modules\\*,*\\bower_components\\*,*\\.git\\*,*.swp
+set wildignore+=*\\node_modules\\*,*\\bower_components\\*,*\\.git\\*,*\\build\\*,*\\dist\\*
 
 " fix autocompletion of filenames in command-line mode
 set wildmode=longest,list
@@ -435,6 +433,7 @@ set expandtab      " or 'noexpandtab': if set, inputs spaces instead of tabs
 set softtabstop=4  " how much spaces will be removed on backspace
 set shiftwidth=4   " count of spaces for '<'/'>' commands
 set shiftround     " smart indent for '<'/'>' commands
+set smarttab       " insert tabs on the start of a line according to shiftwidth, not tabstop
 au FileType javascript setlocal tabstop=2 softtabstop=2 shiftwidth=2
 
 set autoindent    " autoindents for new lines
@@ -445,10 +444,28 @@ set timeoutlen=300 " how long will vim wait for key sequence completion
 " Don't redraw while executing macros
 set lazyredraw
 
-" Turn backup off, since most stuff is in SVN, git etc anyway...
+" ':' commands; search strings; expressions; input lines, typed for the |input()| function; debug mode commands history saved
+set history=500
+
+" Turn backup off
 set nobackup
 set nowb
 set noswapfile
+
+" store swapfiles in a central location
+set directory=~/.vim/tmp/swap//,.,/var/tmp//,/tmp//
+if !isdirectory(s:vimdir . '/tmp/swap')
+    call mkdir(s:vimdir . '/tmp/swap', 'p')
+endif
+
+" enable persistent undo
+if has('persistent_undo')
+    set undofile
+    set undodir=~/.vim/tmp/undo
+    if !isdirectory(&undodir)
+        call mkdir(&undodir, 'p')
+    endif
+endif
 
 " Remember info about open buffers on close
 set viminfo^=%
@@ -465,21 +482,6 @@ set shortmess=aAItW
 " TODO:? comment following 2 lines
 set ignorecase
 set smartcase
-
-" store swapfiles in a central location
-set directory=~/.vim/tmp/swap//,.,/var/tmp//,/tmp//
-if !isdirectory(s:vimdir . '/tmp/swap')
-    call mkdir(s:vimdir . '/tmp/swap', 'p')
-endif
-
-" enable persistent undo
-if has('persistent_undo')
-    set undofile
-    set undodir=~/.vim/tmp/undo
-    if !isdirectory(&undodir)
-        call mkdir(&undodir, 'p')
-    endif
-endif
   
 " windows
 set splitbelow
@@ -535,11 +537,12 @@ if &diff
     set diffopt+=iwhite
 endif
 
-" some custom digraphs
-digraphs TT 8869
-
-" avoid mistypes :)
-abbr funciton function
+augroup git_files "{{{
+    au!
+    " Don't remember the last cursor position when editing commit
+    " messages, always start on line 1
+    autocmd filetype gitcommit call setpos('.', [0, 1, 1, 0])
+augroup end "}}}
 
 " ========================= GLOBAL CONFIGS end=================================
 " =============================================================================
@@ -679,8 +682,15 @@ vmap <space> <leader>
 xmap <space> <leader>
 
 " fast open/reload vimrc
-nnoremap <leader>vo :edit $MYVIMRC<cr>
-nnoremap <leader>vr :source $MYVIMRC<cr>
+nnoremap <leader>ev :edit $MYVIMRC<cr>
+nnoremap <leader>sv :source $MYVIMRC<cr>
+
+" Jump to matching pairs easily, with Tab
+nnoremap <Tab> %
+vnoremap <Tab> %
+
+" Avoid accidental hits of <F1> while aiming for <Esc>
+noremap! <F1> <Esc>
 
 " Swap these two
 nnoremap 0 ^
@@ -799,6 +809,15 @@ nnoremap <leader>al aλ<Esc>
 " type ':S<cr>' to split current buffer to right, and leave it with previous buffer
 command! S vs | wincmd h | bprev | wincmd l
 
+" Toggling True/False
+nnoremap <silent> <C-t> mmviw:s/true\\|false/\={'true':'false','false':'true'}[submatch(0)]/<CR>`m:nohlsearch<CR>
+
+" some custom digraphs
+digraphs TT 8869
+
+" avoid mistypes :)
+abbr funciton function
+
 " Resize submode
 let g:submode_always_show_submode = 1
 let g:submode_timeout = 0
@@ -866,13 +885,17 @@ endfunction
 
 " -----------------------------------------------------------------------------
 " toggle centering cursor
-nnoremap <leader>c :call CenterCursorToggle()<cr>
+nnoremap <leader>c :call ReadModeToggle()<cr>
 
-function! CenterCursorToggle()
+function! ReadModeToggle()
     if &scrolloff > 10
-        setlocal scrolloff=5
+        setlocal &l:scrolloff = g:scrolloff_value
+        setlocal virtualedit=block
     else 
+        let g:scrolloff_value = &scrolloff
         setlocal scrolloff=999
+        setlocal virtualedit=all
+
     endif
 endfunction
 
@@ -900,7 +923,22 @@ endfunction
 
 " -----------------------------------------------------------------------------
 " Toggle quickfix/location window
-nnoremap <leader>b :cclose<bar>lclose<cr>
+" From Steve Losh, http://learnvimscriptthehardway.stevelosh.com/chapters/38.html
+nnoremap <leader>b :call <SID>QuickfixToggle()<cr>
+
+let g:quickfix_is_open = 0
+
+function! s:QuickfixToggle()
+    if g:quickfix_is_open
+        cclose
+        let g:quickfix_is_open = 0
+        execute g:quickfix_return_to_window . "wincmd w"
+    else
+        let g:quickfix_return_to_window = winnr()
+        copen
+        let g:quickfix_is_open = 1
+    endif
+endfunction
 
 " -----------------------------------------------------------------------------
 "  http://vim.wikia.com/wiki/Deleting_a_buffer_without_closing_the_window
