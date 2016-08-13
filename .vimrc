@@ -800,11 +800,15 @@ nnoremap <leader>; A;<Esc>
 nnoremap <leader>, A,<Esc>
 
 " reload all buffers
-nnoremap <M-r> :bufdo<space>e!<CR>
+" nnoremap <M-r> :bufdo<space>e!<CR>
 
 " λ
 nnoremap <leader>il iλ<Esc>
 nnoremap <leader>al aλ<Esc>
+
+" movements for curly
+onoremap ic iB
+onoremap ac aB
 
 " type ':S<cr>' to split current buffer to right, and leave it with previous buffer
 command! S vs | wincmd h | bprev | wincmd l
