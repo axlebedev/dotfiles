@@ -1,11 +1,11 @@
-" =ss1=ssvundle=        VUNDLE
+" =ss1=ssplugin=        VUNDLE
 " =ss2=ssglobals=       GLOBAL CONFIGS
 " =ss3=ssappearance=    APPEARANCE
-" =ss4=sskey=           KEY BINDINGS
+" =ss4=sskeyboard=      KEY BINDINGS
 " =ss5=ssfunctions=     FUNCTIONS
 
-" =ss1=ssvundle================================================================
-" ====================begin VUNDLE ============================================
+" Plugin settings ============================= {{{
+" =ss1=ssplugin=
 
 set nocompatible              " required
 filetype off                  " required
@@ -363,22 +363,11 @@ Plugin 'alexey-broadcast/vim-js-fastlog'
 " -----------------------------------------------------------------------------
 call vundle#end()            " required
 filetype plugin indent on    " required
+" }}}
 
+" Plugin settings ============================= {{{
+" =ss2=ssglobals=
 
-" sspe===================== VUNDLE end=========================================
-" =============================================================================
-
-
-
-
-
-
-
-
-
-
-" =ss2=ssglobals===============================================================
-" ====================begin GLOBAL CONFIGS ====================================
 let s:vimdir = expand("~") . "/.vim"
 
 " english vim interface language
@@ -530,6 +519,9 @@ augroup augroup_settings_global
 
     " set filetype for 'md' files
     autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+
+    " set foldmethod for vimscripts
+    autocmd FileType vim setlocal foldmethod=marker
 augroup END
 
 " ignore whitespace in diff mode
@@ -543,21 +535,10 @@ augroup git_files "{{{
     " messages, always start on line 1
     autocmd filetype gitcommit call setpos('.', [0, 1, 1, 0])
 augroup end "}}}
+" }}}
 
-" ========================= GLOBAL CONFIGS end=================================
-" =============================================================================
-
-
-
-
-
-
-
-
-
-
-" =ss3=ssappearance============================================================
-" ====================begin APPEARANCE ========================================
+" Appearance settings ============================= {{{
+" =ss3=ssappearance=
 
 " syntax color limit (0 for endless)
 set synmaxcol=500
@@ -662,18 +643,10 @@ set list
 " show wrapped line marker
 set showbreak=»
 
-" ========================= APPEARANCE end=====================================
-" =============================================================================
+" }}}
 
-
-
-
-
-
-
-
-" =ss4=sskey===================================================================
-" ====================begin KEY BINDINGS ======================================
+" Keyboard settings ============================= {{{
+" =ss4=sskeyboard=
 
 " TODO: fix it
 let mapleader = "\<space>"
@@ -777,7 +750,7 @@ nnoremap g* g*zz
 nnoremap g# g#zz
 
 " toggle fold on tripleclick
-noremap <3-LeftMouse> za
+noremap <2-LeftMouse> za
 
 " insert blank line
 nnoremap <leader><CR> o<Esc>
@@ -843,23 +816,14 @@ xnoremap <silent> <leader>ll :<C-u>call JsFastLog_stringify()<CR>
 xnoremap <silent> <leader>ld :<C-u>call JsFastLog_function()<CR>
 xnoremap <silent> <leader>ls :<C-u>call JsFastLog_string()<CR>
 xnoremap <silent> <leader>lk :<C-u>call JsFastLog_dir()<CR>
+xnoremap <expr> <leader>j getVisualSelection2()
 
-" ========================= KEY BINDINGS end===================================
-" =============================================================================
+" }}}
 
+" Functions ============================= {{{
+" =ss5=ssfunctions=
 
-
-
-
-
-
-
-
-" =ss5=ssfunctions=============================================================
-" ====================begin FUNCTIONS =========================================
-
-" -----------------------------------------------------------------------------
-" Markdown tagbar support
+" Markdown tagbar support ----------------------------- {{{
 let g:tagbar_type_markdown = {
     \ 'ctagstype': 'markdown',
     \ 'ctagsbin' : '/home/alex/dotfiles/markdown2ctags.py',
@@ -874,9 +838,9 @@ let g:tagbar_type_markdown = {
     \ },
     \ 'sort': 0,
 \ }
+" }}}
 
-" -----------------------------------------------------------------------------
-" toggle foldColumn
+" toggle foldColumn ----------------------------- {{{
 nnoremap <leader>f :call FoldColumnToggle()<cr>
 
 function! FoldColumnToggle()
@@ -886,9 +850,9 @@ function! FoldColumnToggle()
         setlocal foldcolumn=12
     endif
 endfunction
+" }}}
 
-" -----------------------------------------------------------------------------
-" toggle centering cursor
+" toggle centering cursor ----------------------------- {{{
 nnoremap <leader>c :call ReadModeToggle()<cr>
 
 function! ReadModeToggle()
@@ -902,9 +866,9 @@ function! ReadModeToggle()
 
     endif
 endfunction
+" }}}
 
-" -----------------------------------------------------------------------------
-" next functions makes:
+" next functions makes: ----------------------------- {{{
 function! YRRunAfterMaps()
     " nnoremap Y y$ but in YankRing-compatible way
     nnoremap Y :<C-U>YRYankCount 'y$'<CR>
@@ -924,9 +888,9 @@ function! VisualPaste()
         :execute "normal! gvp"
     endif
 endfunction
+" }}}
 
-" -----------------------------------------------------------------------------
-" Toggle quickfix/location window
+" Toggle quickfix/location window ----------------------------- {{{
 " From Steve Losh, http://learnvimscriptthehardway.stevelosh.com/chapters/38.html
 nnoremap <leader>b :call <SID>QuickfixToggle()<cr>
 
@@ -943,8 +907,9 @@ function! s:QuickfixToggle()
         let g:quickfix_is_open = 1
     endif
 endfunction
+" }}}
 
-" -----------------------------------------------------------------------------
+" Kwbd ----------------------------- {{{
 "  http://vim.wikia.com/wiki/Deleting_a_buffer_without_closing_the_window
 "here is a more exotic version of my original Kwbd script
 "delete the buffer; keep windows; create a scratch buffer if no buffers left
@@ -1009,11 +974,11 @@ command! Kwbd call s:Kwbd(1)
 nnoremap <silent> <Plug>Kwbd :<C-u>Kwbd<CR>
 " Create a mapping (e.g. in your .vimrc) like this:
 "nmap <C-W>! <Plug>Kwbd
+" }}}
 
 
 
-" -----------------------------------------------------------------------------
-" Skip quickfix on traversing buffers
+" Skip quickfix on traversing buffers ----------------------------- {{{
 nnoremap <leader>j :<C-u>call OpenNextBuf(1)<CR>
 nnoremap <leader>k :<C-u>call OpenNextBuf(0)<CR>
 function! OpenNextBuf(prev)
@@ -1028,7 +993,7 @@ function! OpenNextBuf(prev)
 endfunction
 
 " -----------------------------------------------------------------------------
-" make gd to work with import
+" make gd to work with import ----------------------------- {{{
 nnoremap <F5> :<C-u>call GoToImportDefinition()<CR>
 let s:isGoingToImportDefinition = 0
 function! GoToImportDefinition()
@@ -1047,17 +1012,17 @@ autocmd BufEnter *
 \   :execute "normal! nzz" |
 \   let s:isGoingToImportDefinition = 0 |
 \ endif
+" }}}
 
-" -----------------------------------------------------------------------------
-" Delete trailing white space on save
+" Delete trailing white space on save ----------------------------- {{{
 func! DeleteTrailingWS()
     exe "normal mz"
     %s/\s\+$//ge
     exe "normal `z"
 endfunc
+" }}}
 
-" ----------------------------------------------------------------------------
-" Todo
+" Todo ----------------------------- {{{
 function! s:todo() abort
     let entries = []
     for cmd in ['git grep -n -e TODO -e FIXME -e XXX 2> /dev/null',
@@ -1077,9 +1042,9 @@ function! s:todo() abort
     endif
 endfunction
 command! Todo call s:todo()
+" }}}
 
-" ----------------------------------------------------------------------------
-" <Leader>?/! | Google it / Feeling lucky
+" <Leader>?/! | Google it / Feeling lucky ----------------------------- {{{
 function! s:goog(pat, lucky)
     echom 'goog'
     echom pat
@@ -1096,9 +1061,9 @@ nnoremap <F3> :call <SID>goog(expand("<cWORD>"), 0)<cr>
 " nnoremap <leader>! :call <SID>goog(expand("<cWORD>"), 1)<cr>
 xnoremap <F3> "gy:call <SID>goog(@g, 0)<cr>gv
 " xnoremap <leader>! "gy:call <SID>goog(@g, 1)<cr>gv
+" }}}
 
-" ----------------------------------------------------------------------------
-" find word under cursor
+" find word under cursor ----------------------------- {{{
 function! s:globalFind()
     let word = ""
     if (visualmode() == 'v')
@@ -1125,7 +1090,7 @@ nnoremap <C-f> :call <SID>globalFind()<cr>
 xnoremap <C-f> :call <SID>globalFind()<cr>
 
 
-" " find/replace in current project
+" find/replace in current project
 if has("win32") || has("win16")
 "     nnoremap <C-f> :vim<space>//j<space>src\**\|cw<left><left><left><left><left><left><left><left><left><left><left><left><C-r><C-w>
 "     vnoremap <C-f> "fy:vim<space>//j<space>src\**\|cw<left><left><left><left><left><left><left><left><left><left><left><left><C-r>f
@@ -1137,21 +1102,17 @@ else
 "     " Plugin 'henrik/vim-qargs' neede for next line
     nnoremap <M-h> :Qdo %s/\<<C-r>f\>//gce\|update<left><left><left><left><left><left><left><left><left><left><left><C-r>f
 endif
+" }}}
 
-"
-"
-"
 " -----------------------------------------------------------------------------
 augroup augroup_functions
     autocmd!
-    " -------------------------------------------------------------------------
     " Return to last edit position when opening files (You want this!)
     autocmd BufReadPost *
          \ if line("'\"") > 0 && line("'\"") <= line("$") |
          \   exe "normal! g`\"" |
          \ endif
 
-    " -------------------------------------------------------------------------
     " Close empty buffer on leave
     autocmd BufLeave *
         \ if line('$') == 1 && getline(1) == '' && expand('%:t') |
@@ -1160,3 +1121,6 @@ augroup augroup_functions
 
     autocmd BufWrite *.js :call DeleteTrailingWS()
 augroup END
+" }}}
+
+" }}}
