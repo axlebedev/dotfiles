@@ -3,12 +3,9 @@
 " =ss3=ssappearance=    APPEARANCE
 " =ss4=sskeyboard=      KEY BINDINGS
 " =ss5=ssfunctions=     FUNCTIONS
-" TODO: help to be always in readmode
 " TODO: fix readmode
+" TODO: 'help' to be always in readmode
 " TODO: <Tab> in insert mode to insert needed number of spaces
-" TODO: FileType vim: 80 columns, foldmethod=marker
-
-
 
 
 
@@ -487,7 +484,7 @@ augroup augroup_settings_global
     autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
     " set foldmethod for vimscripts
-    autocmd FileType vim setlocal foldmethod=marker
+    autocmd FileType vim setlocal foldmethod=marker colorcolumn=80
 augroup END
 
 " ignore whitespace in diff mode
@@ -773,18 +770,10 @@ call submode#map(resizeSubmode, 'n', '', 'l', ':vertical resize +1<cr>')
 call submode#map(resizeSubmode, 'n', '', 'k', ':resize -1<cr>')
 call submode#map(resizeSubmode, 'n', '', 'j', ':resize +1<cr>')
 
-" JsFastLog mappings
-nnoremap <silent> <leader>l :<C-u>call JsFastLog(0)<CR>
-nnoremap <silent> <leader>ll :<C-u>call JsFastLog_stringify()<CR>
-nnoremap <silent> <leader>ld :<C-u>call JsFastLog_function()<CR>
-nnoremap <silent> <leader>ls :<C-u>call JsFastLog_string()<CR>
-nnoremap <silent> <leader>lk :<C-u>call JsFastLog_dir()<CR>
-xnoremap <silent> <leader>l :<C-u>call JsFastLog(0)<CR>
-xnoremap <silent> <leader>ll :<C-u>call JsFastLog_stringify()<CR>
-xnoremap <silent> <leader>ld :<C-u>call JsFastLog_function()<CR>
-xnoremap <silent> <leader>ls :<C-u>call JsFastLog_string()<CR>
-xnoremap <silent> <leader>lk :<C-u>call JsFastLog_dir()<CR>
-xnoremap <expr> <leader>j getVisualSelection2()
+augroup augroup_keyboard
+    autocmd!
+    autocmd FileType help nnoremap <Esc> :q<cr>
+augroup END
 
 " }}}
 
