@@ -1,10 +1,10 @@
 [user]
-	email = alexey.broadcast@gmail.com
-	name = alexey-broadcast
+	email = alevedev@biarum.com
+	name = Alex Lebedev
 [alias]
 	co = checkout
 	ci = commit
-	cia = commit --amend
+	cia = commit --amend --no-edit
 	st = status
 	f = fetch
 	rb = rebase

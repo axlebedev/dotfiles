@@ -96,7 +96,7 @@ alias o="xdg-open"
 
 alias ga="git add"
 alias gi="git commit"
-alias gia="git commit --amend"
+alias gia="git commit --amend --no-edit"
 alias go="git checkout"
 alias gs="git status"
 alias gd="git diff"
