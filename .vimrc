@@ -6,6 +6,8 @@
 " TODO: fix readmode
 " TODO: 'help' to be always in readmode
 " TODO: <Tab> in insert mode to insert needed number of spaces
+" TODO: <C-f>: add searched word to @/
+" TODO: fox <C-t> if there are several values in line
 
 
 
