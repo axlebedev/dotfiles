@@ -3,7 +3,6 @@
 " =ss3=ssappearance=    APPEARANCE
 " =ss4=sskeyboard=      KEY BINDINGS
 " =ss5=ssfunctions=     FUNCTIONS
-" TODO: fix readmode
 " TODO: 'help' to be always in readmode
 " TODO: <Tab> in insert mode to insert needed number of spaces
 " TODO: <C-f>: add searched word to @/
@@ -795,15 +794,16 @@ augroup END
 " toggle centering cursor ----------------------------- {{{
 nnoremap <leader>c :call ReadModeToggle()<cr>
 
+" TODO: scrolloff can't be local :(
+let g:scrolloff_value = &scrolloff
 function! ReadModeToggle()
     if &scrolloff > 10
-        setlocal &l:scrolloff = g:scrolloff_value
-        setlocal virtualedit=block
+        let &scrolloff = g:scrolloff_value
+        set virtualedit=block
     else 
         let g:scrolloff_value = &scrolloff
-        setlocal scrolloff=999
-        setlocal virtualedit=all
-
+        set scrolloff=999
+        set virtualedit=all
     endif
 endfunction
 " }}}
