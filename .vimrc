@@ -640,6 +640,11 @@ nnoremap ^ 0
 nnoremap 00 0
 nnoremap $ g_
 nnoremap $$ $
+vnoremap 0 ^
+vnoremap ^ 0
+vnoremap 00 0
+vnoremap $ g_
+vnoremap $$ $
 
 " fast save file, close file
 nmap <leader>w :w!<cr>
@@ -743,6 +748,7 @@ nnoremap <leader>, g_a,<Esc>
 " nnoremap <M-r> :bufdo<space>e!<CR>
 
 " movements for curly
+" TODO: does it work?
 onoremap ic iB
 onoremap ac aB
 
