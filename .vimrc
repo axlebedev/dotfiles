@@ -5,7 +5,7 @@
 " =ss5=ssfunctions=     FUNCTIONS
 " TODO: 'help' to be always in readmode
 " TODO: <Tab> in insert mode to insert needed number of spaces
-" TODO: <C-f>: add searched word to @/
+" TODO: <C-f>: add searched word to @/ when this register is empty
 " TODO: fox <C-t> if there are several values in line
 
 
@@ -1015,6 +1015,7 @@ function! s:globalFind()
     endif
 
     let searchingWord = input('Searching text: ', word)
+    let @/ = searchingWord
 
     if (empty(searchingWord))
         return
