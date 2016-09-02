@@ -487,6 +487,14 @@ augroup end "}}}
 
 " Match HTML tags
 runtime macros/matchit.vim
+
+" Vim now also uses the selection system clipboard for default yank/paste.
+if has('unnamedplus')
+  " See :h 'clipboard' for details.
+  set clipboard=unnamedplus,unnamed
+else
+  set clipboard+=unnamed
+endif
 " }}}
 
 
@@ -683,11 +691,6 @@ xnoremap . :normal .<CR>
 " don't reset visual selection after indent
 xnoremap <silent> > >gv
 xnoremap <silent> < <gv
-
-" Copy and paste through system slipboard
-vmap Y "+y
-nmap <leader>p "+p
-nmap <leader>P "+P
 
 " Movement in wrapped lines
 nnoremap j gj
