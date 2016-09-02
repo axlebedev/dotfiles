@@ -695,12 +695,17 @@ vnoremap j gj
 vnoremap k gk
 
 " center find results
-nnoremap n nzz
-nnoremap N Nzz
-nnoremap * *zz
-nnoremap # #zz
-nnoremap g* g*zz
-nnoremap g# g#zz
+" zv unfolds any fold if the cursor suddenly appears inside a fold.
+nnoremap n nzzzv
+nnoremap N Nzzzv
+nnoremap * *zzzv
+nnoremap # #zzzv
+nnoremap g* g*zzzv
+nnoremap g# g#zzzv
+
+" Also center the screen when jumping through the changelist
+nnoremap g; g;zz
+nnoremap g, g,zz
 
 " toggle fold on tripleclick
 noremap <3-LeftMouse> za
@@ -744,9 +749,13 @@ nnoremap <silent> <C-t> mmviw:s/true\\|false/\={'true':'false','false':'true'}[s
 " toggle foldColumn: 0->6->12->0...
 nnoremap <leader>f :let &l:foldcolumn = (&l:foldcolumn + 6) % 18<cr>
 
+" Now we don't have to move our fingers so far when we want to scroll through
+" the command history; also, don't forget the q: command
+cnoremap <c-j> <down>
+cnoremap <c-k> <up>
+
 " some custom digraphs
-" ⊥
-digraphs TT 8869
+digraphs TT 8869 " ⊥
 
 " avoid mistypes :)
 abbr funciton function
