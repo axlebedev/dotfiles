@@ -314,6 +314,10 @@ Plugin 'terryma/vim-expand-region'
 vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
 
+Plugin 'Valloric/ListToggle'
+let g:lt_location_list_toggle_map = '<leader>0'
+let g:lt_quickfix_list_toggle_map = '<leader>b'
+
 " -----------------------------------------------------------------------------
 " My ^^
 Plugin 'alexey-broadcast/vim-js-fastlog'
