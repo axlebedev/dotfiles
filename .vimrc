@@ -90,24 +90,6 @@ else
 endif
 
 " -----------------------------------------------------------------------------
-" syntax checker
-"Plugin 'scrooloose/syntastic'
-" TODO: разобраться, нужен или нет
-"let g:syntastic_enable_signs=1
-" some default configs
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 1
-"let g:syntastic_check_on_wq = 1
-
-"let g:syntastic_javascript_checkers = ['eslint']
-" need to install checkers for different languages
-" https://github.com/scrooloose/syntastic/wiki/Syntax-Checkers
-
-" -----------------------------------------------------------------------------
 " Generate jsdoc easily
 " TODO: make it work with `const func = () => 0`
 Plugin 'heavenshell/vim-jsdoc'
@@ -261,8 +243,9 @@ let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
 " Recommended key-mappings.
 " <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
+inoremap <expr><TAB> pumvisible() ?
+  \ "\<C-n>" : "\<Esc>:call SmartInsertTab()\<cr>"
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
 
 augroup augroup_neocomplete
     autocmd!
@@ -365,7 +348,6 @@ set hidden
 set autoread
 
 " keep lines above/below cursor
-" TODO: integrate with my 'readmode'
 set scrolloff=5
 
 " where to search files to open
@@ -766,6 +748,7 @@ digraphs TT 8869
 
 " avoid mistypes :)
 abbr funciton function
+abbr cosnt const
 
 " Resize submode
 let g:submode_always_show_submode = 1
