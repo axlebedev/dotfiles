@@ -184,8 +184,7 @@ let g:ctrlp_match_current_file = 1
 
 " -----------------------------------------------------------------------------
 " comment lines, uncomment lines
-" TODO: inline comments?
-Plugin 'tpope/vim-commentary'
+Plugin 'tomtom/tcomment_vim'
 
 " -----------------------------------------------------------------------------
 " Show 'n of m' result
