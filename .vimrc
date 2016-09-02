@@ -4,7 +4,6 @@
 " =ss4=sskeyboard=      KEY BINDINGS
 " =ss5=ssfunctions=     FUNCTIONS
 " TODO: 'help' to be always in readmode
-" TODO: <Tab> in insert mode to insert needed number of spaces
 " TODO: <C-f>: add searched word to @/ when this register is empty
 " TODO: fox <C-t> if there are several values in line
 
@@ -532,26 +531,22 @@ else
     set t_Co=256
 endif "has('gui_running')
 
-" TODO: comment
+" highlights search results immediately
 set incsearch
-" highlights search results
 set hlsearch
 
 " Monokai settings ----------------------------- {{{
 " If you are using a font which support italic, you can use below config to enable the italic form
 let g:monokai_italic = 1
 
-" The default window border is narrow dotted line, use below config to turn on the thick one
-let g:monokai_thick_border = 1 " TODO: doesn't work :(
-
 " colorscheme
 colorscheme monokai
 " }}}
 
-" Color of find result background
+" color of find result background
 highlight Search guibg='#4A3F2D' guifg='NONE'
 
-" set colors of matching parens
+"  colors of matching parens
 hi MatchParen cterm=bold ctermbg=none ctermfg=magenta gui=bold guibg=#8C5669 guifg=NONE
 
 " colors of fold column
@@ -568,7 +563,6 @@ set cursorline
 hi clear CursorLine
 hi CursorLineNr guifg=#68705e guibg=#131411
 
-" TODO: doesn't work?
 " colors and appearance of window split column
 set fillchars+=vert:│
 hi VertSplit guibg=#131411 guifg=#131411
@@ -732,10 +726,6 @@ vnoremap // y/<C-R>"<CR>
 " add a symbol to current line
 nnoremap <leader>; g_a;<Esc>
 nnoremap <leader>, g_a,<Esc>
-
-" reload all buffers
-" TODO: maybe remove this line?
-" nnoremap <M-r> :bufdo<space>e!<CR>
 
 " movements for curly
 " TODO: does it work?
@@ -911,7 +901,6 @@ nnoremap <silent> <Plug>Kwbd :<C-u>Kwbd<CR>
 
 
 " Skip quickfix on traversing buffers ----------------------------- {{{
-" TODO: Does it work?
 nnoremap <leader>j :<C-u>call OpenNextBuf(1)<CR>
 nnoremap <leader>k :<C-u>call OpenNextBuf(0)<CR>
 function! OpenNextBuf(prev)
