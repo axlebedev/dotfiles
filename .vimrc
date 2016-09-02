@@ -357,6 +357,8 @@ set autoread
 
 " keep lines above/below cursor
 set scrolloff=5
+set sidescrolloff=15
+set sidescroll=1
 
 " where to search files to open
 set path=.,,**
