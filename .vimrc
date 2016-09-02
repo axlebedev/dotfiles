@@ -338,6 +338,11 @@ filetype plugin indent on    " required
 
 let s:vimdir = expand("~") . "/.vim"
 
+" remove all commands on re-read .vimrc file
+augroup au_vimrc
+    autocmd!
+augroup END
+
 " english vim interface language
 set langmenu=en_US
 let $LANG = 'en_US'
@@ -455,35 +460,29 @@ set noerrorbells
 " Also suppress several 'Press Enter to continue messages' especially with FZF
 set shortmess=aoOtI
 
-augroup augroup_settings_global
-    autocmd!
-    " Override some syntaxes so things look better
-    autocmd BufNewFile,BufRead *eslintrc,*babelrc,*conkyrc setlocal syntax=json
+" Override some syntaxes so things look better
+autocmd au_vimrc BufNewFile,BufRead *eslintrc,*babelrc,*conkyrc setlocal syntax=json
 
-    " Allow stylesheets to autocomplete hyphenated words
-    autocmd FileType css,scss,sass setlocal iskeyword+=-
+" Allow stylesheets to autocomplete hyphenated words
+autocmd au_vimrc FileType css,scss,sass setlocal iskeyword+=-
 
-    " when quickfix window is opened - it will be at bottom, but keep NERDTree at left
-    autocmd FileType qf wincmd J | wincmd k | wincmd H | vertical resize 31 | wincmd l | wincmd j
+" when quickfix window is opened - it will be at bottom, but keep NERDTree at left
+autocmd au_vimrc FileType qf wincmd J | wincmd k | wincmd H | vertical resize 31 | wincmd l | wincmd j
 
-    " set filetype for 'md' files
-    autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+" set filetype for 'md' files
+autocmd au_vimrc BufNewFile,BufReadPost *.md set filetype=markdown
 
-    " set foldmethod for vimscripts
-    autocmd FileType vim setlocal foldmethod=marker colorcolumn=80
-augroup END
+" set foldmethod for vimscripts
+autocmd au_vimrc FileType vim setlocal foldmethod=marker colorcolumn=80
 
 " ignore whitespace in diff mode
 if &diff
     set diffopt+=iwhite
 endif
 
-augroup git_files "{{{
-    au!
-    " Don't remember the last cursor position when editing commit
-    " messages, always start on line 1
-    autocmd filetype gitcommit call setpos('.', [0, 1, 1, 0])
-augroup end "}}}
+" Don't remember the last cursor position when editing commit
+" messages, always start on line 1
+autocmd au_vimrc filetype gitcommit call setpos('.', [0, 1, 1, 0])
 
 " Match HTML tags
 runtime macros/matchit.vim
@@ -574,11 +573,8 @@ hi VertSplit guibg=#131411 guifg=#131411
 
 " NERDTree highlight by filetypes settings ----------------------------- {{{
 function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
-    exec 'augroup augroup_nerdtree_highlight'
-    exec 'autocmd!'
-    exec 'autocmd FileType nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guifg='. a:guifg . ' guibg=' . a:guibg
-    exec 'autocmd FileType nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
-    exec 'augroup END'
+    exec 'autocmd augroup_nerdtree FileType nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guifg='. a:guifg . ' guibg=' . a:guibg
+    exec 'autocmd augroup_nerdtree FileType nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
 endfunction
 call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', 'NONE')
 call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', 'NONE')
@@ -766,10 +762,7 @@ call submode#map(resizeSubmode, 'n', '', 'l', ':vertical resize +1<cr>')
 call submode#map(resizeSubmode, 'n', '', 'k', ':resize -1<cr>')
 call submode#map(resizeSubmode, 'n', '', 'j', ':resize +1<cr>')
 
-augroup augroup_keyboard
-    autocmd!
-    autocmd FileType help nnoremap <Esc> :q<cr>
-augroup END
+autocmd au_vimrc FileType help nnoremap <Esc> :q<cr>
 
 " }}}
 
@@ -1032,22 +1025,19 @@ endif
 " }}}
 
 " -----------------------------------------------------------------------------
-augroup augroup_functions
-    autocmd!
-    " Return to last edit position when opening files (You want this!)
-    autocmd BufReadPost *
-         \ if line("'\"") > 0 && line("'\"") <= line("$") |
-         \   exe "normal! g`\"" |
-         \ endif
-
-    " Close empty buffer on leave
-    autocmd BufLeave *
-        \ if line('$') == 1 && getline(1) == '' && expand('%:t') |
-        \     exe 'Kwbd' |
+" Return to last edit position when opening files (You want this!)
+autocmd au_vimrc BufReadPost *
+        \ if line("'\"") > 0 && line("'\"") <= line("$") |
+        \   exe "normal! g`\"" |
         \ endif
 
-    autocmd BufWrite *.js :call DeleteTrailingWS()
-augroup END
+" Close empty buffer on leave
+autocmd au_vimrc BufLeave *
+    \ if line('$') == 1 && getline(1) == '' && expand('%:t') |
+    \     exe 'Kwbd' |
+    \ endif
+
+autocmd au_vimrc BufWrite *.js :call DeleteTrailingWS()
 " }}}
 
 " }}}
