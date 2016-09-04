@@ -71,4 +71,4 @@ ${if_match ${exec ~/.i3/getVolume.sh}>0} { "name" : "Volume", "full_text" : "
 	{ "name" : "Date", "full_text" : "${time %d.%m.%Y}", "color" : "\#815f8c", "separator" : false },
 	{ "name" : "Time", "full_text" : "${time  %H:%M:%S}", "color" : "\#93c8d9" },
 # Next block - keyboard layout
-	{ ${if_match ${template0}<10} "full_text": "EN", "color": "\#00ff00" ${else} "full_text": "RU", "color": "\#ff0000" ${endif} } ],
+	{ ${if_match ${template0}<10} "full_text": " EN ", "color": "\#00ff00" ${else} "full_text": " RU ", "background": "\#ff0000", "color": "\#000000" ${endif} } ],

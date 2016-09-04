@@ -189,16 +189,25 @@ for_window [class="Screenruler" instance="screenruler"] resize set 500 200
 
 for_window [class="Synapse" instance="synapse"] border none
 
+# gaps
+for_window [class="^.*"] border pixel 0
+
 workspace 9 output DVI-D-0
 
-exec --no-startup-id i3-msg 'workspace 1; exec google-chrome; workspace 1'
-exec --no-startup-id i3-msg 'workspace 9; exec google-chrome --app="https://web.skype.com"; workspace 1'
-exec --no-startup-id i3-msg 'workspace 9; exec google-chrome --profile-directory=Default --app-id=clhhggbfdinjmjhajaheehoeibfljjno; workspace 1'
-exec --no-startup-id joxi
-exec --no-startup-id megasync
-exec --no-startup-id feh --bg-scale ~/Pictures/518079-background-hd.jpg --bg-scale ~/Pictures/ws_HTC_Sense_Background_1280x1024\ \(1\).jpg 
-exec --no-startup-id nm-applet
+### exec --no-startup-id i3-msg 'workspace 1; exec google-chrome; workspace 1'
+### exec --no-startup-id i3-msg 'workspace 9; exec google-chrome --app="https://web.skype.com"; workspace 1'
+### exec --no-startup-id i3-msg 'workspace 9; exec google-chrome --profile-directory=Default --app-id=clhhggbfdinjmjhajaheehoeibfljjno; workspace 1'
+### exec --no-startup-id joxi
+### exec --no-startup-id megasync
+exec --no-startup-id feh --bg-scale ~/Pictures/1920blue.jpg --bg-scale ~/Pictures/Abstract-Bubbles-1280x1024.jpg
+### exec --no-startup-id nm-applet
 #exec --no-startup-id gnome-settings-daemon
+
+
+# Experimental gaps stuff
+gaps inner 10
+smart_gaps on
+# gaps outer 10
 
 
 #ass                 border  backgr. text    indicator
@@ -209,6 +218,7 @@ client.urgent           #F86A59 #F86A59 #ffffff #000000
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command $HOME/.i3/i3status.sh 
-	tray_output primary
+    status_command $HOME/.i3/i3status.sh 
+    tray_output primary
+    height 27
 }
