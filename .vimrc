@@ -319,8 +319,11 @@ let g:lt_quickfix_list_toggle_map = '<leader>b'
 
 " -----------------------------------------------------------------------------
 " My ^^
-Plugin 'alexey-broadcast/vim-js-fastlog'
-Plugin 'file:///home/alex/hdd/Proj/knowledge/testplugin'
+" Plugin 'alexey-broadcast/vim-js-fastlog'
+Plugin 'file:///home/alex/hdd/Proj/vim-js-fastlog'
+" Plugin 'alexey-broadcast/vim-smart-insert-tab'
+Plugin 'file:///home/alex/hdd/Proj/vim-smart-insert-tab'
+
 Plugin 'isomoar/vim-css-to-inline'
 
 " -----------------------------------------------------------------------------
@@ -517,7 +520,7 @@ if has('gui_running')
     if has("win32") || has("win16")
         set guifont=Consolas:h10
     else
-        set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Plus\ Nerd\ File\ Types\ 11
+        set guifont=DroidSansMonoforPowerline\ Nerd\ Font
     endif "has("win32") || has("win16")
 
     set guioptions-=m  "remove menu bar
@@ -752,6 +755,12 @@ digraphs TT 8869 " ⊥
 " avoid mistypes :)
 abbr funciton function
 abbr cosnt const
+abbr proips props
+abbr PT PropTypes
+abbr setTimeou setTimeout
+abbr setTimout setTimeout
+abbr clearTimeou clearTimeout
+abbr clearTimout clearTimeout
 
 " Resize submode
 let g:submode_always_show_submode = 1
