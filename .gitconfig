@@ -14,6 +14,7 @@
 	logfilelines = log -p -M --stat -L;N,M:filename - log for lines
 [core]
 	pager = more
+    editor = gvim -f
 	autoclrf
 [credential]
 	helper = cache --timeout=86400
