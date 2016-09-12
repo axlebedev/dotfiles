@@ -756,11 +756,15 @@ digraphs TT 8869 " ⊥
 abbr funciton function
 abbr cosnt const
 abbr proips props
-abbr PT PropTypes
 abbr setTimeou setTimeout
 abbr setTimout setTimeout
 abbr clearTimeou clearTimeout
 abbr clearTimout clearTimeout
+abbr widht width
+abbr transfrom transform
+abbr reutrn return
+abbr pt PropTypes
+abbr tp this.props
 
 " Resize submode
 let g:submode_always_show_submode = 1
