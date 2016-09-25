@@ -26,9 +26,12 @@ font pango:Consolas Bold 12
 bindsym XF86AudioLowerVolume exec amixer -D pulse sset Master 2%- & killall -USR1 i3status 
 bindsym XF86AudioRaiseVolume exec amixer -D pulse sset Master 2%+ & killall -USR1 i3status 
 bindsym XF86AudioMute exec amixer -D pulse sset Master toggle & killall -USR1 i3status 
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioStop exec playerctl stop
 bindsym $mod+o exec gnome-terminal --tab -e "alsamixer -V all"
 
-#exec --no-startup-id gnome-settings-daemon
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
@@ -189,8 +192,6 @@ for_window [class="Screenruler" instance="screenruler"] resize set 500 200
 
 for_window [class="Synapse" instance="synapse"] border none
 
-# gaps
-for_window [class="^.*"] border pixel 0
 
 workspace 9 output DVI-D-0
 
@@ -199,14 +200,16 @@ workspace 9 output DVI-D-0
 ### exec --no-startup-id i3-msg 'workspace 9; exec google-chrome --profile-directory=Default --app-id=clhhggbfdinjmjhajaheehoeibfljjno; workspace 1'
 ### exec --no-startup-id joxi
 ### exec --no-startup-id megasync
-exec --no-startup-id feh --bg-scale ~/Pictures/1920blue.jpg --bg-scale ~/Pictures/Abstract-Bubbles-1280x1024.jpg
-### exec --no-startup-id nm-applet
-#exec --no-startup-id gnome-settings-daemon
+exec --no-startup-id gnome-settings-daemon
+exec --no-startup-id nm-applet
+exec --no-startup-id feh --no-xinerama --bg-scale /usr/share/backgrounds/linuxmint-rafaela/rapciu_pearl.png --bg-scale /usr/share/backgrounds/linuxmint-rafaela/rapciu_pearl.png
 
 
 # Experimental gaps stuff
 gaps inner 10
 smart_gaps on
+smart_borders no_gaps
+for_window [class="^.*"] border pixel 4
 # gaps outer 10
 
 
