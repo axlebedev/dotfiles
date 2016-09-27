@@ -12,33 +12,30 @@
 " Plugin settings ============================= {{{
 " =ss1=ssplugin=
 
-set nocompatible              " required
-filetype off                  " required
+set nocompatible
+filetype off
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-
-" Keep Plugin commands between vundle#begin/end.
-call vundle#begin()
-
+call plug#begin('~/.vim/bundle')
 " -----------------------------------------------------------------------------
-Plugin 'VundleVim/Vundle.vim' "required
+" Install vim-plug:
+" curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    " https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 " -----------------------------------------------------------------------------
 " General purpose funcs for other plugins
-Plugin 'l9'
+Plug 'l9'
 
 " -----------------------------------------------------------------------------
 " Funcs maybe
-" Plugin 'vim-scripts/lh-vim-lib'
+" Plug 'vim-scripts/lh-vim-lib'
 
 " -----------------------------------------------------------------------------
 " Custom submodes
-Plugin 'kana/vim-submode'
+Plug 'kana/vim-submode'
 
 " -----------------------------------------------------------------------------
 " NERD Tree
-Plugin 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree'
 " TODO: read help
 " start NERDTree on vim startup
 augroup augroup_nerdtree
@@ -63,7 +60,7 @@ let NERDTreeShowHidden=1 " show hidden files
 
 " -----------------------------------------------------------------------------
 " vim-airline: cute statusbar at bottom
-Plugin 'bling/vim-airline'
+Plug 'bling/vim-airline'
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled=1
 if !exists('g:airline_symbols')
@@ -91,7 +88,7 @@ endif
 " -----------------------------------------------------------------------------
 " Generate jsdoc easily
 " TODO: make it work with `const func = () => 0`
-Plugin 'heavenshell/vim-jsdoc'
+Plug 'heavenshell/vim-jsdoc'
 let g:jsdoc_allow_input_prompt = 1
 let g:jsdoc_input_description = 1
 let g:jsdoc_return_description = 1
@@ -99,34 +96,34 @@ let g:jsdoc_param_description_separator = ' - '
 
 " -----------------------------------------------------------------------------
 " One plugin to rule all the languages
-Plugin 'othree/html5.vim'
+Plug 'othree/html5.vim'
 
 " -----------------------------------------------------------------------------
 " JavaScript bundle for vim, this bundle provides syntax and indent plugins
-Plugin 'pangloss/vim-javascript'
+Plug 'pangloss/vim-javascript'
 let g:javascript_enable_domhtmlcss = 1
 let g:javascript_plugin_jsdoc = 1
 
-Plugin 'othree/javascript-libraries-syntax.vim'
+Plug 'othree/javascript-libraries-syntax.vim'
 let g:used_javascript_libs = 'underscore,react'
 " -----------------------------------------------------------------------------
 " Customize colors here
 " TODO: ???
-"Plugin 'othree/yajs.vim'
-"Plugin 'othree/es.next.syntax.vim'
-"Plugin 'bigfish/vim-js-context-coloring'
+"Plug 'othree/yajs.vim'
+"Plug 'othree/es.next.syntax.vim'
+"Plug 'bigfish/vim-js-context-coloring'
 " -----------------------------------------------------------------------------
 " jsx support
-Plugin 'mxw/vim-jsx'
+Plug 'mxw/vim-jsx'
 let g:jsx_ext_required = 0
 
 " -----------------------------------------------------------------------------
 "  TODO TODO TODO !!!
-"Plugin 'ternjs/tern_for_vim'
+"Plug 'ternjs/tern_for_vim'
 
 " -----------------------------------------------------------------------------
 " ctags structure
-Plugin 'majutsushi/tagbar'
+Plug 'majutsushi/tagbar'
 nmap <F8> :TagbarToggle<CR>
 let g:tagbar_width = 80
 let g:tagbar_autofocus = 1
@@ -146,11 +143,11 @@ let g:tagbar_type_markdown = {
 " TODO: разобраться с этим плагином
 " :Ack [options] {pattern} [{directories}]
 " :grep = :Ack, :grepadd = :AckAdd, :lgrep = :LAck, :lgrepadd = :LAckAdd
-Plugin 'mileszs/ack.vim'
+Plug 'mileszs/ack.vim'
 
 " -----------------------------------------------------------------------------
 " autoclose parens
-Plugin 'Raimondi/delimitMate'
+Plug 'Raimondi/delimitMate'
 let delimitMate_excluded_ft = 'html'
 let delimitMate_nesting_quotes = ['"','`']
 let delimitMate_expand_cr = 2
@@ -158,7 +155,7 @@ let delimitMate_expand_space = 1
 
 " -----------------------------------------------------------------------------
 " Fuzzy file opener
-Plugin 'ctrlpvim/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 "let g:ctrlp_map = '<C-t>'
 let g:ctrlp_map = '<leader>t'
 let g:ctrlp_cmd = 'CtrlP'
@@ -178,50 +175,50 @@ let g:ctrlp_match_current_file = 1
 " -----------------------------------------------------------------------------
 " Sublime's <C-r> analog
 " TODO: wait until es6 supported
-" Plugin 'tacahiroy/ctrlp-funky'
+" Plug 'tacahiroy/ctrlp-funky'
 " nnoremap <leader>r :CtrlPFunky<Cr>
 
 " -----------------------------------------------------------------------------
 " comment lines, uncomment lines
-Plugin 'tomtom/tcomment_vim'
+Plug 'tomtom/tcomment_vim'
 
 " -----------------------------------------------------------------------------
 " Show 'n of m' result
-Plugin 'henrik/vim-indexed-search'
+Plug 'henrik/vim-indexed-search'
 
 " -----------------------------------------------------------------------------
 " Make '.' work on plugin commands (not all maybe)
-Plugin 'tpope/vim-repeat'
+Plug 'tpope/vim-repeat'
 
 " -----------------------------------------------------------------------------
 " Surround. See docs on https://github.com/tpope/vim-surround
-Plugin 'tpope/vim-surround'
+Plug 'tpope/vim-surround'
 
 " -----------------------------------------------------------------------------
 " autoswitch language on leave insert mode
-Plugin 'lyokha/vim-xkbswitch'
+Plug 'lyokha/vim-xkbswitch'
 let g:XkbSwitchEnabled = 1
 
 " -----------------------------------------------------------------------------
 " Highlight matching html tag
-Plugin 'MatchTag'
+Plug 'MatchTag'
 
 " -----------------------------------------------------------------------------
 " autoclose html tags
-Plugin 'alvan/vim-closetag'
+Plug 'alvan/vim-closetag'
 let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.js,*.jsx"
 " TODO: doesn't close if we use neocomplete 
 
 " -----------------------------------------------------------------------------
 " yank previous registers
-Plugin 'YankRing.vim'
+Plug 'YankRing.vim'
 nnoremap <silent> <F11> :YRShow<CR>
 
 " -----------------------------------------------------------------------------
 " First, close the foldmethod bug
-Plugin 'Konfekt/FastFold'
+Plug 'Konfekt/FastFold'
 
-Plugin 'Shougo/neocomplete.vim'
+Plug 'Shougo/neocomplete.vim'
 " TODO: read help
 let g:acp_enableAtStartup = 0
 
@@ -257,41 +254,42 @@ augroup END
 
 " -----------------------------------------------------------------------------
 " color highlight in text
-Plugin 'ap/vim-css-color'
+Plug 'ap/vim-css-color'
 
 " -----------------------------------------------------------------------------
 " Indent line for leading spaces
-Plugin 'Yggdroot/indentLine'
+Plug 'Yggdroot/indentLine'
 " Warning! needed to patch font as described at https://github.com/Yggdroot/indentLine
-if has("win32") || has("win16")
-    let g:indentLine_char = '⁞'
-else
-    let g:indentLine_char = ''
-endif "has("win32") || has("win16")
+" if has("win32") || has("win16")
+let g:indentLine_char = '┆'
+
+" else
+    " let g:indentLine_char = ''
+" endif "has("win32") || has("win16")
 
 " -----------------------------------------------------------------------------
 " Color theme
-Plugin 'crusoexia/vim-monokai'
+Plug 'crusoexia/vim-monokai'
 
 " -----------------------------------------------------------------------------
 " Delete all buffers but current
 " TODO: remove?
-Plugin 'schickling/vim-bufonly'
+Plug 'schickling/vim-bufonly'
 
 " -----------------------------------------------------------------------------
 " Some more text objects
 " TODO: read doc
-Plugin 'wellle/targets.vim'
+Plug 'wellle/targets.vim'
 
 " -----------------------------------------------------------------------------
 " Split/join js-objects (and many more)
 " TODO: read doc, maybe remove
-Plugin 'AndrewRadev/splitjoin.vim'
+Plug 'AndrewRadev/splitjoin.vim'
 
 " -----------------------------------------------------------------------------
 " EasyMotion like in chrome
 " TODO: maybe remove
-Plugin 'easymotion/vim-easymotion'
+Plug 'easymotion/vim-easymotion'
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
 let g:EasyMotion_smartcase = 1 " Turn on case insensitive feature
 nmap t <Plug>(easymotion-overwin-f)
@@ -299,36 +297,36 @@ nmap tt <Plug>(easymotion-overwin-f2)
 
 " -----------------------------------------------------------------------------
 " :Qdo
-Plugin 'henrik/vim-qargs'
+Plug 'henrik/vim-qargs'
 
 " -----------------------------------------------------------------------------
 " Pretty work with git
 " TODO: READ the fucking docs, WATCH screencasts
-Plugin 'tpope/vim-fugitive'
-Plugin 'junegunn/gv.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'junegunn/gv.vim'
 
 " -----------------------------------------------------------------------------
 " expand selection
-Plugin 'terryma/vim-expand-region'
+Plug 'terryma/vim-expand-region'
 vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
 
-Plugin 'Valloric/ListToggle'
+Plug 'Valloric/ListToggle'
 let g:lt_location_list_toggle_map = '<leader>0'
 let g:lt_quickfix_list_toggle_map = '<leader>b'
 
 " -----------------------------------------------------------------------------
 " My ^^
-" Plugin 'alexey-broadcast/vim-js-fastlog'
-Plugin 'file:///home/alex/hdd/Proj/vim-js-fastlog'
-" Plugin 'alexey-broadcast/vim-smart-insert-tab'
-Plugin 'file:///home/alex/hdd/Proj/vim-smart-insert-tab'
+" Plug 'alexey-broadcast/vim-js-fastlog'
+Plug 'file:///home/alex/hdd/Proj/vim-js-fastlog'
+" Plug 'alexey-broadcast/vim-smart-insert-tab'
+Plug 'file:///home/alex/hdd/Proj/vim-smart-insert-tab'
 
-Plugin 'isomoar/vim-css-to-inline'
+Plug 'isomoar/vim-css-to-inline'
 
 " -----------------------------------------------------------------------------
-call vundle#end()            " required
-filetype plugin indent on    " required
+call plug#end()
+filetype plugin indent on
 " }}}
 
 
