@@ -52,8 +52,8 @@ ${if_match "${exec xset q | grep 'Caps Lock' | sed 's/.*Caps Lock:[ ]*\([^ ]*\).
 	{ "full_text": "██████████ CapsLock ██████████", "color": "\#FF0000" },
 ${endif}
 # Next block - wi-fi 
-	{ "full_text" : "${downspeed wlan0}/s", "color" : "\#ADCBFF", "separator" : false },
-	{ "full_text" : "${upspeed wlan0}/s", "color" : "\#ffc400" },
+	{ "full_text" : "${downspeed eth0}/s", "color" : "\#ADCBFF" },
+	# { "full_text" : "${upspeed eth0}/s", "color" : "\#ffc400" },
 # Next 5 blocks - cpu usage
 	{ "name" : "Processor", "full_text" : "", "separator" : false },
 	{ "full_text" : "${cpu cpu1}", "separator" : false, "color" : ${if_match ${cpu cpu1}<10} "\#00ff00" ${else} ${if_match ${cpu cpu1}<20} "\#a2ff00" ${else} ${if_match ${cpu cpu1}<30} "\#d4ff00" ${else} ${if_match ${cpu cpu1}<50} "\#f6ff00" ${else} ${if_match ${cpu cpu1}<80} "\#ff9d00" ${else} "\#ff0000" ${endif} ${endif} ${endif} ${endif} ${endif} },
