@@ -192,6 +192,10 @@ for_window [class="Screenruler" instance="screenruler"] resize set 500 200
 
 for_window [class="Synapse" instance="synapse"] border none
 
+# chrome extensions
+for_window [instance="^crx.*$" window_role="pop-up"]  floating enable
+for_window [instance="^crx.*$" window_role="pop-up"]  sticky   enable
+
 
 workspace 9 output DVI-D-0
 
@@ -201,8 +205,9 @@ workspace 9 output DVI-D-0
 ### exec --no-startup-id joxi
 ### exec --no-startup-id megasync
 exec --no-startup-id gnome-settings-daemon
-exec --no-startup-id nm-applet
-exec --no-startup-id feh --no-xinerama --bg-scale /usr/share/backgrounds/linuxmint-rafaela/rapciu_pearl.png --bg-scale /usr/share/backgrounds/linuxmint-rafaela/rapciu_pearl.png
+exec --no-startup-id cinnamon-sound-applet
+# exec --no-startup-id nm-applet
+# exec --no-startup-id feh --no-xinerama --bg-scale /usr/share/backgrounds/linuxmint-rafaela/rapciu_pearl.png --bg-scale /usr/share/backgrounds/linuxmint-rafaela/rapciu_pearl.png
 
 
 # Experimental gaps stuff
@@ -213,7 +218,7 @@ for_window [class="^.*"] border pixel 4
 # gaps outer 10
 
 
-#ass                 border  backgr. text    indicator
+#ass                    border  backgr. text    indicator
 client.focused          #23486c #23486c #ffffff #585858
 client.focused_inactive #444444 #444444 #ffffff #444444
 client.unfocused        #28282b #28282b #666666 #444444
