@@ -316,11 +316,6 @@ let g:lt_location_list_toggle_map = '<leader>0'
 let g:lt_quickfix_list_toggle_map = '<leader>b'
 
 " -----------------------------------------------------------------------------
-" pretty and fast search
-Plug 'ramele/agrep'
-let g:agrep_default_flags = '-I --exclude-dir={.git,.svn,node_modules,bin,logs}'
-
-" -----------------------------------------------------------------------------
 " My ^^
 " Plug 'alexey-broadcast/vim-js-fastlog'
 Plug 'file:///home/alex/hdd/Proj/vim-js-fastlog'
@@ -1015,14 +1010,12 @@ function! s:globalFind()
         return
     endif
 
-    " TODO: clean if Agrep works under win
-    " let delimiter = '/'
-    " if has("win32") || has("win16")
-    "     let delimiter = '\'
-    " endif
+    let delimiter = '/'
+    if has("win32") || has("win16")
+        let delimiter = '\'
+    endif
 
-    " :execute ':vim /'.searchingWord.'/j src'.delimiter.'** | cw'
-    :execute ":Agrep -r '".searchingWord."'"
+    :execute ':vim /'.searchingWord.'/j src'.delimiter.'** | cw'
 endfunction
 
 nnoremap <C-f> :call <SID>globalFind()<cr>
