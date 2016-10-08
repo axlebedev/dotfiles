@@ -4,7 +4,6 @@
 " =ss4=sskeyboard=      KEY BINDINGS
 " =ss5=ssfunctions=     FUNCTIONS
 " TODO: 'help' to be always in readmode
-" TODO: <C-f>: add searched word to @/ when this register is empty
 " TODO: fox <C-t> if there are several values in line
 
 
@@ -139,7 +138,7 @@ let g:tagbar_type_markdown = {
 " :Ack [options] {pattern} [{directories}]
 " :grep = :Ack, :grepadd = :AckAdd, :lgrep = :LAck, :lgrepadd = :LAckAdd
 Plug 'mileszs/ack.vim'
-if executable('ag')
+if executable('ag') " sudo apt-get install silversearcher-ag
   let g:ackprg = 'ag --ignore-dir ".git bin logs node_modules static webpack"'
 endif
 
@@ -989,7 +988,7 @@ xnoremap <F3> "gy:call <SID>goog(@g, 0)<cr>gv
 
 " find word under cursor ----------------------------- {{{
 " TODO: use existing plugin, or make own?
-function! s:globalFind()
+function! s:globalFind(wordMatch)
     let word = ""
     if (visualmode() == 'v')
         let word = l9#getSelectedText()
@@ -997,24 +996,30 @@ function! s:globalFind()
         let word = expand("<cword>")
     endif
 
-    let searchingWord = input('Searching text: ', word)
-    let @/ = searchingWord
+    let promptString = 'Searching text: '
+    if (a:wordMatch)
+        let promptString = 'Searching word: '
+    endif
 
+    let searchingWord = input(promptString, word)
     if (empty(searchingWord))
         return
     endif
 
-    let delimiter = '/'
-    if has("win32") || has("win16")
-        let delimiter = '\'
-    endif
+    let @/ = searchingWord
+    set hlsearch
 
-    " :execute ':vim /'.searchingWord.'/j src'.delimiter.'** | cw'
-    :execute ':Ack '.searchingWord
+    if (a:wordMatch)
+        :execute ':Ack! -s -w '.searchingWord
+    else
+        :execute ':Ack! -s '.searchingWord
+    endif
 endfunction
 
-nnoremap <C-f> :call <SID>globalFind()<cr>
-xnoremap <C-f> :call <SID>globalFind()<cr>
+nnoremap <C-f> :call <SID>globalFind(0)<cr>
+xnoremap <C-f> :call <SID>globalFind(0)<cr>
+nnoremap <C-f><C-f> :call <SID>globalFind(1)<cr>
+xnoremap <C-f><C-f> :call <SID>globalFind(1)<cr>
 
 " find/replace in current project 
 if has("win32") || has("win16")
