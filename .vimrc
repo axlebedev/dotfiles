@@ -82,8 +82,10 @@ endif
 " Generate jsdoc easily
 " TODO: make it work with `const func = () => 0`
 Plug 'heavenshell/vim-jsdoc'
+let g:jsdoc_enable_es6 = 1
 let g:jsdoc_allow_input_prompt = 1
 let g:jsdoc_input_description = 1
+let g:jsdoc_return_type = 1
 let g:jsdoc_return_description = 1
 let g:jsdoc_param_description_separator = ' - '
 
