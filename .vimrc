@@ -15,19 +15,13 @@
 set nocompatible
 filetype off
 
+" vim-plug installation:
+" curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 call plug#begin('~/.vim/bundle')
-" -----------------------------------------------------------------------------
-" Install vim-plug:
-" curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-    " https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
 " -----------------------------------------------------------------------------
 " General purpose funcs for other plugins
 Plug 'l9'
-
-" -----------------------------------------------------------------------------
-" Funcs maybe
-" Plug 'vim-scripts/lh-vim-lib'
+" Plug 'lh-vim-lib'
 
 " -----------------------------------------------------------------------------
 " Custom submodes
@@ -106,6 +100,7 @@ let g:javascript_plugin_jsdoc = 1
 
 Plug 'othree/javascript-libraries-syntax.vim'
 let g:used_javascript_libs = 'underscore,react'
+Plug 'othree/es.next.syntax.vim'
 " -----------------------------------------------------------------------------
 " Customize colors here
 " TODO: ???
@@ -144,6 +139,9 @@ let g:tagbar_type_markdown = {
 " :Ack [options] {pattern} [{directories}]
 " :grep = :Ack, :grepadd = :AckAdd, :lgrep = :LAck, :lgrepadd = :LAckAdd
 Plug 'mileszs/ack.vim'
+if executable('ag')
+  let g:ackprg = 'ag --ignore-dir ".git bin logs node_modules static webpack"'
+endif
 
 " -----------------------------------------------------------------------------
 " autoclose parens
@@ -280,6 +278,7 @@ Plug 'schickling/vim-bufonly'
 " Some more text objects
 " TODO: read doc
 Plug 'wellle/targets.vim'
+let g:targets_pairs = '()b {}c [] <>' " replace {}B to {}c
 
 " -----------------------------------------------------------------------------
 " Split/join js-objects (and many more)
@@ -724,11 +723,6 @@ vnoremap // y/<C-R>"<CR>
 nnoremap <leader>; g_a;<Esc>
 nnoremap <leader>, g_a,<Esc>
 
-" movements for curly
-" TODO: does it work?
-onoremap ic iB
-onoremap ac aB
-
 " type ':S<cr>' to split current buffer to right, and leave it with previous buffer
 command! S vs | wincmd h | bprev | wincmd l
 
@@ -1015,7 +1009,8 @@ function! s:globalFind()
         let delimiter = '\'
     endif
 
-    :execute ':vim /'.searchingWord.'/j src'.delimiter.'** | cw'
+    " :execute ':vim /'.searchingWord.'/j src'.delimiter.'** | cw'
+    :execute ':Ack '.searchingWord
 endfunction
 
 nnoremap <C-f> :call <SID>globalFind()<cr>
