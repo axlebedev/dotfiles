@@ -80,7 +80,6 @@ endif
 
 " -----------------------------------------------------------------------------
 " Generate jsdoc easily
-" TODO: make it work with `const func = () => 0`
 Plug 'heavenshell/vim-jsdoc'
 let g:jsdoc_enable_es6 = 1
 let g:jsdoc_allow_input_prompt = 1
@@ -136,9 +135,6 @@ let g:tagbar_type_markdown = {
 
 " -----------------------------------------------------------------------------
 " Search string or pattern in folder
-" TODO: разобраться с этим плагином
-" :Ack [options] {pattern} [{directories}]
-" :grep = :Ack, :grepadd = :AckAdd, :lgrep = :LAck, :lgrepadd = :LAckAdd
 Plug 'mileszs/ack.vim'
 if executable('ag') " sudo apt-get install silversearcher-ag
   let g:ackprg = 'ag --ignore-dir ".git bin logs node_modules static webpack"'
@@ -272,12 +268,10 @@ Plug 'crusoexia/vim-monokai'
 
 " -----------------------------------------------------------------------------
 " Delete all buffers but current
-" TODO: remove?
 Plug 'schickling/vim-bufonly'
 
 " -----------------------------------------------------------------------------
 " Some more text objects
-" TODO: read doc
 Plug 'wellle/targets.vim'
 let g:targets_pairs = '()b {}c [] <>' " replace {}B to {}c
 
@@ -288,7 +282,6 @@ Plug 'AndrewRadev/splitjoin.vim'
 
 " -----------------------------------------------------------------------------
 " EasyMotion like in chrome
-" TODO: maybe remove
 Plug 'easymotion/vim-easymotion'
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
 let g:EasyMotion_smartcase = 1 " Turn on case insensitive feature
@@ -710,15 +703,13 @@ nnoremap <leader>o o<Esc>
 cmap w!! w !sudo tee % >/dev/null
 
 " replace selection
-" TODO: don't pollute registers
 vnoremap <C-h> "hy:%s/<C-r>h//gc<left><left><left><C-r>h
 
 " visual select all
 nnoremap <M-a> ggVG
 
 " pretty find
-" TODO: don't pollute registers
-vnoremap // y/<C-R>"<CR>
+vnoremap // "py/<C-R>p<CR>
 
 " add a symbol to current line
 nnoremap <leader>; g_a;<Esc>
@@ -794,7 +785,6 @@ endfunction
 " }}}
 
 " nnoremap Y y$ but in YankRing-compatible way: ----------- {{{
-" TODO: don't pollute registers
 function! YRRunAfterMaps()
     nnoremap Y :<C-U>YRYankCount 'y$'<CR>
 
