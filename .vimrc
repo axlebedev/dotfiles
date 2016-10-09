@@ -176,6 +176,7 @@ let g:ctrlp_match_current_file = 1
 " -----------------------------------------------------------------------------
 " comment lines, uncomment lines
 Plug 'tomtom/tcomment_vim'
+let g:tcommentTextObjectInlineComment = 'ix'
 
 " -----------------------------------------------------------------------------
 " Show 'n of m' result
