@@ -40,6 +40,9 @@ abbr -a lg l | grep -i
 abbr -a lrg l -R | grep -i
 abbr -a lt tree -a -C -I node_modules\|.git\|bower_components
 
+abbr -a rm rm -rf
+abbr -a cp cp -r
+
 abbr -a v gvim
 
 abbr -a o xdg-open
@@ -60,7 +63,7 @@ abbr -a nemo nemo --no-desktop
 
 abbr -a gt gnome-terminal
 
-abbr -a nd npm run dev
+abbr -a nd sudo npm run dev
 abbr -a nb npm run build
 abbr -a nl npm run lint
 abbr -a nt npm run test
