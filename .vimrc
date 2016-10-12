@@ -458,9 +458,6 @@ autocmd au_vimrc BufNewFile,BufRead *eslintrc,*babelrc,*conkyrc setlocal syntax=
 " Allow stylesheets to autocomplete hyphenated words
 autocmd au_vimrc FileType css,scss,sass setlocal iskeyword+=-
 
-" when quickfix window is opened - it will be at bottom, but keep NERDTree at left
-autocmd au_vimrc FileType qf wincmd J | wincmd k | wincmd H | vertical resize 31 | wincmd l | wincmd j
-
 " set filetype for 'md' files
 autocmd au_vimrc BufNewFile,BufReadPost *.md set filetype=markdown
 
@@ -1002,11 +999,16 @@ function! s:globalFind(wordMatch)
     let @/ = searchingWord
     set hlsearch
 
+    let searchingWord = substitute(searchingWord, '(', '\\(', '')
+    let searchingWord = substitute(searchingWord, ')', '\\)', '')
+
+    :execute ':NERDTreeClose'
     if (a:wordMatch)
-        :execute ':Ack! -s -w '.searchingWord
+        :execute ":Ack! -S -w '".searchingWord."'"
     else
-        :execute ':Ack! -s '.searchingWord
+        :execute ":Ack! -S '".searchingWord."'"
     endif
+    :execute ':NERDTreeToggle'
 endfunction
 
 nnoremap <C-f> :call <SID>globalFind(0)<cr>
