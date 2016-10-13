@@ -48,8 +48,10 @@ abbr -a v gvim
 abbr -a o xdg-open
 
 abbr -a ga git add
+abbr -a gas git add src
 abbr -a gi git commit
 abbr -a gia git commit --amend --no-edit
+abbr -a giw git commit -m "wip"
 abbr -a go git checkout
 abbr -a gs git status
 abbr -a gd git diff
