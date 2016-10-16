@@ -330,9 +330,9 @@ set backspace=indent,eol,start
 " ignore files and folders on search
 set wildignore+=*.sqp,*.log
 " *nix version
-set wildignore+=*/node_modules/*,*/bower_components/*,*/.git/*,*/build/*,*/dist/*
+set wildignore+=*/node_modules/*,*/bower_components/*,*/build/*,*/dist/*
 " windows version
-set wildignore+=*\\node_modules\\*,*\\bower_components\\*,*\\.git\\*,*\\build\\*,*\\dist\\*
+set wildignore+=*\\node_modules\\*,*\\bower_components\\*,*\\build\\*,*\\dist\\*
 
 " fix autocompletion of filenames in command-line mode
 set wildmode=longest,list
