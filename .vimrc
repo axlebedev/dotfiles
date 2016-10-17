@@ -113,11 +113,8 @@ Plug 'mxw/vim-jsx'
 let g:jsx_ext_required = 0
 
 " -----------------------------------------------------------------------------
-Plug 'ternjs/tern_for_vim'
-Plug 'maralla/completor.vim' " Warning! after install do 'make js' in plugins folder
-inoremap <expr><TAB> pumvisible() ?
-  \ "\<C-n>" : "\<Esc>:call SmartInsertTab()\<cr>"
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+"  TODO TODO TODO !!!
+"Plug 'ternjs/tern_for_vim'
 
 " -----------------------------------------------------------------------------
 " ctags structure
@@ -214,6 +211,42 @@ Plug 'YankRing.vim'
 nnoremap <silent> <F11> :YRShow<CR>
 
 " -----------------------------------------------------------------------------
+" First, close the foldmethod bug
+Plug 'Konfekt/FastFold'
+
+Plug 'Shougo/neocomplete.vim'
+" TODO: read help
+let g:acp_enableAtStartup = 0
+
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 2
+" Let it not to skip first completion
+let g:neocomplete#enable_auto_select = 0 
+" Define keyword.
+if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+" Recommended key-mappings.
+" <TAB>: completion.
+inoremap <expr><TAB> pumvisible() ?
+  \ "\<C-n>" : "\<Esc>:call SmartInsertTab()\<cr>"
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+
+augroup augroup_neocomplete
+    autocmd!
+    " Enable omni completion.
+    autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+    autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+    autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+    autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+augroup END
 
 " -----------------------------------------------------------------------------
 " color highlight in text
