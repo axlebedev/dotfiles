@@ -741,8 +741,12 @@ abbr clearTimout clearTimeout
 abbr widht width
 abbr transfrom transform
 abbr reutrn return
+
 abbr pt PropTypes
 abbr tp this.props
+abbr ts this.state
+abbr np nextProps
+abbr ns nextState
 
 " Resize submode
 let g:submode_always_show_submode = 1
