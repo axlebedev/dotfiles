@@ -1003,10 +1003,11 @@ function! s:globalFind(wordMatch)
     let searchingWord = substitute(searchingWord, ')', '\\)', '')
 
     :execute ':NERDTreeClose'
+    let searchCommand = ":Ack! -S --ignore=\"tags\" "
     if (a:wordMatch)
-        :execute ":Ack! -S -w '".searchingWord."'"
+        :execute searchCommand."-w '".searchingWord."'"
     else
-        :execute ":Ack! -S '".searchingWord."'"
+        :execute searchCommand."'".searchingWord."'"
     endif
     :execute ':NERDTreeToggle'
 endfunction
