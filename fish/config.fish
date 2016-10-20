@@ -53,6 +53,8 @@ abbr -a gi git commit
 abbr -a gia git commit --amend --no-edit
 abbr -a giw git commit -m "wip"
 abbr -a go git checkout
+abbr -a gos git checkout src
+abbr -a god git checkout develop
 abbr -a gs git status
 abbr -a gd git diff
 abbr -a gh git hist
@@ -60,6 +62,7 @@ abbr -a ghh git hist -10
 abbr -a ghs git hist --stat
 abbr -a gpl git pull
 abbr -a gps git push
+abbr -a grd git rebase origin/develop
 
 abbr -a nemo nemo --no-desktop
 
@@ -69,3 +72,5 @@ abbr -a nd sudo npm run dev
 abbr -a nb npm run build
 abbr -a nl npm run lint
 abbr -a nt npm run test
+
+abbr -a est es-ctags -R .
