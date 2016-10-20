@@ -27,6 +27,15 @@ Plug 'l9'
 Plug 'kana/vim-submode'
 
 " -----------------------------------------------------------------------------
+" Command-line output to temp buffer
+Plug 'AndrewRadev/bufferize.vim'
+
+" -----------------------------------------------------------------------------
+" Markdown live preview
+" npm i -g livedown
+Plug 'shime/vim-livedown'
+
+" -----------------------------------------------------------------------------
 " NERD Tree
 Plug 'scrooloose/nerdtree'
 " TODO: read help
