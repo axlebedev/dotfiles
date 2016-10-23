@@ -244,7 +244,7 @@ let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 " Recommended key-mappings.
 " <TAB>: completion.
 inoremap <expr><TAB> pumvisible() ?
-  \ "\<C-n>" : "\<Esc>:call SmartInsertTab()\<cr>"
+  \ "\<C-n>" : SmartInsertTab()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
 
 augroup augroup_neocomplete
