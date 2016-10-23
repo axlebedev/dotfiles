@@ -208,6 +208,7 @@ exec --no-startup-id cinnamon-sound-applet
 # exec --no-startup-id nm-applet
 # exec --no-startup-id feh --no-xinerama --bg-scale /usr/share/backgrounds/linuxmint-rafaela/rapciu_pearl.png --bg-scale /usr/share/backgrounds/linuxmint-rafaela/rapciu_pearl.png
 
+focus_on_window_activation focus
 
 # Experimental gaps stuff
 gaps inner 10
