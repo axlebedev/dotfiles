@@ -558,6 +558,7 @@ hi LineNr guibg=#131411 guifg=#34352E
 " highlight current line number
 set cursorline
 hi clear CursorLine
+hi CursorLine guibg=#23241E
 hi CursorLineNr guifg=#68705e guibg=#131411
 
 " colors and appearance of window split column
@@ -603,6 +604,8 @@ let mapleader = "\<space>"
 nmap <space> <leader>
 vmap <space> <leader>
 xmap <space> <leader>
+
+nmap <leader>lkk <leader>lkiW
 
 " fast open/reload vimrc
 nnoremap <leader>ev :edit $MYVIMRC<cr>
