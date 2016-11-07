@@ -189,6 +189,8 @@ let g:tcommentTextObjectInlineComment = 'ix'
 
 " -----------------------------------------------------------------------------
 " Show 'n of m' result
+let g:indexed_search_numbered_only = 1
+let g:indexed_search_center = 1
 Plug 'henrik/vim-indexed-search'
 
 " -----------------------------------------------------------------------------
@@ -690,15 +692,6 @@ nnoremap k gk
 vnoremap j gj
 vnoremap k gk
 
-" center find results
-" zv unfolds any fold if the cursor suddenly appears inside a fold.
-nnoremap n nzzzv
-nnoremap N Nzzzv
-nnoremap * *zzzv
-nnoremap # #zzzv
-nnoremap g* g*zzzv
-nnoremap g# g#zzzv
-
 " Also center the screen when jumping through the changelist
 nnoremap g; g;zz
 nnoremap g, g,zz
@@ -771,7 +764,8 @@ call submode#map(resizeSubmode, 'n', '', 'l', ':vertical resize +1<cr>')
 call submode#map(resizeSubmode, 'n', '', 'k', ':resize -1<cr>')
 call submode#map(resizeSubmode, 'n', '', 'j', ':resize +1<cr>')
 
-autocmd au_vimrc FileType help nnoremap <Esc> :q<cr>
+" autocmd au_vimrc FileType help nnoremap <Esc> :q<cr>
+" autocmd au_vimrc BufLeave * nnoremap! <Esc> <Esc>
 
 " }}}
 
