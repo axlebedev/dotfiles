@@ -722,8 +722,9 @@ nnoremap <M-a> ggVG
 vnoremap // "py/<C-R>p<CR>
 
 " add a symbol to current line
-nnoremap <leader>; g_a;<Esc>
-nnoremap <leader>, g_a,<Esc>
+"
+nnoremap <leader>; mqg_a;<esc>`q
+nnoremap <leader>, mqg_a,<esc>`q
 
 " type ':S<cr>' to split current buffer to right, and leave it with previous buffer
 command! S vs | wincmd h | bprev | wincmd l
