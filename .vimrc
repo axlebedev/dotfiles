@@ -189,9 +189,18 @@ let g:tcommentTextObjectInlineComment = 'ix'
 
 " -----------------------------------------------------------------------------
 " Show 'n of m' result
+let g:indexed_search_mappings = 0
 let g:indexed_search_numbered_only = 1
-let g:indexed_search_center = 1
+let g:indexed_search_shortmess = 1
 Plug 'henrik/vim-indexed-search'
+
+" Clear highlight on cursor move
+let g:oblique#incsearch_highlight_all = 1
+Plug 'junegunn/vim-pseudocl'
+Plug 'junegunn/vim-oblique'
+autocmd User Oblique ShowSearchIndex
+autocmd User ObliqueStar ShowSearchIndex
+autocmd User ObliqueRepeat ShowSearchIndex
 
 " -----------------------------------------------------------------------------
 " Make '.' work on plugin commands (not all maybe)
