@@ -109,7 +109,7 @@ let g:javascript_plugin_jsdoc = 1
 
 Plug 'othree/javascript-libraries-syntax.vim'
 let g:used_javascript_libs = 'underscore,react'
-Plug 'othree/es.next.syntax.vim'
+" Plug 'othree/es.next.syntax.vim'
 " -----------------------------------------------------------------------------
 " Customize colors here
 " TODO: ???
@@ -225,6 +225,7 @@ nnoremap <silent> <F11> :YRShow<CR>
 " First, close the foldmethod bug
 Plug 'Konfekt/FastFold'
 
+" Plug 'Shougo/vimproc'
 Plug 'Shougo/neocomplete.vim'
 " TODO: read help
 let g:acp_enableAtStartup = 0
@@ -322,10 +323,10 @@ let g:lt_quickfix_list_toggle_map = '<leader>b'
 
 " -----------------------------------------------------------------------------
 " My ^^
-" Plug 'alexey-broadcast/vim-js-fastlog'
-Plug 'file:///home/alex/hdd/Proj/vim-js-fastlog'
-" Plug 'alexey-broadcast/vim-smart-insert-tab'
-Plug 'file:///home/alex/hdd/Proj/vim-smart-insert-tab'
+Plug 'alexey-broadcast/vim-js-fastlog'
+" Plug 'file:///home/alex/hdd/Proj/vim-js-fastlog'
+Plug 'alexey-broadcast/vim-smart-insert-tab'
+" Plug 'file:///home/alex/hdd/Proj/vim-smart-insert-tab'
 
 Plug 'isomoar/vim-css-to-inline'
 
@@ -715,7 +716,6 @@ nnoremap <M-a> ggVG
 vnoremap // "py/<C-R>p<CR>
 
 " add a symbol to current line
-"
 nnoremap <leader>; mqg_a;<esc>`q
 nnoremap <leader>, mqg_a,<esc>`q
 
@@ -1014,11 +1014,11 @@ function! s:globalFind(wordMatch)
     let searchingWord = substitute(searchingWord, ')', '\\)', '')
 
     :execute ':NERDTreeClose'
-    let searchCommand = ":Ack! -S --ignore=\"tags\" "
+    let searchCommand = ":Ack! -S "
     if (a:wordMatch)
-        :execute searchCommand."-w '".searchingWord."'"
+        :execute searchCommand."-w '".searchingWord."' src/"
     else
-        :execute searchCommand."'".searchingWord."'"
+        :execute searchCommand."'".searchingWord."' src/"
     endif
     :execute ':NERDTreeToggle'
 endfunction
