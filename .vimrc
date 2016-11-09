@@ -198,9 +198,13 @@ Plug 'henrik/vim-indexed-search'
 let g:oblique#incsearch_highlight_all = 1
 Plug 'junegunn/vim-pseudocl'
 Plug 'junegunn/vim-oblique'
+
 autocmd User Oblique ShowSearchIndex
 autocmd User ObliqueStar ShowSearchIndex
 autocmd User ObliqueRepeat ShowSearchIndex
+
+hi! def link ObliqueCurrentMatch DiffChange
+hi! def link ObliqueCurrentIncSearch DiffChange
 
 " -----------------------------------------------------------------------------
 " Make '.' work on plugin commands (not all maybe)
