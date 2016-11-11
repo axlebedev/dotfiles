@@ -335,6 +335,10 @@ let g:lt_location_list_toggle_map = '<leader>0'
 let g:lt_quickfix_list_toggle_map = '<leader>b'
 
 " -----------------------------------------------------------------------------
+" word motion commands for camel-upper-any-case words
+Plug 'chaoren/vim-wordmotion'
+
+" -----------------------------------------------------------------------------
 " My ^^
 Plug 'alexey-broadcast/vim-js-fastlog'
 " Plug 'file:///home/alex/hdd/Proj/vim-js-fastlog'
