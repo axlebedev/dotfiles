@@ -339,6 +339,13 @@ let g:lt_quickfix_list_toggle_map = '<leader>b'
 Plug 'chaoren/vim-wordmotion'
 
 " -----------------------------------------------------------------------------
+" split-join object literals in many/one line
+let g:splitjoin_split_mapping = 'gs'
+let g:splitjoin_join_mapping = 'gj'
+let g:splitjoin_trailing_comma = 1
+Plug 'AndrewRadev/splitjoin.vim'
+
+" -----------------------------------------------------------------------------
 " My ^^
 Plug 'alexey-broadcast/vim-js-fastlog'
 " Plug 'file:///home/alex/hdd/Proj/vim-js-fastlog'
