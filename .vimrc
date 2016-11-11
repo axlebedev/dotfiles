@@ -335,10 +335,6 @@ let g:lt_location_list_toggle_map = '<leader>0'
 let g:lt_quickfix_list_toggle_map = '<leader>b'
 
 " -----------------------------------------------------------------------------
-" word motion commands for camel-upper-any-case words
-Plug 'chaoren/vim-wordmotion'
-
-" -----------------------------------------------------------------------------
 " split-join object literals in many/one line
 let g:splitjoin_split_mapping = 'gs'
 let g:splitjoin_join_mapping = 'gj'
