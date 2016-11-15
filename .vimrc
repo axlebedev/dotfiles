@@ -241,43 +241,14 @@ Plug 'YankRing.vim'
 nnoremap <silent> <F11> :YRShow<CR>
 
 " -----------------------------------------------------------------------------
-" First, close the foldmethod bug
-Plug 'Konfekt/FastFold'
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_show_diagnostics_ui = 0
+set completeopt-=preview
+Plug 'Valloric/YouCompleteMe'
 
-" Plug 'Shougo/vimproc'
-Plug 'Shougo/neocomplete.vim'
-" TODO: read help
-let g:acp_enableAtStartup = 0
-
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 2
-" Let it not to skip first completion
-let g:neocomplete#enable_auto_select = 0 
-" Define keyword.
-if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
-endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
-" Recommended key-mappings.
-" <TAB>: completion.
 inoremap <expr><TAB> pumvisible() ?
   \ "\<C-n>" : SmartInsertTab()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
-
-augroup augroup_neocomplete
-    autocmd!
-    " Enable omni completion.
-    autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-    autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-    autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-    autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-augroup END
 
 " -----------------------------------------------------------------------------
 " color highlight in text
@@ -314,11 +285,23 @@ Plug 'AndrewRadev/splitjoin.vim'
 
 " -----------------------------------------------------------------------------
 " EasyMotion like in chrome
-Plug 'easymotion/vim-easymotion'
-let g:EasyMotion_do_mapping = 0 " Disable default mappings
-let g:EasyMotion_smartcase = 1 " Turn on case insensitive feature
-nmap t <Plug>(easymotion-overwin-f)
-nmap tt <Plug>(easymotion-overwin-f2)
+let g:sneak#s_next = 1
+let g:sneak#absolute_dir = 1
+Plug 'justinmk/vim-sneak'
+"replace 'f' with 1-char Sneak
+nmap f <Plug>Sneak_f
+nmap F <Plug>Sneak_F
+xmap f <Plug>Sneak_f
+xmap F <Plug>Sneak_F
+omap f <Plug>Sneak_f
+omap F <Plug>Sneak_F
+"replace 't' with 1-char Sneak
+nmap t <Plug>Sneak_t
+nmap T <Plug>Sneak_T
+xmap t <Plug>Sneak_t
+xmap T <Plug>Sneak_T
+omap t <Plug>Sneak_t
+omap T <Plug>Sneak_T
 
 " -----------------------------------------------------------------------------
 " :Qdo
@@ -1081,3 +1064,10 @@ autocmd au_vimrc BufWrite *.js :call DeleteTrailingWS()
 " }}}
 
 " }}}
+"" Change file formatting with eslint's 'fix'
+function! ESLintFix()
+ silent execute "!./node_modules/.bin/eslint -c ./.eslintrc --fix %"
+ edit! %
+endfunction
+
+nnoremap <leader>el :call ESLintFix()<CR>
