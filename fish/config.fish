@@ -2,36 +2,6 @@
 set -g -x PATH /usr/local/bin $PATH
 
 # ======== ALIASES ========
-# alias l="ls -alF"
-# alias lr="ls -lrt"
-# alias lg="l | grep -i"
-# alias lrg="l -R | grep -i"
-# alias lt="tree -a -C -I node_modules\|.git\|bower_components"
-#
-# alias v="gvim"
-#
-# alias o="xdg-open"
-#
-# alias ga="git add"
-# alias gi="git commit"
-# alias gia="git commit --amend --no-edit"
-# alias go="git checkout"
-# alias gs="git status"
-# alias gd="git diff"
-# alias gh="git hist"
-# alias ghh="git hist -10"
-# alias ghs="git hist --stat"
-# alias gpl="git pull"
-# alias gps="git push"
-#
-# alias nemo="nemo --no-desktop"
-#
-# alias gt="gnome-terminal"
-#
-# alias nd="npm run dev"
-# alias nb="npm run build"
-# alias nl="npm run lint"
-
 # alias sbe="stack build && stack exec my-project-exe"
 
 abbr -a l ls -alF
@@ -63,6 +33,8 @@ abbr -a ghs git hist --stat
 abbr -a gpl git pull
 abbr -a gps git push
 abbr -a grd git rebase origin/develop
+abbr -a gfa git fetch --all
+abbr -a gfap git fetch --all -p
 
 abbr -a nemo nemo --no-desktop
 
