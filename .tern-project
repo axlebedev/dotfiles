@@ -1,0 +1,7 @@
+{
+  "ecmaVersion": 7,
+  "plugins": {
+    "node": {},
+    "webpack": {}
+  }
+}
