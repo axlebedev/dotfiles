@@ -332,10 +332,10 @@ Plug 'AndrewRadev/splitjoin.vim'
 
 " -----------------------------------------------------------------------------
 " My ^^
+
 Plug 'alexey-broadcast/vim-js-fastlog'
-" Plug 'file:///home/alex/hdd/Proj/vim-js-fastlog'
+let g:js_fastlog_prefix = '111'
 Plug 'alexey-broadcast/vim-smart-insert-tab'
-" Plug 'file:///home/alex/hdd/Proj/vim-smart-insert-tab'
 
 Plug 'isomoar/vim-css-to-inline'
 
@@ -1071,3 +1071,4 @@ function! ESLintFix()
 endfunction
 
 nnoremap <leader>el :call ESLintFix()<CR>
+
