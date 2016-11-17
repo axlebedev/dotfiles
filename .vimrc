@@ -624,8 +624,8 @@ nnoremap <leader>ev :edit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
 " Jump to matching pairs easily, with Tab
-nnoremap <Tab> %
-vnoremap <Tab> %
+nmap <Tab> %
+vmap <Tab> %
 
 " Avoid accidental hits of <F1> while aiming for <Esc>
 map <F1> <Esc>
