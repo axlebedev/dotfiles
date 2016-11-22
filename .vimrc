@@ -279,31 +279,6 @@ Plug 'wellle/targets.vim'
 let g:targets_pairs = '()b {}c [] <>' " replace {}B to {}c
 
 " -----------------------------------------------------------------------------
-" Split/join js-objects (and many more)
-" TODO: read doc, maybe remove
-Plug 'AndrewRadev/splitjoin.vim'
-
-" -----------------------------------------------------------------------------
-" EasyMotion like in chrome
-let g:sneak#s_next = 1
-let g:sneak#absolute_dir = 1
-Plug 'justinmk/vim-sneak'
-"replace 'f' with 1-char Sneak
-nmap f <Plug>Sneak_f
-nmap F <Plug>Sneak_F
-xmap f <Plug>Sneak_f
-xmap F <Plug>Sneak_F
-omap f <Plug>Sneak_f
-omap F <Plug>Sneak_F
-"replace 't' with 1-char Sneak
-nmap t <Plug>Sneak_t
-nmap T <Plug>Sneak_T
-xmap t <Plug>Sneak_t
-xmap T <Plug>Sneak_T
-omap t <Plug>Sneak_t
-omap T <Plug>Sneak_T
-
-" -----------------------------------------------------------------------------
 " :Qdo
 Plug 'henrik/vim-qargs'
 
