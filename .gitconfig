@@ -43,3 +43,5 @@
 ;unmerged (files which have unmerged changes).
     unmerged = red reverse
 
+[hub]
+	protocol = https
