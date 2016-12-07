@@ -717,6 +717,8 @@ nnoremap <leader>f :let &l:foldcolumn = (&l:foldcolumn + 6) % 18<cr>
 cnoremap <c-j> <down>
 cnoremap <c-k> <up>
 
+cnoremap bo BufOnly
+
 " some custom digraphs
 digraphs TT 8869 " ⊥
 
