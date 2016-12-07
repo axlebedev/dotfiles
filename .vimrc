@@ -737,6 +737,7 @@ abbr reutrn return
 abbr pt PropTypes
 abbr tp this.props
 abbr ts this.state
+abbr tc this.context
 abbr np nextProps
 abbr ns nextState
 
