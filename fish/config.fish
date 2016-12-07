@@ -32,9 +32,14 @@ abbr -a ghh git hist -10
 abbr -a ghs git hist --stat
 abbr -a gpl git pull
 abbr -a gps git push
+abbr -a gr git rebase
 abbr -a grd git rebase origin/develop
 abbr -a gfa git fetch --all
 abbr -a gfap git fetch --all -p
+abbr -a gbs git bisect start
+abbr -a gbr git bisect reset
+abbr -a gbg git bisect good
+abbr -a gbb git bisect bad
 
 abbr -a nemo nemo --no-desktop
 
