@@ -286,6 +286,7 @@ Plug 'henrik/vim-qargs'
 " Pretty work with git
 " TODO: READ the fucking docs, WATCH screencasts
 Plug 'tpope/vim-fugitive'
+Plug 'tommcdo/vim-fugitive-blame-ext'
 Plug 'junegunn/gv.vim'
 
 " -----------------------------------------------------------------------------
