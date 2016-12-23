@@ -713,12 +713,13 @@ nnoremap <silent> <C-t> mmviw:s/true\\|false/\={'true':'false','false':'true'}[s
 " toggle foldColumn: 0->6->12->0...
 nnoremap <leader>f :let &l:foldcolumn = (&l:foldcolumn + 6) % 18<cr>
 
+" close all other buffers
+nnoremap bo :BufOnly<CR>
+
 " Now we don't have to move our fingers so far when we want to scroll through
 " the command history; also, don't forget the q: command
 cnoremap <c-j> <down>
 cnoremap <c-k> <up>
-
-cnoremap bo BufOnly
 
 " some custom digraphs
 digraphs TT 8869 " ⊥
