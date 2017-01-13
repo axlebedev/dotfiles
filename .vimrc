@@ -222,8 +222,10 @@ Plug 'tpope/vim-surround'
 
 " -----------------------------------------------------------------------------
 " autoswitch language on leave insert mode
+" NOTE: установить в системе xkb-switch
 Plug 'lyokha/vim-xkbswitch'
 let g:XkbSwitchEnabled = 1
+let g:XkbSwitchIMappings = ['ru']
 
 " -----------------------------------------------------------------------------
 " Highlight matching html tag
