@@ -663,6 +663,9 @@ vmap <C-M-j> :m'>+<cr>`<my`>mzgv`yo`z
 map <F2> :NERDTreeToggle<CR>
 nmap <leader>tt :NERDTreeFind<CR>
 
+" replace word under cursor with last yanked
+nnoremap wp viwp
+
 " apply macros with Q (disables the default Ex mode shortcut)
 nnoremap Q @q
 vnoremap Q :normal @q<CR>
