@@ -663,9 +663,6 @@ vmap <C-M-j> :m'>+<cr>`<my`>mzgv`yo`z
 map <F2> :NERDTreeToggle<CR>
 nmap <leader>tt :NERDTreeFind<CR>
 
-" replace word under cursor with last yanked
-nnoremap wp viwp
-
 " apply macros with Q (disables the default Ex mode shortcut)
 nnoremap Q @q
 vnoremap Q :normal @q<CR>
@@ -793,6 +790,8 @@ function! YRRunAfterMaps()
 
     vnoremap <silent> y y`]
     vmap p :<C-u>call VisualPaste()<cr>
+    " replace word under cursor with last yanked
+    nnoremap wp viw:<C-u>call VisualPaste()<cr>
     nnoremap <silent> p p`]
 endfunction
 
