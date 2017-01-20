@@ -152,7 +152,7 @@ let g:tagbar_type_markdown = {
 " Search string or pattern in folder
 Plug 'mileszs/ack.vim'
 if executable('ag') " sudo apt-get install silversearcher-ag
-  let g:ackprg = 'ag --ignore-dir ".git bin logs node_modules static webpack"'
+  let g:ackprg = 'ag --ignore-dir ".git bin logs node_modules* static webpack"'
 endif
 
 " -----------------------------------------------------------------------------
@@ -362,9 +362,9 @@ set backspace=indent,eol,start
 " ignore files and folders on search
 set wildignore+=*.sqp,*.log
 " *nix version
-set wildignore+=*/node_modules/*,*/bower_components/*,*/build/*,*/dist/*
+set wildignore+=*/node_modules*,*/bower_components/*,*/build/*,*/dist/*
 " windows version
-set wildignore+=*\\node_modules\\*,*\\bower_components\\*,*\\build\\*,*\\dist\\*
+set wildignore+=*\\node_modules*,*\\bower_components\\*,*\\build\\*,*\\dist\\*
 
 " fix autocompletion of filenames in command-line mode
 set wildmode=longest,list
