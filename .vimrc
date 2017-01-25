@@ -630,7 +630,6 @@ nmap <leader>x :enew<cr>
 
 " return to normal mode by double-j, cyrillic double-о
 inoremap jj <Esc>
-inoremap оо <Esc>
 
 " split line
 nnoremap <leader>s a<CR><Esc>
