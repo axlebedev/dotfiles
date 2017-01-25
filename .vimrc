@@ -226,6 +226,7 @@ Plug 'tpope/vim-surround'
 Plug 'lyokha/vim-xkbswitch'
 let g:XkbSwitchEnabled = 1
 let g:XkbSwitchIMappings = ['ru']
+let g:XkbSwitchSkipIMappings = {'*': ["'", '"', '[', ']']}
 
 " -----------------------------------------------------------------------------
 " Highlight matching html tag
