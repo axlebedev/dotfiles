@@ -628,9 +628,6 @@ nmap <leader>q <Plug>Kwbd
 " new empty buffer
 nmap <leader>x :enew<cr>
 
-" return to normal mode by double-j, cyrillic double-о
-inoremap jj <Esc>
-
 " split line
 nnoremap <leader>s a<CR><Esc>
 
