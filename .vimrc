@@ -247,7 +247,7 @@ nnoremap <silent> <F11> :YRShow<CR>
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_show_diagnostics_ui = 0
 set completeopt-=preview
-Plug 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
 
 inoremap <expr><TAB> pumvisible() ?
   \ "\<C-n>" : SmartInsertTab()
