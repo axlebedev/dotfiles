@@ -558,8 +558,8 @@ hi VertSplit guibg=#131411 guifg=#131411
 
 " NERDTree highlight by filetypes settings ----------------------------- {{{
 function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
-    exec 'autocmd augroup_nerdtree FileType nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guifg='. a:guifg . ' guibg=' . a:guibg
-    exec 'autocmd augroup_nerdtree FileType nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
+    exec 'autocmd FileType nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guifg='. a:guifg . ' guibg=' . a:guibg
+    exec 'autocmd FileType nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
 endfunction
 call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', 'NONE')
 call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', 'NONE')
