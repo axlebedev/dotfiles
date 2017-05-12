@@ -737,6 +737,7 @@ abbr clearTimout clearTimeout
 abbr widht width
 abbr transfrom transform
 abbr reutrn return
+abbr retunr return
 
 abbr pt PropTypes
 abbr tp this.props
