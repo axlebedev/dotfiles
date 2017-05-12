@@ -983,6 +983,8 @@ xnoremap <F3> "gy:call <SID>goog(@g, 0)<cr>gv
 
 " find word under cursor ----------------------------- {{{
 " TODO: use existing plugin, or make own?
+" returns ":Ack! -S -w 'word' src/"
+let g:Abro_superglobalFind = 1
 function! s:globalFind(wordMatch)
     let word = ""
     if (visualmode() == 'v')
@@ -1009,18 +1011,31 @@ function! s:globalFind(wordMatch)
 
     :execute ':NERDTreeClose'
     let searchCommand = ":Ack! -S "
+    let path = g:Abro_superglobalFind ? "." : "src/"
     if (a:wordMatch)
-        :execute searchCommand."-w '".searchingWord."' src/"
+        :execute searchCommand."-w '".searchingWord."' ".path
     else
-        :execute searchCommand."'".searchingWord."' src/"
+        :execute searchCommand."'".searchingWord."' ".path
     endif
     :execute ':NERDTreeToggle'
+endfunction
+
+function! s:toggleGlobalFind()
+    if (g:Abro_superglobalFind)
+        let g:Abro_superglobalFind = 0
+        echo "Abro_superglobalFind = 0"
+    else
+        let g:Abro_superglobalFind = 1
+        echo "Abro_superglobalFind = 1"
+    endif
 endfunction
 
 nnoremap <C-f> :call <SID>globalFind(0)<cr>
 xnoremap <C-f> :call <SID>globalFind(0)<cr>
 nnoremap <C-f><C-f> :call <SID>globalFind(1)<cr>
 xnoremap <C-f><C-f> :call <SID>globalFind(1)<cr>
+nnoremap <C-f><C-g> :call <SID>toggleGlobalFind()<cr>
+xnoremap <C-f><C-g> :call <SID>toggleGlobalFind()<cr>
 
 " find/replace in current project 
 if has("win32") || has("win16")
