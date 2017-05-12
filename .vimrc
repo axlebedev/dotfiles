@@ -19,7 +19,7 @@ filetype off
 call plug#begin('~/.vim/bundle')
 " -----------------------------------------------------------------------------
 " General purpose funcs for other plugins
-Plug 'l9'
+Plug 'vim-scripts/l9'
 " Plug 'lh-vim-lib'
 
 " -----------------------------------------------------------------------------
@@ -230,7 +230,7 @@ let g:XkbSwitchSkipIMappings = {'*': ["'", '"', '[', ']', '<', '>']}
 
 " -----------------------------------------------------------------------------
 " Highlight matching html tag
-Plug 'MatchTag'
+Plug 'vim-scripts/MatchTag'
 
 " -----------------------------------------------------------------------------
 " autoclose html tags
@@ -240,7 +240,7 @@ let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.js,*.jsx"
 
 " -----------------------------------------------------------------------------
 " yank previous registers
-Plug 'YankRing.vim'
+Plug 'vim-scripts/YankRing.vim'
 nnoremap <silent> <F11> :YRShow<CR>
 
 " -----------------------------------------------------------------------------
