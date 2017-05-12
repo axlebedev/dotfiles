@@ -650,6 +650,9 @@ nnoremap <leader>n :noh<CR>
 vnoremap <silent> * :call VisualSelection('f')<CR>
 vnoremap <silent> # :call VisualSelection('b')<CR>
 
+" visual select current line
+nnoremap vg ^vg_
+
 " Move a line of text using Ctrl+Alt+[jk]
 nmap <C-M-j> mz:m+<cr>`z
 nmap <C-M-k> mz:m-2<cr>`z
