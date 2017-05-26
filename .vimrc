@@ -27,13 +27,12 @@ Plug 'vim-scripts/l9'
 Plug 'kana/vim-submode'
 
 " -----------------------------------------------------------------------------
-" Command-line output to temp buffer
+" Execute a :command and show the output in a temporary buffer
 Plug 'AndrewRadev/bufferize.vim'
 
 " -----------------------------------------------------------------------------
 " Markdown live preview
-" npm i -g livedown
-Plug 'shime/vim-livedown'
+Plug 'shime/vim-livedown', { 'do': 'npm i -g livedown' }
 
 " -----------------------------------------------------------------------------
 " NERD Tree
