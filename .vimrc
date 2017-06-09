@@ -152,7 +152,14 @@ let g:tagbar_type_markdown = {
 " Search string or pattern in folder
 Plug 'mileszs/ack.vim'
 if executable('ag') " sudo apt-get install silversearcher-ag
-  let g:ackprg = 'ag --ignore-dir ".git bin logs node_modules* static webpack .happypack"'
+  let g:ackprg = 'ag -U' .
+    \ ' --ignore-dir .git' .
+    \ ' --ignore-dir bin' .
+    \ ' --ignore-dir logs' .
+    \ ' --ignore-dir node_modules' .
+    \ ' --ignore-dir static' .
+    \ ' --ignore-dir webpack' .
+    \ ' --ignore-dir .happypack'
 endif
 
 " -----------------------------------------------------------------------------
