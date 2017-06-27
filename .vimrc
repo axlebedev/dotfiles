@@ -159,6 +159,7 @@ if executable('ag') " sudo apt-get install silversearcher-ag
     \ ' --ignore-dir .git' .
     \ ' --ignore-dir bin' .
     \ ' --ignore-dir logs' .
+    \ ' --ignore-dir lib' .
     \ ' --ignore-dir node_modules' .
     \ ' --ignore-dir static' .
     \ ' --ignore-dir webpack' .
@@ -373,9 +374,9 @@ set backspace=indent,eol,start
 " ignore files and folders on search
 set wildignore+=*.sqp,*.log
 " *nix version
-set wildignore+=*/node_modules*,*/bower_components/*,*/build/*,*/dist/*,*happypack/*
+set wildignore+=*/node_modules*,*/bower_components/*,*/build/*,*/dist/*,*happypack/*,*/lib/*
 " windows version
-set wildignore+=*\\node_modules*,*\\bower_components\\*,*\\build\\*,*\\dist\\*,*happypack\\*
+set wildignore+=*\\node_modules*,*\\bower_components\\*,*\\build\\*,*\\dist\\*,*happypack\\*,*\\lib\\*
 
 " fix autocompletion of filenames in command-line mode
 set wildmode=longest,list
