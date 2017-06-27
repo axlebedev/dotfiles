@@ -36,6 +36,9 @@ Plug 'AndrewRadev/bufferize.vim'
 Plug 'shime/vim-livedown'
 
 " -----------------------------------------------------------------------------
+Plug 'moll/vim-node'
+
+" -----------------------------------------------------------------------------
 " NERD Tree
 Plug 'scrooloose/nerdtree'
 " TODO: read help
