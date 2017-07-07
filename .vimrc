@@ -183,7 +183,7 @@ let g:ctrlp_cmd = 'CtrlP'
 " search hidden files too
 let g:ctrlp_show_hidden = 1
 " search in current dir and parents until folder containing '.git' or other
-let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_working_path_mode = 'a'
 " without next block it won't ignore wildcards' paths
 if exists("g:ctrl_user_command")
   unlet g:ctrlp_user_command
@@ -192,6 +192,8 @@ endif
 let g:ctrlp_clear_cache_on_exit = 1
 " Include current file to find entries
 let g:ctrlp_match_current_file = 1
+
+  let g:ctrlp_custom_ignore = '\v[\/](\.git|node_modules|static)$'
 
 " -----------------------------------------------------------------------------
 " Sublime's <C-r> analog
