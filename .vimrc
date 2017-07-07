@@ -35,6 +35,9 @@ Plug 'AndrewRadev/bufferize.vim'
 Plug 'shime/vim-livedown', { 'do': 'npm i -g livedown' }
 
 " -----------------------------------------------------------------------------
+Plug 'moll/vim-node'
+
+" -----------------------------------------------------------------------------
 " NERD Tree
 Plug 'scrooloose/nerdtree'
 " TODO: read help
@@ -151,7 +154,15 @@ let g:tagbar_type_markdown = {
 " Search string or pattern in folder
 Plug 'mileszs/ack.vim'
 if executable('ag') " sudo apt-get install silversearcher-ag
-  let g:ackprg = 'ag --ignore-dir ".git bin logs node_modules* static webpack .happypack"'
+  let g:ackprg = 'ag -U' .
+    \ ' --ignore-dir .git' .
+    \ ' --ignore-dir bin' .
+    \ ' --ignore-dir logs' .
+    \ ' --ignore-dir lib' .
+    \ ' --ignore-dir node_modules' .
+    \ ' --ignore-dir static' .
+    \ ' --ignore-dir webpack' .
+    \ ' --ignore-dir .happypack'
 endif
 
 " -----------------------------------------------------------------------------
@@ -171,7 +182,7 @@ let g:ctrlp_cmd = 'CtrlP'
 " search hidden files too
 let g:ctrlp_show_hidden = 1
 " search in current dir and parents until folder containing '.git' or other
-let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_working_path_mode = 'a'
 " without next block it won't ignore wildcards' paths
 if exists("g:ctrl_user_command")
   unlet g:ctrlp_user_command
@@ -180,6 +191,8 @@ endif
 let g:ctrlp_clear_cache_on_exit = 1
 " Include current file to find entries
 let g:ctrlp_match_current_file = 1
+
+  let g:ctrlp_custom_ignore = '\v[\/](\.git|node_modules|static)$'
 
 " -----------------------------------------------------------------------------
 " Sublime's <C-r> analog
@@ -362,9 +375,9 @@ set backspace=indent,eol,start
 " ignore files and folders on search
 set wildignore+=*.sqp,*.log
 " *nix version
-set wildignore+=*/node_modules*,*/bower_components/*,*/build/*,*/dist/*,*happypack/*
+set wildignore+=*/node_modules*,*/bower_components/*,*/build/*,*/dist/*,*happypack/*,*/lib/*
 " windows version
-set wildignore+=*\\node_modules*,*\\bower_components\\*,*\\build\\*,*\\dist\\*,*happypack\\*
+set wildignore+=*\\node_modules*,*\\bower_components\\*,*\\build\\*,*\\dist\\*,*happypack\\*,*\\lib\\*
 
 " fix autocompletion of filenames in command-line mode
 set wildmode=longest,list
