@@ -620,6 +620,7 @@ vmap <Tab> %
 
 " Avoid accidental hits of <F1> while aiming for <Esc>
 map <F1> <Esc>
+imap <F1> <Esc>
 
 " Make moving in line a bit more convenient
 nnoremap 0 ^
