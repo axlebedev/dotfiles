@@ -34,6 +34,7 @@ abbr -a gpl git pull
 abbr -a gps git push
 abbr -a gr git rebase
 abbr -a grd git rebase origin/develop
+abbr -a grc git rebase --continue
 abbr -a gfa git fetch --all
 abbr -a gfap git fetch --all -p
 abbr -a gbs git bisect start
