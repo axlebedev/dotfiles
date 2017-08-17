@@ -656,9 +656,6 @@ nnoremap <C-l> <C-w>l
 " double-space to enter command-line
 nnoremap <Space><Space> :
 
-" clear search highlight
-nnoremap <leader>n :noh<CR>
-
 " Visual mode pressing * or # searches for the current selection
 vnoremap <silent> * :call VisualSelection('f')<CR>
 vnoremap <silent> # :call VisualSelection('b')<CR>
