@@ -324,13 +324,17 @@ Plug 'AndrewRadev/splitjoin.vim'
 " -----------------------------------------------------------------------------
 Plug 'w0rp/ale'
 let g:ale_lint_on_save = 0
-let g:ale_open_list = 1
+let g:ale_open_list = 0
+let g:ale_change_sign_column_color = 1
+let g:ale_sign_column_always = 1
+let g:ale_sign_error = '♿'
+let g:ale_sign_warning = ''
 
 let g:ale_linters = { 'javascript': ['eslint'] }
 let g:ale_javascript_eslint_executable = 'npm run lint'
 
-nmap <silent> <leader>nn <Plug>(ale_previous_wrap)
-nmap <silent> <leader>n <Plug>(ale_next_wrap)
+nmap <silent> <C-m> <Plug>(ale_next_wrap)
+nmap <silent> <C-M> <Plug>(ale_previous_wrap)
 
 " -----------------------------------------------------------------------------
 " My ^^
@@ -577,7 +581,10 @@ hi CursorLineNr guifg=#68705e guibg=#131411
 
 " colors and appearance of window split column
 set fillchars+=vert:│
+
 hi VertSplit guibg=#131411 guifg=#131411
+
+hi ALESignColumnWithErrors guibg=#250000
 
 " NERDTree highlight by filetypes settings ----------------------------- {{{
 function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
@@ -604,6 +611,7 @@ set list
 
 " show wrapped line marker
 set showbreak=»
+
 
 " }}}
 
