@@ -322,6 +322,17 @@ let g:splitjoin_trailing_comma = 1
 Plug 'AndrewRadev/splitjoin.vim'
 
 " -----------------------------------------------------------------------------
+Plug 'w0rp/ale'
+let g:ale_lint_on_save = 0
+let g:ale_open_list = 1
+
+let g:ale_linters = { 'javascript': ['eslint'] }
+let g:ale_javascript_eslint_executable = 'npm run lint'
+
+nmap <silent> <leader>nn <Plug>(ale_previous_wrap)
+nmap <silent> <leader>n <Plug>(ale_next_wrap)
+
+" -----------------------------------------------------------------------------
 " My ^^
 
 Plug 'alexey-broadcast/vim-js-fastlog'
