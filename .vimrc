@@ -307,6 +307,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'tommcdo/vim-fugitive-blame-ext'
 Plug 'junegunn/gv.vim'
 
+Plug 'jreybert/vimagit'
+
 " -----------------------------------------------------------------------------
 " expand selection
 Plug 'terryma/vim-expand-region'
