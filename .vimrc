@@ -325,6 +325,7 @@ let g:splitjoin_trailing_comma = 1
 Plug 'AndrewRadev/splitjoin.vim'
 
 " -----------------------------------------------------------------------------
+" Highlight eslint errors
 Plug 'w0rp/ale'
 let g:ale_lint_on_save = 0
 let g:ale_open_list = 0
@@ -338,6 +339,13 @@ let g:ale_javascript_eslint_executable = 'npm run lint'
 
 nmap <silent> <C-m> <Plug>(ale_next_wrap)
 nmap <silent> <C-M> <Plug>(ale_previous_wrap)
+
+" -----------------------------------------------------------------------------
+" Narrow Region, <leader>nr
+Plug 'chrisbra/NrrwRgn'
+let g:nrrw_rgn_vert = 1
+let g:nrrw_topbot_leftright = 'botright'
+let g:nrrw_rgn_wdth = 100
 
 " -----------------------------------------------------------------------------
 " My ^^
