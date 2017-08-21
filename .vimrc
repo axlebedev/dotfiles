@@ -222,8 +222,10 @@ autocmd User Oblique ShowSearchIndex
 autocmd User ObliqueStar ShowSearchIndex
 autocmd User ObliqueRepeat ShowSearchIndex
 
-hi! def link ObliqueCurrentMatch DiffChange
-hi! def link ObliqueCurrentIncSearch DiffChange
+" hi! def link ObliqueCurrentMatch DiffChange
+" hi! def link ObliqueCurrentIncSearch DiffChange
+highlight ObliqueCurrentMatch guibg='#1A4067'
+highlight ObliqueCurrentIncSearch guibg='#1A4067'
 
 " -----------------------------------------------------------------------------
 " Make '.' work on plugin commands (not all maybe)
