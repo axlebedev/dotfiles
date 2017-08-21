@@ -335,6 +335,8 @@ let g:ale_change_sign_column_color = 1
 let g:ale_sign_column_always = 1
 let g:ale_sign_error = '♿'
 let g:ale_sign_warning = ''
+let g:ale_set_loclist = 0
+let g:ale_set_quickfix = 0
 
 let g:ale_linters = { 'javascript': ['eslint'] }
 let g:ale_javascript_eslint_executable = 'npm run lint'
