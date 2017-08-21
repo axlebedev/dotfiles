@@ -65,6 +65,7 @@ let NERDTreeShowHidden=1 " show hidden files
 " -----------------------------------------------------------------------------
 " vim-airline: cute statusbar at bottom
 Plug 'bling/vim-airline'
+let g:airline_skip_empty_sections = 1
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled=1
 if !exists('g:airline_symbols')
