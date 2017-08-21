@@ -1128,3 +1128,9 @@ endfunction
 
 nnoremap <leader>el :call ESLintFix()<CR>
 
+" -----------------------------------------------------------------------------
+" Scroll/cursor bind the current window and the previous window
+command! BindBoth set scrollbind cursorbind | wincmd p | set scrollbind cursorbind | wincmd p
+command! BindBothOff set noscrollbind nocursorbind | wincmd p | set noscrollbind nocursorbind | wincmd p
+nnoremap <leader>bon :BindBoth<cr>
+nnoremap <leader>bof :BindBothOff<cr>
