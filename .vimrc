@@ -346,13 +346,6 @@ nmap <silent> <C-m> <Plug>(ale_next_wrap)
 nmap <silent> <C-M> <Plug>(ale_previous_wrap)
 
 " -----------------------------------------------------------------------------
-" Narrow Region, <leader>nr
-Plug 'chrisbra/NrrwRgn'
-let g:nrrw_rgn_vert = 1
-let g:nrrw_topbot_leftright = 'botright'
-let g:nrrw_rgn_wdth = 100
-
-" -----------------------------------------------------------------------------
 " My ^^
 
 Plug 'alexey-broadcast/vim-js-fastlog'
@@ -360,6 +353,19 @@ let g:js_fastlog_prefix = '111'
 Plug 'alexey-broadcast/vim-smart-insert-tab'
 
 Plug 'isomoar/vim-css-to-inline'
+
+" -----------------------------------------------------------------------------
+"  PLUGINS ON TEST
+" -----------------------------------------------------------------------------
+" color picker window inside vim
+Plug 'Rykka/colorv.vim'
+
+" -----------------------------------------------------------------------------
+" Narrow Region, <leader>nr
+Plug 'chrisbra/NrrwRgn'
+let g:nrrw_rgn_vert = 1
+let g:nrrw_topbot_leftright = 'botright'
+let g:nrrw_rgn_wdth = 100
 
 " -----------------------------------------------------------------------------
 call plug#end()
