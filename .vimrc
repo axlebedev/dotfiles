@@ -60,6 +60,7 @@ let NERDTreeDirArrows=1 " allow it to show arrows
 let NERDTreeDirArrowExpandable='▸'
 let NERDTreeDirArrowCollapsible='▾'
 let NERDTreeShowHidden=1 " show hidden files
+let NERDTreeCascadeSingleChildDir=0 " dont collapse singlechild dir
 " TODO: if need https://github.com/Xuyuanp/nerdtree-git-plugin
 
 " -----------------------------------------------------------------------------
