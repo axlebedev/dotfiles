@@ -309,6 +309,7 @@ Plug 'tommcdo/vim-fugitive-blame-ext'
 Plug 'junegunn/gv.vim'
 
 Plug 'jreybert/vimagit'
+nnoremap <C-g> :Magit<CR>
 
 " -----------------------------------------------------------------------------
 " expand selection
