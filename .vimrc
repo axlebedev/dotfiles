@@ -154,6 +154,23 @@ let g:tagbar_type_markdown = {
 
 " -----------------------------------------------------------------------------
 " Search string or pattern in folder
+
+" TODO: make fzf work with Gvim
+" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+" Plug 'junegunn/fzf.vim'
+"
+" let g:fzf_height = '30%'
+" let g:fzf_commits_log_options = '--color --graph --pretty=format:"%C(yellow)%h%Creset -%C(auto)%d%Creset %s %C(bold blue)(%cr) %Cred<%an>%Creset" --abbrev-commit'
+" let g:fzf_command_prefix = 'Fzf'
+" let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
+" let g:fzf_history_dir = '~/.local/share/fzf-history'
+"
+" " FZF mappings
+" " nnoremap <C-p> :FZF<CR>
+" nnoremap <C-i> :FzfBuffers<CR>
+" nnoremap <leader>a :FzfAg<CR>
+" nnoremap <silent> <BS> :FzfHistory:<CR>
+
 Plug 'mileszs/ack.vim'
 if executable('ag') " sudo apt-get install silversearcher-ag
   let g:ackprg = 'ag -U' .
