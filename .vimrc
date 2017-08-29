@@ -1066,7 +1066,16 @@ xnoremap <F3> "gy:call <SID>goog(@g, 0)<cr>gv
 " TODO: use existing plugin, or make own?
 " returns ":Ack! -S -w 'word' src/"
 let g:Abro_superglobalFind = 1
-function! s:globalFind(wordMatch)
+function! s:globalFind(...)
+    let wordMatch = 0
+    let reactRender = 0
+    if (a:0 > 0)
+        let wordMatch = a:1
+    endif
+    if (a:0 > 1)
+        let reactRender = a:2
+    endif
+
     let word = ""
     if (visualmode() == 'v')
         let word = l9#getSelectedText()
@@ -1075,8 +1084,10 @@ function! s:globalFind(wordMatch)
     endif
 
     let promptString = 'Searching text: '
-    if (a:wordMatch)
+    if (wordMatch)
         let promptString = 'Searching word: '
+    elseif (reactRender)
+        let promptString = 'Searching where render: '
     endif
 
     let searchingWord = input(promptString, word)
@@ -1093,8 +1104,10 @@ function! s:globalFind(wordMatch)
     :execute ':NERDTreeClose'
     let searchCommand = ":Ack! -S "
     let path = g:Abro_superglobalFind ? "." : "src/"
-    if (a:wordMatch)
+    if (wordMatch)
         :execute searchCommand."-w '".searchingWord."' ".path
+    elseif (reactRender)
+        :execute searchCommand."'<".searchingWord."\\b' ".path
     else
         :execute searchCommand."'".searchingWord."' ".path
     endif
@@ -1115,6 +1128,8 @@ nnoremap <C-f> :call <SID>globalFind(0)<cr>
 xnoremap <C-f> :call <SID>globalFind(0)<cr>
 nnoremap <C-f><C-f> :call <SID>globalFind(1)<cr>
 xnoremap <C-f><C-f> :call <SID>globalFind(1)<cr>
+nnoremap <C-f><C-r> :call <SID>globalFind(0, 1)<cr>
+xnoremap <C-f><C-r> :call <SID>globalFind(0, 1)<cr>
 nnoremap <C-f><C-g> :call <SID>toggleGlobalFind()<cr>
 xnoremap <C-f><C-g> :call <SID>toggleGlobalFind()<cr>
 
