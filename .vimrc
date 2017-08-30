@@ -386,6 +386,13 @@ let g:nrrw_topbot_leftright = 'botright'
 let g:nrrw_rgn_wdth = 100
 
 " -----------------------------------------------------------------------------
+"  wrap/unwrap lists in brackets
+Plug 'FooSoft/vim-argwrap'
+nnoremap <silent> <leader>a :ArgWrap<CR>
+let g:argwrap_padded_braces = '{'
+let g:argwrap_tail_comma = 1
+
+" -----------------------------------------------------------------------------
 call plug#end()
 filetype plugin indent on
 " }}}
