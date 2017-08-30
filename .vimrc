@@ -699,11 +699,19 @@ nnoremap ^ 0
 nnoremap 00 0
 nnoremap $ g_
 nnoremap $$ $
+nnoremap H ^
+nnoremap HH 0
+nnoremap L g_
+nnoremap LL $
 vnoremap 0 ^
 vnoremap ^ 0
 vnoremap 00 0
 vnoremap $ g_
 vnoremap $$ $
+vnoremap H ^
+vnoremap HH 0
+vnoremap L g_
+vnoremap LL $
 
 " fast save file, close file
 nmap <leader>w :w!<cr>
