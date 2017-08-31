@@ -5,6 +5,7 @@
 " =ss5=ssfunctions=     FUNCTIONS
 " TODO: 'help' to be always in readmode
 " TODO: fox <C-t> if there are several values in line
+" TODO: https://github.com/Shougo/denite.nvim
 
 
 
