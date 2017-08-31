@@ -389,7 +389,6 @@ let g:nrrw_rgn_wdth = 100
 " -----------------------------------------------------------------------------
 "  wrap/unwrap lists in brackets
 Plug 'FooSoft/vim-argwrap'
-nnoremap <silent> <leader>a :ArgWrap<CR>
 let g:argwrap_padded_braces = '{'
 let g:argwrap_tail_comma = 1
 
@@ -855,6 +854,8 @@ call submode#map(resizeSubmode, 'n', '', 'j', ':resize +1<cr>')
 
 " autocmd au_vimrc FileType help nnoremap <Esc> :q<cr>
 " autocmd au_vimrc BufLeave * nnoremap! <Esc> <Esc>
+
+nnoremap <silent> <leader>a :ArgWrap<CR>
 
 " }}}
 
