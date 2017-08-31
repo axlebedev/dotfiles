@@ -393,6 +393,14 @@ let g:argwrap_padded_braces = '{'
 let g:argwrap_tail_comma = 1
 
 " -----------------------------------------------------------------------------
+"  textobjects
+Plug 'kana/vim-textobj-entire' " ae, ie
+Plug 'kana/vim-textobj-indent' " ai, ii, aI, iI
+Plug 'kana/vim-textobj-lastpat' " a/, i/, a?, i?
+Plug 'kana/vim-textobj-line' " al, il
+Plug 'kana/vim-textobj-underscore' " a_, i_
+
+" -----------------------------------------------------------------------------
 call plug#end()
 filetype plugin indent on
 " }}}
