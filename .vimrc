@@ -402,6 +402,10 @@ Plug 'kana/vim-textobj-line' " al, il
 Plug 'kana/vim-textobj-underscore' " a_, i_
 
 " -----------------------------------------------------------------------------
+"  ELM
+Plug 'ElmCast/elm-vim'
+
+" -----------------------------------------------------------------------------
 call plug#end()
 filetype plugin indent on
 " }}}
@@ -477,7 +481,7 @@ set shiftround     " smart indent for '<'/'>' commands
 set smarttab       " insert tabs on the start of a line according to shiftwidth, not tabstop
 set autoindent     " autoindents for new lines
 set smartindent
-au FileType javascript,scss setlocal tabstop=2 softtabstop=2 shiftwidth=2
+au FileType javascript,scss,elm setlocal tabstop=2 softtabstop=2 shiftwidth=2
 
 set timeoutlen=300 " how long will vim wait for key sequence completion
 
