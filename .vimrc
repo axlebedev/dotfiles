@@ -6,13 +6,13 @@
 " TODO: 'help' to be always in readmode
 " TODO: fox <C-t> if there are several values in line
 " TODO: https://github.com/Shougo/denite.nvim
+" TODO: :help :func-abort
 
 
 
 " Plugin settings ============================= {{{
 " =ss1=ssplugin=
 
-set nocompatible
 filetype off
 
 " vim-plug installation:
@@ -473,7 +473,7 @@ set number
 set showcmd
 
 " indent settings
-set tabstop=4      " width of TAB
+set tabstop=4      " width of TAB. TODO: dont't change its value? https://www.reddit.com/r/vim/wiki/vimrctips
 set expandtab      " or 'noexpandtab': if set, inputs spaces instead of tabs
 set softtabstop=4  " how much spaces will be removed on backspace
 set shiftwidth=4   " count of spaces for '<'/'>' commands
@@ -583,7 +583,9 @@ endif
 set synmaxcol=500
 
 " enable syntax highlight
-syntax on
+if !exists("g:syntax_on")
+    syntax enable
+endif
 
 " 100 columns highlight
 set colorcolumn=100
@@ -699,6 +701,7 @@ nmap <space> <leader>
 vmap <space> <leader>
 xmap <space> <leader>
 
+" no noremap here!
 nmap <leader>lkk <leader>lkiW
 
 " fast open/reload vimrc
@@ -706,8 +709,8 @@ nnoremap <leader>ev :edit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
 " Jump to matching pairs easily, with Tab
-nmap <Tab> %
-vmap <Tab> %
+nnoremap <Tab> %
+vnoremap <Tab> %
 
 " Avoid accidental hits of <F1> while aiming for <Esc>
 map <F1> <Esc>
@@ -734,11 +737,11 @@ vnoremap L g_
 vnoremap LL $
 
 " fast save file, close file
-nmap <leader>w :w!<cr>
+nnoremap <leader>w :w!<cr>
 nmap <leader>q <Plug>Kwbd
 
 " new empty buffer
-nmap <leader>x :enew<cr>
+noremap <leader>x :enew<cr>
 
 " split line
 nnoremap <leader>s a<CR><Esc>
@@ -763,14 +766,14 @@ vnoremap <silent> # :call VisualSelection('b')<CR>
 nnoremap vg ^vg_
 
 " Move a line of text using Ctrl+Alt+[jk]
-nmap <C-M-j> mz:m+<cr>`z
-nmap <C-M-k> mz:m-2<cr>`z
-vmap <C-M-k> :m'<-2<cr>`>my`<mzgv`yo`z
-vmap <C-M-j> :m'>+<cr>`<my`>mzgv`yo`z
+nnoremap <C-M-j> mz:m+<cr>`z
+nnoremap <C-M-k> mz:m-2<cr>`z
+vnoremap <C-M-k> :m'<-2<cr>`>my`<mzgv`yo`z
+vnoremap <C-M-j> :m'>+<cr>`<my`>mzgv`yo`z
 
 " NERDTree mappings
 map <F2> :NERDTreeToggle<CR>
-nmap <leader>tt :NERDTreeFind<CR>
+nnoremap <leader>tt :NERDTreeFind<CR>
 
 " apply macros with Q (disables the default Ex mode shortcut)
 nnoremap Q @q
