@@ -45,16 +45,16 @@ Plug 'scrooloose/nerdtree'
 " start NERDTree on vim startup
 augroup augroup_nerdtree
     autocmd!
-    autocmd VimEnter * NERDTree
-    " focus on editor window instead of NERDTree
-    autocmd VimEnter * wincmd p
-    " focus on editor window instead of NERDTree even if we open dir but not file
-    autocmd StdinReadPre * let s:std_in=1
-    autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-    " if we open dir - we dont show filetree in empty buffer
-    autocmd VimEnter * if argc() == 1 && !filereadable(argv()[0]) | enew | endif
+
+    autocmd VimEnter * Startify | NERDTree | wincmd l
+
     " close vim if only window is NERDTree
-    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+    autocmd bufenter *
+        \ if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) 
+        \   | q
+        \ | endif
+
+    autocmd StdinReadPre * let s:std_in=1
 augroup END
 " some configs of NERDTree
 let NERDTreeDirArrows=1 " allow it to show arrows
@@ -406,6 +406,25 @@ Plug 'kana/vim-textobj-underscore' " a_, i_
 Plug 'ElmCast/elm-vim'
 
 " -----------------------------------------------------------------------------
+"  Start screen for vim
+Plug 'mhinz/vim-startify'
+let g:startify_list_order = [
+    \ ['   Most recent:'], 'dir',
+    \ ['   Sessions:'], 'sessions',
+    \ ['   Bookmarks:'], 'bookmarks',
+    \ ['   Commands:'], 'commands',
+    \ ['   Most recent global'], 'files',
+\ ]
+let g:startify_bookmarks = [ {'c': '~/.vimrc'} ]
+let g:startify_commands = [':PlugUpdate', ':PlugInstall']
+let g:startify_files_number = 12
+let g:startify_update_oldfiles = 1
+let g:startify_change_to_dir = 0
+let g:startify_custom_header = []
+" remap 'o' to open file in Startify window
+autocmd User Startified nmap <buffer> o <plug>(startify-open-buffers)
+
+" -----------------------------------------------------------------------------
 call plug#end()
 filetype plugin indent on
 " }}}
@@ -741,7 +760,7 @@ nnoremap <leader>w :w!<cr>
 nmap <leader>q <Plug>Kwbd
 
 " new empty buffer
-noremap <leader>x :enew<cr>
+noremap <leader>x :Startify<cr>
 
 " split line
 nnoremap <leader>s a<CR><Esc>
