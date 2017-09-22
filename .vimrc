@@ -134,7 +134,6 @@ let g:jsx_ext_required = 0
 let g:tern_show_argument_hints='on_hold'
 let g:tern#is_show_argument_hints_enabled = 1
 Plug 'ternjs/tern_for_vim'
-nnoremap <C-]> :TernDef<cr>
 
 " -----------------------------------------------------------------------------
 " ctags structure
