@@ -421,6 +421,12 @@ autocmd User Startified nmap <buffer> o <plug>(startify-open-buffers)
 "  Close buffer/window
 Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
 
+" -TEST------------------------------------------------------------------------
+" Highlight 'f' entries
+Plug 'rhysd/clever-f.vim'
+let g:clever_f_smart_case = 1
+nmap ; <Plug>(clever-f-repeat-forward)
+
 " -----------------------------------------------------------------------------
 call plug#end()
 filetype plugin indent on
