@@ -355,7 +355,6 @@ let g:ale_linters = { 'javascript': ['eslint'] }
 let g:ale_javascript_eslint_executable = 'npm run lint'
 
 nmap <silent> <C-m> <Plug>(ale_next_wrap)
-nmap <silent> <C-M> <Plug>(ale_previous_wrap)
 
 " -----------------------------------------------------------------------------
 " My ^^
