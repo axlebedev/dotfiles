@@ -49,6 +49,7 @@ abbr -a gt gnome-terminal
 abbr -a ni npm i
 abbr -a nd npm run dev
 abbr -a nb npm run build
+abbr -a ns npm start
 abbr -a nl npm run lint
 abbr -a nt npm run test
 
