@@ -29,6 +29,8 @@ abbr -a gs git status
 abbr -a gd git diff
 abbr -a gh git hist
 abbr -a ghh git hist -10
+abbr -a ghhh git hist -20
+abbr -a ghhhh git hist -30
 abbr -a ghs git hist --stat
 abbr -a gpl git pull
 abbr -a gps git push
