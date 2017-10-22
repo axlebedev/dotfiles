@@ -181,7 +181,8 @@ if executable('ag') " sudo apt-get install silversearcher-ag
     \ ' --ignore-dir node_modules' .
     \ ' --ignore-dir static' .
     \ ' --ignore-dir webpack' .
-    \ ' --ignore-dir .happypack'
+    \ ' --ignore-dir .happypack' .
+    \ ' --ignore-dir coverage'
 endif
 
 " -----------------------------------------------------------------------------
