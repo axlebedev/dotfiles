@@ -37,6 +37,15 @@ font pango: FontAwesome 8
 template0 ${exec xset -q|grep LED| awk '{ print $10 }'}
 # template1 ${if_match ${cpu \1}<10} "\#00ff00" ${else} ${if_match ${cpu \1}<20} "\#a2ff00" ${else} ${if_match ${cpu \1}<30} "\#d4ff00" ${else} ${if_match ${cpu \1}<50} "\#f6ff00" ${else} ${if_match ${cpu \1}<80} "\#ff9d00" ${else} "\#ff0000" ${endif} ${endif} ${endif} ${endif} ${endif} 
 
+color0 "\#5087ed"
+color1 "\#50d5ed"
+color2 "\#50ed91"
+color3 "\#72ed50"
+color4 "\#eaed50"
+color5 "\#edbd50"
+color6 "\#ed7450"
+color7 "\#ed5057"
+
 # Stuff after 'TEXT' will be formatted on screen
 TEXT
 
@@ -56,13 +65,115 @@ ${endif}
 	# { "full_text" : "${upspeed eth0}/s", "color" : "\#ffc400" },
 # Next 5 blocks - cpu usage
 	{ "name" : "Processor", "full_text" : "", "separator" : false },
-	{ "min_width":"00", "full_text" : "${cpu cpu1}", "separator" : false, "color" : ${if_match ${cpu cpu1}<10} "\#00ff00" ${else} ${if_match ${cpu cpu1}<20} "\#a2ff00" ${else} ${if_match ${cpu cpu1}<30} "\#d4ff00" ${else} ${if_match ${cpu cpu1}<50} "\#f6ff00" ${else} ${if_match ${cpu cpu1}<80} "\#ff9d00" ${else} "\#ff0000" ${endif} ${endif} ${endif} ${endif} ${endif} },
-	{ "min_width":"00", "full_text" : "${cpu cpu2}", "separator" : false, "color" : ${if_match ${cpu cpu2}<10} "\#00ff00" ${else} ${if_match ${cpu cpu2}<20} "\#a2ff00" ${else} ${if_match ${cpu cpu2}<30} "\#d4ff00" ${else} ${if_match ${cpu cpu2}<50} "\#f6ff00" ${else} ${if_match ${cpu cpu2}<80} "\#ff9d00" ${else} "\#ff0000" ${endif} ${endif} ${endif} ${endif} ${endif} },
-	{ "min_width":"00", "full_text" : "${cpu cpu3}", "separator" : false, "color" : ${if_match ${cpu cpu3}<10} "\#00ff00" ${else} ${if_match ${cpu cpu3}<20} "\#a2ff00" ${else} ${if_match ${cpu cpu3}<30} "\#d4ff00" ${else} ${if_match ${cpu cpu3}<50} "\#f6ff00" ${else} ${if_match ${cpu cpu3}<80} "\#ff9d00" ${else} "\#ff0000" ${endif} ${endif} ${endif} ${endif} ${endif} },
-	{ "min_width":"00", "full_text" : "${cpu cpu4}", "color" : ${if_match ${cpu cpu4}<10} "\#00ff00" ${else} ${if_match ${cpu cpu4}<20} "\#a2ff00" ${else} ${if_match ${cpu cpu4}<30} "\#d4ff00" ${else} ${if_match ${cpu cpu4}<50} "\#f6ff00" ${else} ${if_match ${cpu cpu4}<80} "\#ff9d00" ${else} "\#ff0000" ${endif} ${endif} ${endif} ${endif} ${endif} },
+        # ${template1 cpu1}
+	{ "separator_block_width":3,
+          "min_width":"█",
+          "full_text" : 
+            ${if_match ${cpu cpu1}<10} "▁" 
+            ${else} ${if_match ${cpu cpu1}<20} "▂" 
+            ${else} ${if_match ${cpu cpu1}<35} "▃" 
+            ${else} ${if_match ${cpu cpu1}<50} "▄" 
+            ${else} ${if_match ${cpu cpu1}<60} "▅" 
+            ${else} ${if_match ${cpu cpu1}<70} "▆" 
+            ${else} ${if_match ${cpu cpu1}<80} "▇" 
+            ${else} "█" ${endif} ${endif} ${endif} ${endif} ${endif} ${endif} ${endif}, 
+          "separator" : false,
+          "color" :
+            ${if_match ${cpu cpu1}<10} "\#5087ed"
+            ${else} ${if_match ${cpu cpu1}<20} "\#50d5ed" 
+            ${else} ${if_match ${cpu cpu1}<35} "\#50ed91" 
+            ${else} ${if_match ${cpu cpu1}<50} "\#72ed50" 
+            ${else} ${if_match ${cpu cpu1}<60} "\#eaed50" 
+            ${else} ${if_match ${cpu cpu1}<70} "\#edbd50" 
+            ${else} ${if_match ${cpu cpu1}<80} "\#ed7450" 
+            ${else} "\#ed5057" ${endif} ${endif} ${endif} ${endif} ${endif} ${endif} ${endif}
+        },
+	{ "separator_block_width":3,
+          "min_width":"█",
+          "full_text" : 
+            ${if_match ${cpu cpu2}<10} "▁" 
+            ${else} ${if_match ${cpu cpu2}<20} "▂" 
+            ${else} ${if_match ${cpu cpu2}<35} "▃" 
+            ${else} ${if_match ${cpu cpu2}<50} "▄" 
+            ${else} ${if_match ${cpu cpu2}<60} "▅" 
+            ${else} ${if_match ${cpu cpu2}<70} "▆" 
+            ${else} ${if_match ${cpu cpu2}<80} "▇" 
+            ${else} "█" ${endif} ${endif} ${endif} ${endif} ${endif} ${endif} ${endif}, 
+          "separator" : false,
+          "color" :
+            ${if_match ${cpu cpu2}<10} "\#5087ed"
+            ${else} ${if_match ${cpu cpu2}<20} "\#50d5ed" 
+            ${else} ${if_match ${cpu cpu2}<35} "\#50ed91" 
+            ${else} ${if_match ${cpu cpu2}<50} "\#72ed50" 
+            ${else} ${if_match ${cpu cpu2}<60} "\#eaed50" 
+            ${else} ${if_match ${cpu cpu2}<70} "\#edbd50" 
+            ${else} ${if_match ${cpu cpu2}<80} "\#ed7450" 
+            ${else} "\#ed5057" ${endif} ${endif} ${endif} ${endif} ${endif} ${endif} ${endif}
+        },
+	{ "separator_block_width":3,
+          "min_width":"█",
+          "full_text" : 
+            ${if_match ${cpu cpu3}<10} "▁" 
+            ${else} ${if_match ${cpu cpu3}<20} "▂" 
+            ${else} ${if_match ${cpu cpu3}<35} "▃" 
+            ${else} ${if_match ${cpu cpu3}<50} "▄" 
+            ${else} ${if_match ${cpu cpu3}<60} "▅" 
+            ${else} ${if_match ${cpu cpu3}<70} "▆" 
+            ${else} ${if_match ${cpu cpu3}<80} "▇" 
+            ${else} "█" ${endif} ${endif} ${endif} ${endif} ${endif} ${endif} ${endif}, 
+          "separator" : false,
+          "color" :
+            ${if_match ${cpu cpu3}<10} "\#5087ed"
+            ${else} ${if_match ${cpu cpu3}<20} "\#50d5ed" 
+            ${else} ${if_match ${cpu cpu3}<35} "\#50ed91" 
+            ${else} ${if_match ${cpu cpu3}<50} "\#72ed50" 
+            ${else} ${if_match ${cpu cpu3}<60} "\#eaed50" 
+            ${else} ${if_match ${cpu cpu3}<70} "\#edbd50" 
+            ${else} ${if_match ${cpu cpu3}<80} "\#ed7450" 
+            ${else} "\#ed5057" ${endif} ${endif} ${endif} ${endif} ${endif} ${endif} ${endif}
+        },
+	{ "separator_block_width":3,
+          "min_width":"█",
+          "separator" : false,
+          "full_text" : 
+            ${if_match ${cpu cpu4}<10} "▁" 
+            ${else} ${if_match ${cpu cpu4}<20} "▂" 
+            ${else} ${if_match ${cpu cpu4}<35} "▃" 
+            ${else} ${if_match ${cpu cpu4}<50} "▄" 
+            ${else} ${if_match ${cpu cpu4}<60} "▅" 
+            ${else} ${if_match ${cpu cpu4}<70} "▆" 
+            ${else} ${if_match ${cpu cpu4}<80} "▇" 
+            ${else} "█" ${endif} ${endif} ${endif} ${endif} ${endif} ${endif} ${endif}, 
+          "color" :
+            ${if_match ${cpu cpu4}<10} "\#5087ed"
+            ${else} ${if_match ${cpu cpu4}<20} "\#50d5ed" 
+            ${else} ${if_match ${cpu cpu4}<35} "\#50ed91" 
+            ${else} ${if_match ${cpu cpu4}<50} "\#72ed50" 
+            ${else} ${if_match ${cpu cpu4}<60} "\#eaed50" 
+            ${else} ${if_match ${cpu cpu4}<70} "\#edbd50" 
+            ${else} ${if_match ${cpu cpu4}<80} "\#ed7450" 
+            ${else} "\#ed5057" ${endif} ${endif} ${endif} ${endif} ${endif} ${endif} ${endif}
+        },
 # Next block - memory usage
-	{ "full_text" : "", "separator" : false },
-	{ "name" : "Memory", "min_width":"00%", "full_text" : "${memperc}%", "color" : 	${if_match ${memperc}<10} "\#00ff00" ${else} ${if_match ${memperc}<20}	"\#a2ff00" ${else} ${if_match ${memperc}<30} "\#d4ff00" ${else} ${if_match ${memperc}<50}	"\#f6ff00" ${else} ${if_match ${memperc}<80}	"\#ff9d00" ${else} "\#ff0000" ${endif} ${endif} ${endif} ${endif} ${endif} },
+	{ "name" : "Memory",
+          "min_width":"00",
+          "full_text" : "${memperc}",
+            # ${if_match ${memperc}<20} "○${memperc}" 
+            # ${else} ${if_match ${memperc}<40} "◔${memperc}" 
+            # ${else} ${if_match ${memperc}<60} "◑${memperc}" 
+            # ${else} ${if_match ${memperc}<80} "◕${memperc}" 
+            # ${else} "●${memperc}" ${endif} ${endif} ${endif} ${endif},
+          "color": "\#000000",
+          "background" :
+            ${if_match ${memperc}<10} "\#5087ed"
+            ${else} ${if_match ${memperc}<20} "\#50d5ed" 
+            ${else} ${if_match ${memperc}<35} "\#50ed91" 
+            ${else} ${if_match ${memperc}<50} "\#72ed50" 
+            ${else} ${if_match ${memperc}<60} "\#eaed50" 
+            ${else} ${if_match ${memperc}<70} "\#edbd50" 
+            ${else} ${if_match ${memperc}<80} "\#ed7450" 
+            ${else} "\#ed5057" ${endif} ${endif} ${endif} ${endif} ${endif} ${endif} ${endif}
+        },
 # Next block - main disk free space
 	{ "name" : "HDD", "full_text" : " ${fs_free /home} Free", "color" : "\#d4909b" },
 # Next block - system volume 
