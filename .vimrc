@@ -7,7 +7,10 @@
 " TODO: fox <C-t> if there are several values in line
 " TODO: https://github.com/Shougo/denite.nvim
 " TODO: :help :func-abort
-
+" TODO: https://github.com/hauleth/sad.vim
+" TODO: https://github.com/justinmk/vim-sneak
+" TODO: https://github.com/machakann/vim-sandwich вместо surround
+" TODO: Plug 'nixprime/cpsm'
 
 
 " Plugin settings ============================= {{{
@@ -212,7 +215,7 @@ let g:ctrlp_clear_cache_on_exit = 1
 " Include current file to find entries
 let g:ctrlp_match_current_file = 1
 
-  let g:ctrlp_custom_ignore = '\v[\/](\.git|node_modules|static)$'
+let g:ctrlp_custom_ignore = '\v[\/](\.git|node_modules|static)$'
 
 " -----------------------------------------------------------------------------
 " Sublime's <C-r> analog
