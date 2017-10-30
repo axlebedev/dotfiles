@@ -11,7 +11,12 @@
 " TODO: https://github.com/justinmk/vim-sneak
 " TODO: https://github.com/machakann/vim-sandwich вместо surround
 " TODO: Plug 'nixprime/cpsm'
-
+" TODO: https://github.com/haya14busa/vim-asterisk
+" TODO: Plug 'haya14busa/vim-operator-flashy'
+" TODO: https://github.com/haya14busa/is.vim
+"
+" TODO https://github.com/haya14busa/.vim/
+" TODO: https://github.com/haya14busa/dotfiles/blob/master/.vimrc
 
 " Plugin settings ============================= {{{
 " =ss1=ssplugin=
@@ -244,8 +249,6 @@ autocmd User Oblique ShowSearchIndex
 autocmd User ObliqueStar ShowSearchIndex
 autocmd User ObliqueRepeat ShowSearchIndex
 
-" hi! def link ObliqueCurrentMatch DiffChange
-" hi! def link ObliqueCurrentIncSearch DiffChange
 highlight ObliqueCurrentMatch guibg='#1A4067'
 highlight ObliqueCurrentIncSearch guibg='#1A4067'
 
