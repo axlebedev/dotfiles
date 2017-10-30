@@ -334,6 +334,8 @@ Plug 'junegunn/gv.vim'
 
 Plug 'jreybert/vimagit'
 nnoremap <C-g> :Magit<CR>
+autocmd User VimagitUpdateFile normal! zz
+autocmd User VimagitRefresh normal! zz
 
 " -----------------------------------------------------------------------------
 " expand selection
