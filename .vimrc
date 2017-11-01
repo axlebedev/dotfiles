@@ -5,8 +5,8 @@
 " =ss5=ssfunctions=     FUNCTIONS
 " TODO: 'help' to be always in readmode
 " TODO: fox <C-t> if there are several values in line
-" TODO: https://github.com/Shougo/denite.nvim
-" TODO: :help :func-abort
+" TODO: https://github.com/Shougo/denite.nvim - wants python3 even if its ebabled
+"
 " TODO: https://github.com/hauleth/sad.vim
 " TODO: https://github.com/justinmk/vim-sneak
 " TODO: https://github.com/machakann/vim-sandwich вместо surround
@@ -381,32 +381,8 @@ Plug 'alexey-broadcast/vim-smart-insert-tab'
 Plug 'isomoar/vim-css-to-inline'
 
 " -----------------------------------------------------------------------------
-"  PLUGINS ON TEST
-" -----------------------------------------------------------------------------
 " color picker window inside vim
 Plug 'Rykka/colorv.vim'
-
-" -----------------------------------------------------------------------------
-" Narrow Region, <leader>nr
-Plug 'chrisbra/NrrwRgn'
-let g:nrrw_rgn_vert = 1
-let g:nrrw_topbot_leftright = 'botright'
-let g:nrrw_rgn_wdth = 100
-
-" -----------------------------------------------------------------------------
-"  wrap/unwrap lists in brackets
-Plug 'FooSoft/vim-argwrap'
-let g:argwrap_padded_braces = '{'
-let g:argwrap_tail_comma = 1
-
-" -----------------------------------------------------------------------------
-"  textobjects
-Plug 'kana/vim-textobj-user' " dependency for below
-Plug 'kana/vim-textobj-entire' " ae, ie
-Plug 'kana/vim-textobj-indent' " ai, ii, aI, iI
-Plug 'kana/vim-textobj-lastpat' " a/, i/, a?, i?
-Plug 'kana/vim-textobj-line' " al, il
-Plug 'kana/vim-textobj-underscore' " a_, i_
 
 " -----------------------------------------------------------------------------
 "  ELM
@@ -432,10 +408,36 @@ let g:startify_custom_header = []
 autocmd User Startified nmap <buffer> o <plug>(startify-open-buffers)
 
 " -TEST------------------------------------------------------------------------
+" Narrow Region, <leader>nr
+Plug 'chrisbra/NrrwRgn'
+let g:nrrw_rgn_vert = 1
+let g:nrrw_topbot_leftright = 'botright'
+let g:nrrw_rgn_wdth = 100
+
+" -TEST------------------------------------------------------------------------
+"  wrap/unwrap lists in brackets
+Plug 'FooSoft/vim-argwrap'
+let g:argwrap_padded_braces = '{'
+let g:argwrap_tail_comma = 1
+
+" -TEST------------------------------------------------------------------------
+"  textobjects
+Plug 'kana/vim-textobj-user' " dependency for below
+Plug 'kana/vim-textobj-entire' " ae, ie
+Plug 'kana/vim-textobj-indent' " ai, ii, aI, iI
+Plug 'kana/vim-textobj-lastpat' " a/, i/, a?, i?
+Plug 'kana/vim-textobj-line' " al, il
+Plug 'kana/vim-textobj-underscore' " a_, i_
+
+" -TEST------------------------------------------------------------------------
 " Highlight 'f' entries
 Plug 'rhysd/clever-f.vim'
 let g:clever_f_smart_case = 1
 nmap ; <Plug>(clever-f-repeat-forward)
+
+" -TEST------------------------------------------------------------------------
+"  Seek and destroy
+Plug 'hauleth/sad.vim'
 
 " -----------------------------------------------------------------------------
 call plug#end()
