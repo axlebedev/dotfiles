@@ -7,11 +7,7 @@
 " TODO: fox <C-t> if there are several values in line
 " TODO: https://github.com/Shougo/denite.nvim - wants python3 even if its ebabled
 "
-" TODO: https://github.com/hauleth/sad.vim
-" TODO: https://github.com/justinmk/vim-sneak
-" TODO: https://github.com/machakann/vim-sandwich вместо surround
 " TODO: Plug 'nixprime/cpsm'
-" TODO: https://github.com/haya14busa/vim-asterisk
 " TODO: Plug 'haya14busa/vim-operator-flashy'
 " TODO: https://github.com/haya14busa/is.vim
 "
@@ -257,7 +253,7 @@ highlight ObliqueCurrentIncSearch guibg='#1A4067'
 Plug 'tpope/vim-repeat'
 
 " -----------------------------------------------------------------------------
-" Surround. See docs on https://github.com/tpope/vim-surround
+" Surround.
 Plug 'tpope/vim-surround'
 
 " -----------------------------------------------------------------------------
