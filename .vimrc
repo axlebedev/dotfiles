@@ -431,10 +431,6 @@ Plug 'rhysd/clever-f.vim'
 let g:clever_f_smart_case = 1
 nmap ; <Plug>(clever-f-repeat-forward)
 
-" -TEST------------------------------------------------------------------------
-"  Seek and destroy
-Plug 'hauleth/sad.vim'
-
 " -----------------------------------------------------------------------------
 call plug#end()
 filetype plugin indent on
