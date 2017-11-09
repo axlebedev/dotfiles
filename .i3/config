@@ -34,6 +34,9 @@ bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 bindsym XF86AudioStop exec playerctl stop
 
+bindsym $mod+plus exec amixer -D pulse sset Master 2%+ & killall -USR1 i3status 
+bindsym $mod+minus exec amixer -D pulse sset Master 2%- & killall -USR1 i3status 
+
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
