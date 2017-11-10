@@ -1,0 +1,45 @@
+snippet testit
+it('$1', () => {
+	const mock = $2;
+	mock.forEach(($3) => {
+		expect($4).to.eql(result);
+	});
+	});
+$0
+endsnippet
+
+
+
+snippet con
+constructor(props) {
+	super(props);
+
+	this.state = {
+		${1}: ${0},
+	};
+}
+endsnippet
+
+
+
+snippet cdm
+componentDidMount() {
+	$0
+}
+endsnippet
+
+
+
+snippet cwrp
+componentWillReceiveProps(nextProps) {
+	$0
+}
+endsnippet
+
+
+
+snippet cdu
+componentDidUpdate(prevProps) {
+	$0
+}
+endsnippet

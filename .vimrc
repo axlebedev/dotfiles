@@ -431,6 +431,15 @@ Plug 'rhysd/clever-f.vim'
 let g:clever_f_smart_case = 1
 nmap ; <Plug>(clever-f-repeat-forward)
 
+" -TEST------------------------------------------------------------------------
+let g:UltiSnipsSnippetDirectories=['~/.vim', 'UltiSnips']
+Plug 'SirVer/ultisnips'
+
+" let g:UltiSnipsExpandTrigger="<leader>s"
+let g:UltiSnipsExpandTrigger="<c-k>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+
 " -----------------------------------------------------------------------------
 call plug#end()
 filetype plugin indent on
