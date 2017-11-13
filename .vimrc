@@ -183,6 +183,7 @@ if executable('ag') " sudo apt-get install silversearcher-ag
     \ ' --ignore-dir logs' .
     \ ' --ignore-dir lib' .
     \ ' --ignore-dir node_modules' .
+    \ ' --ignore-dir coverage' .
     \ ' --ignore-dir static' .
     \ ' --ignore-dir webpack' .
     \ ' --ignore-dir .happypack' .
@@ -216,7 +217,7 @@ let g:ctrlp_clear_cache_on_exit = 1
 " Include current file to find entries
 let g:ctrlp_match_current_file = 1
 
-let g:ctrlp_custom_ignore = '\v[\/](\.git|node_modules|static)$'
+let g:ctrlp_custom_ignore = '\v[\/](\.git|node_modules|static|coverage)$'
 
 " -----------------------------------------------------------------------------
 " Sublime's <C-r> analog
@@ -486,9 +487,9 @@ set backspace=indent,eol,start
 " ignore files and folders on search
 set wildignore+=*.sqp,*.log
 " *nix version
-set wildignore+=*/node_modules*,*/bower_components/*,*/build/*,*/dist/*,*happypack/*,*/lib/*
+set wildignore+=*/node_modules*,*/bower_components/*,*/build/*,*/dist/*,*happypack/*,*/lib/*,*/coverage/*
 " windows version
-set wildignore+=*\\node_modules*,*\\bower_components\\*,*\\build\\*,*\\dist\\*,*happypack\\*,*\\lib\\*
+set wildignore+=*\\node_modules*,*\\bower_components\\*,*\\build\\*,*\\dist\\*,*happypack\\*,*\\lib\\*,*\\coverage\\*
 
 " fix autocompletion of filenames in command-line mode
 set wildmode=longest,list
