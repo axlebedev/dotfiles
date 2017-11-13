@@ -429,6 +429,7 @@ Plug 'kana/vim-textobj-underscore' " a_, i_
 " Highlight 'f' entries
 Plug 'rhysd/clever-f.vim'
 let g:clever_f_smart_case = 1
+let g:clever_f_across_no_line = 1
 nmap ; <Plug>(clever-f-repeat-forward)
 
 " -TEST------------------------------------------------------------------------
