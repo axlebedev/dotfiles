@@ -46,7 +46,7 @@ template0 ${exec xset -q|grep LED| awk '{ print $10 }'}
 # color6 #ed7450
 # color7 #ed5057
 
-template1 ${if_match ${cpu \1}<10} "▁" ${else} ${if_match ${cpu \1}<20} "▂" ${else} ${if_match ${cpu \1}<35} "▃" ${else} ${if_match ${cpu \1}<50} "▄" ${else} ${if_match ${cpu \1}<60} "▅" ${else} ${if_match ${cpu \1}<70} "▆" ${else} ${if_match ${cpu \1}<80} "▇" ${else} "█" ${endif} ${endif} ${endif} ${endif} ${endif} ${endif} ${endif} 
+template1 ${if_match ${cpu \1}<10} " " ${else} ${if_match ${cpu \1}<20} "▁" ${else} ${if_match ${cpu \1}<30} "▂" ${else} ${if_match ${cpu \1}<40} "▃" ${else} ${if_match ${cpu \1}<50} "▄" ${else} ${if_match ${cpu \1}<60} "▅" ${else} ${if_match ${cpu \1}<70} "▆" ${else} ${if_match ${cpu \1}<80} "▇" ${else} "█" ${endif} ${endif} ${endif} ${endif} ${endif} ${endif} ${endif} ${endif} 
 
 template2 ${if_match ${cpu \1}<10}5087ed${else}${if_match ${cpu \1}<20}50d5ed${else}${if_match ${cpu \1}<35}50ed91${else}${if_match ${cpu \1}<50}72ed50${else}${if_match ${cpu \1}<60}eaed50${else}${if_match ${cpu \1}<70}edbd50${else}${if_match ${cpu \1}<80}ed7450${else}ed5057${endif}${endif}${endif}${endif}${endif}${endif}${endif}
 
