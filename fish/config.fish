@@ -43,6 +43,8 @@ abbr -a gbs git bisect start
 abbr -a gbr git bisect reset
 abbr -a gbg git bisect good
 abbr -a gbb git bisect bad
+abbr -a gst git stash
+abbr -a gsa git stash apply
 
 abbr -a nemo nemo --no-desktop
 
