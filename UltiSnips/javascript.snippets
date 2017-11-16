@@ -1,10 +1,10 @@
 snippet testit
-it('$1', () => {
-	const mock = $2;
-	mock.forEach(($3) => {
-		expect($4).to.eql(result);
+it('$1:funcname', () => {
+	const mock = [$2];
+	mock.forEach(({ $3result }) => {
+		expect($1()).to.eql(result);
 	});
-	});
+});
 $0
 endsnippet
 
