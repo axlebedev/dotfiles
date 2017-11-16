@@ -910,6 +910,11 @@ call submode#map(resizeSubmode, 'n', '', 'j', ':resize +1<cr>')
 
 nnoremap <silent> <leader>a :ArgWrap<CR>
 
+" get current highlight group under cursor
+map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
 " }}}
 
 
