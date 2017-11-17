@@ -404,6 +404,15 @@ let g:startify_custom_header = []
 " remap 'o' to open file in Startify window
 autocmd User Startified nmap <buffer> o <plug>(startify-open-buffers)
 
+" -----------------------------------------------------------------------------
+let g:UltiSnipsSnippetDirectories=['~/.vim', 'UltiSnips']
+Plug 'SirVer/ultisnips'
+
+" let g:UltiSnipsExpandTrigger="<leader>s"
+let g:UltiSnipsExpandTrigger="<c-k>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+
 " -TEST------------------------------------------------------------------------
 " Narrow Region, <leader>nr
 Plug 'chrisbra/NrrwRgn'
@@ -432,15 +441,6 @@ Plug 'rhysd/clever-f.vim'
 let g:clever_f_smart_case = 1
 let g:clever_f_across_no_line = 1
 nmap ; <Plug>(clever-f-repeat-forward)
-
-" -TEST------------------------------------------------------------------------
-let g:UltiSnipsSnippetDirectories=['~/.vim', 'UltiSnips']
-Plug 'SirVer/ultisnips'
-
-" let g:UltiSnipsExpandTrigger="<leader>s"
-let g:UltiSnipsExpandTrigger="<c-k>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 " -----------------------------------------------------------------------------
 call plug#end()
