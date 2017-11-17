@@ -1120,12 +1120,9 @@ endfunction
 command! Todo call s:todo()
 " }}}
 
-" <leader>?/! | Google it / Feeling lucky ----------------------------- {{{
+" Google it / Feeling lucky ----------------------------- {{{
 function! s:goog(pat, lucky)
-    echom 'goog'
-    echom pat
-    let q = '"'.substitute(a:pat, '["\n]', ' ', 'g').'"'
-    echom q
+    let q = substitute(a:pat, '["\n]', ' ', 'g')
     let q = substitute(q, '[[:punct:] ]',
                 \ '\=printf("%%%02X", char2nr(submatch(0)))', 'g')
     echom q
@@ -1133,10 +1130,8 @@ function! s:goog(pat, lucky)
                 \ a:lucky ? 'btnI&' : '', q))
 endfunction
 
-nnoremap <F3> :call <SID>goog(expand("<cWORD>"), 0)<cr>
-" nnoremap <leader>! :call <SID>goog(expand("<cWORD>"), 1)<cr>
-xnoremap <F3> "gy:call <SID>goog(@g, 0)<cr>gv
-" xnoremap <leader>! "gy:call <SID>goog(@g, 1)<cr>gv
+nnoremap <silent> <F3> :call <SID>goog(expand("<cword>"), 0)<cr>
+xnoremap <silent> <F3> "gy:call <SID>goog(@g, 0)<cr>gv
 " }}}
 
 " find word under cursor ----------------------------- {{{
