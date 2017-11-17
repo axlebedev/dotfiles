@@ -607,6 +607,8 @@ if has('unnamedplus')
 else
   set clipboard+=unnamed
 endif
+
+let g:markdown_folding = 1
 " }}}
 
 
