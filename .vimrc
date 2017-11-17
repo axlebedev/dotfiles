@@ -442,6 +442,10 @@ let g:clever_f_smart_case = 1
 let g:clever_f_across_no_line = 1
 nmap ; <Plug>(clever-f-repeat-forward)
 
+" -TEST------------------------------------------------------------------------
+"  TODO: разобраться с конфигом: игнор ненужного. неигнор дочерних репозиториев
+" Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
+
 " -----------------------------------------------------------------------------
 call plug#end()
 filetype plugin indent on
@@ -864,7 +868,7 @@ command! S vs | wincmd h | bprev | wincmd l
 nnoremap <silent> <C-t> mmviw:s/true\\|false/\={'true':'false','false':'true'}[submatch(0)]/<CR>`m:nohlsearch<CR>
 
 " toggle foldColumn: 0->6->12->0...
-nnoremap <leader>f :let &l:foldcolumn = (&l:foldcolumn + 6) % 18<cr>
+nnoremap <silent> <F4> :let &l:foldcolumn = (&l:foldcolumn + 6) % 18<cr>
 
 " close all other buffers
 nnoremap bo :BufOnly<CR>
