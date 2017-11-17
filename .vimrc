@@ -13,6 +13,9 @@
 "
 " TODO https://github.com/haya14busa/.vim/
 " TODO: https://github.com/haya14busa/dotfiles/blob/master/.vimrc
+"
+" TODO: если мы разместили последнюю строку по центру, ушли в другой буфер,
+" вернулись - то последняя строка будет снизу. Понять, откуда и исправить
 
 " Plugin settings ============================= {{{
 " =ss1=ssplugin=
