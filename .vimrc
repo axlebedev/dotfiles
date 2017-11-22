@@ -809,7 +809,7 @@ vnoremap <silent> * :call VisualSelection('f')<CR>
 vnoremap <silent> # :call VisualSelection('b')<CR>
 
 " visual select current line
-nnoremap vl ^vg_
+nnoremap vg ^vg_
 
 " Move a line of text using Ctrl+Alt+[jk]
 nnoremap <C-M-j> mz:m+<cr>`z
