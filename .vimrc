@@ -16,6 +16,11 @@
 "
 " TODO: если мы разместили последнюю строку по центру, ушли в другой буфер,
 " вернулись - то последняя строка будет снизу. Понять, откуда и исправить
+"
+" TODO: git merge plugins
+" https://github.com/junkblocker/patchreview-vim
+" https://github.com/idanarye/vim-merginal
+" https://github.com/rhysd/conflict-marker.vim
 
 " Plugin settings ============================= {{{
 " =ss1=ssplugin=
