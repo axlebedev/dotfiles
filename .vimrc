@@ -421,6 +421,10 @@ let g:UltiSnipsExpandTrigger="<c-k>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
+" -----------------------------------------------------------------------------
+" highlight current ex-range
+Plug 'xtal8/traces.vim'
+
 " -TEST------------------------------------------------------------------------
 " Narrow Region, <leader>nr
 Plug 'chrisbra/NrrwRgn'
