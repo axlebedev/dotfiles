@@ -1211,7 +1211,7 @@ function! s:globalFind(...)
     else
         :execute searchCommand."'".searchingWord."' ".path
     endif
-    :execute ':NERDTreeToggle'
+    :NERDTreeFocus | wincmd l | wincmd j
 endfunction
 
 function! s:toggleGlobalFind()
