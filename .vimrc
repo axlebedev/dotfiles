@@ -21,6 +21,13 @@
 " https://github.com/junkblocker/patchreview-vim
 " https://github.com/idanarye/vim-merginal
 " https://github.com/rhysd/conflict-marker.vim
+"
+
+" TODO: разобраться, почему не работает vip<C-v> и после этого попробовать 
+" Plug 'kana/vim-niceblock'
+"
+" TODO will133/vim-dirdiff
+" TODO: machakann/vim-highlightedyank
 
 " Plugin settings ============================= {{{
 " =ss1=ssplugin=
@@ -352,12 +359,12 @@ Plug 'Valloric/ListToggle'
 let g:lt_location_list_toggle_map = '<leader>0'
 let g:lt_quickfix_list_toggle_map = '<leader>b'
 
-" -----------------------------------------------------------------------------
+" -TODO------------------------------------------------------------------------
 " split-join object literals in many/one line
-let g:splitjoin_split_mapping = 'gs'
-let g:splitjoin_join_mapping = 'gj'
-let g:splitjoin_trailing_comma = 1
-Plug 'AndrewRadev/splitjoin.vim'
+" let g:splitjoin_split_mapping = 'gs'
+" let g:splitjoin_join_mapping = 'gj'
+" let g:splitjoin_trailing_comma = 1
+" Plug 'AndrewRadev/splitjoin.vim'
 
 " -----------------------------------------------------------------------------
 " Highlight eslint errors
@@ -453,6 +460,11 @@ Plug 'rhysd/clever-f.vim'
 let g:clever_f_smart_case = 1
 let g:clever_f_across_no_line = 1
 nmap ; <Plug>(clever-f-repeat-forward)
+
+" -TEST------------------------------------------------------------------------
+Plug 'haya14busa/vim-signjk-motion'
+map gj <Plug>(signjk-j)
+map gk <Plug>(signjk-k)
 
 " -TEST------------------------------------------------------------------------
 "  TODO: разобраться с конфигом: игнор ненужного. неигнор дочерних репозиториев
