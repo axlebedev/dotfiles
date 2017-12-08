@@ -621,6 +621,9 @@ if &diff
     set diffopt+=iwhite
 endif
 
+" set quickfix wrap
+autocmd au_vimrc FileType qf setlocal nowrap
+
 " Don't remember the last cursor position when editing commit
 " messages, always start on line 1
 autocmd au_vimrc filetype gitcommit call setpos('.', [0, 1, 1, 0])
