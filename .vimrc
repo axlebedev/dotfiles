@@ -173,6 +173,8 @@ let g:tagbar_type_markdown = {
 
 " -----------------------------------------------------------------------------
 " Search string or pattern in folder
+" Necessary to open files from quickfix
+Plug 'yssl/QFEnter'
 
 " TODO: make fzf work with Gvim
 " Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -189,8 +191,9 @@ let g:tagbar_type_markdown = {
 " nnoremap <C-i> :FzfBuffers<CR>
 " nnoremap <leader>a :FzfAg<CR>
 " nnoremap <silent> <BS> :FzfHistory:<CR>
-
 Plug 'mileszs/ack.vim'
+let g:ack_apply_qmappings = 0
+let g:ack_apply_lmappings = 0
 if executable('ag') " sudo apt-get install silversearcher-ag
   let g:ackprg = 'ag -U' .
     \ ' --ignore-dir .git' .
@@ -1169,9 +1172,10 @@ xnoremap <silent> <F3> "gy:call <SID>goog(@g, 0)<cr>gv
 " TODO: use existing plugin, or make own?
 " returns ":Ack! -S -w 'word' src/"
 let g:Abro_superglobalFind = 1
-function! s:globalFind(wordMatch, reactRender, functionDef)
+function! s:globalFind(isVisualMode, wordMatch, reactRender, functionDef)
+    let saved_ack_qhandler = g:ack_qhandler
     let word = ""
-    if (visualmode() == 'v')
+    if (a:isVisualMode)
         let word = l9#getSelectedText()
     else
         let word = expand("<cword>")
@@ -1190,18 +1194,26 @@ function! s:globalFind(wordMatch, reactRender, functionDef)
         let searchingWord = input(promptString, word)
     endif
 
+    echom 'searchingWord = '.searchingWord
+
     if (empty(searchingWord))
         return
     endif
 
     let @/ = searchingWord
     set hlsearch
+    let g:ack_qhandler = winnr('$') > 2 ? 'botright copen' : 'belowright copen'
 
     let searchingWord = substitute(searchingWord, '(', '\\(', '')
     let searchingWord = substitute(searchingWord, ')', '\\)', '')
 
-    let searchCommand = ":Ack! -S "
+    let searchCommand = a:functionDef ? ":LAck! " : ":Ack! -S "
     let path = g:Abro_superglobalFind ? "." : "src/"
+
+    " let isQuickfixOpened = 0
+    " windo if &l:buftype == "quickfix" | let isQuickfixOpened = 1 | endif
+    if (a:functionDef) | :cclose | endif
+
     if (a:wordMatch)
         :execute searchCommand."-w '".searchingWord."' ".path
     elseif (a:reactRender)
@@ -1213,14 +1225,19 @@ function! s:globalFind(wordMatch, reactRender, functionDef)
         :execute searchCommand."'".searchingWord."' ".path
     endif
 
-    let qfList = getqflist()
-    if (a:functionDef && len(qfList) == 1)
-        :normal! m'
-        :cbuffer | keepjumps normal! nzz
-        :cclose
+    " let qfList = getqflist()
+    let locList = getloclist(0)
+    if (a:functionDef && len(locList) == 1)
+        :ll! | lclose
     else
-        :NERDTreeClose | NERDTreeFocus | wincmd l | wincmd j
+        " следующий if - ничего функционального не несет, только делает
+        " поменьше дергов когда всего одно окно (помимо NERDTree)
+        if (winnr('$') > 2)
+            :NERDTreeClose | NERDTree | wincmd l | wincmd j
+        endif
     endif
+
+    let g:ack_qhandler = saved_ack_qhandler
 endfunction
 
 function! s:toggleGlobalFind()
@@ -1233,13 +1250,13 @@ function! s:toggleGlobalFind()
     endif
 endfunction
 
-nnoremap <C-f> :call <SID>globalFind(0, 0, 0)<cr>
-xnoremap <C-f> :call <SID>globalFind(0, 0, 0)<cr>
-nnoremap <C-f><C-f> :call <SID>globalFind(1, 0, 0)<cr>
-xnoremap <C-f><C-f> :call <SID>globalFind(1, 0, 0)<cr>
-nnoremap <C-f><C-r> :call <SID>globalFind(0, 1, 0)<cr>
-xnoremap <C-f><C-r> :call <SID>globalFind(0, 1, 0)<cr>
-nnoremap <C-]> :call <SID>globalFind(0, 0, 1)<cr>
+nnoremap <C-f> :call <SID>globalFind(0, 0, 0, 0)<cr>
+xnoremap <C-f> :call <SID>globalFind(1, 0, 0, 0)<cr>
+nnoremap <C-f><C-f> :call <SID>globalFind(0, 1, 0, 0)<cr>
+xnoremap <C-f><C-f> :call <SID>globalFind(1, 1, 0, 0)<cr>
+nnoremap <C-f><C-r> :call <SID>globalFind(0, 0, 1, 0)<cr>
+xnoremap <C-f><C-r> :call <SID>globalFind(1, 0, 1, 0)<cr>
+nnoremap <C-]> :call <SID>globalFind(0, 0, 0, 1)<cr>
 nnoremap <C-f><C-g> :call <SID>toggleGlobalFind()<cr>
 xnoremap <C-f><C-g> :call <SID>toggleGlobalFind()<cr>
 
