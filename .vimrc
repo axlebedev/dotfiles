@@ -1200,7 +1200,6 @@ function! s:globalFind(wordMatch, reactRender, functionDef)
     let searchingWord = substitute(searchingWord, '(', '\\(', '')
     let searchingWord = substitute(searchingWord, ')', '\\)', '')
 
-    :execute ':NERDTreeClose'
     let searchCommand = ":Ack! -S "
     let path = g:Abro_superglobalFind ? "." : "src/"
     if (a:wordMatch)
@@ -1213,7 +1212,15 @@ function! s:globalFind(wordMatch, reactRender, functionDef)
     else
         :execute searchCommand."'".searchingWord."' ".path
     endif
-    :NERDTreeFocus | wincmd l | wincmd j
+
+    let qfList = getqflist()
+    if (a:functionDef && len(qfList) == 1)
+        :normal! m'
+        :cbuffer | keepjumps normal! nzz
+        :cclose
+    else
+        :NERDTreeClose | NERDTreeFocus | wincmd l | wincmd j
+    endif
 endfunction
 
 function! s:toggleGlobalFind()
