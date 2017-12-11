@@ -175,6 +175,10 @@ let g:tagbar_type_markdown = {
 " Search string or pattern in folder
 " Necessary to open files from quickfix
 Plug 'yssl/QFEnter'
+let g:qfenter_keymap = {}
+let g:qfenter_keymap.open = ['<CR>', '<2-LeftMouse>', 'o']
+let g:qfenter_keymap.vopen = ['<C-v>', 'i']
+let g:qfenter_keymap.hopen = ['<C-s>']
 
 " TODO: make fzf work with Gvim
 " Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
