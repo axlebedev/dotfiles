@@ -945,8 +945,7 @@ call submode#map(resizeSubmode, 'n', '', 'l', ':vertical resize +1<cr>')
 call submode#map(resizeSubmode, 'n', '', 'k', ':resize -1<cr>')
 call submode#map(resizeSubmode, 'n', '', 'j', ':resize +1<cr>')
 
-" autocmd au_vimrc FileType help nnoremap <Esc> :q<cr>
-" autocmd au_vimrc BufLeave * nnoremap! <Esc> <Esc>
+autocmd au_vimrc FileType help,qf,git nnoremap <buffer> q :q<cr>
 
 nnoremap <silent> <leader>a :ArgWrap<CR>
 
