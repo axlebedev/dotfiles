@@ -957,6 +957,8 @@ map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
 
 nnoremap <M-o> <Tab>
 
+nnoremap zl :set foldlevel=1<cr>
+
 " }}}
 
 
