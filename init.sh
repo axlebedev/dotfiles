@@ -18,6 +18,9 @@ ln -s ~/dotfiles/.gitconfig ~/.gitconfig
 rm ~/.vimrc
 ln -s ~/dotfiles/.vimrc ~/.vimrc
 
+rm ~/.vim/ftplugin
+ln -s ~/dotfiles/.vim/ftplugin ~/.vim/ftplugin
+
 rm ~/.i3
 ln -s ~/dotfiles/.i3 ~/.i3
 
