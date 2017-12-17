@@ -391,11 +391,14 @@ let g:ale_javascript_eslint_executable = 'npm run lint'
 nmap <silent> <C-m> <Plug>(ale_next_wrap)
 
 " -----------------------------------------------------------------------------
-" My ^^
+" homemade ^^
 
 Plug 'alexey-broadcast/vim-js-fastlog'
 let g:js_fastlog_prefix = '111'
+
 Plug 'alexey-broadcast/vim-smart-insert-tab'
+
+Plug 'alexey-broadcast/js-gotodef'
 
 Plug 'isomoar/vim-css-to-inline'
 
@@ -1179,8 +1182,8 @@ xnoremap <silent> <F3> "gy:call <SID>goog(@g, 0)<cr>gv
 " find word under cursor ----------------------------- {{{
 " TODO: use existing plugin, or make own?
 " returns ":Ack! -S -w 'word' src/"
-let g:Abro_superglobalFind = 1
-function! s:globalFind(isVisualMode, wordMatch, reactRender, functionDef)
+let g:vimrc_superglobalFind = 1
+function! s:globalFind(isVisualMode, wordMatch, reactRender)
     let saved_ack_qhandler = g:ack_qhandler
     let word = ""
     if (a:isVisualMode)
@@ -1191,16 +1194,14 @@ function! s:globalFind(isVisualMode, wordMatch, reactRender, functionDef)
 
     let searchingWord = word
 
-    if (!a:functionDef)
-        let promptString = 'Searching text: '
-        if (a:wordMatch)
-            let promptString = 'Searching word: '
-        elseif (a:reactRender)
-            let promptString = 'Searching where render: '
-        endif
-
-        let searchingWord = input(promptString, word)
+    let promptString = 'Searching text: '
+    if (a:wordMatch)
+        let promptString = 'Searching word: '
+    elseif (a:reactRender)
+        let promptString = 'Searching where render: '
     endif
+
+    let searchingWord = input(promptString, word)
 
     echom 'searchingWord = '.searchingWord
 
@@ -1215,29 +1216,20 @@ function! s:globalFind(isVisualMode, wordMatch, reactRender, functionDef)
     let searchingWord = substitute(searchingWord, '(', '\\(', '')
     let searchingWord = substitute(searchingWord, ')', '\\)', '')
 
-    let searchCommand = a:functionDef ? ":LAck! " : ":Ack! -S "
-    let path = g:Abro_superglobalFind ? "." : "src/"
-
-    " let isQuickfixOpened = 0
-    " windo if &l:buftype == "quickfix" | let isQuickfixOpened = 1 | endif
-    if (a:functionDef) | :cclose | endif
+    let searchCommand = ":Ack! -S "
+    let path = g:vimrc_superglobalFind ? "." : "src/"
 
     if (a:wordMatch)
         :execute searchCommand."-w '".searchingWord."' ".path
     elseif (a:reactRender)
         :execute searchCommand."'<".searchingWord."\\b' ".path
-    elseif (a:functionDef)
-        let searchExpr = searchingWord." ?=|function +".searchingWord."|".searchingWord." *:"
-        :execute searchCommand."'".searchExpr."' ".path
     else
         :execute searchCommand."'".searchingWord."' ".path
     endif
 
     " let qfList = getqflist()
     let locList = getloclist(0)
-    if (a:functionDef && len(locList) == 1)
-        :ll! | lclose
-    else
+    if 
         " следующий if - ничего функционального не несет, только делает
         " поменьше дергов когда всего одно окно (помимо NERDTree)
         if (winnr('$') > 2)
@@ -1249,22 +1241,21 @@ function! s:globalFind(isVisualMode, wordMatch, reactRender, functionDef)
 endfunction
 
 function! s:toggleGlobalFind()
-    if (g:Abro_superglobalFind)
-        let g:Abro_superglobalFind = 0
-        echo "Abro_superglobalFind = 0"
+    if (g:vimrc_superglobalFind)
+        let g:vimrc_superglobalFind = 0
+        echo "vimrc_superglobalFind = 0"
     else
-        let g:Abro_superglobalFind = 1
-        echo "Abro_superglobalFind = 1"
+        let g:vimrc_superglobalFind = 1
+        echo "vimrc_superglobalFind = 1"
     endif
 endfunction
 
-nnoremap <C-f> :call <SID>globalFind(0, 0, 0, 0)<cr>
-xnoremap <C-f> :call <SID>globalFind(1, 0, 0, 0)<cr>
-nnoremap <C-f><C-f> :call <SID>globalFind(0, 1, 0, 0)<cr>
-xnoremap <C-f><C-f> :call <SID>globalFind(1, 1, 0, 0)<cr>
-nnoremap <C-f><C-r> :call <SID>globalFind(0, 0, 1, 0)<cr>
-xnoremap <C-f><C-r> :call <SID>globalFind(1, 0, 1, 0)<cr>
-nnoremap <C-]> :call <SID>globalFind(0, 0, 0, 1)<cr>
+nnoremap <C-f> :call <SID>globalFind(0, 0, 0)<cr>
+xnoremap <C-f> :call <SID>globalFind(1, 0, 0)<cr>
+nnoremap <C-f><C-f> :call <SID>globalFind(0, 1, 0)<cr>
+xnoremap <C-f><C-f> :call <SID>globalFind(1, 1, 0)<cr>
+nnoremap <C-f><C-r> :call <SID>globalFind(0, 0, 1)<cr>
+xnoremap <C-f><C-r> :call <SID>globalFind(1, 0, 1)<cr>
 nnoremap <C-f><C-g> :call <SID>toggleGlobalFind()<cr>
 xnoremap <C-f><C-g> :call <SID>toggleGlobalFind()<cr>
 
