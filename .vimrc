@@ -1202,8 +1202,6 @@ function! s:globalFind(isVisualMode, wordMatch, reactRender)
         let word = expand("<cword>")
     endif
 
-    let searchingWord = word
-
     let promptString = 'Searching text: '
     if (a:wordMatch)
         let promptString = 'Searching word: '
@@ -1212,8 +1210,6 @@ function! s:globalFind(isVisualMode, wordMatch, reactRender)
     endif
 
     let searchingWord = input(promptString, word)
-
-    echom 'searchingWord = '.searchingWord
 
     if (empty(searchingWord))
         return
@@ -1237,12 +1233,10 @@ function! s:globalFind(isVisualMode, wordMatch, reactRender)
         :execute searchCommand."'".searchingWord."' ".path
     endif
 
-    if 
-        " следующий if - ничего функционального не несет, только делает
-        " поменьше дергов когда всего одно окно (помимо NERDTree)
-        if (winnr('$') > 2)
-            :NERDTreeClose | NERDTree | wincmd l | wincmd j
-        endif
+    " следующий if - ничего функционального не несет, только делает
+    " поменьше дергов когда всего одно окно (помимо NERDTree)
+    if (winnr('$') > 2)
+        :NERDTreeClose | NERDTree | wincmd l | wincmd j
     endif
 
     let g:ack_qhandler = saved_ack_qhandler
