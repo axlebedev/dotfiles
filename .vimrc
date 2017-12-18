@@ -962,6 +962,8 @@ nnoremap <M-o> <Tab>
 
 nnoremap zl :set foldlevel=1<cr>
 
+nnoremap <C-b> :<C-u>Gblame<cr>
+
 " }}}
 
 
