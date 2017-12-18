@@ -1227,8 +1227,6 @@ function! s:globalFind(isVisualMode, wordMatch, reactRender)
         :execute searchCommand."'".searchingWord."' ".path
     endif
 
-    " let qfList = getqflist()
-    let locList = getloclist(0)
     if 
         " следующий if - ничего функционального не несет, только делает
         " поменьше дергов когда всего одно окно (помимо NERDTree)
