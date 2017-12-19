@@ -352,7 +352,6 @@ Plug 'tommcdo/vim-fugitive-blame-ext'
 Plug 'junegunn/gv.vim'
 
 Plug 'jreybert/vimagit'
-nnoremap <C-g> :Magit<CR>
 autocmd User VimagitUpdateFile normal! zz
 autocmd User VimagitRefresh normal! zz
 
@@ -966,7 +965,10 @@ nnoremap <M-o> <Tab>
 
 nnoremap zl :set foldlevel=1<cr>
 
-nnoremap <C-b> :<C-u>Gblame<cr>
+" for convenient git
+nnoremap <C-g> :<C-u>Magit<CR>
+nnoremap <C-g><C-b> :<C-u>Gblame<cr>
+nnoremap <C-g><C-s> :<C-u>Gstatus<cr>
 
 " }}}
 
