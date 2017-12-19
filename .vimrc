@@ -481,14 +481,7 @@ map gk <Plug>(signjk-k)
 " Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 
 " -TEST------------------------------------------------------------------------
-Plug 'terryma/vim-smooth-scroll'
-" TODO: https://github.com/yuttie/comfortable-motion.vim
-noremap <silent> <c-u> :call smooth_scroll#up(&scroll, 0, 2)<CR>
-noremap <silent> <c-d> :call smooth_scroll#down(&scroll, 0, 2)<CR>
-noremap <silent> <PageUp> :call smooth_scroll#up(&scroll*2, 0, 4)<CR>
-noremap <silent> <PageDown> :call smooth_scroll#down(&scroll*2, 0, 4)<CR>
-noremap <silent> G :call smooth_scroll#down(line('$') - line('.'), 0, 4)<CR>
-noremap <silent> gg :call smooth_scroll#up(line('.'), 0, 4)<CR>
+Plug 'rhysd/conflict-marker.vim'
 
 " -----------------------------------------------------------------------------
 call plug#end()
