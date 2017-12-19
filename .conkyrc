@@ -61,8 +61,8 @@ TEXT
 	#{ "full_text": "██████████ NumLock off ██████████", "color": "\#FF0000" },
 #${endif}
 # Next block - Caps lock indicator
-${if_match "${exec xset q | grep 'Caps Lock' | sed 's/.*Caps Lock:[ ]*\([^ ]*\).*/\1/'}"=="on"}
-	{ "full_text": "██████████ CapsLock ██████████", "color": "\#FF0000" },
+${if_match "${texeci 5 xset q | grep 'Caps Lock' | sed 's/.*Caps Lock:[ ]*\([^ ]*\).*/\1/'}"=="on"}
+{ "full_text": "           CapsLock           ", "color": "\#FFFFFF", "background": "\#FF0000" },
 ${endif}
 # Next block - wi-fi 
 	{ "full_text" : "${downspeed eth0}/s", "color" : "\#ADCBFF" },
