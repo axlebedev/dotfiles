@@ -477,6 +477,10 @@ map gk <Plug>(signjk-k)
 " -TEST------------------------------------------------------------------------
 Plug 'rhysd/conflict-marker.vim'
 
+" -TEST------------------------------------------------------------------------
+" close tags on </
+Plugin 'docunext/closetag.vim'
+
 " -----------------------------------------------------------------------------
 call plug#end()
 filetype plugin indent on
