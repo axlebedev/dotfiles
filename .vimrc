@@ -28,6 +28,8 @@
 "
 " TODO will133/vim-dirdiff
 " TODO: machakann/vim-highlightedyank
+"
+" TODO: https://github.com/wincent/ferret
 
 " Plugin settings ============================= {{{
 " =ss1=ssplugin=
@@ -442,13 +444,6 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 Plug 'xtal8/traces.vim'
 
 " -TEST------------------------------------------------------------------------
-" Narrow Region, <leader>nr
-Plug 'chrisbra/NrrwRgn'
-let g:nrrw_rgn_vert = 1
-let g:nrrw_topbot_leftright = 'botright'
-let g:nrrw_rgn_wdth = 100
-
-" -TEST------------------------------------------------------------------------
 "  wrap/unwrap lists in brackets
 Plug 'FooSoft/vim-argwrap'
 let g:argwrap_padded_braces = '{'
@@ -459,7 +454,7 @@ let g:argwrap_tail_comma = 1
 Plug 'kana/vim-textobj-user' " dependency for below
 Plug 'kana/vim-textobj-entire' " ae, ie
 Plug 'kana/vim-textobj-indent' " ai, ii, aI, iI
-Plug 'kana/vim-textobj-lastpat' " a/, i/, a?, i?
+Plug 'kana/vim-textobj-lastpat' " last search pattern a/, i/, a?, i?
 Plug 'kana/vim-textobj-line' " al, il
 Plug 'kana/vim-textobj-underscore' " a_, i_
 
