@@ -332,6 +332,8 @@ let g:indentLine_char = '┆'
 " -----------------------------------------------------------------------------
 " Color theme
 Plug 'crusoexia/vim-monokai'
+" give it a try https://github.com/morhetz/gruvbox
+" give it a try https://github.com/arcticicestudio/nord-vim
 
 " -----------------------------------------------------------------------------
 " Delete all buffers but current
