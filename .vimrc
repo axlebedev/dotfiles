@@ -481,7 +481,7 @@ Plug 'rhysd/conflict-marker.vim'
 
 " -TEST------------------------------------------------------------------------
 " close tags on </
-Plugin 'docunext/closetag.vim'
+Plug 'docunext/closetag.vim'
 
 " -TEST------------------------------------------------------------------------
 " Plug 'myusuf3/numbers.vim'
