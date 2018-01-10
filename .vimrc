@@ -152,9 +152,28 @@ let g:jsx_ext_required = 0
 " 1. 'npm i' after install
 " 2. tern_for_vim/node_modules/tern/plugin/webpack.js:
 " getResolver::config::modules += "src"
-let g:tern_show_argument_hints='on_hold'
-let g:tern#is_show_argument_hints_enabled = 1
-Plug 'ternjs/tern_for_vim', { 'do': 'npm i' }
+" let g:tern_show_argument_hints='on_hold'
+" let g:tern#is_show_argument_hints_enabled = 1
+" Plug 'ternjs/tern_for_vim', { 'do': 'npm i' }
+
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
+
+let g:lsp_async_completion = 1
+
+autocmd FileType javascript setlocal omnifunc=lsp#complete
+
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+
+if executable('typescript-language-server')
+    au User lsp_setup call lsp#register_server({
+      \ 'name': 'typescript-language-server',
+      \ 'cmd': { server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
+      \ 'root_uri': { server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_directory(lsp#utils#get_buffer_path(), '.git/..'))},
+      \ 'whitelist': ['typescript', 'javascript', 'javascript.jsx']
+      \ })
+endif
 
 " -----------------------------------------------------------------------------
 " ctags structure
@@ -400,8 +419,6 @@ Plug 'alexey-broadcast/vim-js-fastlog'
 let g:js_fastlog_prefix = '111'
 
 Plug 'alexey-broadcast/vim-smart-insert-tab'
-
-Plug 'alexey-broadcast/js-gotodef'
 
 Plug 'isomoar/vim-css-to-inline'
 

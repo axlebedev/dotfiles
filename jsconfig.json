@@ -1,0 +1,17 @@
+example for js-lsp
+{
+    "compilerOptions": {
+        "target": "es6",
+        "baseUrl": ".",
+        "experimentalDecorators": true,
+        "paths": {
+            "components/*": ["./src/components/*"],
+            "modules/*": ["./src/modules/*"],
+            "moduleName/*": ["./src/modules/moduleName/src/*"]
+        },
+        "module": "commonjs"
+    },
+    "exclude": [
+        "node_modules"
+    ]
+}
