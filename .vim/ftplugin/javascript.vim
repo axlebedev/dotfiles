@@ -1,2 +1,2 @@
-nnoremap gd :call JsGotoDef()<cr>
+nnoremap gd :LspDefinition<cr>
 nnoremap gdd gd
