@@ -30,6 +30,9 @@
 " TODO: machakann/vim-highlightedyank
 "
 " TODO: https://github.com/wincent/ferret
+"
+" TODO: interesting one kana/vim-arpeggio
+" TODO: for 'gf' (go to file): kana/vim-gf-diff, kana/vim-gf-user
 
 " Plugin settings ============================= {{{
 " =ss1=ssplugin=
@@ -236,6 +239,7 @@ endif
 " -----------------------------------------------------------------------------
 " autoclose parens
 Plug 'Raimondi/delimitMate'
+" TODO: maybe replace with 'kana/vim-smartinput'?
 let delimitMate_excluded_ft = 'html'
 let delimitMate_nesting_quotes = ['"','`']
 let delimitMate_expand_cr = 2
