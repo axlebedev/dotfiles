@@ -238,12 +238,7 @@ endif
 
 " -----------------------------------------------------------------------------
 " autoclose parens
-Plug 'Raimondi/delimitMate'
-" TODO: maybe replace with 'kana/vim-smartinput'?
-let delimitMate_excluded_ft = 'html'
-let delimitMate_nesting_quotes = ['"','`']
-let delimitMate_expand_cr = 2
-let delimitMate_expand_space = 1
+Plug 'jiangmiao/auto-pairs'
 
 " -----------------------------------------------------------------------------
 " Fuzzy file opener
