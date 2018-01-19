@@ -33,6 +33,7 @@
 "
 " TODO: interesting one kana/vim-arpeggio
 " TODO: for 'gf' (go to file): kana/vim-gf-diff, kana/vim-gf-user
+" TODO: DougBeney/pickachu - graphical color/date picker
 
 " Plugin settings ============================= {{{
 " =ss1=ssplugin=
