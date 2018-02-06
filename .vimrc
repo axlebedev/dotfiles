@@ -997,6 +997,9 @@ nnoremap <C-g><C-b> :<C-u>Gblame<cr>
 nnoremap <C-g><C-s> :<C-u>Gstatus<cr>
 nnoremap <C-g><C-v> :<C-u>GV<cr>
 
+" beautify json
+nnoremap <leader>bj :<C-u>%!python -m json.tool<cr>
+
 " }}}
 
 
