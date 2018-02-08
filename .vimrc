@@ -263,7 +263,7 @@ let g:ctrlp_clear_cache_on_exit = 1
 " Include current file to find entries
 let g:ctrlp_match_current_file = 1
 
-let g:ctrlp_custom_ignore = '\v[\/](\.git|node_modules|static|coverage)$'
+let g:ctrlp_custom_ignore = '\v[\/](\.git|node_modules|static|coverage|jsfcore/jsfiller3|jsfcore/ws-editor-lib)$'
 
 " -----------------------------------------------------------------------------
 " Sublime's <C-r> analog
