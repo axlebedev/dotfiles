@@ -230,12 +230,12 @@ if executable('ag') " sudo apt-get install silversearcher-ag
     \ ' --ignore-dir bin' .
     \ ' --ignore-dir logs' .
     \ ' --ignore-dir lib' .
-    \ ' --ignore-dir node_modules' .
     \ ' --ignore-dir coverage' .
     \ ' --ignore-dir static' .
     \ ' --ignore-dir webpack' .
     \ ' --ignore-dir .happypack' .
     \ ' --ignore-dir coverage' .
+    \ ' --ignore "*node_modules*"' .
     \ ' --ignore "src/modules/jsfcore/jsfiller3"' .
     \ ' --ignore "src/modules/jsfcore/ws-editor-lib"'
 endif
