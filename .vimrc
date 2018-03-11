@@ -530,6 +530,6 @@ autocmd au_vimrc BufReadPost *
 
 " Close empty buffer on leave
 autocmd au_vimrc BufLeave *
-    \ if line('$') == 1 && getline(1) == '' && expand('%:t') |
+    \ if line('$') == 1 && getline(1) == '' && !expand('%:t') |
     \     exe 'call kwbd#Kwbd(1)' |
     \ endif
