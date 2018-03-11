@@ -33,7 +33,6 @@ Plug 'kana/vim-submode'
 
 " -----------------------------------------------------------------------------
 " Execute a :command and show the output in a temporary buffer
-" TODO: do I really need it?
 Plug 'AndrewRadev/bufferize.vim'
 
 " -----------------------------------------------------------------------------
@@ -46,7 +45,6 @@ Plug 'moll/vim-node'
 " -----------------------------------------------------------------------------
 " NERD Tree
 Plug 'scrooloose/nerdtree'
-" TODO: if need 'Xuyuanp/nerdtree-git-plugin'
 let NERDTreeDirArrows=1 " allow it to show arrows
 let NERDTreeDirArrowExpandable='▸'
 let NERDTreeDirArrowCollapsible='▾'
@@ -244,7 +242,7 @@ Plug 'vim-scripts/MatchTag'
 Plug 'alvan/vim-closetag'
 let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.js,*.jsx"
 " TODO: doesn't close if we use neocomplete 
-
+"
 " -----------------------------------------------------------------------------
 " yank previous registers
 Plug 'vim-scripts/YankRing.vim'
@@ -380,10 +378,10 @@ Plug 'isomoar/vim-css-to-inline'
 " -----------------------------------------------------------------------------
 " TODO: make it work
 let g:UltiSnipsSnippetDirectories=[expand('~') . '/dotfiles/.vim/UltiSnips', 'UltiSnips']
-Plug 'SirVer/ultisnips'
 let g:UltiSnipsExpandTrigger="<c-k>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+Plug 'SirVer/ultisnips'
 
 " -TEST------------------------------------------------------------------------
 "  wrap/unwrap lists in brackets
