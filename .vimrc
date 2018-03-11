@@ -280,11 +280,13 @@ endfunction
 " -----------------------------------------------------------------------------
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_show_diagnostics_ui = 0
+let g:ycm_complete_in_comments = 1
 set completeopt-=preview
+let g:ycm_key_list_select_completion = ['<Down>']
+let g:ycm_key_list_previous_completion = ['<Up>']
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : SmartInsertTab()
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-TAB>"
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
-
-inoremap <expr><TAB> pumvisible() ? "\<C-n>" : SmartInsertTab()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
 
 " -----------------------------------------------------------------------------
 " color highlight in text
