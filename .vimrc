@@ -495,11 +495,6 @@ let g:clever_f_across_no_line = 1
 nmap ; <Plug>(clever-f-repeat-forward)
 
 " -TEST------------------------------------------------------------------------
-Plug 'haya14busa/vim-signjk-motion'
-map gj <Plug>(signjk-j)
-map gk <Plug>(signjk-k)
-
-" -TEST------------------------------------------------------------------------
 "  TODO: разобраться с конфигом: игнор ненужного. неигнор дочерних репозиториев
 " Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 
