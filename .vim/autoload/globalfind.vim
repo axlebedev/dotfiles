@@ -1,7 +1,7 @@
 " find word under cursor
 " returns ":Ack! -S -w 'word' src/"
 let s:vimrc_superglobalFind = 1
-function! globalfind#GlobalFind(isVisualMode, wordMatch, reactRender)
+function! globalfind#GlobalFind(isVisualMode, wordMatch, reactRender) abort
     let saved_ack_qhandler = g:ack_qhandler
     let word = ""
     if (a:isVisualMode)
@@ -50,7 +50,7 @@ function! globalfind#GlobalFind(isVisualMode, wordMatch, reactRender)
     let g:ack_qhandler = saved_ack_qhandler
 endfunction
 
-function! globalfind#ToggleGlobalFind()
+function! globalfind#ToggleGlobalFind() abort
     if (s:vimrc_superglobalFind)
         let s:vimrc_superglobalFind = 0
         echo "superglobalFind = 0"

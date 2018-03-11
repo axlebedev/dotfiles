@@ -267,7 +267,7 @@ let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.js,*.jsx"
 " yank previous registers
 Plug 'vim-scripts/YankRing.vim'
 nnoremap <silent> <F11> :YRShow<CR>
-function! YRRunAfterMaps()
+function! YRRunAfterMaps() abort
     nnoremap Y :<C-U>YRYankCount 'y$'<CR>
 
     vnoremap <silent> y y`]

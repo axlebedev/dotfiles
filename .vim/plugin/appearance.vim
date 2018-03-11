@@ -68,7 +68,7 @@ highlight VertSplit guibg=#131411 guifg=#131411
 highlight ALESignColumnWithErrors guibg=#250000
 
 " NERDTree highlight by filetypes settings ----------------------------- {{{
-function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
+function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg) abort
     exec 'autocmd FileType nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guifg='. a:guifg . ' guibg=' . a:guibg
     exec 'autocmd FileType nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
 endfunction

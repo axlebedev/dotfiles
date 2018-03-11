@@ -1,5 +1,5 @@
 " Google it
-function! google#Google(pattern)
+function! google#Google(pattern) abort
     let q = substitute(a:pattern, '["\n]', ' ', 'g')
     let q = substitute(q, '[[:punct:] ]',
                 \ '\=printf("%%%02X", char2nr(submatch(0)))', 'g')

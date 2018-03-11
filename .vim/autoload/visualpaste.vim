@@ -1,5 +1,5 @@
 " paste but keep register
-function! visualpaste#VisualPaste()
+function! visualpaste#VisualPaste() abort
     let currentMode = visualmode()
     if (currentMode ==# 'v')
         :execute "normal! gv\"_c\<esc>p"

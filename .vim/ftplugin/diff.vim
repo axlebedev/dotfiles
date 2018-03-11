@@ -1,5 +1,5 @@
 setlocal foldmethod=expr foldexpr=DiffFold(v:lnum)
-function! DiffFold(lnum)
+function! DiffFold(lnum) abort
   let line = getline(a:lnum)
   if line =~ '^\(diff\|---\|+++\|@@\) '
     return 1

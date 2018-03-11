@@ -1,7 +1,7 @@
 " toggle centering cursor
 " NOTE: scrolloff can't be local :(
 let s:scrolloff_value = &scrolloff
-function! readmode#ReadModeToggle()
+function! readmode#ReadModeToggle() abort
     if &scrolloff > 10
         let &scrolloff = s:scrolloff_value
         set virtualedit=block
