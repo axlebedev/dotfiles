@@ -171,7 +171,8 @@ call submode#map(resizeSubmode, 'n', '', 'j', ':resize +1<cr>')
 autocmd au_vimrc FileType help,qf,git nnoremap <buffer> q :q<cr>
 autocmd au_vimrc FileType help,qf,git nnoremap <buffer> <Esc> :q<cr>
 
-nnoremap <silent> <leader>a :ArgWrap<CR>
+nnoremap <silent> <leader>a :<C-u>ArgWrap<CR>
+nnoremap <silent> <leader>t :<C-u>CtrlP<CR>
 
 " get current highlight group under cursor
 map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'

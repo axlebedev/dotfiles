@@ -29,10 +29,14 @@ set backspace=indent,eol,start
 
 " ignore files and folders on search
 set wildignore+=*.sqp,*.log
-" *nix version
-set wildignore+=*/node_modules*,*/bower_components/*,*/build/*,*/dist/*,*happypack/*,*/lib/*,*/coverage/*
-" windows version
-set wildignore+=*\\node_modules*,*\\bower_components\\*,*\\build\\*,*\\dist\\*,*happypack\\*,*\\lib\\*,*\\coverage\\*
+let s:isWin = has('win32') || has('win16')
+if (s:isWin)
+    " *nix version
+    set wildignore+=*/node_modules*,*/bower_components/*,*/build/*,*/dist/*,*happypack/*,*/lib/*,*/coverage/*
+else
+    " windows version
+    set wildignore+=*\\node_modules*,*\\bower_components\\*,*\\build\\*,*\\dist\\*,*happypack\\*,*\\lib\\*,*\\coverage\\*
+endif
 
 " fix autocompletion of filenames in command-line mode
 set wildmode=longest,list
@@ -61,7 +65,6 @@ set shiftround     " smart indent for '<'/'>' commands
 set smarttab       " insert tabs on the start of a line according to shiftwidth, not tabstop
 set autoindent     " autoindents for new lines
 set smartindent
-au FileType javascript,scss,elm setlocal tabstop=2 softtabstop=2 shiftwidth=2
 
 set timeoutlen=300 " how long will vim wait for key sequence completion
 
@@ -120,10 +123,8 @@ set noerrorbells
 set shortmess=aoOtI
 
 " Override some syntaxes so things look better
-autocmd au_vimrc_settings BufNewFile,BufRead *eslintrc,*babelrc,*conkyrc setlocal syntax=json
-
-" Allow stylesheets to autocomplete hyphenated words
-autocmd au_vimrc_settings FileType css,scss,sass setlocal iskeyword+=-
+autocmd au_vimrc_settings BufNewFile,BufRead .eslintrc,.babelrc setlocal syntax=json
+autocmd au_vimrc_settings BufNewFile,BufRead .conkyrc setlocal syntax=python
 
 " set filetype for 'md' files
 autocmd au_vimrc_settings BufNewFile,BufReadPost *.md set filetype=markdown
@@ -142,9 +143,6 @@ autocmd au_vimrc_settings FileType qf setlocal nowrap
 " Don't remember the last cursor position when editing commit
 " messages, always start on line 1
 autocmd au_vimrc_settings filetype gitcommit call setpos('.', [0, 1, 1, 0])
-
-" Match HTML tags
-runtime macros/matchit.vim
 
 " Vim now also uses the selection system clipboard for default yank/paste.
 if has('unnamedplus')

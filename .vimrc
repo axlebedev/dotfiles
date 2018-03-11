@@ -197,7 +197,6 @@ Plug 'jiangmiao/auto-pairs'
 " -----------------------------------------------------------------------------
 " Fuzzy file opener
 Plug 'ctrlpvim/ctrlp.vim'
-let g:ctrlp_map = '<leader>t'
 let g:ctrlp_cmd = 'CtrlP'
 " search hidden files too
 let g:ctrlp_show_hidden = 1
@@ -428,6 +427,9 @@ let &rtp = &rtp . ',' . expand('~') . '/dotfiles/.vim'
 augroup au_vimrc
     autocmd!
 augroup END
+
+" Match HTML tags
+runtime macros/matchit.vim
 
 " Return to last edit position when opening files (You want this!)
 autocmd au_vimrc BufReadPost *
