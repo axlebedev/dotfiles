@@ -321,6 +321,16 @@ let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.js,*.jsx"
 " yank previous registers
 Plug 'vim-scripts/YankRing.vim'
 nnoremap <silent> <F11> :YRShow<CR>
+function! YRRunAfterMaps()
+    nnoremap Y :<C-U>YRYankCount 'y$'<CR>
+
+    vnoremap <silent> y y`]
+    vmap p :<C-u>call VisualPaste()<cr>
+    " replace word under cursor with last yanked
+    "visualpaste#visualpaste
+    nnoremap wp viw:<C-u>call visualpaste#VisualPaste()<cr>
+    nnoremap <silent> p p`]
+endfunction
 
 " -----------------------------------------------------------------------------
 let g:ycm_autoclose_preview_window_after_completion = 1
@@ -383,9 +393,9 @@ Plug 'terryma/vim-expand-region'
 vmap v <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
 
-Plug 'Valloric/ListToggle'
-let g:lt_location_list_toggle_map = '<leader>0'
-let g:lt_quickfix_list_toggle_map = '<leader>b'
+" Plug 'Valloric/ListToggle'
+" let g:lt_location_list_toggle_map = '<leader>0'
+" let g:lt_quickfix_list_toggle_map = '<leader>b'
 
 " -TODO------------------------------------------------------------------------
 " split-join object literals in many/one line
@@ -517,285 +527,10 @@ augroup au_vimrc
     autocmd!
 augroup END
 
+command! Todo call todo#Todo()
 
-" Functions ============================= {{{
-" =ss5=ssfunctions=
+autocmd au_vimrc BufWrite *.js :call trailingspace#DeleteTrailingWS()
 
-
-" nnoremap Y y$ but in YankRing-compatible way: ----------- {{{
-function! YRRunAfterMaps()
-    nnoremap Y :<C-U>YRYankCount 'y$'<CR>
-
-    vnoremap <silent> y y`]
-    vmap p :<C-u>call VisualPaste()<cr>
-    " replace word under cursor with last yanked
-    nnoremap wp viw:<C-u>call VisualPaste()<cr>
-    nnoremap <silent> p p`]
-endfunction
-
-function! VisualPaste()
-    let currentMode = visualmode()
-    if (currentMode ==# 'v')
-        :execute "normal! gv\"_c\<esc>p"
-    elseif (currentMode ==# 'V')
-        :execute "normal! gv\"_dP`]"
-    elseif
-        :execute "normal! gvp"
-    endif
-endfunction
-" }}}
-
-" Toggle quickfix/location window ----------------------------- {{{
-" From Steve Losh, http://learnvimscriptthehardway.stevelosh.com/chapters/38.html
-nnoremap <leader>b :call <SID>QuickfixToggle()<cr>
-
-let g:quickfix_is_open = 0
-function! s:QuickfixToggle()
-    if g:quickfix_is_open
-        cclose
-        let g:quickfix_is_open = 0
-        execute g:quickfix_return_to_window . "wincmd w"
-    else
-        let g:quickfix_return_to_window = winnr()
-        copen
-        let g:quickfix_is_open = 1
-    endif
-endfunction
-" }}}
-
-" Kwbd ----------------------------- {{{
-"  http://vim.wikia.com/wiki/Deleting_a_buffer_without_closing_the_window
-"here is a more exotic version of my original Kwbd script
-"delete the buffer; keep windows; create a scratch buffer if no buffers left
-function! s:Kwbd(kwbdStage)
-    if(a:kwbdStage == 1)
-        if(!buflisted(winbufnr(0)))
-            bd!
-            return
-        endif
-        let s:kwbdBufNum = bufnr("%")
-        let s:kwbdWinNum = winnr()
-        windo call s:Kwbd(2)
-        execute s:kwbdWinNum . 'wincmd w'
-        let s:buflistedLeft = 0
-        let s:bufFinalJump = 0
-        let l:nBufs = bufnr("$")
-        let l:i = 1
-        while(l:i <= l:nBufs)
-            if(l:i != s:kwbdBufNum)
-                if(buflisted(l:i))
-                    let s:buflistedLeft = s:buflistedLeft + 1
-                else
-                    if(bufexists(l:i) && !strlen(bufname(l:i)) && !s:bufFinalJump)
-                        let s:bufFinalJump = l:i
-                    endif
-                endif
-            endif
-            let l:i = l:i + 1
-        endwhile
-        if(!s:buflistedLeft)
-            if(s:bufFinalJump)
-                windo if(buflisted(winbufnr(0))) | execute "b! " . s:bufFinalJump | endif
-        else
-            enew
-            let l:newBuf = bufnr("%")
-            windo if(buflisted(winbufnr(0))) | execute "b! " . l:newBuf | endif
-    endif
-    execute s:kwbdWinNum . 'wincmd w'
-endif
-if(buflisted(s:kwbdBufNum) || s:kwbdBufNum == bufnr("%"))
-    execute "bd! " . s:kwbdBufNum
-endif
-if(!s:buflistedLeft)
-    set buflisted
-    set bufhidden=delete
-    set buftype=
-    setlocal noswapfile
-endif
-  else
-      if(bufnr("%") == s:kwbdBufNum)
-          let prevbufvar = bufnr("#")
-          if(prevbufvar > 0 && buflisted(prevbufvar) && prevbufvar != s:kwbdBufNum)
-              b #
-          else
-              bn
-          endif
-      endif
-  endif
-endfunction
-
-command! Kwbd call s:Kwbd(1)
-nnoremap <silent> <Plug>Kwbd :<C-u>Kwbd<CR>
-" Create a mapping (e.g. in your .vimrc) like this:
-"nmap <C-W>! <Plug>Kwbd
-" }}}
-
-
-
-" Skip quickfix on traversing buffers ----------------------------- {{{
-nnoremap <leader>j :<C-u>call OpenNextBuf(1)<CR>
-nnoremap <leader>k :<C-u>call OpenNextBuf(0)<CR>
-function! OpenNextBuf(prev)
-    let l:command = "bnext"
-    if(a:prev == 1)
-        let l:command = "bprev"
-    endif
-    :execute l:command
-    if &buftype ==# 'quickfix'
-        :execute l:command
-    endif
-endfunction
-
-" make gd to work with import ----------------------------- {{{
-" TODO: make gd to work correctly :)
-nnoremap <F5> :<C-u>call GoToImportDefinition()<CR>
-let s:isGoingToImportDefinition = 0
-function! GoToImportDefinition()
-    let s:isGoingToImportDefinition = 1
-    :execute "normal! gd"
-    let l:isImport = matchstr(getline("."), "import")
-    if empty(l:isImport)
-        " do nothing
-    else
-        :execute "normal! f'gf"
-    endif
-endfunction
-
-autocmd BufEnter *
-\ if s:isGoingToImportDefinition == 1 |
-\   :execute "normal! nzz" |
-\   let s:isGoingToImportDefinition = 0 |
-\ endif
-" }}}
-
-" Delete trailing white space on save ----------------------------- {{{
-func! DeleteTrailingWS()
-    exe "normal mz"
-    %s/\s\+$//ge
-    exe "normal `z"
-endfunc
-" }}}
-
-" Show all 'T O D O" locations ----------------------------- {{{
-" TODO: maybe there is a plugin?
-function! s:todo() abort
-    let entries = []
-    for cmd in ['git grep -n -e TODO -e FIXME -e XXX 2> /dev/null',
-                \ 'grep -rn -e TODO -e FIXME -e XXX * 2> /dev/null']
-        let lines = split(system(cmd), '\n')
-        if v:shell_error != 0 | continue | endif
-        for line in lines
-            let [fname, lno, text] = matchlist(line, '^\([^:]*\):\([^:]*\):\(.*\)')[1:3]
-            call add(entries, { 'filename': fname, 'lnum': lno, 'text': text })
-        endfor
-        break
-    endfor
-
-    if !empty(entries)
-        call setqflist(entries)
-        copen
-    endif
-endfunction
-command! Todo call s:todo()
-" }}}
-
-" Google it / Feeling lucky ----------------------------- {{{
-function! s:goog(pat, lucky)
-    let q = substitute(a:pat, '["\n]', ' ', 'g')
-    let q = substitute(q, '[[:punct:] ]',
-                \ '\=printf("%%%02X", char2nr(submatch(0)))', 'g')
-    echom q
-    call system(printf('xdg-open "https://www.google.com/search?%sq=%s"',
-                \ a:lucky ? 'btnI&' : '', q))
-endfunction
-
-nnoremap <silent> <F3> :call <SID>goog(expand("<cword>"), 0)<cr>
-xnoremap <silent> <F3> "gy:call <SID>goog(@g, 0)<cr>gv
-" }}}
-
-" find word under cursor ----------------------------- {{{
-" TODO: use existing plugin, or make own?
-" returns ":Ack! -S -w 'word' src/"
-let g:vimrc_superglobalFind = 1
-function! s:globalFind(isVisualMode, wordMatch, reactRender)
-    let saved_ack_qhandler = g:ack_qhandler
-    let word = ""
-    if (a:isVisualMode)
-        let word = l9#getSelectedText()
-    else
-        let word = expand("<cword>")
-    endif
-
-    let promptString = 'Searching text: '
-    if (a:wordMatch)
-        let promptString = 'Searching word: '
-    elseif (a:reactRender)
-        let promptString = 'Searching where render: '
-    endif
-
-    let searchingWord = input(promptString, word)
-
-    if (empty(searchingWord))
-        return
-    endif
-
-    let @/ = searchingWord
-    set hlsearch
-    let g:ack_qhandler = winnr('$') > 2 ? 'botright copen' : 'belowright copen'
-
-    let searchingWord = substitute(searchingWord, '(', '\\(', '')
-    let searchingWord = substitute(searchingWord, ')', '\\)', '')
-
-    let searchCommand = ":Ack! -S "
-    let path = g:vimrc_superglobalFind ? "." : "src/"
-
-    if (a:wordMatch)
-        :execute searchCommand."-w '".searchingWord."' ".path
-    elseif (a:reactRender)
-        :execute searchCommand."'<".searchingWord."\\b' ".path
-    else
-        :execute searchCommand."'".searchingWord."' ".path
-    endif
-
-    " следующий if - ничего функционального не несет, только делает
-    " поменьше дергов когда всего одно окно (помимо NERDTree)
-    if (winnr('$') > 2)
-        :NERDTreeClose | NERDTree | wincmd l | wincmd j
-    endif
-
-    let g:ack_qhandler = saved_ack_qhandler
-endfunction
-
-function! s:toggleGlobalFind()
-    if (g:vimrc_superglobalFind)
-        let g:vimrc_superglobalFind = 0
-        echo "vimrc_superglobalFind = 0"
-    else
-        let g:vimrc_superglobalFind = 1
-        echo "vimrc_superglobalFind = 1"
-    endif
-endfunction
-
-nnoremap <C-f> :call <SID>globalFind(0, 0, 0)<cr>
-xnoremap <C-f> :call <SID>globalFind(1, 0, 0)<cr>
-nnoremap <C-f><C-f> :call <SID>globalFind(0, 1, 0)<cr>
-xnoremap <C-f><C-f> :call <SID>globalFind(1, 1, 0)<cr>
-nnoremap <C-f><C-r> :call <SID>globalFind(0, 0, 1)<cr>
-xnoremap <C-f><C-r> :call <SID>globalFind(1, 0, 1)<cr>
-nnoremap <C-f><C-g> :call <SID>toggleGlobalFind()<cr>
-xnoremap <C-f><C-g> :call <SID>toggleGlobalFind()<cr>
-
-" find/replace in current project 
-if has("win32") || has("win16")
-"   Plugin 'henrik/vim-qargs' needed for next line
-    nnoremap <M-h> :Qdo %s/<C-r>f//gce\|update<left><left><left><left><left><left><left><left><left><left><left><C-r>f
-else
-"   Plugin 'henrik/vim-qargs' needed for next line
-    nnoremap <M-h> :Qdo %s/\<<C-r>f\>//gce\|update<left><left><left><left><left><left><left><left><left><left><left><C-r>f
-endif
-" }}}
-
-" -----------------------------------------------------------------------------
 " Return to last edit position when opening files (You want this!)
 autocmd au_vimrc BufReadPost *
         \ if line("'\"") > 0 && line("'\"") <= line("$") |
@@ -805,20 +540,11 @@ autocmd au_vimrc BufReadPost *
 " Close empty buffer on leave
 autocmd au_vimrc BufLeave *
     \ if line('$') == 1 && getline(1) == '' && expand('%:t') |
-    \     exe 'Kwbd' |
+    \     exe 'call kwbd#Kwbd(1)' |
     \ endif
 
-autocmd au_vimrc BufWrite *.js :call DeleteTrailingWS()
+autocmd au_vimrc BufWrite *.js :call trailingspace#DeleteTrailingWS()
 " }}}
-
-" }}}
-"" Change file formatting with eslint's 'fix'
-function! ESLintFix()
- silent execute "!./node_modules/.bin/eslint -c ./.eslintrc --fix %"
- edit! %
-endfunction
-
-nnoremap <leader>el :call ESLintFix()<CR>
 
 " -----------------------------------------------------------------------------
 " Scroll/cursor bind the current window and the previous window

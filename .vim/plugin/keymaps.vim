@@ -41,7 +41,7 @@ vnoremap LL $
 
 " fast save file, close file
 nnoremap <leader>w :w!<cr>
-nmap <leader>q <Plug>Kwbd
+nmap <silent> <leader>q :<C-u>call kwbd#Kwbd(1)<CR>
 
 " new empty buffer
 noremap <leader>x :Startify<cr>
@@ -195,3 +195,18 @@ nnoremap <C-g><C-v> :<C-u>GV<cr>
 nnoremap <leader>bj :<C-u>%!python -m json.tool<cr>
 
 nnoremap <leader>c :call readmode#ReadModeToggle()<cr>
+
+nnoremap <leader>j :<C-u>call opennextbuf#OpenNextBuf(1)<CR>
+nnoremap <leader>k :<C-u>call opennextbuf#OpenNextBuf(0)<CR>
+
+nnoremap <silent> <F3> :call google#Google(expand("<cword>"))<cr>
+xnoremap <silent> <F3> "gy:call google#Google(@g)<cr>gv
+
+nnoremap <C-f> :call globalfind#GlobalFind(0, 0, 0)<cr>
+xnoremap <C-f> :call globalfind#GlobalFind(1, 0, 0)<cr>
+nnoremap <C-f><C-f> :call globalfind#GlobalFind(0, 1, 0)<cr>
+xnoremap <C-f><C-f> :call globalfind#GlobalFind(1, 1, 0)<cr>
+nnoremap <C-f><C-r> :call globalfind#GlobalFind(0, 0, 1)<cr>
+xnoremap <C-f><C-r> :call globalfind#GlobalFind(1, 0, 1)<cr>
+nnoremap <C-f><C-g> :call globalfind#ToggleGlobalFind()<cr>
+xnoremap <C-f><C-g> :call globalfind#ToggleGlobalFind()<cr>
