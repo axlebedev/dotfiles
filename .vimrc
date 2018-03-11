@@ -418,11 +418,11 @@ nmap <silent> <C-m> <Plug>(ale_next_wrap)
 " -----------------------------------------------------------------------------
 " homemade ^^
 
-Plug 'alexey-broadcast/vim-js-fastlog'
+Plug 'axlebedev/vim-js-fastlog'
 let g:js_fastlog_prefix = '111'
 
-Plug 'alexey-broadcast/vim-smart-insert-tab'
-Plug 'alexey-broadcast/js-gotodef'
+Plug 'axlebedev/vim-smart-insert-tab'
+Plug 'axlebedev/js-gotodef'
 
 Plug 'isomoar/vim-css-to-inline'
 
