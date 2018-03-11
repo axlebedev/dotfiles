@@ -1,5 +1,4 @@
 " Show all 'T O D O" locations
-" TODO: maybe there is a plugin?
 function! todo#Todo() abort
     let entries = []
     for cmd in ['git grep -n -e TODO -e FIXME -e XXX 2> /dev/null',

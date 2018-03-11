@@ -57,14 +57,13 @@ set number
 set showcmd
 
 " indent settings
-set tabstop=4      " width of TAB. TODO: dont't change its value? https://www.reddit.com/r/vim/wiki/vimrctips
+set tabstop=4      " width of TAB.
 set expandtab      " or 'noexpandtab': if set, inputs spaces instead of tabs
 set softtabstop=4  " how much spaces will be removed on backspace
 set shiftwidth=4   " count of spaces for '<'/'>' commands
 set shiftround     " smart indent for '<'/'>' commands
 set smarttab       " insert tabs on the start of a line according to shiftwidth, not tabstop
 set autoindent     " autoindents for new lines
-set smartindent
 
 set timeoutlen=300 " how long will vim wait for key sequence completion
 
