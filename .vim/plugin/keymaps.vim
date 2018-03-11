@@ -4,6 +4,7 @@ vmap <space> <leader>
 xmap <space> <leader>
 
 " no noremap here!
+" JsFastLog mapping
 nmap <leader>lkk <leader>lkiW
 
 " fast open/reload vimrc
@@ -16,10 +17,11 @@ nmap <Tab> %
 vmap <Tab> %
 
 " Avoid accidental hits of <F1> while aiming for <Esc>
-map <F1> <Esc>
+map  <F1> <Esc>
 imap <F1> <Esc>
 
 " Make moving in line a bit more convenient
+" NOTE: maps twice: Nnoremap and Vnoremap
 nnoremap 0 ^
 nnoremap ^ 0
 nnoremap 00 0
@@ -68,19 +70,9 @@ vnoremap <silent> # :call VisualSelection('b')<CR>
 " visual select current line
 nnoremap vg ^vg_
 
-" Move a line of text using Ctrl+Alt+[jk]
-nnoremap <C-M-j> mz:m+<cr>`z
-nnoremap <C-M-k> mz:m-2<cr>`z
-vnoremap <C-M-k> :m'<-2<cr>`>my`<mzgv`yo`z
-vnoremap <C-M-j> :m'>+<cr>`<my`>mzgv`yo`z
-
 " NERDTree mappings
 map <F2> :NERDTreeToggle<CR>
 nnoremap <leader>tt :NERDTreeFind<CR>
-
-" apply macros with Q (disables the default Ex mode shortcut)
-nnoremap Q @q
-vnoremap Q :normal @q<CR>
 
 " repeat command for each line in selection
 xnoremap . :normal .<CR>
@@ -94,10 +86,6 @@ nnoremap j gj
 nnoremap k gk
 vnoremap j gj
 vnoremap k gk
-
-" Also center the screen when jumping through the changelist
-nnoremap g; g;zz
-nnoremap g, g,zz
 
 " toggle fold on tripleclick
 noremap <3-LeftMouse> za
@@ -118,10 +106,12 @@ nnoremap <M-a> ggVG
 vnoremap // "py/<C-R>p<CR>
 
 " add a symbol to current line
+" TODO: don't break jumplist
 nnoremap <leader>; mqg_a;<esc>`q
 nnoremap <leader>, mqg_a,<esc>`q
 
 " Toggle true/false
+" TODO
 nnoremap <silent> <C-t> mmviw:s/true\\|false/\={'true':'false','false':'true'}[submatch(0)]/<CR>`m:nohlsearch<CR>
 
 " toggle foldColumn: 0->6->12->0...
@@ -134,29 +124,6 @@ nnoremap bo :BufOnly<CR>
 " the command history; also, don't forget the q: command
 cnoremap <c-j> <down>
 cnoremap <c-k> <up>
-
-" some custom digraphs
-digraphs TT 8869 " ⊥
-
-" avoid mistypes :)
-abbr funciton function
-abbr cosnt const
-abbr proips props
-abbr setTimeou setTimeout
-abbr setTimout setTimeout
-abbr clearTimeou clearTimeout
-abbr clearTimout clearTimeout
-abbr widht width
-abbr transfrom transform
-abbr reutrn return
-abbr retunr return
-
-abbr pt PropTypes
-abbr tp this.props
-abbr ts this.state
-abbr tc this.context
-abbr np nextProps
-abbr ns nextState
 
 " Resize submode
 let g:submode_always_show_submode = 1
