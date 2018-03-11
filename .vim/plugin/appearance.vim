@@ -43,29 +43,29 @@ colorscheme monokai
 highlight Search guibg='#4A3F2D' guifg='NONE'
 
 "  colors of matching parens
-hi MatchParen cterm=bold ctermbg=none ctermfg=magenta gui=bold guibg=#8C5669 guifg=NONE
+highlight MatchParen cterm=bold ctermbg=none ctermfg=magenta gui=bold guibg=#8C5669 guifg=NONE
 
 " colors of fold column
-hi FoldColumn guibg=#131411 guifg=#34352E
+highlight FoldColumn guibg=#131411 guifg=#34352E
 
 " colors of error column
-hi SignColumn guibg=#131411
+highlight SignColumn guibg=#131411
 
 " colors of line number column
-hi LineNr guibg=#131411 guifg=#34352E
+highlight LineNr guibg=#131411 guifg=#34352E
 
 " highlight current line number
 set cursorline
-hi clear CursorLine
-hi CursorLine guibg=#23241E
-hi CursorLineNr guifg=#68705e guibg=#131411
+highlight clear CursorLine
+highlight CursorLine guibg=#23241E
+highlight CursorLineNr guifg=#68705e guibg=#131411
 
 " colors and appearance of window split column
 set fillchars+=vert:│
 
-hi VertSplit guibg=#131411 guifg=#131411
+highlight VertSplit guibg=#131411 guifg=#131411
 
-hi ALESignColumnWithErrors guibg=#250000
+highlight ALESignColumnWithErrors guibg=#250000
 
 " NERDTree highlight by filetypes settings ----------------------------- {{{
 function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
@@ -94,14 +94,15 @@ set list
 set showbreak=»
 
 " Diff styling
-highlight diffAdded   term=bold ctermbg=black   ctermfg=green  cterm=bold guibg=#114417   guifg=white gui=none
-highlight DiffAdd    term=bold         ctermbg=darkgreen ctermfg=white    cterm=bold guibg=#114417  guifg=White    gui=bold
+highlight diffAdded term=bold ctermbg=black     ctermfg=green cterm=bold guibg=#114417 guifg=white gui=none
+highlight DiffAdd   term=bold ctermbg=darkgreen ctermfg=white cterm=bold guibg=#114417 guifg=White gui=bold
 
-highlight diffRemoved term=bold ctermbg=black   ctermfg=red    cterm=bold guibg=#532120     guifg=white gui=none
-highlight DiffDelete term=none         ctermbg=darkblue  ctermfg=darkblue cterm=none guibg=DarkBlue   guifg=DarkBlue gui=none
+highlight diffRemoved term=bold ctermbg=black    ctermfg=red      cterm=bold guibg=#532120  guifg=white    gui=none
+highlight DiffDelete  term=none ctermbg=darkblue ctermfg=darkblue cterm=none guibg=DarkBlue guifg=DarkBlue gui=none
 
 highlight diffChanged term=bold ctermbg=black   ctermfg=yellow cterm=bold guibg=#995C00  guifg=white gui=none
-highlight diffLine    term=bold ctermbg=magenta ctermfg=white  cterm=bold guibg=#350066 guifg=white gui=none
+highlight diffLine    term=bold ctermbg=magenta ctermfg=white  cterm=bold guibg=#350066  guifg=white gui=none
 highlight diffFile    term=bold ctermbg=yellow  ctermfg=black  cterm=none guibg=#995C00  guifg=white gui=none
+
 highlight DiffText   term=reverse,bold ctermbg=red       ctermfg=yellow   cterm=bold guibg=DarkRed    guifg=yellow   gui=bold
 highlight DiffChange term=bold         ctermbg=black     ctermfg=white    cterm=bold guibg=Black      guifg=White    gui=bold
