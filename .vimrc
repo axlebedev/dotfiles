@@ -522,8 +522,6 @@ augroup au_vimrc
     autocmd!
 augroup END
 
-autocmd au_vimrc BufWrite *.js :call trailingspace#DeleteTrailingWS()
-
 " Return to last edit position when opening files (You want this!)
 autocmd au_vimrc BufReadPost *
         \ if line("'\"") > 0 && line("'\"") <= line("$") |
