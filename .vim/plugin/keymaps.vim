@@ -111,8 +111,7 @@ nnoremap <leader>; mqg_a;<esc>`q
 nnoremap <leader>, mqg_a,<esc>`q
 
 " Toggle true/false
-" TODO
-nnoremap <silent> <C-t> mmviw:s/true\\|false/\={'true':'false','false':'true'}[submatch(0)]/<CR>`m:nohlsearch<CR>
+nnoremap <silent> <C-t> :<C-u>ToggleBool<CR>
 
 " toggle foldColumn: 0->6->12->0...
 nnoremap <silent> <F4> :let &l:foldcolumn = (&l:foldcolumn + 6) % 18<cr>

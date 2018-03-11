@@ -1,7 +1,6 @@
 " =ss4=sskeyboard=      KEY BINDINGS
 " =ss5=ssfunctions=     FUNCTIONS
 " TODO: 'help' to be always in readmode
-" TODO: fox <C-t> if there are several values in line
 " TODO: https://github.com/Shougo/denite.nvim - wants python3 even if its ebabled
 "
 " TODO: Plug 'nixprime/cpsm'
@@ -379,6 +378,10 @@ let g:startify_change_to_dir = 0
 let g:startify_custom_header = []
 " remap 'o' to open file in Startify window
 autocmd User Startified nmap <buffer> o <plug>(startify-open-buffers)
+
+" -----------------------------------------------------------------------------
+" Toggle true/false
+Plug 'sagarrakshe/toggle-bool'
 
 " -----------------------------------------------------------------------------
 " homemade ^^
