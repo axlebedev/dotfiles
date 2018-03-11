@@ -3,34 +3,18 @@
 " TODO: 'help' to be always in readmode
 " TODO: https://github.com/Shougo/denite.nvim - wants python3 even if its ebabled
 "
-" TODO: Plug 'nixprime/cpsm'
-" TODO: Plug 'haya14busa/vim-operator-flashy'
-" TODO: https://github.com/haya14busa/is.vim
+" TODO: Plug 'nixprime/cpsm' after build with python3?
+" TODO: Plug 'haya14busa/vim-operator-flashy' marry it with YankRing?
 "
 " TODO https://github.com/haya14busa/.vim/
 " TODO: https://github.com/haya14busa/dotfiles/blob/master/.vimrc
 "
 " TODO: если мы разместили последнюю строку по центру, ушли в другой буфер,
 " вернулись - то последняя строка будет снизу. Понять, откуда и исправить
-"
-" TODO: git merge plugins
-" https://github.com/junkblocker/patchreview-vim
-" https://github.com/idanarye/vim-merginal
-" https://github.com/rhysd/conflict-marker.vim
-"
 
 " TODO: разобраться, почему не работает vip<C-v> и после этого попробовать 
 " Plug 'kana/vim-niceblock'
 "
-" TODO will133/vim-dirdiff
-"
-" TODO: https://github.com/wincent/ferret
-"
-" TODO: interesting one kana/vim-arpeggio
-" TODO: for 'gf' (go to file): kana/vim-gf-diff, kana/vim-gf-user
-" TODO: DougBeney/pickachu - graphical color/date picker
-" TODO: lambdalisue/gina.vim git plugin, many likes
-
 " Plugin settings ============================= {{{
 
 filetype off
@@ -422,6 +406,11 @@ Plug 'jeffkreeftmeijer/vim-numbertoggle'
 " -TEST------------------------------------------------------------------------
 Plug 'machakann/vim-highlightedyank'
 let g:highlightedyank_highlight_duration = 300
+
+" -TEST------------------------------------------------------------------------
+" 'gf' from a diff file
+Plug 'kana/vim-gf-user'
+Plug 'kana/vim-gf-diff'
 
 " -----------------------------------------------------------------------------
 call plug#end()
