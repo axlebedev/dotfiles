@@ -39,7 +39,7 @@ filetype off
 
 " vim-plug installation:
 " curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-call plug#begin('~/.vim/bundle')
+call plug#begin(expand('~') . '/.vim/bundle')
 " -----------------------------------------------------------------------------
 " General purpose funcs for other plugins
 Plug 'vim-scripts/l9'
@@ -51,6 +51,7 @@ Plug 'kana/vim-submode'
 
 " -----------------------------------------------------------------------------
 " Execute a :command and show the output in a temporary buffer
+" TODO: do I really need it?
 Plug 'AndrewRadev/bufferize.vim'
 
 " -----------------------------------------------------------------------------
@@ -63,31 +64,15 @@ Plug 'moll/vim-node'
 " -----------------------------------------------------------------------------
 " NERD Tree
 Plug 'scrooloose/nerdtree'
-" TODO: read help
-" start NERDTree on vim startup
-augroup augroup_nerdtree
-    autocmd!
-
-    autocmd VimEnter * Startify | NERDTree | wincmd l
-
-    " close vim if only window is NERDTree
-    autocmd bufenter *
-        \ if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) 
-        \   | q
-        \ | endif
-
-    autocmd StdinReadPre * let s:std_in=1
-augroup END
-" some configs of NERDTree
+" TODO: if need 'Xuyuanp/nerdtree-git-plugin'
 let NERDTreeDirArrows=1 " allow it to show arrows
 let NERDTreeDirArrowExpandable='▸'
 let NERDTreeDirArrowCollapsible='▾'
 let NERDTreeShowHidden=1 " show hidden files
 let NERDTreeCascadeSingleChildDir=0 " dont collapse singlechild dir
-" TODO: if need https://github.com/Xuyuanp/nerdtree-git-plugin
 
 " -----------------------------------------------------------------------------
-" vim-airline: cute statusbar at bottom
+" vim-airline: cute statusbar
 Plug 'bling/vim-airline'
 let g:airline_skip_empty_sections = 1
 let g:airline_powerline_fonts = 1
@@ -96,23 +81,14 @@ if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
 
-if has("win32") || has("win16")
-    let g:airline_left_sep = ' '
-    let g:airline_right_sep = ' '
-    let g:airline_left_alt_sep = ' '
-    let g:airline_right_alt_sep = ' '
-    let g:airline_symbols.branch = ' '
-    let g:airline_symbols.readonly = ' '
-    let g:airline_symbols.linenr = ' '
-else
-    let g:airline_left_sep = ''
-    let g:airline_right_sep = ''
-    let g:airline_left_alt_sep = ''
-    let g:airline_right_alt_sep = ''
-    let g:airline_symbols.branch = ''
-    let g:airline_symbols.readonly = ''
-    let g:airline_symbols.linenr = ''
-endif
+let s:isWin = has('win32') || has('win16')
+let g:airline_left_sep = s:isWin ? ' ' : ''
+let g:airline_right_sep = s:isWin ? ' ' : ''
+let g:airline_left_alt_sep = s:isWin ? ' ' : ''
+let g:airline_right_alt_sep = s:isWin ? ' ' : ''
+let g:airline_symbols.branch = s:isWin ? ' ' : ''
+let g:airline_symbols.readonly = s:isWin ? ' ' : ''
+let g:airline_symbols.linenr = s:isWin ? ' ' : ''
 
 " -----------------------------------------------------------------------------
 " Generate jsdoc easily
@@ -137,12 +113,7 @@ let g:javascript_plugin_jsdoc = 1
 Plug 'othree/javascript-libraries-syntax.vim'
 let g:used_javascript_libs = 'underscore,react'
 " Plug 'othree/es.next.syntax.vim'
-" -----------------------------------------------------------------------------
-" Customize colors here
-" TODO: ???
-"Plug 'othree/yajs.vim'
-"Plug 'othree/es.next.syntax.vim'
-"Plug 'bigfish/vim-js-context-coloring'
+
 " -----------------------------------------------------------------------------
 " jsx support
 Plug 'mxw/vim-jsx'
@@ -150,8 +121,7 @@ let g:jsx_ext_required = 0
 
 " -----------------------------------------------------------------------------
 " To make it work: 
-" 1. 'npm i' after install
-" 2. tern_for_vim/node_modules/tern/plugin/webpack.js:
+" tern_for_vim/node_modules/tern/plugin/webpack.js:
 " getResolver::config::modules += "src"
 " let g:tern_show_argument_hints='on_hold'
 " let g:tern#is_show_argument_hints_enabled = 1
@@ -159,16 +129,13 @@ let g:jsx_ext_required = 0
 
 Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
-
 let g:lsp_async_completion = 1
-
-autocmd FileType javascript setlocal omnifunc=lsp#complete
 
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
 if executable('typescript-language-server')
-    au User lsp_setup call lsp#register_server({
+    autocmd User lsp_setup call lsp#register_server({
       \ 'name': 'typescript-language-server',
       \ 'cmd': { server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
       \ 'root_uri': { server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_directory(lsp#utils#get_buffer_path(), '.git/..'))},
@@ -202,21 +169,8 @@ let g:qfenter_keymap.open = ['<CR>', '<2-LeftMouse>', 'o']
 let g:qfenter_keymap.vopen = ['<C-v>', 'i']
 let g:qfenter_keymap.hopen = ['<C-s>']
 
-" TODO: make fzf work with Gvim
-" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-" Plug 'junegunn/fzf.vim'
-"
-" let g:fzf_height = '30%'
-" let g:fzf_commits_log_options = '--color --graph --pretty=format:"%C(yellow)%h%Creset -%C(auto)%d%Creset %s %C(bold blue)(%cr) %Cred<%an>%Creset" --abbrev-commit'
-" let g:fzf_command_prefix = 'Fzf'
-" let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -g ""'
-" let g:fzf_history_dir = '~/.local/share/fzf-history'
-"
-" " FZF mappings
-" " nnoremap <C-p> :FZF<CR>
-" nnoremap <C-i> :FzfBuffers<CR>
-" nnoremap <leader>a :FzfAg<CR>
-" nnoremap <silent> <BS> :FzfHistory:<CR>
+" -----------------------------------------------------------------------------
+" Search in project
 Plug 'mileszs/ack.vim'
 let g:ack_apply_qmappings = 0
 let g:ack_apply_lmappings = 0
@@ -243,7 +197,6 @@ Plug 'jiangmiao/auto-pairs'
 " -----------------------------------------------------------------------------
 " Fuzzy file opener
 Plug 'ctrlpvim/ctrlp.vim'
-"let g:ctrlp_map = '<C-t>'
 let g:ctrlp_map = '<leader>t'
 let g:ctrlp_cmd = 'CtrlP'
 " search hidden files too
@@ -259,13 +212,7 @@ let g:ctrlp_clear_cache_on_exit = 1
 " Include current file to find entries
 let g:ctrlp_match_current_file = 1
 
-let g:ctrlp_custom_ignore = '\v[\/](\.git|node_modules|static|coverage|jsfcore/jsfiller3|jsfcore/ws-editor-lib)$'
-
-" -----------------------------------------------------------------------------
-" Sublime's <C-r> analog
-" TODO: wait until es6 supported
-" Plug 'tacahiroy/ctrlp-funky'
-" nnoremap <leader>r :CtrlPFunky<Cr>
+let g:ctrlp_custom_ignore = '\v[\/](\.git|node_modules|static|coverage)$'
 
 " -----------------------------------------------------------------------------
 " comment lines, uncomment lines
@@ -327,7 +274,6 @@ function! YRRunAfterMaps()
     vnoremap <silent> y y`]
     vmap p :<C-u>call VisualPaste()<cr>
     " replace word under cursor with last yanked
-    "visualpaste#visualpaste
     nnoremap wp viw:<C-u>call visualpaste#VisualPaste()<cr>
     nnoremap <silent> p p`]
 endfunction
@@ -338,8 +284,7 @@ let g:ycm_show_diagnostics_ui = 0
 set completeopt-=preview
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
 
-inoremap <expr><TAB> pumvisible() ?
-  \ "\<C-n>" : SmartInsertTab()
+inoremap <expr><TAB> pumvisible() ? "\<C-n>" : SmartInsertTab()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
 
 " -----------------------------------------------------------------------------
@@ -350,12 +295,7 @@ Plug 'ap/vim-css-color'
 " Indent line for leading spaces
 Plug 'Yggdroot/indentLine'
 " Warning! needed to patch font as described at https://github.com/Yggdroot/indentLine
-" if has("win32") || has("win16")
 let g:indentLine_char = '┆'
-
-" else
-    " let g:indentLine_char = ''
-" endif "has("win32") || has("win16")
 
 " -----------------------------------------------------------------------------
 " Color theme
@@ -378,14 +318,13 @@ Plug 'henrik/vim-qargs'
 
 " -----------------------------------------------------------------------------
 " Pretty work with git
-" TODO: READ the fucking docs, WATCH screencasts
 Plug 'tpope/vim-fugitive'
 Plug 'tommcdo/vim-fugitive-blame-ext'
 Plug 'junegunn/gv.vim'
-
 Plug 'jreybert/vimagit'
-autocmd User VimagitUpdateFile normal! zz
-autocmd User VimagitRefresh normal! zz
+autocmd User VimagitUpdateFile normal! zt
+autocmd User VimagitRefresh normal! zt
+Plug 'rhysd/conflict-marker.vim'
 
 " -----------------------------------------------------------------------------
 " expand selection
@@ -396,13 +335,6 @@ vmap <C-v> <Plug>(expand_region_shrink)
 " Plug 'Valloric/ListToggle'
 " let g:lt_location_list_toggle_map = '<leader>0'
 " let g:lt_quickfix_list_toggle_map = '<leader>b'
-
-" -TODO------------------------------------------------------------------------
-" split-join object literals in many/one line
-" let g:splitjoin_split_mapping = 'gs'
-" let g:splitjoin_join_mapping = 'gj'
-" let g:splitjoin_trailing_comma = 1
-" Plug 'AndrewRadev/splitjoin.vim'
 
 " -----------------------------------------------------------------------------
 " Highlight eslint errors
@@ -422,23 +354,11 @@ let g:ale_javascript_eslint_executable = 'npm run lint'
 nmap <silent> <C-m> <Plug>(ale_next_wrap)
 
 " -----------------------------------------------------------------------------
-" homemade ^^
-
-Plug 'axlebedev/vim-js-fastlog'
-let g:js_fastlog_prefix = '111'
-
-Plug 'axlebedev/vim-smart-insert-tab'
-Plug 'axlebedev/js-gotodef'
-
-Plug 'isomoar/vim-css-to-inline'
-
-" -----------------------------------------------------------------------------
-" color picker window inside vim
-Plug 'Rykka/colorv.vim'
-
-" -----------------------------------------------------------------------------
-"  ELM
-Plug 'ElmCast/elm-vim'
+" Highlight 'f' entries
+Plug 'rhysd/clever-f.vim'
+let g:clever_f_smart_case = 1
+let g:clever_f_across_no_line = 1
+nmap ; <Plug>(clever-f-repeat-forward)
 
 " -----------------------------------------------------------------------------
 "  Start screen for vim
@@ -460,17 +380,23 @@ let g:startify_custom_header = []
 autocmd User Startified nmap <buffer> o <plug>(startify-open-buffers)
 
 " -----------------------------------------------------------------------------
-let g:UltiSnipsSnippetDirectories=['~/.vim', 'UltiSnips']
-Plug 'SirVer/ultisnips'
+" homemade ^^
 
-" let g:UltiSnipsExpandTrigger="<leader>s"
+Plug 'axlebedev/vim-js-fastlog'
+let g:js_fastlog_prefix = '111'
+
+Plug 'axlebedev/vim-smart-insert-tab'
+Plug 'axlebedev/js-gotodef'
+
+Plug 'isomoar/vim-css-to-inline'
+
+" -----------------------------------------------------------------------------
+" TODO: make it work
+let g:UltiSnipsSnippetDirectories=[expand('~') . '/dotfiles/.vim/UltiSnips', 'UltiSnips']
+Plug 'SirVer/ultisnips'
 let g:UltiSnipsExpandTrigger="<c-k>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-
-" -----------------------------------------------------------------------------
-" highlight current ex-range
-Plug 'xtal8/traces.vim'
 
 " -TEST------------------------------------------------------------------------
 "  wrap/unwrap lists in brackets
@@ -488,25 +414,6 @@ Plug 'kana/vim-textobj-line' " al, il
 Plug 'kana/vim-textobj-underscore' " a_, i_
 
 " -TEST------------------------------------------------------------------------
-" Highlight 'f' entries
-Plug 'rhysd/clever-f.vim'
-let g:clever_f_smart_case = 1
-let g:clever_f_across_no_line = 1
-nmap ; <Plug>(clever-f-repeat-forward)
-
-" -TEST------------------------------------------------------------------------
-"  TODO: разобраться с конфигом: игнор ненужного. неигнор дочерних репозиториев
-" Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
-
-" -TEST------------------------------------------------------------------------
-Plug 'rhysd/conflict-marker.vim'
-
-" -TEST------------------------------------------------------------------------
-" close tags on </
-Plug 'docunext/closetag.vim'
-
-" -TEST------------------------------------------------------------------------
-" Plug 'myusuf3/numbers.vim'
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 
 " -----------------------------------------------------------------------------
@@ -533,3 +440,12 @@ autocmd au_vimrc BufLeave *
     \ if line('$') == 1 && getline(1) == '' && !expand('%:t') |
     \     exe 'call kwbd#Kwbd(1)' |
     \ endif
+
+" start NERDTree and Startify on vim startup
+autocmd VimEnter * Startify | NERDTree | wincmd l
+
+" close vim if only window is NERDTree
+autocmd au_vimrc bufenter *
+    \ if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) 
+    \   | q
+    \ | endif
