@@ -121,9 +121,6 @@ vnoremap // "py/<C-R>p<CR>
 nnoremap <leader>; mqg_a;<esc>`q
 nnoremap <leader>, mqg_a,<esc>`q
 
-" type ':S<cr>' to split current buffer to right, and leave it with previous buffer
-command! S vs | wincmd h | bprev | wincmd l
-
 " Toggle true/false
 nnoremap <silent> <C-t> mmviw:s/true\\|false/\={'true':'false','false':'true'}[submatch(0)]/<CR>`m:nohlsearch<CR>
 

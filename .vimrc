@@ -527,8 +527,6 @@ augroup au_vimrc
     autocmd!
 augroup END
 
-command! Todo call todo#Todo()
-
 autocmd au_vimrc BufWrite *.js :call trailingspace#DeleteTrailingWS()
 
 " Return to last edit position when opening files (You want this!)
@@ -542,13 +540,3 @@ autocmd au_vimrc BufLeave *
     \ if line('$') == 1 && getline(1) == '' && expand('%:t') |
     \     exe 'call kwbd#Kwbd(1)' |
     \ endif
-
-autocmd au_vimrc BufWrite *.js :call trailingspace#DeleteTrailingWS()
-" }}}
-
-" -----------------------------------------------------------------------------
-" Scroll/cursor bind the current window and the previous window
-command! BindBoth set scrollbind cursorbind | wincmd p | set scrollbind cursorbind | wincmd p
-command! BindBothOff set noscrollbind nocursorbind | wincmd p | set noscrollbind nocursorbind | wincmd p
-nnoremap <leader>bon :BindBoth<cr>
-nnoremap <leader>bof :BindBothOff<cr>
