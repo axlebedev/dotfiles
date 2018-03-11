@@ -23,7 +23,6 @@
 " Plug 'kana/vim-niceblock'
 "
 " TODO will133/vim-dirdiff
-" TODO: machakann/vim-highlightedyank
 "
 " TODO: https://github.com/wincent/ferret
 "
@@ -419,6 +418,10 @@ Plug 'kana/vim-textobj-underscore' " a_, i_
 
 " -TEST------------------------------------------------------------------------
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
+
+" -TEST------------------------------------------------------------------------
+Plug 'machakann/vim-highlightedyank'
+let g:highlightedyank_highlight_duration = 300
 
 " -----------------------------------------------------------------------------
 call plug#end()
