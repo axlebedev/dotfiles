@@ -271,7 +271,7 @@ function! YRRunAfterMaps()
     nnoremap Y :<C-U>YRYankCount 'y$'<CR>
 
     vnoremap <silent> y y`]
-    vmap p :<C-u>call VisualPaste()<cr>
+    vmap p :<C-u>call visualpaste#VisualPaste()<cr>
     " replace word under cursor with last yanked
     nnoremap wp viw:<C-u>call visualpaste#VisualPaste()<cr>
     nnoremap <silent> p p`]
