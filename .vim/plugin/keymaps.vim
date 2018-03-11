@@ -106,9 +106,8 @@ nnoremap <M-a> ggVG
 vnoremap // "py/<C-R>p<CR>
 
 " add a symbol to current line
-" TODO: don't break jumplist
-nnoremap <leader>; mqg_a;<esc>`q
-nnoremap <leader>, mqg_a,<esc>`q
+nnoremap <silent> <leader>; :call appendchar#AppendChar(';')<CR>
+nnoremap <silent> <leader>, :call appendchar#AppendChar(',')<CR>
 
 " Toggle true/false
 nnoremap <silent> <C-t> :<C-u>ToggleBool<CR>
