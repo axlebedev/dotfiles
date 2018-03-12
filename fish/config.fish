@@ -38,6 +38,7 @@ abbr -a gr git rebase
 abbr -a grd git rebase origin/develop
 abbr -a grc git rebase --continue
 abbr -a gra git rebase --abort
+abbr -a gcp git cherry-pick
 abbr -a gcpc git cherry-pick --continue
 abbr -a gcpa git cherry-pick --continue
 abbr -a gfa git fetch --all
