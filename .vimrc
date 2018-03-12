@@ -403,7 +403,7 @@ Plug 'jeffkreeftmeijer/vim-numbertoggle'
 
 " -TEST------------------------------------------------------------------------
 Plug 'machakann/vim-highlightedyank'
-let g:highlightedyank_highlight_duration = 300
+let g:highlightedyank_highlight_duration = 200
 
 " -TEST------------------------------------------------------------------------
 " 'gf' from a diff file
