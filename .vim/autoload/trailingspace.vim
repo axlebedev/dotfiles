@@ -1,6 +1,14 @@
 " Delete trailing white space
 function! trailingspace#DeleteTrailingWS() abort
-    exe "normal mz"
-    %s/\s\+$//ge
-    exe "normal `z"
+    let l:cursor_pos = getpos(".")
+
+    let text = substitute(
+      \ getline('.'),
+      \ '\v^(.+\S)(\s*)$',
+      \ '\1',
+      \ ''
+   \)
+    call setline('.', text)
+
+    call setpos('.', l:cursor_pos)
 endfunction
