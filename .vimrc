@@ -193,6 +193,27 @@ let g:ctrlp_match_current_file = 1
 
 let g:ctrlp_custom_ignore = '\v[\/](\.git|node_modules|static|coverage)$'
 
+if executable('ag')
+    let g:ctrlp_use_caching = 0
+
+    " Use Ag over Grep
+    set grepprg=ag\ --nogroup\ --nocolor
+
+    " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+    let g:ctrlp_user_command = 'ag %s -l --nocolor -g "" -U --hidden' .
+      \ ' --ignore-dir .git' .
+      \ ' --ignore-dir bin' .
+      \ ' --ignore-dir logs' .
+      \ ' --ignore-dir lib' .
+      \ ' --ignore-dir coverage' .
+      \ ' --ignore-dir .happypack' .
+      \ ' --ignore-dir coverage' .
+      \ ' --ignore "*\.git*"' .
+      \ ' --ignore "*node_modules*"' .
+      \ ' --ignore "src/modules/jsfcore/jsfiller3"' .
+      \ ' --ignore "src/modules/jsfcore/ws-editor-lib"'
+endif
+
 " -----------------------------------------------------------------------------
 " comment lines, uncomment lines
 Plug 'tomtom/tcomment_vim'
