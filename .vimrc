@@ -424,7 +424,7 @@ Plug 'jeffkreeftmeijer/vim-numbertoggle'
 
 " -TEST------------------------------------------------------------------------
 Plug 'machakann/vim-highlightedyank'
-let g:highlightedyank_highlight_duration = 200
+let g:highlightedyank_highlight_duration = 300
 
 " -TEST------------------------------------------------------------------------
 " 'gf' from a diff file

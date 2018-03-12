@@ -106,3 +106,6 @@ highlight diffFile    term=bold ctermbg=yellow  ctermfg=black  cterm=none guibg=
 
 highlight DiffText   term=reverse,bold ctermbg=red       ctermfg=yellow   cterm=bold guibg=DarkRed    guifg=yellow   gui=bold
 highlight DiffChange term=bold         ctermbg=black     ctermfg=white    cterm=bold guibg=Black      guifg=White    gui=bold
+
+" highlight yank region
+highlight HighlightedyankRegion cterm=reverse guibg=#433e30
