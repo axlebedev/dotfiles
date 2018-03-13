@@ -4,7 +4,7 @@ function! appendchar#AppendChar(char) abort
 
     let text = substitute(
       \ getline('.'),
-      \ '\v^(.+\S)(\s*)$',
+      \ '\v^(.*\S)(\s*)$',
       \ '\1' . a:char . '\2',
       \ ''
    \)
