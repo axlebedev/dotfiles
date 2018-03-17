@@ -46,8 +46,13 @@ Plug 'moll/vim-node'
 " NERD Tree
 Plug 'scrooloose/nerdtree'
 let NERDTreeDirArrows=1 " allow it to show arrows
-let NERDTreeDirArrowExpandable='▸'
-let NERDTreeDirArrowCollapsible='▾'
+if has('gui_running')
+    let NERDTreeDirArrowExpandable='▸'
+    let NERDTreeDirArrowCollapsible='▾'
+else 
+    let NERDTreeDirArrowExpandable='+'
+    let NERDTreeDirArrowCollapsible='-'
+endif
 let NERDTreeShowHidden=1 " show hidden files
 let NERDTreeCascadeSingleChildDir=0 " dont collapse singlechild dir
 
@@ -61,14 +66,16 @@ if !exists('g:airline_symbols')
     let g:airline_symbols = {}
 endif
 
-let s:isWin = has('win32') || has('win16')
-let g:airline_left_sep = s:isWin ? ' ' : ''
-let g:airline_right_sep = s:isWin ? ' ' : ''
-let g:airline_left_alt_sep = s:isWin ? ' ' : ''
-let g:airline_right_alt_sep = s:isWin ? ' ' : ''
-let g:airline_symbols.branch = s:isWin ? ' ' : ''
-let g:airline_symbols.readonly = s:isWin ? ' ' : ''
-let g:airline_symbols.linenr = s:isWin ? ' ' : ''
+if has("gui_running")
+    let s:isWin = has('win32') || has('win16')
+    let g:airline_left_sep = s:isWin ? ' ' : ''
+    let g:airline_right_sep = s:isWin ? ' ' : ''
+    let g:airline_left_alt_sep = s:isWin ? ' ' : ''
+    let g:airline_right_alt_sep = s:isWin ? ' ' : ''
+    let g:airline_symbols.branch = s:isWin ? ' ' : ''
+    let g:airline_symbols.readonly = s:isWin ? ' ' : ''
+    let g:airline_symbols.linenr = s:isWin ? ' ' : ''
+endif
 
 " -----------------------------------------------------------------------------
 " Generate jsdoc easily
@@ -297,7 +304,9 @@ Plug 'ap/vim-css-color'
 " Indent line for leading spaces
 Plug 'Yggdroot/indentLine'
 " Warning! needed to patch font as described at https://github.com/Yggdroot/indentLine
-let g:indentLine_char = '┆'
+if has("gui_running")
+    let g:indentLine_char = '┆'
+endif
 
 " -----------------------------------------------------------------------------
 " Color theme

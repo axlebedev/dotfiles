@@ -61,7 +61,9 @@ highlight CursorLine guibg=#23241E
 highlight CursorLineNr guifg=#68705e guibg=#131411
 
 " colors and appearance of window split column
-set fillchars+=vert:│
+if has('gui_running')
+    set fillchars+=vert:│
+endif
 
 highlight VertSplit guibg=#131411 guifg=#131411
 
@@ -85,7 +87,7 @@ let NERDTreeMinimalUI=1
 " show invisible chars
 if has("win32") || has("win16")
     set listchars=tab:⁞\ ,trail:·,extends:»,precedes:«,conceal:_,nbsp:•
-else
+elseif has('gui_running')
     set listchars=tab:↳\ ,trail:·,extends:»,precedes:«,conceal:_,nbsp:•
 endif
 set list
