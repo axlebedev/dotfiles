@@ -234,16 +234,8 @@ let g:indexed_search_shortmess = 1
 Plug 'henrik/vim-indexed-search'
 
 " Clear highlight on cursor move
-let g:oblique#incsearch_highlight_all = 1
-Plug 'junegunn/vim-pseudocl'
-Plug 'junegunn/vim-oblique'
-
-autocmd User Oblique ShowSearchIndex
-autocmd User ObliqueStar ShowSearchIndex
-autocmd User ObliqueRepeat ShowSearchIndex
-
-highlight ObliqueCurrentMatch guibg='#1A4067'
-highlight ObliqueCurrentIncSearch guibg='#1A4067'
+Plug 'junegunn/vim-slash'
+noremap <silent> <plug>(slash-after) :ShowSearchIndex<cr>
 
 " -----------------------------------------------------------------------------
 " Make '.' work on plugin commands (not all maybe)
