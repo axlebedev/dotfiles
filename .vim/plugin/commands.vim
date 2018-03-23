@@ -8,3 +8,5 @@ command! Todo call todo#Todo()
 
 " type ':S<cr>' to split current buffer to right, and leave it with previous buffer
 command! S vs | wincmd h | bprev | wincmd l
+
+command! Grc Git rebase --continue
