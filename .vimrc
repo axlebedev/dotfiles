@@ -15,6 +15,9 @@
 " TODO: разобраться, почему не работает vip<C-v> и после этого попробовать 
 " Plug 'kana/vim-niceblock'
 "
+" TODO: vim-easymotion потестить
+" TODO: https://github.com/qpkorr/vim-bufkill вместо kwbd
+"
 " Plugin settings ============================= {{{
 
 filetype off
