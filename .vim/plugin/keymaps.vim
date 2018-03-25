@@ -119,6 +119,9 @@ nnoremap bo :BufOnly<CR>
 cnoremap <c-j> <down>
 cnoremap <c-k> <up>
 
+" dont insert annoying 'PrtSc' code
+inoremap <t_%9> <nop>
+
 " Resize submode
 let g:submode_always_show_submode = 1
 let g:submode_timeout = 0
