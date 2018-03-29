@@ -172,6 +172,8 @@ nnoremap <C-f><C-r> :call globalfind#GlobalFind(0, 0, 1)<cr>
 xnoremap <C-f><C-r> :call globalfind#GlobalFind(1, 0, 1)<cr>
 nnoremap <C-f><C-g> :call globalfind#ToggleGlobalFind()<cr>
 xnoremap <C-f><C-g> :call globalfind#ToggleGlobalFind()<cr>
+nnoremap <C-f><C-t> :call globalfind#ToggleTestSearch()<cr>
+xnoremap <C-f><C-t> :call globalfind#ToggleTestSearch()<cr>
 
 " JsFastLog mapping
 nnoremap <leader>l :set operatorfunc=JsFastLog_simple<cr>g@

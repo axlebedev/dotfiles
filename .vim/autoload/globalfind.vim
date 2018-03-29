@@ -1,6 +1,12 @@
 " find word under cursor
 " returns ":Ack! -S -w 'word' src/"
-let s:vimrc_superglobalFind = 1
+let s:vimrc_superglobalFind = 0
+let s:vimrc_findInTest = 0
+
+function! s:FilterTestEntries(qflist) abort
+    return filter(a:qflist, "bufname(v:val.bufnr) !~# '__test__'")
+endfunction
+
 function! globalfind#GlobalFind(isVisualMode, wordMatch, reactRender) abort
     let saved_ack_qhandler = g:ack_qhandler
     let word = ""
@@ -41,6 +47,10 @@ function! globalfind#GlobalFind(isVisualMode, wordMatch, reactRender) abort
         :execute searchCommand."'".searchingWord."' ".path
     endif
 
+    if (s:vimrc_findInTest == 0)
+        call setqflist(s:FilterTestEntries(getqflist()))
+    endif
+
     " следующий if - ничего функционального не несет, только делает
     " поменьше дергов когда всего одно окно (помимо NERDTree)
     if (winnr('$') > 2)
@@ -57,5 +67,15 @@ function! globalfind#ToggleGlobalFind() abort
     else
         let s:vimrc_superglobalFind = 1
         echo "superglobalFind = 1"
+    endif
+endfunction
+
+function! globalfind#ToggleTestSearch() abort
+    if (s:vimrc_findInTest)
+        let s:vimrc_findInTest = 0
+        echo "vimrc_findInTest = 0"
+    else
+        let s:vimrc_findInTest = 1
+        echo "vimrc_findInTest = 1"
     endif
 endfunction
