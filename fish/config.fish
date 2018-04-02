@@ -40,7 +40,7 @@ abbr -a grc git rebase --continue
 abbr -a gra git rebase --abort
 abbr -a gcp git cherry-pick
 abbr -a gcpc git cherry-pick --continue
-abbr -a gcpa git cherry-pick --continue
+abbr -a gcpa git cherry-pick --abort
 abbr -a gfa git fetch --all
 abbr -a gfap git fetch --all -p
 abbr -a gbs git bisect start
