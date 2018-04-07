@@ -151,7 +151,7 @@ nnoremap zl :set foldlevel=1<cr>
 nnoremap <C-g> :<C-u>Magit<CR>
 nnoremap <C-g><C-b> :<C-u>Gblame<cr>
 nnoremap <C-g><C-s> :<C-u>Gstatus<cr>
-nnoremap <C-g><C-v> :<C-u>GV<cr>
+nnoremap <C-g><C-v> :<C-u>Gitv<cr>
 
 " beautify json
 nnoremap <leader>bj :<C-u>%!python -m json.tool<cr>

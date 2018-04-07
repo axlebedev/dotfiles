@@ -327,11 +327,12 @@ Plug 'henrik/vim-qargs'
 " Pretty work with git
 Plug 'tpope/vim-fugitive'
 Plug 'tommcdo/vim-fugitive-blame-ext'
-Plug 'junegunn/gv.vim'
 Plug 'jreybert/vimagit'
 autocmd User VimagitUpdateFile normal! zt
 autocmd User VimagitRefresh normal! zt
 Plug 'rhysd/conflict-marker.vim'
+" test, GV replacement
+Plug 'gregsexton/gitv'
 
 " -----------------------------------------------------------------------------
 " expand selection
