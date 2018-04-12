@@ -23,6 +23,7 @@ abbr -a gi git commit
 abbr -a gia git commit --amend --no-edit
 abbr -a giw git commit -m "wip"
 abbr -a go git checkout
+abbr -a gob git checkout -b
 abbr -a gos git checkout src
 abbr -a god git checkout develop
 abbr -a gs git status
@@ -33,7 +34,9 @@ abbr -a ghhh git hist -20
 abbr -a ghhhh git hist -30
 abbr -a ghs git hist --stat
 abbr -a gpl git pull
-abbr -a gps git push
+abbr -a gps git push origin
+abbr -a gpsu git push -u origin
+abbr -a gpsf git push -f origin
 abbr -a gr git rebase
 abbr -a grd git rebase origin/develop
 abbr -a grc git rebase --continue
