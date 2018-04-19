@@ -473,3 +473,17 @@ autocmd au_vimrc bufenter *
     \ if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) 
     \   | q
     \ | endif
+
+" Don't use indentLine in diff mode
+" TODO: check for background color of indentLine in diffs
+function! MaybeTobbleIndentLineByDiff() 
+    if (&diff)
+        :IndentLinesDisable
+    endif
+
+    if (!&diff)
+        :IndentLinesEnable
+    endif
+endfunction
+
+autocmd BufEnter * :call MaybeTobbleIndentLineByDiff()
