@@ -96,18 +96,18 @@ set list
 set showbreak=»
 
 " Diff styling
-highlight diffAdded term=bold ctermbg=black     ctermfg=green cterm=bold guibg=#114417 guifg=white gui=none
-highlight DiffAdd   term=bold ctermbg=darkgreen ctermfg=white cterm=bold guibg=#114417 guifg=White gui=bold
+highlight diffAdded term=bold ctermbg=black     ctermfg=green cterm=bold guibg=#114417 guifg=NONE gui=none
+highlight DiffAdd   term=bold ctermbg=darkgreen ctermfg=white cterm=bold guibg=#114417 guifg=NONE gui=bold
 
-highlight diffRemoved term=bold ctermbg=black    ctermfg=red      cterm=bold guibg=#532120  guifg=white    gui=none
-highlight DiffDelete  term=none ctermbg=darkblue ctermfg=darkblue cterm=none guibg=DarkBlue guifg=DarkBlue gui=none
+highlight diffRemoved term=bold ctermbg=black    ctermfg=red      cterm=bold guibg=#532120  guifg=NONE   gui=none
+highlight DiffDelete  term=none ctermbg=darkblue ctermfg=darkblue cterm=none guibg=#532120  guifg=#532120   gui=none
 
-highlight diffChanged term=bold ctermbg=black   ctermfg=yellow cterm=bold guibg=#995C00  guifg=white gui=none
-highlight diffLine    term=bold ctermbg=magenta ctermfg=white  cterm=bold guibg=#350066  guifg=white gui=none
-highlight diffFile    term=bold ctermbg=yellow  ctermfg=black  cterm=none guibg=#995C00  guifg=white gui=none
+highlight diffChanged term=bold ctermbg=black   ctermfg=yellow cterm=bold guibg=#995C00  guifg=NONE gui=none
+highlight diffFile    term=bold ctermbg=yellow  ctermfg=black  cterm=none guibg=#995C00  guifg=NONE gui=none
+highlight diffLine    term=bold ctermbg=magenta ctermfg=white  cterm=bold guibg=#350066  guifg=NONE gui=none
 
-highlight DiffText   term=reverse,bold ctermbg=red       ctermfg=yellow   cterm=bold guibg=DarkRed    guifg=yellow   gui=bold
-highlight DiffChange term=bold         ctermbg=black     ctermfg=white    cterm=bold guibg=Black      guifg=White    gui=bold
+highlight DiffText   term=reverse,bold ctermbg=red       ctermfg=yellow   cterm=bold guibg=#191C41 guifg=NONE   gui=bold
+highlight DiffChange term=bold         ctermbg=black     ctermfg=white    cterm=bold guibg=NONE guifg=NONE
 
 " highlight yank region
 highlight HighlightedyankRegion cterm=reverse guibg=#433e30
