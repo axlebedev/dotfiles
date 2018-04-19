@@ -164,6 +164,9 @@ nnoremap <leader>k :<C-u>call opennextbuf#OpenNextBuf(0)<CR>
 nnoremap <silent> <F3> :call google#Google(expand("<cword>"))<cr>
 xnoremap <silent> <F3> "gy:call google#Google(@g)<cr>gv
 
+" update current file
+nnoremap <silent> <F5> :e<CR>
+
 nnoremap <C-f> :call globalfind#GlobalFind(0, 0, 0)<cr>
 xnoremap <C-f> :call globalfind#GlobalFind(1, 0, 0)<cr>
 nnoremap <C-f><C-f> :call globalfind#GlobalFind(0, 1, 0)<cr>
