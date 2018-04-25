@@ -65,7 +65,7 @@ ${if_match "${texeci 5 xset q | grep 'Caps Lock' | sed 's/.*Caps Lock:[ ]*\([^ ]
 { "full_text": "           CapsLock           ", "color": "\#FFFFFF", "background": "\#FF0000" },
 ${endif}
 # Next block - wi-fi 
-	{ "full_text" : "${downspeed eth0}/s", "color" : "\#ADCBFF" },
+	{ "full_text" : "${downspeed wlp3s0}/s", "color" : "\#ADCBFF" },
 	# { "full_text" : "${upspeed eth0}/s", "color" : "\#ffc400" },
 # Next 5 blocks - cpu usage
 	{ "name" : "Processor", "separator_block_width":3, "full_text" : "", "separator" : false },
