@@ -4,9 +4,6 @@
 " TODO https://github.com/haya14busa/.vim/
 " TODO: https://github.com/haya14busa/dotfiles/blob/master/.vimrc
 "
-" TODO: если мы разместили последнюю строку по центру, ушли в другой буфер,
-" вернулись - то последняя строка будет снизу. Понять, откуда и исправить
-
 " TODO: разобраться, почему не работает vip<C-v> и после этого попробовать 
 " Plug 'kana/vim-niceblock'
 "
@@ -482,3 +479,7 @@ function! MaybeTobbleIndentLineByDiff()
 endfunction
 
 autocmd BufEnter * :call MaybeTobbleIndentLineByDiff()
+
+" When switching buffers, preserve window view.
+autocmd BufLeave * call winview#AutoSaveWinView()
+autocmd BufEnter * call winview#AutoRestoreWinView()
