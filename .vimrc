@@ -1,10 +1,5 @@
-" =ss4=sskeyboard=      KEY BINDINGS
-" =ss5=ssfunctions=     FUNCTIONS
 " TODO: 'help' to be always in readmode
 " TODO: https://github.com/Shougo/denite.nvim - wants python3 even if its ebabled
-"
-" TODO: Plug 'nixprime/cpsm' after build with python3?
-" TODO: Plug 'haya14busa/vim-operator-flashy' marry it with YankRing?
 "
 " TODO https://github.com/haya14busa/.vim/
 " TODO: https://github.com/haya14busa/dotfiles/blob/master/.vimrc
