@@ -68,7 +68,7 @@ ${if_match "${texeci 5 xset q | grep 'Caps Lock' | sed 's/.*Caps Lock:[ ]*\([^ ]
 ${endif}
 # VPN OfficeKiev
         ${if_match "${template4}"=="1"}
-            { "full_text": "VPN", "separator": false, "color": "\#41f480" },
+            { "full_text": "VPN", "separator": false, "color": "\#eaed50" },
         ${endif}
 # Next block - wi-fi 
 	{ "full_text" : "${downspeed eth0}/s", "color" : "\#ADCBFF" },
