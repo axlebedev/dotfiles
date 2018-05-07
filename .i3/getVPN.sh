@@ -1,9 +1,10 @@
 #!/bin/bash
-STATUS="$(nmcli con | grep OfficeKiev)";
+ACTIVE_CON="$(nmcli -f NAME,ACTIVE,TYPE con | grep --perl-regexp "yes\s+vpn")"
 
-if [[ $STATUS = *"--"* ]];
+if [[ $ACTIVE_CON = "" ]];
 then
-  echo 0
+  return 0
 else
-  echo 1
+  IFS=' ' read -ra NAME <<< "$ACTIVE_CON"
+  echo $NAME
 fi
