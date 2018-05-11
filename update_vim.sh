@@ -1,5 +1,7 @@
 #!/bin/bash
 
+[ "$UID" -eq 0 ] || exec sudo "$0" "$@"
+
 COLOR_RED='\033[0;31m'
 COLOR_GREEN='\033[0;32m'
 COLOR_YELLOW='\033[0;33m'
