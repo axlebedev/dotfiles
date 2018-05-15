@@ -34,9 +34,9 @@ abbr -a ghhh git hist -20
 abbr -a ghhhh git hist -30
 abbr -a ghs git hist --stat
 abbr -a gpl git pull
-abbr -a gps git push origin
-abbr -a gpsu git push -u origin
-abbr -a gpsf git push -f origin
+abbr -a gps git push origin HEAD
+abbr -a gpsu git push -u origin HEAD
+abbr -a gpsf git push -f origin HEAD
 abbr -a gr git rebase
 abbr -a grd git rebase origin/develop
 abbr -a grc git rebase --continue
