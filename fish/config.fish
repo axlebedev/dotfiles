@@ -52,6 +52,7 @@ abbr -a gbg git bisect good
 abbr -a gbb git bisect bad
 abbr -a gst git stash
 abbr -a gsta git stash apply
+abbr -a grh git reset HEAD^
 
 abbr -a nemo nemo --no-desktop
 
