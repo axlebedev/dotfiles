@@ -7,7 +7,20 @@ COLOR_GREEN='\033[0;32m'
 COLOR_YELLOW='\033[0;33m'
 COLOR_RESET='\033[0m' # No Color
 COLOR_INVERTED='\033[7m'
-printf "${COLOR_GREEN}Starting...${COLOR_RESET}\n\n"
+
+cd ~/github/vim/
+current_commit=$(git rev-parse HEAD)
+
+printf "${COLOR_GREEN}Checking for updates...${COLOR_RESET}\n\n"
+git fetch
+last_commit=$(git rev-parse origin/master)
+if [ "$current_commit" == "$last_commit" ]; \
+then
+    printf "${COLOR_GREEN}ALREADY UP TO DATE${COLOR_RESET}\n\n"
+    exit 0
+fi
+
+printf "${COLOR_GREEN}Starting update...${COLOR_RESET}\n\n"
 
 printf "${COLOR_YELLOW}apt-get install deps...${COLOR_RESET}\n"
 if sudo apt-get install -y \
@@ -39,10 +52,6 @@ else
 fi
 
 printf "${COLOR_YELLOW}pull vim sources...${COLOR_RESET}\n"
-cd ~/github/vim/
-
-current_commit=$(git rev-parse HEAD)
-
 if git pull; \
 then
     printf "${COLOR_GREEN}pull vim sources OK${COLOR_RESET}\n\n"
@@ -105,7 +114,7 @@ fi
 printf "${COLOR_GREEN}VIM UPDATED SUCCESSFULLTY!!${COLOR_RESET}\n\n"
 vim --version
 
-printf "${COLOR_GREEN}UPDATES;${COLOR_RESET}\n"
+printf "\n${COLOR_GREEN}UPDATES:${COLOR_RESET}\n"
 git log --format="%C(cyan)%h%Cgreen (%ad)%Creset - %f %Cblue<%an>%Creset" --date=format:"%H:%M %d.%m.%Y" $current_commit..HEAD
 
 exit 0
