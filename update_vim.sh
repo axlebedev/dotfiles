@@ -40,6 +40,9 @@ fi
 
 printf "${COLOR_YELLOW}pull vim sources...${COLOR_RESET}\n"
 cd ~/github/vim/
+
+current_commit=$(git rev-parse HEAD)
+
 if git pull; \
 then
     printf "${COLOR_GREEN}pull vim sources OK${COLOR_RESET}\n\n"
@@ -99,6 +102,10 @@ else
     exit 1
 fi
 
-printf "${COLOR_GREEN}VIM UPDATED SUCCESSFULLTY!!${COLOR_RESET}\n"
+printf "${COLOR_GREEN}VIM UPDATED SUCCESSFULLTY!!${COLOR_RESET}\n\n"
 vim --version
+
+printf "${COLOR_GREEN}UPDATES;${COLOR_RESET}\n"
+git log --format="%C(cyan)%h%Cgreen (%ad)%Creset - %f %Cblue<%an>%Creset" --date=format:"%H:%M %d.%m.%Y" $current_commit..HEAD
+
 exit 0
