@@ -88,7 +88,7 @@ let NERDTreeMinimalUI=1
 if has("win32") || has("win16")
     set listchars=tab:⁞\ ,trail:·,extends:»,precedes:«,conceal:_,nbsp:•
 elseif has('gui_running')
-    set listchars=tab:↳\ ,trail:·,extends:»,precedes:«,conceal:_,nbsp:•
+    set listchars=tab:·\ ,trail:·,extends:»,precedes:«,conceal:_,nbsp:•
 endif
 set list
 
