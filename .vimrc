@@ -282,7 +282,18 @@ let g:ycm_key_list_select_completion = ['<Down>']
 let g:ycm_key_list_previous_completion = ['<Up>']
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : SmartInsertTab()
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
+if !exists("g:ycm_semantic_triggers")
+  let g:ycm_semantic_triggers = {}
+endif
+let g:ycm_semantic_triggers['typescript'] = ['.']
+
+" -----------------------------------------------------------------------------
+" typescript
+Plug 'leafgarland/typescript-vim'
+Plug 'HerringtonDarkholme/yats.vim'
+Plug 'Quramy/tsuquyomi'
 
 " -----------------------------------------------------------------------------
 " color highlight in text
@@ -348,8 +359,12 @@ let g:ale_sign_warning = ''
 let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 0
 
-let g:ale_linters = { 'javascript': ['eslint'] }
+let g:ale_linters = {
+\   'javascript': ['eslint'],
+\   'typescript': ['tslint'],
+\}
 let g:ale_javascript_eslint_executable = 'npm run lint'
+let g:ale_typescript_tslint_executable = 'npm run lint'
 
 nmap <silent> <C-m> <Plug>(ale_next_wrap)
 
