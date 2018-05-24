@@ -147,6 +147,8 @@ nnoremap <M-o> <Tab>
 
 nnoremap zl :set foldlevel=1<cr>
 
+nnoremap <silent> <leader>hh :call blockline#BlockLine()<CR>
+
 " for convenient git
 nnoremap <C-g> :<C-u>Magit<CR>
 nnoremap <C-g><C-b> :<C-u>Gblame<cr>
