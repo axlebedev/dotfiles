@@ -146,4 +146,6 @@ vim --version  >>${logFile} 2>>${logFile}
 printf "\n${COLOR_GREEN}UPDATES:${COLOR_RESET}\n"
 git log --format="%C(cyan)%h%Cgreen (%ad)%Creset - %f %Cblue<%an>%Creset" --date=format:"%H:%M %d.%m.%Y" $current_commit..HEAD
 
+rm ${logFile}
+
 exit 0
