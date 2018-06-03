@@ -29,6 +29,7 @@ then
     printf "${COLOR_GREEN}VIM IS ALREADY UP TO DATE${COLOR_RESET}"
     printf "${filler}"
     printf "\n"
+    rm ${logFile}
     exit 0
 fi
 printf "\n"
