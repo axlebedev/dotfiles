@@ -293,7 +293,9 @@ let g:ycm_semantic_triggers['typescript'] = ['.']
 " typescript
 Plug 'leafgarland/typescript-vim'
 Plug 'HerringtonDarkholme/yats.vim'
+
 Plug 'Quramy/tsuquyomi'
+let g:tsuquyomi_disable_quickfix=1
 
 " -----------------------------------------------------------------------------
 " color highlight in text
