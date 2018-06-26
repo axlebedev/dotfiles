@@ -401,6 +401,10 @@ autocmd User Startified nmap <buffer> o <plug>(startify-open-buffers)
 Plug 'sagarrakshe/toggle-bool'
 
 " -----------------------------------------------------------------------------
+Plug 'machakann/vim-highlightedyank'
+let g:highlightedyank_highlight_duration = 300
+
+" -----------------------------------------------------------------------------
 " homemade ^^
 
 Plug 'axlebedev/vim-js-fastlog'
@@ -436,10 +440,6 @@ Plug 'kana/vim-textobj-underscore' " a_, i_
 
 " -TEST------------------------------------------------------------------------
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
-
-" -TEST------------------------------------------------------------------------
-Plug 'machakann/vim-highlightedyank'
-let g:highlightedyank_highlight_duration = 300
 
 " -TEST------------------------------------------------------------------------
 " 'gf' from a diff file
