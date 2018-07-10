@@ -408,7 +408,7 @@ let g:highlightedyank_highlight_duration = 300
 " homemade ^^
 
 Plug 'axlebedev/vim-js-fastlog'
-let g:js_fastlog_prefix = '111'
+let g:js_fastlog_prefix = '11111'
 
 Plug 'axlebedev/vim-smart-insert-tab'
 Plug 'axlebedev/js-gotodef'
