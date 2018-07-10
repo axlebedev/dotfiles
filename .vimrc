@@ -220,7 +220,7 @@ endif
 " -----------------------------------------------------------------------------
 " comment lines, uncomment lines
 Plug 'tomtom/tcomment_vim'
-let g:tcommentTextObjectInlineComment = 'ix'
+let g:tcomment_textobject_inlinecomment = 'ix'
 
 " -----------------------------------------------------------------------------
 " Show 'n of m' result
