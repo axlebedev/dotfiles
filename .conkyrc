@@ -74,25 +74,25 @@ ${endif}
 # Next 5 blocks - cpu usage
 	{ "name" : "Processor", "separator_block_width":3, "full_text" : "", "separator" : false },
 	{ "separator_block_width":3,
-          "min_width":"█",
+          "min_width":"▁",
           "full_text" : ${template1 cpu cpu1},
           "separator" : false,
           "color" : "\#${template2 cpu cpu1}" 
         },
 	{ "separator_block_width":3,
-          "min_width":"█",
+          "min_width":"▁",
           "full_text" : ${template1 cpu cpu2},
           "separator" : false,
           "color" : "\#${template2 cpu cpu2}" 
         },
 	{ "separator_block_width":3,
-          "min_width":"█",
+          "min_width":"▁",
           "full_text" : ${template1 cpu cpu3},
           "separator" : false,
           "color" : "\#${template2 cpu cpu3}" 
         },
-	{ "separator_block_width":10,
-          "min_width":"█",
+	{ "separator_block_width":3,
+          "min_width":"▁",
           "full_text" : ${template1 cpu cpu4},
           "color" : "\#${template2 cpu cpu4}" 
         },
@@ -104,7 +104,7 @@ ${endif}
           "separator" : false
         },
 	{ "name" : "Memory",
-          "min_width":"█",
+          "min_width":"▁",
           "full_text" : ${template1 memperc},
           "color" : "\#${template2 memperc}", 
           "separator_block_width":10
