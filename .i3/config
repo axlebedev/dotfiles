@@ -229,7 +229,7 @@ for_window [class="^.*"] border pixel 4
 
 
 #ass                    border  backgr. text    indicator
-client.focused          #9AB87C #9AB87C #444444 #585858
+client.focused          #6fa6d6 #6fa6d6 #444444 #585858
 client.focused_inactive #444444 #444444 #ffffff #444444
 client.unfocused        #28282b #28282b #666666 #444444
 client.urgent           #F86A59 #F86A59 #ffffff #000000
