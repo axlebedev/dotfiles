@@ -57,7 +57,6 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 let g:airline_skip_empty_sections = 1
 let g:airline_powerline_fonts = 1
-let g:airline_theme='jellybeans'
 let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#tabline#formatter = 'jsformatter'
 if !exists('g:airline_symbols')
@@ -74,6 +73,18 @@ if has("gui_running")
     let g:airline_symbols.readonly = s:isWin ? ' ' : ''
     let g:airline_symbols.linenr = s:isWin ? ' ' : ''
 endif
+
+let g:airline_theme='jellybeans'
+" TODO TODO
+" let g:airline_theme_patch_func = 'AirlineThemePatch'
+" function! AirlineThemePatch(palette)
+" if g:airline_theme == 'jellybeans'
+"     echom a:palette
+"     " for colors in values(a:palette.inactive)
+"     " let colors[3] = 245
+"     " endfor
+" endif
+" endfunction
 
 " -----------------------------------------------------------------------------
 " Generate jsdoc easily
