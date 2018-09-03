@@ -122,6 +122,9 @@ cnoremap <c-k> <up>
 " dont insert annoying 'PrtSc' code
 inoremap <t_%9> <nop>
 
+" <C-v> in insertmode to paste
+inoremap <C-v> <C-r>*
+
 " Resize submode
 let g:submode_always_show_submode = 1
 let g:submode_timeout = 0
