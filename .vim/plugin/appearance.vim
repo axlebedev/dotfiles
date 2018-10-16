@@ -27,6 +27,11 @@ else
     set t_Co=256
 endif "has('gui_running')
 
+" different cursor shapes for different terminal modes
+let &t_SI = "\<Esc>[6 q"
+let &t_SR = "\<Esc>[4 q"
+let &t_EI = "\<Esc>[2 q"
+
 " highlights search results immediately
 set incsearch
 set hlsearch
