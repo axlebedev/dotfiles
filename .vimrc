@@ -287,22 +287,6 @@ function! YRRunAfterMaps() abort
 endfunction
 
 " -----------------------------------------------------------------------------
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_show_diagnostics_ui = 0
-let g:ycm_complete_in_comments = 1
-set completeopt-=preview
-let g:ycm_key_list_select_completion = ['<Down>']
-let g:ycm_key_list_previous_completion = ['<Up>']
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : SmartInsertTab()
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-TAB>"
-
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
-if !exists("g:ycm_semantic_triggers")
-  let g:ycm_semantic_triggers = {}
-endif
-let g:ycm_semantic_triggers['typescript'] = ['.']
-
-" -----------------------------------------------------------------------------
 " typescript
 Plug 'leafgarland/typescript-vim'
 Plug 'HerringtonDarkholme/yats.vim'
@@ -458,6 +442,49 @@ Plug 'jeffkreeftmeijer/vim-numbertoggle'
 " 'gf' from a diff file
 Plug 'kana/vim-gf-user'
 Plug 'kana/vim-gf-diff'
+
+" -TEST------------------------------------------------------------------------
+Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
+let g:LanguageClient_autoStart = 1
+let g:LanguageClient_serverCommands = {
+    \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
+    \ 'javascript.jsx': ['/usr/local/bin/javascript-typescript-stdio'],
+    \ 'python': ['/usr/local/bin/pyls'],
+    \ }
+
+Plug 'maralla/completor.vim'
+let g:completor_refresh_always = 0 " avoid flickering
+let g:completor_python_omni_trigger = ".*"
+set formatexpr=LanguageClient_textDocument_rangeFormatting()
+set omnifunc=LanguageClient#complete
+
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
+
+let g:completor_complete_options = 'menuone,noselect,preview'
+
+" jsconfig.json example:
+" https://code.visualstudio.com/docs/languages/jsconfig
+" {
+"     "compilerOptions": {
+"         "target": "es2017",
+"         "checkJs": true,
+"         "baseUrl": ".",
+"         "experimentalDecorators": true,
+"         "allowSyntheticDefaultImports": true,
+"         "allowJs": true,
+"         "jsx": "react",
+"         "paths": {
+"             "modules/*": ["./src/modules/*"],
+"             "moduleName/*": ["./src/modules/moduleName/src/*"],
+"         },
+"         "module": "commonjs"
+"     },
+"     "exclude": [
+"         "node_modules"
+"     ]
+" }
 
 " -----------------------------------------------------------------------------
 call plug#end()

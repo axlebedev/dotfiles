@@ -208,3 +208,6 @@ vnoremap <leader>lpn :<C-u>call JsFastLog_thisToNext(visualmode())<cr>
 
 nnoremap <leader>lss :call JsFastLog_separator()<cr>
 nnoremap <leader>lsn :call JsFastLog_lineNumber()<cr>
+
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
