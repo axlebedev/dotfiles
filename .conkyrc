@@ -75,6 +75,12 @@ ${endif}
 	{ "name" : "Processor", "separator_block_width":3, "full_text" : "", "separator" : false },
 	{ "separator_block_width":3,
           "min_width":"▁",
+          "full_text" : "${exec cat /sys/devices/platform/coretemp.0/hwmon/hwmon1/temp1_input | cut -c-2}",
+          "separator" : false,
+          "color" : "\#FFFFFF" 
+        },
+	{ "separator_block_width":3,
+          "min_width":"▁",
           "full_text" : ${template1 cpu cpu1},
           "separator" : false,
           "color" : "\#${template2 cpu cpu1}" 
