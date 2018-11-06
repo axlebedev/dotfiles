@@ -436,9 +436,6 @@ Plug 'kana/vim-textobj-line' " al, il
 Plug 'kana/vim-textobj-underscore' " a_, i_
 
 " -TEST------------------------------------------------------------------------
-Plug 'jeffkreeftmeijer/vim-numbertoggle'
-
-" -TEST------------------------------------------------------------------------
 " 'gf' from a diff file
 Plug 'kana/vim-gf-user'
 Plug 'kana/vim-gf-diff'
