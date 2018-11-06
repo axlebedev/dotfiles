@@ -496,6 +496,10 @@ augroup au_vimrc
     autocmd!
 augroup END
 
+" fix LanguageClients bug with incorrect buffer open
+autocmd au_vimrc BufReadPost *
+            \ if (filereadable(expand("%"))) | :e % | endif
+
 " Match HTML tags
 runtime macros/matchit.vim
 
