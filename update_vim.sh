@@ -141,16 +141,16 @@ else
     exit 1
 fi
 
-printf "${COLOR_YELLOW}PlugUpdate...${COLOR_RESET}\r"
-if gvim +'PlugUpdate --sync' +qa >>${logFile} 2>>${logFile}; \
-then
-    printf "${COLOR_GREEN}PlugUpdate OK${COLOR_RESET}"
-    printf "${filler}\n\r"
-else
-    printf "${COLOR_RED}PlugUpdate ERRORED${COLOR_RESET}"
-    printf "${filler}\n\r"
-    exit 1
-fi
+# printf "${COLOR_YELLOW}PlugUpdate...${COLOR_RESET}\r"
+# if gvim +'PlugUpdate --sync' +qa >>${logFile} 2>>${logFile}; \
+# then
+#     printf "${COLOR_GREEN}PlugUpdate OK${COLOR_RESET}"
+#     printf "${filler}\n\r"
+# else
+#     printf "${COLOR_RED}PlugUpdate ERRORED${COLOR_RESET}"
+#     printf "${filler}\n\r"
+#     exit 1
+# fi
 
 printf "\n${COLOR_YELLOW}VIM UPDATED SUCCESSFULLTY!!${COLOR_RESET}\n"
 vim --version  >>${logFile} 2>>${logFile}
