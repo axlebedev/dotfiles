@@ -442,6 +442,7 @@ Plug 'kana/vim-gf-diff'
 " -TEST------------------------------------------------------------------------
 Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
 let g:LanguageClient_autoStart = 1
+let g:LanguageClient_diagnosticsEnable = 0
 let g:LanguageClient_serverCommands = {
     \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
     \ 'javascript.jsx': ['/usr/local/bin/javascript-typescript-stdio'],
