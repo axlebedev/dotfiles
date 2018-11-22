@@ -333,8 +333,7 @@ Plug 'jreybert/vimagit'
 autocmd User VimagitUpdateFile normal! zt
 autocmd User VimagitRefresh normal! zt
 Plug 'rhysd/conflict-marker.vim'
-" test, GV replacement
-Plug 'gregsexton/gitv'
+Plug 'junegunn/gv.vim'
 
 " -----------------------------------------------------------------------------
 " expand selection
