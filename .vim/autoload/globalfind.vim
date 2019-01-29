@@ -1,6 +1,6 @@
 " find word under cursor
-" returns ":Ack! -S -w 'word' src/"
-let s:vimrc_superglobalFind = 0
+" returns ":Ack! -S -w 'word' ."
+" let s:vimrc_superglobalFind = 0
 let s:vimrc_findInTest = 0
 
 function! s:FilterTestEntries(qflist) abort
@@ -37,7 +37,8 @@ function! globalfind#GlobalFind(isVisualMode, wordMatch, reactRender) abort
     let searchingWord = substitute(searchingWord, ')', '\\)', '')
 
     let searchCommand = ":Ack! -S "
-    let path = s:vimrc_superglobalFind ? "." : "src/"
+    " let path = s:vimrc_superglobalFind ? "." : "."
+    let path = "."
 
     if (a:wordMatch)
         :execute searchCommand."-w '".searchingWord."' ".path
@@ -60,15 +61,15 @@ function! globalfind#GlobalFind(isVisualMode, wordMatch, reactRender) abort
     let g:ack_qhandler = saved_ack_qhandler
 endfunction
 
-function! globalfind#ToggleGlobalFind() abort
-    if (s:vimrc_superglobalFind)
-        let s:vimrc_superglobalFind = 0
-        echo "superglobalFind = 0"
-    else
-        let s:vimrc_superglobalFind = 1
-        echo "superglobalFind = 1"
-    endif
-endfunction
+" function! globalfind#ToggleGlobalFind() abort
+"     if (s:vimrc_superglobalFind)
+"         let s:vimrc_superglobalFind = 0
+"         echo "superglobalFind = 0"
+"     else
+"         let s:vimrc_superglobalFind = 1
+"         echo "superglobalFind = 1"
+"     endif
+" endfunction
 
 function! globalfind#ToggleTestSearch() abort
     if (s:vimrc_findInTest)
