@@ -19,12 +19,14 @@ abbr -a o xdg-open
 
 abbr -a ga git add
 abbr -a gas git add src
+abbr -a gap git add packages
 abbr -a gi git commit
 abbr -a gia git commit --amend --no-edit
 abbr -a giw git commit -m "wip"
 abbr -a go git checkout
 abbr -a gob git checkout -b
 abbr -a gos git checkout src
+abbr -a gop git checkout packages
 abbr -a god git checkout develop
 abbr -a gs git status
 abbr -a gd git diff
