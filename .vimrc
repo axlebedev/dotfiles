@@ -50,6 +50,7 @@ else
 endif
 let NERDTreeShowHidden=1 " show hidden files
 let NERDTreeCascadeSingleChildDir=0 " dont collapse singlechild dir
+let NERDTreeWinSize=50
 
 " -----------------------------------------------------------------------------
 " vim-airline: cute statusbar
