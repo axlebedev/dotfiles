@@ -331,7 +331,6 @@ Plug 'henrik/vim-qargs'
 " -----------------------------------------------------------------------------
 " Pretty work with git
 Plug 'tpope/vim-fugitive'
-Plug 'tommcdo/vim-fugitive-blame-ext'
 Plug 'jreybert/vimagit'
 autocmd User VimagitUpdateFile normal! zt
 autocmd User VimagitRefresh normal! zt
