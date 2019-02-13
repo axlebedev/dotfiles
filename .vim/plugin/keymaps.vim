@@ -64,7 +64,11 @@ vnoremap <silent> * :call VisualSelection('f')<CR>
 vnoremap <silent> # :call VisualSelection('b')<CR>
 
 " visual select current line
-nnoremap vg ^vg_
+nnoremap vl ^vg_
+
+" visual select last visual selection
+" ХЗ почему я постоянно путаю
+nnoremap vg gv
 
 " NERDTree mappings
 map <F2> :NERDTreeToggle<CR>
