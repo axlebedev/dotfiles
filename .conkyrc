@@ -97,10 +97,22 @@ ${endif}
           "separator" : false,
           "color" : "\#${template2 cpu cpu3}" 
         },
-	{ "separator_block_width":3,
+ 	{ "separator_block_width":3,
           "min_width":"▁",
           "full_text" : ${template1 cpu cpu4},
+          "separator" : false,
           "color" : "\#${template2 cpu cpu4}" 
+         },
+	{ "separator_block_width":3,
+          "min_width":"▁",
+          "full_text" : ${template1 cpu cpu5},
+          "separator" : false,
+          "color" : "\#${template2 cpu cpu5}" 
+        },
+	{ "separator_block_width":10,
+          "min_width":"▁",
+          "full_text" : ${template1 cpu cpu6},
+          "color" : "\#${template2 cpu cpu6}" 
         },
 # Next block - memory usage
 	{ 
