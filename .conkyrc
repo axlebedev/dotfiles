@@ -51,6 +51,7 @@ template1 ${if_match ${\1 \2}<10} " " ${else} ${if_match ${\1 \2}<20} "▁" ${el
 template2 ${if_match ${\1 \2}<10}5087ed${else}${if_match ${\1 \2}<20}50d5ed${else}${if_match ${\1 \2}<35}50ed91${else}${if_match ${\1 \2}<50}72ed50${else}${if_match ${\1 \2}<60}eaed50${else}${if_match ${\1 \2}<70}edbd50${else}${if_match ${\1 \2}<80}ed7450${else}ed5057${endif}${endif}${endif}${endif}${endif}${endif}${endif}
 
 template4 ${texeci 5 (bash ~/dotfiles/.i3/getVPN.sh)}
+template3 ${texeci 5 (bash ~/dotfiles/.i3/getBranch.sh \1)}
 
 # Stuff after 'TEXT' will be formatted on screen
 TEXT
@@ -66,18 +67,19 @@ TEXT
 ${if_match "${texeci 5 xset q | grep 'Caps Lock' | sed 's/.*Caps Lock:[ ]*\([^ ]*\).*/\1/'}"=="on"}
 { "full_text": "           CapsLock           ", "color": "\#FFFFFF", "background": "\#FF0000" },
 ${endif}
-# VPN OfficeKiev
-        { "full_text": "${template4}", "separator": false, "color": "\#eaed50" },
-# Next block - wi-fi 
-	{ "full_text" : "${downspeed eth0}/s", "color" : "\#ADCBFF" },
+# Current branches
+        { "full_text": "${template3 /home/alex/jsfiller}", "color": "\#427df4" },
+
+# Next block - vpn, wi-fi 
+        { "full_text" : "${template4}", "color" : "\#ffc400", "separator": false },
+        { "full_text" : "${downspeed enp6s0}/s", "min_width": "0.00M/s", "color" : "\#ADCBFF" },
 	# { "full_text" : "${upspeed eth0}/s", "color" : "\#ffc400" },
 # Next 5 blocks - cpu usage
 	{ "name" : "Processor", "separator_block_width":3, "full_text" : "", "separator" : false },
 	{ "separator_block_width":3,
           "min_width":"▁",
-          "full_text" : "${exec cat /sys/devices/platform/coretemp.0/hwmon/hwmon1/temp1_input | cut -c-2}",
-          "separator" : false,
-          "color" : "\#FFFFFF" 
+          "full_text" : "${platform coretemp.0/hwmon/hwmon1 temp 1}",
+          "separator" : false
         },
 	{ "separator_block_width":3,
           "min_width":"▁",
