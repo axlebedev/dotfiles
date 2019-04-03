@@ -13,7 +13,7 @@ if has('gui_running')
     if has("win32") || has("win16")
         set guifont=Consolas:h10
     else
-        set guifont=DroidSansMonoforPowerline\ Nerd\ Font
+        set guifont=DroidSansMono\ Nerd\ Font\ Mono\ 12
     endif "has("win32") || has("win16")
 
     set guioptions-=m  "remove menu bar
@@ -39,39 +39,44 @@ set hlsearch
 
 " Monokai settings ----------------------------- {{{
 " If you are using a font which support italic, you can use below config to enable the italic form
-let g:monokai_italic = 1
+" let g:monokai_italic = 1
 
 " colorscheme
-colorscheme monokai
+let g:gotham_airline_emphasised_insert = 0
+colorscheme gotham
+AirlineTheme gotham
 " }}}
 
 " color of find result background
-highlight Search guibg='#4A3F2D' guifg='NONE'
+highlight Search guibg='#2C2F3E' guifg='NONE'
 
 "  colors of matching parens
 highlight MatchParen cterm=bold ctermbg=none ctermfg=magenta gui=bold guibg=#8C5669 guifg=NONE
 
 " colors of fold column
-highlight FoldColumn guibg=#131411 guifg=#34352E
+highlight FoldColumn guibg=#131411 guifg=#0C0F14
 
 " colors of error column
-highlight SignColumn guibg=#131411
+highlight SignColumn guibg=#0C0F14
 
 " colors of line number column
-highlight LineNr guibg=#131411 guifg=#34352E
+highlight LineNr guibg=#070908 guifg=#3C3F74
 
 " highlight current line number
 set cursorline
 highlight clear CursorLine
-highlight CursorLine guibg=#23241E
-highlight CursorLineNr guifg=#68705e guibg=#131411
+highlight CursorLine guibg=#1C1F24
+highlight CursorLineNr guifg=#7C7FC4 guibg=#1C1F24
+
+" highlight completion popup
+highlight Pmenu guibg=#202540
 
 " colors and appearance of window split column
 if has('gui_running')
     set fillchars+=vert:│
 endif
 
-highlight VertSplit guibg=#131411 guifg=#131411
+highlight VertSplit guibg=#06070A guifg=#06070A
 
 highlight ALESignColumnWithErrors guibg=#250000
 
@@ -101,6 +106,8 @@ set list
 " show wrapped line marker
 set showbreak=»
 
+highlight SpellBad term=bold ctermbg=red  guibg=#532120 guifg=NONE gui=none
+
 " Diff styling
 highlight diffAdded term=bold ctermbg=black     ctermfg=green cterm=bold guibg=#114417 guifg=NONE gui=none
 highlight DiffAdd   term=bold ctermbg=darkgreen ctermfg=white cterm=bold guibg=#114417 guifg=NONE gui=bold
@@ -116,4 +123,4 @@ highlight DiffText   term=reverse,bold ctermbg=red       ctermfg=yellow   cterm=
 highlight DiffChange term=bold         ctermbg=black     ctermfg=white    cterm=bold guibg=NONE guifg=NONE
 
 " highlight yank region
-highlight HighlightedyankRegion cterm=reverse guibg=#433e30
+highlight HighlightedyankRegion cterm=reverse guibg=#3C3F74

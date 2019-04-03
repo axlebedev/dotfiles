@@ -314,7 +314,10 @@ endif
 
 " -----------------------------------------------------------------------------
 " Color theme
-Plug 'crusoexia/vim-monokai'
+" Plug 'crusoexia/vim-monokai'
+Plug 'whatyouhide/vim-gotham'
+" Plug 'morhetz/gruvbox'
+
 " give it a try https://github.com/morhetz/gruvbox
 " give it a try https://github.com/arcticicestudio/nord-vim
 
