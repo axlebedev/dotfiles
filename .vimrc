@@ -267,7 +267,8 @@ let g:XkbSwitchSkipIMappings = {'*': ["'", '"', '[', ']', '<', '>']}
 
 " -----------------------------------------------------------------------------
 " Highlight matching html tag
-Plug 'vim-scripts/MatchTag'
+" forked from 'vim-scripts/MatchTag'
+Plug 'axlebedev/MatchTag'
 
 " -----------------------------------------------------------------------------
 " autoclose html tags
