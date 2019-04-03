@@ -32,7 +32,7 @@ Plug 'AndrewRadev/bufferize.vim'
 
 " -----------------------------------------------------------------------------
 " Markdown live preview
-Plug 'shime/vim-livedown', { 'do': 'npm i -g livedown' }
+Plug 'shime/vim-livedown', { 'do': 'sudo npm i -g livedown' }
 
 " -----------------------------------------------------------------------------
 Plug 'moll/vim-node'
