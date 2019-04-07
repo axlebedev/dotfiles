@@ -11,6 +11,7 @@
 " TODO: https://github.com/qpkorr/vim-bufkill вместо kwbd
 "
 " Plugin settings ============================= {{{
+set shell=bash
 
 filetype off
 
@@ -448,6 +449,7 @@ let g:LanguageClient_autoStart = 1
 let g:LanguageClient_diagnosticsEnable = 0
 let g:LanguageClient_serverCommands = {
     \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
+    \ 'typescript': ['/usr/local/bin/javascript-typescript-stdio'],
     \ 'javascript.jsx': ['/usr/local/bin/javascript-typescript-stdio'],
     \ 'typescript': ['/usr/local/bin/javascript-typescript-stdio'],
     \ 'python': ['/usr/local/bin/pyls'],
