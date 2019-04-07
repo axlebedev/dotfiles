@@ -13,7 +13,7 @@ if has('gui_running')
     if has("win32") || has("win16")
         set guifont=Consolas:h10
     else
-        set guifont=DroidSansMonoforPowerline\ Nerd\ Font
+        set guifont=Droid\ Sans\ Mono\ for\ Powerline\ 14
     endif "has("win32") || has("win16")
 
     set guioptions-=m  "remove menu bar

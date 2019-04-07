@@ -218,6 +218,9 @@ workspace 9 output DVI-D-0
 ### exec --no-startup-id megasync
 exec --no-startup-id gnome-settings-daemon
 exec --no-startup-id cinnamon-sound-applet
+exec --no-startup-id setxkbmap -layout us,ru
+exec --no-startup-id setxkbmap -option 'grp:shift_caps_switch'
+exec --no-startup-id xrandr --auto --output DVI-D-0 --right-of HDMI-0
 # exec --no-startup-id nm-applet
 # exec --no-startup-id feh --no-xinerama --bg-scale /usr/share/backgrounds/linuxmint-rafaela/rapciu_pearl.png --bg-scale /usr/share/backgrounds/linuxmint-rafaela/rapciu_pearl.png
 
