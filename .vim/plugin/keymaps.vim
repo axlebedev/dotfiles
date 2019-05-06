@@ -175,6 +175,9 @@ nnoremap <leader>k :<C-u>call opennextbuf#OpenNextBuf(0)<CR>
 nnoremap <silent> <F3> :call google#Google(expand("<cword>"))<cr>
 xnoremap <silent> <F3> "gy:call google#Google(@g)<cr>gv
 
+" yank current buffers filename to system clipboard
+nnoremap <silent> yf :let @*=@%<CR>
+
 " update current file
 nnoremap <silent> <F5> :e<CR>
 
