@@ -61,6 +61,7 @@ abbr -a nemo nemo --no-desktop
 abbr -a gt gnome-terminal
 
 abbr -a ni npm i
+abbr -a nis npm i --save
 abbr -a nd npm run dev
 abbr -a ncc npm cache clean -f
 abbr -a nccnd npm cache clean -f ; and npm run dev
