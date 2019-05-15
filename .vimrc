@@ -189,6 +189,10 @@ endif
 " -----------------------------------------------------------------------------
 " autoclose parens
 Plug 'jiangmiao/auto-pairs'
+let g:AutoPairsMapSpace = 0
+imap <silent> <expr> <space> pumvisible()
+	\ ? "<space>"
+	\ : "<c-r>=AutoPairsSpace()<cr>"
 
 " -----------------------------------------------------------------------------
 " Fuzzy file opener
