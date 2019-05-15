@@ -129,9 +129,6 @@ Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
 let g:lsp_async_completion = 1
 
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
-
 if executable('typescript-language-server')
     autocmd User lsp_setup call lsp#register_server({
       \ 'name': 'typescript-language-server',
@@ -454,9 +451,17 @@ let g:LanguageClient_serverCommands = {
     \ 'python': ['/usr/local/bin/pyls'],
     \ }
 
-Plug 'maralla/completor.vim'
-let g:completor_refresh_always = 0 " avoid flickering
-let g:completor_python_omni_trigger = ".*"
+Plug 'lifepillar/vim-mucomplete'
+set completeopt+=menuone
+set completeopt+=noselect
+set shortmess+=c   " Shut off completion messages
+set belloff+=ctrlg " If Vim beeps during completion
+let g:mucomplete#enable_auto_at_startup = 1
+set fileignorecase
+let g:mucomplete#buffer_relative_paths = 1
+let g:mucomplete#completion_delay = 100
+let g:mucomplete#reopen_immediately = 0
+
 set formatexpr=LanguageClient_textDocument_rangeFormatting()
 set omnifunc=LanguageClient#complete
 
