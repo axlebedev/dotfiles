@@ -114,8 +114,9 @@ let g:used_javascript_libs = 'underscore,react'
 
 " -----------------------------------------------------------------------------
 " jsx support
-Plug 'mxw/vim-jsx'
-let g:jsx_ext_required = 0
+Plug 'MaxMEllon/vim-jsx-pretty'
+let g:vim_jsx_pretty_template_tags = []
+let g:vim_jsx_pretty_colorful_config = 1
 
 " -----------------------------------------------------------------------------
 " To make it work: 

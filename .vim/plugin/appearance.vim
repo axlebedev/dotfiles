@@ -117,3 +117,14 @@ highlight DiffChange term=bold         ctermbg=black     ctermfg=white    cterm=
 
 " highlight yank region
 highlight HighlightedyankRegion cterm=reverse guibg=#433e30
+
+" highlight jsx customizations
+highlight jsObjectKey guifg=white
+highlight jsxElement guifg=#f92772
+highlight jsxTag guifg=#f92772
+highlight jsxPunct guifg=#f92772
+highlight jsxTagName guifg=#db880d
+highlight jsxComponentName guifg=#db880d
+highlight jsxCloseTag guifg=#f92772
+highlight jsxAttrib guifg=#A6E22D
+highlight jsxEqual guifg=white
