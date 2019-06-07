@@ -8,9 +8,6 @@ function! google#Google(pattern) abort
 endfunction
 
 function! google#GoToUrl(pattern) abort
-    let q = substitute(a:pattern, '["\n]', ' ', 'g')
-    let q = substitute(q, '[[:punct:] ]',
-                \ '\=printf("%%%02X", char2nr(submatch(0)))', 'g')
-    echom q
-    call system(printf('google-chrome %s', q))
+    echom a:pattern
+    call system(printf('google-chrome %s', a:pattern))
 endfunction
