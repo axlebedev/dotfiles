@@ -24,8 +24,8 @@ if has('gui_running')
     " Maximize gvim window.
     set lines=999 columns=999
 else
-    " number of colors in terminal
-    set t_Co=256
+    " number of colors in terminal: use gui-colors, assuming terminal supports it
+    set termguicolors
 endif "has('gui_running')
 
 " different cursor shapes for different terminal modes
@@ -94,6 +94,8 @@ let NERDTreeMinimalUI=1
 if has("win32") || has("win16")
     set listchars=tab:⁞\ ,trail:·,extends:»,precedes:«,conceal:_,nbsp:•
 elseif has('gui_running')
+    set listchars=tab:·\ ,trail:·,extends:»,precedes:«,conceal:_,nbsp:•
+else
     set listchars=tab:·\ ,trail:·,extends:»,precedes:«,conceal:_,nbsp:•
 endif
 set list
