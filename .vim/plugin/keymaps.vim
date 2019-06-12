@@ -143,7 +143,8 @@ autocmd au_vimrc FileType help,qf,git nnoremap <buffer> q :q<cr>
 autocmd au_vimrc FileType help,qf,git nnoremap <buffer> <Esc> :q<cr>
 
 nnoremap <silent> <leader>a :<C-u>ArgWrap<CR>
-nnoremap <silent> <leader>t :<C-u>CtrlP<CR>
+
+nnoremap <silent> <leader>t :<C-u>call fzf#run({'source': 'git ls-files', 'sink': 'e', 'window': '15split'})<CR>
 
 " get current highlight group under cursor
 map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'

@@ -196,47 +196,6 @@ imap <silent> <expr> <space> pumvisible()
 	\ : "<c-r>=AutoPairsSpace()<cr>"
 
 " -----------------------------------------------------------------------------
-" Fuzzy file opener
-Plug 'ctrlpvim/ctrlp.vim'
-let g:ctrlp_cmd = 'CtrlP'
-" search hidden files too
-let g:ctrlp_show_hidden = 1
-" search in current dir and parents until folder containing '.git' or other
-let g:ctrlp_working_path_mode = 'a'
-" without next block it won't ignore wildcards' paths
-if exists("g:ctrl_user_command")
-  unlet g:ctrlp_user_command
-endif
-" clear cache on vim exit
-let g:ctrlp_clear_cache_on_exit = 1
-" Include current file to find entries
-let g:ctrlp_match_current_file = 1
-
-let g:ctrlp_custom_ignore = '\v[\/](\.git|node_modules|static|coverage)$'
-
-if executable('ag')
-    let g:ctrlp_use_caching = 0
-
-    " Use Ag over Grep
-    set grepprg=ag\ --nogroup\ --nocolor
-
-    " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-    let g:ctrlp_user_command = 'ag %s -l --nocolor -g "" -U --hidden' .
-      \ ' --ignore-dir .git' .
-      \ ' --ignore-dir bin' .
-      \ ' --ignore-dir logs' .
-      \ ' --ignore-dir lib' .
-      \ ' --ignore-dir coverage' .
-      \ ' --ignore-dir .happypack' .
-      \ ' --ignore-dir coverage' .
-      \ ' --ignore-dir .cache' .
-      \ ' --ignore "*\.git*"' .
-      \ ' --ignore "*node_modules*"' .
-      \ ' --ignore "src/modules/jsfcore/jsfiller3"' .
-      \ ' --ignore "src/modules/jsfcore/ws-editor-lib"'
-endif
-
-" -----------------------------------------------------------------------------
 " comment lines, uncomment lines
 Plug 'tomtom/tcomment_vim'
 let g:tcomment_textobject_inlinecomment = 'ix'
@@ -498,6 +457,25 @@ let g:completor_complete_options = 'menuone,noselect,preview'
 "         "node_modules"
 "     ]
 " }
+
+" -----------------------------------------------------------------------------
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+let g:fzf_layout = { 'up': '~20%' }
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
 
 " -----------------------------------------------------------------------------
 call plug#end()
