@@ -458,7 +458,7 @@ let g:completor_complete_options = 'menuone,noselect,preview'
 "     ]
 " }
 
-" -----------------------------------------------------------------------------
+" TEST-------------------------------------------------------------------------
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 let g:fzf_layout = { 'up': '~20%' }
@@ -477,6 +477,8 @@ let g:fzf_colors =
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
 
+" TEST-------------------------------------------------------------------------
+Plug 'francoiscabrol/ranger.vim'
 " -----------------------------------------------------------------------------
 call plug#end()
 filetype plugin indent on
