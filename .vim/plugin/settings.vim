@@ -121,6 +121,9 @@ set noerrorbells
 " Also suppress several 'Press Enter to continue messages' especially with FZF
 set shortmess=aoOtI
 
+" Show title for terminal vim
+set title
+
 " Override some syntaxes so things look better
 autocmd au_vimrc_settings BufNewFile,BufRead .eslintrc,.babelrc setlocal syntax=json
 autocmd au_vimrc_settings BufNewFile,BufRead .conkyrc setlocal syntax=python
