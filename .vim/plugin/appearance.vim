@@ -130,3 +130,14 @@ highlight jsxComponentName guifg=#db880d
 highlight jsxCloseTag guifg=#f92772
 highlight jsxAttrib guifg=#A6E22D
 highlight jsxEqual guifg=white
+
+" for Plug 'RRethy/vim-illuminate'
+highlight illuminatedWord guibg=#191C41
+let g:Illuminate_delay = 100
+let g:Illuminate_ftblacklist = ['nerdtree', 'magit']
+let g:Illuminate_ftHighlightGroups = {
+    \ 'javascript:blacklist': ['Statement', 'Noise', 'PreProc', 'Type']
+    \ }
+
+" gotham
+highlight HighlightedyankRegion cterm=reverse guibg=#3C3F74
