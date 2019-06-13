@@ -9,3 +9,5 @@ function! DiffFold(lnum) abort
     return 0
   endif
 endfunction
+
+setlocal nocursorline
