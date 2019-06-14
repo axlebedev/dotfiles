@@ -42,13 +42,8 @@ Plug 'moll/vim-node'
 " NERD Tree
 Plug 'scrooloose/nerdtree'
 let NERDTreeDirArrows=1 " allow it to show arrows
-if has('gui_running')
-    let NERDTreeDirArrowExpandable='▸'
-    let NERDTreeDirArrowCollapsible='▾'
-else 
-    let NERDTreeDirArrowExpandable='+'
-    let NERDTreeDirArrowCollapsible='-'
-endif
+let NERDTreeDirArrowExpandable='▸'
+let NERDTreeDirArrowCollapsible='▾'
 let NERDTreeShowHidden=1 " show hidden files
 let NERDTreeCascadeSingleChildDir=0 " dont collapse singlechild dir
 let NERDTreeWinSize=50
@@ -297,6 +292,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'jreybert/vimagit'
 autocmd User VimagitUpdateFile normal! zt
 autocmd User VimagitRefresh normal! zt
+autocmd FileType * if &ft ==# 'magit' | setlocal nocursorline | endif
 Plug 'rhysd/conflict-marker.vim'
 Plug 'junegunn/gv.vim'
 
