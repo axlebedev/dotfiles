@@ -13,7 +13,7 @@ nmap <Tab> %
 vmap <Tab> %
 
 " Avoid accidental hits of <F1> while aiming for <Esc>
-map  <F1> <Esc>
+map  <F1> :<C-u>Helptags<cr>
 imap <F1> <Esc>
 
 " Make moving in line a bit more convenient
