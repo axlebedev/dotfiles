@@ -337,6 +337,7 @@ nmap ; <Plug>(clever-f-repeat-forward)
 " -----------------------------------------------------------------------------
 "  Start screen for vim
 Plug 'mhinz/vim-startify'
+let g:startify_disable_at_vimenter = 0
 let g:startify_list_order = [
     \ ['   Most recent:'], 'dir',
     \ ['   Sessions:'], 'sessions',
@@ -458,7 +459,7 @@ let g:completor_complete_options = 'menuone,noselect,preview'
 " TEST-------------------------------------------------------------------------
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-let g:fzf_layout = { 'up': '~20%' }
+let g:fzf_layout = { 'window': '10new' }
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],
   \ 'bg':      ['bg', 'Normal'],
