@@ -64,7 +64,7 @@ vnoremap <silent> * :call VisualSelection('f')<CR>
 vnoremap <silent> # :call VisualSelection('b')<CR>
 
 " visual select current line
-nnoremap va ^vg_
+" nnoremap vz ^vg_
 
 " visual select last visual selection
 " ХЗ почему я постоянно путаю
