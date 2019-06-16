@@ -136,7 +136,14 @@ highlight illuminatedWord guibg=#191C41
 let g:Illuminate_delay = 100
 let g:Illuminate_ftblacklist = ['nerdtree', 'magit']
 let g:Illuminate_ftHighlightGroups = {
-    \ 'javascript:blacklist': ['Statement', 'Noise', 'PreProc', 'Type']
+    \ 'javascript:blacklist': [
+    \   'Statement',
+    \   'Noise',
+    \   'PreProc',
+    \   'Type',
+    \   'jsStorageClass',
+    \   'jsImport', 'Include'
+    \ ]
     \ }
 
 " gotham
