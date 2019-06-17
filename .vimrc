@@ -513,7 +513,7 @@ autocmd au_vimrc BufLeave *
     \ endif
 
 " start NERDTree and Startify on vim startup
-autocmd VimEnter * Startify | NERDTree | wincmd l
+autocmd VimEnter * NERDTree | wincmd l
 
 " close vim if only window is NERDTree
 autocmd au_vimrc bufenter *
