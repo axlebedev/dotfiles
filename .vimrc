@@ -424,6 +424,7 @@ let g:mucomplete#completion_delay = 100
 let g:mucomplete#reopen_immediately = 0
 let g:mucomplete#no_mappings = 1
 autocmd BufEnter * if &ft ==# 'magit' | MUcompleteAutoOff | else | MUcompleteAutoOn | endif
+autocmd FileType * if &ft ==# 'magit' | MUcompleteAutoOff | else | MUcompleteAutoOn | endif
 
 set formatexpr=LanguageClient_textDocument_rangeFormatting()
 set omnifunc=LanguageClient#complete
