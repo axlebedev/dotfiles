@@ -263,9 +263,7 @@ Plug 'ap/vim-css-color'
 " Indent line for leading spaces
 Plug 'Yggdroot/indentLine'
 " Warning! needed to patch font as described at https://github.com/Yggdroot/indentLine
-if has("gui_running")
-    let g:indentLine_char = '┆'
-endif
+let g:indentLine_char = '┆'
 
 " -----------------------------------------------------------------------------
 " Color theme
