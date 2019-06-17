@@ -11,8 +11,13 @@ endfunction
 
 function! GoToNextDiff() abort
   let savedSearchReg = @/
-  let @/ = 'diff'
-  normal n
+  let @/ = '\<diff\>'
+
+  let savedScrollOff = &scrolloff
+  set scrolloff=20
+  normal nzt
+
+  let &scrolloff=savedScrollOff
   let @/ = savedSearchReg
 endfunction
 
