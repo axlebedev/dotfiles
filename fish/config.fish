@@ -40,7 +40,7 @@ abbr -a gpl git pull
 abbr -a gps git push origin HEAD
 abbr -a gpsu git push -u origin HEAD
 abbr -a gpsf git push -f origin HEAD
-abbr -a gr git rebase
+abbr -a gr git rebase --autostash
 abbr -a grd git rebase origin/develop
 abbr -a grc git rebase --continue
 abbr -a gra git rebase --abort
