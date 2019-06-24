@@ -511,7 +511,12 @@ autocmd au_vimrc BufLeave *
     \ endif
 
 " start NERDTree and Startify on vim startup
-autocmd VimEnter * NERDTree | wincmd l
+" autocmd VimEnter * NERDTree | wincmd l
+function! CallNERDTree(tid) abort
+    NERDTree
+    wincmd l
+endfunction
+autocmd VimEnter * call timer_start(50, 'CallNERDTree')
 
 " close vim if only window is NERDTree
 autocmd au_vimrc bufenter *
