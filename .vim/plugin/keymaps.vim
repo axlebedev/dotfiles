@@ -155,6 +155,8 @@ nnoremap <M-o> <Tab>
 
 nnoremap zl :set foldlevel=1<cr>
 
+nnoremap yf :call yankfilename#YankFileName()<CR>
+
 nnoremap <silent> <leader>hh :call blockline#BlockLine()<CR>
 
 " for convenient git
@@ -178,9 +180,6 @@ xnoremap <silent> <F3> "gy:call google#Google(@g)<cr>gv
 
 nnoremap <silent> <F4> :call google#GoToUrl(expand("<cword>"))<cr>
 xnoremap <silent> <F4> "gy:call google#GoToUrl(@g)<cr>gv
-
-" yank current buffers filename to system clipboard
-nnoremap <silent> yf :let @*=@%<CR>
 
 " update current file
 nnoremap <silent> <F5> :e<CR>
