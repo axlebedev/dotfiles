@@ -1,3 +1,6 @@
+setlocal nocursorline
+
+" DiffFold {{{
 function! DiffFold(lnum) abort
   let line = getline(a:lnum)
   if line =~ '^\(diff\|---\|+++\|@@\) '
@@ -9,6 +12,10 @@ function! DiffFold(lnum) abort
   endif
 endfunction
 
+setlocal foldmethod=expr foldexpr=DiffFold(v:lnum)
+" }}} DiffFold
+
+" GoToNextDiff {{{
 function! GoToNextDiff() abort
   let savedSearchReg = @/
   let @/ = '\<diff\>'
@@ -22,6 +29,20 @@ function! GoToNextDiff() abort
 endfunction
 
 map <buffer> <silent> gn :<C-u>call GoToNextDiff()<CR>
+" }}} GoToNextDiff
 
-setlocal foldmethod=expr foldexpr=DiffFold(v:lnum)
-setlocal nocursorline
+" CopyWithoutStart {{{
+function! CopyWithoutStart() abort
+  normal! yy
+  let currentLine = @+
+  let firstChar = currentLine[0]
+
+  if (firstChar == '+' || firstChar == '-')
+      let currentLine = currentLine[1:]
+  endif
+  let @* = currentLine
+  let @+ = currentLine
+endfunction
+
+nnoremap <buffer> <silent> yy :<C-u>call CopyWithoutStart()<CR>
+" }}} CopyWithoutStart
