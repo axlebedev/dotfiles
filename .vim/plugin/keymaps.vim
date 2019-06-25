@@ -135,6 +135,7 @@ let g:submode_always_show_submode = 1
 let g:submode_timeout = 0
 let resizeSubmode = 'Resize'
 call submode#enter_with(resizeSubmode, 'n', '', '<M-r>')
+call submode#enter_with(resizeSubmode, 'n', '', '<leader>r')
 call submode#map(resizeSubmode, 'n', '', 'h', ':vertical resize -1<cr>')
 call submode#map(resizeSubmode, 'n', '', 'l', ':vertical resize +1<cr>')
 call submode#map(resizeSubmode, 'n', '', 'k', ':resize -1<cr>')
