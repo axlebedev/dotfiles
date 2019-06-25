@@ -26,6 +26,7 @@ nnoremap $$ $
 nnoremap H ^
 nnoremap HH 0
 nnoremap L g_
+nnoremap f; g_
 nnoremap LL $
 vnoremap 0 ^
 vnoremap ^ 0
