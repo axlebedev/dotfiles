@@ -39,16 +39,6 @@ Plug 'shime/vim-livedown', { 'do': 'sudo npm i -g livedown' }
 Plug 'moll/vim-node'
 
 " -----------------------------------------------------------------------------
-" NERD Tree
-Plug 'scrooloose/nerdtree'
-let NERDTreeDirArrows=1 " allow it to show arrows
-let NERDTreeDirArrowExpandable='▸'
-let NERDTreeDirArrowCollapsible='▾'
-let NERDTreeShowHidden=1 " show hidden files
-let NERDTreeCascadeSingleChildDir=0 " dont collapse singlechild dir
-let NERDTreeWinSize=50
-
-" -----------------------------------------------------------------------------
 " vim-airline: cute statusbar
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -353,6 +343,16 @@ let g:startify_custom_header = []
 autocmd User Startified nmap <buffer> o <plug>(startify-open-buffers)
 
 " -----------------------------------------------------------------------------
+" NERD Tree
+Plug 'scrooloose/nerdtree'
+let NERDTreeDirArrows=1 " allow it to show arrows
+let NERDTreeDirArrowExpandable='▸'
+let NERDTreeDirArrowCollapsible='▾'
+let NERDTreeShowHidden=1 " show hidden files
+let NERDTreeCascadeSingleChildDir=0 " dont collapse singlechild dir
+let NERDTreeWinSize=50
+
+" -----------------------------------------------------------------------------
 " Toggle true/false
 Plug 'sagarrakshe/toggle-bool'
 
@@ -510,13 +510,7 @@ autocmd au_vimrc BufLeave *
     \     exe 'call kwbd#Kwbd(1)' |
     \ endif
 
-" start NERDTree and Startify on vim startup
-" autocmd VimEnter * NERDTree | wincmd l
-function! CallNERDTree(tid) abort
-    NERDTree
-    wincmd l
-endfunction
-autocmd VimEnter * call timer_start(50, 'CallNERDTree')
+autocmd VimEnter * NERDTree | wincmd l
 
 " close vim if only window is NERDTree
 autocmd au_vimrc bufenter *
