@@ -45,4 +45,17 @@ function! CopyWithoutStart() abort
 endfunction
 
 nnoremap <buffer> <silent> yy :<C-u>call CopyWithoutStart()<CR>
+
+function! Lal() abort
+  let yankedText = l9#getSelectedText()
+  let yankedText = substitute(yankedText, "[\n^][+-]", '\n', 'g')
+
+  " remove starting + or -, expecting that visual LINE selection
+  if (yankedText[0] == '+' || yankedText[0] == '-')
+    let yankedText = yankedText[1:]
+  endif
+  let @* = yankedText
+  let @+ = yankedText
+endfunction
+vnoremap <buffer> <silent> y :<C-u>call Lal()<CR>
 " }}} CopyWithoutStart
