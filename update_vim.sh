@@ -141,6 +141,17 @@ else
     exit 1
 fi
 
+printf "${COLOR_YELLOW}update javascript-typescript-langserver...${COLOR_RESET}\r"
+if sudo npm i -g javascript-typescript-langserver >>${logFile} 2>>${logFile}; \
+then
+    printf "${COLOR_GREEN}update javascript-typescript-langserver OK${COLOR_RESET}"
+    printf "${filler}\n\r"
+else
+    printf "${COLOR_RED}update javascript-typescript-langserver ERRORED${COLOR_RESET}"
+    printf "${filler}\n\r"
+    exit 1
+fi
+
 # printf "${COLOR_YELLOW}PlugUpdate...${COLOR_RESET}\r"
 # if gvim +'PlugUpdate --sync' +qa >>${logFile} 2>>${logFile}; \
 # then
