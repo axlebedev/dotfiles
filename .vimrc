@@ -421,8 +421,6 @@ let g:mucomplete#buffer_relative_paths = 1
 let g:mucomplete#completion_delay = 100
 let g:mucomplete#reopen_immediately = 0
 let g:mucomplete#no_mappings = 1
-autocmd BufEnter * if &ft ==# 'magit' | MUcompleteAutoOff | else | MUcompleteAutoOn | endif
-autocmd FileType * if &ft ==# 'magit' | MUcompleteAutoOff | else | MUcompleteAutoOn | endif
 
 set formatexpr=LanguageClient_textDocument_rangeFormatting()
 set omnifunc=LanguageClient#complete
@@ -430,6 +428,13 @@ set omnifunc=LanguageClient#complete
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
+
+let g:mucomplete#chains = {
+    \ 'default'   : ['path', 'omni', 'keyn', 'dict', 'uspl'],
+    \ 'vim'       : ['path', 'cmd', 'keyn'],
+    \ 'magit'     : ['path', 'cmd', 'keyn'],
+    \ 'gitcommit' : ['path', 'cmd', 'keyn']
+    \ }
 
 let g:completor_complete_options = 'menuone,noselect,preview'
 
