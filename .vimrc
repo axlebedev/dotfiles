@@ -515,7 +515,7 @@ autocmd au_vimrc BufLeave *
     \     exe 'call kwbd#Kwbd(1)' |
     \ endif
 
-autocmd VimEnter * NERDTree | wincmd l
+autocmd VimEnter * Startify | NERDTree | wincmd l
 
 " close vim if only window is NERDTree
 autocmd au_vimrc bufenter *
