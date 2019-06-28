@@ -325,7 +325,7 @@ nmap ; <Plug>(clever-f-repeat-forward)
 " -----------------------------------------------------------------------------
 "  Start screen for vim
 Plug 'mhinz/vim-startify'
-let g:startify_disable_at_vimenter = 0
+let g:startify_disable_at_vimenter = 1
 let g:startify_list_order = [
     \ ['   Most recent:'], 'dir',
     \ ['   Sessions:'], 'sessions',
