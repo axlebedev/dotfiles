@@ -115,10 +115,10 @@ Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/vim-lsp'
 let g:lsp_async_completion = 1
 
-if executable('typescript-language-server')
+if executable('javascript-typescript-langserver')
     autocmd User lsp_setup call lsp#register_server({
-      \ 'name': 'typescript-language-server',
-      \ 'cmd': { server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
+      \ 'name': 'javascript-typescript-langserver',
+      \ 'cmd': { server_info->[&shell, &shellcmdflag, 'javascript-typescript-stdio']},
       \ 'root_uri': { server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_directory(lsp#utils#get_buffer_path(), '.git/..'))},
       \ 'whitelist': ['typescript', 'javascript', 'javascript.jsx']
       \ })
