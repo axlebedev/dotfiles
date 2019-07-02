@@ -7,8 +7,6 @@ exec conky -c $HOME/.conkyrc &
 
 # WARNING!!! 'jshon' needed
 
-CAL_PID=0
-
 while read -r line
 do
     if [ "$line" = "[" ]
@@ -21,14 +19,7 @@ do
 
     if [ "$getname" = "Date" ] 
     then
-        if [ $CAL_PID -eq 0 ] 
-        then
-            gsimplecal &
-            CAL_PID=$!
-        else
-            kill $CAL_PID
-            CAL_PID=0
-        fi
+        google-chrome --app="https://calendar.google.com/" > /dev/null 2>&1
     fi
 
     if [ "$getname" = "Memory" ] 
