@@ -155,3 +155,5 @@ else
 endif
 
 let g:markdown_folding = 1
+
+set diffopt+=internal,algorithm:patience,indent-heuristic
