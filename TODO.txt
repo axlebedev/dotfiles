@@ -1,0 +1,9 @@
+vim merge tool
+https://vimways.org/2018/vim-and-git/
+
+rebase in vim
+https://github.com/tpope/vim-git/blob/master/ftplugin/gitrebase.vim
+
+vim: work with git branches
+https://github.com/idanarye/vim-merginal
+https://github.com/sodapopcan/vim-twiggy
