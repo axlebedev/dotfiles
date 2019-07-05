@@ -316,13 +316,6 @@ let g:ale_typescript_tslint_executable = 'npm run lint'
 nmap <silent> <C-m> <Plug>(ale_next_wrap)
 
 " -----------------------------------------------------------------------------
-" Highlight 'f' entries
-Plug 'rhysd/clever-f.vim'
-let g:clever_f_smart_case = 1
-let g:clever_f_across_no_line = 1
-nmap ; <Plug>(clever-f-repeat-forward)
-
-" -----------------------------------------------------------------------------
 "  Start screen for vim
 Plug 'mhinz/vim-startify'
 let g:startify_disable_at_vimenter = 1
@@ -484,6 +477,18 @@ Plug 'francoiscabrol/ranger.vim'
 
 " -----------------------------------------------------------------------------
 Plug 'RRethy/vim-illuminate'
+
+" -----------------------------------------------------------------------------
+" Highlight 'f' entries
+" Plug 'rhysd/clever-f.vim'
+" let g:clever_f_smart_case = 1
+" let g:clever_f_across_no_line = 1
+" nmap ; <Plug>(clever-f-repeat-forward)
+" -TEST-instead-of-previous----------------------------------------------------
+Plug 'justinmk/vim-sneak'
+map f <Plug>Sneak_s
+map F <Plug>Sneak_S
+
 " -----------------------------------------------------------------------------
 call plug#end()
 filetype plugin indent on
