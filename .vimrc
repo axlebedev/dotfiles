@@ -379,13 +379,13 @@ let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 Plug 'SirVer/ultisnips'
 
-" -TEST------------------------------------------------------------------------
+" -----------------------------------------------------------------------------
 "  wrap/unwrap lists in brackets
 Plug 'FooSoft/vim-argwrap'
 let g:argwrap_padded_braces = '{'
 let g:argwrap_tail_comma = 1
 
-" -TEST------------------------------------------------------------------------
+" -----------------------------------------------------------------------------
 "  textobjects
 Plug 'kana/vim-textobj-user' " dependency for below
 Plug 'kana/vim-textobj-entire' " ae, ie
@@ -394,12 +394,12 @@ Plug 'kana/vim-textobj-lastpat' " last search pattern a/, i/, a?, i?
 Plug 'kana/vim-textobj-line' " al, il
 Plug 'kana/vim-textobj-underscore' " a_, i_
 
-" -TEST------------------------------------------------------------------------
+" -----------------------------------------------------------------------------
 " 'gf' from a diff file
 Plug 'kana/vim-gf-user'
 Plug 'kana/vim-gf-diff'
 
-" -TEST------------------------------------------------------------------------
+" -----------------------------------------------------------------------------
 Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
 let g:LanguageClient_autoStart = 1
 let g:LanguageClient_diagnosticsEnable = 0
@@ -460,7 +460,7 @@ let g:completor_complete_options = 'menuone,noselect,preview'
 "     ]
 " }
 
-" TEST-------------------------------------------------------------------------
+" -----------------------------------------------------------------------------
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 let g:fzf_layout = { 'window': '10new' }
@@ -479,9 +479,10 @@ let g:fzf_colors =
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
 
-" TEST-------------------------------------------------------------------------
+" -----------------------------------------------------------------------------
 Plug 'francoiscabrol/ranger.vim'
-" TEST-------------------------------------------------------------------------
+
+" -----------------------------------------------------------------------------
 Plug 'RRethy/vim-illuminate'
 " -----------------------------------------------------------------------------
 call plug#end()
