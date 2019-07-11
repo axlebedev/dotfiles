@@ -7,3 +7,5 @@ https://github.com/tpope/vim-git/blob/master/ftplugin/gitrebase.vim
 vim: work with git branches
 https://github.com/idanarye/vim-merginal
 https://github.com/sodapopcan/vim-twiggy
+
+vim: сделать чтобы git-буферы не закрывались по выходу из них
