@@ -536,7 +536,7 @@ function! CallNERDTree(tid) abort
     NERDTree
     wincmd l
 endfunction
-autocmd VimEnter * call timer_start(50, 'CallNERDTree')
+autocmd VimEnter * call timer_start(100, 'CallNERDTree')
 
 " close vim if only window is NERDTree
 autocmd au_vimrc bufenter *
