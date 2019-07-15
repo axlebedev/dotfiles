@@ -529,14 +529,22 @@ autocmd au_vimrc BufLeave *
     \     exe 'call kwbd#Kwbd(1)' |
     \ endif
 
+
+function! IsNerdTreeEnabled()
+    return exists('t:NERDTreeBufName') && bufwinnr(t:NERDTreeBufName) != -1
+endfunction
 " start NERDTree and Startify on vim startup
 " autocmd VimEnter * NERDTree | wincmd l
 function! CallNERDTree(tid) abort
-    Startify
-    NERDTree
-    wincmd l
+    if (IsNerdTreeEnabled())
+        Startify
+    else
+        NERDTree
+        wincmd l
+        call timer_start(100, 'CallNERDTree')
+    endif
 endfunction
-autocmd VimEnter * call timer_start(100, 'CallNERDTree')
+autocmd VimEnter * call CallNERDTree(0)
 
 " close vim if only window is NERDTree
 autocmd au_vimrc bufenter *
