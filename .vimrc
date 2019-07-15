@@ -486,8 +486,15 @@ Plug 'RRethy/vim-illuminate'
 " nmap ; <Plug>(clever-f-repeat-forward)
 " -TEST-instead-of-previous----------------------------------------------------
 Plug 'justinmk/vim-sneak'
-map f <Plug>Sneak_s
-map F <Plug>Sneak_S
+" 2-character Sneak (default)
+nmap f <Plug>Sneak_s
+nmap F <Plug>Sneak_S
+" visual-mode
+xmap f <Plug>Sneak_s
+xmap F <Plug>Sneak_S
+" operator-pending-mode
+omap f <Plug>Sneak_s
+omap F <Plug>Sneak_S
 let g:sneak#use_ic_scs = 1
 
 " -----------------------------------------------------------------------------
