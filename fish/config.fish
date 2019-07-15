@@ -13,7 +13,7 @@ abbr -a lt tree -a -C -I node_modules\|.git\|bower_components
 abbr -a rm rm -rf
 abbr -a cp cp -r
 
-abbr -a v gnome-terminal -- sh -c "sleep 0.01; exec vim ."
+abbr -a v gnome-terminal -- vim .
 abbr -a vv gvim
 
 abbr -a o xdg-open
