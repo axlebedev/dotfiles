@@ -177,12 +177,6 @@ nnoremap <leader>c :call readmode#ReadModeToggle()<cr>
 nnoremap <leader>j :<C-u>call opennextbuf#OpenNextBuf(1)<CR>
 nnoremap <leader>k :<C-u>call opennextbuf#OpenNextBuf(0)<CR>
 
-nnoremap <silent> <F3> :call google#Google(expand("<cword>"))<cr>
-xnoremap <silent> <F3> "gy:call google#Google(@g)<cr>gv
-
-nnoremap <silent> <F4> :call google#GoToUrl(expand("<cword>"))<cr>
-xnoremap <silent> <F4> "gy:call google#GoToUrl(@g)<cr>gv
-
 " update current file
 nnoremap <silent> <F5> :e<CR>
 

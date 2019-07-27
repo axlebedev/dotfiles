@@ -497,6 +497,11 @@ omap f <Plug>Sneak_s
 omap F <Plug>Sneak_S
 let g:sneak#use_ic_scs = 1
 
+" -TEST------------------------------------------------------------------------
+" Commands to open browser + open specific pages on Github.
+Plug 'tyru/open-browser.vim'
+nmap <F3> <Plug>(openbrowser-smart-search)
+vmap <F3> <Plug>(openbrowser-smart-search)
 " -----------------------------------------------------------------------------
 call plug#end()
 filetype plugin indent on
