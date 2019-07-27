@@ -503,6 +503,12 @@ let g:sneak#use_ic_scs = 1
 Plug 'tyru/open-browser.vim'
 nmap <F3> <Plug>(openbrowser-smart-search)
 vmap <F3> <Plug>(openbrowser-smart-search)
+
+" -TEST------------------------------------------------------------------------
+" Make C-a/C-x work as expected when `-` in front of number.
+Plug 'osyo-manga/vim-trip'
+nmap <C-a> <Plug>(trip-increment)
+nmap <C-x> <Plug>(trip-decrement)
 " -----------------------------------------------------------------------------
 call plug#end()
 filetype plugin indent on
