@@ -509,6 +509,10 @@ vmap <F3> <Plug>(openbrowser-smart-search)
 Plug 'osyo-manga/vim-trip'
 nmap <C-a> <Plug>(trip-increment)
 nmap <C-x> <Plug>(trip-decrement)
+
+" -TEST------------------------------------------------------------------------
+Plug 'pbrisbin/vim-mkdir' " Automatically create parent directories on write when don't exist already.
+
 " -----------------------------------------------------------------------------
 call plug#end()
 filetype plugin indent on
