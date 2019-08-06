@@ -177,6 +177,8 @@ nnoremap <leader>c :call readmode#ReadModeToggle()<cr>
 nnoremap <leader>j :<C-u>call opennextbuf#OpenNextBuf(1)<CR>
 nnoremap <leader>k :<C-u>call opennextbuf#OpenNextBuf(0)<CR>
 
+nnoremap <leader>f :<C-u>call findcursor#FindCursor()<CR>
+
 " update current file
 nnoremap <silent> <F5> :e<CR>
 
