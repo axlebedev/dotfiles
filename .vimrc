@@ -233,7 +233,7 @@ function! YRRunAfterMaps() abort
     vnoremap <silent> y y`]
     vmap p pgvy
     " replace word under cursor with last yanked
-    nnoremap wp viwpgvy
+    nnoremap wp mmviwpgvy`m
     nnoremap <silent> p p`]
 endfunction
 
