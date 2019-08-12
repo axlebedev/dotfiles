@@ -280,7 +280,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'jreybert/vimagit'
 autocmd User VimagitUpdateFile normal! zt
 autocmd User VimagitRefresh normal! zt
-autocmd FileType * if &ft ==# 'magit' | setlocal nocursorline | endif
+autocmd FileType magit setlocal nocursorline
 Plug 'rhysd/conflict-marker.vim'
 Plug 'junegunn/gv.vim'
 
