@@ -585,3 +585,5 @@ autocmd BufEnter * :call MaybeTobbleIndentLineByDiff()
 " When switching buffers, preserve window view.
 autocmd BufLeave * call winview#AutoSaveWinView()
 autocmd BufEnter * call winview#AutoRestoreWinView()
+
+autocmd BufRead,BufNewFile *.qf set filetype=qf
