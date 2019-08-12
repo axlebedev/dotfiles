@@ -1,5 +1,11 @@
 " When using in the quickfix list, remove the item from the quickfix list.
 function! removeqfitem#RemoveQFItem() abort
+    let filename = expand("%")
+    if (len(filename) > 0)
+        delete " current line
+        return
+    endif
+
     let l:winview = winsaveview()
     let curpos = getpos('.')
     let curqfidx = line('.') - 1
@@ -15,6 +21,12 @@ function! removeqfitem#RemoveQFItemsVisual() abort
 
     let lineStart = getpos("'<")[1]
     let lineEnd = getpos("'>")[1]
+
+    let filename = expand("%")
+    if (len(filename) > 0)
+        call deletebufline(bufname(''), lineStart, lineEnd)
+        return
+    endif
 
     let l:winview = winsaveview()
 
