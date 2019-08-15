@@ -181,6 +181,7 @@ nnoremap <leader>f :<C-u>call findcursor#FindCursor()<CR>
 
 " update current file
 nnoremap <silent> <F5> :e<CR>
+nnoremap <silent> <F5><F5> :e!<CR>
 
 nnoremap <C-f> :call globalfind#GlobalFind(0, 0, 0)<cr>
 xnoremap <C-f> :call globalfind#GlobalFind(1, 0, 0)<cr>
