@@ -119,6 +119,9 @@ nnoremap <silent> <C-t> :<C-u>ToggleBool<CR>
 " close all other buffers
 nnoremap bo :BufOnly<CR>
 
+" make line where we jump at center
+nnoremap G Gzz
+
 " Now we don't have to move our fingers so far when we want to scroll through
 " the command history; also, don't forget the q: command
 cnoremap <c-j> <down>
