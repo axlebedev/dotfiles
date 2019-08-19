@@ -36,6 +36,17 @@ printf "\n"
 
 printf "Starting update...\n"
 
+printf "${COLOR_YELLOW}pull vim sources...${COLOR_RESET}\r"
+if git reset --hard origin/master >>${logFile} 2>>${logFile}; \
+then
+    printf "${COLOR_GREEN}pull vim sources OK${COLOR_RESET}"
+    printf "${filler}\n\r"
+else
+    printf "${COLOR_RED}pull vim sources ERRORED${COLOR_RESET}"
+    printf "${filler}\n\r"
+    exit 1
+fi
+
 printf "${COLOR_YELLOW}apt-get install deps...${COLOR_RESET}\r"
 if sudo apt-get install -y \
     liblua5.1-dev \
@@ -66,17 +77,6 @@ then
     printf "${filler}\n\r"
 else
     printf "${COLOR_RED}apt build-dep ERRORED${COLOR_RESET}"
-    printf "${filler}\n\r"
-    exit 1
-fi
-
-printf "${COLOR_YELLOW}pull vim sources...${COLOR_RESET}\r"
-if git pull >>${logFile} 2>>${logFile}; \
-then
-    printf "${COLOR_GREEN}pull vim sources OK${COLOR_RESET}"
-    printf "${filler}\n\r"
-else
-    printf "${COLOR_RED}pull vim sources ERRORED${COLOR_RESET}"
     printf "${filler}\n\r"
     exit 1
 fi
