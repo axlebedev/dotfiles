@@ -496,6 +496,8 @@ xmap F <Plug>Sneak_S
 " operator-pending-mode
 omap f <Plug>Sneak_s
 omap F <Plug>Sneak_S
+
+nnoremap f, f,
 let g:sneak#use_ic_scs = 1
 
 " -TEST------------------------------------------------------------------------
