@@ -32,7 +32,7 @@ abbr -a gop git checkout packages
 abbr -a god git checkout develop
 abbr -a gs git status
 # maybe git diff --patience
-abbr -a gd git diff --histogram --indent-heuristic
+abbr -a gd git diff --histogram --minimal --ignore-space-change
 abbr -a gh git hist
 abbr -a ghh git hist -10
 abbr -a ghhh git hist -20
