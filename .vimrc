@@ -104,27 +104,6 @@ let g:vim_jsx_pretty_template_tags = []
 let g:vim_jsx_pretty_colorful_config = 1
 
 " -----------------------------------------------------------------------------
-" To make it work: 
-" tern_for_vim/node_modules/tern/plugin/webpack.js:
-" getResolver::config::modules += "src"
-" let g:tern_show_argument_hints='on_hold'
-" let g:tern#is_show_argument_hints_enabled = 1
-" Plug 'ternjs/tern_for_vim', { 'do': 'npm i' }
-
-Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/vim-lsp'
-let g:lsp_async_completion = 1
-
-if executable('javascript-typescript-langserver')
-    autocmd User lsp_setup call lsp#register_server({
-      \ 'name': 'javascript-typescript-langserver',
-      \ 'cmd': { server_info->[&shell, &shellcmdflag, 'javascript-typescript-stdio']},
-      \ 'root_uri': { server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_directory(lsp#utils#get_buffer_path(), '.git/..'))},
-      \ 'whitelist': ['typescript', 'javascript', 'javascript.jsx']
-      \ })
-endif
-
-" -----------------------------------------------------------------------------
 " ctags structure
 Plug 'majutsushi/tagbar'
 nmap <F8> :TagbarToggle<CR>
@@ -395,65 +374,19 @@ Plug 'kana/vim-gf-user'
 Plug 'kana/vim-gf-diff'
 
 " -----------------------------------------------------------------------------
-Plug 'autozimu/LanguageClient-neovim', { 'branch': 'next', 'do': 'bash install.sh' }
-let g:LanguageClient_autoStart = 1
-let g:LanguageClient_diagnosticsEnable = 0
-let g:LanguageClient_serverCommands = {
-    \ 'javascript': ['/usr/local/bin/javascript-typescript-stdio'],
-    \ 'javascript.jsx': ['/usr/local/bin/javascript-typescript-stdio'],
-    \ 'typescript': ['/usr/local/bin/javascript-typescript-stdio'],
-    \ 'python': ['/usr/local/bin/pyls'],
-    \ }
-
-Plug 'lifepillar/vim-mucomplete'
-set completeopt+=menuone
-set completeopt+=noselect
-set shortmess+=c   " Shut off completion messages
-set belloff+=ctrlg " If Vim beeps during completion
-let g:mucomplete#enable_auto_at_startup = 1
-set fileignorecase
-let g:mucomplete#buffer_relative_paths = 1
-let g:mucomplete#completion_delay = 100
-let g:mucomplete#reopen_immediately = 0
-let g:mucomplete#no_mappings = 1
-
-set formatexpr=LanguageClient_textDocument_rangeFormatting()
-set omnifunc=LanguageClient#complete
-
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
-
-let g:mucomplete#chains = {
-    \ 'default'   : ['path', 'omni', 'keyn', 'dict', 'uspl'],
-    \ 'vim'       : ['path', 'cmd', 'keyn'],
-    \ 'magit'     : ['path', 'cmd', 'keyn'],
-    \ 'gitcommit' : ['path', 'cmd', 'keyn']
-    \ }
-
-let g:completor_complete_options = 'menuone,noselect,preview'
-
-" jsconfig.json example:
-" https://code.visualstudio.com/docs/languages/jsconfig
-" {
-"     "compilerOptions": {
-"         "target": "es2017",
-"         "checkJs": true,
-"         "baseUrl": ".",
-"         "experimentalDecorators": true,
-"         "allowSyntheticDefaultImports": true,
-"         "allowJs": true,
-"         "jsx": "react",
-"         "paths": {
-"             "modules/*": ["./src/modules/*"],
-"             "moduleName/*": ["./src/modules/moduleName/src/*"],
-"         },
-"         "module": "commonjs"
-"     },
-"     "exclude": [
-"         "node_modules"
-"     ]
-" }
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+" CocInstall coc-json
+" CocInstall coc-tsserver
+" CocInstall coc-tabnine
+" use <tab> for trigger completion and navigate to the next complete item
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+inoremap <silent><expr> <Tab>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<Tab>" :
+      \ coc#refresh()
 
 " -----------------------------------------------------------------------------
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -528,10 +461,6 @@ let &rtp = &rtp . ',' . expand('~') . '/dotfiles/.vim'
 augroup au_vimrc
     autocmd!
 augroup END
-
-" fix LanguageClients bug with incorrect buffer open
-autocmd au_vimrc BufReadPost *
-            \ if (filereadable(expand("%"))) | :e % | endif
 
 " Match HTML tags
 runtime macros/matchit.vim
