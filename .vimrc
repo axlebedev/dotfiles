@@ -374,7 +374,10 @@ Plug 'kana/vim-gf-user'
 Plug 'kana/vim-gf-diff'
 
 " -----------------------------------------------------------------------------
-Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+Plug 'neoclide/coc.nvim', {
+\    'branch': 'release',
+\    'do': ':CocInstall coc-json \| CocInstall coc-tsserver \| CocInstall coc-tabnine'
+\}
 " CocInstall coc-json
 " CocInstall coc-tsserver
 " CocInstall coc-tabnine
