@@ -374,22 +374,19 @@ Plug 'kana/vim-gf-user'
 Plug 'kana/vim-gf-diff'
 
 " -----------------------------------------------------------------------------
-Plug 'neoclide/coc.nvim', {
-\    'branch': 'release',
-\    'do': ':CocInstall coc-json \| CocInstall coc-tsserver \| CocInstall coc-tabnine'
-\}
+Plug 'neoclide/coc.nvim', { 'do': 'yarn install --frozen-lockfile' }
 " CocInstall coc-json
 " CocInstall coc-tsserver
 " CocInstall coc-tabnine
-" use <tab> for trigger completion and navigate to the next complete item
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
+" CocInstall coc-snippets
 inoremap <silent><expr> <Tab>
       \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<Tab>" :
-      \ coc#refresh()
+      \ "\<Tab>"
+inoremap <silent><expr> <S-Tab>
+      \ pumvisible() ? "\<C-p>" :
+      \ "\<S-Tab>"
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
+
 
 " -----------------------------------------------------------------------------
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
