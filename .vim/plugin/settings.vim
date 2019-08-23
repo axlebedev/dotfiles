@@ -38,8 +38,11 @@ else
     set wildignore+=*\\node_modules*,*\\bower_components\\*,*\\build\\*,*\\dist\\*,*happypack\\*,*\\lib\\*,*\\coverage\\*
 endif
 
+" tab for command line autocomplete
+set wildmenu
 " fix autocompletion of filenames in command-line mode
-set wildmode=longest,list
+set wildmode=list:full
+set wildignorecase
 
 if has('gui_running')
     set encoding=utf-8
