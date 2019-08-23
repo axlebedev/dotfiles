@@ -224,5 +224,5 @@ nnoremap <leader>lsn :call JsFastLog_lineNumber()<cr>
 " nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
 " nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
 
-nnoremap <silent> K :call CocActionAsync("doHover")<CR>
-nnoremap <silent> gd :call CocActionAsync("jumpDefinition")<CR>
+nnoremap <silent> K :call CocAction("doHover")<CR>
+nnoremap <silent> gd :call CocAction("jumpDefinition")<CR>
