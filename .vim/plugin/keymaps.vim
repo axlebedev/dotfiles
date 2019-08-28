@@ -164,6 +164,8 @@ nnoremap yf :call yankfilename#YankFileName()<CR>
 
 nnoremap <silent> <leader>hh :call blockline#BlockLine()<CR>
 
+nnoremap <silent> cn :<C-u>cn<CR>
+
 " for convenient git
 nnoremap <C-g> :<C-u>Magit<CR>
 nnoremap <C-g><C-b> :<C-u>Gblame<cr>
