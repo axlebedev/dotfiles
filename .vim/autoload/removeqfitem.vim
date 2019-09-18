@@ -41,3 +41,33 @@ function! removeqfitem#RemoveQFItemsVisual() abort
     call winrestview(l:winview)
     call setpos('.', curpos)
 endfunction
+
+function! removeqfitem#FilterQF(isVisualMode) abort
+    let curpos = getpos('.')
+    let word = ""
+    let l:winview = winsaveview()
+
+    if (a:isVisualMode)
+        let word = l9#getSelectedText()
+    else
+        let word = expand("<cword>")
+    endif
+
+    let promptString = 'Filter entries with text: '
+    let word = input(promptString, word)
+    if (empty(word))
+        return
+    endif
+
+    let filename = expand("%")
+    if (len(filename) > 0)
+        delete " current line
+        return
+    endif
+
+    let qfall = getqflist()
+    call filter(qfall, 'v:val.text !~ "'.word.'"')
+    call setqflist(qfall, 'r')
+    call winrestview(l:winview)
+    call setpos('.', curpos)
+endfunction
