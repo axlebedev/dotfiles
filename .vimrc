@@ -485,14 +485,19 @@ endfunction
 " autocmd VimEnter * NERDTree | wincmd l
 function! CallNERDTree(tid) abort
     if (IsNerdTreeEnabled())
-        Startify
+        if (argc() == 1 && argv(0) == ".")
+            Startify
+        else
+            echom 'argc()='.argc()
+            echom 'argv(0)='.argv(0)
+        endif
     else
         NERDTree
         wincmd l
         call timer_start(100, 'CallNERDTree')
     endif
 endfunction
-autocmd VimEnter * call CallNERDTree(0)
+autocmd VimEnter * if (!&diff) | call CallNERDTree(0) | endif
 
 " close vim if only window is NERDTree
 autocmd au_vimrc bufenter *
