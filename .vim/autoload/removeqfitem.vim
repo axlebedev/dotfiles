@@ -66,7 +66,7 @@ function! removeqfitem#FilterQF(isVisualMode) abort
     endif
 
     let qfall = getqflist()
-    call filter(qfall, 'v:val.text !~ "'.word.'"')
+    call filter(qfall, 'v:val.text !~ "'.word.'" && bufname(v:val.bufnr) !~ "'.word.'"')
     call setqflist(qfall, 'r')
     call winrestview(l:winview)
     call setpos('.', curpos)
