@@ -182,6 +182,9 @@ nnoremap <C-g><C-w> :<C-u>Gw<cr>
 " beautify json
 nnoremap <leader>bj :<C-u>%!python -m json.tool<cr>
 
+" copen
+nnoremap <leader>co :<C-u>copen<cr>
+
 nnoremap <leader>c :call readmode#ReadModeToggle()<cr>
 
 nnoremap <leader>j :<C-u>call opennextbuf#OpenNextBuf(1)<CR>
