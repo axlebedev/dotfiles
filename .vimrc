@@ -444,6 +444,8 @@ nmap <C-x> <Plug>(trip-decrement)
 " -TEST------------------------------------------------------------------------
 Plug 'pbrisbin/vim-mkdir' " Automatically create parent directories on write when don't exist already.
 
+Plug 'rhysd/vim-textobj-anyblock'
+
 " -----------------------------------------------------------------------------
 call plug#end()
 filetype plugin indent on
