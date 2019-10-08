@@ -158,6 +158,7 @@ let g:AutoPairsMapSpace = 0
 imap <silent> <expr> <space> pumvisible()
 	\ ? "<space>"
 	\ : "<c-r>=AutoPairsSpace()<cr>"
+let g:AutoPairsMapBS = 0
 
 " -----------------------------------------------------------------------------
 " comment lines, uncomment lines
@@ -375,18 +376,24 @@ Plug 'kana/vim-gf-diff'
 
 " -----------------------------------------------------------------------------
 Plug 'neoclide/coc.nvim', { 'do': 'yarn install --frozen-lockfile' }
-" CocInstall coc-json
-" CocInstall coc-tsserver
-" CocInstall coc-tabnine
-" CocInstall coc-snippets
-inoremap <silent><expr> <Tab>
+let g:coc_global_extensions = ['coc-json', 'coc-tsserver', 'coc-tabnine', 'coc-snippets']
+
+function! s:check_back_space() abort
+	let col = col('.') - 1
+	return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
-      \ "\<Tab>"
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
 inoremap <silent><expr> <S-Tab>
       \ pumvisible() ? "\<C-p>" :
       \ "\<S-Tab>"
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
 
+inoremap <silent><expr> <BS>
+      \ <SID>check_back_space() ? "\<BS>" : "\<BS>\<C-r>=coc#refresh()<CR>"
 
 " -----------------------------------------------------------------------------
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
