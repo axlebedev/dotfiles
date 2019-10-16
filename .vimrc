@@ -422,19 +422,10 @@ Plug 'RRethy/vim-illuminate'
 
 " -TEST------------------------------------------------------------------------
 " Highlight 'f' entries
-" Plug 'rhysd/clever-f.vim'
-" let g:clever_f_smart_case = 1
-" let g:clever_f_across_no_line = 1
-" nmap ; <Plug>(clever-f-repeat-forward)
-" -TEST-instead-of-previous----------------------------------------------------
-Plug 'justinmk/vim-sneak'
-map f <Plug>Sneak_f
-map F <Plug>Sneak_F
-
-map t <Plug>Sneak_t
-map T <Plug>Sneak_T
-
-let g:sneak#use_ic_scs = 1
+Plug 'rhysd/clever-f.vim'
+let g:clever_f_smart_case = 1
+let g:clever_f_across_no_line = 1
+nmap ; <Plug>(clever-f-repeat-forward)
 
 " -TEST------------------------------------------------------------------------
 " Commands to open browser + open specific pages on Github.
