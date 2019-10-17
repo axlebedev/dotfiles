@@ -193,8 +193,13 @@ nnoremap <leader>k :<C-u>call opennextbuf#OpenNextBuf(0)<CR>
 nnoremap <leader>f :<C-u>call findcursor#FindCursor()<CR>
 
 " update current file
-nnoremap <silent> <F5> :e<CR>
-nnoremap <silent> <F5><F5> :e!<CR>
+function! UpdateBuffer(force) abort
+    let winview = winsaveview()
+    if (a:force) | e! | else | e | endif
+    call winrestview(winview)
+endfunction
+nnoremap <silent> <F5> :call UpdateBuffer(0)<CR>
+nnoremap <silent> <F5><F5> :call UpdateBuffer(1)<CR>
 
 nnoremap <C-f> :call globalfind#GlobalFind(0, 0, 0)<cr>
 xnoremap <C-f> :call globalfind#GlobalFind(1, 0, 0)<cr>
