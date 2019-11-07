@@ -59,6 +59,10 @@ abbr -a gst git stash
 abbr -a gsta git stash apply
 abbr -a grh git reset HEAD^
 
+alias copyBranch="git rev-parse --abbrev-ref HEAD | xclip -sel clip"
+abbr -a cb copyBranch
+
+
 abbr -a nemo nemo --no-desktop
 
 abbr -a gt gnome-terminal
