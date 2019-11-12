@@ -110,9 +110,6 @@ vnoremap // "py/<C-R>p<CR>
 nnoremap <silent> <leader>; :call appendchar#AppendChar(';')<CR>
 nnoremap <silent> <leader>, :call appendchar#AppendChar(',')<CR>
 
-" Toggle true/false
-nnoremap <silent> <C-t> :<C-u>ToggleBool<CR>
-
 " toggle foldColumn: 0->6->12->0...
 " nnoremap <silent> <F4> :let &l:foldcolumn = (&l:foldcolumn + 6) % 18<cr>
 

@@ -328,7 +328,8 @@ let NERDTreeAutoDeleteBuffer=1
 
 " -----------------------------------------------------------------------------
 " Toggle true/false
-Plug 'sagarrakshe/toggle-bool'
+Plug 'AndrewRadev/switch.vim'
+let g:switch_mapping = "<C-t>"
 
 " -----------------------------------------------------------------------------
 Plug 'machakann/vim-highlightedyank'
