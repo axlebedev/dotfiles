@@ -369,6 +369,7 @@ Plug 'kana/vim-textobj-lastpat' " last search pattern a/, i/, a?, i?
 Plug 'kana/vim-textobj-line' " al, il
 Plug 'kana/vim-textobj-underscore' " a_, i_
 Plug 'Julian/vim-textobj-variable-segment' " Variable (CamelCase or underscore) segment text object (iv / av).
+Plug 'rhysd/vim-textobj-anyblock'
 
 " -----------------------------------------------------------------------------
 " 'gf' from a diff file
