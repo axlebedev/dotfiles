@@ -444,7 +444,10 @@ nmap <C-x> <Plug>(trip-decrement)
 " -TEST------------------------------------------------------------------------
 Plug 'pbrisbin/vim-mkdir' " Automatically create parent directories on write when don't exist already.
 
-Plug 'rhysd/vim-textobj-anyblock'
+" -TEST------------------------------------------------------------------------
+Plug 'psliwka/vim-smoothie'
+let g:smoothie_base_speed = 13
+
 
 " -----------------------------------------------------------------------------
 call plug#end()
