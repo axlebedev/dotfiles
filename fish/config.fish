@@ -55,7 +55,7 @@ abbr -a gbs git bisect start
 abbr -a gbr git bisect reset
 abbr -a gbg git bisect good
 abbr -a gbb git bisect bad
-abbr -a gst git stash
+abbr -a gst git stash save --keep-index
 abbr -a gsta git stash apply
 abbr -a grh git reset HEAD^
 
