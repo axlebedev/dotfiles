@@ -18,6 +18,7 @@ filetype off
 " vim-plug installation:
 " curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 call plug#begin(expand('~') . '/.vim/bundle')
+" General purpose plugins {{{
 " -----------------------------------------------------------------------------
 " General purpose funcs for other plugins
 Plug 'vim-scripts/l9'
@@ -28,15 +29,182 @@ Plug 'vim-scripts/l9'
 Plug 'kana/vim-submode'
 
 " -----------------------------------------------------------------------------
+" Automatically create parent directories on write when don't exist already.
+Plug 'pbrisbin/vim-mkdir' 
+
+" -----------------------------------------------------------------------------
+" Make '.' work on plugin commands (not all maybe)
+Plug 'tpope/vim-repeat'
+
+" -----------------------------------------------------------------------------
+" autoswitch language on leave insert mode
+" NOTE: установить в системе xkb-switch
+Plug 'lyokha/vim-xkbswitch'
+let g:XkbSwitchEnabled = 1
+let g:XkbSwitchSkipIMappings = {'*': ["'", '"', '[', ']', '<', '>']}
+
+" -----------------------------------------------------------------------------
+" yank previous registers
+Plug 'vim-scripts/YankRing.vim'
+nnoremap <silent> <F11> :YRShow<CR>
+function! YRRunAfterMaps() abort
+    nnoremap Y :<C-U>YRYankCount 'y$'<CR>
+
+    vnoremap <silent> y y`]
+    vmap p pgvy
+    " replace word under cursor with last yanked
+    nnoremap wp mmviwpgvy`m
+    nnoremap <silent> p p`]
+endfunction
+
+" -----------------------------------------------------------------------------
+"  Start screen for vim
+Plug 'mhinz/vim-startify', { 'on':  'Startify' }
+let g:startify_disable_at_vimenter = 1
+let g:startify_list_order = [
+    \ ['   Most recent:'], 'dir',
+    \ ['   Sessions:'], 'sessions',
+    \ ['   Bookmarks:'], 'bookmarks',
+    \ ['   Commands:'], 'commands',
+    \ ['   Most recent global'], 'files',
+\ ]
+let g:startify_bookmarks = [ {'c': '~/.vimrc'} ]
+let g:startify_commands = [':PlugUpdate', ':PlugInstall']
+let g:startify_files_number = 12
+let g:startify_update_oldfiles = 1
+let g:startify_change_to_dir = 0
+let g:startify_custom_header = []
+" remap 'o' to open file in Startify window
+autocmd User Startified nmap <buffer> o <plug>(startify-open-buffers)
+
+" -----------------------------------------------------------------------------
+" NERD Tree
+Plug 'scrooloose/nerdtree', { 'on':  ['NERDTreeToggle', 'NERDTree'] }
+let NERDTreeDirArrows = 1 " allow it to show arrows
+let NERDTreeDirArrowExpandable = '▸' 
+let NERDTreeDirArrowCollapsible = '▾'
+let NERDTreeShowHidden = 1 " show hidden files
+let NERDTreeCascadeSingleChildDir = 0 " dont collapse singlechild dir
+let NERDTreeWinSize = 50
+let NERDTreeAutoDeleteBuffer = 1
+
+" -----------------------------------------------------------------------------
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+let g:fzf_layout = { 'window': '10new' }
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
+" }}} General purpose plugins
+
+" functions plugins {{{
+" -----------------------------------------------------------------------------
+" Markdown live preview
+Plug 'shime/vim-livedown', { 'for': 'markdown', 'do': 'sudo npm i -g livedown' }
+
+" -----------------------------------------------------------------------------
+" :Qdo
+Plug 'henrik/vim-qargs'
+
+" -----------------------------------------------------------------------------
+" Commands to open browser + open specific pages on Github.
+Plug 'tyru/open-browser.vim'
+nmap <F3> <Plug>(openbrowser-smart-search)
+vmap <F3> <Plug>(openbrowser-smart-search)
+
+" -----------------------------------------------------------------------------
+Plug 'francoiscabrol/ranger.vim'
+
+" -----------------------------------------------------------------------------
+" Delete all buffers but current
+Plug 'schickling/vim-bufonly'
+
+" -----------------------------------------------------------------------------
 " Execute a :command and show the output in a temporary buffer
 Plug 'AndrewRadev/bufferize.vim'
 
-" -----------------------------------------------------------------------------
-" Markdown live preview
-Plug 'shime/vim-livedown', { 'do': 'sudo npm i -g livedown' }
+" }}} functions plugins
+"
+" search plugins {{{
 
 " -----------------------------------------------------------------------------
-Plug 'moll/vim-node'
+"  TODO
+" Search string or pattern in folder
+" Necessary to open files from quickfix
+Plug 'yssl/QFEnter'
+let g:qfenter_keymap = {}
+let g:qfenter_keymap.open = ['<CR>', '<2-LeftMouse>', 'o']
+let g:qfenter_keymap.vopen = ['<C-v>', 'i']
+let g:qfenter_keymap.hopen = ['<C-s>']
+
+" -----------------------------------------------------------------------------
+" Search in project
+Plug 'mileszs/ack.vim'
+let g:ack_apply_qmappings = 0
+let g:ack_apply_lmappings = 0
+if executable('ag') " sudo apt-get install silversearcher-ag
+  let g:ackprg = 'ag -U' .
+    \ ' --ignore-dir .git' .
+    \ ' --ignore-dir .happypack' .
+    \ ' --ignore-dir bin' .
+    \ ' --ignore-dir build' .
+    \ ' --ignore-dir coverage' .
+    \ ' --ignore-dir lib' .
+    \ ' --ignore-dir logs' .
+    \ ' --ignore-dir public' .
+    \ ' --ignore-dir static' .
+    \ ' --ignore-dir webpack' .
+    \ ' --ignore "*node_modules*"'
+endif
+
+" -----------------------------------------------------------------------------
+" Show 'n of m' result
+let g:indexed_search_mappings = 0
+let g:indexed_search_numbered_only = 1
+let g:indexed_search_shortmess = 1
+Plug 'henrik/vim-indexed-search'
+
+" Clear highlight on cursor move
+Plug 'junegunn/vim-slash'
+noremap <silent> <plug>(slash-after) :ShowSearchIndex<cr>
+
+" }}} search plugins
+
+" appearance plugins {{{
+" -----------------------------------------------------------------------------
+" Indent line for leading spaces
+Plug 'Yggdroot/indentLine'
+" Warning! needed to patch font as described at https://github.com/Yggdroot/indentLine
+let g:indentLine_char = '┆'
+
+" -----------------------------------------------------------------------------
+" Color theme
+Plug 'crusoexia/vim-monokai'
+" give it a try https://github.com/morhetz/gruvbox
+" give it a try https://github.com/arcticicestudio/nord-vim
+
+" -----------------------------------------------------------------------------
+" Highlight 'f' entries
+Plug 'rhysd/clever-f.vim'
+let g:clever_f_smart_case = 1
+let g:clever_f_across_no_line = 1
+nmap ; <Plug>(clever-f-repeat-forward)
+
+" -----------------------------------------------------------------------------
+Plug 'psliwka/vim-smoothie'
+let g:smoothie_base_speed = 13
 
 " -----------------------------------------------------------------------------
 " vim-airline: cute statusbar
@@ -72,84 +240,79 @@ let g:airline_theme='jellybeans'
 "     " endfor
 " endif
 " endfunction
+" }}} appearance plugins
+
+" git plugins {{{
+" -----------------------------------------------------------------------------
+" Pretty work with git
+Plug 'tpope/vim-fugitive'
+Plug 'jreybert/vimagit'
+autocmd User VimagitUpdateFile normal! zt
+autocmd User VimagitRefresh normal! zt
+autocmd FileType magit setlocal nocursorline
+Plug 'rhysd/conflict-marker.vim'
+Plug 'junegunn/gv.vim'
 
 " -----------------------------------------------------------------------------
-" Generate jsdoc easily
-Plug 'heavenshell/vim-jsdoc'
-let g:jsdoc_enable_es6 = 1
-let g:jsdoc_allow_input_prompt = 1
-let g:jsdoc_input_description = 1
-let g:jsdoc_return_type = 1
-let g:jsdoc_return_description = 1
-let g:jsdoc_param_description_separator = ' - '
+" 'gf' from a diff file
+Plug 'kana/vim-gf-user'
+Plug 'kana/vim-gf-diff'
+" }}} git plugins
+
+" text-edit plugins {{{
+" -----------------------------------------------------------------------------
+" Some more text objects
+Plug 'wellle/targets.vim'
+let g:targets_pairs = '()b {}c [] <>' " replace {}B to {}c
 
 " -----------------------------------------------------------------------------
-" One plugin to rule all the languages
-Plug 'othree/html5.vim'
+" expand selection
+Plug 'terryma/vim-expand-region'
+vmap v <Plug>(expand_region_expand)
+vmap <C-v> <Plug>(expand_region_shrink)
 
 " -----------------------------------------------------------------------------
-" JavaScript bundle for vim, this bundle provides syntax and indent plugins
-Plug 'pangloss/vim-javascript'
-let g:javascript_enable_domhtmlcss = 1
-let g:javascript_plugin_jsdoc = 1
-
-Plug 'othree/javascript-libraries-syntax.vim'
-let g:used_javascript_libs = 'underscore,react'
-" Plug 'othree/es.next.syntax.vim'
+" Toggle true/false
+Plug 'AndrewRadev/switch.vim'
+let g:switch_mapping = "<C-t>"
 
 " -----------------------------------------------------------------------------
-" jsx support
-Plug 'MaxMEllon/vim-jsx-pretty'
-let g:vim_jsx_pretty_template_tags = []
-let g:vim_jsx_pretty_colorful_config = 1
+"  textobjects
+Plug 'kana/vim-textobj-user' " dependency for below
+Plug 'kana/vim-textobj-entire' " ae, ie
+Plug 'kana/vim-textobj-indent' " ai, ii, aI, iI
+Plug 'kana/vim-textobj-lastpat' " last search pattern a/, i/, a?, i?
+Plug 'kana/vim-textobj-line' " al, il
+Plug 'kana/vim-textobj-underscore' " a_, i_
+Plug 'Julian/vim-textobj-variable-segment' " Variable (CamelCase or underscore) segment text object (iv / av).
+Plug 'rhysd/vim-textobj-anyblock'
 
 " -----------------------------------------------------------------------------
-" ctags structure
-Plug 'majutsushi/tagbar'
-nmap <F8> :TagbarToggle<CR>
-let g:tagbar_width = 80
-let g:tagbar_autofocus = 1
-" markdown support
-let g:tagbar_type_markdown = {
-    \ 'ctagstype':  'markdown',
-    \ 'ctagsbin':   '/home/alex/dotfiles/markdown2ctags.py',
-    \ 'ctagsargs':  '-f - --sort=yes',
-    \ 'kinds':      ['s:sections', 'i:images'],
-    \ 'sro':        '|',
-    \ 'kind2scope': { 's': 'section' },
-    \ 'sort':       0,
-\ }
+Plug 'machakann/vim-highlightedyank'
+let g:highlightedyank_highlight_duration = 300
 
 " -----------------------------------------------------------------------------
-" Search string or pattern in folder
-" Necessary to open files from quickfix
-Plug 'yssl/QFEnter'
-let g:qfenter_keymap = {}
-let g:qfenter_keymap.open = ['<CR>', '<2-LeftMouse>', 'o']
-let g:qfenter_keymap.vopen = ['<C-v>', 'i']
-let g:qfenter_keymap.hopen = ['<C-s>']
+Plug 'RRethy/vim-illuminate'
 
 " -----------------------------------------------------------------------------
-" Search in project
-Plug 'mileszs/ack.vim'
-let g:ack_apply_qmappings = 0
-let g:ack_apply_lmappings = 0
-if executable('ag') " sudo apt-get install silversearcher-ag
-  let g:ackprg = 'ag -U' .
-    \ ' --ignore-dir .git' .
-    \ ' --ignore-dir bin' .
-    \ ' --ignore-dir logs' .
-    \ ' --ignore-dir lib' .
-    \ ' --ignore-dir coverage' .
-    \ ' --ignore-dir static' .
-    \ ' --ignore-dir webpack' .
-    \ ' --ignore-dir public' .
-    \ ' --ignore-dir .happypack' .
-    \ ' --ignore-dir coverage' .
-    \ ' --ignore-dir build' .
-    \ ' --ignore-dir logs' .
-    \ ' --ignore "*node_modules*"'
-endif
+" Make C-a/C-x work as expected when `-` in front of number.
+Plug 'osyo-manga/vim-trip'
+nmap <C-a> <Plug>(trip-increment)
+nmap <C-x> <Plug>(trip-decrement)
+
+" -----------------------------------------------------------------------------
+" TODO: make it work
+let g:UltiSnipsSnippetDirectories=[expand('~') . '/dotfiles/.vim/UltiSnips', 'UltiSnips']
+let g:UltiSnipsExpandTrigger="<c-k>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+Plug 'SirVer/ultisnips'
+
+" -----------------------------------------------------------------------------
+"  wrap/unwrap lists in brackets
+Plug 'FooSoft/vim-argwrap'
+let g:argwrap_padded_braces = '{'
+let g:argwrap_tail_comma = 1
 
 " -----------------------------------------------------------------------------
 " autoclose parens
@@ -166,56 +329,55 @@ Plug 'tomtom/tcomment_vim'
 let g:tcomment_textobject_inlinecomment = 'ix'
 
 " -----------------------------------------------------------------------------
-" Show 'n of m' result
-let g:indexed_search_mappings = 0
-let g:indexed_search_numbered_only = 1
-let g:indexed_search_shortmess = 1
-Plug 'henrik/vim-indexed-search'
-
-" Clear highlight on cursor move
-Plug 'junegunn/vim-slash'
-noremap <silent> <plug>(slash-after) :ShowSearchIndex<cr>
-
-" -----------------------------------------------------------------------------
-" Make '.' work on plugin commands (not all maybe)
-Plug 'tpope/vim-repeat'
-
-" -----------------------------------------------------------------------------
 " Surround.
 Plug 'tpope/vim-surround'
 
+" }}} text-edit plugins
+
+" js/html/css... plugins {{{
 " -----------------------------------------------------------------------------
-" autoswitch language on leave insert mode
-" NOTE: установить в системе xkb-switch
-Plug 'lyokha/vim-xkbswitch'
-let g:XkbSwitchEnabled = 1
-let g:XkbSwitchIMappings = ['ru']
-let g:XkbSwitchSkipIMappings = {'*': ["'", '"', '[', ']', '<', '>']}
+Plug 'moll/vim-node'
+
+" -----------------------------------------------------------------------------
+" Generate jsdoc easily
+Plug 'heavenshell/vim-jsdoc', { 'for': 'javascript' }
+let g:jsdoc_enable_es6 = 1
+let g:jsdoc_allow_input_prompt = 1
+let g:jsdoc_input_description = 1
+let g:jsdoc_return_type = 1
+let g:jsdoc_return_description = 1
+let g:jsdoc_param_description_separator = ' - '
+
+" -----------------------------------------------------------------------------
+" One plugin to rule all the languages
+Plug 'othree/html5.vim', { 'for': ['html', 'javascript'] }
+
+" -----------------------------------------------------------------------------
+" JavaScript bundle for vim, this bundle provides syntax and indent plugins
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+let g:javascript_enable_domhtmlcss = 1
+let g:javascript_plugin_jsdoc = 1
+
+Plug 'othree/javascript-libraries-syntax.vim', { 'for': 'javascript' }
+let g:used_javascript_libs = 'underscore,react'
+" Plug 'othree/es.next.syntax.vim'
+
+" -----------------------------------------------------------------------------
+" jsx support
+Plug 'MaxMEllon/vim-jsx-pretty', { 'for': 'javascript' }
+let g:vim_jsx_pretty_template_tags = []
+let g:vim_jsx_pretty_colorful_config = 1
 
 " -----------------------------------------------------------------------------
 " Highlight matching html tag
 " forked from 'vim-scripts/MatchTag'
-Plug 'axlebedev/MatchTag'
+Plug 'axlebedev/MatchTag', { 'for': ['javascript', 'html'] }
 
 " -----------------------------------------------------------------------------
 " autoclose html tags
-Plug 'alvan/vim-closetag'
+Plug 'alvan/vim-closetag', { 'for': ['javascript', 'html'] }
 let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.js,*.jsx"
 " TODO: doesn't close if we use neocomplete 
-"
-" -----------------------------------------------------------------------------
-" yank previous registers
-Plug 'vim-scripts/YankRing.vim'
-nnoremap <silent> <F11> :YRShow<CR>
-function! YRRunAfterMaps() abort
-    nnoremap Y :<C-U>YRYankCount 'y$'<CR>
-
-    vnoremap <silent> y y`]
-    vmap p pgvy
-    " replace word under cursor with last yanked
-    nnoremap wp mmviwpgvy`m
-    nnoremap <silent> p p`]
-endfunction
 
 " -----------------------------------------------------------------------------
 " typescript
@@ -227,52 +389,7 @@ let g:tsuquyomi_disable_quickfix=1
 
 " -----------------------------------------------------------------------------
 " color highlight in text
-Plug 'ap/vim-css-color'
-
-" -----------------------------------------------------------------------------
-" Indent line for leading spaces
-Plug 'Yggdroot/indentLine'
-" Warning! needed to patch font as described at https://github.com/Yggdroot/indentLine
-let g:indentLine_char = '┆'
-
-" -----------------------------------------------------------------------------
-" Color theme
-Plug 'crusoexia/vim-monokai'
-" give it a try https://github.com/morhetz/gruvbox
-" give it a try https://github.com/arcticicestudio/nord-vim
-
-" -----------------------------------------------------------------------------
-" Delete all buffers but current
-Plug 'schickling/vim-bufonly'
-
-" -----------------------------------------------------------------------------
-" Some more text objects
-Plug 'wellle/targets.vim'
-let g:targets_pairs = '()b {}c [] <>' " replace {}B to {}c
-
-" -----------------------------------------------------------------------------
-" :Qdo
-Plug 'henrik/vim-qargs'
-
-" -----------------------------------------------------------------------------
-" Pretty work with git
-Plug 'tpope/vim-fugitive'
-Plug 'jreybert/vimagit'
-autocmd User VimagitUpdateFile normal! zt
-autocmd User VimagitRefresh normal! zt
-autocmd FileType magit setlocal nocursorline
-Plug 'rhysd/conflict-marker.vim'
-Plug 'junegunn/gv.vim'
-
-" -----------------------------------------------------------------------------
-" expand selection
-Plug 'terryma/vim-expand-region'
-vmap v <Plug>(expand_region_expand)
-vmap <C-v> <Plug>(expand_region_shrink)
-
-" Plug 'Valloric/ListToggle'
-" let g:lt_location_list_toggle_map = '<leader>0'
-" let g:lt_quickfix_list_toggle_map = '<leader>b'
+Plug 'ap/vim-css-color', { 'for': ['javascript', 'html', 'css'] }
 
 " -----------------------------------------------------------------------------
 " Highlight eslint errors
@@ -296,87 +413,6 @@ let g:ale_typescript_tslint_executable = 'npm run lint'
 nmap <silent> <C-m> <Plug>(ale_next_wrap)
 
 " -----------------------------------------------------------------------------
-"  Start screen for vim
-Plug 'mhinz/vim-startify'
-let g:startify_disable_at_vimenter = 1
-let g:startify_list_order = [
-    \ ['   Most recent:'], 'dir',
-    \ ['   Sessions:'], 'sessions',
-    \ ['   Bookmarks:'], 'bookmarks',
-    \ ['   Commands:'], 'commands',
-    \ ['   Most recent global'], 'files',
-\ ]
-let g:startify_bookmarks = [ {'c': '~/.vimrc'} ]
-let g:startify_commands = [':PlugUpdate', ':PlugInstall']
-let g:startify_files_number = 12
-let g:startify_update_oldfiles = 1
-let g:startify_change_to_dir = 0
-let g:startify_custom_header = []
-" remap 'o' to open file in Startify window
-autocmd User Startified nmap <buffer> o <plug>(startify-open-buffers)
-
-" -----------------------------------------------------------------------------
-" NERD Tree
-Plug 'scrooloose/nerdtree'
-let NERDTreeDirArrows=1 " allow it to show arrows
-let NERDTreeDirArrowExpandable='▸'
-let NERDTreeDirArrowCollapsible='▾'
-let NERDTreeShowHidden=1 " show hidden files
-let NERDTreeCascadeSingleChildDir=0 " dont collapse singlechild dir
-let NERDTreeWinSize=50
-let NERDTreeAutoDeleteBuffer=1
-
-" -----------------------------------------------------------------------------
-" Toggle true/false
-Plug 'AndrewRadev/switch.vim'
-let g:switch_mapping = "<C-t>"
-
-" -----------------------------------------------------------------------------
-Plug 'machakann/vim-highlightedyank'
-let g:highlightedyank_highlight_duration = 300
-
-" -----------------------------------------------------------------------------
-" homemade ^^
-
-Plug 'axlebedev/vim-js-fastlog'
-let g:js_fastlog_prefix = ['%c11111', 'background:#00FF00']
-
-Plug 'axlebedev/vim-smart-insert-tab'
-Plug 'axlebedev/js-gotodef'
-
-Plug 'isomoar/vim-css-to-inline'
-
-" -----------------------------------------------------------------------------
-" TODO: make it work
-let g:UltiSnipsSnippetDirectories=[expand('~') . '/dotfiles/.vim/UltiSnips', 'UltiSnips']
-let g:UltiSnipsExpandTrigger="<c-k>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
-Plug 'SirVer/ultisnips'
-
-" -----------------------------------------------------------------------------
-"  wrap/unwrap lists in brackets
-Plug 'FooSoft/vim-argwrap'
-let g:argwrap_padded_braces = '{'
-let g:argwrap_tail_comma = 1
-
-" -----------------------------------------------------------------------------
-"  textobjects
-Plug 'kana/vim-textobj-user' " dependency for below
-Plug 'kana/vim-textobj-entire' " ae, ie
-Plug 'kana/vim-textobj-indent' " ai, ii, aI, iI
-Plug 'kana/vim-textobj-lastpat' " last search pattern a/, i/, a?, i?
-Plug 'kana/vim-textobj-line' " al, il
-Plug 'kana/vim-textobj-underscore' " a_, i_
-Plug 'Julian/vim-textobj-variable-segment' " Variable (CamelCase or underscore) segment text object (iv / av).
-Plug 'rhysd/vim-textobj-anyblock'
-
-" -----------------------------------------------------------------------------
-" 'gf' from a diff file
-Plug 'kana/vim-gf-user'
-Plug 'kana/vim-gf-diff'
-
-" -----------------------------------------------------------------------------
 Plug 'neoclide/coc.nvim', { 'do': 'yarn install --frozen-lockfile' }
 let g:coc_global_extensions = ['coc-json', 'coc-tsserver', 'coc-tabnine', 'coc-snippets']
 
@@ -397,57 +433,19 @@ inoremap <silent><expr> <S-Tab>
 inoremap <silent><expr> <BS>
       \ <SID>check_back_space() ? "\<BS>" : "\<BS>\<C-r>=coc#refresh()<CR>"
 
+" }}} js/html/css... plugins
+
+" homemade plugins {{{
 " -----------------------------------------------------------------------------
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-let g:fzf_layout = { 'window': '10new' }
-let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'border':  ['fg', 'Ignore'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] }
+" homemade ^^
 
-" -----------------------------------------------------------------------------
-Plug 'francoiscabrol/ranger.vim'
+Plug 'axlebedev/vim-js-fastlog', { 'for': 'javascript' }
+let g:js_fastlog_prefix = ['%c11111', 'background:#00FF00']
 
-" -----------------------------------------------------------------------------
-Plug 'RRethy/vim-illuminate'
+Plug 'axlebedev/vim-smart-insert-tab'
 
-" -TEST------------------------------------------------------------------------
-" Highlight 'f' entries
-Plug 'rhysd/clever-f.vim'
-let g:clever_f_smart_case = 1
-let g:clever_f_across_no_line = 1
-nmap ; <Plug>(clever-f-repeat-forward)
-
-" -TEST------------------------------------------------------------------------
-" Commands to open browser + open specific pages on Github.
-Plug 'tyru/open-browser.vim'
-nmap <F3> <Plug>(openbrowser-smart-search)
-vmap <F3> <Plug>(openbrowser-smart-search)
-
-" -TEST------------------------------------------------------------------------
-" Make C-a/C-x work as expected when `-` in front of number.
-Plug 'osyo-manga/vim-trip'
-nmap <C-a> <Plug>(trip-increment)
-nmap <C-x> <Plug>(trip-decrement)
-
-" -TEST------------------------------------------------------------------------
-Plug 'pbrisbin/vim-mkdir' " Automatically create parent directories on write when don't exist already.
-
-" -TEST------------------------------------------------------------------------
-Plug 'psliwka/vim-smoothie'
-let g:smoothie_base_speed = 13
-
+Plug 'isomoar/vim-css-to-inline', { 'for': ['javascript', 'css', 'html'] }
+" }}} homemade plugins
 
 " -----------------------------------------------------------------------------
 call plug#end()
