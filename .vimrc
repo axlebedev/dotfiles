@@ -480,6 +480,7 @@ function! Startup() abort
     if (!&diff)
         NERDTree
         wincmd l
+        redraw!
         Startify
     endif
 endfunction
