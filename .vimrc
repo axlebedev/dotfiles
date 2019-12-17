@@ -208,7 +208,7 @@ let g:smoothie_base_speed = 13
 
 " -----------------------------------------------------------------------------
 " vim-airline: cute statusbar
-Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline', { 'on':  'Startify' }
 Plug 'vim-airline/vim-airline-themes'
 let g:airline_skip_empty_sections = 1
 let g:airline_powerline_fonts = 1
@@ -476,26 +476,14 @@ autocmd au_vimrc BufLeave *
     \ endif
 
 
-function! IsNerdTreeEnabled()
-    return exists('t:NERDTreeBufName') && bufwinnr(t:NERDTreeBufName) != -1
-endfunction
-" start NERDTree and Startify on vim startup
-" autocmd VimEnter * NERDTree | wincmd l
-function! CallNERDTree(tid) abort
-    if (IsNerdTreeEnabled())
-        if (argc() == 1 && argv(0) == ".")
-            Startify
-        else
-            echom 'argc()='.argc()
-            echom 'argv(0)='.argv(0)
-        endif
-    else
+function! Startup() abort
+    if (!&diff)
         NERDTree
         wincmd l
-        call timer_start(100, 'CallNERDTree')
+        Startify
     endif
 endfunction
-autocmd VimEnter * if (!&diff) | call CallNERDTree(0) | endif
+autocmd VimEnter * call Startup()
 
 " close vim if only window is NERDTree
 autocmd au_vimrc bufenter *
