@@ -73,7 +73,9 @@ endif
 
 highlight VertSplit guibg=#131411 guifg=#131411
 
+" ale-vim customizations
 highlight ALESignColumnWithErrors guibg=#250000
+highlight ALEError cterm=underline guibg=#630000
 
 " NERDTree highlight by filetypes settings ----------------------------- {{{
 function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg) abort
