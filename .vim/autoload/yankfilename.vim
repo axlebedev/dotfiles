@@ -1,5 +1,5 @@
 function! yankfilename#YankFileName()
-    let filename = expand("%")
+    let filename = expand("%:.") . ':' . line('.')
     let @* = filename
     let @+ = filename
     echo 'yanked: "' . filename . '"'
