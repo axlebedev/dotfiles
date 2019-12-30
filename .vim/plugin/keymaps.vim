@@ -3,10 +3,6 @@ nmap <space> <leader>
 vmap <space> <leader>
 xmap <space> <leader>
 
-" fast open/reload vimrc
-nnoremap <leader>ev :edit $MYVIMRC<cr>
-nnoremap <leader>sv :source $MYVIMRC<cr>
-
 " Jump to matching pairs easily, with Tab
 " NOTE: recursive map for macros/matchit.vim
 nmap <Tab> %
@@ -23,11 +19,9 @@ nnoremap ^ 0
 nnoremap 00 0
 nnoremap $ g_
 nnoremap $$ $
-nnoremap H ^
-nnoremap HH 0
 nnoremap L g_
-nnoremap f; g_
 nnoremap LL $
+nnoremap f; g_
 vnoremap 0 ^
 vnoremap ^ 0
 vnoremap 00 0
@@ -37,6 +31,7 @@ vnoremap H ^
 vnoremap HH 0
 vnoremap L g_
 vnoremap LL $
+vnoremap f; g_
 
 " fast save file, close file
 nnoremap <leader>w :w!<cr>
@@ -48,9 +43,6 @@ noremap <leader>x :Startify<cr>
 " split line
 nnoremap <leader>s a<CR><Esc>
 
-" use K to join current line with line above, just like J does with line below
-nnoremap K kJ
-
 " comfortable navigation through windows
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
@@ -59,13 +51,6 @@ nnoremap <C-l> <C-w>l
 
 " double-space to enter command-line
 nnoremap <Space><Space> :
-
-" Visual mode pressing * or # searches for the current selection
-vnoremap <silent> * :call VisualSelection('f')<CR>
-vnoremap <silent> # :call VisualSelection('b')<CR>
-
-" visual select current line
-" nnoremap vz ^vg_
 
 " visual select last visual selection
 " ХЗ почему я постоянно путаю
@@ -88,9 +73,6 @@ nnoremap k gk
 vnoremap j gj
 vnoremap k gk
 
-" toggle fold on tripleclick
-noremap <3-LeftMouse> za
-
 " insert blank line
 nnoremap <leader>o o<Esc>
 
@@ -100,18 +82,12 @@ cmap w!! w !sudo tee % >/dev/null
 " replace selection
 vnoremap <C-h> "hy:%s/<C-r>h//gc<left><left><left><C-r>h
 
-" visual select all
-nnoremap <M-a> ggVG
-
 " pretty find
 vnoremap // "py/<C-R>p<CR>
 
 " add a symbol to current line
 nnoremap <silent> <leader>; :call appendchar#AppendChar(';')<CR>
 nnoremap <silent> <leader>, :call appendchar#AppendChar(',')<CR>
-
-" toggle foldColumn: 0->6->12->0...
-" nnoremap <silent> <F4> :let &l:foldcolumn = (&l:foldcolumn + 6) % 18<cr>
 
 " close all other buffers
 nnoremap bo :BufOnly<CR>
@@ -157,14 +133,12 @@ map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
 \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
 \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
-nnoremap <M-o> <Tab>
-
-nnoremap zl :set foldlevel=1<cr>
-
 nnoremap yf :call yankfilename#YankFileName()<CR>
 
+" fix one-line 'if' statement
 nnoremap <silent> <leader>hh :call blockline#BlockLine()<CR>
 
+" quickfix next
 nnoremap <silent> cn :<C-u>cn<CR>
 
 " for convenient git
@@ -172,7 +146,7 @@ nnoremap <C-g> :<C-u>Magit<CR>
 nnoremap <C-g><C-b> :<C-u>Gblame<cr>
 nnoremap <C-g><C-s> :<C-u>Gstatus<cr>
 nnoremap <C-g><C-v> :<C-u>GV<cr>
-    " stage current file
+" stage current file
 nnoremap <C-g><C-w> :<C-u>Gw<cr> 
 
 " beautify json
