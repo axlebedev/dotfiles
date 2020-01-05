@@ -44,20 +44,6 @@ let g:XkbSwitchEnabled = 1
 let g:XkbSwitchSkipIMappings = {'*': ["'", '"', '[', ']', '<', '>']}
 
 " -----------------------------------------------------------------------------
-" yank previous registers
-Plug 'vim-scripts/YankRing.vim'
-nnoremap <silent> <F11> :YRShow<CR>
-function! YRRunAfterMaps() abort
-    nnoremap Y :<C-U>YRYankCount 'y$'<CR>
-
-    vnoremap <silent> y y`]
-    vmap p pgvy
-    " replace word under cursor with last yanked
-    nnoremap wp mmviwpgvy`m
-    nnoremap <silent> p p`]
-endfunction
-
-" -----------------------------------------------------------------------------
 "  Start screen for vim
 Plug 'mhinz/vim-startify', { 'on':  'Startify' }
 let g:startify_disable_at_vimenter = 1
@@ -106,6 +92,11 @@ let g:fzf_colors =
   \ 'marker':  ['fg', 'Keyword'],
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
+
+" requires 'rust' and 'cargo', 'ripgrep'
+" Lots of additional installations here, look at plugin readme
+Plug 'liuchengxu/vim-clap'
+let g:clap_popup_input_delay = 50
 
 " }}} General purpose plugins
 

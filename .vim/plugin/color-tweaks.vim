@@ -9,6 +9,11 @@ highlight FoldColumn guibg=#131411 guifg=#34352E
 
 " colors of error column
 highlight SignColumn guibg=#131411
+augroup ClapHighlights
+  autocmd!
+  autocmd User ClapOnExit highlight SignColumn guibg=#131411
+  autocmd User ClapOnEnter highlight SignColumn guibg=#131411
+augroup END
 
 " colors of line number column
 highlight LineNr guibg=#131411 guifg=#34352E

@@ -126,7 +126,8 @@ autocmd au_vimrc FileType help,qf,git nnoremap <buffer> <Esc> :q<cr>
 
 nnoremap <silent> <leader>a :<C-u>ArgWrap<CR>
 
-nnoremap <silent> <leader>t :<C-u>call fzf#run({'source': 'git ls-files --cached --exclude-standard --others', 'sink': 'e', 'window': '15split'})<CR>
+nnoremap <silent> <leader>t :<C-u>Clap files<CR>
+nnoremap <silent> <leader>b :<C-u>Clap buffers<CR>
 
 " get current highlight group under cursor
 map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
@@ -134,6 +135,13 @@ map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
 \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 nnoremap yf :call yankfilename#YankFileName()<CR>
+
+nnoremap Y y$
+vnoremap <silent> y y`]
+vmap p pgvy
+" replace word under cursor with last yanked
+nnoremap wp mmviwpgvy`m
+nnoremap <silent> p p`]
 
 " fix one-line 'if' statement
 nnoremap <silent> <leader>hh :call blockline#BlockLine()<CR>
