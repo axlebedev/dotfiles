@@ -269,7 +269,7 @@ let g:targets_pairs = '()b {}c [] <>' " replace {}B to {}c
 " expand selection
 Plug 'terryma/vim-expand-region'
 vmap v <Plug>(expand_region_expand)
-vmap <C-v> <Plug>(expand_region_shrink)
+vmap <S-v> <Plug>(expand_region_shrink)
 
 " -----------------------------------------------------------------------------
 " Toggle true/false
