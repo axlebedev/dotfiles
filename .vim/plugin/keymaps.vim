@@ -126,7 +126,7 @@ autocmd au_vimrc FileType help,qf,git nnoremap <buffer> <Esc> :q<cr>
 
 nnoremap <silent> <leader>a :<C-u>ArgWrap<CR>
 
-nnoremap <silent> <leader>t :<C-u>Clap files<CR>
+nnoremap <silent> <leader>t :<C-u>Clap files ++finder=git ls-files --cached<CR>
 nnoremap <silent> <leader>b :<C-u>Clap buffers<CR>
 
 " get current highlight group under cursor
