@@ -116,6 +116,7 @@ nmap <F3> <Plug>(openbrowser-smart-search)
 vmap <F3> <Plug>(openbrowser-smart-search)
 
 " -----------------------------------------------------------------------------
+let g:ranger_map_keys = 0
 Plug 'francoiscabrol/ranger.vim'
 
 " -----------------------------------------------------------------------------
