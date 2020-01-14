@@ -126,8 +126,15 @@ autocmd au_vimrc FileType help,qf,git nnoremap <buffer> <Esc> :q<cr>
 
 nnoremap <silent> <leader>a :<C-u>ArgWrap<CR>
 
-nnoremap <silent> <leader>t :<C-u>Clap files ++finder=git ls-files --cached<CR>
-nnoremap <silent> <leader>b :<C-u>Clap buffers<CR>
+function! ClapOpen(command_str)
+  while (winnr('$') > 1 && (expand('%') =~# 'NERD_tree' || &ft == 'help' || &ft == 'qf'))
+    wincmd w
+  endwhile
+  exe 'normal! ' . a:command_str . "\<cr>"
+endfunction
+
+nnoremap <silent> <leader>t :call ClapOpen(':Clap files ++finder=git ls-files --cached')<CR>
+nnoremap <silent> <leader>b :call ClapOpen(':Clap buffers')<CR>
 
 " get current highlight group under cursor
 map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
