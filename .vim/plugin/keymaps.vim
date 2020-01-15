@@ -171,8 +171,8 @@ nnoremap <leader>co :<C-u>copen<cr>
 
 nnoremap <leader>c :call readmode#ReadModeToggle()<cr>
 
-nnoremap <leader>j :<C-u>call opennextbuf#OpenNextBuf(1)<CR>
-nnoremap <leader>k :<C-u>call opennextbuf#OpenNextBuf(0)<CR>
+nnoremap <silent> <leader>j :call ClapOpen(':call opennextbuf#OpenNextBuf(1)')<CR>
+nnoremap <silent> <leader>k :call ClapOpen(':call opennextbuf#OpenNextBuf(0)')<CR>
 
 nnoremap <leader>f :<C-u>call findcursor#FindCursor()<CR>
 
