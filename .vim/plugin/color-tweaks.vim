@@ -60,6 +60,9 @@ highlight jsxEqual guifg=white
 " for Plug 'RRethy/vim-illuminate'
 highlight illuminatedWord guibg=#191C41
 
+" supress tildas at empty lines
+highlight NonText guifg=bg
+
 " NERDTree highlight by filetypes settings -----------------------------
 function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg) abort
     exec 'autocmd FileType nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guifg='. a:guifg . ' guibg=' . a:guibg
