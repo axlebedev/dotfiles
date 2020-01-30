@@ -23,6 +23,7 @@
 	tool = gvimdiff
 [merge]
 	tool = gvimdiff
+	renameLimit = 999999
 [difftool]
 	prompt = false
 [color]
