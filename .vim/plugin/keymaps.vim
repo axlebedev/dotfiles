@@ -134,7 +134,7 @@ function! ClapOpen(command_str)
 endfunction
 
 nnoremap <silent> <leader>t :call ClapOpen(':Clap files ++finder=git ls-files --cached --others --exclude-standard')<CR>
-nnoremap <silent> <leader>b :call ClapOpen(':Clap buffers')<CR>
+nnoremap <silent> <leader>b :call ClapOpen(':Clap providers')<CR>
 
 " get current highlight group under cursor
 map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
