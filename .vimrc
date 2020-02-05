@@ -423,7 +423,7 @@ inoremap <silent><expr> <S-Tab>
       \ "\<S-Tab>"
 
 inoremap <silent><expr> <BS>
-      \ <SID>check_back_space() ? "\<BS>" : "\<BS>\<C-r>=coc#refresh()<CR>"
+      \ <SID>check_back_space() ? "\<C-r>=AutoPairsDelete()<CR>" : "\<C-r>=AutoPairsDelete() \<bar> coc#refresh()<CR>"
 
 " }}} js/html/css... plugins
 
