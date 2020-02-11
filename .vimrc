@@ -203,8 +203,24 @@ let g:smoothie_base_speed = 13
 Plug 'vim-airline/vim-airline', { 'on':  'Startify' }
 Plug 'vim-airline/vim-airline-themes'
 let g:airline_skip_empty_sections = 1
-let g:airline_powerline_fonts = 1
+let g:airline_powerline_fonts = 0
 let g:airline#extensions#tabline#enabled=1
+let g:airline_detect_spell = 0
+let g:airline_detect_spelllang = 0
+
+function! AirlineInit()
+    " like default, but without keyboard layout indicator
+    let g:airline_section_a = '%#__accent_bold#%{airline#util#wrap(airline#parts#mode(),0)}%#__restore__#%{airline#util#append(airline#parts#crypt(),0)}%{airline#util#append(airline#parts#paste(),0)}%{airline#util#append(airline#extensions#keymap#status(),0)}%{airline#util#append(airline#parts#spell(),0)}%{airline#util#append("",0)}%{airline#util#append(airline#parts#iminsert(),0)}'
+
+    let g:airline_section_b = '' " dont show git branch at airline
+
+    let g:airline_section_y = '' " dont show encoding
+
+    " remove excess symbols from right part
+    let g:airline_section_z = '%3p%% %#__accent_bold#%{g:airline_symbols.linenr}%4l%#__restore__#%#__accent_bold#/%L%#__restore__# :%3v'
+endfunction
+autocmd User AirlineAfterInit call AirlineInit()
+
 let g:airline#extensions#tabline#formatter = 'jsformatter'
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
