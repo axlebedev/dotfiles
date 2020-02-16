@@ -483,3 +483,66 @@ set timefmt=%H:%M\ %d.%m.%Y
 
 " Don't highlight search results automatically
 " set nohlsearch
+
+
+" Colors tweak
+highlight clear
+
+" Palettes
+" --------
+
+let s:white       = 252 
+let s:white2      = 250 
+let s:black       = 234 
+let s:lightblack  = 235 
+let s:lightblack2 = 236 
+let s:lightblack3 = 237 
+let s:darkblack   = 233 
+let s:grey        = 243 
+let s:lightgrey   = 237 
+let s:darkgrey    = 239 
+let s:warmgrey    = 59 
+
+let s:pink        = 197 
+let s:green       = 148 
+let s:aqua        = 81 
+let s:yellow      = 186 
+let s:orange      = 208 
+let s:purple      = 141 
+let s:red         = 196 
+let s:purered     = 52 
+let s:darkred     = 52 
+
+let s:addfg       = 193 
+let s:addbg       = 65 
+let s:delbg       = 167 
+let s:changefg    = 189 
+let s:changebg    = 60 
+
+highlight  TopLine     cterm=none               ctermfg=15       ctermbg=233
+highlight  Border     cterm=none               ctermfg=15       ctermbg=233
+highlight  StatusLine  cterm=none               ctermfg=white    ctermbg=233
+
+highlight  CmdLine     cterm=none               ctermfg=white    ctermbg=235
+
+highlight  Win         cterm=none               ctermfg=white    ctermbg=236
+highlight  CurrLine    cterm=bold               ctermfg=default  ctermbg=235
+highlight  Directory   cterm=bold               ctermfg=141       ctermbg=236
+" highlight  BrokenLink  cterm=bold               ctermfg=red      ctermbg=default
+" highlight  Device      cterm=bold               ctermfg=red      ctermbg=default
+" highlight  ErrorMsg    cterm=none               ctermfg=red      ctermbg=black
+" highlight  Executable  cterm=bold               ctermfg=green    ctermbg=default
+" highlight  Fifo        cterm=bold               ctermfg=cyan     ctermbg=default
+" highlight  Link        cterm=bold               ctermfg=green    ctermbg=default
+" highlight  OtherLine   cterm=bold               ctermfg=default  ctermbg=235
+" highlight  Selected    cterm=bold               ctermfg=magenta  ctermbg=default
+" highlight  Socket      cterm=bold               ctermfg=magenta  ctermbg=default
+" highlight  SuggestBox  cterm=none               ctermfg=white    ctermbg=black
+" highlight  TopLineSel  cterm=none               ctermfg=148      ctermbg=default
+" highlight  WildMenu    cterm=underline,reverse  ctermfg=white    ctermbg=black
+
+" if $USER == 'root'
+"     highlight  Border      cterm=none  ctermfg=default  ctermbg=red
+"     highlight  StatusLine  cterm=none  ctermfg=white    ctermbg=red
+"     highlight  TopLine     cterm=none  ctermfg=default  ctermbg=red
+" endif
