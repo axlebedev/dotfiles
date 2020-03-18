@@ -76,14 +76,29 @@ set lazyredraw
 " ':' commands; search strings; expressions; input lines, typed for the |input()| function; debug mode commands history saved
 set history=500
 
-" Turn backup off and store swapfiles in a central location
+" https://begriffs.com/posts/2019-07-19-history-use-vim.html#backups-and-undo
+" Protect changes between writes. Default values of
+" updatecount (200 keystrokes) and updatetime
+" (4 seconds) are fine
+set swapfile
+set directory^=~/.vim/tmp/swap//
+
+" protect against crash-during-write
+set writebackup
+" but do not persist backup after successful write
 set nobackup
-set nowb
-set noswapfile
-set directory=~/.vim/tmp/swap//,.,/var/tmp//,/tmp//
-if !isdirectory(s:vimdir . '/tmp/swap')
-    call mkdir(s:vimdir . '/tmp/swap', 'p')
-endif
+" use rename-and-write-new method whenever safe
+set backupcopy=auto
+" patch required to honor double slash at end
+if has("patch-8.1.0251")
+	" consolidate the writebackups -- not a big
+	" deal either way, since they usually get deleted
+	set backupdir^=~/.vim/backup//
+end
+
+" persist the undo tree for each file
+set undofile
+set undodir^=~/.vim/tmp/undo//
 
 " enable persistent undo
 if has('persistent_undo')
