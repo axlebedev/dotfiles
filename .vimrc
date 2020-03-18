@@ -500,14 +500,12 @@ autocmd au_vimrc bufenter *
     \   | q
     \ | endif
 
-" Don't use indentLine in diff mode
+" Don't use indentLine in diff mode and json
 " TODO: check for background color of indentLine in diffs
 function! MaybeTobbleIndentLineByDiff() 
-    if (&diff)
+    if (&diff || &ft == 'json')
         :IndentLinesDisable
-    endif
-
-    if (!&diff)
+    else 
         :IndentLinesEnable
     endif
 endfunction
