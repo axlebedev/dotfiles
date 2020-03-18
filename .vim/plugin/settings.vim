@@ -175,3 +175,5 @@ endif
 let g:markdown_folding = 1
 
 set diffopt+=internal,algorithm:patience,indent-heuristic
+
+let g:markdown_fenced_languages = ['javascript', 'html', 'css']
