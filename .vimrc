@@ -45,7 +45,7 @@ let g:XkbSwitchSkipIMappings = {'*': ["'", '"', '[', ']', '<', '>']}
 
 " -----------------------------------------------------------------------------
 "  Start screen for vim
-Plug 'mhinz/vim-startify', { 'on':  'Startify' }
+Plug 'mhinz/vim-startify'
 let g:startify_disable_at_vimenter = 1
 let g:startify_list_order = [
     \ ['   Most recent:'], 'dir',
@@ -200,7 +200,7 @@ let g:smoothie_base_speed = 13
 
 " -----------------------------------------------------------------------------
 " vim-airline: cute statusbar
-Plug 'vim-airline/vim-airline', { 'on':  'Startify' }
+Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 let g:airline_skip_empty_sections = 1
 let g:airline_powerline_fonts = 0
@@ -484,12 +484,15 @@ autocmd au_vimrc BufLeave *
     \ endif
 
 
+function! StartifyCall(timer) abort
+    Startify
+endfunction
 function! Startup() abort
     if (!&diff)
         NERDTree
         wincmd l
         redraw!
-        Startify
+        call timer_start(10, 'StartifyCall')
     endif
 endfunction
 autocmd VimEnter * call Startup()
