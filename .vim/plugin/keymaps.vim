@@ -133,7 +133,7 @@ function! ClapOpen(command_str)
   exe 'normal! ' . a:command_str . "\<cr>"
 endfunction
 
-nnoremap <silent> <leader>t :call ClapOpen(':Clap files ++finder=git ls-files --cached --others --exclude-standard')<CR>
+nnoremap <silent> <leader>t :call ClapOpen(':Clap files ++finder=git ls-files --cached --others --exclude-standard --exclude=!*local*')<CR>
 nnoremap <silent> <leader>b :call ClapOpen(':Clap providers')<CR>
 
 " get current highlight group under cursor
