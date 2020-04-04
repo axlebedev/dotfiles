@@ -29,13 +29,26 @@ abbr -a giw git commit -m "wip"
 function git-branch -d 'Fuzzy-find a branch'
   set -l cmd (commandline -j)
   [ "$cmd" ]; or return
-  eval $cmd | eval git branch --all | grep -v HEAD | sed -r 's/(remotes\/)(origin\/)(.*)/\2\3\n\3/' | sed -r 's/\* //' | string trim | awk '!x[$0]++' | fzf --reverse --height=50% | read -l result
+  eval $cmd | eval git branch --all | grep -v HEAD | sed -r 's/(remotes\/)(origin\/)(.*)/\2\3\n\3/' | sed -r 's/\* //' | string trim | awk '!x[$0]++' | fzf --no-sort -i --reverse --height=50% | read -l result
   [ "$result" ]; or return
   set -l cmdResult $cmd$result | tr '\n' ' '
   commandline -j -- $cmdResult
   commandline -f repaint
 end
 bind \cg git-branch
+
+
+function git-commit -d 'Fuzzy-find a commit'
+  set -l cmd (commandline -j)
+  [ "$cmd" ]; or return
+  eval $cmd | eval git hist | grep -v HEAD | string trim | awk '!x[$0]++' | fzf --ansi -i --height=50% --reverse --no-sort | read -l result
+  [ "$result" ]; or return
+  set -l $result (echo $result | sed -r 's/^.*([0-9a-f]{7}).*$/\1/')
+  set -l cmdResult $cmd$result | tr '\n' ' '
+  commandline -j -- $cmdResult
+  commandline -f repaint
+end
+bind \cb git-commit
 
 abbr -a go git checkout
 
