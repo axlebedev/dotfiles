@@ -25,7 +25,20 @@ abbr -a gap git add packages
 abbr -a gi git commit --verbose
 abbr -a gia git commit --amend --no-edit
 abbr -a giw git commit -m "wip"
+
+function git-branch -d 'Fuzzy-find a branch'
+  set -l cmd (commandline -j)
+  [ "$cmd" ]; or return
+  eval $cmd | eval git branch --all | grep -v HEAD | sed -r 's/(remotes\/)(origin\/)(.*)/\2\3\n\3/' | sed -r 's/\* //' | string trim | awk '!x[$0]++' | fzf --reverse --height=50% | read -l result
+  [ "$result" ]; or return
+  set -l cmdResult $cmd$result | tr '\n' ' '
+  commandline -j -- $cmdResult
+  commandline -f repaint
+end
+bind \cg git-branch
+
 abbr -a go git checkout
+
 abbr -a gob git checkout -b
 abbr -a gos git checkout src
 abbr -a gop git checkout packages
