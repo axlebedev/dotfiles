@@ -162,6 +162,8 @@ nnoremap <C-g><C-w> :<C-u>Gw<cr>
 
 " beautify json
 nnoremap <leader>bj :<C-u>%!python -m json.tool<cr>
+" beautify html
+nnoremap <leader>bh :<C-u>call htmlbeautify#htmlbeautify()<CR>
 
 " copen
 nnoremap <leader>co :<C-u>copen<cr>
