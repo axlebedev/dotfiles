@@ -158,6 +158,8 @@ if executable('ag') " sudo apt-get install silversearcher-ag
     \ ' --ignore-dir public' .
     \ ' --ignore-dir static' .
     \ ' --ignore-dir webpack' .
+    \ ' --ignore yarn.lock' .
+    \ ' --ignore yarn-error.log' .
     \ ' --ignore "*node_modules*"'
 endif
 
