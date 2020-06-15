@@ -533,3 +533,8 @@ augroup yank_restore_cursor
             \ call setpos('.', s:cursor) |
         \ endif
 augroup END
+
+augroup autoupdate_on_vimagit
+    autocmd!
+    autocmd User VimagitUpdateFile checktime
+augroup END
