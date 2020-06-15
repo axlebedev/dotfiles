@@ -224,3 +224,5 @@ nnoremap <leader>lsn :call JsFastLog_lineNumber()<cr>
 
 nnoremap <silent> K :call CocAction("doHover")<CR>
 nnoremap <silent> gd :call CocAction("jumpDefinition")<CR>
+
+nnoremap <silent> gdd :call gdd#gdd()<CR>
