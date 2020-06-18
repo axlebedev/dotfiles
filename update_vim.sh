@@ -16,7 +16,7 @@ COLOR_RESET='\033[0m' # No Color
 COLOR_INVERTED='\033[7m'
 
 # check if update necessary
-cd ~/github/vim/
+cd /home/alex/github/vim/
 current_commit=$(git rev-parse HEAD)
 
 printf "Checking for updates...\n"
