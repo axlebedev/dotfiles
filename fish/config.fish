@@ -2,12 +2,8 @@
 set -g -x PATH /usr/local/bin $PATH
 
 # ======== ALIASES ========
-# alias sbe="stack build && stack exec my-project-exe"
-
 abbr -a l ls -alF
 abbr -a lr ls -lrt
-abbr -a lg l | grep -i
-abbr -a lrg l -R | grep -i
 abbr -a lt tree -a -C -I node_modules\|.git\|bower_components
 
 abbr -a rm rm -rf
@@ -25,25 +21,6 @@ abbr -a gap git add packages
 abbr -a gi git commit --verbose
 abbr -a gia git commit --amend --no-edit
 abbr -a giw git commit -m "wip"
-
-# function git-branch -d 'Fuzzy-find a branch'
-#   set -l cmd (commandline -j)
-#   [ "$cmd" ]; or return
-#   eval $cmd |\
-#       eval git branch --all |\
-#       grep -v HEAD |\
-#       sed -r 's/(remotes\/)(origin\/)(.*)/\2\3\n\3/' |\
-#       sed -r 's/\* //' |\
-#       string trim |\
-#       awk '!x[$0]++' |\
-#       fzf --no-sort -i --reverse --height=50% |\
-#       read -l result
-#   [ "$result" ]; or return
-#   set -l cmdResult $cmd$result | tr '\n' ' '
-#   commandline -j -- $cmdResult
-#   commandline -f repaint
-# end
-# bind \cg git-branch
 
 function git-sortedbranch -d 'Fuzzy-find a branch, sorted by reflog, and then all branches'
   set -l cmd (commandline -j)
@@ -115,16 +92,13 @@ abbr -a grh git reset HEAD^
 alias copyBranch="git rev-parse --abbrev-ref HEAD | xclip -sel clip"
 abbr -a cb copyBranch
 
-
 abbr -a nemo nemo --no-desktop
 
 abbr -a gt gnome-terminal
 
 abbr -a ni npm i
 abbr -a nis npm i --save
-abbr -a nd npm run dev
 abbr -a ncc npm cache clean -f
-abbr -a nccnd npm cache clean -f ; and npm run dev
 abbr -a nb npm run build
 abbr -a ns npm start
 abbr -a nl npm run lint
@@ -134,5 +108,3 @@ abbr -a nta npm run test-all
 abbr -a ys yarn start
 abbr -a ycc yarn cache clean
 abbr -a yi yarn --ignore-engines
-
-abbr -a est es-ctags -R .
