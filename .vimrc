@@ -65,7 +65,7 @@ autocmd User Startified nmap <buffer> o <plug>(startify-open-buffers)
 
 " -----------------------------------------------------------------------------
 " NERD Tree
-Plug 'scrooloose/nerdtree', { 'on':  ['NERDTreeToggle', 'NERDTree'] }
+Plug 'scrooloose/nerdtree'
 let NERDTreeDirArrows = 1 " allow it to show arrows
 let NERDTreeDirArrowExpandable = '▸' 
 let NERDTreeDirArrowCollapsible = '▾'
@@ -204,8 +204,6 @@ let g:smoothie_base_speed = 13
 
 " -----------------------------------------------------------------------------
 " vim-airline: cute statusbar
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 let g:airline_skip_empty_sections = 1
 let g:airline_powerline_fonts = 0
 let g:airline#extensions#tabline#enabled=1
@@ -240,8 +238,10 @@ if has("gui_running")
     let g:airline_symbols.readonly = s:isWin ? ' ' : ''
     let g:airline_symbols.linenr = s:isWin ? ' ' : ''
 endif
-
 let g:airline_theme='jellybeans'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
 " TODO TODO
 " let g:airline_theme_patch_func = 'AirlineThemePatch'
 " function! AirlineThemePatch(palette)
@@ -487,19 +487,6 @@ autocmd au_vimrc BufLeave *
     \     exe 'call kwbd#Kwbd(1)' |
     \ endif
 
-
-function! StartifyCall(timer) abort
-    Startify
-endfunction
-function! Startup() abort
-    if (!&diff)
-        NERDTree
-        wincmd l
-        redraw!
-        call timer_start(10, 'StartifyCall')
-    endif
-endfunction
-autocmd VimEnter * call Startup()
 
 " close vim if only window is NERDTree
 autocmd au_vimrc bufenter *
