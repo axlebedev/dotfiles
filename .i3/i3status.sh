@@ -22,6 +22,11 @@ do
         google-chrome --app="https://calendar.google.com/" > /dev/null 2>&1 &
     fi
 
+    if [ "$getname" = "Volume" ] 
+    then
+        google-chrome --app="https://music.youtube.com/" > /dev/null 2>&1 &
+    fi
+
     if [ "$getname" = "Memory" ] 
     then
         gnome-system-monitor > /dev/null 2>&1 &
