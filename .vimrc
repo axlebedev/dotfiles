@@ -405,7 +405,7 @@ Plug 'ap/vim-css-color', { 'for': ['javascript', 'html', 'css'] }
 
 " -----------------------------------------------------------------------------
 " Highlight eslint errors
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 let g:ale_lint_on_save = 0
 let g:ale_open_list = 0
 let g:ale_change_sign_column_color = 1
