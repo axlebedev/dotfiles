@@ -64,10 +64,10 @@ abbr -a gs git status
 # maybe git diff --patience
 abbr -a gd git diff --histogram --minimal --ignore-space-change
 abbr -a gh git hist
-abbr -a ghh git hist -10
-abbr -a ghhh git hist -20
-abbr -a ghhhh git hist -30
-abbr -a ghs git hist --stat
+abbr -a ghh git hist --first-parent -10
+abbr -a ghhh git hist --first-parent -20
+abbr -a ghhhh git hist --first-parent -30
+abbr -a ghs git hist --stat --first-parent
 abbr -a gpl git pull
 abbr -a gps git push origin HEAD
 abbr -a gpsu git push -u origin HEAD
@@ -86,7 +86,7 @@ abbr -a gbr git bisect reset
 abbr -a gbg git bisect good
 abbr -a gbb git bisect bad
 abbr -a gst git stash save --keep-index
-abbr -a gsta git stash apply
+abbr -a gsta git stash pop
 abbr -a grh git reset HEAD^
 
 alias copyBranch="git rev-parse --abbrev-ref HEAD | xclip -sel clip"
