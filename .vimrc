@@ -460,6 +460,11 @@ Plug 'axlebedev/vim-smart-insert-tab'
 Plug 'isomoar/vim-css-to-inline', { 'for': ['javascript', 'css', 'html'] }
 " }}} homemade plugins
 
+" -TEST------------------------------------------------------------------------
+" 'gf' from a diff file
+Plug 'kana/vim-gf-user'
+Plug 'kana/vim-gf-diff'
+
 " -----------------------------------------------------------------------------
 call plug#end()
 filetype plugin indent on
