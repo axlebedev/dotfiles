@@ -66,16 +66,17 @@ TEXT
 ${if_match "${texeci 5 xset q | grep 'Caps Lock' | sed 's/.*Caps Lock:[ ]*\([^ ]*\).*/\1/'}"=="on"}
 { "full_text": "           CapsLock           ", "color": "\#FFFFFF", "background": "\#FF0000" },
 ${endif}
-# VPN OfficeKiev
-        { "full_text": "${template4}", "separator": false, "color": "\#eaed50" },
 # Next block - wi-fi 
-	{ "full_text" : "${downspeed eth0}/s", "color" : "\#ADCBFF" },
+	{ "full_text" : "${downspeed wlp3s0}/s", "color" : "\#ADCBFF", "separator": false },
+# VPN 
+{ "full_text": "${execi 5 (bash ~/dotfiles/.i3/getVPN.sh)}", "color": "\#50ed50", "separator": false },
+{ "full_text": "${addr wlp3s0}", "color": "\#ADCBFF" },
 	# { "full_text" : "${upspeed eth0}/s", "color" : "\#ffc400" },
 # Next 5 blocks - cpu usage
 	{ "name" : "Processor", "separator_block_width":3, "full_text" : "", "separator" : false },
 	{ "separator_block_width":3,
           "min_width":"▁",
-          "full_text" : "${exec cat /sys/devices/platform/coretemp.0/hwmon/hwmon1/temp1_input | cut -c-2}",
+          "full_text" : "${exec cat /sys/devices/platform/coretemp.0/hwmon/hwmon2/temp1_input | cut -c-2}",
           "separator" : false,
           "color" : "\#FFFFFF" 
         },
