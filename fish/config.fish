@@ -25,7 +25,7 @@ abbr -a giw git commit -m "wip"
 function git-sortedbranch -d 'Fuzzy-find a branch, sorted by reflog, and then all branches'
   set -l cmd (commandline -j)
   [ "$cmd" ]; or return
-  eval bash ~/dotfiles/fish/sortedBranch.sh |\
+  bash ~/dotfiles/fish/sortedBranch.sh |\
     fzf --no-sort -i --reverse --height=50% |\
     read -l result
   [ "$result" ]; or return
