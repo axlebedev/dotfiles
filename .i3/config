@@ -20,9 +20,9 @@ smart_borders no_gaps
 # gaps outer 10
 
 exec --no-startup-id unclutter -idle 3
-exec --no-startup-id setxkbmap -layout us,ru
-exec --no-startup-id setxkbmap -option 'grp:shift_caps_switch'
-exec --no-startup-id xrandr --auto --output DVI-D-0 --right-of HDMI-0
+exec --no-startup-id setxkbmap -layout us,ru -option 'grp:shift_caps_switch'
+exec --no-startup-id xrandr --auto --output DVI-D-0 --left-of HDMI-0
+exec --no-startup-id nm-applet
 
 for_window [class="VsTranslator" instance="vsTranslator"] floating enable
 for_window [class="Gnome-system-monitor" instance="gnome-system-monitor"] floating enable
