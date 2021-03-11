@@ -423,6 +423,7 @@ let g:ale_javascript_eslint_executable = 'npm run lint'
 let g:ale_typescript_tslint_executable = 'npm run lint'
 
 nmap <silent> <C-m> <Plug>(ale_next_wrap)
+nmap <silent> <C-n> <Plug>(ale_previous_wrap)
 
 " -----------------------------------------------------------------------------
 Plug 'neoclide/coc.nvim', { 'do': 'yarn install --frozen-lockfile', 'frozen': 1 }
