@@ -458,6 +458,8 @@ let g:js_fastlog_prefix = ['%c11111', 'background:#00FF00']
 Plug 'axlebedev/vim-smart-insert-tab'
 
 Plug 'isomoar/vim-css-to-inline', { 'for': ['javascript', 'css', 'html'] }
+
+Plug 'axlebedev/vim-gotoline-popup'
 " }}} homemade plugins
 
 " -----------------------------------------------------------------------------

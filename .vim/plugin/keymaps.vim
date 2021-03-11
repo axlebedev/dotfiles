@@ -92,9 +92,6 @@ nnoremap <silent> <leader>, :call appendchar#AppendChar(',')<CR>
 " close all other buffers
 nnoremap bo :BufOnly<CR>
 
-" make line where we jump at center
-nnoremap G Gzz
-
 " Now we don't have to move our fingers so far when we want to scroll through
 " the command history; also, don't forget the q: command
 cnoremap <c-j> <down>
@@ -153,7 +150,7 @@ nnoremap <silent> <leader>hh :call blockline#BlockLine()<CR>
 nnoremap <silent> cn :<C-u>cn<CR>
 
 " for convenient git
-nnoremap <C-g> :<C-u>Magit<CR>
+nnoremap <C-g><C-g> :<C-u>Magit<CR>
 nnoremap <C-g><C-b> :<C-u>Gblame<cr>
 nnoremap <C-g><C-s> :<C-u>Gstatus<cr>
 nnoremap <C-g><C-v> :<C-u>GV<cr>
