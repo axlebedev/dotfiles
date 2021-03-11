@@ -38,7 +38,7 @@ Plug 'tpope/vim-repeat'
 
 " -----------------------------------------------------------------------------
 " autoswitch language on leave insert mode
-" NOTE: установить в системе xkb-switch
+" NOTE: собрать и установить xkb-switch  https://github.com/grwlf/xkb-switch
 Plug 'lyokha/vim-xkbswitch'
 let g:XkbSwitchEnabled = 1
 let g:XkbSwitchSkipIMappings = {'*': ["'", '"', '[', ']', '<', '>']}
