@@ -444,10 +444,18 @@ inoremap <silent><expr> <S-Tab>
       \ pumvisible() ? "\<C-p>" :
       \ "\<S-Tab>"
 
+inoremap <silent><expr> <CR>
+      \ pumvisible() ? "\<C-y>" :
+      \ "\<CR>"
+
 inoremap <silent><expr> <BS>
       \ <SID>check_back_space() ? "\<C-r>=AutoPairsDelete()<CR>" : "\<C-r>=AutoPairsDelete() \<bar> coc#refresh()<CR>"
 
 " }}} js/html/css... plugins
+
+" - TEST ----------------------------------------------------------------------
+" TODO: config
+Plug 'scr1pt0r/crease.vim'
 
 " homemade plugins {{{
 " -----------------------------------------------------------------------------
