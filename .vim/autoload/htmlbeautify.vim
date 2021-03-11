@@ -59,19 +59,15 @@ function! htmlbeautify#htmlbeautify() abort
     " enter temporary first line to make search work well
     normal! ggOstart
 
-    echom 63
     " split attributes by lines
     call s:sortAttribute()
 
-    echom 67
     " split classes by lines
     call s:sortClasses()
 
-    echom 71
     " split styles by lines
     call s:sortStyles()
 
-    echom 75
     " remove blank lines
     execute 'g/^\s*$/d'
 

@@ -1,10 +1,10 @@
 #!/bin/bash
-ACTIVE_CON="$(nmcli -f NAME,ACTIVE,TYPE con | grep --perl-regexp "yes\s+vpn")"
+# ACTIVE_CON="$(nmcli -f NAME,ACTIVE,TYPE con | grep --perl-regexp "yes\s+vpn")"
+ACTIVE_CON="$(cat /proc/net/route | grep --perl-regexp "ppp|tun")"
 
 if [[ $ACTIVE_CON = "" ]];
 then
-  return 0
+  echo ""
 else
-  IFS=' ' read -ra NAME <<< "$ACTIVE_CON"
-  echo $NAME
+  echo "VPN"
 fi

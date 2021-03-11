@@ -223,3 +223,5 @@ nnoremap <silent> K :call CocAction("doHover")<CR>
 nnoremap <silent> gd :call CocAction("jumpDefinition")<CR>
 
 nnoremap <silent> gdd :call gdd#gdd()<CR>
+
+nnoremap <silent> to :call openjstest#OpenJsTest()<cR>
