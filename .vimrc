@@ -471,6 +471,11 @@ Plug 'isomoar/vim-css-to-inline', { 'for': ['javascript', 'css', 'html'] }
 Plug 'axlebedev/vim-gotoline-popup'
 " }}} homemade plugins
 
+" -TEST------------------------------------------------------------------------
+" 'gf' from a diff file
+Plug 'kana/vim-gf-user'
+Plug 'kana/vim-gf-diff'
+
 " -----------------------------------------------------------------------------
 call plug#end()
 filetype plugin indent on
