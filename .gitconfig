@@ -21,6 +21,7 @@
 	helper = cache --timeout=86400
 [diff]
 	tool = gvimdiff
+    algorithm = histogram
 [merge]
 	tool = gvimdiff
 	renameLimit = 999999
