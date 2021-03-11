@@ -12,7 +12,8 @@
 
 allBranches="$(git branch --all |\
     grep -v HEAD |\
-    sed -r 's/(remotes\/)(origin\/)(.*)/\2\3\n\3/' |\
+    # sed -r 's/( *remotes\/)(origin\/)(.*)/\2\3\n\3/' |\
+    sed -r 's/\s*(remotes\/)(origin\/)(.*)/\2\3\n\3/' |\
     sed -r 's/\* //')"
 
 localBranches="$(git log -g --grep-reflog "checkout:" --format="%gs" |\
