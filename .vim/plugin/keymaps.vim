@@ -225,3 +225,5 @@ nnoremap <silent> gd :call CocAction("jumpDefinition")<CR>
 nnoremap <silent> gdd :call gdd#gdd()<CR>
 
 nnoremap <silent> to :call openjstest#OpenJsTest()<cR>
+
+nnoremap <silent> co :cope<CR>
