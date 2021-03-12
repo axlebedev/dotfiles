@@ -21,6 +21,7 @@ highlight LineNr guibg=#131411 guifg=#34352E
 " highlight current line number
 highlight clear CursorLine
 highlight CursorLine guibg=#23241E
+highlight CursorColumn guibg=#23241E
 highlight CursorLineNr guifg=#68705e guibg=#131411
 
 highlight VertSplit guibg=#131411 guifg=#131411

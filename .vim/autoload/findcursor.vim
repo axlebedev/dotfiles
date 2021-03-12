@@ -40,16 +40,18 @@ function! s:RestoreSettings() abort
   endif
 endfunction
 
-function! findcursor#FindCursor() abort
+function! findcursor#FindCursor(withHighlight) abort
   call <sid>SaveSettings()
 
   Windo set nocursorline
   Windo set nocursorcolumn
   setlocal cursorline
   setlocal cursorcolumn
-  highlight CursorLine guibg=#5F0000
-  highlight CursorColumn guibg=#5F0000
+  if (a:withHighlight)
+    highlight CursorLine guibg=#5F0000
+    highlight CursorColumn guibg=#5F0000
   " highlight CursorColumn guibg=#fc03be
+  endif
   IlluminationDisable
   IndentLinesDisable
 
