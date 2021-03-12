@@ -4,6 +4,7 @@ let s:cursorline = 0
 let s:cursorcolumn = 0
 let s:cursorlineBg = ''
 let s:cursorcolumnBg = ''
+let s:isActivated = 0
 
 " Like windo but restore the current window.
 function! WinDo(command)
@@ -22,6 +23,7 @@ function! s:ReturnHighlightTerm(group, term) abort
 endfunction
 
 function! s:SaveSettings() abort
+  let s:isActivated = 1
   let s:cursorline = &cursorline
   let s:cursorcolumn = &cursorcolumn
   let s:cursorlineBg = s:ReturnHighlightTerm('CursorLine', 'guibg')
@@ -29,18 +31,22 @@ function! s:SaveSettings() abort
   let s:indentEnabled = g:indentLine_enabled
 endfunction
 
-function! s:RestoreSettings() abort
-  Windo let &cursorline = s:cursorline
-  Windo let &cursorcolumn = s:cursorcolumn
-  execute 'highlight CursorLine guibg='.s:cursorlineBg
-  execute 'highlight CursorColumn guibg='.s:cursorcolumnBg
-  IlluminationEnable
-  if (s:indentEnabled)
-      IndentLinesEnable
+function! s:RestoreSettings(...) abort
+  if (s:isActivated)
+    let s:isActivated = 0
+    Windo let &cursorline = s:cursorline
+    Windo let &cursorcolumn = s:cursorcolumn
+    execute 'highlight CursorLine guibg='.s:cursorlineBg
+    execute 'highlight CursorColumn guibg='.s:cursorcolumnBg
+    IlluminationEnable
+    if (s:indentEnabled)
+        IndentLinesEnable
+    endif
+    autocmd! findcursor
   endif
 endfunction
 
-function! findcursor#FindCursor(withHighlight) abort
+function! findcursor#FindCursor(withHighlight, needHideIndent) abort
   call <sid>SaveSettings()
 
   Windo set nocursorline
@@ -53,10 +59,14 @@ function! findcursor#FindCursor(withHighlight) abort
   " highlight CursorColumn guibg=#fc03be
   endif
   IlluminationDisable
-  IndentLinesDisable
+  if (a:needHideIndent)
+    IndentLinesDisable
+  endif
 
   augroup findcursor
     autocmd!
-    autocmd CursorMoved,CursorMovedI * call <sid>RestoreSettings() | autocmd! findcursor
+    autocmd CursorMoved,CursorMovedI * call <sid>RestoreSettings()
   augroup END
+
+  let timer_id = timer_start(500, {id -> <sid>RestoreSettings()})
 endfunction

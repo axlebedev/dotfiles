@@ -5,8 +5,8 @@ xmap <space> <leader>
 
 " Jump to matching pairs easily, with Tab
 " NOTE: recursive map for macros/matchit.vim
-nmap <Tab> %:<C-u>call findcursor#FindCursor(0)<CR>
-vmap <Tab> %:<C-u>call findcursor#FindCursor(0)<CR>
+nmap <Tab> %:<C-u>call findcursor#FindCursor(0, 0)<CR>
+vmap <Tab> %:<C-u>call findcursor#FindCursor(0, 0)<CR>
 
 " Avoid accidental hits of <F1> while aiming for <Esc>
 map  <F1> :<C-u>Helptags<cr>
@@ -170,7 +170,7 @@ nnoremap <leader>c :call readmode#ReadModeToggle()<cr>
 nnoremap <silent> <leader>j :call ClapOpen(':call opennextbuf#OpenNextBuf(1)')<CR>
 nnoremap <silent> <leader>k :call ClapOpen(':call opennextbuf#OpenNextBuf(0)')<CR>
 
-nnoremap <leader>f :<C-u>call findcursor#FindCursor(1)<CR>
+nnoremap <leader>f :<C-u>call findcursor#FindCursor(1, 1)<CR>
 
 " update current file
 function! UpdateBuffer(force) abort
