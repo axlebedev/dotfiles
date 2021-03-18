@@ -4,7 +4,7 @@
 let s:vimrc_findInTest = 0
 
 function! s:FilterTestEntries(qflist) abort
-    return filter(a:qflist, "bufname(v:val.bufnr) !~# '__test__'")
+    return filter(a:qflist, "bufname(v:val.bufnr) !~# 'test'")
 endfunction
 
 function! globalfind#GlobalFind(isVisualMode, wordMatch, reactRender) abort
