@@ -181,14 +181,14 @@ endfunction
 nnoremap <silent> <F5> :call UpdateBuffer(0)<CR>
 nnoremap <silent> <F5><F5> :call UpdateBuffer(1)<CR>
 
-nnoremap <C-f> :call globalfind#GlobalFind(0, 0, 0)<cr>
-xnoremap <C-f> :call globalfind#GlobalFind(1, 0, 0)<cr>
-nnoremap <C-f><C-f> :call globalfind#GlobalFind(0, 1, 0)<cr>
-xnoremap <C-f><C-f> :call globalfind#GlobalFind(1, 1, 0)<cr>
-nnoremap <C-f><C-r> :call globalfind#GlobalFind(0, 0, 1)<cr>
-xnoremap <C-f><C-r> :call globalfind#GlobalFind(1, 0, 1)<cr>
-nnoremap <C-f><C-t> :call globalfind#ToggleTestSearch()<cr>
-xnoremap <C-f><C-t> :call globalfind#ToggleTestSearch()<cr>
+" nnoremap <C-f> :call globalfind#GlobalFind(0, 0, 0)<cr>
+" xnoremap <C-f> :call globalfind#GlobalFind(1, 0, 0)<cr>
+" nnoremap <C-f><C-f> :call globalfind#GlobalFind(0, 1, 0)<cr>
+" xnoremap <C-f><C-f> :call globalfind#GlobalFind(1, 1, 0)<cr>
+" nnoremap <C-f><C-r> :call globalfind#GlobalFind(0, 0, 1)<cr>
+" xnoremap <C-f><C-r> :call globalfind#GlobalFind(1, 0, 1)<cr>
+" nnoremap <C-f><C-t> :call globalfind#ToggleTestSearch()<cr>
+" xnoremap <C-f><C-t> :call globalfind#ToggleTestSearch()<cr>
 
 " JsFastLog mapping
 nnoremap <leader>l :set operatorfunc=JsFastLog_simple<cr>g@
