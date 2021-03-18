@@ -99,6 +99,7 @@ let g:fzf_colors =
 " Lots of additional installations here, look at plugin readme
 Plug 'liuchengxu/vim-clap'
 let g:clap_popup_input_delay = 50
+let g:clap_open_preview = 'never'
 
 " }}} General purpose plugins
 
