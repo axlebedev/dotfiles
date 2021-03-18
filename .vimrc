@@ -145,25 +145,24 @@ let g:qfenter_keymap.hopen = ['<C-s>']
 
 " -----------------------------------------------------------------------------
 " Search in project
-Plug 'mileszs/ack.vim'
-let g:ack_apply_qmappings = 0
-let g:ack_apply_lmappings = 0
-if executable('ag') " sudo apt-get install silversearcher-ag
-  let g:ackprg = 'ag -U' .
-    \ ' --ignore-dir .git' .
-    \ ' --ignore-dir .happypack' .
-    \ ' --ignore-dir bin' .
-    \ ' --ignore-dir build' .
-    \ ' --ignore-dir coverage' .
-    \ ' --ignore-dir lib' .
-    \ ' --ignore-dir logs' .
-    \ ' --ignore-dir public' .
-    \ ' --ignore-dir static' .
-    \ ' --ignore-dir webpack' .
-    \ ' --ignore yarn.lock' .
-    \ ' --ignore yarn-error.log' .
-    \ ' --ignore "*node_modules*"'
-endif
+Plug 'eugen0329/vim-esearch'
+function! EsearchWord() abort
+  let savedPrefill = g:esearch.prefill
+  let g:esearch.prefill = ['cword', 'last']
+  execute "normal \<Plug>(esearch)"
+  let g:esearch.prefill = savedPrefill
+endfunction
+
+nnoremap <c-f><c-f> :<C-u>call EsearchWord()<CR>
+map <c-f> <plug>(esearch)
+
+let g:esearch = {}
+let g:esearch.prefill = []
+let g:esearch.regex = 1
+let g:esearch.case = 'smart'
+let g:esearch.select_prefilled = 0
+let g:esearch.live_update = 0
+let g:esearch.out = 'qflist'
 
 " -----------------------------------------------------------------------------
 " Show 'n of m' result
