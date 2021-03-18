@@ -5,36 +5,26 @@ function! globalfind#FilterTestEntries() abort
     call setqflist(filtered)
 endfunction
 
-function! globalfind#Esearch() abort
+function! s:EsearchInner(prefill) abort
   let savedPrefill = g:esearch.prefill
 
-  let g:esearch.prefill = []
+  let g:esearch.prefill = a:prefill
   execute "normal \<Plug>(esearch)"
 
   let @/ = g:esearch.last_pattern.str
 
   let g:esearch.prefill = savedPrefill
+endfunction
+
+function! globalfind#Esearch() abort
+  call s:EsearchInner([])
 endfunction
 
 function! globalfind#EsearchVisual() abort
   let word = l9#getSelectedText()
-  let savedPrefill = g:esearch.prefill
-
-  let g:esearch.prefill = [{-> word }]
-  execute "normal \<Plug>(esearch)"
-
-  let @/ = g:esearch.last_pattern.str
-
-  let g:esearch.prefill = savedPrefill
+  call s:EsearchInner([{-> word }])
 endfunction
 
 function! globalfind#EsearchWord() abort
-  let savedPrefill = g:esearch.prefill
-
-  let g:esearch.prefill = ['cword', 'last']
-  execute "normal \<Plug>(esearch)"
-
-  let @/ = g:esearch.last_pattern.str
-
-  let g:esearch.prefill = savedPrefill
+  call s:EsearchInner(['cword', 'last'])
 endfunction
