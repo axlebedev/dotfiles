@@ -182,7 +182,8 @@ nnoremap <silent> <F5> :call UpdateBuffer(0)<CR>
 nnoremap <silent> <F5><F5> :call UpdateBuffer(1)<CR>
 
 nnoremap <c-f><c-f> :<C-u>call globalfind#EsearchWord()<CR>
-map <c-f> <plug>(esearch)
+nnoremap <c-f> :<C-u>call globalfind#Esearch()<CR>
+xnoremap <c-f> :<C-u>call globalfind#EsearchVisual()<CR>
 nnoremap <C-f><C-t> :call globalfind#FilterTestEntries()<cr>
 
 " JsFastLog mapping
