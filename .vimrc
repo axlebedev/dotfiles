@@ -147,15 +147,6 @@ let g:qfenter_keymap.hopen = ['<C-s>']
 " -----------------------------------------------------------------------------
 " Search in project
 Plug 'eugen0329/vim-esearch'
-function! EsearchWord() abort
-  let savedPrefill = g:esearch.prefill
-  let g:esearch.prefill = ['cword', 'last']
-  execute "normal \<Plug>(esearch)"
-  let g:esearch.prefill = savedPrefill
-endfunction
-
-nnoremap <c-f><c-f> :<C-u>call EsearchWord()<CR>
-map <c-f> <plug>(esearch)
 
 let g:esearch = {}
 let g:esearch.prefill = []
