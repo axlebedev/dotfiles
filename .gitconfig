@@ -48,3 +48,5 @@
 
 [hub]
 	protocol = https
+[pull]
+	ff = only
