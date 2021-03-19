@@ -49,18 +49,19 @@ endfunction
 function! findcursor#FindCursor(withHighlight, needHideIndent) abort
   call <sid>SaveSettings()
 
-  Windo set nocursorline
-  Windo set nocursorcolumn
+  IlluminationDisable
+  if (a:needHideIndent)
+    Windo set nocursorline
+    Windo set nocursorcolumn
+    IndentLinesDisable
+  endif
+
   setlocal cursorline
   setlocal cursorcolumn
   if (a:withHighlight)
     highlight CursorLine guibg=#5F0000
     highlight CursorColumn guibg=#5F0000
   " highlight CursorColumn guibg=#fc03be
-  endif
-  IlluminationDisable
-  if (a:needHideIndent)
-    IndentLinesDisable
   endif
 
   augroup findcursor
