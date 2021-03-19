@@ -11,7 +11,9 @@ function! s:EsearchInner(prefill) abort
   let g:esearch.prefill = a:prefill
   execute "normal \<Plug>(esearch)"
 
-  let @/ = g:esearch.last_pattern.str
+  if (!empty(g:esearch.last_pattern) && get(g:esearch.last_pattern, 'str'))
+    let @/ = g:esearch.last_pattern.str
+  endif
 
   let g:esearch.prefill = savedPrefill
 endfunction
