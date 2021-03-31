@@ -155,6 +155,7 @@ let g:esearch.case = 'smart'
 let g:esearch.select_prefilled = 0
 let g:esearch.live_update = 0
 let g:esearch.out = 'qflist'
+let g:esearch.textobj = 0
 
 " -----------------------------------------------------------------------------
 " Show 'n of m' result
