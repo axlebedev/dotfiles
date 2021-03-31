@@ -5,6 +5,7 @@ let s:cursorcolumn = 0
 let s:cursorlineBg = ''
 let s:cursorcolumnBg = ''
 let s:isActivated = 0
+let s:timer_id = 0
 
 " Like windo but restore the current window.
 function! WinDo(command)
@@ -32,6 +33,8 @@ function! s:SaveSettings() abort
 endfunction
 
 function! s:RestoreSettings(...) abort
+  call timer_stop(s:timer_id)
+  let s:timer_id = 0
   if (s:isActivated)
     let s:isActivated = 0
     Windo let &cursorline = s:cursorline
@@ -47,7 +50,9 @@ function! s:RestoreSettings(...) abort
 endfunction
 
 function! findcursor#FindCursor(withHighlight, needHideIndent) abort
-  call <sid>SaveSettings()
+  if (s:timer_id == 0)
+    call <sid>SaveSettings()
+  endif
 
   IlluminationDisable
   if (a:needHideIndent)
@@ -69,5 +74,5 @@ function! findcursor#FindCursor(withHighlight, needHideIndent) abort
     autocmd CursorMoved,CursorMovedI * call <sid>RestoreSettings()
   augroup END
 
-  let timer_id = timer_start(500, {id -> <sid>RestoreSettings()})
+  let s:timer_id = timer_start(500, {id -> <sid>RestoreSettings()})
 endfunction
