@@ -149,6 +149,12 @@ nnoremap <silent> <leader>hh :call blockline#BlockLine()<CR>
 " quickfix next
 nnoremap <silent> cn :<C-u>cn<CR>
 
+" return to start point on visual mode leave
+nnoremap v vmv
+nnoremap V Vmv
+nnoremap <C-v> <C-v>mv
+xnoremap <Esc> <Esc>`v
+
 " for convenient git
 nnoremap <C-g><C-g> :<C-u>Magit<CR>
 nnoremap <C-g><C-b> :<C-u>Gblame<cr>
