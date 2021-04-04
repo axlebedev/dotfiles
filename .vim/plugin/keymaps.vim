@@ -223,3 +223,5 @@ nnoremap <silent> gdd :call gdd#gdd()<CR>
 nnoremap <silent> to :call openjstest#OpenJsTest()<cR>
 
 nnoremap <silent> co :cope<CR>
+
+noremap <silent> <plug>(slash-after) :execute("FindCursor<bar>ShowSearchIndex")<CR>

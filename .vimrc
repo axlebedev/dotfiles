@@ -166,7 +166,6 @@ Plug 'henrik/vim-indexed-search'
 
 " Clear highlight on cursor move
 Plug 'junegunn/vim-slash'
-noremap <silent> <plug>(slash-after) :ShowSearchIndex<cr>
 
 " }}} search plugins
 
