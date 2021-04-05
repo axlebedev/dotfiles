@@ -166,7 +166,6 @@ Plug 'henrik/vim-indexed-search'
 
 " Clear highlight on cursor move
 Plug 'junegunn/vim-slash'
-noremap <silent> <plug>(slash-after) :ShowSearchIndex<cr>
 
 " }}} search plugins
 
@@ -462,6 +461,7 @@ Plug 'axlebedev/vim-smart-insert-tab'
 Plug 'isomoar/vim-css-to-inline', { 'for': ['javascript', 'css', 'html'] }
 
 Plug 'axlebedev/vim-gotoline-popup'
+nmap <C-g> <plug>(gotoline-popup)
 " }}} homemade plugins
 
 " -TEST------------------------------------------------------------------------
