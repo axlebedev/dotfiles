@@ -5,17 +5,15 @@ function! globalfind#FilterTestEntries() abort
     let filtered1 = filter(filtered0, "bufname(v:val.bufnr) !~# 'jsfiller3'")
     let filtered2 = filter(filtered1, "bufname(v:val.bufnr) !~# 'git'")
     let filtered3 = filter(filtered2, "bufname(v:val.bufnr) !~# 'diff'")
-    call setqflist(filtered1)
+    let filtered4 = filter(filtered3, "bufname(v:val.bufnr) !~# 'commonMock'")
+    call setqflist(filtered4)
 endfunction
 
 function! s:EsearchInner(prefill, textobj) abort
   let g:esearch.prefill = a:prefill
   let g:esearch.textobj = a:textobj
   execute "normal \<Plug>(esearch)"
-
-  if (!empty(g:esearch.last_pattern) && get(g:esearch.last_pattern, 'str'))
-    let @/ = g:esearch.last_pattern.str
-  endif
+  let @/ = g:esearch.last_pattern.str
 endfunction
 
 function! globalfind#Esearch() abort
