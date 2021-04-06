@@ -6,7 +6,8 @@ function! globalfind#FilterTestEntries() abort
     let filtered2 = filter(filtered1, "bufname(v:val.bufnr) !~# 'git'")
     let filtered3 = filter(filtered2, "bufname(v:val.bufnr) !~# 'diff'")
     let filtered4 = filter(filtered3, "bufname(v:val.bufnr) !~# 'commonMock'")
-    call setqflist(filtered4)
+    let filtered5 = filter(filtered4, "bufname(v:val.bufnr) !~# 'yarn.lock'")
+    call setqflist(filtered5)
 endfunction
 
 function! s:EsearchInner(prefill, textobj) abort
