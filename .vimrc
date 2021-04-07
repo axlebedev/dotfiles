@@ -526,7 +526,7 @@ autocmd BufEnter * call winview#AutoRestoreWinView()
 
 autocmd BufRead,BufNewFile *.qf set filetype=qf
 
-autocmd VimEnter * NERDTree | wincmd l | Startify
+autocmd VimEnter * if (&diff == 0) | NERDTree | wincmd l | Startify | endif
 
 " keep cursor on yank
 augroup yank_restore_cursor
