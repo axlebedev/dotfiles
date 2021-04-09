@@ -231,4 +231,5 @@ nnoremap <silent> to :call openjstest#OpenJsTest()<cR>
 nnoremap <silent> co :cope<CR>
 
 noremap <silent> <plug>(slash-after) :execute("FindCursor<bar>ShowSearchIndex")<CR>
-nnoremap <silent> N :execute("cnext<bar>normal n")<CR>
+" 'quickfix next'
+nnoremap <silent> qn :execute("cnext<bar>normal n")<CR>
