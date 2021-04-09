@@ -17,9 +17,11 @@ set hidden
 set autoread
 
 " keep lines above/below cursor
-set scrolloff=5
-set sidescrolloff=15
-set sidescroll=1
+if (&diff == 0)
+    set scrolloff=5
+    set sidescrolloff=15
+    set sidescroll=1
+endif
 
 " where to search files to open
 set path=.,,**
