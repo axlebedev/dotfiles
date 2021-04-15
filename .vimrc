@@ -525,7 +525,7 @@ autocmd BufEnter * call winview#AutoRestoreWinView()
 
 autocmd BufRead,BufNewFile *.qf set filetype=qf
 
-autocmd VimEnter * if (&diff == 0 && argv(0) !~# 'git.*MSG' ) | NERDTree | wincmd l | Startify | endif
+autocmd VimEnter * if (&diff == 0 && argv(0) !~# 'git.+MSG' ) | NERDTree | wincmd l | Startify | endif
 
 " keep cursor on yank
 augroup yank_restore_cursor
