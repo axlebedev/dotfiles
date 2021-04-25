@@ -7,6 +7,7 @@ let s:vimdir = expand("~") . "/.vim"
 " english vim interface language
 set langmenu=en_US
 let $LANG = 'en_US'
+let $PAGER='' " for open 'man' in vim https://vim.fandom.com/wiki/Using_vim_as_a_man-page_viewer_under_Unix
 source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
 
