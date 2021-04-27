@@ -504,10 +504,6 @@ autocmd au_vimrc bufenter *
     \   | q
     \ | endif
 
-" re-write oldfiles list on the fly
-" timer is needed because command shots before there is something to write
-autocmd au_vimrc BufWinEnter * :call timer_start(100, {-> execute("wviminfo")})
-
 " Don't use indentLine in diff mode and json
 " TODO: check for background color of indentLine in diffs
 function! MaybeTobbleIndentLineByDiff() 
