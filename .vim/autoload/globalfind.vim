@@ -9,23 +9,3 @@ function! globalfind#FilterTestEntries() abort
     let filtered5 = filter(filtered4, "bufname(v:val.bufnr) !~# 'yarn.lock'")
     call setqflist(filtered5)
 endfunction
-
-function! s:EsearchInner(prefill, textobj) abort
-  let g:esearch.prefill = a:prefill
-  let g:esearch.textobj = a:textobj
-  execute "normal \<Plug>(esearch)"
-  let @/ = g:esearch.last_pattern.str
-endfunction
-
-function! globalfind#Esearch() abort
-  call s:EsearchInner([], 0)
-endfunction
-
-function! globalfind#EsearchVisual() abort
-  let word = l9#getSelectedText()
-  call s:EsearchInner([{-> word }], 0)
-endfunction
-
-function! globalfind#EsearchWord() abort
-  call s:EsearchInner(['cword', 'last'], 'word')
-endfunction

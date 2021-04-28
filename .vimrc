@@ -149,13 +149,14 @@ let g:qfenter_keymap.hopen = ['<C-s>']
 Plug 'eugen0329/vim-esearch'
 
 let g:esearch = {}
-let g:esearch.prefill = []
+let g:esearch.prefill = ['cword', 'last']
 let g:esearch.regex = 1
 let g:esearch.case = 'smart'
 let g:esearch.select_prefilled = 0
 let g:esearch.live_update = 0
 let g:esearch.out = 'qflist'
 let g:esearch.textobj = 0
+let g:esearch.root_markers = []
 
 " -----------------------------------------------------------------------------
 " Show 'n of m' result
@@ -539,3 +540,7 @@ augroup autoupdate_on_vimagit
     autocmd!
     autocmd User VimagitUpdateFile checktime
 augroup END
+
+autocmd TextChanged * if &buftype == 'quickfix'
+\| let @/ = g:esearch.last_pattern.str
+\| endif
