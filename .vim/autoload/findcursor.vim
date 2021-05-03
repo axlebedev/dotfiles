@@ -49,7 +49,7 @@ function! s:RestoreSettings(...) abort
   endif
 endfunction
 
-function! findcursor#FindCursor(withHighlight, needHideIndent) abort
+function! findcursor#FindCursor(color, needHideIndent, autoClear) abort
   if (s:timer_id == 0)
     call <sid>SaveSettings()
   endif
@@ -65,9 +65,9 @@ function! findcursor#FindCursor(withHighlight, needHideIndent) abort
 
   setlocal cursorline
   setlocal cursorcolumn
-  if (a:withHighlight)
-    highlight CursorLine guibg=#5F0000
-    highlight CursorColumn guibg=#5F0000
+  if (a:color[0] == '#')
+    execute 'highlight CursorLine guibg='.a:color
+    execute 'highlight CursorColumn guibg='.a:color
   " highlight CursorColumn guibg=#fc03be
   endif
 
@@ -76,5 +76,7 @@ function! findcursor#FindCursor(withHighlight, needHideIndent) abort
     autocmd CursorMoved,CursorMovedI * call <sid>RestoreSettings()
   augroup END
 
-  let s:timer_id = timer_start(500, {id -> <sid>RestoreSettings()})
+  if (a:autoClear)
+    let s:timer_id = timer_start(500, {id -> <sid>RestoreSettings()})
+  endif
 endfunction
