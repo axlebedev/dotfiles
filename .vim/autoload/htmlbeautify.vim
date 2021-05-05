@@ -1,23 +1,19 @@
+let s:startTagRegexp = '<[a-zA-Z0-9]\+ '
 function! s:sortAttribute() abort
     call cursor(1, 1)
-    let lastSearch = 0
-    while 1
+    while search(s:startTagRegexp, 'nW') != 0
         " go to next <tag definition, not <!--
-        call search('<[a-zA-Z]\+ ', 'W')
+        call search(s:startTagRegexp, 'W')
 
         " split attributes by lines
         execute 'silent! s/\S\+="[^"]*"/\r\0\r/g'
 
         " return to tag start
-        call search('<[a-zA-Z]\+ ', 'bW')
+        call search(s:startTagRegexp, 'bW')
 
         " sort attributes
         execute 'silent! .+1,/>/-1sort'
         " if nothing found in rest of buffer - break
-        if search('<[a-zA-Z]\+ ', 'n') <= lastSearch
-            break
-        endif
-        let lastSearch = search('<[a-zA-Z]\+ ', 'nW')
     endwhile
 endfunction
 
