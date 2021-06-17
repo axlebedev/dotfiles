@@ -184,7 +184,6 @@ nmap ; <Plug>(clever-f-repeat-forward)
 " -----------------------------------------------------------------------------
 Plug 'psliwka/vim-smoothie'
 let g:smoothie_base_speed = 13
-let g:smoothie_speed_exponentiation_factor = 1.0
 
 " -----------------------------------------------------------------------------
 " vim-airline: cute statusbar
