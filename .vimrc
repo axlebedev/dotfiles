@@ -454,7 +454,7 @@ Plug 'scr1pt0r/crease.vim'
 " -----------------------------------------------------------------------------
 " homemade ^^
 
-Plug 'axlebedev/vim-js-fastlog', { 'for': 'javascript' }
+Plug 'axlebedev/vim-js-fastlog'
 let g:js_fastlog_prefix = ['%c11111', 'background:#00FF00']
 
 Plug 'axlebedev/vim-smart-insert-tab'
