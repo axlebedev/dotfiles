@@ -24,7 +24,7 @@ do
 
     if [ "$getname" = "Volume" ] 
     then
-        google-chrome --app="https://music.youtube.com/" > /dev/null 2>&1 &
+        google-chrome --user-data-dir="/home/alex/chrome-YTM" --app="https://music.youtube.com/" > /dev/null 2>&1 &
     fi
 
     if [ "$getname" = "Memory" ] 
