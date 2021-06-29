@@ -463,6 +463,7 @@ Plug 'isomoar/vim-css-to-inline', { 'for': ['javascript', 'css', 'html'] }
 
 Plug 'axlebedev/vim-gotoline-popup'
 nmap <C-g> <plug>(gotoline-popup)
+Plug 'axlebedev/vim-footprints'
 " }}} homemade plugins
 
 " -TEST------------------------------------------------------------------------
