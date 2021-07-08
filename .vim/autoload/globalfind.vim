@@ -7,5 +7,6 @@ function! globalfind#FilterTestEntries() abort
     let filtered3 = filter(filtered2, "bufname(v:val.bufnr) !~# 'diff'")
     let filtered4 = filter(filtered3, "bufname(v:val.bufnr) !~# 'commonMock'")
     let filtered5 = filter(filtered4, "bufname(v:val.bufnr) !~# 'yarn.lock'")
+    let filtered5 = filter(filtered4, "bufname(v:val.bufnr) !~# 'fake-api'")
     call setqflist(filtered5)
 endfunction
