@@ -143,6 +143,9 @@ vmap p pgvy
 nnoremap wp mmviwpgvy`m
 nnoremap <silent> p p`]
 
+" I dont need ex mode
+nnoremap Q @@
+
 " fix one-line 'if' statement
 nnoremap <silent> <leader>hh :call blockline#BlockLine()<CR>
 
