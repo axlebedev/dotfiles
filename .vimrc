@@ -468,7 +468,7 @@ Plug 'axlebedev/footprints'
 let g:footprintsColor = '#38403b'
 let g:footprintsEasingFunction = 'easeinout'
 let g:footprintsHistoryDepth = 10
-let g:footprintsExcludeFiletypes = '['magit', 'nerdtree', 'diff']'
+let g:footprintsExcludeFiletypes = ['magit', 'nerdtree', 'diff']
 " }}} homemade plugins
 
 " -TEST------------------------------------------------------------------------

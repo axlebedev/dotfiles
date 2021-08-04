@@ -53,6 +53,9 @@ nnoremap <C-l> <C-w>l
 " ХЗ почему я постоянно путаю
 nnoremap vg gv
 
+" visual select last pasted text
+nnoremap vp `[v`]
+
 " NERDTree mappings
 map <F2> :NERDTreeToggle<CR>
 nnoremap <leader>tt :NERDTreeFind<CR>
