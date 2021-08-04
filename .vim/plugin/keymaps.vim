@@ -49,9 +49,6 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-" double-space to enter command-line
-nnoremap <Space><Space> :
-
 " visual select last visual selection
 " ХЗ почему я постоянно путаю
 nnoremap vg gv
