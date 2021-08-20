@@ -476,6 +476,9 @@ let g:footprintsExcludeFiletypes = ['magit', 'nerdtree', 'diff']
 Plug 'kana/vim-gf-user'
 Plug 'kana/vim-gf-diff'
 
+" additional bindings to NERDTree
+Plug 'PhilRunninger/nerdtree-visual-selection'
+
 " -----------------------------------------------------------------------------
 call plug#end()
 filetype plugin indent on
