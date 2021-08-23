@@ -234,3 +234,6 @@ nnoremap <silent> co :cope<CR>
 noremap <silent> <plug>(slash-after) :execute("FindCursor<bar>ShowSearchIndex")<CR>
 " 'quickfix next'
 nnoremap <silent> qn :execute("cnext<bar>normal n")<CR>
+
+" этот момент заебал
+cnoremap <C-f> <NOP>
