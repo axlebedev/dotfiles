@@ -251,6 +251,8 @@ Plug 'vim-airline/vim-airline-themes'
 " -----------------------------------------------------------------------------
 " Pretty work with git
 Plug 'tpope/vim-fugitive'
+" By default it's set bufhidden=delete in plugin source. I dont need it
+autocmd BufReadPost fugitive://* set bufhidden&
 Plug 'jreybert/vimagit'
 autocmd User VimagitUpdateFile normal! zt
 autocmd User VimagitRefresh normal! zt
