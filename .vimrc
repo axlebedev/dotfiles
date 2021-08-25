@@ -442,10 +442,6 @@ inoremap <silent><expr> <BS>
 
 " }}} js/html/css... plugins
 
-" - TEST ----------------------------------------------------------------------
-" TODO: config
-Plug 'scr1pt0r/crease.vim'
-
 " homemade plugins {{{
 " -----------------------------------------------------------------------------
 " homemade ^^
