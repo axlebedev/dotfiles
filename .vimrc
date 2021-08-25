@@ -172,12 +172,6 @@ Plug 'junegunn/vim-slash'
 
 " appearance plugins {{{
 " -----------------------------------------------------------------------------
-" Indent line for leading spaces
-Plug 'Yggdroot/indentLine'
-" Warning! needed to patch font as described at https://github.com/Yggdroot/indentLine
-let g:indentLine_char = '┆'
-
-" -----------------------------------------------------------------------------
 " Color theme
 Plug 'crusoexia/vim-monokai'
 " give it a try https://github.com/morhetz/gruvbox
@@ -515,18 +509,6 @@ autocmd au_vimrc bufenter *
     \ if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) 
     \   | q
     \ | endif
-
-" Don't use indentLine in diff mode and json
-" TODO: check for background color of indentLine in diffs
-function! MaybeTobbleIndentLineByDiff() 
-    if (&diff || &ft == 'json')
-        :IndentLinesDisable
-    else 
-        :IndentLinesEnable
-    endif
-endfunction
-
-autocmd BufEnter * :call MaybeTobbleIndentLineByDiff()
 
 " When switching buffers, preserve window view.
 autocmd BufLeave * call winview#AutoSaveWinView()
