@@ -5,11 +5,11 @@ xmap <space> <leader>
 
 " Jump to matching pairs easily, with Tab
 " NOTE: recursive map for macros/matchit.vim
-nmap <Tab> %:<C-u>call findcursor#FindCursor(0, 0, 1)<CR>
+nmap <Tab> %<CMD>call findcursor#FindCursor(0, 0, 1)<CR>
 vmap <Tab> %
 
 " Avoid accidental hits of <F1> while aiming for <Esc>
-map  <F1> :<C-u>Helptags<cr>
+map  <F1> <CMD>Helptags<cr>
 imap <F1> <Esc>
 
 " Make moving in line a bit more convenient
@@ -34,11 +34,11 @@ vnoremap LL $
 vnoremap f; g_
 
 " fast save file, close file
-nnoremap <leader>w :w!<cr>
-nmap <silent> <leader>q :<C-u>call kwbd#Kwbd(1)<CR>
+nnoremap <leader>w <CMD>w!<cr>
+nmap <silent> <leader>q <CMD>call kwbd#Kwbd(1)<CR>
 
 " new empty buffer
-noremap <leader>x :Startify<cr>
+noremap <leader>x <CMD>Startify<cr>
 
 " split line
 nnoremap <leader>s a<CR><Esc>
@@ -57,11 +57,11 @@ nnoremap vg gv
 nnoremap vp `[v`]
 
 " NERDTree mappings
-map <F2> :NERDTreeToggle<CR>
-nnoremap <leader>tt :NERDTreeFind<CR>
+map <F2> <CMD>NERDTreeToggle<CR>
+nnoremap <leader>tt <CMD>NERDTreeFind<CR>
 
 " repeat command for each line in selection
-xnoremap . :normal .<CR>
+xnoremap . <CMD>normal .<CR>
 
 " don't reset visual selection after indent
 xnoremap <silent> > >gv
@@ -80,17 +80,17 @@ nnoremap <leader>o o<Esc>
 cmap w!! w !sudo tee % >/dev/null
 
 " replace selection
-vnoremap <C-h> "hy:%s/<C-r>h//gc<left><left><left><C-r>h
+vnoremap <C-h> "hy<CMD>%s/<C-r>h//gc<left><left><left><C-r>h
 
 " pretty find
 vnoremap // "py/<C-R>p<CR>
 
 " add a symbol to current line
-nnoremap <silent> <leader>; :call appendchar#AppendChar(';')<CR>
-nnoremap <silent> <leader>, :call appendchar#AppendChar(',')<CR>
+nnoremap <silent> <leader>; <CMD>call appendchar#AppendChar(';')<CR>
+nnoremap <silent> <leader>, <CMD>call appendchar#AppendChar(',')<CR>
 
 " close all other buffers
-nnoremap bo :BufOnly<CR>
+nnoremap bo <CMD>BufOnly<CR>
 
 " Now we don't have to move our fingers so far when we want to scroll through
 " the command history; also, don't forget the q: command
@@ -113,12 +113,12 @@ call submode#map(resizeSubmode, 'n', '', 'j', ':resize +1<cr>')
 
 " uncomment next line on join if it's comment
 " NOTE: need Plug 'tomtom/tcomment_vim'
-nnoremap J :normal jg<ck<CR>J
+nnoremap J <CMD>normal jg<ck<CR>J
 
-autocmd au_vimrc FileType help,qf,git nnoremap <buffer> q :q<cr>
-autocmd au_vimrc FileType help,qf,git nnoremap <buffer> <Esc> :q<cr>
+autocmd au_vimrc FileType help,qf,git nnoremap <buffer> q <CMD>q<cr>
+autocmd au_vimrc FileType help,qf,git nnoremap <buffer> <Esc> <CMD>q<cr>
 
-nnoremap <silent> <leader>a :<C-u>ArgWrap<CR>
+nnoremap <silent> <leader>a <CMD><C-u>ArgWrap<CR>
 
 function! ClapOpen(command_str)
   while (winnr('$') > 1 && (expand('%') =~# 'NERD_tree' || &ft == 'help' || &ft == 'qf'))
@@ -127,15 +127,16 @@ function! ClapOpen(command_str)
   exe 'normal! ' . a:command_str . "\<cr>"
 endfunction
 
-nnoremap <silent> <leader>t :call ClapOpen(':Clap files ++finder=git ls-files --cached --others --exclude-standard --exclude=!*local*')<CR>
-nnoremap <silent> <leader>b :call ClapOpen(':Clap providers')<CR>
+" nnoremap <silent> <leader>t <CMD>call ClapOpen(':Clap files ++finder=git ls-files --cached --others --exclude-standard --exclude=!*local*')<CR>
+nnoremap <silent> <leader>t <CMD>FZF<CR>
+" nnoremap <silent> <leader>b <CMD>call ClapOpen(':Clap providers')<CR>
 
 " get current highlight group under cursor
-map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+map <F10> <CMD>echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
 \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
 \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
-nnoremap yf :call yankfilename#YankFileName()<CR>
+nnoremap yf <CMD>call yankfilename#YankFileName()<CR>
 
 nnoremap Y y$
 vmap p pgvy
@@ -147,33 +148,33 @@ nnoremap <silent> p p`]
 nnoremap Q @@
 
 " fix one-line 'if' statement
-nnoremap <silent> <leader>hh :call blockline#BlockLine()<CR>
+nnoremap <silent> <leader>hh <CMD>call blockline#BlockLine()<CR>
 
 " quickfix next
-nnoremap <silent> cn :<C-u>cn<CR>
+nnoremap <silent> cn <CMD>cn<CR>
 
 " for convenient git
-nnoremap <C-g><C-g> :<C-u>Magit<CR>
-nnoremap <C-g><C-b> :<C-u>Gblame<cr>
-nnoremap <C-g><C-s> :<C-u>Gstatus<cr>
-nnoremap <C-g><C-v> :<C-u>GV<cr>
+nnoremap <C-g><C-g> <CMD>Magit<CR>
+nnoremap <C-g><C-b> <CMD>Gblame<cr>
+nnoremap <C-g><C-s> <CMD>Gstatus<cr>
+nnoremap <C-g><C-v> <CMD>GV<cr>
 " stage current file
-nnoremap <C-g><C-w> :<C-u>Gw<cr> 
+nnoremap <C-g><C-w> <CMD>Gw<cr> 
 
 " beautify json
-nnoremap <leader>bj :<C-u>%!python -m json.tool<cr>
+nnoremap <leader>bj <CMD>%!python -m json.tool<cr>
 " beautify html
-nnoremap <leader>bh :<C-u>call htmlbeautify#htmlbeautify()<CR>
+nnoremap <leader>bh <CMD>call htmlbeautify#htmlbeautify()<CR>
 
 " copen
-nnoremap <leader>co :<C-u>copen<cr>
+nnoremap <leader>co <CMD>copen<cr>
 
-nnoremap <leader>c :call readmode#ReadModeToggle()<cr>
+nnoremap <leader>c <CMD>call readmode#ReadModeToggle()<cr>
 
-nnoremap <silent> <leader>j :call ClapOpen(':call opennextbuf#OpenNextBuf(1)')<CR>
-nnoremap <silent> <leader>k :call ClapOpen(':call opennextbuf#OpenNextBuf(0)')<CR>
+nnoremap <silent> <leader>j <CMD>call ClapOpen(':call opennextbuf#OpenNextBuf(1)')<CR>
+nnoremap <silent> <leader>k <CMD>call ClapOpen(':call opennextbuf#OpenNextBuf(0)')<CR>
 
-nnoremap <leader>f :<C-u>call findcursor#FindCursor('#5F0000', 1, 1)<CR>
+nnoremap <leader>f <CMD>call findcursor#FindCursor('#5F0000', 1, 1)<CR>
 
 " update current file
 function! UpdateBuffer(force) abort
@@ -181,59 +182,59 @@ function! UpdateBuffer(force) abort
     if (a:force) | e! | else | e | endif
     call winrestview(winview)
 endfunction
-nnoremap <silent> <F5> :call UpdateBuffer(0)<CR>
-nnoremap <silent> <F5><F5> :call UpdateBuffer(1)<CR>
+nnoremap <silent> <F5> <CMD>call UpdateBuffer(0)<CR>
+nnoremap <silent> <F5><F5> <CMD>call UpdateBuffer(1)<CR>
 
 map <c-f> <plug>(esearch)
-nnoremap <C-f><C-t> :call globalfind#FilterTestEntries()<cr>
+nnoremap <C-f><C-t> <CMD>call globalfind#FilterTestEntries()<cr>
 
 " JsFastLog mapping
-nnoremap <leader>l :set operatorfunc=JsFastLog_simple<cr>g@
-vnoremap <leader>l :<C-u>call JsFastLog_simple(visualmode())<cr>
+nnoremap <leader>l <CMD>set operatorfunc=JsFastLog_simple<cr>g@
+vnoremap <leader>l <CMD>call JsFastLog_simple(visualmode())<cr>
 
-nnoremap <leader>ll :set operatorfunc=JsFastLog_JSONstringify<cr>g@
-vnoremap <leader>ll :<C-u>call JsFastLog_JSONstringify(visualmode())<cr>
+nnoremap <leader>ll <CMD>set operatorfunc=JsFastLog_JSONstringify<cr>g@
+vnoremap <leader>ll <CMD>call JsFastLog_JSONstringify(visualmode())<cr>
 
-nnoremap <leader>lk :set operatorfunc=JsFastLog_variable<cr>g@
+nnoremap <leader>lk <CMD>set operatorfunc=JsFastLog_variable<cr>g@
 nmap <leader>lkk <leader>lkiW
-vnoremap <leader>lk :<C-u>call JsFastLog_variable(visualmode())<cr>
+vnoremap <leader>lk <CMD>call JsFastLog_variable(visualmode())<cr>
 
-nnoremap <leader>ld :set operatorfunc=JsFastLog_function<cr>g@
-vnoremap <leader>ld :<C-u>call JsFastLog_function(visualmode())<cr>
+nnoremap <leader>ld <CMD>set operatorfunc=JsFastLog_function<cr>g@
+vnoremap <leader>ld <CMD>call JsFastLog_function(visualmode())<cr>
 
-nnoremap <leader>ls :set operatorfunc=JsFastLog_string<cr>g@
-vnoremap <leader>ls :<C-u>call JsFastLog_string(visualmode())<cr>
+nnoremap <leader>ls <CMD>set operatorfunc=JsFastLog_string<cr>g@
+vnoremap <leader>ls <CMD>call JsFastLog_string(visualmode())<cr>
 
-nnoremap <leader>lpp :set operatorfunc=JsFastLog_prevToThis<cr>g@
-vnoremap <leader>lpp :<C-u>call JsFastLog_prevToThis(visualmode())<cr>
+nnoremap <leader>lpp <CMD>set operatorfunc=JsFastLog_prevToThis<cr>g@
+vnoremap <leader>lpp <CMD>call JsFastLog_prevToThis(visualmode())<cr>
 
-nnoremap <leader>lpn :set operatorfunc=JsFastLog_thisToNext<cr>g@
-vnoremap <leader>lpn :<C-u>call JsFastLog_thisToNext(visualmode())<cr>
+nnoremap <leader>lpn <CMD>set operatorfunc=JsFastLog_thisToNext<cr>g@
+vnoremap <leader>lpn <CMD>call JsFastLog_thisToNext(visualmode())<cr>
 
-nnoremap <leader>lss :call JsFastLog_separator()<cr>
-nnoremap <leader>lsn :call JsFastLog_lineNumber()<cr>
+nnoremap <leader>lss <CMD>call JsFastLog_separator()<cr>
+nnoremap <leader>lsn <CMD>call JsFastLog_lineNumber()<cr>
 
-" nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-" nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+" nnoremap <silent> K <CMD>call LanguageClient#textDocument_hover()<CR>
+" nnoremap <silent> gd <CMD>call LanguageClient#textDocument_definition()<CR>
 
-nnoremap <silent> K :call CocAction("doHover")<CR>
+nnoremap <silent> K <CMD>call CocAction("doHover")<CR>
 function! JumpDefinitionFindCursor() abort
     call CocAction("jumpDefinition")
     " call timer_start(100, {id -> findcursor#FindCursor('#68705e', 1, 0)})
     call timer_start(100, {id -> findcursor#FindCursor('#191C41', 1, 0)})
 
 endfunction
-nnoremap <silent> gd :call JumpDefinitionFindCursor()<CR>
+nnoremap <silent> gd <CMD>call JumpDefinitionFindCursor()<CR>
 
-nnoremap <silent> gdd :call gdd#gdd()<CR>
+nnoremap <silent> gdd <CMD>call gdd#gdd()<CR>
 
-nnoremap <silent> to :call openjstest#OpenJsTest()<cR>
+nnoremap <silent> to <CMD>call openjstest#OpenJsTest()<cR>
 
-nnoremap <silent> co :cope<CR>
+nnoremap <silent> co <CMD>cope<CR>
 
-noremap <silent> <plug>(slash-after) :execute("FindCursor<bar>ShowSearchIndex")<CR>
+noremap <silent> <plug>(slash-after) <CMD>execute("FindCursor<bar>ShowSearchIndex")<CR>
 " 'quickfix next'
-nnoremap <silent> qn :execute("cnext<bar>normal n")<CR>
+nnoremap <silent> qn <CMD>execute("cnext<bar>normal n")<CR>
 
 " этот момент заебал
 cnoremap <C-f> <NOP>

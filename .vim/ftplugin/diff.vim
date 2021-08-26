@@ -28,7 +28,7 @@ function! GoToNextDiff() abort
   let @/ = savedSearchReg
 endfunction
 
-map <buffer> <silent> gn :<C-u>call GoToNextDiff()<CR>
+map <buffer> <silent> gn <CMD>call GoToNextDiff()<CR>
 " }}} GoToNextDiff
 
 " CopyWithoutStart {{{
@@ -44,7 +44,7 @@ function! CopyWithoutStart() abort
   let @+ = currentLine
 endfunction
 
-nnoremap <buffer> <silent> yy :<C-u>call CopyWithoutStart()<CR>
+nnoremap <buffer> <silent> yy <CMD>call CopyWithoutStart()<CR>
 
 function! Lal() abort
   let yankedText = l9#getSelectedText()
@@ -57,5 +57,5 @@ function! Lal() abort
   let @* = yankedText
   let @+ = yankedText
 endfunction
-vnoremap <buffer> <silent> y :<C-u>call Lal()<CR>
+vnoremap <buffer> <silent> y <CMD>call Lal()<CR>
 " }}} CopyWithoutStart
