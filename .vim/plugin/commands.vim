@@ -10,5 +10,3 @@ command! Todo call todo#Todo()
 command! S vs | wincmd h | bprev | wincmd l
 
 command! Grc Git rebase --continue
-
-command! -bar FindCursor call findcursor#FindCursor(0, 0, 1)
