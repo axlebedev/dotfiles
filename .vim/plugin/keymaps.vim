@@ -80,7 +80,7 @@ nnoremap <leader>o o<Esc>
 cmap w!! w !sudo tee % >/dev/null
 
 " replace selection
-vnoremap <C-h> "hy<CMD>%s/<C-r>h//gc<left><left><left><C-r>h
+vnoremap <C-h> "hy:%s/<C-r>h//gc<left><left><left><C-r>h
 
 " pretty find
 vnoremap // "py/<C-R>p<CR>
