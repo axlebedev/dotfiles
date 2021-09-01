@@ -155,8 +155,7 @@ nnoremap <silent> cn <CMD>cn<CR>
 
 " for convenient git
 nnoremap <C-g><C-g> <CMD>Magit<CR>
-nnoremap <C-g><C-b> <CMD>Gblame<cr>
-nnoremap <C-g><C-s> <CMD>Gstatus<cr>
+nnoremap <C-g><C-b> <CMD>Git blame<cr>
 nnoremap <C-g><C-v> <CMD>GV<cr>
 " stage current file
 nnoremap <C-g><C-w> <CMD>Gw<cr> 
