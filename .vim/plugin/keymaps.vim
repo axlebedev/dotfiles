@@ -127,9 +127,9 @@ function! ClapOpen(command_str)
   exe 'normal! ' . a:command_str . "\<cr>"
 endfunction
 
-" nnoremap <silent> <leader>t <CMD>call ClapOpen(':Clap files ++finder=git ls-files --cached --others --exclude-standard --exclude=!*local*')<CR>
-nnoremap <silent> <leader>t <CMD>FZF<CR>
-" nnoremap <silent> <leader>b <CMD>call ClapOpen(':Clap providers')<CR>
+nnoremap <silent> <leader>t <CMD>call ClapOpen(':Clap files ++finder=git ls-files --cached --others --exclude-standard --exclude=!*local*')<CR>
+" nnoremap <silent> <leader>t <CMD>FZF<CR>
+nnoremap <silent> <leader>b <CMD>call ClapOpen(':Clap providers')<CR>
 
 " get current highlight group under cursor
 map <F10> <CMD>echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
