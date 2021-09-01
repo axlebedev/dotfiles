@@ -473,6 +473,9 @@ Plug 'kana/vim-gf-diff'
 " additional bindings to NERDTree
 Plug 'PhilRunninger/nerdtree-visual-selection'
 
+" vmap '~' for cycle through cases
+Plug 'JoseConseco/vim-case-change'
+
 " -----------------------------------------------------------------------------
 call plug#end()
 filetype plugin indent on
