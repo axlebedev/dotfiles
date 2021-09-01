@@ -116,7 +116,6 @@ call submode#map(resizeSubmode, 'n', '', 'j', ':resize +1<cr>')
 nnoremap J <CMD>normal jg<ck<CR>J
 
 autocmd au_vimrc FileType help,qf,git nnoremap <buffer> q <CMD>q<cr>
-autocmd au_vimrc FileType help,qf,git nnoremap <buffer> <Esc> <CMD>q<cr>
 
 nnoremap <silent> <leader>a <CMD><C-u>ArgWrap<CR>
 
