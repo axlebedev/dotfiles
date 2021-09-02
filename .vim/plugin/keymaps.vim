@@ -115,7 +115,7 @@ call submode#map(resizeSubmode, 'n', '', 'j', ':resize +1<cr>')
 " NOTE: need Plug 'tomtom/tcomment_vim'
 nnoremap J <CMD>normal jg<ck<CR>J
 
-autocmd au_vimrc FileType help,qf,git nnoremap <buffer> q <CMD>q<cr>
+autocmd au_vimrc FileType help,qf,git,fugitive* nnoremap <buffer> q <CMD>q<cr>
 
 nnoremap <silent> <leader>a <CMD>ArgWrap<CR>
 
