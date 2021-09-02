@@ -117,7 +117,7 @@ nnoremap J <CMD>normal jg<ck<CR>J
 
 autocmd au_vimrc FileType help,qf,git nnoremap <buffer> q <CMD>q<cr>
 
-nnoremap <silent> <leader>a <CMD><C-u>ArgWrap<CR>
+nnoremap <silent> <leader>a <CMD>ArgWrap<CR>
 
 function! ClapOpen(command_str)
   while (winnr('$') > 1 && (expand('%') =~# 'NERD_tree' || &ft == 'help' || &ft == 'qf'))
