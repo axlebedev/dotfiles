@@ -5,7 +5,7 @@ xmap <space> <leader>
 
 " Jump to matching pairs easily, with Tab
 " NOTE: recursive map for macros/matchit.vim
-nmap <Tab> %<CMD>call findcursor#FindCursor(0, 0, 1)<CR>
+nmap <Tab> %<CMD>FindCursor 0 500<CR>
 vmap <Tab> %
 
 " Avoid accidental hits of <F1> while aiming for <Esc>
@@ -172,7 +172,7 @@ nnoremap <leader>c <CMD>call readmode#ReadModeToggle()<cr>
 nnoremap <silent> <leader>j <CMD>call ClapOpen(':call opennextbuf#OpenNextBuf(1)')<CR>
 nnoremap <silent> <leader>k <CMD>call ClapOpen(':call opennextbuf#OpenNextBuf(0)')<CR>
 
-nnoremap <leader>f <CMD>call findcursor#FindCursor('#5F0000', 1, 1)<CR>
+nnoremap <leader>f <CMD>FindCursor #5F0000 500<CR>
 
 " update current file
 function! UpdateBuffer(force) abort
@@ -218,8 +218,8 @@ nnoremap <leader>lsn <CMD>call JsFastLog_lineNumber()<cr>
 nnoremap <silent> K <CMD>call CocAction("doHover")<CR>
 function! JumpDefinitionFindCursor() abort
     call CocAction("jumpDefinition")
-    " call timer_start(100, {id -> findcursor#FindCursor('#68705e', 1, 0)})
-    call timer_start(100, {id -> findcursor#FindCursor('#191C41', 1, 0)})
+    " call timer_start(100, {id -> findcursor#FindCursor('#68705e', 0)})
+    call timer_start(100, {id -> findcursor#FindCursor('#191C41', 0)})
 
 endfunction
 nnoremap <silent> gd <CMD>call JumpDefinitionFindCursor()<CR>
@@ -230,7 +230,7 @@ nnoremap <silent> to <CMD>call openjstest#OpenJsTest()<cR>
 
 nnoremap <silent> co <CMD>cope<CR>
 
-noremap <silent> <plug>(slash-after) <CMD>execute("FindCursor<bar>ShowSearchIndex")<CR>
+noremap <silent> <plug>(slash-after) <CMD>execute("FindCursor #191C41 0<bar>ShowSearchIndex")<CR>
 " 'quickfix next'
 nnoremap <silent> qn <CMD>execute("cnext<bar>normal n")<CR>
 
