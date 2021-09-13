@@ -236,3 +236,5 @@ nnoremap <silent> qn <CMD>execute("cnext<bar>normal n")<CR>
 
 " этот момент заебал
 cnoremap <C-f> <NOP>
+
+nnoremap zj zz<CMD>execute 'normal '.(winheight('.') / 4).'<C-e>'<CR>
