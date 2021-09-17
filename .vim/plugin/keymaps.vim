@@ -164,9 +164,6 @@ nnoremap <leader>bj <CMD>%!python -m json.tool<cr>
 " beautify html
 nnoremap <leader>bh <CMD>call htmlbeautify#htmlbeautify()<CR>
 
-" copen
-nnoremap <leader>co <CMD>copen<cr>
-
 nnoremap <leader>c <CMD>call readmode#ReadModeToggle()<cr>
 
 nnoremap <silent> <leader>j <CMD>call ClapOpen(':call opennextbuf#OpenNextBuf(1)')<CR>
