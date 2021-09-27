@@ -64,6 +64,8 @@ conky.config = {
   ]],
 
   template2 = getTemplateForColors(colors),
+
+  template3 = [[${texeci 5 (bash ~/dotfiles/.i3/getBranch.sh)}]],
 };
 
 
@@ -115,6 +117,11 @@ conky.text = [[
   ${if_match "${exec xset q | grep 'Caps Lock' | sed 's/.*Caps Lock:[ ]*\([^ ]*\).*/\1/'}"=="on"}
   ]] .. warningWarning("CapsLock") .. [[,
   ${endif}
+# Current branches
+  { 
+    "full_text": "${template3}   ",
+    "color": "]] .. textColorFg .. [[" 
+  },
 # Next block - wi-fi 
   ]] .. wifi() .. [[,
 # VPN 

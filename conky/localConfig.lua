@@ -40,5 +40,5 @@ secondaryTextColorFg = '\\#' .. colors[9]
 
 -- config local to machine
 
-internetInterface = 'wlp3s0'
-hwMonitorPath = '/sys/devices/platform/coretemp.0/hwmon/hwmon2/temp1_input'
+internetInterface = 'enp6s0'
+hwMonitorPath = '/sys/devices/platform/coretemp.0/hwmon/hwmon1/temp1_input'
