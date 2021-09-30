@@ -100,6 +100,7 @@ let g:fzf_colors =
 Plug 'liuchengxu/vim-clap'
 let g:clap_popup_input_delay = 50
 let g:clap_open_preview = 'never'
+let g:clap_theme = 'onehalflight'
 
 " }}} General purpose plugins
 
@@ -173,7 +174,8 @@ Plug 'junegunn/vim-slash'
 " appearance plugins {{{
 " -----------------------------------------------------------------------------
 " Color theme
-Plug 'crusoexia/vim-monokai'
+" Plug 'crusoexia/vim-monokai'
+Plug 'NLKNguyen/papercolor-theme'
 " give it a try https://github.com/morhetz/gruvbox
 " give it a try https://github.com/arcticicestudio/nord-vim
 
@@ -225,7 +227,7 @@ if has("gui_running")
     let g:airline_symbols.readonly = s:isWin ? ' ' : ''
     let g:airline_symbols.linenr = s:isWin ? ' ' : ''
 endif
-let g:airline_theme='jellybeans'
+let g:airline_theme='papercolor'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
@@ -457,7 +459,7 @@ Plug 'axlebedev/vim-gotoline-popup'
 nmap <C-g> <plug>(gotoline-popup)
 
 Plug 'axlebedev/footprints'
-let g:footprintsColor = '#38403b'
+" let g:footprintsColor = '#38403b'
 let g:footprintsEasingFunction = 'easeinout'
 let g:footprintsHistoryDepth = 10
 let g:footprintsExcludeFiletypes = ['magit', 'nerdtree', 'diff']
