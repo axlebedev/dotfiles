@@ -79,7 +79,9 @@ let NERDTreeHijackNetrw = 0
 " -----------------------------------------------------------------------------
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-let g:fzf_layout = { 'window': '10new' }
+let g:fzf_preview_window = ['right:40%:hidden', 'ctrl-/']
+let g:fzf_buffers_jump = 1
+let g:fzf_layout = { 'window': { 'width': 0.5, 'height': 0.5 } }
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],
   \ 'bg':      ['bg', 'Normal'],
@@ -94,13 +96,6 @@ let g:fzf_colors =
   \ 'marker':  ['fg', 'Keyword'],
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
-
-" requires 'rust' and 'cargo', 'ripgrep'
-" Lots of additional installations here, look at plugin readme
-Plug 'liuchengxu/vim-clap'
-let g:clap_popup_input_delay = 50
-let g:clap_open_preview = 'never'
-let g:clap_theme = 'onehalflight'
 
 " }}} General purpose plugins
 
