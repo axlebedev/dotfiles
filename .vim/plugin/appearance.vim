@@ -39,10 +39,13 @@ set hlsearch
 
 " Monokai settings ----------------------------- {{{
 " If you are using a font which support italic, you can use below config to enable the italic form
-let g:monokai_italic = 1
+" let g:monokai_italic = 1
 
 " colorscheme
-colorscheme monokai
+" colorscheme monokai
+
+set background=light
+colorscheme PaperColor
 " }}}
 
 " highlight current line number
