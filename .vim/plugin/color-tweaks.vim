@@ -1,5 +1,5 @@
-" " color of find result background
-" highlight Search guibg='#4A3F2D' guifg='NONE'
+" color of find result background
+highlight Search guibg='#ba91f2' guifg='NONE'
 
 "  colors of matching parens
 highlight MatchParen cterm=bold ctermbg=none ctermfg=magenta gui=bold guibg=#8C5669 guifg=NONE
@@ -28,7 +28,8 @@ highlight VertSplit guibg=#d9d9d9 guifg=#d9d9d9
 "
 " " ale-vim customizations
 " highlight ALESignColumnWithErrors guibg=#f92772
-highlight ALEError cterm=underline guibg=#ffb7d1
+highlight ALEError cterm=underline guibg=#ea4c31
+highlight ALEWarning cterm=underline guibg=#f0eab4
 "
 " " Diff styling
 " highlight diffAdded term=bold ctermbg=black     ctermfg=green cterm=bold guibg=#114417 guifg=NONE gui=none

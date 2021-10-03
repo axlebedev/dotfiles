@@ -222,7 +222,7 @@ nnoremap <silent> K <CMD>call CocAction("doHover")<CR>
 function! JumpDefinitionFindCursor() abort
     call CocAction("jumpDefinition")
     " call timer_start(100, {id -> findcursor#FindCursor('#68705e', 0)})
-    call timer_start(100, {id -> findcursor#FindCursor('#9199f2', 0)})
+    call timer_start(100, {id -> findcursor#FindCursor('#d6d8fa', 0)})
 
 endfunction
 nnoremap <silent> gd <CMD>call JumpDefinitionFindCursor()<CR>
@@ -233,7 +233,7 @@ nnoremap <silent> to <CMD>call openjstest#OpenJsTest()<cR>
 
 nnoremap <silent> co <CMD>cope<CR>
 
-noremap <silent> <plug>(slash-after) <CMD>execute("FindCursor #9199f2 0<bar>ShowSearchIndex")<CR>
+noremap <silent> <plug>(slash-after) <CMD>execute("FindCursor #d6d8fa 0<bar>ShowSearchIndex")<CR>
 " 'quickfix next'
 nnoremap <silent> qn <CMD>execute("cnext<bar>normal n")<CR>
 
