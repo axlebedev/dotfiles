@@ -1,3 +1,6 @@
+" color of Visual selection
+highlight Visual guibg=#C7A575
+
 " color of find result background
 highlight Search guibg='#ba91f2' guifg='NONE'
 
