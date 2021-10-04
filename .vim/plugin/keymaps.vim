@@ -175,7 +175,7 @@ nnoremap <leader>c <CMD>call readmode#ReadModeToggle()<cr>
 nnoremap <silent> <leader>j <CMD>call ClapOpen(':call opennextbuf#OpenNextBuf(1)')<CR>
 nnoremap <silent> <leader>k <CMD>call ClapOpen(':call opennextbuf#OpenNextBuf(0)')<CR>
 
-nnoremap <leader>f <CMD>FindCursor #5F0000 500<CR>
+nnoremap <leader>f <CMD>FindCursor #CC0000 500<CR>
 
 " update current file
 function! UpdateBuffer(force) abort
