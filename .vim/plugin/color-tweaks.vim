@@ -2,10 +2,10 @@
 highlight Visual guibg=#C7A575
 
 " color of find result background
-highlight Search guibg='#ba91f2' guifg='NONE'
+highlight Search guibg=#ba91f2 guifg='NONE'
 
 "  colors of matching parens
-highlight MatchParen cterm=bold ctermbg=none ctermfg=magenta gui=bold guibg=#8C5669 guifg=NONE
+highlight MatchParen cterm=bold ctermbg=none ctermfg=magenta gui=bold guibg=#FDBED4 guifg=NONE
 
 " colors of fold column
 highlight FoldColumn guibg=#d9d9d9 guifg=#34352E
