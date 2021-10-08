@@ -55,7 +55,7 @@ let g:startify_list_order = [
     \ ['   Most recent global'], 'files',
 \ ]
 let g:startify_bookmarks = [ {'c': '~/.vimrc'} ]
-let g:startify_commands = [':PlugUpdate', ':PlugInstall']
+let g:startify_commands = [':PlugUpdate', ':PlugInstall', ':CocUpdate']
 let g:startify_files_number = 12
 let g:startify_update_oldfiles = 1
 let g:startify_change_to_dir = 0
