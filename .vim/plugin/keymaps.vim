@@ -126,9 +126,14 @@ function! ClapOpen(command_str)
   exe 'normal! ' . a:command_str . "\<cr>"
 endfunction
 
-nnoremap <silent> <leader>t <CMD>call ClapOpen(':Clap files ++finder=git ls-files --cached --others --exclude-standard --exclude=!*local*')<CR>
-" nnoremap <silent> <leader>t <CMD>FZF<CR>
-nnoremap <silent> <leader>b <CMD>call ClapOpen(':Clap providers')<CR>
+nnoremap <silent> <leader>t <CMD>GFiles<CR>
+" FZF command
+nnoremap <silent> <leader>h <CMD>History<CR>
+
+function! g:GeditFile(branch) abort
+    execute 'Gedit '.a:branch.':%'
+endfunction
+nnoremap <silent> <C-g><C-f> <CMD>call fzf#run(fzf#wrap({ 'source': 'sh ~/dotfiles/fish/sortedBranch.sh', 'sink': function('GeditFile') }))<CR>
 
 " get current highlight group under cursor
 map <F10> <CMD>echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
