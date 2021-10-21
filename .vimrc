@@ -482,7 +482,7 @@ Plug 'kana/vim-gf-diff'
 Plug 'PhilRunninger/nerdtree-visual-selection'
 
 " vmap '~' for cycle through cases
-Plug 'JoseConseco/vim-case-change'
+Plug 'axlebedev/vim-case-change'
 
 " -----------------------------------------------------------------------------
 call plug#end()
