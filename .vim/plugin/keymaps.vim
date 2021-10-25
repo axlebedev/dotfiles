@@ -141,6 +141,7 @@ map <F10> <CMD>echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> t
 \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 nnoremap yf <CMD>call yankfilename#YankFileName()<CR>
+nnoremap yg <CMD>call yankfilename#YankGithubURL()<CR>
 
 nnoremap Y y$
 vmap p pgvy
