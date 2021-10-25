@@ -175,7 +175,7 @@ nnoremap <leader>c <CMD>call readmode#ReadModeToggle()<cr>
 nnoremap <silent> <leader>j <CMD>call ClapOpen(':call opennextbuf#OpenNextBuf(1)')<CR>
 nnoremap <silent> <leader>k <CMD>call ClapOpen(':call opennextbuf#OpenNextBuf(0)')<CR>
 
-nnoremap <leader>f <CMD>FindCursor #5F0000 500<CR>
+nnoremap <leader>f <CMD>FindCursor #CC0000 500<CR>
 
 " update current file
 function! UpdateBuffer(force) abort
@@ -222,7 +222,7 @@ nnoremap <silent> K <CMD>call CocAction("doHover")<CR>
 function! JumpDefinitionFindCursor() abort
     call CocAction("jumpDefinition")
     " call timer_start(100, {id -> findcursor#FindCursor('#68705e', 0)})
-    call timer_start(100, {id -> findcursor#FindCursor('#191C41', 0)})
+    call timer_start(100, {id -> findcursor#FindCursor('#d6d8fa', 0)})
 
 endfunction
 nnoremap <silent> gd <CMD>call JumpDefinitionFindCursor()<CR>
@@ -233,7 +233,7 @@ nnoremap <silent> to <CMD>call openjstest#OpenJsTest()<cR>
 
 nnoremap <silent> co <CMD>cope<CR>
 
-noremap <silent> <plug>(slash-after) <CMD>execute("FindCursor #191C41 0<bar>ShowSearchIndex")<CR>
+noremap <silent> <plug>(slash-after) <CMD>execute("FindCursor #d6d8fa 0<bar>ShowSearchIndex")<CR>
 " 'quickfix next'
 nnoremap <silent> qn <CMD>execute("cnext<bar>normal n")<CR>
 
