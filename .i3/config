@@ -44,6 +44,7 @@ for_window [class="Google-chrome" window_role="pop-up"]  floating enable
 for_window [class="calendar.google.com, Google-chrome"]  floating enable
 for_window [instance="^crx.*$" window_role="pop-up"]  floating enable
 for_window [instance="^crx.*$" window_role="pop-up"]  sticky   enable
+for_window [class="zoom"]  floating   enable
 
 # Pulse Audio controls
 bindsym XF86AudioLowerVolume exec amixer -D pulse sset Master 2%- & killall -USR1 i3status 
