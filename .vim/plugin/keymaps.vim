@@ -126,7 +126,7 @@ function! ClapOpen(command_str)
   exe 'normal! ' . a:command_str . "\<cr>"
 endfunction
 
-nnoremap <silent> <leader>t <CMD>GFiles<CR>
+nnoremap <silent> <leader>t <CMD>GFiles -c -o --exclude-standard<CR>
 " FZF command
 nnoremap <silent> <leader>h <CMD>History<CR>
 
