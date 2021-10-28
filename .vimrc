@@ -481,6 +481,9 @@ Plug 'PhilRunninger/nerdtree-visual-selection'
 " vmap '~' for cycle through cases
 Plug 'axlebedev/vim-case-change'
 
+" TODO: сделать чтобы работал бесшовно
+" Plug 'noscript/taberian.vim'
+
 " -----------------------------------------------------------------------------
 call plug#end()
 filetype plugin indent on
