@@ -18,6 +18,12 @@ augroup ClapHighlights
   autocmd User ClapOnEnter highlight SignColumn guibg=#d9d9d9
 augroup END
 
+" color of Plug 'RRethy/vim-illuminate'
+augroup illuminate_augroup
+    autocmd!
+    autocmd VimEnter * hi illuminatedWord cterm=underline gui=underline guibg=#D6E3E9
+augroup END
+
 " " colors of line number column
 highlight LineNr guibg=#d9d9d9 guifg=#34352E
 "
