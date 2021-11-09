@@ -62,12 +62,24 @@ TEXT
 
 [
 # Next block - Num lock indicator
-#${if_match "${exec xset q | grep 'Num Lock' | sed 's/.*Num Lock:[ ]*\([^ ]*\).*/\1/'}"=="off"}
-	#{ "full_text": "██████████ NumLock off ██████████", "color": "\#C42021" },
-#${endif}
+${if_match "${exec xset q | grep 'Num Lock' | sed 's/.*Num Lock:[ ]*\([^ ]*\).*/\1/'}"=="off"}
+	{ 
+    "full_text": "NumLock off",
+    "color": "\#FFFFFF",
+    "background": "\#C42021",  
+    "align": "center",
+    "min_width":"▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁"
+    },
+${endif}
 # Next block - Caps lock indicator
 ${if_match "${texeci 5 xset q | grep 'Caps Lock' | sed 's/.*Caps Lock:[ ]*\([^ ]*\).*/\1/'}"=="on"}
-{ "full_text": "           CapsLock           ", "color": "\#FFFFFF", "background": "\#C42021" },
+    {
+    "full_text": "CapsLock",
+    "color": "\#FFFFFF",
+    "background": "\#C42021",  
+    "align": "center",
+    "min_width":"▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁"
+    },
 ${endif}
 # Next block - wi-fi 
 	{ 
