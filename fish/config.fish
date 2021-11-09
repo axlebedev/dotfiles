@@ -12,6 +12,9 @@ abbr -a l ls -alF
 abbr -a lr ls -lrt
 abbr -a lt tree -a -C -I node_modules\|.git\|bower_components
 
+# disc usage
+# abbr -a dus du -sch .[!.]* * | sort -h
+
 abbr -a rm rm -rf
 abbr -a cp cp -r
 
