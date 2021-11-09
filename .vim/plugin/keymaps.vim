@@ -22,6 +22,7 @@ nnoremap $$ $
 nnoremap L g_
 nnoremap LL $
 nnoremap f; g_
+
 vnoremap 0 ^
 vnoremap ^ 0
 vnoremap 00 0
@@ -32,6 +33,17 @@ vnoremap HH 0
 vnoremap L g_
 vnoremap LL $
 vnoremap f; g_
+
+onoremap 0 ^
+onoremap ^ 0
+onoremap 00 0
+onoremap $ g_
+onoremap $$ $
+onoremap H ^
+onoremap HH 0
+onoremap L g_
+onoremap LL $
+onoremap f; g_
 
 " fast save file, close file
 nnoremap <leader>w <CMD>w!<cr>
