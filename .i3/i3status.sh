@@ -36,4 +36,9 @@ do
     then
         gnome-alsamixer > /dev/null 2>&1 &
     fi
+    
+    if [ "$getname" = "Language" ] 
+    then
+        xkb-switch -n
+    fi
 done
