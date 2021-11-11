@@ -51,7 +51,7 @@ template0 ${exec xset -q|grep LED| awk '{ print $10 }'}
 
 template1 ${if_match ${\1 \2}<10} " " ${else} ${if_match ${\1 \2}<20} "▁" ${else} ${if_match ${\1 \2}<30} "▂" ${else} ${if_match ${\1 \2}<40} "▃" ${else} ${if_match ${\1 \2}<50} "▄" ${else} ${if_match ${\1 \2}<60} "▅" ${else} ${if_match ${\1 \2}<70} "▆" ${else} ${if_match ${\1 \2}<80} "▇" ${else} "█" ${endif} ${endif} ${endif} ${endif} ${endif} ${endif} ${endif} ${endif} 
 
-template2 ${if_match ${\1 \2}<10}A14DA0${else}${if_match ${\1 \2}<20}227DC4${else}${if_match ${\1 \2}<35}ADCBFF${else}${else}${if_match ${\1 \2}<55}edbd50${else}${if_match ${\1 \2}<70}ed7450${else}${if_match ${\1 \2}<80}ed5057${else}ed5057${endif}${endif}${endif}${endif}${endif}${endif}${endif}
+template2 ${if_match ${\1 \2}<10}A14DA0${else}${if_match ${\1 \2}<20}227DC4${else}${if_match ${\1 \2}<35}ADCBFF${else}${if_match ${\1 \2}<55}EDBD50${else}${if_match ${\1 \2}<70}ED7450${else}${if_match ${\1 \2}<80}ED5057${else}ED5057${endif}${endif}${endif}${endif}${endif}${endif}
 
 template4 ${texeci 5 (bash ~/dotfiles/.i3/getVPN.sh)}
 
