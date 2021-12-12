@@ -6,5 +6,5 @@ if [[ $ACTIVE_CON = "" ]];
 then
   echo ""
 else
-  echo "VPN"
+  echo " VPN "
 fi
