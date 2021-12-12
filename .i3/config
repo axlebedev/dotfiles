@@ -210,7 +210,7 @@ bar {
 
     colors {
         focused_workspace #3d91dc #0d61ac #eeeeee
-        active_workspace  #9AB87C #324420 #ffffff
+        active_workspace  #3d91dc #324420 #ffffff
     }
 }
 
