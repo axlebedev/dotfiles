@@ -63,7 +63,7 @@ conky.config = {
     ${endif} ${endif} ${endif} ${endif} ${endif} ${endif} ${endif} ${endif} 
   ]],
 
-  template2 = [[${if_match ${\1 \2}<10}38048F${else}${if_match ${\1 \2}<20}6004C8${else}${if_match ${\1 \2}<30}8D15EE${else}${if_match ${\1 \2}<40}C041F6${else}${if_match ${\1 \2}<50}F46EFE${else}${if_match ${\1 \2}<60}FE50E1${else}${if_match ${\1 \2}<70}FE20BB${else}${if_match ${\1 \2}<80}FF0296${else}${if_match ${\1 \2}<90}FF0A73${else}FF104F${endif}${endif}${endif}${endif}${endif}${endif}${endif}${endif}${endif}]],
+  template2 = getTemplateForColors(colors),
 };
 
 
@@ -94,7 +94,7 @@ function cpuCore(coreN)
     "separator_block_width":3,
       "min_width":"]] .. stringWidth(1) .. [[",
       "full_text" : ${template1 cpu cpu]] .. coreN .. [[},
-      "color" : "\#${template2 cpu cpu"]] .. coreN .. [["}", 
+      "color" : "\#\#${template2 cpu cpu"]] .. coreN .. [["}", 
       "separator" : false
   }]]
 end
@@ -136,9 +136,9 @@ conky.text = [[
   "separator" : false
 },
 
-{ "separator_block_width":3,
+{ 
+  "separator_block_width":3,
   "min_width":"▁",
-# TODO: hwmon is different on different computers
   "full_text" : "${exec cat ]] .. hwMonitorPath .. [[ | cut -c-2}",
   "color" : "\#${template2 exec ~/dotfiles/.i3/getCPUTempNormalized.sh}", 
   "separator" : false

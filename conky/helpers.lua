@@ -27,3 +27,17 @@ function getTemplateForColors(colorsArray)
 
   return result
 end
+
+-- for demo
+function demoCpu(i, colorsArray, charsArray) -- assume i=[0..10]
+  local n = 10
+  local colorIndex = math.floor(i * #colorsArray / n + 0.5)
+  local charIndex = math.floor(i * #charsArray / n + 0.5)
+  return [[{
+    "separator_block_width":3,
+    "min_width":"]] .. stringWidth(1) .. [[",
+    "full_text" : "]] .. charsArray[charIndex] .. [[",
+    "color" : "]] .. colorsArray[colorIndex] .. [[", 
+    "separator" : false
+  }]]
+end
