@@ -192,7 +192,7 @@ bindsym $mod+r mode "Resize (L) (H) (J) (K)"
 
 # Create Log out, Reboot, Poweroff bindings
 mode "Exit (L)ogout, (P)oweroff" {
-	bindsym $mod+l exec gnome-session-quit
+	bindsym $mod+l exec i3-msg exit
 	bindsym $mod+p exec gnome-session-quit --power-off
 
 # back to normal: Enter or Escape
