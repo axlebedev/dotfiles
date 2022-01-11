@@ -215,7 +215,7 @@ conky.text = [[
     {
       "name" : "Volume",
       "full_text" : " Mute",
-      "color": "]] .. errorColorBg .. [[",  
+      "color": "]] .. errorColorBg .. [["  
     },
   ${endif}
 # Next 2 blocks - date and time
