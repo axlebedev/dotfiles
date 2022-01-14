@@ -21,7 +21,7 @@ smart_borders no_gaps
 
 exec --no-startup-id unclutter -idle 3
 exec --no-startup-id setxkbmap -layout us,ru -option 'grp:shift_caps_switch'
-exec --no-startup-id xrandr --auto --output DVI-D-0 --left-of HDMI-0
+exec --no-startup-id xrandr --auto --output HDMI-1 --pos 0x250
 exec --no-startup-id nm-applet
 # 0.5 - is mouse pointer speed
 exec --no-startup-id xinput set-prop "Genius Optical Mouse" "Coordinate Transformation Matrix" 0.5 0 0 0 0.5 0 0 0 1
