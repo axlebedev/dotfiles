@@ -193,7 +193,7 @@ bindsym $mod+r mode "Resize (L) (H) (J) (K)"
 # Create Log out, Reboot, Poweroff bindings
 mode "Exit (L)ogout, (P)oweroff, loc(K) screen" {
 	bindsym $mod+l exec i3-msg exit
-	bindsym $mod+p exec gnome-session-quit --power-off
+	bindsym $mod+p exec systemctl poweroff
 	bindsym $mod+k exec i3lock -c 000000 ; mode "default"
 
 # back to normal: Enter or Escape
