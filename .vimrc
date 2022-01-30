@@ -485,6 +485,10 @@ Plug 'PhilRunninger/nerdtree-visual-selection'
 " TODO: сделать чтобы работал бесшовно
 " Plug 'noscript/taberian.vim'
 
+" -TEST------------------------------------------------------------------------
+" keep cursor on yank
+Plug 'svban/YankAssassin.vim'
+
 " -----------------------------------------------------------------------------
 call plug#end()
 filetype plugin indent on
@@ -527,17 +531,6 @@ autocmd BufEnter * call winview#AutoRestoreWinView()
 autocmd BufRead,BufNewFile *.qf set filetype=qf
 
 autocmd VimEnter * if (&diff == 0 && argv(0) !~# 'git.+MSG' ) | NERDTree | wincmd l | Startify | endif
-
-" keep cursor on yank
-augroup yank_restore_cursor
-    autocmd!
-    autocmd VimEnter,CursorMoved *
-        \ let s:cursor = getpos('.')
-    autocmd TextYankPost *
-        \ if v:event.operator ==? 'y' |
-            \ call setpos('.', s:cursor) |
-        \ endif
-augroup END
 
 augroup autoupdate_on_vimagit
     autocmd!
