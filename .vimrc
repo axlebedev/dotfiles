@@ -330,6 +330,10 @@ let g:tcomment_textobject_inlinecomment = 'ix'
 " Surround.
 Plug 'tpope/vim-surround'
 
+" -----------------------------------------------------------------------------
+" vmap '~' for cycle through cases
+Plug 'axlebedev/vim-case-change'
+
 " }}} text-edit plugins
 
 " js/html/css... plugins {{{
@@ -477,9 +481,6 @@ Plug 'kana/vim-gf-diff'
 
 " additional bindings to NERDTree
 Plug 'PhilRunninger/nerdtree-visual-selection'
-
-" vmap '~' for cycle through cases
-Plug 'axlebedev/vim-case-change'
 
 " TODO: сделать чтобы работал бесшовно
 " Plug 'noscript/taberian.vim'
