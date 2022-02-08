@@ -530,7 +530,7 @@ autocmd BufEnter * call winview#AutoRestoreWinView()
 
 autocmd BufRead,BufNewFile *.qf set filetype=qf
 
-autocmd VimEnter * if (&diff == 0 && argv(0) !~# 'git.+MSG' ) | NERDTree | wincmd l | Startify | endif
+autocmd VimEnter * if (&diff == 0 && argc() == 0) | NERDTree | wincmd l | Startify | endif
 
 augroup autoupdate_on_vimagit
     autocmd!
