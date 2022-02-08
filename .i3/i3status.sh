@@ -30,8 +30,11 @@ do
         google-chrome --app="https://calendar.google.com/" > /dev/null 2>&1 &
     fi
 
+    # How to avoid 'restore tabs' popup
+    # https://forum.uipath.com/t/how-to-close-restore-pages-pop-up-in-chrome/213168/2
     if [ "$getname" = "Volume" ] 
     then
+        sed -i "s/\"exited_cleanly\":false/\"exited_cleanly\":true/g" /home/alex/chrome-YTM/Local\ State
         google-chrome --user-data-dir="/home/alex/chrome-YTM" --app="https://music.youtube.com/" > /dev/null 2>&1 &
     fi
 
