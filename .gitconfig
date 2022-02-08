@@ -21,10 +21,10 @@
 [credential]
 	helper = cache --timeout=86400
 [diff]
-	tool = gvimdiff
+	tool = vimdiff
     algorithm = histogram
 [merge]
-	tool = gvimdiff
+	tool = vimdiff
 	renameLimit = 999999
 [difftool]
 	prompt = false
