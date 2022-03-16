@@ -463,12 +463,14 @@ let g:footprintsEasingFunction = 'easeinout'
 let g:footprintsHistoryDepth = 10
 let g:footprintsExcludeFiletypes = ['magit', 'nerdtree', 'diff']
 
-Plug 'axlebedev/where-is-cursor'
+Plug 'axlebedev/find-my-cursor'
 function! FindCursorHookPre() abort
+    FootprintsDisable
     IlluminationDisable
 endfunction
 let g:FindCursorPre = function('FindCursorHookPre')
 function! FindCursorHookPost() abort
+    FootprintsEnable
     IlluminationEnable
 endfunction
 let g:FindCursorPost = function('FindCursorHookPost')
