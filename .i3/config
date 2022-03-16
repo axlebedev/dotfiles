@@ -218,7 +218,7 @@ bar {
 }
 
 #ass                    border  backgr. text    indicator
-client.focused          #0d61ac #0d61ac #dddddd #585858
+client.focused          #227DC4 #227DC4 #dddddd #585858
 client.focused_inactive #444444 #444444 #ffffff #444444
 client.unfocused        #28282b #28282b #666666 #444444
-client.urgent           #F86A59 #F86A59 #ffffff #000000
+client.urgent           #ed5057 #ed5057 #ffffff #000000
