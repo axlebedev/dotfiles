@@ -191,9 +191,10 @@ mode "Resize (L) (H) (J) (K)" {
 bindsym $mod+r mode "Resize (L) (H) (J) (K)"
 
 # Create Log out, Reboot, Poweroff bindings
-mode "Exit (L)ogout, (P)oweroff, loc(K) screen" {
+mode "Exit (P)oweroff, (L)ogout, loc(K) screen, (S)uspend" {
 	bindsym $mod+l exec i3-msg exit
 	bindsym $mod+p exec systemctl poweroff
+	bindsym $mod+s exec systemctl suspend
 	bindsym $mod+k exec i3lock -c 000000 ; mode "default"
 
 # back to normal: Enter or Escape
