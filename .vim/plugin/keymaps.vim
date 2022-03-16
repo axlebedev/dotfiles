@@ -139,6 +139,7 @@ function! ClapOpen(command_str)
 endfunction
 
 nnoremap <silent> <leader>t <CMD>GFiles -c -o --exclude-standard<CR>
+nnoremap <silent> <leader>b <CMD>Buffers<CR>
 " FZF command
 nnoremap <silent> <leader>h <CMD>History<CR>
 
