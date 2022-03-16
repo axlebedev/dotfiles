@@ -28,7 +28,7 @@ colors = {
 }
 
 -- errorColorFg = '\\#C42021'
-errorColorFg = '\\#' .. colors[#colors]
+errorColorFg = '\\#' .. colors[#colors-2]
 errorColorBg = '\\#FFFFFF'
 
 -- textColorFg = '\\#ADCBFF'
