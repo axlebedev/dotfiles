@@ -316,6 +316,7 @@ let g:argwrap_tail_comma = 1
 " autoclose parens
 Plug 'jiangmiao/auto-pairs'
 let g:AutoPairsMapSpace = 0
+let g:AutoPairsMultilineClose = 0 " Dont make a mess when `{ if(condition) { doSomething [cursor] }`
 imap <silent> <expr> <space> pumvisible()
 	\ ? "<space>"
 	\ : "<c-r>=AutoPairsSpace()<cr>"
