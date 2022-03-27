@@ -421,6 +421,14 @@ Plug 'neoclide/coc.nvim', { 'do': 'yarn install --frozen-lockfile', 'frozen': 1 
 let g:coc_global_extensions = ['coc-json', 'coc-tsserver', 'coc-tabnine']
 let g:coc_global_config = '/home/alex/dotfiles/coc-settings.json'
 
+let s:filesuffix_blacklist = ['git', '']
+function! s:disable_coc_for_type()
+	if index(s:filesuffix_blacklist, expand('%:e')) != -1
+		let b:coc_enabled = 0
+	endif
+endfunction
+autocmd BufRead,BufNewFile * call s:disable_coc_for_type()
+
 function! s:check_back_space() abort
 	let col = col('.') - 1
 	return !col || getline('.')[col - 1]  =~# '\s'
