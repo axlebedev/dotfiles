@@ -47,7 +47,18 @@ onoremap f; g_
 
 " fast save file, close file
 nnoremap <leader>w <CMD>w!<cr>
-nmap <silent> <leader>q <CMD>call kwbd#Kwbd(1)<CR>
+
+" Если просто закрыть fugitive-буфер - то закроется весь вим.
+" Поэтому делаем такой костыль
+function s:CloseBuffer() abort
+    if (bufname('%') =~ 'fugitive')
+        set bufhidden=delete
+        b#
+    else
+        call kwbd#Kwbd(1)
+    endif
+endfunction
+nmap <silent> <leader>q <CMD>call <SID>CloseBuffer()<CR>
 
 " new empty buffer
 noremap <leader>x <CMD>Startify<cr>
