@@ -551,3 +551,22 @@ augroup END
 autocmd TextChanged * if &buftype == 'quickfix'
 \| let @/ = g:esearch.last_pattern.str
 \| endif
+
+" fugitive tormoz: when go to fugitive buffer - these plugins
+" hang up all vim
+" Plug 'pangloss/vim-javascript'
+" Plug 'MaxMEllon/vim-jsx-pretty'
+" set foldmethod to avoid it
+function! s:CustomFixFoldmethod()
+    augroup au_vimrc_foldmethod
+        autocmd!
+        let s:savedFoldMethod = &foldmethod
+        autocmd BufEnter *
+        \ if (bufname('%') =~ 'fugitive') 
+        \ | set foldmethod=manual 
+        \ | else 
+        \ | let &foldmethod = s:savedFoldMethod
+        \ | endif 
+    augroup END
+endfunction
+autocmd VimEnter * call <SID>CustomFixFoldmethod()
