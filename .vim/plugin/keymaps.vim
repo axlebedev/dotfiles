@@ -266,3 +266,6 @@ nnoremap <silent> qn <CMD>execute("cnext<bar>normal n")<CR>
 cnoremap <C-f> <NOP>
 
 nnoremap zj zz<CMD>execute 'normal '.(winheight('.') / 4).'<C-e>'<CR>
+
+nnoremap <BS> ==
+vnoremap <BS> =
