@@ -189,8 +189,9 @@ nnoremap <C-g><C-v> <CMD>GV<cr>
 " stage current file
 nnoremap <C-g><C-w> <CMD>Gw<cr> 
 
-" beautify json
-nnoremap <leader>bj <CMD>%!python -m json.tool<cr>
+" beautify json, need "sudo apt install jq"
+nnoremap <leader>bj <CMD>%!jq .<cr>
+vnoremap <leader>bj <CMD>'<,'>!jq .<cr>
 " beautify html
 nnoremap <leader>bh <CMD>call htmlbeautify#htmlbeautify()<CR>
 
