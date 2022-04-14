@@ -76,6 +76,10 @@ bindsym $mod+q kill
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 bindsym $mod+d exec ulauncher
 
+bindsym $mod+c exec xeyes
+# XEyes window should be floating, have no border, and be focused on open
+for_window [class="XEyes"] floating enable border none focus
+
 # change focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down
