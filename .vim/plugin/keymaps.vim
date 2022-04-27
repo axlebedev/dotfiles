@@ -180,7 +180,7 @@ nnoremap Q @@
 nnoremap <silent> <leader>hh <CMD>call blockline#BlockLine()<CR>
 
 " quickfix next
-nnoremap <silent> cn <CMD>cn<CR>
+nnoremap <silent> cn <CMD>Cnext<CR>
 
 " for convenient git
 nnoremap <C-g><C-g> <CMD>Magit<CR>

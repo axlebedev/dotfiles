@@ -12,3 +12,10 @@ command! S vs | wincmd h | bprev | wincmd l
 command! Grc Git rebase --continue
 
 command! NewInstance !gnome-terminal -- vim %
+
+" Make cnext and co wrap
+command! Cnext try | cnext | catch | cfirst | catch | endtry
+command! Cprev try | cprev | catch | clast | catch | endtry
+
+command! Lnext try | lnext | catch | lfirst | catch | endtry
+command! Lprev try | lprev | catch | llast | catch | endtry
