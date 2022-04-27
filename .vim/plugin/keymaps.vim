@@ -269,3 +269,7 @@ nnoremap zj zz<CMD>execute 'normal '.(winheight('.') / 4).'<C-e>'<CR>
 
 nnoremap <BS> ==
 vnoremap <BS> =
+
+nnoremap <silent> x <CMD>call removechar#RemoveChar()<CR>
+" Для того чтобы поменять местами буквы - оставляем дефолтное поведение
+nnoremap xp xp
