@@ -97,9 +97,6 @@ if has('persistent_undo')
     endif
 endif
 
-" Avoid all the hit-enter prompts
-set shortmess=aAItW
-
 " smartcase for search
 set ignorecase
 set smartcase
@@ -125,7 +122,7 @@ set noerrorbells
 
 " Don't show the intro message when starting Vim
 " Also suppress several 'Press Enter to continue messages' especially with FZF
-set shortmess=aoOtI
+set shortmess-=S
 
 " Show title for terminal vim
 set title
