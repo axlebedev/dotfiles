@@ -87,6 +87,8 @@ bindsym $mod+c exec xeyes
 # XEyes window should be floating, have no border, and be focused on open
 for_window [class="XEyes"] floating enable border none focus
 
+bindsym Print exec flameshot gui
+
 # change focus
 bindsym $mod+h focus left
 bindsym $mod+j focus down
