@@ -10,3 +10,5 @@ command! Todo call todo#Todo()
 command! S vs | wincmd h | bprev | wincmd l
 
 command! Grc Git rebase --continue
+
+command! NewInstance !gnome-terminal -- vim %
