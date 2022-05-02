@@ -161,6 +161,7 @@ let g:indexed_search_numbered_only = 1
 let g:indexed_search_shortmess = 1
 Plug 'henrik/vim-indexed-search'
 
+" -----------------------------------------------------------------------------
 " Clear highlight on cursor move
 Plug 'junegunn/vim-slash'
 
