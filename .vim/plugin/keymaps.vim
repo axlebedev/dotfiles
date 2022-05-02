@@ -50,10 +50,20 @@ nnoremap <leader>w <CMD>w!<cr>
 
 " Если просто закрыть fugitive-буфер - то закроется весь вим.
 " Поэтому делаем такой костыль
+function! s:CloseFugitive() abort
+    set bufhidden&
+endfunction
+
+augroup close_fugitive
+    autocmd!
+    " By default it's set bufhidden=delete in plugin source. I dont need it
+    autocmd BufReadPost fugitive://* call <SID>CloseFugitive()
+augroup END
 function s:CloseBuffer() abort
     if (bufname('%') =~ 'fugitive')
-        set bufhidden=delete
-        b#
+        let buf = bufnr('%')
+        bprev
+        exe 'bdelete '.buf
     else
         call kwbd#Kwbd(1)
     endif
