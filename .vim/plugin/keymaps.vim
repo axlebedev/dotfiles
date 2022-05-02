@@ -167,7 +167,10 @@ nnoremap <silent> <leader>h <CMD>History<CR>
 function! g:GeditFile(branch) abort
     execute 'Gedit '.a:branch.':%'
 endfunction
+" open current file version in branch
 nnoremap <silent> <C-g><C-f> <CMD>call fzf#run(fzf#wrap({ 'source': 'sh ~/dotfiles/fish/sortedBranch.sh', 'sink': function('GeditFile') }))<CR>
+" open unmerged list
+nnoremap <silent> <C-g><C-m> <CMD>call fzf#run({'source': 'git diff --name-only --diff-filter=U', 'sink': 'e', 'window': { 'width': 0.9, 'height': 0.6 }})<CR>
 
 " get current highlight group under cursor
 map <F10> <CMD>echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
