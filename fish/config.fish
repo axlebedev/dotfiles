@@ -116,12 +116,3 @@ abbr -a ys yarn start
 abbr -a ysn yarn snfiller
 abbr -a ycc yarn cache clean
 abbr -a yi yarn --ignore-engines
-
-function __select_from_last
-	set -l FZF_OUT (eval $history[1] | fzf)
-	if test -n "$FZF_OUT"
-		commandline -a "$FZF_OUT "
-		commandline -f end-of-line
-	end
-end
-bind \cn __select_from_last
