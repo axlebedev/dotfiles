@@ -35,7 +35,8 @@ do
     if [ "$getname" = "Volume" ] 
     then
         sed -i "s/\"exited_cleanly\":false/\"exited_cleanly\":true/g" /home/alex/chrome-YTM/Local\ State
-        google-chrome --user-data-dir="/home/alex/chrome-YTM" --app="https://music.youtube.com/" > /dev/null 2>&1 &
+        # google-chrome --user-data-dir="/home/alex/chrome-YTM" --app="https://music.youtube.com/" > /dev/null 2>&1 &
+        firefox -P YandexMusic --new-instance music.yandex.ru > /dev/null 2>&1 &
     fi
 
     if [ "$getname" = "Memory" ] 
