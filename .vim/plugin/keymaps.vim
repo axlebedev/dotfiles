@@ -160,8 +160,23 @@ function! ClapOpen(command_str)
   exe 'normal! ' . a:command_str . "\<cr>"
 endfunction
 
-nnoremap <silent> <leader>t <CMD>GFiles -c -o --exclude-standard<CR>
+" nnoremap <silent> <leader>t <CMD>GFiles -c -o --exclude-standard<CR>
+
+nnoremap <silent> <leader>t <CMD>call fzf#vim#gitfiles('', {
+            \    'source': 'git ls-files -c -o --exclude-standard ',
+            \    'sink': 'e'
+            \ })<CR>
+vnoremap <silent> <leader>t "ly<CMD>call fzf#vim#gitfiles('', {
+            \    'source': 'git ls-files -c -o --exclude-standard ',
+            \    'sink': 'e',
+            \    'options': '--query='.@l
+            \ })<CR>
 nnoremap <silent> <leader>b <CMD>Buffers<CR>
+nnoremap <silent> <leader>m <CMD>call fzf#vim#gitfiles('', {
+            \    'source': 'git diff --name-status --diff-filter=U',
+            \    'sink': 'e',
+            \    'options': '--prompt="Unmerged> "'
+            \ })<CR>
 " FZF command
 nnoremap <silent> <leader>h <CMD>History<CR>
 
