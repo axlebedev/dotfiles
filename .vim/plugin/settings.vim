@@ -120,8 +120,6 @@ set nojoinspaces
 " Disable error bells
 set noerrorbells
 
-" Don't show the intro message when starting Vim
-" Also suppress several 'Press Enter to continue messages' especially with FZF
 set shortmess-=S
 
 " Show title for terminal vim
