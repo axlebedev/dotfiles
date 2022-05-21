@@ -209,7 +209,12 @@ nnoremap Q @@
 nnoremap <silent> <leader>hh <CMD>call blockline#BlockLine()<CR>
 
 " quickfix next
-nnoremap <silent> cn <CMD>Cnext<CR>
+function! Cn() abort
+    Cnext
+    " it should run after buffer change
+    call timer_start(1, {id -> findcursor#FindCursor('#d6d8fa', 0)})
+endfunction
+nnoremap <silent> cn <CMD>call Cn()<CR>
 
 " for convenient git
 nnoremap <C-g><C-g> <CMD>Magit<CR>
