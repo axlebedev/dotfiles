@@ -215,6 +215,13 @@ function! Cn() abort
     call timer_start(1, {id -> findcursor#FindCursor('#d6d8fa', 0)})
 endfunction
 nnoremap <silent> cn <CMD>call Cn()<CR>
+" quickfix prev
+function! Cp() abort
+    Cprev
+    " it should run after buffer change
+    call timer_start(1, {id -> findcursor#FindCursor('#d6d8fa', 0)})
+endfunction
+nnoremap <silent> cp <CMD>call Cp()<CR>
 
 " for convenient git
 nnoremap <C-g><C-g> <CMD>Magit<CR>
