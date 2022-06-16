@@ -96,6 +96,9 @@ abbr -a gst git stash save --keep-index
 abbr -a gsta git stash pop
 abbr -a grh git reset HEAD^
 
+alias showMocks='ls -1 ~/jsfiller/snfiller/static/fake-api/ | grep json'
+bind mocks showMocks
+
 alias copyBranch="git rev-parse --abbrev-ref HEAD | xclip -sel clip"
 abbr -a cb copyBranch
 
