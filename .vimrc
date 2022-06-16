@@ -324,7 +324,10 @@ let g:AutoPairsMapBS = 0
 " -----------------------------------------------------------------------------
 " comment lines, uncomment lines
 Plug 'tomtom/tcomment_vim'
+let g:tcomment_maps = 0
 let g:tcomment_textobject_inlinecomment = 'ix'
+nnoremap <C-_> <CMD>TComment<CR>
+vnoremap <C-_> :'<,'>TComment<CR>gv
 
 " -----------------------------------------------------------------------------
 " Surround.
