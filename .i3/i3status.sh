@@ -34,6 +34,7 @@ do
     # https://forum.uipath.com/t/how-to-close-restore-pages-pop-up-in-chrome/213168/2
     if [ "$getname" = "Volume" ] 
     then
+        # gnome-alsamixer > /dev/null 2>&1 &
         sed -i "s/\"exited_cleanly\":false/\"exited_cleanly\":true/g" /home/alex/chrome-YTM/Local\ State
         # google-chrome --user-data-dir="/home/alex/chrome-YTM" --app="https://music.youtube.com/" > /dev/null 2>&1 &
         firefox -P YandexMusic --new-instance music.yandex.ru > /dev/null 2>&1 &
@@ -44,11 +45,6 @@ do
         gnome-system-monitor > /dev/null 2>&1 &
     fi
 
-    if [ "$getname" = "Volume" ] 
-    then
-        gnome-alsamixer > /dev/null 2>&1 &
-    fi
-    
     if [ "$getname" = "Language" ] 
     then
         xkb-switch -n
