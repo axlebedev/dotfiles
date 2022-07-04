@@ -21,3 +21,22 @@ command! Lnext try | lnext | catch | lfirst | catch | endtry
 command! Lprev try | lprev | catch | llast | catch | endtry
 
 command! ClearSession %bd | NERDTree | wincmd l | Startify
+
+let s:FindCursorPostSaved = g:FindCursorPost
+function! NullFn() abort
+endfunction
+function! SetDemoMode(on) abort
+    if (a:on == 1)
+        FootprintsDisable
+        ALEDisable
+        let s:FindCursorPostSaved = g:FindCursorPost
+        let g:FindCursorPost = function('NullFn')
+    else
+        FootprintsEnable
+        ALEEnable
+        let g:FindCursorPost = s:FindCursorPostSaved
+    endif
+endfunction
+
+command! DemoOn call SetDemoMode(1)
+command! DemoOff call SetDemoMode(0)
