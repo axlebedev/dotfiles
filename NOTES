@@ -7,3 +7,10 @@ screenkey - для показа нажатой кнопки
 peek - запись скринкаста
 
 flameshot - скриншоты с рисованием
+
+# Если сломались репозитории в apt-get
+```
+sudo apt --fix-broken install
+sudo apt-get check
+sudo apt-get update
+```
