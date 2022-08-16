@@ -165,7 +165,7 @@ nnoremap <silent> <leader>t <CMD>call fzf#vim#gitfiles('', {
 vnoremap <silent> <leader>t "ly<CMD>call fzf#vim#gitfiles('', {
             \    'source': 'git ls-files -c -o --exclude-standard ',
             \    'sink': 'e',
-            \    'options': '--query='.substitute(@l, '\.', '', '')
+            \    'options': '--query='.tolower(substitute(@l, '\.', '', ''))
             \ })<CR>
 nnoremap <silent> <leader>b <CMD>Buffers<CR>
 nnoremap <silent> <leader>m <CMD>call fzf#vim#gitfiles('', {
