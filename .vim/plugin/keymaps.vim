@@ -145,10 +145,6 @@ call submode#map(resizeSubmode, 'n', '', 'l', ':vertical resize +1<cr>')
 call submode#map(resizeSubmode, 'n', '', 'k', ':resize -1<cr>')
 call submode#map(resizeSubmode, 'n', '', 'j', ':resize +1<cr>')
 
-" uncomment next line on join if it's comment
-" NOTE: need Plug 'tomtom/tcomment_vim'
-nnoremap J <CMD>normal jg<ck<CR>J
-
 autocmd au_vimrc FileType help,qf,git,fugitive* nnoremap <buffer> q <CMD>q<cr>
 
 nnoremap <silent> <leader>a <CMD>ArgWrap<CR>
