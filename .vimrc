@@ -71,7 +71,7 @@ let NERDTreeDirArrowExpandable = '▸'
 let NERDTreeDirArrowCollapsible = '▾'
 let NERDTreeShowHidden = 1 " show hidden files
 let NERDTreeCascadeSingleChildDir = 0 " dont collapse singlechild dir
-let NERDTreeWinSize = 50
+let NERDTreeWinSize = 30
 let NERDTreeAutoDeleteBuffer = 1
 " for correct Startify update items while one session
 let NERDTreeHijackNetrw = 0
