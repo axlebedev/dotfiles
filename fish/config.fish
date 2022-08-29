@@ -12,7 +12,8 @@ set -x PAGER "/bin/sh -c \"unset PAGER;col -b -x | \
 # ======== ALIASES ========
 abbr -a l ls -alF
 abbr -a lr ls -lrt
-abbr -a lt tree -a -C -I node_modules\|.git\|bower_components
+# sudo apt install tree
+abbr -a lt tree -a -C -I "node_modules\|.git\|bower_components"
 
 # disc usage
 # abbr -a dus du -sch .[!.]* * | sort -h
