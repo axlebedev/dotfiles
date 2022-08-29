@@ -1,14 +1,15 @@
 " find word under cursor
 
 function! globalfind#FilterTestEntries() abort
-    let filtered = filter(getqflist(), "bufname(v:val.bufnr) !~# 'test'")
-    let filtered = filter(filtered, "bufname(v:val.bufnr) !~# 'jsfiller3'")
-    let filtered = filter(filtered, "bufname(v:val.bufnr) !~# 'git'")
-    let filtered = filter(filtered, "bufname(v:val.bufnr) !~# 'diff'")
-    let filtered = filter(filtered, "bufname(v:val.bufnr) !~# 'commonMock'")
-    let filtered = filter(filtered, "bufname(v:val.bufnr) !~# 'yarn.lock'")
-    let filtered = filter(filtered, "bufname(v:val.bufnr) !~# 'fake-api'")
-    let filtered = filter(filtered, "bufname(v:val.bufnr) !~# 'crowdin'")
-    let filtered = filter(filtered, "bufname(v:val.bufnr) !~# 'localization'")
+    let filtered = getqflist()
+                \ ->filter("bufname(v:val.bufnr) !~# 'test'")
+                \ ->filter("bufname(v:val.bufnr) !~# 'git'")
+                \ ->filter("bufname(v:val.bufnr) !~# 'diff'")
+                \ ->filter("bufname(v:val.bufnr) !~# 'commonMock'")
+                \ ->filter("bufname(v:val.bufnr) !~# 'yarn.lock'")
+                \ ->filter("bufname(v:val.bufnr) !~# 'fake-api'")
+                \ ->filter("bufname(v:val.bufnr) !~# 'crowdin'")
+                \ ->filter("bufname(v:val.bufnr) !~# 'localization'")
+                \ ->filter("bufname(v:val.bufnr) !~# 'node_modules'")
     call setqflist(filtered)
 endfunction
