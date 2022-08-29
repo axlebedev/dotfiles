@@ -410,7 +410,7 @@ let g:ale_set_quickfix = 0
 
 let g:ale_linters = {
 \   'javascript': ['eslint'],
-\   'typescript': ['tslint'],
+\   'typescript': ['eslint'],
 \}
 let g:ale_javascript_eslint_executable = 'npm run lint'
 let g:ale_typescript_tslint_executable = 'npm run lint'
