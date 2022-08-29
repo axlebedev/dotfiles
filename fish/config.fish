@@ -26,13 +26,12 @@ abbr -a vv gvim
 
 abbr -a o xdg-open
 
-abbr -a ga git add
-abbr -a gas git add src
-abbr -a gap git add packages
+abbr -a ga goa add
+abbr -a gas goa add src
 # --verbose to show diff in vim when show commit
-abbr -a gi git commit --verbose
-abbr -a gia git commit --amend --no-edit
-abbr -a giw git commit -m "wip"
+abbr -a gi goa commit --verbose
+abbr -a gia goa commit --amend --no-edit
+abbr -a giw goa commit -m "wip"
 
 function git-sortedbranch -d 'Fuzzy-find a branch, sorted by reflog, and then all branches'
   set -l cmd (commandline -j)
@@ -44,60 +43,78 @@ function git-sortedbranch -d 'Fuzzy-find a branch, sorted by reflog, and then al
   commandline -j -- $cmdResult
   commandline -f repaint
 end
-bind \cg git-sortedbranch
+# bind \cg git-sortedbranch
 # Local branches sorted by visited
 
-function git-commit -d 'Fuzzy-find a commit'
+function arc-sortedbranch -d 'Fuzzy-find a branch'
   set -l cmd (commandline -j)
-  [ "$cmd" ]; or return
-  eval $cmd |\
-    eval git hist |\
-    grep -v HEAD |\
-    string trim |\
-    awk '!x[$0]++' |\
-    fzf --ansi -i --height=50% --reverse --no-sort |\
+  bash ~/dotfiles/fish/arcSortedBranch.sh |\
+    fzf --no-sort -i --reverse --height=50% |\
     read -l result
   [ "$result" ]; or return
-  set -l $result (echo $result | sed -r 's/^.*([0-9a-f]{7}).*$/\1/')
   set -l cmdResult $cmd$result | tr '\n' ' '
   commandline -j -- $cmdResult
   commandline -f repaint
 end
-bind \cb git-commit
+bind \ca arc-sortedbranch
 
-abbr -a go git checkout
-abbr -a gs git switch
-abbr -a gr git restore
-abbr -a go git checkout
-abbr -a gob git switch -c
-abbr -a gss git status
+function goa-sortedbranch -d 'git or arc sorted branch'
+  if string match "/home/l-e-b-e-d-e-v/arc*" $PWD
+    arc-sortedbranch
+  else
+    git-sortedbranch
+  end
+end
+bind \cg goa-sortedbranch
+
+abbr -a go goa checkout
+abbr -a gr goa restore
+abbr -a go goa checkout
+abbr -a gob goa checkout -b
+abbr -a gs goa status
 # maybe git diff --patience
-abbr -a gd git diff --histogram --minimal --ignore-space-change
-abbr -a gh git hist
-abbr -a ghh git hist --first-parent -10
-abbr -a ghhh git hist --first-parent -20
-abbr -a ghhhh git hist --first-parent -30
-abbr -a ghs git hist --stat --first-parent
-abbr -a gpl git pull
-abbr -a gps git push origin HEAD
-abbr -a gpsu git push -u origin HEAD
-abbr -a gpsf git push -f origin HEAD
-abbr -a grb git rebase --autostash
-abbr -a grd git rebase --autostash origin/develop
-abbr -a grc git rebase --continue
-abbr -a gra git rebase --abort
-abbr -a gcp git cherry-pick
-abbr -a gcpc git cherry-pick --continue
-abbr -a gcpa git cherry-pick --abort
-abbr -a gfa git fetch --all
-abbr -a gfap git fetch --all -p
-abbr -a gbs git bisect start
-abbr -a gbr git bisect reset
-abbr -a gbg git bisect good
-abbr -a gbb git bisect bad
-abbr -a gst git stash save --keep-index
-abbr -a gsta git stash pop
-abbr -a grh git reset HEAD^
+
+abbr -a gd goa diff --histogram --minimal --ignore-space-change
+abbr -a gh goa hist
+abbr -a ghh goa hist --first-parent -n 10
+abbr -a ghhh goa hist --first-parent -n 20
+abbr -a ghhhh goa hist --first-parent -n 30
+abbr -a ghs goa hist --stat --first-parent
+abbr -a gpl goa pull
+abbr -a gps goa push origin HEAD
+abbr -a gpsu goa push -u origin HEAD
+abbr -a gpsf goa push -f origin HEAD
+abbr -a grb goa rebase --autostash
+abbr -a grd goa rebase --autostash origin/develop
+abbr -a grc goa rebase --continue
+abbr -a gra goa rebase --abort
+abbr -a gcp goa cherry-pick
+abbr -a gcpc goa cherry-pick --continue
+abbr -a gcpa goa cherry-pick --abort
+abbr -a gfa goa fetch --all
+abbr -a gfap goa fetch --all -p
+abbr -a gbs goa bisect start
+abbr -a gbr goa bisect reset
+abbr -a gbg goa bisect good
+abbr -a gbb goa bisect bad
+abbr -a gst goa stash save --keep-index
+abbr -a gsta goa stash pop
+abbr -a grh goa reset HEAD^
+
+
+abbr -a ah arc log --oneline
+abbr -a ahh arc log --oneline -n 10
+abbr -a ai arc commit
+abbr -a aia arc commit --amend --no-edit
+abbr -a ao arc checkout
+abbr -a aob arc checkout -b
+abbr -a apl arc pull
+abbr -a aps arc push
+abbr -a apr arc pr create
+abbr -a ad arc diff
+abbr -a acp arc cherry-pick
+abbr -a aa arc add
+abbr -a as arc status
 
 alias showMocks='ls -1 ~/jsfiller/snfiller/static/fake-api/ | grep json'
 bind mocks showMocks
