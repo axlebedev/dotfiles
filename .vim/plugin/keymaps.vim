@@ -310,3 +310,5 @@ vnoremap <BS> =
 nnoremap <silent> x "_x
 " Для того чтобы поменять местами буквы - оставляем дефолтное поведение
 nnoremap xp xp
+
+nnoremap sft :<C-U>setfiletype 
