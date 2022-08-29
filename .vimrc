@@ -327,7 +327,7 @@ Plug 'tomtom/tcomment_vim'
 let g:tcomment_maps = 1
 let g:tcomment_textobject_inlinecomment = 'ix'
 nnoremap <C-_> <CMD>TComment<CR>
-vnoremap <C-_> :'<,'>TComment<CR>gv
+vnoremap <C-_> :TComment<CR>gv
 
 " -----------------------------------------------------------------------------
 " Surround.
