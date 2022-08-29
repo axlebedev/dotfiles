@@ -543,6 +543,8 @@ autocmd BufEnter * call winview#AutoRestoreWinView()
 
 autocmd BufRead,BufNewFile *.qf set filetype=qf
 
+autocmd BufRead,BufNewFile *.styl set filetype=css
+
 autocmd VimEnter * if (&diff == 0 && argc() == 0) | NERDTree | wincmd l | Startify | endif
 
 augroup autoupdate_on_vimagit
