@@ -74,7 +74,8 @@ abbr -a gob goa checkout -b
 abbr -a gs goa status
 # maybe git diff --patience
 
-abbr -a gd goa diff --histogram --minimal --ignore-space-change
+abbr -a gd goa diff --histogram --minimal --ignore-space-change --relative
+abbr -a gdm goa diff $(goa merge-base HEAD trunk) 
 abbr -a gh goa hist
 abbr -a ghh goa hist --first-parent -n 10
 abbr -a ghhh goa hist --first-parent -n 20
@@ -93,11 +94,12 @@ abbr -a gcpc goa cherry-pick --continue
 abbr -a gcpa goa cherry-pick --abort
 abbr -a gfa goa fetch --all
 abbr -a gfap goa fetch --all -p
+abbr -a gb goa branch
 abbr -a gbs goa bisect start
 abbr -a gbr goa bisect reset
 abbr -a gbg goa bisect good
 abbr -a gbb goa bisect bad
-abbr -a gst goa stash save --keep-index
+abbr -a gst goa stash push --keep-index
 abbr -a gsta goa stash pop
 abbr -a grh goa reset HEAD^
 
