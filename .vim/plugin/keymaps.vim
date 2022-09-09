@@ -185,6 +185,7 @@ nnoremap <silent> <leader>m <CMD>call fzf#vim#gitfiles('', {
             \    'options': '--prompt="Unmerged> "'
             \ })<CR>
 " FZF command
+nnoremap <silent> sft <CMD>Filetypes<CR>
 nnoremap <silent> <leader>h <CMD>History<CR>
 
 function! g:GeditFile(branch) abort
@@ -321,5 +322,3 @@ vnoremap <BS> =
 nnoremap <silent> x "_x
 " Для того чтобы поменять местами буквы - оставляем дефолтное поведение
 nnoremap xp xp
-
-nnoremap sft :<C-U>setfiletype 
