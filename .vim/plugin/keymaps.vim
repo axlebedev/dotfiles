@@ -145,6 +145,17 @@ call submode#map(resizeSubmode, 'n', '', 'l', ':vertical resize +1<cr>')
 call submode#map(resizeSubmode, 'n', '', 'k', ':resize -1<cr>')
 call submode#map(resizeSubmode, 'n', '', 'j', ':resize +1<cr>')
 
+let foldlevelSubmode = 'Foldlevel'
+call submode#enter_with(foldlevelSubmode, 'n', '', '<C-l>')
+call submode#map(foldlevelSubmode, 'n', '', '-', '<CMD>call increasefoldlevel#decreaseFoldlevel()<cr>')
+call submode#map(foldlevelSubmode, 'n', '', '<', '<CMD>call increasefoldlevel#decreaseFoldlevel()<cr>')
+call submode#map(foldlevelSubmode, 'n', '', 'h', '<CMD>call increasefoldlevel#decreaseFoldlevel()<cr>')
+call submode#map(foldlevelSubmode, 'n', '', '+', '<CMD>call increasefoldlevel#increaseFoldlevel()<cr>')
+call submode#map(foldlevelSubmode, 'n', '', '>', '<CMD>call increasefoldlevel#increaseFoldlevel()<cr>')
+call submode#map(foldlevelSubmode, 'n', '', 'l', '<CMD>call increasefoldlevel#increaseFoldlevel()<cr>')
+call submode#map(foldlevelSubmode, 'n', '', '0', '<CMD>set foldlevel=0<cr>')
+call submode#map(foldlevelSubmode, 'n', '', '9', '<CMD>set foldlevel=99<cr>')
+
 autocmd au_vimrc FileType help,qf,git,fugitive* nnoremap <buffer> q <CMD>q<cr>
 
 nnoremap <silent> <leader>a <CMD>ArgWrap<CR>
