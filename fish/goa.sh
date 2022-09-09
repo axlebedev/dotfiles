@@ -1,22 +1,43 @@
 #!/bin/bash
+argsToExclude=()
+filteredArgs=()
+function doFilterArgs () {
+    _filteredargs=()
+    allargs=("$@")
+    for i in "${allargs[@]:1}"
+    do
+        if [[ ! " ${argsToExclude[*]} " =~ " $i " ]]; then
+            _filteredargs=(${_filteredargs[@]} $i)
+        fi
+    done
+    filteredArgs=${_filteredargs[@]}
+}
+
 if [[ $PWD == /home/l-e-b-e-d-e-v/arc* ]];
 then
-    # TODO: commit --amend --no-edit
     # TODO: push --force
     if [[ $1 == diff ]]
     then
-        arc diff --ignore-space-change
+        argsToExclude=("--histogram" "--minimal")
+        doFilterArgs $@
+        eval arc diff --git "${filteredArgs[@]}"
     elif [[ $1 == commit ]]
     then
-        arc commit
+        argsToExclude=("--verbose")
+        doFilterArgs $@
+        eval arc commit "${filteredArgs[@]}"
     elif [[ $1 == push ]]
     then
-        arc push
-    elif [[ $1 == stash ]]
+        argsToExclude=("origin" "HEAD")
+        doFilterArgs $@
+        eval arc push "${filteredArgs[@]}"
+    elif [[ $1 == hist ]]
     then
-        arc stash
+        argsToExclude=("--first-parent")
+        doFilterArgs $@
+        eval arc hist "${filteredArgs[@]}"
     else
-        arc $@
+        eval arc $@
     fi
 else
     git $@
