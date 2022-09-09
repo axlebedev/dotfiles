@@ -316,7 +316,7 @@ let g:argwrap_tail_comma = 1
 Plug 'jiangmiao/auto-pairs'
 let g:AutoPairsMapSpace = 0
 let g:AutoPairsMultilineClose = 0 " Dont make a mess when `{ if(condition) { doSomething [cursor] }`
-imap <silent> <expr> <space> pumvisible()
+imap <silent> <expr> <space> coc#pum#visible()
 	\ ? "<space>"
 	\ : "<c-r>=AutoPairsSpace()<cr>"
 let g:AutoPairsMapBS = 0
