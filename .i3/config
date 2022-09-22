@@ -20,6 +20,9 @@ smart_borders no_gaps
 # gaps outer 10
 
 
+# screenshot
+exec --no-startup-id flameshot
+
 # mouse speed: last number. Bigger is slower
 exec --no-startup-id xinput --set-prop "Logitech USB Optical Mouse" \
   "Coordinate Transformation Matrix" 1, 0, 0, 0, 1, 0, 0, 0, 1.5
