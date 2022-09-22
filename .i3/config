@@ -211,7 +211,7 @@ mode "Exit (P)oweroff, (L)ogout, loc(K) screen, (S)uspend" {
 	bindsym $mod+l exec i3-msg exit
 	bindsym $mod+p exec systemctl poweroff
 	bindsym $mod+s mode "default" ; exec systemctl suspend
-	bindsym $mod+k mode "default" ; i3lock -c 000000
+	bindsym $mod+k mode "default" ; exec i3lock -c 000000
 
 # back to normal: Enter or Escape
 	bindsym Return mode "default"
