@@ -8,7 +8,8 @@ end
 
 beginArrayItem = '${if_match ${\\1 \\2}<TICK}COLOR${else}'
 endArrayItem = '${endif}'
-function getTemplateForColors(colorsArray)
+function getTemplateForColors(colorsArray, offset)
+  offset = offset or 0
   local result = ''
 
   for i=1,#colorsArray do
@@ -16,7 +17,7 @@ function getTemplateForColors(colorsArray)
     if (i == #colors) then
       result = result .. color
     else
-      local tick = math.floor(100 / #colorsArray * i)
+      local tick = math.floor(100 / #colorsArray * i + offset)
       result = result .. beginArrayItem:gsub('TICK', tick):gsub('COLOR', color)
     end
   end
