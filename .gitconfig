@@ -1,6 +1,6 @@
 [user]
 	email = alexey.broadcast@gmail.com
-	name = Alex
+	name = Alex Lebedev
 [alias]
 	co = checkout
 	ci = commit
