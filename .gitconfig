@@ -47,6 +47,9 @@
 ;unmerged (files which have unmerged changes).
     unmerged = red reverse
 
+[color "diff"]
+    meta = magenta
+
 [hub]
 	protocol = https
 [pull]
