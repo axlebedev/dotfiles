@@ -146,7 +146,7 @@ call submode#map(resizeSubmode, 'n', '', 'k', ':resize -1<cr>')
 call submode#map(resizeSubmode, 'n', '', 'j', ':resize +1<cr>')
 
 let foldlevelSubmode = 'Foldlevel'
-call submode#enter_with(foldlevelSubmode, 'n', '', '<C-l>')
+call submode#enter_with(foldlevelSubmode, 'n', '', '<C-,>')
 call submode#map(foldlevelSubmode, 'n', '', '-', '<CMD>call increasefoldlevel#decreaseFoldlevel()<cr>')
 call submode#map(foldlevelSubmode, 'n', '', '<', '<CMD>call increasefoldlevel#decreaseFoldlevel()<cr>')
 call submode#map(foldlevelSubmode, 'n', '', 'h', '<CMD>call increasefoldlevel#decreaseFoldlevel()<cr>')
