@@ -63,7 +63,10 @@ conky.config = {
     ${endif} ${endif} ${endif} ${endif} ${endif} ${endif} ${endif} ${endif} 
   ]],
 
+  -- for anything
   template2 = getTemplateForColors(colors),
+  -- for cpu temperature
+  template3 = getTemplateForColors(colors, 30),
 };
 
 
@@ -81,12 +84,14 @@ function warningWarning(text)
 end
 
 function wifi()
-  return [[{
-    "full_text" : "${downspeed ]] .. internetInterface .. [[ }/s",
+  return [[
+    {
+      "full_text" : "${downspeed ]] .. internetInterface .. [[ }/s",
       "color" : "]] .. textColorFg .. [[",
       "min_width":"]] .. stringWidth(8) .. [[",
       "align": "center"
-  }]]
+    }
+  ]]
 end
 
 function cpuCore(coreN)

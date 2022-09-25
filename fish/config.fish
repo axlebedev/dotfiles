@@ -27,7 +27,7 @@ abbr -a vv gvim
 abbr -a o xdg-open
 
 abbr -a ga goa add
-abbr -a gas goa add src
+abbr -a gap goa add -p ./packages/callcenter-staff ./services
 # --verbose to show diff in vim when show commit
 abbr -a gi goa commit --verbose
 abbr -a gia goa commit --amend --no-edit
@@ -68,7 +68,7 @@ end
 bind \cg goa-sortedbranch
 
 abbr -a go goa checkout
-abbr -a gr goa restore
+abbr -a gr goa reset
 abbr -a go goa checkout
 abbr -a gob goa checkout -b
 abbr -a gs goa status
@@ -86,7 +86,6 @@ abbr -a gps goa push origin HEAD
 abbr -a gpsu goa push -u origin HEAD
 abbr -a gpsf goa push -f origin HEAD
 abbr -a grb goa rebase --autostash
-abbr -a grd goa rebase --autostash origin/develop
 abbr -a grc goa rebase --continue
 abbr -a gra goa rebase --abort
 abbr -a gcp goa cherry-pick
@@ -102,7 +101,6 @@ abbr -a gbb goa bisect bad
 abbr -a gst goa stash push --keep-index
 abbr -a gsta goa stash pop
 abbr -a grh goa reset HEAD^
-
 
 abbr -a ah arc log --oneline
 abbr -a ahh arc log --oneline -n 10
