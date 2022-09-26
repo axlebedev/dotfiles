@@ -324,3 +324,6 @@ nnoremap <silent> x "_x
 nnoremap xp xp
 
 nnoremap <C-;> <CMD>Commands<Cr>
+
+vnoremap SB <Plug>VSurroundBkJ
+vnoremap Sb <Plug>VSurroundbkJ
