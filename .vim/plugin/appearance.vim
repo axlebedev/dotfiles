@@ -100,9 +100,11 @@ highlight SpellBad term=bold ctermbg=red  guibg=#532120 guifg=NONE gui=none
 "
 " highlight DiffText   term=reverse,bold ctermbg=red       ctermfg=yellow   cterm=bold guibg=#191C41 guifg=NONE   gui=bold
 " highlight DiffChange term=bold         ctermbg=black     ctermfg=white    cterm=bold guibg=NONE guifg=NONE
-"
-" " Folded line
+
+" Folded line
 " highlight Folded     ctermfg=7 ctermbg=4 guifg=#99d1ce guibg=#0a2730
 
 " highlight yank region
-highlight HighlightedyankRegion cterm=reverse guibg=#3C3F74
+highlight HighlightedyankRegion cterm=reverse guibg=#995C00
+
+highlight PmenuThumb guibg=#999999

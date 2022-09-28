@@ -180,7 +180,7 @@ vnoremap <silent> <leader>t "ly<CMD>call fzf#vim#files('', {
             \ })<CR>
 nnoremap <silent> <leader>b <CMD>Buffers<CR>
 nnoremap <silent> <leader>m <CMD>call fzf#vim#files('', {
-            \    'source': 'git diff --name-only --diff-filter=U',
+            \    'source': 'goa diff --name-only --diff-filter=U',
             \    'sink': 'e',
             \    'options': '--prompt="Unmerged> "'
             \ })<CR>

@@ -437,16 +437,16 @@ function! s:check_back_space() abort
 endfunction
 
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
+      \ coc#pum#visible() ? coc#pum#next(1):
       \ <SID>check_back_space() ? "\<C-r>=SmartInsertTab()\<cr>" :
       \ coc#refresh()
 
 inoremap <silent><expr> <S-Tab>
-      \ pumvisible() ? "\<C-p>" :
+      \ coc#pum#visible() ? coc#pum#prev(1) :
       \ "\<S-Tab>"
 
 inoremap <silent><expr> <CR>
-      \ pumvisible() ? "\<C-y>" :
+      \ coc#pum#visible() ? coc#_select_confirm() :
       \ "\<CR>"
 
 inoremap <silent><expr> <BS>

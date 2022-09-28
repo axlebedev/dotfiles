@@ -85,7 +85,7 @@ abbr -a gps goa push origin HEAD
 abbr -a gpsu goa push -u origin HEAD
 abbr -a gpsf goa push -f origin HEAD
 abbr -a grb goa rebase --autostash
-abbr -a grbt goa rebase --autostash trunk
+abbr -a grbt goa rebase --autostash arcadia/trunk
 abbr -a grbc goa rebase --continue
 abbr -a gra goa rebase --abort
 abbr -a gcp goa cherry-pick
