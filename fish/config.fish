@@ -68,8 +68,6 @@ end
 bind \cg goa-sortedbranch
 
 abbr -a go goa checkout
-abbr -a gr goa reset
-abbr -a go goa checkout
 abbr -a gob goa checkout -b
 abbr -a gs goa status
 # maybe git diff --patience
@@ -102,7 +100,6 @@ abbr -a gbg goa bisect good
 abbr -a gbb goa bisect bad
 abbr -a gst goa stash push --keep-index
 abbr -a gsta goa stash pop
-abbr -a grh goa reset HEAD^
 
 abbr -a ah arc log --oneline
 abbr -a ahh arc log --oneline -n 10

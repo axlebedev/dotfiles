@@ -36,6 +36,11 @@ then
         argsToExclude=("origin" "HEAD")
         doFilterArgs $@
         eval arc push "${filteredArgs[@]}"
+    elif [[ $1 == ls-files ]]
+    then
+        argsToExclude=("--exclude-standard")
+        doFilterArgs $@
+        eval arc ls-files "${filteredArgs[@]}"
     elif [[ $1 == hist ]]
     then
         argsToExclude=("--first-parent")
