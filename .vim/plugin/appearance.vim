@@ -88,21 +88,21 @@ let g:Illuminate_ftHighlightGroups = {
 highlight SpellBad term=bold ctermbg=red  guibg=#532120 guifg=NONE gui=none
 
 " Diff styling
-highlight diffAdded term=bold ctermbg=black     ctermfg=green cterm=bold guibg=#114417 guifg=NONE gui=none
-highlight DiffAdd   term=bold ctermbg=darkgreen ctermfg=white cterm=bold guibg=#114417 guifg=NONE gui=bold
-
-highlight diffRemoved term=bold ctermbg=black    ctermfg=red      cterm=bold guibg=#532120  guifg=NONE   gui=none
-highlight DiffDelete  term=none ctermbg=darkblue ctermfg=darkblue cterm=none guibg=#532120  guifg=#532120   gui=none
-
-highlight diffChanged term=bold ctermbg=black   ctermfg=yellow cterm=bold guibg=#995C00  guifg=NONE gui=none
-highlight diffFile    term=bold ctermbg=yellow  ctermfg=black  cterm=none guibg=#995C00  guifg=NONE gui=none
-highlight diffLine    term=bold ctermbg=magenta ctermfg=white  cterm=bold guibg=#350066  guifg=NONE gui=none
-
-highlight DiffText   term=reverse,bold ctermbg=red       ctermfg=yellow   cterm=bold guibg=#191C41 guifg=NONE   gui=bold
-highlight DiffChange term=bold         ctermbg=black     ctermfg=white    cterm=bold guibg=NONE guifg=NONE
-
-" Folded line
-highlight Folded     ctermfg=7 ctermbg=4 guifg=#99d1ce guibg=#0a2730
+" highlight diffAdded term=bold ctermbg=black     ctermfg=green cterm=bold guibg=#114417 guifg=NONE gui=none
+" highlight DiffAdd   term=bold ctermbg=darkgreen ctermfg=white cterm=bold guibg=#114417 guifg=NONE gui=bold
+"
+" highlight diffRemoved term=bold ctermbg=black    ctermfg=red      cterm=bold guibg=#532120  guifg=NONE   gui=none
+" highlight DiffDelete  term=none ctermbg=darkblue ctermfg=darkblue cterm=none guibg=#532120  guifg=#532120   gui=none
+"
+" highlight diffChanged term=bold ctermbg=black   ctermfg=yellow cterm=bold guibg=#995C00  guifg=NONE gui=none
+" highlight diffFile    term=bold ctermbg=yellow  ctermfg=black  cterm=none guibg=#995C00  guifg=NONE gui=none
+" highlight diffLine    term=bold ctermbg=magenta ctermfg=white  cterm=bold guibg=#350066  guifg=NONE gui=none
+"
+" highlight DiffText   term=reverse,bold ctermbg=red       ctermfg=yellow   cterm=bold guibg=#191C41 guifg=NONE   gui=bold
+" highlight DiffChange term=bold         ctermbg=black     ctermfg=white    cterm=bold guibg=NONE guifg=NONE
+"
+" " Folded line
+" highlight Folded     ctermfg=7 ctermbg=4 guifg=#99d1ce guibg=#0a2730
 
 " highlight yank region
 highlight HighlightedyankRegion cterm=reverse guibg=#3C3F74
