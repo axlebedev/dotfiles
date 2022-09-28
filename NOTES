@@ -1,5 +1,16 @@
 Для корректной работы vim и conkyrc нужен https://github.com/grwlf/xkb-switch
 
+Чтобы не отсоединял wi-fi - 
+--
+Try disabling powersave for Wi-Fi. In /etc/NetworkManager/conf.d/default-wifi-powersave-on.conf set:
+wifi.powersave = 2
+--
+nmcli connection modify <Your VPN connection name> connection.autoconnect-retries 0
+nmcli connection modify <Your VPN connection name> vpn.persistent yes
+--
+gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing'
+
+
 Тулза для рисования на экране - https://github.com/bk138/gromit-mpx
 
 screenkey - для показа нажатой кнопки
