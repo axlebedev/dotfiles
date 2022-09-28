@@ -75,6 +75,7 @@ abbr -a gs goa status
 # maybe git diff --patience
 
 abbr -a gd goa diff --histogram --minimal --ignore-space-change --relative
+abbr -a gdc goa diff --histogram --minimal --ignore-space-change --relative --cached
 abbr -a gdm goa diff $(goa merge-base HEAD trunk) 
 abbr -a gh goa hist
 abbr -a ghh goa hist --first-parent -n 10
@@ -86,7 +87,8 @@ abbr -a gps goa push origin HEAD
 abbr -a gpsu goa push -u origin HEAD
 abbr -a gpsf goa push -f origin HEAD
 abbr -a grb goa rebase --autostash
-abbr -a grc goa rebase --continue
+abbr -a grbt goa rebase --autostash trunk
+abbr -a grbc goa rebase --continue
 abbr -a gra goa rebase --abort
 abbr -a gcp goa cherry-pick
 abbr -a gcpc goa cherry-pick --continue

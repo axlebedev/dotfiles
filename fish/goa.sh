@@ -26,6 +26,11 @@ then
         argsToExclude=("--verbose")
         doFilterArgs $@
         eval arc commit "${filteredArgs[@]}"
+    elif [[ $1 == rebase ]]
+    then
+        argsToExclude=("--autostash")
+        doFilterArgs $@
+        eval arc rebase "${filteredArgs[@]}"
     elif [[ $1 == push ]]
     then
         argsToExclude=("origin" "HEAD")
