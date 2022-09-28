@@ -51,3 +51,6 @@ Instead of steps 3-5, you can use the corresponding ENV variable (e.g. if you do
 `NPM_CONFIG_PREFIX=~/.npm-global`
 
 NOTE: пакет который мы хотим залинковать, нигде не должен быть установлен, ни в одном node_modules других пакетов! Поэтому node_modules где он может встречаться лучше удалить
+
+# Node without sudo, ports under 1024
+bash: sudo setcap 'cap_net_bind_service=+ep' `which node`
