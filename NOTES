@@ -15,7 +15,7 @@ gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'no
 
 screenkey - для показа нажатой кнопки
 
-peek - запись скринкаста
+peek или simplescreenrecorder (с аудио) - запись скринкаста
 
 flameshot - скриншоты с рисованием
 
