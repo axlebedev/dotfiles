@@ -101,6 +101,9 @@ abbr -a gbb goa bisect bad
 abbr -a gst goa stash push --keep-index
 abbr -a gsta goa stash pop
 
+# Почему-то остался 'goa reset'. Надо защититься от него)
+abbr -a gr gr
+
 abbr -a ah arc log --oneline
 abbr -a ahh arc log --oneline -n 10
 abbr -a ai arc commit
