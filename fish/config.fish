@@ -69,7 +69,7 @@ bind \cg goa-sortedbranch
 
 abbr -a go goa checkout
 abbr -a gob goa checkout -b
-abbr -a gs goa status
+abbr -a gs goa status .
 # maybe git diff --patience
 
 abbr -a gd goa diff --histogram --minimal --ignore-space-change --relative
