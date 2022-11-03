@@ -389,9 +389,6 @@ let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.js,*.jsx"
 Plug 'leafgarland/typescript-vim'
 Plug 'HerringtonDarkholme/yats.vim'
 
-Plug 'Quramy/tsuquyomi'
-let g:tsuquyomi_disable_quickfix=1
-
 " -----------------------------------------------------------------------------
 " color highlight in text
 Plug 'ap/vim-css-color', { 'for': ['javascript', 'html', 'css'] }
