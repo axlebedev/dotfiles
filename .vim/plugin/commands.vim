@@ -41,4 +41,4 @@ endfunction
 command! DemoOn call SetDemoMode(1)
 command! DemoOff call SetDemoMode(0)
 
-command! EslintFix !npx eslint --fix %
+command! EslintFix execute('term ++close ++hidden npx eslint --fix %')
