@@ -29,7 +29,7 @@
     # the top and down respectively.
     # The width can be negative.  In this case the actual width is the
     # screen width minus the width defined in within the geometry option.
-    geometry = "1000x5+900+400"
+    geometry = "1000x5+5-32"
 
     # Show how many messages are currently hidden (because of geometry).
     indicate_hidden = yes
@@ -144,7 +144,7 @@
 
     # When word_wrap is set to no, specify where to make an ellipsis in long lines.
     # Possible values are "start", "middle" and "end".
-    ellipsize = middle
+    ellipsize = start
 
     # Ignore newlines '\n' in notifications.
     ignore_newline = no
