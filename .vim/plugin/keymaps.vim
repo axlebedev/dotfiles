@@ -252,14 +252,8 @@ nnoremap <silent> <leader>k <CMD>call ClapOpen(':call opennextbuf#OpenNextBuf(0)
 
 nnoremap <leader>f <CMD>FindCursor #CC0000 500<CR>
 
-" update current file
-function! UpdateBuffer(force) abort
-    let winview = winsaveview()
-    if (a:force) | e! | else | e | endif
-    call winrestview(winview)
-endfunction
-nnoremap <silent> <F5> <CMD>call UpdateBuffer(0)<CR>
-nnoremap <silent> <F5><F5> <CMD>call UpdateBuffer(1)<CR>
+nnoremap <silent> <F5> <CMD>call updatebuffer#UpdateBuffer(0)<CR>
+nnoremap <silent> <F5><F5> <CMD>call updatebuffer#UpdateBuffer(1)<CR>
 
 map <c-f> <plug>(esearch)
 nnoremap <C-f><C-t> <CMD>call globalfind#FilterTestEntries()<cr>
