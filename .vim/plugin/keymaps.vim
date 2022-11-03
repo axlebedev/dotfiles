@@ -322,3 +322,5 @@ nnoremap <C-;> <CMD>Commands<Cr>
 
 vnoremap SB <Plug>VSurroundBkJ
 vnoremap Sb <Plug>VSurroundbkJ
+
+nnoremap <silent> elf <CMD>call updatebuffer#UpdateBuffer(1)<bar>EslintFix<CR>
