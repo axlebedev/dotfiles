@@ -17,6 +17,7 @@ imap <F1> <Esc>
 nnoremap 0 ^
 nnoremap ^ 0
 nnoremap 00 0
+nnoremap <silent> gg <CMD>call cursor(1,1)<CR>
 nnoremap $ g_
 nnoremap $$ $
 nnoremap L g_
