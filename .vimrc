@@ -51,19 +51,23 @@ g:XkbSwitchSkipIMappings = {'*': ["'", '"', '[', ']', '<', '>']}
 #  Start screen for vim
 Plug 'mhinz/vim-startify'
 g:startify_disable_at_vimenter = 1
-g:startify_list_order = [
-    ['   Most recent:'], 'dir',
-    ['   Sessions:'], 'sessions',
-    ['   Bookmarks:'], 'bookmarks',
-    ['   Commands:'], 'commands',
-    ['   Most recent global'], 'files',
+g:startify_lists = [
+    { type: 'dir',       header: ['   MRU ' .. getcwd()] },
+    { type: 'sessions',  header: ['   Sessions']       },
+    { type: 'bookmarks', header: ['   Bookmarks']      },
+    { type: 'commands',  header: ['   Commands']       },
+    { type: 'files',     header: ['   MRU']            },
 ]
-g:startify_bookmarks = [ {'c': '~/.vimrc'} ]
+
+g:startify_bookmarks = [ { c: '~/.vimrc' } ]
 g:startify_commands = [':PlugUpdate', ':PlugInstall', ':CocUpdate']
-g:startify_files_number = 40
+g:startify_files_number = 15
+g:startify_update_oldfiles = 1
 g:startify_update_oldfiles = 1
 g:startify_change_to_dir = 0
 g:startify_custom_header = []
+# If you want numbers to start at 1 instead of 0, you could use this:
+g:startify_custom_indices = map(range(1, 100), 'string(v:val)')
 # remap 'o' to open file in Startify window
 autocmd User Startified nmap <buffer> o <plug>(startify-open-buffers)
 
