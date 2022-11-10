@@ -167,6 +167,8 @@ bindsym $mod+0 workspace number 10
 bindsym $mod+n workspace next_on_output
 bindsym $mod+p workspace prev_on_output
 bindsym $mod+o workspace back_and_forth
+bindsym $mod+shift+n move container to workspace next_on_output; workspace next_on_output
+bindsym $mod+shift+p move container to workspace prev_on_output; workspace prev_on_output
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1; workspace 1
