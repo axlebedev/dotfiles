@@ -68,6 +68,7 @@ end
 bind \cg goa-sortedbranch
 
 abbr -a go goa checkout
+abbr -a gor goa checkout users/l-e-b-e-d-e-v/
 abbr -a gob goa checkout -b
 abbr -a gs goa status .
 # maybe git diff --patience
@@ -92,6 +93,7 @@ abbr -a gcp goa cherry-pick
 abbr -a gcpc goa cherry-pick --continue
 abbr -a gcpa goa cherry-pick --abort
 abbr -a gfa goa fetch --all
+abbr -a gfu goa fetch users/l-e-b-e-d-e-v/
 abbr -a gfap goa fetch --all -p
 abbr -a gb goa branch
 abbr -a gbs goa bisect start
