@@ -425,7 +425,7 @@ nmap <silent> <C-m> <Plug>(ale_next_wrap)
 nmap <silent> <C-n> <Plug>(ale_previous_wrap)
 
 # -----------------------------------------------------------------------------
-Plug 'neoclide/coc.nvim', #{ do: 'yarn install --frozen-lockfile', frozen: 0 }
+Plug 'neoclide/coc.nvim', { 'do': 'yarn install --frozen-lockfile', 'tag': 'v0.0.82' }
 g:coc_global_extensions = ['coc-json', 'coc-tsserver', 'coc-tabnine']
 g:coc_global_config = '/home/alex/dotfiles/coc-settings.json'
 
