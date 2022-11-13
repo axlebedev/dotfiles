@@ -56,3 +56,5 @@
 	ff = only
 [init]
 	defaultBranch = master
+
+; TODO: 'git rerere', google it
