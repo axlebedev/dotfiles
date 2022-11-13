@@ -342,7 +342,7 @@ Plug 'tpope/vim-surround'
 
 # -----------------------------------------------------------------------------
 # vmap '~' for cycle through cases
-Plug 'axlebedev/vim-case-change'
+Plug 'axlebedev/vim-chase'
 autocmd ColorScheme *
   \ highlight CaseChangeWord guibg=#0000FF
 
