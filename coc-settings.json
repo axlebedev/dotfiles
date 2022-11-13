@@ -3,5 +3,7 @@
 
     // ln -s coc-settings.json ~/.vim/coc-settings.json
     "suggest.timeout": 50,
-    "suggest.minTriggerInputLength": 1
+    "suggest.minTriggerInputLength": 1,
+    "coc.preferences.noselect": true,
+    "suggest.noselect": false
 }
