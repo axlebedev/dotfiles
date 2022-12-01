@@ -85,7 +85,7 @@ g:NERDTreeAutoDeleteBuffer = 1
 g:NERDTreeHijackNetrw = 0
 
 # -----------------------------------------------------------------------------
-Plug 'junegunn/fzf', #{ dir: '~/.fzf', do: './install --all' }
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 g:fzf_preview_window = ['right:40%:hidden', 'ctrl-/']
 g:fzf_buffers_jump = 1
@@ -111,7 +111,7 @@ g:fzf_colors = {
 # functions plugins {{{
 # -----------------------------------------------------------------------------
 # Markdown live preview
-Plug 'shime/vim-livedown', #{ for: 'markdown', do: 'sudo npm i -g livedown' }
+Plug 'shime/vim-livedown', { 'for': 'markdown', 'do': 'sudo npm i -g livedown' }
 
 # -----------------------------------------------------------------------------
 # :Qdo
@@ -354,7 +354,7 @@ Plug 'moll/vim-node'
 
 # -----------------------------------------------------------------------------
 # Generate jsdoc easily
-Plug 'heavenshell/vim-jsdoc', #{ for: 'javascript' }
+Plug 'heavenshell/vim-jsdoc', { 'for': 'javascript' }
 g:jsdoc_enable_es6 = 1
 g:jsdoc_allow_input_prompt = 1
 g:jsdoc_input_description = 1
@@ -364,32 +364,32 @@ g:jsdoc_param_description_separator = ' - '
 
 # -----------------------------------------------------------------------------
 # One plugin to rule all the languages
-Plug 'othree/html5.vim', #{ for: ['html', 'javascript'] }
+Plug 'othree/html5.vim', { 'for': ['html', 'javascript', 'typescript'] }
 
 # -----------------------------------------------------------------------------
 # JavaScript bundle for vim, this bundle provides syntax and indent plugins
-Plug 'pangloss/vim-javascript', #{ for: 'javascript' }
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 g:javascript_enable_domhtmlcss = 1
 g:javascript_plugin_jsdoc = 1
 
-Plug 'othree/javascript-libraries-syntax.vim', #{ for: 'javascript' }
+Plug 'othree/javascript-libraries-syntax.vim', { 'for': 'javascript' }
 g:used_javascript_libs = 'underscore,react'
 # Plug 'othree/es.next.syntax.vim'
 
 # -----------------------------------------------------------------------------
 # jsx support
-Plug 'MaxMEllon/vim-jsx-pretty', #{ for: 'javascript' }
+Plug 'MaxMEllon/vim-jsx-pretty', { 'for': ['javascript', 'typescript'] }
 g:vim_jsx_pretty_template_tags = []
 g:vim_jsx_pretty_colorful_config = 1
 
 # -----------------------------------------------------------------------------
 # Highlight matching html tag
 # forked from 'vim-scripts/MatchTag'
-Plug 'axlebedev/MatchTag', #{ for: ['javascript', 'html'] }
+# Plug 'axlebedev/MatchTag', { 'for': ['javascript', 'html'] }
 
 # -----------------------------------------------------------------------------
 # autoclose html tags
-Plug 'alvan/vim-closetag', #{ for: ['javascript', 'html'] }
+Plug 'alvan/vim-closetag', { 'for': ['javascript', 'html'] }
 g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.js,*.jsx"
 # TODO: doesn't close if we use neocomplete
 
@@ -400,7 +400,7 @@ Plug 'HerringtonDarkholme/yats.vim'
 
 # -----------------------------------------------------------------------------
 # color highlight in text
-Plug 'ap/vim-css-color', #{ for: ['javascript', 'html', 'css'] }
+# Plug 'ap/vim-css-color', { for: ['javascript', 'html', 'css'] }
 
 # -----------------------------------------------------------------------------
 # Highlight eslint errors
@@ -471,7 +471,7 @@ g:js_fastlog_prefix = ['%c11111', 'background:#00FF00']
 
 Plug 'axlebedev/vim-smart-insert-tab'
 
-Plug 'isomoar/vim-css-to-inline', #{ for: ['javascript', 'css', 'html'] }
+Plug 'isomoar/vim-css-to-inline', { 'for': ['javascript', 'typescript', 'css', 'html'] }
 
 Plug 'axlebedev/vim-gotoline-popup'
 nmap <C-g> <plug>(gotoline-popup)
