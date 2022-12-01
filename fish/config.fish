@@ -2,6 +2,7 @@
 set -g -x PATH /usr/local/bin $PATH
 
 alias goa="~/dotfiles/fish/goa.sh"
+alias g="~/dotfiles/fish/goa.sh"
 
 # open 'man' in vim
 set -x PAGER "/bin/sh -c \"unset PAGER;col -b -x | \
