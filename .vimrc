@@ -85,6 +85,15 @@ g:NERDTreeAutoDeleteBuffer = 1
 g:NERDTreeHijackNetrw = 0
 
 # -----------------------------------------------------------------------------
+# additional bindings to NERDTree
+Plug 'PhilRunninger/nerdtree-visual-selection'
+
+# -----------------------------------------------------------------------------
+# 'gf' from a diff file
+Plug 'kana/vim-gf-user'
+Plug 'kana/vim-gf-diff'
+
+# -----------------------------------------------------------------------------
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 g:fzf_preview_window = ['right:40%:hidden', 'ctrl-/']
@@ -346,6 +355,10 @@ Plug 'axlebedev/vim-chase'
 autocmd ColorScheme *
   \ highlight CaseChangeWord guibg=#0000FF
 
+# -----------------------------------------------------------------------------
+# keep cursor on yank
+Plug 'svban/YankAssassin.vim'
+
 # }}} text-edit plugins
 
 # js/html/css... plugins {{{
@@ -495,24 +508,8 @@ enddef
 g:FindCursorPost = function('FindCursorHookPost')
 # }}} homemade plugins
 
-# -TEST------------------------------------------------------------------------
-# 'gf' from a diff file
-Plug 'kana/vim-gf-user'
-Plug 'kana/vim-gf-diff'
-
-# additional bindings to NERDTree
-Plug 'PhilRunninger/nerdtree-visual-selection'
-
 # TODO: сделать чтобы работал бесшовно
 # Plug 'noscript/taberian.vim'
-
-# -TEST------------------------------------------------------------------------
-# keep cursor on yank
-Plug 'svban/YankAssassin.vim'
-
-# -TEST------------------------------------------------------------------------
-# edit quickfix
-Plug 'itchyny/vim-qfedit'
 
 # -----------------------------------------------------------------------------
 plug#end()
