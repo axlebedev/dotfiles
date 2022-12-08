@@ -510,6 +510,10 @@ Plug 'PhilRunninger/nerdtree-visual-selection'
 # keep cursor on yank
 Plug 'svban/YankAssassin.vim'
 
+# -TEST------------------------------------------------------------------------
+# edit quickfix
+Plug 'itchyny/vim-qfedit'
+
 # -----------------------------------------------------------------------------
 plug#end()
 filetype plugin indent on
