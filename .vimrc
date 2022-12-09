@@ -63,7 +63,6 @@ g:startify_bookmarks = [ { c: '~/.vimrc' } ]
 g:startify_commands = [':PlugUpdate', ':PlugInstall', ':CocUpdate']
 g:startify_files_number = 15
 g:startify_update_oldfiles = 1
-g:startify_update_oldfiles = 1
 g:startify_change_to_dir = 0
 g:startify_custom_header = []
 # If you want numbers to start at 1 instead of 0, you could use this:
