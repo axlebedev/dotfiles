@@ -74,9 +74,9 @@ abbr -a gob goa checkout -b
 abbr -a gs goa status .
 # maybe git diff --patience
 
-abbr -a gd goa diff --histogram --minimal --ignore-space-change --relative
-abbr -a gdc goa diff --histogram --minimal --ignore-space-change --relative --cached
-abbr -a gdm goa diff $(goa merge-base HEAD trunk) 
+abbr -a gd goa diff --histogram --minimal --ignore-space-change --relative --color-words
+abbr -a gdc goa diff --histogram --minimal --ignore-space-change --relative --cached --color-words
+abbr -a gdm goa diff --color-words $(goa merge-base HEAD trunk) 
 abbr -a gh goa hist
 abbr -a ghh goa hist --first-parent -n 10
 abbr -a ghhh goa hist --first-parent -n 20
