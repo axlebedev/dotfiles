@@ -1,12 +1,21 @@
 # =================================================================================================
 # === LINUX INSTALL ===============================================================================
 # ----- Установка нужных программ -----
-sudo add-apt-repository ppa:agornostal/ulauncher && \
-sudo add-apt-repository ppa:git-core/ppa && \
-sudo apt-add-repository ppa:fish-shell/release-3 %% \
+sudo add-apt-repository -y ppa:agornostal/ulauncher && \
+sudo add-apt-repository -y ppa:git-core/ppa && \
+sudo apt-add-repository -y ppa:fish-shell/release-3 %% \
 sudo apt update
 
 # initial installation
+# jshon \ # for clickable i3-status
+# feh \ # background picture in i3
+# dconf-settings \ # turn off show device on auto-mount
+# ttf-ancient-fonts \ # если проблема с unicode-символами
+# python3-smbc samba smbclient \ # for ya printer
+# unclutter \ # скрыть курсор мыши при наборе текста
+# autorandr \ # надо буудет сохранить профили
+# screenkey # для показа нажатой кнопки
+
 sudo apt install -y \
 git \
 curl \
@@ -17,26 +26,29 @@ network-manager-l2tp \
 network-manager-l2tp-gnome \
 i3 \
 ulauncher \
-jshon \ # for clickable i3-status
+jshon \
 fonts-font-awesome \
-feh \ # background picture in i3
+feh \
 screenruler \
 fzf fish \
-dconf-settings \ # turn off show device on auto-mount
-ttf-ancient-fonts \ # если проблема с unicode-символами
-python3-smbc samba smbclient \ # for ya printer
+ttf-ancient-fonts \
+python3-smbc samba
 xkb-switch \
-unclutter \ # скрыть курсор мыши при наборе текста
-autorandr \ # надо буудет сохранить профили
-screenkey # для показа нажатой кнопки
+unclutter \
+autorandr \
+screenkey
 
+# indicator-sound-switcher \ # меню звук-девайсов в трее
+# gromit-mpx \ # для рисования на экране
+# simplescreenrecorder \ # для записи скринкастов
+# flameshot # для скриншотов
 sudo snap install \
 diff-so-fancy \
 flameshot \
-indicator-sound-switcher \ # меню звук-девайсов в трее
-gromit-mpx \ # для рисования на экране
-simplescreenrecorder \ # для записи скринкастов
-flameshot # для скриншотов
+indicator-sound-switcher \
+gromit-mpx \
+simplescreenrecorder \
+flameshot
 
 sudo snap install -classic node
 
