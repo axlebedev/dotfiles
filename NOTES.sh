@@ -124,6 +124,20 @@ omf install sudope # TODO: разобраться и настроить
 omf install z # TODO разобраться и навешать алиасов
 
 # ===== Чтобы не отсоединялся wi-fi ===============================================================
+# ПОМОГЛО: обновить убунту до 22
+# sudo  journalctl -b 0 -u NetworkManager
+#
+# Another way to debug the issue is to raise the logging level with the following change to /etc/NetworkManager/NetworkManager.conf:
+# [logging]
+# level=DEBUG
+# Then run the following to get better messages in /var/log/syslog:
+# sudo systemctl restart NetworkManager
+#
+# Alternative Solution
+# Another option is to disable connectivity checking:
+# [connectivity]
+# interval=0
+#
 # 1
 # Try disabling powersave for Wi-Fi. In /etc/NetworkManager/conf.d/default-wifi-powersave-on.conf set:
 # wifi.powersave = 2
@@ -140,6 +154,14 @@ gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'no
 
 # 6 В старом гисте был ещё такой коммент:
 # Чтобы не выключался wi-fi https://askubuntu.com/questions/1030653/wifi-randomly-disconnected-on-ubuntu-18-04-lts
+
+# 7
+# /etc/NetworkManager/NetworkManager.conf
+# change
+# `managed=false`
+# to
+# `managed=true`
+# and reboot
 
 ===================================================================================================
 
