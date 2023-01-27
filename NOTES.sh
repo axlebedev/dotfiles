@@ -115,8 +115,8 @@ curl -fLo ~/vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.co
 # https://hackercodex.com/guide/install-fish-shell-mac-ubuntu/
 # or-my-fish:
 curl -L http://get.oh-my.fish | fish
-omf install agnoster # theme
-omf theme agnoster # don't forget to enable powerline-nerd-font
+omf install bobthefish # prev: agnoster # theme
+omf theme bobthefish # prev: agnoster # don't forget to enable powerline-nerd-font
 # plugins
 omf install cd
 omf install sudope # TODO: разобраться и настроить

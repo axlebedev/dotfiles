@@ -1,6 +1,12 @@
 # local/bin to PATH
 set -g -x PATH /usr/local/bin $PATH
 
+# omf install bobthefish
+# omf theme bobthefish
+set -g theme_color_scheme light
+set -g theme_nerd_fonts yes
+set -g theme_date_format "+%H:%M"
+
 alias goa="~/dotfiles/fish/goa.sh"
 alias g="~/dotfiles/fish/goa.sh"
 
