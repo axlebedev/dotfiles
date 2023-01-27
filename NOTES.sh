@@ -213,6 +213,9 @@ sudo apt-get check
 sudo apt-get update
 ```
 
+# Чтобы numpad-dot всегда давал точку а не запятую -
+# надо в /usr/share/X11/xkb/symbols/ru удалить вызов kpdl(comma)
+
 ===================================================================================================
 # TODO:
 # vim plugin for draw a hooi
