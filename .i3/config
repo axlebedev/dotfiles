@@ -27,6 +27,7 @@ exec --no-startup-id flameshot
 exec --no-startup-id xinput --set-prop "Logitech USB Optical Mouse" \
   "Coordinate Transformation Matrix" 1, 0, 0, 0, 1, 0, 0, 0, 1.5
 exec --no-startup-id unclutter -idle 3
+exec --no-startup-id indicator-sound-switcher
 exec --no-startup-id xrandr \
   --auto --output HDMI-0 --primary \
   --auto --output DVI-D-0 --left-of HDMI-0 \
@@ -40,6 +41,10 @@ exec --no-startup-id pasystray
 exec --no-startup-id xinput set-prop "Genius Optical Mouse" "Coordinate Transformation Matrix" 0.5 0 0 0 0.5 0 0 0 1
 # Чтобы numpad-dot всегда давал точку а не запятую - надо в /usr/share/X11/xkb/symbols/ru удалить вызов kpdl(comma)
 exec --no-startup-id sleep 1 && setxkbmap -layout us,ru -option 'grp:shift_caps_switch'
+exec --no-startup-id sleep 2 && autorandr --change
+# Чтобы автоматически plug/unplug мониторы
+# sudo apt install autorandr
+exec --no-startup-id systemctl enable autorandr.service
 bindsym ctrl+F9 exec gromit-mpx --active
 
 for_window [class="VsTranslator" instance="vsTranslator"] floating enable
@@ -61,6 +66,9 @@ for_window [class="calendar.google.com, Google-chrome"]  floating enable
 for_window [instance="^crx.*$" window_role="pop-up"]  floating enable
 for_window [instance="^crx.*$" window_role="pop-up"]  sticky   enable
 for_window [class="zoom"]  floating   enable
+
+for_window [class="floating"]  floating   enable
+for_window [class="sticky"]  sticky   enable
 
 # Pulse Audio controls
 bindsym XF86AudioLowerVolume exec amixer -D pulse sset Master 2%- & killall -USR1 i3status 
@@ -193,6 +201,8 @@ bindsym $mod+Shift+r restart
 
 bindsym $mod+F12 --release exec --no-startup-id maim -s | xclip -selection clipboard -t image/png
 
+bindsym $mod+z sticky toggle
+
 # resize window (you can also use the mouse for that)
 mode "Resize (L) (H) (J) (K)" {
         # These bindings trigger as soon as you enter the resize mode
@@ -232,6 +242,18 @@ mode "Exit (P)oweroff, (L)ogout, loc(K) screen, (S)uspend" {
 }
 
 bindsym $mod+Shift+e mode "Exit (P)oweroff, (L)ogout, loc(K) screen, (S)uspend"
+
+# Yandex work
+mode "Yandex (P)eople (B)rowser" {
+	bindsym $mod+p mode "default" ; exec --no-startup-id gnome-terminal --class floatingsticky -- vim ~/dotfiles/people.txt
+	bindsym $mod+b mode "default" ; exec --no-startup-id nohup yandex-browser --user-data-dir="ya-dev" & disown
+
+# back to normal: Enter or Escape
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+
+bindsym $mod+Shift+y mode "Yandex (P)eople (B)rowser"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)

@@ -553,7 +553,17 @@ autocmd BufRead,BufNewFile *.qf set filetype=qf
 
 autocmd BufRead,BufNewFile *.styl set filetype=css
 
-autocmd VimEnter * if (&diff == false && argc() == 0) | NERDTree | wincmd l | Startify | else | NERDTree | wincmd l | endif
+autocmd VimEnter *
+    \ if (&diff == false && argc() == 0)
+        \ | if (getline(1) =~ "^diff --git")
+            \ | set filetype=diff | set foldlevel=999 | nnoremap q <CMD>q<CR>
+        \ | else
+            \ | NERDTree | wincmd l | Startify
+        \ | endif
+    \ | else
+        \ | NERDTree | wincmd l 
+    \ | endif
+
 
 augroup autoupdate_on_vimagit
     autocmd!
