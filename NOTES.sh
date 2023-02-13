@@ -83,6 +83,12 @@ libx11-dev \
 libxpm-dev \
 libxt-dev
 
+# В /etc/apt/sources.list надо скопипасить cтрочку
+# ...ubuntu version
+# и дать концовкy 'main restricted universe main multiverse'
+# Получится что-то типа
+# deb-src http://mirror.yandex.ru/ubuntu xenial main restricted universe main multiverse
+
 sudo apt build-dep vim
 cd ~ && mkdir github && cd ~/github
 git clone git@github.com:vim/vim.git 
