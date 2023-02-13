@@ -222,6 +222,12 @@ sudo apt-get update
 # Чтобы numpad-dot всегда давал точку а не запятую -
 # надо в /usr/share/X11/xkb/symbols/ru удалить вызов kpdl(comma)
 
+# How to prevent xkbmap reset?
+# --
+# Edit the /etc/default/keyboard file:
+# XKBLAYOUT="us,ru"
+# XKBOPTIONS="grp:shift_caps_switch"
+
 ===================================================================================================
 # TODO:
 # 0. vim plugin for draw a hooi
