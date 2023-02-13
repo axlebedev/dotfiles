@@ -108,3 +108,6 @@ highlight SpellBad term=bold ctermbg=red  guibg=#532120 guifg=NONE gui=none
 highlight HighlightedyankRegion cterm=reverse guibg=#995C00
 
 highlight PmenuThumb guibg=#999999
+
+" for 'defined but never used' warnings
+highlight Conceal guifg=NONE guibg=#f6b7ac
