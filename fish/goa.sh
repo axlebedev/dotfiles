@@ -21,7 +21,7 @@ then
     then
         argsToExclude=("--histogram" "--minimal" "--color-words")
         doFilterArgs $@
-        eval arc diff --git --no-color "${filteredArgs[@]}"
+        eval arc diff --git "${filteredArgs[@]}"
 
     elif [[ $1 == commit ]]
     then
@@ -49,7 +49,7 @@ then
 
     elif [[ $1 == hist ]]
     then
-        argsToExclude=("--first-parent")
+        argsToExclude=("--color" "--date" "--graph" "--pretty" "--abbrev-commit")
         doFilterArgs $@
         eval arc hist "${filteredArgs[@]}"
 
