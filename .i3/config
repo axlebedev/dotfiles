@@ -46,6 +46,8 @@ exec --no-startup-id sleep 2 && autorandr --change
 # sudo apt install autorandr
 exec --no-startup-id systemctl enable autorandr.service
 bindsym ctrl+F9 exec gromit-mpx --active
+# Чтобы выключать тачпад при наборе текста
+exec --no-startup-id syndaemon -i .3 -d -t -K   
 
 for_window [class="VsTranslator" instance="vsTranslator"] floating enable
 for_window [class="Gnome-system-monitor" instance="gnome-system-monitor"] floating enable

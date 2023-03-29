@@ -36,6 +36,7 @@ python3-smbc samba
 xkb-switch \
 unclutter \
 autorandr \
+xserver-xorg-input-libinput \
 screenkey
 
 # indicator-sound-switcher \ # меню звук-девайсов в трее
