@@ -206,7 +206,8 @@ bindsym $mod+F12 --release exec --no-startup-id maim -s | xclip -selection clipb
 bindsym $mod+z sticky toggle
 
 # resize window (you can also use the mouse for that)
-mode "Resize (L) (H) (J) (K)" {
+set $mode_resize "Resize (L) (H) (J) (K)"
+mode $mode_resize {
         # These bindings trigger as soon as you enter the resize mode
 
         # Pressing left will shrink the window’s width.
@@ -228,14 +229,14 @@ mode "Resize (L) (H) (J) (K)" {
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
-
-bindsym $mod+r mode "Resize (L) (H) (J) (K)"
+bindsym $mod+r mode $mode_resize
 
 # Create Log out, Reboot, Poweroff bindings
-mode "Exit (P)oweroff, (L)ogout, loc(K) screen, (S)uspend" {
+set $mode_poweroff "Exit (P)oweroff, (L)ogout, loc(K) screen, (S)uspend"
+mode $mode_poweroff {
 	bindsym $mod+l exec i3-msg exit
 	bindsym $mod+p exec systemctl poweroff
-	bindsym $mod+s mode "default" ; exec systemctl suspend
+	bindsym $mod+s mode "default" ; exec $HOME/.i3/i3lock.sh ; exec systemctl suspend
 	bindsym $mod+k mode "default" ; exec $HOME/.i3/i3lock.sh 
 
 # back to normal: Enter or Escape
@@ -243,10 +244,39 @@ mode "Exit (P)oweroff, (L)ogout, loc(K) screen, (S)uspend" {
 	bindsym Escape mode "default"
 }
 
-bindsym $mod+Shift+e mode "Exit (P)oweroff, (L)ogout, loc(K) screen, (S)uspend"
+bindsym $mod+Shift+e mode $mode_poweroff
+
+# Move workspace to another monitor
+set $mode_move_workspace "Move workspace to another monitor"
+mode $mode_move_workspace {
+    bindsym $mod+1 workspace number 1
+    bindsym $mod+2 workspace number 2
+    bindsym $mod+3 workspace number 3
+    bindsym $mod+4 workspace number 4
+    bindsym $mod+5 workspace number 5
+    bindsym $mod+6 workspace number 6
+    bindsym $mod+7 workspace number 7
+    bindsym $mod+8 workspace number 8
+    bindsym $mod+9 workspace number 9
+    bindsym $mod+0 workspace number 10
+	bindsym $mod+Shift+l move workspace to output right; focus output left
+	bindsym $mod+Shift+h move workspace to output left; focus output right
+	bindsym $mod+Shift+j move workspace to output next; focus output prev
+	bindsym $mod+Shift+k move workspace to output prev; focus output next
+    bindsym $mod+h focus output left
+    bindsym $mod+j focus output down
+    bindsym $mod+k focus output up
+    bindsym $mod+l focus output right
+
+# back to normal: Enter or Escape
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+bindsym $mod+Shift+m mode $mode_move_workspace 
 
 # Yandex work
-mode "Yandex (P)eople (B)rowser" {
+set $mode_yandex "Yandex (P)eople (B)rowser"
+mode $mode_yandex {
 	bindsym $mod+p mode "default" ; exec --no-startup-id gnome-terminal --class floatingsticky -- vim ~/dotfiles/people.txt
 	bindsym $mod+b mode "default" ; exec --no-startup-id nohup yandex-browser --user-data-dir="ya-dev" & disown
 
@@ -255,7 +285,7 @@ mode "Yandex (P)eople (B)rowser" {
 	bindsym Escape mode "default"
 }
 
-bindsym $mod+Shift+y mode "Yandex (P)eople (B)rowser"
+bindsym $mod+Shift+y mode $mode_yandex
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
