@@ -160,3 +160,6 @@ let g:markdown_folding = 1
 set diffopt+=internal,algorithm:patience,indent-heuristic
 
 let g:markdown_fenced_languages = ['javascript', 'html', 'css']
+
+set formatoptions+=j " Delete comment characters when joining lines.
+set nrformats-=octal " Interpret octal as decimal when incrementing numbers.
