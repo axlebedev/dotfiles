@@ -599,3 +599,5 @@ def CustomFixFoldMethod(): void
     augroup END
 enddef
 autocmd VimEnter * CustomFixFoldMethod()
+
+autocmd BufEnter quickfix IlluminatePauseBuf
