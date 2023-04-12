@@ -41,8 +41,6 @@ endfunction
 command! DemoOn call SetDemoMode(1)
 command! DemoOff call SetDemoMode(0)
 
-command! EslintFix execute('term ++close ++hidden npx eslint --fix %')
-
 " run buffer
 function! RB() abort
     silent normal! gg"yyG
