@@ -323,4 +323,8 @@ nnoremap <C-;> <CMD>Commands<Cr>
 vnoremap SB <Plug>VSurroundBkJ
 vnoremap Sb <Plug>VSurroundbkJ
 
-nnoremap <silent> elf <CMD>call updatebuffer#UpdateBuffer(1)<bar>EslintFix<CR>
+function! Elf() abort
+    read !npx eslint --fix %
+    call updatebuffer#UpdateBuffer(1)
+endfunction
+nnoremap <silent> elf <CMD>call Elf()<CR>
