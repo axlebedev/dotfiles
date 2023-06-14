@@ -232,13 +232,14 @@ mode $mode_resize {
 bindsym $mod+r mode $mode_resize
 
 # Create Log out, Reboot, Poweroff bindings
-set $mode_poweroff "(E)xit, (P)oweroff, (R)eboot, (L)ogout, loc(K) screen, (S)uspend"
+set $mode_poweroff "(E)xit, (P)oweroff, (R)eboot, lo(G)out, (L)oc(K) screen, (S)uspend"
 mode $mode_poweroff {
-	bindsym $mod+l exec i3-msg exit
+	bindsym $mod+g exec i3-msg exit
 	bindsym $mod+p exec systemctl poweroff
 	bindsym $mod+r exec systemctl reboot
 	bindsym $mod+s mode "default" ; exec $HOME/.i3/i3lock.sh ; exec systemctl suspend
 	bindsym $mod+k mode "default" ; exec $HOME/.i3/i3lock.sh 
+	bindsym $mod+l mode "default" ; exec $HOME/.i3/i3lock.sh 
 
 # back to normal: Enter or Escape
 	bindsym Return mode "default"
