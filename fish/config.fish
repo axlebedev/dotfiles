@@ -33,12 +33,15 @@ abbr -a vv gvim
 
 abbr -a o xdg-open
 
-abbr -a ga goa add
-abbr -a gap goa add -p ./packages/callcenter-staff ./services
+abbr -a ga g add
+abbr -a gap g add -p ./packages/callcenter-staff ./services
 # --verbose to show diff in vim when show commit
-abbr -a gi goa commit --verbose
-abbr -a gia goa commit --amend --no-edit
-abbr -a giw goa commit -m "wip"
+abbr -a gi g commit --verbose
+abbr -a gia g commit --amend --no-edit
+abbr -a giw g commit -m "wip"
+
+abbr -a gm arc mount arc-
+abbr -a cda cd arc-
 
 function git-sortedbranch -d 'Fuzzy-find a branch, sorted by reflog, and then all branches'
   set -l cmd (commandline -j)
@@ -65,52 +68,52 @@ function arc-sortedbranch -d 'Fuzzy-find a branch'
 end
 bind \ca arc-sortedbranch
 
-function goa-sortedbranch -d 'git or arc sorted branch'
+function g-sortedbranch -d 'git or arc sorted branch'
   if string match "/home/l-e-b-e-d-e-v/arc*" $PWD
     arc-sortedbranch
   else
     git-sortedbranch
   end
 end
-bind \cg goa-sortedbranch
+bind \cg g-sortedbranch
 
-abbr -a go goa checkout
-abbr -a gor goa checkout users/l-e-b-e-d-e-v/
-abbr -a gob goa checkout -b
-abbr -a gs goa status .
+abbr -a go g checkout
+abbr -a gor g checkout users/l-e-b-e-d-e-v/
+abbr -a gob g checkout -b
+abbr -a gs g status .
 # maybe git diff --patience
 
-abbr -a gd goa diff --histogram --minimal --ignore-space-change --relative --color-words
-abbr -a gdc goa diff --histogram --minimal --ignore-space-change --relative --cached --color-words
-abbr -a gdm goa diff --color-words $(goa merge-base HEAD trunk) 
-abbr -a gh goa hist
-abbr -a ghh goa hist --first-parent -n 10
-abbr -a ghhh goa hist --first-parent -n 20
-abbr -a ghhhh goa hist --first-parent -n 30
-abbr -a ghs goa hist --stat --first-parent
-abbr -a gpl goa pull
-abbr -a gps goa push origin HEAD
-abbr -a gpsu goa push -u origin HEAD
-abbr -a gpsf goa push -f origin HEAD
-abbr -a grb goa rebase --autostash
-abbr -a grbt goa rebase --autostash arcadia/trunk
-abbr -a grbc goa rebase --continue
-abbr -a gra goa rebase --abort
-abbr -a gcp goa cherry-pick
-abbr -a gcpc goa cherry-pick --continue
-abbr -a gcpa goa cherry-pick --abort
-abbr -a gfa goa fetch --all
-abbr -a gfu goa fetch users/l-e-b-e-d-e-v/
-abbr -a gfap goa fetch --all -p
-abbr -a gb goa branch
-abbr -a gbs goa bisect start
-abbr -a gbr goa bisect reset
-abbr -a gbg goa bisect good
-abbr -a gbb goa bisect bad
-abbr -a gst goa stash push --keep-index
-abbr -a gsta goa stash pop
+abbr -a gd g diff --histogram --minimal --ignore-space-change --relative --color-words
+abbr -a gdc g diff --histogram --minimal --ignore-space-change --relative --cached --color-words
+abbr -a gdm g diff --color-words $(g merge-base HEAD trunk) 
+abbr -a gh g hist
+abbr -a ghh g hist --first-parent -n 10
+abbr -a ghhh g hist --first-parent -n 20
+abbr -a ghhhh g hist --first-parent -n 30
+abbr -a ghs g hist --stat --first-parent
+abbr -a gpl g pull
+abbr -a gps g push origin HEAD
+abbr -a gpsu g push -u origin HEAD
+abbr -a gpsf g push -f origin HEAD
+abbr -a grb g rebase --autostash
+abbr -a grbt g rebase --autostash arcadia/trunk
+abbr -a grbc g rebase --continue
+abbr -a gra g rebase --abort
+abbr -a gcp g cherry-pick
+abbr -a gcpc g cherry-pick --continue
+abbr -a gcpa g cherry-pick --abort
+abbr -a gfa g fetch --all
+abbr -a gfu g fetch users/l-e-b-e-d-e-v/
+abbr -a gfap g fetch --all -p
+abbr -a gb g branch
+abbr -a gbs g bisect start
+abbr -a gbr g bisect reset
+abbr -a gbg g bisect good
+abbr -a gbb g bisect bad
+abbr -a gst g stash push --keep-index
+abbr -a gsta g stash pop
 
-# Почему-то остался 'goa reset'. Надо защититься от него)
+# Почему-то остался 'g reset'. Надо защититься от него)
 abbr -a gr gr
 
 abbr -a ah arc log --oneline
