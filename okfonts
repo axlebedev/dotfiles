@@ -1,0 +1,19 @@
+https://www.programmingfonts.org/#input
+how to install many fonts:
+mkdir ~/.fonts
+# copy there all font files
+fc-cache -f -v # update fonts cache
+
+B612 Mono
+Bitstream Vera Sans Mono
+Bront Dejavu Sans Mono
+Comic Shanns
+Consolamono
+Courier Prime Code
+Dejavu Mono
+Droid Sans
+Gintronic
+Go Mono
+Input
+JetBrains Mono
+Luculent
