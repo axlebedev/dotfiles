@@ -412,7 +412,7 @@ Plug 'HerringtonDarkholme/yats.vim'
 
 # -----------------------------------------------------------------------------
 # color highlight in text
-# Plug 'ap/vim-css-color', { for: ['javascript', 'html', 'css'] }
+Plug 'ap/vim-css-color'
 
 # -----------------------------------------------------------------------------
 # Highlight eslint errors
@@ -429,7 +429,7 @@ g:ale_virtualtext_cursor = 0
 
 g:ale_linters = {
     javascript: ['eslint'],
-    typescript: ['eslint'],
+    typescript: ['tslint']
 }
 g:ale_javascript_eslint_executable = 'npm run lint'
 g:ale_typescript_tslint_executable = 'npm run lint'
