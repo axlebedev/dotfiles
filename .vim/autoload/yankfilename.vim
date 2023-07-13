@@ -27,3 +27,26 @@ export def YankGithubURL()
     setreg('+', result)
     echo 'yanked: "' .. result .. '"'
 enddef
+
+# https://a.yandex-team.ru/arcadia/taxi/callcenter-frontend/[namewithpath]#L[linenum]
+export def YankArcURL()
+    var filename = expand("%:p")->split('/')
+    var indexOfArcRoot = filename->indexof((i, part) => part =~ "arc")
+    var respath = filename[indexOfArcRoot + 1 : ]->join('/')
+    var lineNr = line('.')
+
+    var result = 'https://a.yandex-team.ru/arcadia/' .. respath .. '#L' .. lineNr
+
+    setreg('*', result)
+    setreg('+', result)
+    echo 'yanked: "' .. result .. '"'
+enddef
+
+export def YankURL()
+    var rootFolders = expand('%:p')->split('/')[0 : 4]->join()
+    if (rootFolders->stridx('arc') > -1)
+        YankArcURL()
+    else
+        YankGithubURL()
+    endif
+enddef

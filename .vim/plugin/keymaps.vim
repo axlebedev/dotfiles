@@ -216,7 +216,7 @@ map <F10> <CMD>echo "hi<" .. synIDattr(synID(line("."),col("."),1),"name") .. '>
 \ .. synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") .. ">"<CR>
 
 nnoremap yf <ScriptCmd>yankfilename.YankFileName()<CR>
-nnoremap yg <ScriptCmd>yankfilename.YankGithubURL()<CR>
+nnoremap yg <ScriptCmd>yankfilename.YankURL()<CR>
 
 nnoremap Y y$
 vmap p pgvy

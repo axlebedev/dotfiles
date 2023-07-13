@@ -40,3 +40,5 @@ enddef
 
 command! DemoOn SetDemoMode(1)
 command! DemoOff SetDemoMode(0)
+
+command! WhereAmI !pwd | sed 's/\/home\/l-e-b-e-d-e-v\/\([^\/]\+\)\/.*/\1/'

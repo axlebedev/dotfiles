@@ -141,13 +141,6 @@ conky.text = [[
   "separator" : false
 },
 
-{ 
-  "separator_block_width":3,
-  "min_width":"▁",
-  "full_text" : "${exec cat ]] .. hwMonitorPath .. [[ | cut -c-2}",
-  "color" : "\#${template2 exec ~/dotfiles/.i3/getCPUTempNormalized.sh}", 
-  "separator" : false
-},
 {
     "separator_block_width":3,
       "min_width":"]] .. stringWidth(1) .. [[",
@@ -188,6 +181,76 @@ conky.text = [[
       "min_width":"]] .. stringWidth(1) .. [[",
       "full_text" : ${template1 cpu cpu6},
       "color" : "\#${template2 cpu cpu6}", 
+      "separator" : false
+  },
+{
+    "separator_block_width":3,
+      "min_width":"]] .. stringWidth(1) .. [[",
+      "full_text" : ${template1 cpu cpu7},
+      "color" : "\#${template2 cpu cpu7}", 
+      "separator" : false
+  },
+{
+    "separator_block_width":3,
+      "min_width":"]] .. stringWidth(1) .. [[",
+      "full_text" : ${template1 cpu cpu8},
+      "color" : "\#${template2 cpu cpu8}", 
+      "separator" : false
+  },
+{
+    "separator_block_width":3,
+      "min_width":"]] .. stringWidth(1) .. [[",
+      "full_text" : ${template1 cpu cpu9},
+      "color" : "\#${template2 cpu cpu9}", 
+      "separator" : false
+  },
+{
+    "separator_block_width":3,
+      "min_width":"]] .. stringWidth(1) .. [[",
+      "full_text" : ${template1 cpu cpu10},
+      "color" : "\#${template2 cpu cpu10}", 
+      "separator" : false
+  },
+{
+    "separator_block_width":3,
+      "min_width":"]] .. stringWidth(1) .. [[",
+      "full_text" : ${template1 cpu cpu11},
+      "color" : "\#${template2 cpu cpu11}", 
+      "separator" : false
+  },
+{
+    "separator_block_width":3,
+      "min_width":"]] .. stringWidth(1) .. [[",
+      "full_text" : ${template1 cpu cpu12},
+      "color" : "\#${template2 cpu cpu12}", 
+      "separator" : false
+  },
+{
+    "separator_block_width":3,
+      "min_width":"]] .. stringWidth(1) .. [[",
+      "full_text" : ${template1 cpu cpu13},
+      "color" : "\#${template2 cpu cpu13}", 
+      "separator" : false
+  },
+{
+    "separator_block_width":3,
+      "min_width":"]] .. stringWidth(1) .. [[",
+      "full_text" : ${template1 cpu cpu14},
+      "color" : "\#${template2 cpu cpu14}", 
+      "separator" : false
+  },
+{
+    "separator_block_width":3,
+      "min_width":"]] .. stringWidth(1) .. [[",
+      "full_text" : ${template1 cpu cpu15},
+      "color" : "\#${template2 cpu cpu15}", 
+      "separator" : false
+  },
+{
+    "separator_block_width":3,
+      "min_width":"]] .. stringWidth(1) .. [[",
+      "full_text" : ${template1 cpu cpu16},
+      "color" : "\#${template2 cpu cpu16}", 
       "separator" : false
   },
 # Next block - memory usage

@@ -1,6 +1,6 @@
 [user]
 	email = alexey.broadcast@gmail.com
-	name = Alex Lebedev
+    name = l-e-b-e-d-e-v
 [alias]
 	co = checkout
 	ci = commit
@@ -9,7 +9,7 @@
 	f = fetch
 	rb = rebase
 	cp = cherry-pick
-	hist = log --color --graph --pretty=format:'%C(cyan)%h%Creset %Cgreen(%cd) -%C(yellow)%d%Creset %s %C(bold blue)<%an>%Creset' --abbrev-commit
+	hist = log --color --graph --oneline
 	prbr = for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(authorname) (%(color:green)%(committerdate)%(color:reset))' ;show branches sorted by date
 	logfile = log -p -M --follow --stat; -Gpattern for search pattern
 	logfilelines = log -p -M --stat -L;N,M:filename - log for lines
@@ -30,6 +30,7 @@
 	prompt = false
 [color]
 	ui = true
+    diff = auto
 
 [color "status"]
 ;header (the header text of the status message), 
@@ -48,7 +49,11 @@
     unmerged = red reverse
 
 [color "diff"]
-    meta = magenta
+	meta = magenta
+    frag = magenta bold
+    old = red bold
+    new = green bold
+    context = black italic
 
 [hub]
 	protocol = https

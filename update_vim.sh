@@ -16,12 +16,12 @@ COLOR_RESET='\033[0m' # No Color
 COLOR_INVERTED='\033[7m'
 
 # check if update necessary
-cd ~/github/vim/
+cd /home/l-e-b-e-d-e-v/github/vim/
 current_commit=$(git rev-parse HEAD)
 
 printf "Checking for updates...\n"
 eval `ssh-agent -s` >>${logFile} 2>>${logFile}
-ssh-add /home/alex/.ssh/id_rsa >>${logFile} 2>>${logFile}
+ssh-add /home/l-e-b-e-d-e-v/.ssh/id_rsa >>${logFile} 2>>${logFile}
 git fetch >>${logFile} 2>>${logFile}
 last_commit=$(git rev-parse origin/master)
 if [ "$current_commit" == "$last_commit" ]; \
@@ -52,10 +52,9 @@ if sudo apt install -y \
     liblua5.1-dev \
     luajit \
     libluajit-5.1-dev \
-    python-dev \
+    python2-dev \
     ruby-dev \
     libperl-dev \
-    libncurses5-dev \
     libatk1.0-dev \
     libx11-dev \
     libxpm-dev \

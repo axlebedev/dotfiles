@@ -57,6 +57,24 @@ function cdf
 end
 abbr -a cdf cdf
 
+function cda
+    argparse --name="cda" "prompt=?" "path=?" -- $argv
+    ls -1 ~ | fzf --layout=reverse --height=20 --scheme=history --query=arc- --print-query --scheme=history --tac --prompt="$_flag_prompt: " | tail -1 | read -l result
+
+    if test -n "$result"
+        arc mount --allow-root ~/$result || true
+        eval cd ~/$result/$_flag_path
+    end
+end
+abbr -a cda cda --prompt="cd\ taxi:\ " --path="taxi"
+abbr -a cdg cda --prompt="cd\ taxi:\ " --path="taxi"
+abbr -a gm cda --prompt="arc\ mount:\ " --path="taxi"
+abbr -a cdc cda --prompt="cd\ callcenter-frontend:\ " --path="taxi/callcenter-frontend"
+abbr -a свс cda --prompt="cd\ callcenter-frontend:\ " --path="taxi/callcenter-frontend"
+abbr -a cdt cda --prompt="cd\ tariff-editor:\ " --path="taxi/tariff-editor"
+abbr -a cds cda --prompt="cd\ schemas/schemas:\ " --path="taxi/schemas/schemas"
+abbr -a cdl cda --prompt="cd\ cc-jssip-hooks:\ " --path="frontend/packages/taxi-react-jssip-hooks"
+
 function git-sortedbranch -d 'Fuzzy-find a branch, sorted by reflog, and then all branches'
   set -l cmd (commandline -j)
   bash ~/dotfiles/fish/sortedBranch.sh |\
@@ -96,11 +114,22 @@ abbr -a gor g checkout users/l-e-b-e-d-e-v/
 abbr -a gob g checkout -b
 abbr -a gbl g blame
 
+function gobc
+    pwd
+    string split --no-empty --max=4 / (pwd) | read -l -a --null arr
+    # arr = ['home', 'username', 'arc-13-lalala', 'anyother/folder/subfolder']
+    # arr[3] = 'arc-13-lalala'
+    string split --no-empty --max=1 '-' $arr[3] | read -l -a --null folderName
+    # folderName = ['arc', '13-lalala']
+    commandline -i (string join '' 'g checkout -b CALLCENTERFRONT-' $folderName[2])
+end
+abbr -a gobc gobc
+
 abbr -a gs g status .
 # maybe git diff --patience
 
-abbr -a gd g diff --histogram --minimal --ignore-space-change --relative --color-words
-abbr -a gdc g diff --histogram --minimal --ignore-space-change --relative --cached --color-words
+abbr -a gd g diff --histogram --minimal --ignore-space-change  --color-words
+abbr -a gdc g diff --histogram --minimal --ignore-space-change  --cached --color-words
 abbr -a gdm g diff --color-words $(g merge-base HEAD trunk) 
 abbr -a gh g hist
 abbr -a ghh g hist --first-parent -n 10
@@ -140,7 +169,7 @@ abbr -a ao arc checkout
 abbr -a aob arc checkout -b
 abbr -a apl arc pull
 abbr -a aps arc push
-abbr -a apr arc pr create
+abbr -a gpr arc pr create --publish --no-edit
 abbr -a ad arc diff
 abbr -a acp arc cherry-pick
 abbr -a aa arc add
@@ -161,6 +190,8 @@ abbr -a nis npm i --save
 abbr -a ncc npm cache clean -f
 abbr -a nb npm run build
 abbr -a ns npm start
+abbr -a nrb npm run beta
+abbr -a nra npm run admin
 abbr -a nl npm run lint
 abbr -a nt npm run test
 abbr -a nta npm run test-all
@@ -171,3 +202,5 @@ abbr -a ycc yarn cache clean
 abbr -a yi yarn --ignore-engines
 
 bind ` forward-char
+
+alias gab='~/dotfiles/fish/gab.sh'

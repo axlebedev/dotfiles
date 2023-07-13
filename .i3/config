@@ -27,16 +27,19 @@ exec --no-startup-id flameshot
 exec --no-startup-id xinput --set-prop "Logitech USB Optical Mouse" \
   "Coordinate Transformation Matrix" 1, 0, 0, 0, 1, 0, 0, 0, 1.5
 exec --no-startup-id unclutter -idle 3
-exec --no-startup-id indicator-sound-switcher
+# exec --no-startup-id indicator-sound-switcher
+# Ya notebook: eDP-1 DP-2-1
 exec --no-startup-id xrandr \
-  --auto --output HDMI-0 --primary \
-  --auto --output DVI-D-0 --left-of HDMI-0 \
-  --auto --output DP-0 --right-of HDMI-0
-exec --no-startup-id i3-msg "workspace 1, move workspace to output HDMI-0"
-exec --no-startup-id i3-msg "workspace 9, move workspace to output DVI-D-0"
-exec --no-startup-id i3-msg "workspace 10, move workspace to output DP-0"
+  --auto --output DP-2-1 --primary \
+  --auto --output HDMI-1 --primary \
+  --auto --output DP-1 --right-of HDMI-1 \
+  --auto --output DP-2 --right-of HDMI-1 \
+  --auto --output eDP-1 --left-of DP-2-1
+exec --no-startup-id i3-msg "focus left, workspace 10"
+exec --no-startup-id i3-msg "focus right, focus right, workspace 11"
+exec --no-startup-id i3-msg "focus left, workspace 1"
 exec --no-startup-id nm-applet
-exec --no-startup-id pasystray
+# exec --no-startup-id pasystray
 # 0.5 - is mouse pointer speed
 exec --no-startup-id xinput set-prop "Genius Optical Mouse" "Coordinate Transformation Matrix" 0.5 0 0 0 0.5 0 0 0 1
 # Чтобы numpad-dot всегда давал точку а не запятую - надо в /usr/share/X11/xkb/symbols/ru удалить вызов kpdl(comma)
@@ -50,6 +53,7 @@ bindsym ctrl+F9 exec gromit-mpx --active
 exec --no-startup-id syndaemon -i .3 -d -t -K   
 exec --no-startup-id gnome-keyring-daemon
 exec --no-startup-id touchpad-indicator
+exec --no-startup-id indicator-sound-switcher
 
 for_window [class="VsTranslator" instance="vsTranslator"] floating enable
 for_window [class="Gnome-system-monitor" instance="gnome-system-monitor"] floating enable
@@ -286,7 +290,7 @@ bindsym $mod+Shift+m mode $mode_move_workspace
 # Yandex work
 set $mode_yandex "Yandex (P)eople (B)rowser (L)inphone"
 mode $mode_yandex {
-	bindsym $mod+p mode "default" ; exec --no-startup-id gnome-terminal --class floatingsticky -- vim ~/dotfiles/people.txt
+	bindsym $mod+p mode "default" ; exec --no-startup-id gnome-terminal --geometry 34x16 --class floatingsticky -- vim --cmd "let g:runClearWindow = 1" ~/dotfiles/people.txt
 	bindsym $mod+b mode "default" ; exec --no-startup-id nohup yandex-browser --user-data-dir="ya-dev" & disown
 	bindsym $mod+l mode "default" ; exec --no-startup-id linphone & disown
 
@@ -294,7 +298,7 @@ mode $mode_yandex {
 	bindsym Return mode "default"
 	bindsym Escape mode "default"
 }
-bindsym $mod+Shift+y mode $mode_yandex
+bindsym $mod+Shift+y exec --no-startup-id notify-send --expire-time=1500 $mode_yandex ; mode $mode_yandex
 
 # Utils
 set $mode_utils "UTILS: Notifications (N)off (M)on | (G)romit-mpx | (L)ebedev-bro | (Z)oom"
