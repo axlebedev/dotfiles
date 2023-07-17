@@ -486,7 +486,7 @@ g:js_fastlog_prefix = ['%c11111', 'background:#00FF00']
 
 Plug 'axlebedev/vim-smart-insert-tab'
 
-Plug 'isomoar/vim-css-to-inline', { 'for': ['javascript', 'typescript', 'css', 'html'] }
+Plug 'isomoar/vim-css-to-inline'
 
 Plug 'axlebedev/vim-gotoline-popup'
 nmap <C-g> <plug>(gotoline-popup)
