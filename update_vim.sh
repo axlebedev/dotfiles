@@ -51,7 +51,7 @@ printf "${COLOR_YELLOW}apt install deps...${COLOR_RESET}\r"
 if sudo apt install -y \
     liblua5.1-dev \
     luajit \
-    libluajit-5.1 \
+    libluajit-5.1-dev \
     python-dev \
     ruby-dev \
     libperl-dev \
