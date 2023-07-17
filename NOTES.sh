@@ -233,4 +233,10 @@ sudo apt-get update
 # TODO:
 # 0. vim plugin for draw a hooi
 # 1. 'map xp' чтобы работал как xp но не засирал регистр с copypaste
-# 2. Попробовать WICD вместо стандартного NetworkManager https://askubuntu.com/questions/1030653/wifi-randomly-disconnected-on-ubuntu-18-04-lts
+#
+
+# How to prevent xkbmap reset?
+# --
+# Edit the /etc/default/keyboard file:
+# XKBLAYOUT="us,ru"
+# XKBOPTIONS="grp:shift_caps_switch"
