@@ -1,7 +1,7 @@
 #!/bin/sh
 # create symlinks
 rm ~/.conkyrc
-ln -s ~/dotfiles/.conkyrc ~/.conkyrc
+ln -s ~/dotfiles/conky/.conkyrc ~/.conkyrc
 
 rm ~/.bashrc
 ln -s ~/dotfiles/.bashrc ~/.bashrc
