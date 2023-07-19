@@ -6,6 +6,16 @@ sudo add-apt-repository -y ppa:git-core/ppa && \
 sudo apt-add-repository -y ppa:fish-shell/release-3 %% \
 sudo apt update
 
+# Убрать заголовок в окне gnome-terminal
+gsettings set org.gnome.Terminal.Legacy.Settings headerbar "@mb false"   
+# Или в dconf-editor: org.gnome.Terminal.Legacy.Settings headerbar - uncheck "use default" - В custom ввести "False"
+# menubar убрать в гуи настройках самого терминала
+# После этого перелогиниться
+
+# Добавить ключи ssh для гитхаба
+ssh-keygen -t rsa -C "alexey.broadcast@gmail.com"
+cat .ssh/id_rsa.pub
+
 # initial installation
 # jshon \ # for clickable i3-status
 # feh \ # background picture in i3
@@ -37,7 +47,11 @@ xkb-switch \
 unclutter \
 autorandr \
 xserver-xorg-input-libinput \
-screenkey
+screenkey \
+snapd \
+nodejs npm \
+cmake libxkbfile-dev \
+flameshot
 
 # indicator-sound-switcher \ # меню звук-девайсов в трее
 # gromit-mpx \ # для рисования на экране
@@ -45,11 +59,9 @@ screenkey
 # flameshot # для скриншотов
 sudo snap install \
 diff-so-fancy \
-flameshot \
 indicator-sound-switcher \
 gromit-mpx \
 simplescreenrecorder \
-flameshot
 
 sudo snap install -classic node
 
@@ -59,10 +71,6 @@ sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable
 sudo apt update 
 # maybe sudo apt install libnss3
 sudo apt install google-chrome-stable
-
-# ----- install i3-lock
-# i3lock установить в соотв. с инструкцией, всё должно собраться 
-# https://raymond.li/i3lock-color/
 
 # ===== dotfiles ==================================================================================
 cd ~ && \
@@ -74,8 +82,8 @@ git clone git@github.com:axlebedev/dotfiles.git && \
 sudo apt install \
 liblua5.1-dev \
 luajit \
-libluajit-5.1 \
-python-dev \
+libluajit-5.1-dev \
+python2-dev \
 ruby-dev \
 libperl-dev
 libncurses5-dev \
@@ -83,6 +91,14 @@ libatk1.0-dev \
 libx11-dev \
 libxpm-dev \
 libxt-dev
+
+# install xkb-switch
+cd ~/github
+git clone git@github.com:grwlf/xkb-switch.git
+cd xkb-switch/
+mkdir build && cd build
+cmake ..
+make && sudo make install
 
 # В /etc/apt/sources.list надо скопипасить cтрочку
 # ...ubuntu version
@@ -113,10 +129,39 @@ sudo make distclean
 --with-x
 
 sudo make && sudo make install
-curl -fLo ~/vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 # font here: https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/DroidSansMono/complete/Droid%20Sans%20Mono%20for%20Powerline%20Nerd%20Font%20Complete%20Mono.otf
 
+# ===== I3 GAPS ============================================
+sudo apt install libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev libxcb-icccm4-dev libyajl-dev libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev autoconf xutils-dev libtool
+
+# Install xcb-util-xrm
+cd ~/github
+git clone https://github.com/Airblader/xcb-util-xrm
+cd xcb-util-xrm
+git submodule update --init
+./autogen.sh --prefix=/usr
+make && sudo make install
+
+# Install i3-gaps
+cd ~/github
+
+sudo apt purge i3
+sudo apt install meson dh-autoreconf libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev xcb libxcb1-dev libxcb-icccm4-dev libyajl-dev libev-dev libxcb-xkb-dev libxcb-cursor-dev libxkbcommon-dev libxcb-xinerama0-dev libxkbcommon-x11-dev libstartup-notification0-dev libxcb-randr0-dev libxcb-xrm0 libxcb-xrm-dev libxcb-shape0 libxcb-shape0-dev
+git clone https://www.github.com/Airblader/i3 i3-gaps
+cd i3-gaps
+mkdir -p build && cd build
+meson --prefix /usr/local
+ninja
+sudo ninja install
+
+
+
+
+# ----- install i3-lock
+# i3lock установить в соотв. с инструкцией, всё должно собраться 
+# https://raymond.li/i3lock-color/
 
 # ===== FISH ======================================================================================
 # https://hackercodex.com/guide/install-fish-shell-mac-ubuntu/
@@ -176,12 +221,10 @@ gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'no
 Нужно поменять путь установки глобальных пакетов на домашний:
 https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally
 
-    1. Back up your computer.
-    2. On the command line, in your home directory, create a directory for global installations:
-       `mkdir ~/.npm-global`
-    3-5. NPM_CONFIG_PREFIX=~/.npm-global
-    6. To test your new configuration, install a package globally without using sudo:
-       `npm install -g jshint`
+mkdir ~/.npm-global
+npm config set prefix '~/.npm-global'
+echo 'export PATH=~/.npm-global/bin:$PATH' >> ~/.profile
+source ~/.profile
 
 NOTE: пакет который мы хотим залинковать, нигде не должен быть установлен, ни в одном node_modules других пакетов! Поэтому node_modules где он может встречаться лучше удалить
 
