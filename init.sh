@@ -27,6 +27,9 @@ ln -s ~/dotfiles/.i3 ~/.i3
 rm ~/.fzf.bash
 ln -s ~/dotfiles/.fzf.bash ~/.fzf.bash
 
+rm ~/.config/dunst
+ln -s ~/dotfiles/dunst ~/.config/dunst
+
 mkdir ~/.config/fish/
 rm ~/.config/fish/config.fish
 ln -s ~/dotfiles/fish/config.fish ~/.config/fish/config.fish
