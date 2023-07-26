@@ -51,7 +51,8 @@ screenkey \
 snapd \
 nodejs npm \
 cmake libxkbfile-dev \
-flameshot
+flameshot \
+autorandr
 
 # indicator-sound-switcher \ # меню звук-девайсов в трее
 # gromit-mpx \ # для рисования на экране
