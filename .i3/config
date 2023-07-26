@@ -175,6 +175,7 @@ bindsym $mod+7 workspace number 7
 bindsym $mod+8 workspace number 8
 bindsym $mod+9 workspace number 9
 bindsym $mod+0 workspace number 10
+bindsym $mod+F1 workspace number 11
 
 # traverse through workspaces: next, prev, back
 bindsym $mod+n workspace next_on_output
@@ -194,6 +195,7 @@ bindsym $mod+Shift+7 move container to workspace 7; workspace 7
 # bindsym $mod+Shift+8 move container to workspace 8; workspace 8
 bindsym $mod+Shift+9 move container to workspace 9; workspace 9
 bindsym $mod+Shift+0 move container to workspace 10; workspace 10
+bindsym $mod+Shift+F1 move container to workspace 11; workspace 11
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
