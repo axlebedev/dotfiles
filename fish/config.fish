@@ -155,3 +155,5 @@ abbr -a ys yarn start
 abbr -a ysn yarn snfiller
 abbr -a ycc yarn cache clean
 abbr -a yi yarn --ignore-engines
+
+bind ` forward-char
