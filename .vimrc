@@ -429,7 +429,7 @@ g:ale_virtualtext_cursor = 0
 
 g:ale_linters = {
     javascript: ['eslint'],
-    typescript: ['tslint']
+    typescript: ['eslint', 'tslint']
 }
 g:ale_javascript_eslint_executable = 'npm run lint'
 g:ale_typescript_tslint_executable = 'npm run lint'
