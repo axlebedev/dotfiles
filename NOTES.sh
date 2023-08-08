@@ -284,3 +284,12 @@ sudo apt-get update
 # Edit the /etc/default/keyboard file:
 # XKBLAYOUT="us,ru"
 # XKBOPTIONS="grp:shift_caps_switch"
+# ===============
+# Чтобы починить ubuntu-логин-скрин + убикей:
+# https://bytefreaks.net/gnulinux/ubuntu-22-04lts-forces-the-use-of-yubikey-on-login-without-activating-it
+#
+# ==================
+# Ноутбук: чтобы при наборе текста не было случайных нажатий на тачпад (+ другие настройки)
+sudo add-apt-repository ppa:atareao/atareao
+sudo apt update
+sudo apt install touchpad-indicator

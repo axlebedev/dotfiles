@@ -80,6 +80,8 @@ bind \cg g-sortedbranch
 abbr -a go g checkout
 abbr -a gor g checkout users/l-e-b-e-d-e-v/
 abbr -a gob g checkout -b
+abbr -a gbl g blame
+
 abbr -a gs g status .
 # maybe git diff --patience
 

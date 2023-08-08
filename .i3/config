@@ -48,6 +48,8 @@ exec --no-startup-id systemctl enable autorandr.service
 bindsym ctrl+F9 exec gromit-mpx --active
 # Чтобы выключать тачпад при наборе текста
 exec --no-startup-id syndaemon -i .3 -d -t -K   
+exec --no-startup-id gnome-keyring-daemon
+exec --no-startup-id touchpad-indicator
 
 for_window [class="VsTranslator" instance="vsTranslator"] floating enable
 for_window [class="Gnome-system-monitor" instance="gnome-system-monitor"] floating enable
