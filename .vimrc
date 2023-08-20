@@ -556,17 +556,23 @@ autocmd BufRead,BufNewFile *.qf set filetype=qf
 
 autocmd BufRead,BufNewFile *.styl set filetype=css
 
-autocmd VimEnter *
-    \ if (&diff == false && argc() == 0)
-        \ | if (getline(1) =~ "^diff --git")
-            \ | set filetype=diff | set foldlevel=999 | nnoremap q <CMD>q<CR>
-        \ | else
-            \ | NERDTree | wincmd l | Startify
-        \ | endif
-    \ | else
-        \ | NERDTree | wincmd l 
-    \ | endif
-
+def MaybeRunNERDTree(): void
+    if (&diff == false && argc() == 0)
+        if (getline(1) =~ "^diff --git")
+            set filetype=diff
+            set foldlevel=999
+            nnoremap q <CMD>q<CR>
+        else
+            NERDTree
+            wincmd l
+            Startify
+        endif
+    elseif (!get(g:, 'runClearWindow'))
+        NERDTree
+        wincmd l 
+    endif
+enddef
+autocmd VimEnter * MaybeRunNERDTree()
 
 augroup autoupdate_on_vimagit
     autocmd!
