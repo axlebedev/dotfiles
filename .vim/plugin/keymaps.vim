@@ -171,17 +171,17 @@ endfunction
 " nnoremap <silent> <leader>t <CMD>GFiles -c -o --exclude-standard<CR>
 
 nnoremap <silent> <leader>t <CMD>call fzf#vim#files('', {
-            \    'source': 'goa ls-files -c -o --exclude-standard ',
+            \    'source': 'g ls-files -c -o --exclude-standard ',
             \    'sink': 'e'
             \ })<CR>
 vnoremap <silent> <leader>t "ly<CMD>call fzf#vim#files('', {
-            \    'source': 'goa ls-files -c -o --exclude-standard ',
+            \    'source': 'g ls-files -c -o --exclude-standard ',
             \    'sink': 'e',
             \    'options': '--query='.tolower(substitute(@l, '\.', '', ''))
             \ })<CR>
 nnoremap <silent> <leader>b <CMD>Buffers<CR>
 nnoremap <silent> <leader>m <CMD>call fzf#vim#files('', {
-            \    'source': 'goa diff --name-only --diff-filter=U',
+            \    'source': 'g diff --name-only --diff-filter=U',
             \    'sink': 'e',
             \    'options': '--prompt="Unmerged> "'
             \ })<CR>
