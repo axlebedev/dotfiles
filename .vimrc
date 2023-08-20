@@ -431,8 +431,8 @@ g:ale_linters = {
     javascript: ['eslint'],
     typescript: ['eslint', 'tslint']
 }
-g:ale_javascript_eslint_executable = 'npm run lint'
-g:ale_typescript_tslint_executable = 'npm run lint'
+g:ale_javascript_eslint_executable = 'npm -s run lint %'
+g:ale_typescript_tslint_executable = 'npm -s run lint %'
 
 nmap <silent> <C-m> <Plug>(ale_next_wrap)
 nmap <silent> <C-n> <Plug>(ale_previous_wrap)
