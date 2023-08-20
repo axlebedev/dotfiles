@@ -55,6 +55,7 @@ for_window [class="VsTranslator" instance="vsTranslator"] floating enable
 for_window [class="Gnome-system-monitor" instance="gnome-system-monitor"] floating enable
 for_window [class="Gnome-alsamixer" instance="gnome-alsamixer"] floating enable
 for_window [class="TeamViewer.exe"] floating enable
+for_window [class="Gnome-control-center"] floating enable
 
 for_window [class="Doublecmd"] floating enable
 for_window [class="Doublecmd" title="Double Commander"] floating disable
