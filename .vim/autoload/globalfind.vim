@@ -1,20 +1,30 @@
-" find word under cursor
-set grepprg=ag\ --vimgrep\ --hidden\ --smart-case\ --ignore\ node_modules\ --ignore\ dist
-" cnoremap <C-w> <CMD>set grepprg=ag\ --vimgrep\ --hidden\ --smart-case\ --ignore\ node_modules\ --ignore\ dist\ --word-regexp<CR>
-" cnoremap <C-W> <CMD>set grepprg=ag\ --vimgrep\ --hidden\ --smart-case\ --ignore\ node_modules\ --ignore\ dist<CR>
+vim9script
 
-function! globalfind#Grep(...)
-    let word = input('Search: ', expand('<cword>'))
+# find word under cursor
+set grepprg=ag\ --vimgrep\ --hidden\ --smart-case\ --ignore\ node_modules\ --ignore\ dist
+# cnoremap <C-w> <CMD>set grepprg=ag\ --vimgrep\ --hidden\ --smart-case\ --ignore\ node_modules\ --ignore\ dist\ --word-regexp<CR>
+# cnoremap <C-W> <CMD>set grepprg=ag\ --vimgrep\ --hidden\ --smart-case\ --ignore\ node_modules\ --ignore\ dist<CR>
+
+export def Grep()
+    var savedReg = @g
+
+    var word1: string
     if (mode() != 'n')
-        " visual selection
-        let word = getline("'<")[getpos("'<")[2]-1:getpos("'>")[2]]
+        HighlightedyankOff
+        execute('normal! "gy')
+        word1 = @g
+        HighlightedyankOn
+    else
+        word1 = expand('<cword>')
     endif
 
-    let expandedArgs= expandcmd(join(a:000, ' '))
-    let @/ = word
-    cgetexpr system(join([&grepprg] + [expandedArgs] + [word], ' '))
+    var word = input('Search: ', word1)
+
+    @/ = word
+    cgetexpr system(join([&grepprg] + [word], ' '))
     copen
-endfunction
+    @g = savedReg
+enddef
 
 augroup quickfix
     autocmd!
@@ -22,11 +32,11 @@ augroup quickfix
     autocmd QuickFixCmdPost lgetexpr lwindow
 augroup END
 
-" =============================================================================
+# =============================================================================
 
-function! globalfind#FilterTestEntries() abort
-    let list = getqflist()
-    let filtered = copy(list)
+export def FilterTestEntries()
+    var list = getqflist()
+    var filtered = copy(list)
                 \ ->filter("bufname(v:val.bufnr) !~# 'node_modules'")
                 " \ ->filter('index(list, v:val, v:key+1)==-1') " remove duplicates
                 \ ->filter("bufname(v:val.bufnr) !~# 'test__'")
@@ -39,4 +49,4 @@ function! globalfind#FilterTestEntries() abort
                 \ ->filter("bufname(v:val.bufnr) !~# 'crowdin'")
                 \ ->filter("bufname(v:val.bufnr) !~# 'localization'")
     call setqflist(filtered)
-endfunction
+enddef
