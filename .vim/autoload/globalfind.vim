@@ -1,4 +1,28 @@
 " find word under cursor
+set grepprg=ag\ --vimgrep\ --hidden\ --smart-case\ --ignore\ node_modules\ --ignore\ dist
+" cnoremap <C-w> <CMD>set grepprg=ag\ --vimgrep\ --hidden\ --smart-case\ --ignore\ node_modules\ --ignore\ dist\ --word-regexp<CR>
+" cnoremap <C-W> <CMD>set grepprg=ag\ --vimgrep\ --hidden\ --smart-case\ --ignore\ node_modules\ --ignore\ dist<CR>
+
+function! globalfind#Grep(...)
+    let word = input('Search: ', expand('<cword>'))
+    if (mode() != 'n')
+        " visual selection
+        let word = getline("'<")[getpos("'<")[2]-1:getpos("'>")[2]]
+    endif
+
+    let expandedArgs= expandcmd(join(a:000, ' '))
+    let @/ = word
+    cgetexpr system(join([&grepprg] + [expandedArgs] + [word], ' '))
+    copen
+endfunction
+
+augroup quickfix
+    autocmd!
+    autocmd QuickFixCmdPost cgetexpr cwindow
+    autocmd QuickFixCmdPost lgetexpr lwindow
+augroup END
+
+" =============================================================================
 
 function! globalfind#FilterTestEntries() abort
     let list = getqflist()

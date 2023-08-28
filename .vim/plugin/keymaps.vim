@@ -256,7 +256,10 @@ nnoremap <leader>f <CMD>FindCursor #CC0000 500<CR>
 nnoremap <silent> <F5> <CMD>call updatebuffer#UpdateBuffer(0)<CR>
 nnoremap <silent> <F5><F5> <CMD>call updatebuffer#UpdateBuffer(1)<CR>
 
-map <c-f> <plug>(esearch)
+" Global find fix: use 'ag' and open quickfix {{{
+nnoremap <C-f> <CMD>call globalfind#Grep()<CR>
+vnoremap <C-f> <CMD>call globalfind#Grep()<CR>
+
 nnoremap <C-f><C-t> <CMD>call globalfind#FilterTestEntries()<cr>
 
 " JsFastLog mapping

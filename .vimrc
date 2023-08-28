@@ -158,20 +158,6 @@ g:qfenter_keymap.vopen = ['<C-v>', 'i']
 g:qfenter_keymap.hopen = ['<C-s>']
 
 # -----------------------------------------------------------------------------
-# Search in project
-Plug 'eugen0329/vim-esearch'
-
-g:esearch = {}
-g:esearch.prefill = ['cword', 'last']
-g:esearch.regex = 1
-g:esearch.case = 'smart'
-g:esearch.select_prefilled = 0
-g:esearch.live_update = 0
-g:esearch.out = 'qflist'
-g:esearch.textobj = 0
-g:esearch.root_markers = []
-
-# -----------------------------------------------------------------------------
 # Show 'n of m' result
 g:indexed_search_mappings = 0
 g:indexed_search_numbered_only = 1
@@ -578,12 +564,6 @@ augroup autoupdate_on_vimagit
     autocmd!
     autocmd User VimagitUpdateFile checktime
 augroup END
-
-autocmd TextChanged * {
-    if &buftype == 'quickfix'
-        @/ = g:esearch.last_pattern.str
-    endif
-}
 
 # fugitive tormoz: when go to fugitive buffer - these plugins
 # hang up all vim
