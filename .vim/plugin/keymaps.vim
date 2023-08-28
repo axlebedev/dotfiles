@@ -171,11 +171,11 @@ endfunction
 " nnoremap <silent> <leader>t <CMD>GFiles -c -o --exclude-standard<CR>
 
 nnoremap <silent> <leader>t <CMD>call fzf#vim#files('', {
-            \    'source': 'g ls-files -c -o --exclude-standard ',
+            \    'source': 'ag --vimgrep --hidden --ignore node_modules --ignore dist -l',
             \    'sink': 'e'
             \ })<CR>
 vnoremap <silent> <leader>t "ly<CMD>call fzf#vim#files('', {
-            \    'source': 'g ls-files -c -o --exclude-standard ',
+            \    'source': 'ag --vimgrep --hidden --ignore node_modules --ignore dist  -l',
             \    'sink': 'e',
             \    'options': '--query='.tolower(substitute(@l, '\.', '', ''))
             \ })<CR>
