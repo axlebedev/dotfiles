@@ -1,19 +1,21 @@
-let mapleader = "\<space>"
+vim9script
+
+g:mapleader = "\<space>"
 nmap <space> <leader>
 vmap <space> <leader>
 xmap <space> <leader>
 
-" Jump to matching pairs easily, with Tab
-" NOTE: recursive map for macros/matchit.vim
+# Jump to matching pairs easily, with Tab
+# NOTE: recursive map for macros/matchit.vim
 nmap <Tab> %<CMD>FindCursor 0 500<CR>
 vmap <Tab> %
 
-" Avoid accidental hits of <F1> while aiming for <Esc>
+# Avoid accidental hits of <F1> while aiming for <Esc>
 map  <F1> <CMD>Helptags<cr>
 imap <F1> <Esc>
 
-" Make moving in line a bit more convenient
-" NOTE: maps twice: Nnoremap and Vnoremap
+# Make moving in line a bit more convenient
+# NOTE: maps twice: Nnoremap and Vnoremap
 nnoremap 0 ^
 nnoremap ^ 0
 nnoremap 00 0
@@ -46,99 +48,99 @@ onoremap L g_
 onoremap LL $
 onoremap f; g_
 
-" fast save file, close file
+# fast save file, close file
 nnoremap <leader>w <CMD>w!<cr>
 
-" Если просто закрыть fugitive-буфер - то закроется весь вим.
-" Поэтому делаем такой костыль
-function! s:DontCloseFugitive() abort
+# Если просто закрыть fugitive-буфер - то закроется весь вим.
+# Поэтому делаем такой костыль
+def DontCloseFugitive()
     set bufhidden&
-endfunction
+enddef
 
-" By default it's set bufhidden=delete in plugin source. I dont need it
+# By default it's set bufhidden=delete in plugin source. I dont need it
 augroup dont_close_fugitive
     autocmd!
     autocmd BufReadPost fugitive://* call <SID>DontCloseFugitive()
 augroup END
-function s:CloseBuffer() abort
-    let buf = bufnr('%')
-    let filesLength = len(filter(range(1, bufnr('$')), 'buflisted(v:val)'))
+def CloseBuffer()
+    buf = bufnr('%')
+    filesLength = len(filter(range(1, bufnr('$')), 'buflisted(v:val)'))
     if (filesLength == 1)
         Startify
     else
         b#
     endif
     exe 'bdelete '.buf
-endfunction
+enddef
 nmap <silent> <leader>q <CMD>call <SID>CloseBuffer()<CR>
 
-" new empty buffer
+# new empty buffer
 noremap <leader>x <CMD>Startify<cr>
 
-" split line
+# split line
 nnoremap <leader>s a<CR><Esc>
 
-" comfortable navigation through windows
+# comfortable navigation through windows
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-" visual select last visual selection
-" ХЗ почему я постоянно путаю
+# visual select last visual selection
+# ХЗ почему я постоянно путаю
 nnoremap vg gv
 
-" visual select last pasted text
+# visual select last pasted text
 nnoremap vp `[v`]
 
-" NERDTree mappings
+# NERDTree mappings
 map <F2> <CMD>NERDTreeToggle<CR>
 nnoremap <leader>tt <CMD>NERDTreeFind<CR>
 
-" repeat command for each line in selection
+# repeat command for each line in selection
 xnoremap . <CMD>normal .<CR>
 
-" don't reset visual selection after indent
+# don't reset visual selection after indent
 xnoremap <silent> > >gv
 xnoremap <silent> < <gv
 
-" Movement in wrapped lines
+# Movement in wrapped lines
 nnoremap j gj
 nnoremap k gk
 vnoremap j gj
 vnoremap k gk
 
-" insert blank line
+# insert blank line
 nnoremap <leader>o o<Esc>
 
-" save file under root
+# save file under root
 cmap w!! w !sudo tee % >/dev/null
 
-" replace selection
+# replace selection
 vnoremap <C-h> "hy:%s/<C-r>h//gc<left><left><left><C-r>h
 
-" pretty find
+# pretty find
 vnoremap // "py/<C-R>p<CR>
 
-" add a symbol to current line
+# add a symbol to current line
 nnoremap <silent> <leader>; <CMD>call appendchar#AppendChar(';')<CR>
 nnoremap <silent> <leader>, <CMD>call appendchar#AppendChar(',')<CR>
 
-" close all other buffers
+# close all other buffers
 nnoremap bo <CMD>BufOnly<CR>
 
-" Now we don't have to move our fingers so far when we want to scroll through
-" the command history; also, don't forget the q: command
+# Now we don't have to move our fingers so far when we want to scroll through
+# the command history; also, don't forget the q: command
 cnoremap <c-j> <down>
 cnoremap <c-k> <up>
 
-" dont insert annoying 'PrtSc' code
+# dont insert annoying 'PrtSc' code
 inoremap <t_%9> <nop>
 
-" Resize submode
-let g:submode_always_show_submode = 1
-let g:submode_timeout = 0
-let resizeSubmode = 'Resize'
+# Resize submode
+g:submode_always_show_submode = 1
+g:submode_timeout = 0
+var resizeSubmode = 'Resize'
 call submode#enter_with(resizeSubmode, 'n', '', '<M-r>')
 call submode#enter_with(resizeSubmode, 'n', '', '<leader>r')
 call submode#map(resizeSubmode, 'n', '', 'h', ':vertical resize -1<cr>')
@@ -146,7 +148,7 @@ call submode#map(resizeSubmode, 'n', '', 'l', ':vertical resize +1<cr>')
 call submode#map(resizeSubmode, 'n', '', 'k', ':resize -1<cr>')
 call submode#map(resizeSubmode, 'n', '', 'j', ':resize +1<cr>')
 
-let foldlevelSubmode = 'Foldlevel'
+var foldlevelSubmode = 'Foldlevel'
 call submode#enter_with(foldlevelSubmode, 'n', '', '<leader>fo')
 call submode#map(foldlevelSubmode, 'n', '', '-', '<CMD>call increasefoldlevel#decreaseFoldlevel()<cr>')
 call submode#map(foldlevelSubmode, 'n', '', '<', '<CMD>call increasefoldlevel#decreaseFoldlevel()<cr>')
@@ -161,14 +163,14 @@ autocmd au_vimrc FileType help,qf,git,fugitive* nnoremap <buffer> q <CMD>q<cr>
 
 nnoremap <silent> <leader>a <CMD>ArgWrap<CR>
 
-function! ClapOpen(command_str)
+def ClapOpen(command_str: string)
   while (winnr('$') > 1 && (expand('%') =~# 'NERD_tree' || &ft == 'help' || &ft == 'qf'))
     wincmd w
   endwhile
-  exe 'normal! ' . a:command_str . "\<cr>"
-endfunction
+  exe 'normal! ' .. a:command_str .. "\<cr>"
+enddef
 
-" nnoremap <silent> <leader>t <CMD>GFiles -c -o --exclude-standard<CR>
+# nnoremap <silent> <leader>t <CMD>GFiles -c -o --exclude-standard<CR>
 
 nnoremap <silent> <leader>t <CMD>call fzf#vim#files('', {
             \    'source': 'ag --vimgrep --hidden --ignore node_modules --ignore dist -l',
@@ -185,65 +187,65 @@ nnoremap <silent> <leader>m <CMD>call fzf#vim#files('', {
             \    'sink': 'e',
             \    'options': '--prompt="Unmerged> "'
             \ })<CR>
-" FZF command
+# FZF command
 nnoremap <silent> sft <CMD>Filetypes<CR>
 nnoremap <silent> <leader>h <CMD>History<CR>
 nnoremap <silent> <leader>e <CMD>Commands<CR>
 
-function! g:GeditFile(branch) abort
-    execute 'Gedit '.a:branch.':%'
-endfunction
-" open current file version in branch
-nnoremap <silent> <C-g><C-f> <CMD>call fzf#run(fzf#wrap({ 'source': 'sh ~/dotfiles/fish/sortedBranch.sh', 'sink': function('GeditFile') }))<CR>
-" open unmerged list
+def g:GeditFile(branch: string)
+    execute 'Gedit ' .. a:branch .. ':%'
+enddef
+# open current file version in branch
+nnoremap <silent> <C-g><C-f> <CMD>call fzf#run(fzf#wrap({ 'source': 'sh ~/dotfiles/fish/sortedBranch.sh', 'sink': def('GeditFile') }))<CR>
+# open unmerged list
 nnoremap <silent> <C-g><C-m> <CMD>call fzf#run({'source': 'git diff --name-only --diff-filter=U', 'sink': 'e', 'window': { 'width': 0.9, 'height': 0.6 }})<CR>
 
-" get current highlight group under cursor
-map <F10> <CMD>echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
-\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
-\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+# get current highlight group under cursor
+map <F10> <CMD>echo "hi<" .. synIDattr(synID(line("."),col("."),1),"name") .. '> trans<'
+\ .. synIDattr(synID(line("."),col("."),0),"name") .. "> lo<"
+\ .. synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") .. ">"<CR>
 
 nnoremap yf <CMD>call yankfilename#YankFileName()<CR>
 nnoremap yg <CMD>call yankfilename#YankGithubURL()<CR>
 
 nnoremap Y y$
 vmap p pgvy
-" replace word under cursor with last yanked
+# replace word under cursor with last yanked
 nnoremap wp mmviwpgvy`m
 nnoremap <silent> p p`]
 
-" I dont need ex mode
+# I dont need ex mode
 nnoremap Q @@
 
-" fix one-line 'if' statement
+# fix one-line 'if' statement
 nnoremap <silent> <leader>hh <CMD>call blockline#BlockLine()<CR>
 
-" quickfix next
-function! Cn() abort
+# quickfix next
+def Cn()
     Cnext
-    " it should run after buffer change
+    # it should run after buffer change
     call timer_start(1, {id -> findcursor#FindCursor('#d6d8fa', 0)})
-endfunction
+enddef
 nnoremap <silent> cn <CMD>call Cn()<CR>
-" quickfix prev
-function! Cp() abort
+# quickfix prev
+def Cp()
     Cprev
-    " it should run after buffer change
+    # it should run after buffer change
     call timer_start(1, {id -> findcursor#FindCursor('#d6d8fa', 0)})
-endfunction
+enddef
 nnoremap <silent> cp <CMD>call Cp()<CR>
 
-" for convenient git
+# for convenient git
 nnoremap <C-g><C-g> <CMD>Magit<CR>
 nnoremap <C-g><C-b> <CMD>Git blame<cr>
 nnoremap <C-g><C-v> <CMD>GV<cr>
-" stage current file
+# stage current file
 nnoremap <C-g><C-w> <CMD>Gw<cr> 
 
-" beautify json, need "sudo apt install jq"
+# beautify json, need "sudo apt install jq"
 nnoremap <leader>bj <CMD>%!jq .<cr>
 vnoremap <leader>bj <CMD>'<,'>!jq .<cr>
-" beautify html
+# beautify html
 nnoremap <leader>bh <CMD>call htmlbeautify#htmlbeautify()<CR>
 
 nnoremap <leader>c <CMD>call readmode#ReadModeToggle()<cr>
@@ -256,13 +258,13 @@ nnoremap <leader>f <CMD>FindCursor #CC0000 500<CR>
 nnoremap <silent> <F5> <CMD>call updatebuffer#UpdateBuffer(0)<CR>
 nnoremap <silent> <F5><F5> <CMD>call updatebuffer#UpdateBuffer(1)<CR>
 
-" Global find fix: use 'ag' and open quickfix {{{
+# Global find fix: use 'ag' and open quickfix {{{
 nnoremap <C-f> <CMD>call globalfind#Grep()<CR>
 vnoremap <C-f> <CMD>call globalfind#Grep()<CR>
 
 nnoremap <C-f><C-t> <CMD>call globalfind#FilterTestEntries()<cr>
 
-" JsFastLog mapping
+# JsFastLog mapping
 nnoremap <leader>l <CMD>set operatorfunc=JsFastLog_simple<cr>g@
 vnoremap <leader>l <CMD>call JsFastLog_simple(visualmode())<cr>
 
@@ -273,8 +275,8 @@ nnoremap <leader>lk <CMD>set operatorfunc=JsFastLog_variable<cr>g@
 nmap <leader>lkk <leader>lkiW
 vnoremap <leader>lk <CMD>call JsFastLog_variable(visualmode())<cr>
 
-nnoremap <leader>ld <CMD>set operatorfunc=JsFastLog_function<cr>g@
-vnoremap <leader>ld <CMD>call JsFastLog_function(visualmode())<cr>
+nnoremap <leader>ld <CMD>set operatorfunc=JsFastLog_def<cr>g@
+vnoremap <leader>ld <CMD>call JsFastLog_def(visualmode())<cr>
 
 nnoremap <leader>ls <CMD>set operatorfunc=JsFastLog_string<cr>g@
 vnoremap <leader>ls <CMD>call JsFastLog_string(visualmode())<cr>
@@ -288,16 +290,16 @@ vnoremap <leader>lpn <CMD>call JsFastLog_thisToNext(visualmode())<cr>
 nnoremap <leader>lss <CMD>call JsFastLog_separator()<cr>
 nnoremap <leader>lsn <CMD>call JsFastLog_lineNumber()<cr>
 
-" nnoremap <silent> K <CMD>call LanguageClient#textDocument_hover()<CR>
-" nnoremap <silent> gd <CMD>call LanguageClient#textDocument_definition()<CR>
+# nnoremap <silent> K <CMD>call LanguageClient#textDocument_hover()<CR>
+# nnoremap <silent> gd <CMD>call LanguageClient#textDocument_definition()<CR>
 
 nnoremap <silent> K <CMD>call CocAction("doHover")<CR>
-function! JumpDefinitionFindCursor() abort
+def JumpDefinitionFindCursor()
     call CocAction("jumpDefinition")
-    " call timer_start(100, {id -> findcursor#FindCursor('#68705e', 0)})
+    # call timer_start(100, {id -> findcursor#FindCursor('#68705e', 0)})
     call timer_start(100, {id -> findcursor#FindCursor('#d6d8fa', 0)})
 
-endfunction
+enddef
 nnoremap <silent> gd <CMD>call JumpDefinitionFindCursor()<CR>
 
 nnoremap <silent> gdd <CMD>call gdd#gdd()<CR>
@@ -307,10 +309,10 @@ nnoremap <silent> to <CMD>call openjstest#OpenJsTest()<cR>
 nnoremap <silent> co <CMD>cope<CR>
 
 noremap <silent> <plug>(slash-after) <CMD>execute("FindCursor #d6d8fa 0<bar>ShowSearchIndex")<CR>
-" 'quickfix next'
+# 'quickfix next'
 nnoremap <silent> qn <CMD>execute("cnext<bar>normal n")<CR>
 
-" этот момент заебал
+# этот момент заебал
 cnoremap <C-f> <NOP>
 
 nnoremap zj zz<CMD>execute 'normal '.(winheight('.') / 4).'<C-e>'<CR>
@@ -319,7 +321,7 @@ nnoremap <BS> ==
 vnoremap <BS> =
 
 nnoremap <silent> x "_x
-" Для того чтобы поменять местами буквы - оставляем дефолтное поведение
+# Для того чтобы поменять местами буквы - оставляем дефолтное поведение
 nnoremap xp xp
 
 nnoremap <C-;> <CMD>Commands<Cr>
@@ -327,8 +329,8 @@ nnoremap <C-;> <CMD>Commands<Cr>
 vnoremap SB <Plug>VSurroundBkJ
 vnoremap Sb <Plug>VSurroundbkJ
 
-function! Elf() abort
+def Elf()
     read !npx eslint --fix %
     call updatebuffer#UpdateBuffer(1)
-endfunction
+enddef
 nnoremap <silent> elf <CMD>call Elf()<CR>
