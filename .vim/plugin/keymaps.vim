@@ -5,6 +5,7 @@ import autoload '../autoload/opennextbuf.vim'
 import autoload '../autoload/appendchar.vim'
 import autoload '../autoload/blockline.vim'
 import autoload '../autoload/htmlbeautify.vim'
+import autoload '../autoload/readmode.vim'
 
 g:mapleader = "\<space>"
 nmap <space> <leader>
@@ -252,7 +253,7 @@ vnoremap <leader>bj <CMD>'<,'>!jq .<cr>
 # beautify html
 nnoremap <leader>bh <CMD>vim9cmd <SID>htmlbeautify.Htmlbeautify()<CR>
 
-nnoremap <leader>c <CMD>call readmode#ReadModeToggle()<cr>
+nnoremap <leader>c <CMD>vim9cmd <SID>readmode.ReadModeToggle()<cr>
 
 nnoremap <silent> <leader>j <CMD>vim9cmd <SID>ClapOpen(':vim9cmd opennextbuf.OpenNextBuf(1)')<CR>
 nnoremap <silent> <leader>k <CMD>vim9cmd <SID>ClapOpen(':vim9cmd opennextbuf.OpenNextBuf(0)')<CR>

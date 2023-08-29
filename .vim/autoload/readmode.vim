@@ -1,37 +1,39 @@
-" toggle centering cursor
-" NOTE: scrolloff can't be local :(
-let s:scrolloff_value = &scrolloff
-let s:isReadModeEnabled = 0
+vim9script
 
-function! readmode#ReadModeToggle() abort
-    if s:isReadModeEnabled
-        call s:SetReadMode(0)
+# toggle centering cursor
+# NOTE: scrolloff can't be local :(
+var scrolloff_value = &scrolloff
+var isReadModeEnabled = 0
+
+export def ReadModeToggle()
+    if (isReadModeEnabled)
+        SetReadMode(false)
     else 
-        call s:SetReadMode(1)
+        SetReadMode(true)
     endif
-endfunction
+enddef
 
-function! readmode#ReadModeEnable() abort
-    call s:SetReadMode(1)
-endfunction
+export def ReadModeEnable()
+    SetReadMode(true)
+enddef
 
-function! readmode#ReadModeDisable() abort
-    call s:SetReadMode(0)
-endfunction
+export def ReadModeDisable()
+    SetReadMode(false)
+enddef
 
-function! s:SetReadMode(setEnabled) abort
-    if (a:setEnabled)
-        let s:isReadModeEnabled = 1
-        let s:scrolloff_value = &scrolloff
+def SetReadMode(setEnabled: bool)
+    if (setEnabled)
+        isReadModeEnabled = 1
+        scrolloff_value = &scrolloff
         set scrolloff=999
         set virtualedit=all
 
-        let curPos = getpos('.')
-        let curPos[2] = 100
-        call setpos('.', curPos)
+        var curPos = getpos('.')
+        curPos[2] = 100
+        setpos('.', curPos)
     else 
-        let s:isReadModeEnabled = 0
-        let &scrolloff = s:scrolloff_value
+        isReadModeEnabled = 0
+        &scrolloff = scrolloff_value
         set virtualedit=block
     endif
-endfunction
+enddef
