@@ -1,72 +1,74 @@
-let s:startTagRegexp = '<[a-zA-Z0-9]\+ '
-function! s:sortAttribute() abort
-    call cursor(1, 1)
-    while search(s:startTagRegexp, 'nW') != 0
-        " go to next <tag definition, not <!--
-        call search(s:startTagRegexp, 'W')
+vim9script
 
-        " split attributes by lines
+var startTagRegexp = '<[a-zA-Z0-9]\+ '
+def SortAttribute()
+    cursor(1, 1)
+    while (search(startTagRegexp, 'nW') != 0)
+        # go to next <tag definition, not <!--
+        search(startTagRegexp, 'W')
+
+        # split attributes by lines
         execute 'silent! s/\S\+="[^"]*"/\r\0\r/g'
 
-        " return to tag start
-        call search(s:startTagRegexp, 'bW')
+        # return to tag start
+        search(startTagRegexp, 'bW')
 
-        " sort attributes
+        # sort attributes
         execute 'silent! .+1,/>/-1sort'
-        " if nothing found in rest of buffer - break
+        # if nothing found in rest of buffer - break
     endwhile
-endfunction
+enddef
 
-function! s:sortClasses() abort
-    call cursor(1, 1)
-    while search('class=', 'nW') != 0
-        call search('class=', 'W')
+def SortClasses()
+    cursor(1, 1)
+    while (search('class=', 'nW') != 0)
+        search('class=', 'W')
         execute 'silent! s/"/"\r'
         execute 'silent! s/ /\r/g'
-        call search('"', 'W')
+        search('"', 'W')
         execute 'silent! s/"/\r"'
-        call search('"', 'bW')
+        search('"', 'bW')
         execute 'silent! .+1,/"/-1sort'
     endwhile
-endfunction
+enddef
 
-function! s:sortStyles() abort
-    call cursor(1, 1)
-    while search('style=', 'nW') != 0
-        call search('style=', 'W')
+def SortStyles()
+    cursor(1, 1)
+    while (search('style=', 'nW') != 0)
+        search('style=', 'W')
         execute 'silent! s/: */: '
         execute 'silent! s/"/"\r'
         execute 'silent! s/;/;\r/g'
         execute 'silent! s/"/\r"'
-        call search('"', 'bW')
+        search('"', 'bW')
         execute 'silent! .+1,/"/-1sort'
     endwhile
-endfunction
+enddef
 
-function! htmlbeautify#htmlbeautify() abort
+export def Htmlbeautify()
     execute 'set ft=html'
 
-    " remove comments
+    # remove comments
     execute 'silent! %s/<!--\_.\{-}-->//g'
 
-    " split tags by lines
+    # split tags by lines
     execute 'silent! %s/<[^>]*>/\r&\r/g'
 
-    " enter temporary first line to make search work well
+    # enter temporary first line to make search work well
     normal! ggOstart
 
-    " split attributes by lines
-    call s:sortAttribute()
+    # split attributes by lines
+    SortAttribute()
 
-    " split classes by lines
-    call s:sortClasses()
+    # split classes by lines
+    SortClasses()
 
-    " split styles by lines
-    call s:sortStyles()
+    # split styles by lines
+    SortStyles()
 
-    " remove blank lines
+    # remove blank lines
     execute 'g/^\s*$/d'
 
-    " indent all and remove temporary first line
+    # indent all and remove temporary first line
     normal! ggdd=Ggg
-endfunction
+enddef

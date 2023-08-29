@@ -4,7 +4,7 @@ import autoload '../autoload/globalfind.vim'
 import autoload '../autoload/opennextbuf.vim'
 import autoload '../autoload/appendchar.vim'
 import autoload '../autoload/blockline.vim'
-import autoload '../autoload/gdd.vim'
+import autoload '../autoload/htmlbeautify.vim'
 
 g:mapleader = "\<space>"
 nmap <space> <leader>
@@ -250,7 +250,7 @@ nnoremap <C-g><C-w> <CMD>Gw<cr>
 nnoremap <leader>bj <CMD>%!jq .<cr>
 vnoremap <leader>bj <CMD>'<,'>!jq .<cr>
 # beautify html
-nnoremap <leader>bh <CMD>call htmlbeautify#htmlbeautify()<CR>
+nnoremap <leader>bh <CMD>vim9cmd <SID>htmlbeautify.Htmlbeautify()<CR>
 
 nnoremap <leader>c <CMD>call readmode#ReadModeToggle()<cr>
 
