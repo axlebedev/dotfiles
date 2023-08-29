@@ -2,6 +2,7 @@ vim9script
 
 import autoload '../autoload/globalfind.vim'
 import autoload '../autoload/opennextbuf.vim'
+import autoload '../autoload/appendchar.vim'
 
 g:mapleader = "\<space>"
 nmap <space> <leader>
@@ -126,9 +127,8 @@ vnoremap <C-h> "hy:%s/<C-r>h//gc<left><left><left><C-r>h
 vnoremap // "py/<C-R>p<CR>
 
 # add a symbol to current line
-# TODO: vim9cmd
-nnoremap <silent> <leader>; <CMD>call appendchar#AppendChar(';')<CR>
-nnoremap <silent> <leader>, <CMD>call appendchar#AppendChar(',')<CR>
+nnoremap <silent> <leader>; <CMD>vim9cmd <SID>appendchar.AppendChar(';')<CR>
+nnoremap <silent> <leader>, <CMD>vim9cmd <SID>appendchar.AppendChar(',')<CR>
 
 # close all other buffers
 nnoremap bo <CMD>BufOnly<CR>
