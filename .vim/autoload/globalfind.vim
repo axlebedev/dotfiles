@@ -2,8 +2,8 @@ vim9script
 
 # find word under cursor
 set grepprg=ag\ --vimgrep\ --hidden\ --smart-case\ --ignore\ node_modules\ --ignore\ dist\ --ignore\ .git
-# cnoremap <C-w> <CMD>set grepprg=ag\ --vimgrep\ --hidden\ --smart-case\ --ignore\ node_modules\ --ignore\ dist\ --word-regexp<CR>
-# cnoremap <C-W> <CMD>set grepprg=ag\ --vimgrep\ --hidden\ --smart-case\ --ignore\ node_modules\ --ignore\ dist<CR>
+# -w --word-regexp
+# -Q --literal
 
 export def Grep()
     var savedReg = @g
