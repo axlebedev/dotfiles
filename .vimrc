@@ -286,8 +286,7 @@ Plug 'rhysd/vim-textobj-anyblock'
 Plug 'glts/vim-textobj-comment' # comment: ic, ac
 
 # -----------------------------------------------------------------------------
-Plug 'machakann/vim-highlightedyank'
-g:highlightedyank_highlight_duration = 300
+Plug 'ubaldot/vim-highlight-yanked'
 
 # -----------------------------------------------------------------------------
 Plug 'RRethy/vim-illuminate'

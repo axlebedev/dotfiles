@@ -10,10 +10,8 @@ export def Grep()
 
     var word1: string
     if (mode() != 'n')
-        HighlightedyankOff
         execute('normal! "gy')
         word1 = @g
-        HighlightedyankOn
     else
         word1 = expand('<cword>')
     endif
