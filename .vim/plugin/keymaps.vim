@@ -3,6 +3,7 @@ vim9script
 import autoload '../autoload/globalfind.vim'
 import autoload '../autoload/opennextbuf.vim'
 import autoload '../autoload/appendchar.vim'
+import autoload '../autoload/blockline.vim'
 
 g:mapleader = "\<space>"
 nmap <space> <leader>
@@ -220,7 +221,7 @@ nnoremap <silent> p p`]
 nnoremap Q @@
 
 # fix one-line 'if' statement
-nnoremap <silent> <leader>hh <CMD>call blockline#BlockLine()<CR>
+nnoremap <silent> <leader>hh <CMD>vim9cmd <SID>blockline.BlockLine()<CR>
 
 # quickfix next
 def Cn()
