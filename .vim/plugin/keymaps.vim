@@ -22,7 +22,7 @@ imap <F1> <Esc>
 nnoremap 0 ^
 nnoremap ^ 0
 nnoremap 00 0
-nnoremap <silent> gg <CMD>call cursor(1,1)<CR>
+nnoremap <silent> gg <CMD>vim9cmd cursor(1, 1)<CR>
 nnoremap $ g_
 nnoremap $$ $
 nnoremap L g_
@@ -75,7 +75,7 @@ def CloseBuffer()
     endif
     exe 'bdelete ' .. buf
 enddef
-nmap <silent> <leader>q <CMD>call <SID>CloseBuffer()<CR>
+nmap <silent> <leader>q <CMD>vim9cmd <SID>CloseBuffer()<CR>
 
 # new empty buffer
 noremap <leader>x <CMD>Startify<cr>
@@ -126,8 +126,9 @@ vnoremap <C-h> "hy:%s/<C-r>h//gc<left><left><left><C-r>h
 vnoremap // "py/<C-R>p<CR>
 
 # add a symbol to current line
-nnoremap <silent> <leader>; <CMD>appendchar#AppendChar(';')<CR>
-nnoremap <silent> <leader>, <CMD>appendchar#AppendChar(',')<CR>
+# TODO: vim9cmd
+nnoremap <silent> <leader>; <CMD>call appendchar#AppendChar(';')<CR>
+nnoremap <silent> <leader>, <CMD>call appendchar#AppendChar(',')<CR>
 
 # close all other buffers
 nnoremap bo <CMD>BufOnly<CR>
@@ -173,19 +174,17 @@ def ClapOpen(command_str: string)
   exe 'normal! ' .. command_str .. "\<cr>"
 enddef
 
-# nnoremap <silent> <leader>t <CMD>GFiles -c -o --exclude-standard<CR>
-
-nnoremap <silent> <leader>t <CMD>fzf#vim#files('', {
+nnoremap <silent> <leader>t <CMD>call fzf#vim#files('', {
             \    'source': 'ag --vimgrep --hidden --ignore node_modules --ignore dist -l',
             \    'sink': 'e'
             \ })<CR>
-vnoremap <silent> <leader>t "ly<CMD>fzf#vim#files('', {
+vnoremap <silent> <leader>t "ly<CMD>call fzf#vim#files('', {
             \    'source': 'ag --vimgrep --hidden --ignore node_modules --ignore dist  -l',
             \    'sink': 'e',
             \    'options': '--query=' .. tolower(substitute(@l, '\.', '', ''))
             \ })<CR>
 nnoremap <silent> <leader>b <CMD>Buffers<CR>
-nnoremap <silent> <leader>m <CMD>fzf#vim#files('', {
+nnoremap <silent> <leader>m <CMD>call fzf#vim#files('', {
             \    'source': 'g diff --name-only --diff-filter=U',
             \    'sink': 'e',
             \    'options': '--prompt="Unmerged> "'
@@ -208,8 +207,8 @@ map <F10> <CMD>echo "hi<" .. synIDattr(synID(line("."),col("."),1),"name") .. '>
 \ .. synIDattr(synID(line("."),col("."),0),"name") .. "> lo<"
 \ .. synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") .. ">"<CR>
 
-nnoremap yf <CMD>yankfilename#YankFileName()<CR>
-nnoremap yg <CMD>yankfilename#YankGithubURL()<CR>
+nnoremap yf <CMD>call yankfilename#YankFileName()<CR>
+nnoremap yg <CMD>call yankfilename#YankGithubURL()<CR>
 
 nnoremap Y y$
 vmap p pgvy
@@ -221,22 +220,22 @@ nnoremap <silent> p p`]
 nnoremap Q @@
 
 # fix one-line 'if' statement
-nnoremap <silent> <leader>hh <CMD>blockline#BlockLine()<CR>
+nnoremap <silent> <leader>hh <CMD>call blockline#BlockLine()<CR>
 
 # quickfix next
 def Cn()
     Cnext
     # it should run after buffer change
-    timer_start(1, {id -> findcursor#FindCursor('#d6d8fa', 0)})
+    timer_start(1, (id) => findcursor#FindCursor('#d6d8fa', 0))
 enddef
-nnoremap <silent> cn <CMD>Cn()<CR>
+nnoremap <silent> cn <CMD>vim9cmd <SID>Cn()<CR>
 # quickfix prev
 def Cp()
     Cprev
     # it should run after buffer change
-    timer_start(1, {id -> findcursor#FindCursor('#d6d8fa', 0)})
+    timer_start(1, (id) => findcursor#FindCursor('#d6d8fa', 0))
 enddef
-nnoremap <silent> cp <CMD>Cp()<CR>
+nnoremap <silent> cp <CMD>vim9cmd <SID>Cp()<CR>
 
 # for convenient git
 nnoremap <C-g><C-g> <CMD>Magit<CR>
@@ -249,17 +248,17 @@ nnoremap <C-g><C-w> <CMD>Gw<cr>
 nnoremap <leader>bj <CMD>%!jq .<cr>
 vnoremap <leader>bj <CMD>'<,'>!jq .<cr>
 # beautify html
-nnoremap <leader>bh <CMD>htmlbeautify#htmlbeautify()<CR>
+nnoremap <leader>bh <CMD>call htmlbeautify#htmlbeautify()<CR>
 
-nnoremap <leader>c <CMD>readmode#ReadModeToggle()<cr>
+nnoremap <leader>c <CMD>call readmode#ReadModeToggle()<cr>
 
-nnoremap <silent> <leader>j <CMD>call <SID>ClapOpen(':vim9cmd opennextbuf.OpenNextBuf(1)')<CR>
-nnoremap <silent> <leader>k <CMD>call <SID>ClapOpen(':vim9cmd opennextbuf.OpenNextBuf(0)')<CR>
+nnoremap <silent> <leader>j <CMD>vim9cmd <SID>ClapOpen(':vim9cmd opennextbuf.OpenNextBuf(1)')<CR>
+nnoremap <silent> <leader>k <CMD>vim9cmd <SID>ClapOpen(':vim9cmd opennextbuf.OpenNextBuf(0)')<CR>
 
 nnoremap <leader>f <CMD>FindCursor #CC0000 500<CR>
 
-nnoremap <silent> <F5> <CMD>updatebuffer#UpdateBuffer(0)<CR>
-nnoremap <silent> <F5><F5> <CMD>updatebuffer#UpdateBuffer(1)<CR>
+nnoremap <silent> <F5> <CMD>call updatebuffer#UpdateBuffer(0)<CR>
+nnoremap <silent> <F5><F5> <CMD>call updatebuffer#UpdateBuffer(1)<CR>
 
 # Global find fix: use 'ag' and open quickfix {{{
 nnoremap <C-f> <CMD>vim9cmd <SID>globalfind.Grep()<CR>
@@ -269,44 +268,44 @@ nnoremap <C-f><C-t> <CMD>vim9cmd <SID>globalfind.FilterTestEntries()<cr>
 
 # JsFastLog mapping
 nnoremap <leader>l <CMD>set operatorfunc=JsFastLog_simple<cr>g@
-vnoremap <leader>l <CMD>JsFastLog_simple(visualmode())<cr>
+vnoremap <leader>l <CMD>call JsFastLog_simple(visualmode())<cr>
 
 nnoremap <leader>ll <CMD>set operatorfunc=JsFastLog_JSONstringify<cr>g@
-vnoremap <leader>ll <CMD>JsFastLog_JSONstringify(visualmode())<cr>
+vnoremap <leader>ll <CMD>call JsFastLog_JSONstringify(visualmode())<cr>
 
 nnoremap <leader>lk <CMD>set operatorfunc=JsFastLog_variable<cr>g@
 nmap <leader>lkk <leader>lkiW
-vnoremap <leader>lk <CMD>JsFastLog_variable(visualmode())<cr>
+vnoremap <leader>lk <CMD>call JsFastLog_variable(visualmode())<cr>
 
 nnoremap <leader>ld <CMD>set operatorfunc=JsFastLog_def<cr>g@
-vnoremap <leader>ld <CMD>JsFastLog_def(visualmode())<cr>
+vnoremap <leader>ld <CMD>call JsFastLog_def(visualmode())<cr>
 
 nnoremap <leader>ls <CMD>set operatorfunc=JsFastLog_string<cr>g@
-vnoremap <leader>ls <CMD>JsFastLog_string(visualmode())<cr>
+vnoremap <leader>ls <CMD>call JsFastLog_string(visualmode())<cr>
 
 nnoremap <leader>lpp <CMD>set operatorfunc=JsFastLog_prevToThis<cr>g@
-vnoremap <leader>lpp <CMD>JsFastLog_prevToThis(visualmode())<cr>
+vnoremap <leader>lpp <CMD>call JsFastLog_prevToThis(visualmode())<cr>
 
 nnoremap <leader>lpn <CMD>set operatorfunc=JsFastLog_thisToNext<cr>g@
-vnoremap <leader>lpn <CMD>JsFastLog_thisToNext(visualmode())<cr>
+vnoremap <leader>lpn <CMD>call JsFastLog_thisToNext(visualmode())<cr>
 
 nnoremap <leader>lss <CMD>JsFastLog_separator()<cr>
-nnoremap <leader>lsn <CMD>JsFastLog_lineNumber()<cr>
+nnoremap <leader>lsn <CMD>call JsFastLog_lineNumber()<cr>
 
-# nnoremap <silent> K <CMD>LanguageClient#textDocument_hover()<CR>
-# nnoremap <silent> gd <CMD>LanguageClient#textDocument_definition()<CR>
+# nnoremap <silent> K <CMD>call LanguageClient#textDocument_hover()<CR>
+# nnoremap <silent> gd <CMD>call LanguageClient#textDocument_definition()<CR>
 
-nnoremap <silent> K <CMD>CocAction("doHover")<CR>
+nnoremap <silent> K <CMD>call CocAction("doHover")<CR>
 def JumpDefinitionFindCursor()
-    CocAction("jumpDefinition")
+    exe "call CocAction('jumpDefinition')"
     # timer_start(100, {id -> findcursor#FindCursor('#68705e', 0)})
-    timer_start(100, {id -> findcursor#FindCursor('#d6d8fa', 0)})
+    timer_start(100, (id) => findcursor#FindCursor('#d6d8fa', 0))
 enddef
-nnoremap gd <CMD>call <SID>JumpDefinitionFindCursor()<CR>
+nnoremap gd <CMD>vim9cmd <SID>JumpDefinitionFindCursor()<CR>
 
-nnoremap <silent> gdd <CMD>gdd#gdd()<CR>
+nnoremap <silent> gdd <CMD>call gdd#gdd()<CR>
 
-nnoremap <silent> to <CMD>openjstest#OpenJsTest()<cR>
+nnoremap <silent> to <CMD>call openjstest#OpenJsTest()<cR>
 
 nnoremap <silent> co <CMD>cope<CR>
 
@@ -335,4 +334,4 @@ def Elf()
     read !npx eslint --fix %
     updatebuffer#UpdateBuffer(1)
 enddef
-nnoremap <silent> elf <CMD>Elf()<CR>
+nnoremap <silent> elf <CMD>vim9cmd <SID>Elf()<CR>
