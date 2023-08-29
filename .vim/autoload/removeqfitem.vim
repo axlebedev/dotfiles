@@ -1,73 +1,73 @@
-" When using in the quickfix list, remove the item from the quickfix list.
-function! removeqfitem#RemoveQFItem() abort
-    let filename = expand("%")
+vim9script
+
+# When using in the quickfix list, remove the item from the quickfix list.
+export def RemoveQFItem()
+    var filename = expand("%")
     if (len(filename) > 0)
-        delete " current line
+        delete # current line
         return
     endif
 
-    let l:winview = winsaveview()
-    let curpos = getpos('.')
-    let curqfidx = line('.') - 1
-    let qfall = getqflist()
-    call remove(qfall, curqfidx)
-    call setqflist(qfall, 'r')
-    call winrestview(l:winview)
-    call setpos('.', curpos)
-endfunction
+    var curpos = getpos('.')
+    var winview = winsaveview()
+    var qfall = getqflist()
+    var curqfidx = line('.') - 1
 
-function! removeqfitem#RemoveQFItemsVisual() abort
-    let curpos = getpos('.')
+    remove(qfall, curqfidx)
+    setqflist(qfall, 'r')
+    winrestview(winview)
+    setpos('.', curpos)
+enddef
 
-    let lineStart = getpos("'<")[1]
-    let lineEnd = getpos("'>")[1]
+export def RemoveQFItemsVisual()
+    var curpos = getpos('.')
+    var vpos = getpos('v')
+    var lineStart = min([curpos[1], vpos[1]])
+    var lineEnd = max([curpos[1], vpos[1]])
 
-    let filename = expand("%")
+    var filename = expand("%")
     if (len(filename) > 0)
-        call deletebufline(bufname(''), lineStart, lineEnd)
+        deletebufline(bufname(''), lineStart, lineEnd)
         return
     endif
 
-    let l:winview = winsaveview()
+    var winview = winsaveview()
+    var qfall = getqflist()
 
-    let qfall = getqflist()
+    var qfnew = lineStart < 2
+        ? qfall[lineEnd : ]
+        : qfall[ : lineStart - 2] + qfall[lineEnd : ]
 
-    let qfnew = qfall[:lineStart - 2] + qfall[lineEnd:]
-    if (lineStart < 2)
-        let qfnew = qfall[lineEnd:]
-    endif
+    setqflist(qfnew, 'r')
+    winrestview(winview)
+    setpos('.', curpos)
+    execute 'normal! ' .. mode()
+enddef
 
-    call setqflist(qfnew, 'r')
-    call winrestview(l:winview)
-    call setpos('.', curpos)
-endfunction
+export def FilterQF(isVisualMode: bool)
+    var curpos = getpos('.')
+    var winview = winsaveview()
 
-function! removeqfitem#FilterQF(isVisualMode) abort
-    let curpos = getpos('.')
-    let word = ""
-    let l:winview = winsaveview()
+    var initialWord = isVisualMode ? l9#getSelectedText() : expand("<cword>")
 
-    if (a:isVisualMode)
-        let word = l9#getSelectedText()
-    else
-        let word = expand("<cword>")
-    endif
-
-    let promptString = 'Filter entries with text: '
-    let word = input(promptString, word)
+    var promptString = 'Filter entries with text: '
+    var word = input(promptString, initialWord)
     if (empty(word))
         return
     endif
 
-    let filename = expand("%")
+    var filename = expand("%")
     if (len(filename) > 0)
-        delete " current line
+        delete # current line
         return
     endif
 
-    let qfall = getqflist()
-    call filter(qfall, 'v:val.text !~ "'.word.'" && bufname(v:val.bufnr) !~ "'.word.'"')
-    call setqflist(qfall, 'r')
-    call winrestview(l:winview)
-    call setpos('.', curpos)
-endfunction
+    var qfall = getqflist()
+    filter(
+        qfall,
+        'v:val.text !~ "' .. word .. '" && bufname(v:val.bufnr) !~ "' .. word .. '"',
+    )
+    setqflist(qfall, 'r')
+    winrestview(winview)
+    setpos('.', curpos)
+enddef
