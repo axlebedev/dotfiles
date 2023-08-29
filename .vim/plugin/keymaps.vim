@@ -4,6 +4,7 @@ import autoload '../autoload/globalfind.vim'
 import autoload '../autoload/opennextbuf.vim'
 import autoload '../autoload/appendchar.vim'
 import autoload '../autoload/blockline.vim'
+import autoload '../autoload/gdd.vim'
 
 g:mapleader = "\<space>"
 nmap <space> <leader>
@@ -303,8 +304,6 @@ def JumpDefinitionFindCursor()
     timer_start(100, (id) => findcursor#FindCursor('#d6d8fa', 0))
 enddef
 nnoremap gd <CMD>vim9cmd <SID>JumpDefinitionFindCursor()<CR>
-
-nnoremap <silent> gdd <CMD>call gdd#gdd()<CR>
 
 nnoremap <silent> to <CMD>call openjstest#OpenJsTest()<cR>
 
