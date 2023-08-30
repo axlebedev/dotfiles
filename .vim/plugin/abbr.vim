@@ -1,7 +1,9 @@
-" some custom digraphs
-digraphs TT 8869 " ⊥
+vim9script
 
-" avoid mistypes :)
+# some custom digraphs
+digraphs TT 8869 # ⊥
+
+# avoid mistypes :)
 abbr funciton function
 abbr cosnt const
 abbr proips props
