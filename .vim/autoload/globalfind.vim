@@ -6,22 +6,17 @@ set grepprg=ag\ --vimgrep\ --hidden\ --smart-case\ --ignore\ node_modules\ --ign
 # -Q --literal
 
 export def Grep()
-    var savedReg = @g
+    var initialWord = mode() != 'n'
+        ? l9#getSelectedText()
+        : expand('<cword>')
 
-    var word1: string
-    if (mode() != 'n')
-        execute('normal! "gy')
-        word1 = @g
-    else
-        word1 = expand('<cword>')
+    var word = input('Search: ', initialWord)
+
+    if (!empty(word))
+        setreg('/', word)
+        cgetexpr system(join([&grepprg] + [word], ' '))
+        copen
     endif
-
-    var word = input('Search: ', word1)
-
-    @/ = word
-    cgetexpr system(join([&grepprg] + [word], ' '))
-    copen
-    @g = savedReg
 enddef
 
 augroup quickfix
