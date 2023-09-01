@@ -14,7 +14,7 @@ export def Grep()
 
     if (!empty(word))
         setreg('/', word)
-        cgetexpr system(join([&grepprg] + [word], ' '))
+        cgetexpr system(join([&grepprg] + ['"' .. word .. '"', '.'], ' '))
         copen
     endif
 enddef
