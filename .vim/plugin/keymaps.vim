@@ -7,6 +7,7 @@ import autoload '../autoload/blockline.vim'
 import autoload '../autoload/htmlbeautify.vim'
 import autoload '../autoload/readmode.vim'
 import autoload '../autoload/updatebuffer.vim'
+import autoload '../autoload/yankfilename.vim'
 
 g:mapleader = "\<space>"
 nmap <space> <leader>
@@ -211,8 +212,8 @@ map <F10> <CMD>echo "hi<" .. synIDattr(synID(line("."),col("."),1),"name") .. '>
 \ .. synIDattr(synID(line("."),col("."),0),"name") .. "> lo<"
 \ .. synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") .. ">"<CR>
 
-nnoremap yf <CMD>call yankfilename#YankFileName()<CR>
-nnoremap yg <CMD>call yankfilename#YankGithubURL()<CR>
+nnoremap yf <ScriptCmd>yankfilename.YankFileName()<CR>
+nnoremap yg <ScriptCmd>yankfilename.YankGithubURL()<CR>
 
 nnoremap Y y$
 vmap p pgvy

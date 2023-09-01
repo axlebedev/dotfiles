@@ -1,27 +1,29 @@
-function! yankfilename#YankFileName()
-    let filename = expand("%:.")
-    let @* = filename
-    let @+ = filename
-    echo 'yanked: "' . filename . '"'
-endfunction
+vim9script
 
-" https://github.com/[owner]/[repo]/blob/[git branch]/[filename]#L[lineNr]
-function! yankfilename#YankGithubURL()
-    "git@github.com:[owner]/[repo].git
-    let remoteUrl = system('git remote get-url --push origin')
-    let ownerRepo = split(remoteUrl, ':')[1] " [owner]/[repo].git
-    let repoGit = split(ownerRepo, '/')[1]
+export def YankFileName()
+    var filename = expand("%:.")
+    setreg('*', filename)
+    setreg('+', filename)
+    echo 'yanked: "' .. filename .. '"'
+enddef
 
-    let owner = split(ownerRepo, '/')[0]
-    let repo = split(repoGit, '\.')[0]
+# https://github.com/[owner]/[repo]/blob/[git branch]/[filename]#L[lineNr]
+export def YankGithubURL()
+    # git@github.com:[owner]/[repo].git
+    var remoteUrl = system('git remote get-url --push origin')
+    var ownerRepo = split(remoteUrl, ':')[1] # [owner]/[repo].git
+    var repoGit = split(ownerRepo, '/')[1]
 
-    let branch = systemlist('git rev-parse --abbrev-ref HEAD')[0]
-    let filename = expand("%:.")
-    let lineNr = line('.')
+    var owner = split(ownerRepo, '/')[0]
+    var repo = split(repoGit, '\.')[0]
 
-    let result = 'https://github.com/'.owner.'/'.repo.'/blob/'.branch.'/'.filename.'#L'.lineNr
+    var branch = systemlist('git rev-parse --abbrev-ref HEAD')[0]
+    var filename = expand("%:.")
+    var lineNr = line('.')
 
-    let @* = result
-    let @+ = result
-    echo 'yanked: "' . result . '"'
-endfunction
+    var result = 'https://github.com/' .. owner .. '/' .. repo .. '/blob/' .. branch .. '/' .. filename .. '#L' .. lineNr
+
+    setreg('*', result)
+    setreg('+', result)
+    echo 'yanked: "' .. result .. '"'
+enddef
