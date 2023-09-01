@@ -1,7 +1,7 @@
 vim9script
 
 # find word under cursor
-set grepprg=ag\ --vimgrep\ --hidden\ --smart-case\ --ignore\ node_modules\ --ignore\ dist\ --ignore\ .git
+set grepprg=ag\ --hidden\ --smart-case\ --ignore\ node_modules\ --ignore\ dist\ --ignore\ .git
 # -w --word-regexp
 # -Q --literal
 
