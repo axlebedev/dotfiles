@@ -6,6 +6,7 @@ import autoload '../autoload/appendchar.vim'
 import autoload '../autoload/blockline.vim'
 import autoload '../autoload/htmlbeautify.vim'
 import autoload '../autoload/readmode.vim'
+import autoload '../autoload/updatebuffer.vim'
 
 g:mapleader = "\<space>"
 nmap <space> <leader>
@@ -260,8 +261,8 @@ nnoremap <silent> <leader>k <ScriptCmd>ClapOpen(':vim9cmd opennextbuf.OpenNextBu
 
 nnoremap <leader>f <CMD>FindCursor #CC0000 500<CR>
 
-nnoremap <silent> <F5> <CMD>call updatebuffer#UpdateBuffer(0)<CR>
-nnoremap <silent> <F5><F5> <CMD>call updatebuffer#UpdateBuffer(1)<CR>
+nnoremap <silent> <F5> <ScriptCmd>updatebuffer.UpdateBuffer(0)<CR>
+nnoremap <silent> <F5><F5> <ScriptCmd>updatebuffer.UpdateBuffer(1)<CR>
 
 # Global find fix: use 'ag' and open quickfix {{{
 nnoremap <C-f> <ScriptCmd>globalfind.Grep()<CR>
@@ -327,6 +328,6 @@ vnoremap Sb <Plug>VSurroundbkJ
 
 def Elf()
     read !npx eslint --fix %
-    updatebuffer#UpdateBuffer(1)
+    updatebuffer.UpdateBuffer(1)
 enddef
 nnoremap <silent> elf <ScriptCmd>Elf()<CR>
