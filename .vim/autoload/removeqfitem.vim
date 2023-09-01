@@ -65,7 +65,7 @@ export def FilterQF(isVisualMode: bool)
     var qfall = getqflist()
     filter(
         qfall,
-        'v:val.text !~ "' .. word .. '" && bufname(v:val.bufnr) !~ "' .. word .. '"',
+        'v:val.text !~? "' .. word .. '" && bufname(v:val.bufnr) !~? "' .. word .. '"',
     )
     setqflist(qfall, 'r')
     winrestview(winview)
