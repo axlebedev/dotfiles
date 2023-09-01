@@ -2,12 +2,12 @@ vim9script
 
 import autoload '../autoload/removeqfitem.vim'
 
-nnoremap <silent> <buffer> dd <CMD>vim9cmd <SID>removeqfitem.RemoveQFItem()<CR>
-vnoremap <silent> <buffer> d <CMD>vim9cmd <SID>removeqfitem.RemoveQFItemsVisual()<CR>
+nnoremap <silent> <buffer> dd <ScriptCmd>removeqfitem.RemoveQFItem()<CR>
+vnoremap <silent> <buffer> d <ScriptCmd>removeqfitem.RemoveQFItemsVisual()<CR>
 
-nnoremap <buffer> <leader>f <CMD>vim9cmd <SID>removeqfitem.FilterQF(0)<CR> 
-xnoremap <buffer> <leader>f <CMD>vim9cmd <SID>removeqfitem.FilterQF(1)<CR> 
+nnoremap <buffer> <leader>f <ScriptCmd>removeqfitem.FilterQF(0)<CR> 
+xnoremap <buffer> <leader>f <ScriptCmd>removeqfitem.FilterQF(1)<CR> 
 
-nnoremap <buffer> <silent> <leader>q <CMD>cclose<CR> 
+nnoremap <buffer> <silent> <leader>q <ScriptCmd>cclose<CR> 
 
 setlocal cursorline

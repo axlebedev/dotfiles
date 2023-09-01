@@ -1,8 +1,10 @@
-" Delete trailing white space
-function! trailingspace#DeleteTrailingWS() abort
-    let l:cursor_pos = getpos(".")
+vim9script
 
-    %s/\s\+$//ge
+# Delete trailing white space
+export def DeleteTrailingWS()
+    var cursor_pos = getpos(".")
 
-    call setpos('.', l:cursor_pos)
-endfunction
+    :%s/\s\+$//ge
+
+    setpos('.', cursor_pos)
+enddef

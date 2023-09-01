@@ -1,8 +1,10 @@
+vim9script
+
 setlocal nocursorline
 
-" DiffFold {{{
-function! DiffFold(lnum) abort
-  let line = getline(a:lnum)
+# DiffFold {{{
+def DiffFold(lnum: number)
+  var line = getline(lnum)
   if line =~ '^\(diff\|---\|+++\|@@\) '
     return 1
   elseif line[0] =~ '[-+ ]'
@@ -10,52 +12,51 @@ function! DiffFold(lnum) abort
   else
     return 0
   endif
-endfunction
+enddef
 
 setlocal foldmethod=expr foldexpr=DiffFold(v:lnum)
-" }}} DiffFold
+# }}} DiffFold
 
-" GoToNextDiff {{{
-function! GoToNextDiff() abort
-  let savedSearchReg = @/
-  let @/ = '\<diff\>'
+# GoToNextDiff {{{
+def GoToNextDiff()
+  var savedSearchReg = getreg('/')
+  setreg('/', '\<diff\>')
 
-  let savedScrollOff = &scrolloff
+  var savedScrollOff = &scrolloff
   set scrolloff=20
   normal nzt
 
-  let &scrolloff=savedScrollOff
-  let @/ = savedSearchReg
-endfunction
+  &scrolloff=savedScrollOff
+  setreg('/', savedSearchReg)
+enddef
 
-map <buffer> <silent> gn <CMD>call GoToNextDiff()<CR>
-" }}} GoToNextDiff
+map <buffer> <silent> gn <ScriptCmd>GoToNextDiff()<CR>
+# }}} GoToNextDiff
 
-" CopyWithoutStart {{{
-function! CopyWithoutStart() abort
+# CopyWithoutStart {{{
+def CopyWithoutStart()
   normal! yy
-  let currentLine = @+
-  let firstChar = currentLine[0]
+  var currentLine = getreg('+')
+  var firstChar = currentLine[0]
 
   if (firstChar == '+' || firstChar == '-')
-      let currentLine = currentLine[1:]
+      currentLine = currentLine[1:]
   endif
-  let @* = currentLine
-  let @+ = currentLine
-endfunction
+  setreg('*', currentLine)
+  setreg('+', currentLine)
+enddef
 
-nnoremap <buffer> <silent> yy <CMD>call CopyWithoutStart()<CR>
+nnoremap <buffer> <silent> yy <ScriptCmd>call CopyWithoutStart()<CR>
 
-function! Lal() abort
-  let yankedText = l9#getSelectedText()
-  let yankedText = substitute(yankedText, "[\n^][+-]", '\n', 'g')
+def Lal()
+  var yankedText = substitute(l9#getSelectedText(), "[\n^][+-]", '\n', 'g')
 
-  " remove starting + or -, expecting that visual LINE selection
+  # remove starting + or -, expecting that visual LINE selection
   if (yankedText[0] == '+' || yankedText[0] == '-')
-    let yankedText = yankedText[1:]
+    yankedText = yankedText[1:]
   endif
-  let @* = yankedText
-  let @+ = yankedText
-endfunction
+  setreg('*', yankedText)
+  setreg('+', yankedText)
+enddef
 vnoremap <buffer> <silent> y <CMD>call Lal()<CR>
-" }}} CopyWithoutStart
+# }}} CopyWithoutStart
