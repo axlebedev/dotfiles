@@ -17,6 +17,8 @@ set -x PAGER "/bin/sh -c \"unset PAGER;col -b -x | \
     -c 'nmap K :Man <C-R>=expand(\\\"<cword>\\\")<CR><CR>' -\""
 
 # ======== ALIASES ========
+abbr -a pp pwd
+abbr -a pd pwd
 abbr -a l ls -alF
 abbr -a lr ls -lrt
 # sudo apt install tree
