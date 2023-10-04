@@ -72,6 +72,7 @@ for_window [instance="^crx.*$" window_role="pop-up"]  floating enable
 for_window [instance="^crx.*$" window_role="pop-up"]  sticky   enable
 for_window [class="zoom"]  floating   enable
 for_window [class="TelegramDesktop"]  floating   enable
+for_window [class="linphone"]  floating   enable
 
 for_window [class="floating"]  floating   enable
 for_window [class="sticky"]  sticky   enable
@@ -283,17 +284,32 @@ mode $mode_move_workspace {
 bindsym $mod+Shift+m mode $mode_move_workspace 
 
 # Yandex work
-set $mode_yandex "Yandex (P)eople (B)rowser"
+set $mode_yandex "Yandex (P)eople (B)rowser (L)inphone"
 mode $mode_yandex {
 	bindsym $mod+p mode "default" ; exec --no-startup-id gnome-terminal --class floatingsticky -- vim ~/dotfiles/people.txt
 	bindsym $mod+b mode "default" ; exec --no-startup-id nohup yandex-browser --user-data-dir="ya-dev" & disown
+	bindsym $mod+l mode "default" ; exec --no-startup-id linphone & disown
+
+# back to normal: Enter or Escape
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+bindsym $mod+Shift+y mode $mode_yandex
+
+# Utils
+set $mode_utils "Notifications (N)off (M)on | (G)romit-mpx | (L)ebedev-bro"
+mode $mode_utils {
+	bindsym $mod+n mode "default" ; exec --no-startup-id notify-send "PAUSE notifications" ; exec --no-startup-id notify-send DUNST_COMMAND_PAUSE
+	bindsym $mod+m mode "default" ; exec --no-startup-id notify-send DUNST_COMMAND_RESUME ; exec --no-startup-id notify-send "RESUME notifications"
+    bindsym $mod+g mode "default" ; exec --no-startup-id gromit-mpx --active & disown
+	bindsym $mod+l mode "default" ; exec --no-startup-id nohup yandex-browser --user-data-dir="ya-al-bro-gmail" & disown
 
 # back to normal: Enter or Escape
 	bindsym Return mode "default"
 	bindsym Escape mode "default"
 }
 
-bindsym $mod+Shift+y mode $mode_yandex
+bindsym $mod+Shift+u mode $mode_utils
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
