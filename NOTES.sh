@@ -25,6 +25,7 @@ cat .ssh/id_rsa.pub
 # unclutter \ # скрыть курсор мыши при наборе текста
 # autorandr \ # надо буудет сохранить профили
 # screenkey # для показа нажатой кнопки
+# linphone - для sip-телефонии. УСТАНОВИТЬ ОТДЕЛЬНО ВРУЧНУЮ!
 
 sudo apt install -y \
 git \
@@ -295,5 +296,17 @@ sudo apt update
 sudo apt install touchpad-indicator
 
 # ====================
-# UNMUTE all devices (bash)
-# for x in `amixer controls  | grep layback` ; do amixer cset "${x}" on ; done
+# UNMUTE default device (bash)
+# pactl set-sink-mute @DEFAULT_SINK@ toggle
+#
+# ================================================================================================
+# Ya printer
+# https://wiki.yandex-team.ru/helpdesk/secureprint/
+#
+# =====
+# Генерация SSH ключей
+# https://doc.yandex-team.ru/help/diy/common/auth/ssh-keys.html
+#
+# ===============
+# Чтобы починить ubuntu-логин-скрин + убикей:
+# https://bytefreaks.net/gnulinux/ubuntu-22-04lts-forces-the-use-of-yubikey-on-login-without-activating-it
