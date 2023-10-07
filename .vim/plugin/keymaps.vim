@@ -1,5 +1,7 @@
 vim9script
 
+import 'vim-js-fastlog.vim' as jsLog
+
 import autoload '../autoload/globalfind.vim'
 import autoload '../autoload/opennextbuf.vim'
 import autoload '../autoload/appendchar.vim'
@@ -271,31 +273,29 @@ vnoremap <C-f> <ScriptCmd>globalfind.Grep()<CR>
 
 nnoremap <C-f><C-t> <ScriptCmd>globalfind.FilterTestEntries()<cr>
 
-# JsFastLog mapping
-nnoremap <leader>l <CMD>set operatorfunc=JsFastLog_simple<cr>g@
-vnoremap <leader>l <CMD>call JsFastLog_simple(visualmode())<cr>
+# jsLog.JsFastLog mapping
+nnoremap <leader>l <ScriptCmd>set operatorfunc=function('jsLog.JsFastLog_simple')<cr>g@
+vnoremap <leader>l <ScriptCmd>jsLog.JsFastLog_simple(visualmode())<cr>
 
-nnoremap <leader>ll <CMD>set operatorfunc=JsFastLog_JSONstringify<cr>g@
-vnoremap <leader>ll <CMD>call JsFastLog_JSONstringify(visualmode())<cr>
+nnoremap <leader>ll <ScriptCmd>set operatorfunc=function('jsLog.JsFastLog_JSONstringify')<cr>g@
+vnoremap <leader>ll <ScriptCmd>jsLog.JsFastLog_JSONstringify(visualmode())<cr>
 
-nnoremap <leader>lk <CMD>set operatorfunc=JsFastLog_variable<cr>g@
+nnoremap <leader>lk <ScriptCmd>set operatorfunc=function('jsLog.JsFastLog_variable')<cr>g@
 nmap <leader>lkk <leader>lkiW
-vnoremap <leader>lk <CMD>call JsFastLog_variable(visualmode())<cr>
+vnoremap <leader>lk <ScriptCmd>jsLog.JsFastLog_variable(visualmode())<cr>
 
-nnoremap <leader>ld <CMD>set operatorfunc=JsFastLog_def<cr>g@
-vnoremap <leader>ld <CMD>call JsFastLog_def(visualmode())<cr>
+nnoremap <leader>lt <ScriptCmd>set operatorfunc=function('jsLog.JsFastLog_variable_trace')<cr>g@
+nmap <leader>lkt <leader>ltiW
+vnoremap <leader>lt <ScriptCmd>jsLog.JsFastLog_variable_trace(visualmode())<cr>
 
-nnoremap <leader>ls <CMD>set operatorfunc=JsFastLog_string<cr>g@
-vnoremap <leader>ls <CMD>call JsFastLog_string(visualmode())<cr>
+nnoremap <leader>ld <ScriptCmd>set operatorfunc=function('jsLog.JsFastLog_function')<cr>g@
+vnoremap <leader>ld <ScriptCmd>jsLog.JsFastLog_function(visualmode())<cr>
 
-nnoremap <leader>lpp <CMD>set operatorfunc=JsFastLog_prevToThis<cr>g@
-vnoremap <leader>lpp <CMD>call JsFastLog_prevToThis(visualmode())<cr>
+nnoremap <leader>ls <ScriptCmd>set operatorfunc=function('jsLog.JsFastLog_string')<cr>g@
+vnoremap <leader>ls <ScriptCmd>jsLog.JsFastLog_string(visualmode())<cr>
 
-nnoremap <leader>lpn <CMD>set operatorfunc=JsFastLog_thisToNext<cr>g@
-vnoremap <leader>lpn <CMD>call JsFastLog_thisToNext(visualmode())<cr>
-
-nnoremap <leader>lss <CMD>JsFastLog_separator()<cr>
-nnoremap <leader>lsn <CMD>call JsFastLog_lineNumber()<cr>
+nnoremap <leader>lss <ScriptCmd>jsLog.JsFastLog_separator()<cr>
+nnoremap <leader>lsn <ScriptCmd>jsLog.JsFastLog_lineNumber()<cr>
 
 nnoremap <silent> K <CMD>call CocAction("doHover")<CR>
 def JumpDefinitionFindCursor()
