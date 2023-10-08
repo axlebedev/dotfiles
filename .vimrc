@@ -467,7 +467,7 @@ inoremap <silent><expr> <BS> <SID>CheckBackSpace()
 # homemade ^^
 
 Plug 'axlebedev/vim-js-fastlog'
-g:js_fastlog_prefix = ['%c11111', 'background:#00FF00']
+g:js_fastlog_prefix = '11111'
 
 Plug 'axlebedev/vim-smart-insert-tab'
 
