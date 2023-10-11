@@ -42,8 +42,20 @@ abbr -a gi g commit --verbose
 abbr -a gia g commit --amend --no-edit
 abbr -a giw g commit -m "wip"
 
-abbr -a gm arc mount arc-
-abbr -a cda cd arc-
+function cdf
+    set resultPath ''
+    while true
+        ls -aF | grep "/\$" | fzf --layout=reverse --bind=esc:abort --height=20 --scheme=history --tac --bind esc: | tail -1 | read -l result
+        if test $result
+            set resultPath $resultPath$result
+            echo -e '\e[1A\e[K'$resultPath
+            cd $result
+        else
+            break
+        end
+    end
+end
+abbr -a cdf cdf
 
 function git-sortedbranch -d 'Fuzzy-find a branch, sorted by reflog, and then all branches'
   set -l cmd (commandline -j)
