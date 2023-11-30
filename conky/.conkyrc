@@ -210,19 +210,11 @@ conky.text = [[
   "color" : "]] .. textColorFg .. [["
 },
 # Next block - system volume 
-  ${if_match ${exec ~/.i3/getVolume.sh}>0}
-    {
-      "name" : "Volume",
-      "full_text" : " ${exec ~/.i3/getVolume.sh}",
-      "color" : "]] .. textColorFg .. [["
-    },
-  ${else}
-    {
-      "name" : "Volume",
-      "full_text" : " Mute",
-      "color": "]] .. errorColorBg .. [["  
-    },
-  ${endif}
+  {
+    "name" : "Volume",
+    "full_text" : " ${exec ~/.i3/getVolume.sh}",
+    "color" : "]] .. textColorFg .. [["
+  },
 # Next 2 blocks - date and time
 {
   "name" : "Date",
