@@ -297,19 +297,20 @@ mode $mode_yandex {
 bindsym $mod+Shift+y mode $mode_yandex
 
 # Utils
-set $mode_utils "Notifications (N)off (M)on | (G)romit-mpx | (L)ebedev-bro"
+set $mode_utils "UTILS: Notifications (N)off (M)on | (G)romit-mpx | (L)ebedev-bro | (Z)oom"
 mode $mode_utils {
 	bindsym $mod+n mode "default" ; exec --no-startup-id notify-send "PAUSE notifications" ; exec --no-startup-id notify-send DUNST_COMMAND_PAUSE
 	bindsym $mod+m mode "default" ; exec --no-startup-id notify-send DUNST_COMMAND_RESUME ; exec --no-startup-id notify-send "RESUME notifications"
     bindsym $mod+g mode "default" ; exec --no-startup-id gromit-mpx --active & disown
 	bindsym $mod+l mode "default" ; exec --no-startup-id nohup yandex-browser --user-data-dir="ya-al-bro-gmail" & disown
+    bindsym $mod+z mode "default" ; exec --no-startup-id zoom
 
 # back to normal: Enter or Escape
 	bindsym Return mode "default"
 	bindsym Escape mode "default"
 }
 
-bindsym $mod+Shift+u mode $mode_utils
+bindsym $mod+Shift+u exec --no-startup-id notify-send --expire-time=1500 $mode_utils ; mode $mode_utils
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
