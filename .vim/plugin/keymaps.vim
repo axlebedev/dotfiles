@@ -1,6 +1,7 @@
 vim9script
 
 import 'vim-js-fastlog.vim' as jsLog
+import 'chase.vim' as chase
 
 import autoload '../autoload/globalfind.vim'
 import autoload '../autoload/opennextbuf.vim'
@@ -332,3 +333,8 @@ def Elf()
     updatebuffer.UpdateBuffer(1)
 enddef
 nnoremap <silent> elf <ScriptCmd>Elf()<CR>
+
+nnoremap ~ <ScriptCmd>chase.Next()<CR>
+vnoremap ~ <ScriptCmd>chase.Next()<CR>
+nnoremap ! <ScriptCmd>chase.Prev()<CR>
+vnoremap ! <ScriptCmd>chase.Prev()<CR>

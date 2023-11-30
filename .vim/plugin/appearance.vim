@@ -85,5 +85,8 @@ highlight SpellBad term=bold ctermbg=red  guibg=#532120 guifg=NONE gui=none
 
 highlight PmenuThumb guibg=#999999
 
+highlight link ChaseChangedLetter DiffAdd
+highlight link ChaseSeparator DiffChange
+
 # for 'defined but never used' warnings
 highlight Conceal guifg=NONE guibg=#f6b7ac
