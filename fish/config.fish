@@ -146,8 +146,8 @@ abbr -a acp arc cherry-pick
 abbr -a aa arc add
 abbr -a as arc status
 
-alias showMocks='ls -1 ~/jsfiller/snfiller/static/fake-api/ | grep json'
-bind mocks showMocks
+# alias showMocks='ls -1 ~/jsfiller/snfiller/static/fake-api/ | grep json'
+# bind mocks showMocks
 
 alias copyBranch="git rev-parse --abbrev-ref HEAD | xclip -sel clip"
 abbr -a cb copyBranch
