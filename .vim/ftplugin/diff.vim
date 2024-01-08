@@ -53,10 +53,10 @@ def Lal()
 
   # remove starting + or -, expecting that visual LINE selection
   if (yankedText[0] == '+' || yankedText[0] == '-')
-    yankedText = yankedText[1:]
+    yankedText = yankedText[1 : ]
   endif
   setreg('*', yankedText)
   setreg('+', yankedText)
 enddef
-vnoremap <buffer> <silent> y <CMD>call Lal()<CR>
+vnoremap <buffer> <silent> y <CMD>call <SID>Lal()<CR>
 # }}} CopyWithoutStart
