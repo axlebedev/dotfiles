@@ -96,11 +96,12 @@ end
 
 function cpuCore(coreN)
   return [[{
+    "name": "CPU",
     "separator_block_width":3,
-      "min_width":"]] .. stringWidth(1) .. [[",
-      "full_text" : ${template1 cpu cpu]] .. coreN .. [[},
-      "color" : "\#\#${template2 cpu cpu"]] .. coreN .. [["}", 
-      "separator" : false
+    "min_width":"]] .. stringWidth(1) .. [[",
+    "full_text" : ${template1 cpu cpu]] .. coreN .. [[},
+    "color" : "\#${template3 cpu cpu"]] .. coreN .. [["}", 
+    "separator" : false
   }]]
 end
 -- ###############################################################################################
