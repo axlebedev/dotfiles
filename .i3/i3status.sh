@@ -30,18 +30,19 @@ do
         google-chrome --app="https://calendar.google.com/" > /dev/null 2>&1 &
     fi
 
-    # How to avoid 'restore tabs' popup
-    # https://forum.uipath.com/t/how-to-close-restore-pages-pop-up-in-chrome/213168/2
     if [ "$getname" = "Volume" ] 
     then
-        sed -i "s/\"exited_cleanly\":false/\"exited_cleanly\":true/g" /home/alex/chrome-YTM/Local\ State
-        # google-chrome --user-data-dir="/home/alex/chrome-YTM" --app="https://music.youtube.com/" > /dev/null 2>&1 &
-        firefox -P YandexMusic --new-instance music.yandex.ru > /dev/null 2>&1 &
+        amixer -D pulse sset Master toggle > /dev/null 2>&1 & killall -USR1 i3status > /dev/null 2>&1
     fi
 
-    if [ "$getname" = "Memory" ] 
+    if [ "$getname" = "Memory" ] || [ "$getname" = "CPU" ]  
     then
         gnome-system-monitor > /dev/null 2>&1 &
+    fi
+
+    if [ "$getname" = "HDD" ]
+    then
+        nautilus --class="floating" > /dev/null 2>&1 &
     fi
 
     if [ "$getname" = "Volume" ] 
