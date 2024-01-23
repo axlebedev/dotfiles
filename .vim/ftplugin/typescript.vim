@@ -6,7 +6,7 @@ augroup au_vimrc_js
     autocmd!
 augroup END
 
-setlocal tabstop=2 softtabstop=2 shiftwidth=2
+setlocal tabstop=4 softtabstop=4 shiftwidth=4
 
 nnoremap <leader>d <ScriptCmd>JsGotoDef()<CR>
 nnoremap gdd gd
