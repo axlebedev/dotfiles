@@ -310,3 +310,7 @@ sudo apt install touchpad-indicator
 # ===============
 # Чтобы починить ubuntu-логин-скрин + убикей:
 # https://bytefreaks.net/gnulinux/ubuntu-22-04lts-forces-the-use-of-yubikey-on-login-without-activating-it
+#
+# ================================================================
+# Сильно шумят кулеры. Пробую решение
+# На уровне железа возможно есть биндинг fn+1, кот вкл/выкл max fan
