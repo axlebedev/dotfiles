@@ -101,7 +101,6 @@ abbr -a gs g status .
 
 abbr -a gd g diff --histogram --minimal --ignore-space-change --relative --color-words
 abbr -a gdc g diff --histogram --minimal --ignore-space-change --relative --cached --color-words
-abbr -a gdm g diff --color-words $(g merge-base HEAD trunk) 
 abbr -a gh g hist
 abbr -a ghh g hist --first-parent -n 10
 abbr -a ghhh g hist --first-parent -n 20
