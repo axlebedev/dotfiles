@@ -1,4 +1,6 @@
 # i3 config file (v4)
+
+# printf '\n\nPASSWORD\ny' | /opt/cisco/anyconnect/bin/vpn -s connect vpn.ncloudtech.ru      
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 set $mod Mod4
@@ -28,12 +30,44 @@ exec --no-startup-id flameshot
 #   "Coordinate Transformation Matrix" 1, 0, 0, 0, 1, 0, 0, 0, 1.5
 exec --no-startup-id unclutter -idle 3
 exec --no-startup-id indicator-sound-switcher
-exec --no-startup-id xrandr \
-  --auto --output HDMI-0 --primary \
-  --auto --output DVI-D-0 --left-of HDMI-0 \
-  --auto --output DP-0 --right-of HDMI-0
-exec --no-startup-id i3 focus output DVI-D-0, workspace 10, focus output DP-0, workspace 11, focus output HDMI-0, workspace 1
 
+# Office:
+set $monitors_office "xrandr \
+  --auto --output DP-1 --primary \
+  --auto --output eDP-1 --left-of DP-1 \
+  --auto --output HDMI-1 --right-of DP-1"
+set $monitors_home "xrandr \
+  --auto --output HDMI-1 --primary \
+  --auto --output eDP-1 --left-of HDMI-1 \
+  --auto --output DP-1 --right-of HDMI-1"
+
+set $workspaces_office "i3 \
+    focus output eDP-1, workspace 20, \
+    focus output HDMI-1, workspace 21, \
+    focus output DP-1, workspace 22, \
+    focus output eDP-1, workspace 10, \
+    focus output HDMI-1, workspace 11, \
+    focus output DP-1, workspace 1"
+set $workspaces_home "i3 \
+    focus output eDP-1, workspace 20, \
+    focus output DP-1, workspace 21, \
+    focus output HDMI-1, workspace 22, \
+    focus output eDP-1, workspace 10, \
+    focus output DP-1, workspace 11, \
+    focus output HDMI-1, workspace 1"
+
+exec --no-startup-id $monitors_office
+exec --no-startup-id $workspaces_office
+set $mode_monitors "Monitors (O)ffice (H)ome"
+mode $mode_monitors {
+	bindsym $mod+o mode "default" ; exec --no-startup-id $monitors_office ; exec --no-startup-id $workspaces_office
+	bindsym $mod+h mode "default" ; exec --no-startup-id $monitors_home ; exec --no-startup-id $workspaces_home
+
+# back to normal: Enter or Escape
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+bindsym $mod+Shift+w mode $mode_monitors
 
 exec --no-startup-id nm-applet
 # exec --no-startup-id pasystray
@@ -290,9 +324,11 @@ mode $mode_move_workspace {
 bindsym $mod+Shift+m mode $mode_move_workspace 
 
 # Work
-set $mode_yandex "Work (B)rowser"
+set $mode_yandex "Work (B)rowser (S)quadus"
 mode $mode_yandex {
 	bindsym $mod+b mode "default" ; exec --no-startup-id nohup google-chrome --user-data-dir="/home/user/chrome-users/debug" & disown
+	bindsym $mod+s mode "default" ; exec --no-startup-id nohup google-chrome --app="https://im.ncloudtech.ru/rooms" & disown
+	bindsym $mod+shift+s mode "default" ; exec --no-startup-id nohup squadus & disown
 
 # back to normal: Enter or Escape
 	bindsym Return mode "default"

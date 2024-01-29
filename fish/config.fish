@@ -186,3 +186,5 @@ set -g theme_display_node yes
 set -g theme_display_date no
 set -g theme_display_cmd_duration yes
 set -g theme_color_scheme light
+
+abbr -a gpr ~/dotfiles/fish/gpr.sh

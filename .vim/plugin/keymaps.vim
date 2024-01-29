@@ -343,5 +343,9 @@ vnoremap ! <ScriptCmd>chase.Prev()<CR>
 
 nnoremap zn nzz
 
+nnoremap ad <ScriptCmd>ALEDisable<CR>
+
 nnoremap q <NOP>
 nnoremap <C-q> q
+
+nnoremap ad <ScriptCmd>ALEDisable<CR>
