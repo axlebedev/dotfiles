@@ -24,8 +24,8 @@ smart_borders no_gaps
 exec --no-startup-id flameshot
 
 # mouse speed: last number. Bigger is slower
-exec --no-startup-id xinput --set-prop "Logitech USB Optical Mouse" \
-  "Coordinate Transformation Matrix" 1, 0, 0, 0, 1, 0, 0, 0, 1.5
+# exec --no-startup-id xinput --set-prop "Logitech USB Optical Mouse" \
+#   "Coordinate Transformation Matrix" 1, 0, 0, 0, 1, 0, 0, 0, 1.5
 exec --no-startup-id unclutter -idle 3
 exec --no-startup-id indicator-sound-switcher
 exec --no-startup-id xrandr \
@@ -36,14 +36,14 @@ exec --no-startup-id i3-msg "workspace 1, move workspace to output HDMI-0"
 exec --no-startup-id i3-msg "workspace 9, move workspace to output DVI-D-0"
 exec --no-startup-id i3-msg "workspace 10, move workspace to output DP-0"
 exec --no-startup-id nm-applet
-exec --no-startup-id pasystray
+# exec --no-startup-id pasystray
 # 0.5 - is mouse pointer speed
-exec --no-startup-id xinput set-prop "Genius Optical Mouse" "Coordinate Transformation Matrix" 0.5 0 0 0 0.5 0 0 0 1
+# exec --no-startup-id xinput set-prop "Genius Optical Mouse" "Coordinate Transformation Matrix" 0.5 0 0 0 0.5 0 0 0 1
 # Чтобы numpad-dot всегда давал точку а не запятую - надо в /usr/share/X11/xkb/symbols/ru удалить вызов kpdl(comma)
 exec --no-startup-id sleep 1 && setxkbmap -layout us,ru -option 'grp:shift_caps_switch'
-exec --no-startup-id sleep 2 && autorandr --change
 # Чтобы автоматически plug/unplug мониторы
 # sudo apt install autorandr
+# exec --no-startup-id sleep 2 && autorandr --change
 exec --no-startup-id systemctl enable autorandr.service
 bindsym ctrl+F9 exec gromit-mpx --active
 # Чтобы выключать тачпад при наборе текста
@@ -284,12 +284,10 @@ mode $mode_move_workspace {
 }
 bindsym $mod+Shift+m mode $mode_move_workspace 
 
-# Yandex work
-set $mode_yandex "Yandex (P)eople (B)rowser (L)inphone"
+# Work
+set $mode_yandex "Work (B)rowser"
 mode $mode_yandex {
-	bindsym $mod+p mode "default" ; exec --no-startup-id gnome-terminal --class floatingsticky -- vim ~/dotfiles/people.txt
-	bindsym $mod+b mode "default" ; exec --no-startup-id nohup yandex-browser --user-data-dir="ya-dev" & disown
-	bindsym $mod+l mode "default" ; exec --no-startup-id linphone & disown
+	bindsym $mod+b mode "default" ; exec --no-startup-id nohup google-chrome --user-data-dir="/home/user/chrome-users/debug" & disown
 
 # back to normal: Enter or Escape
 	bindsym Return mode "default"
@@ -303,7 +301,7 @@ mode $mode_utils {
 	bindsym $mod+n mode "default" ; exec --no-startup-id notify-send "PAUSE notifications" ; exec --no-startup-id notify-send DUNST_COMMAND_PAUSE
 	bindsym $mod+m mode "default" ; exec --no-startup-id notify-send DUNST_COMMAND_RESUME ; exec --no-startup-id notify-send "RESUME notifications"
     bindsym $mod+g mode "default" ; exec --no-startup-id gromit-mpx --active & disown
-	bindsym $mod+l mode "default" ; exec --no-startup-id nohup yandex-browser --user-data-dir="ya-al-bro-gmail" & disown
+	bindsym $mod+l mode "default" ; exec --no-startup-id nohup google-chrome --user-data-dir="/home/user/chrome-users/alexey-broadcast" & disown
     bindsym $mod+z mode "default" ; exec --no-startup-id zoom
 
 # back to normal: Enter or Escape
