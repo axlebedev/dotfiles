@@ -1,4 +1,7 @@
 #!/bin/sh
+
+mkdir -p ~/chrome-users
+
 # create symlinks
 rm ~/.conkyrc
 ln -s ~/dotfiles/conky/.conkyrc ~/.conkyrc
