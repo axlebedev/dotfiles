@@ -77,6 +77,7 @@ for_window [instance="^crx.*$" window_role="pop-up"]  sticky   enable
 for_window [class="zoom"]  floating   enable
 for_window [class="TelegramDesktop"]  floating   enable
 for_window [class="linphone"]  floating   enable
+for_window [class="Squadus"] floating enable
 
 for_window [class="floating"]  floating   enable
 for_window [class="sticky"]  sticky   enable
