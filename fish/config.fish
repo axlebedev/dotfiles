@@ -111,14 +111,13 @@ abbr -a gps g push origin HEAD
 abbr -a gpsu g push -u origin HEAD
 abbr -a gpsf g push -f origin HEAD
 abbr -a grb g rebase --autostash
-abbr -a grbt g rebase --autostash arcadia/trunk
+abbr -a grbm "g fetch origin master && g rebase --autostash origin/master"
 abbr -a grbc g rebase --continue
-abbr -a gra g rebase --abort
+abbr -a grba g rebase --abort
 abbr -a gcp g cherry-pick
 abbr -a gcpc g cherry-pick --continue
 abbr -a gcpa g cherry-pick --abort
 abbr -a gfa g fetch --all
-abbr -a gfu g fetch users/l-e-b-e-d-e-v/
 abbr -a gfap g fetch --all -p
 abbr -a gb g branch
 abbr -a gbs g bisect start
@@ -165,7 +164,7 @@ abbr -a nt npm run test
 abbr -a nta npm run test-all
 
 abbr -a ys yarn start
-abbr -a ysn yarn snfiller
+abbr -a yss "yarn && yarn start"
 abbr -a ycc yarn cache clean
 abbr -a yi yarn --ignore-engines
 
