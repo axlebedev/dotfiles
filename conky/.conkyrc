@@ -94,6 +94,21 @@ function wifi()
   ]]
 end
 
+function numLock()
+  if needNumLockOff then
+    return [[
+      ${if_match "${exec xset q | grep 'Num Lock' | sed 's/.*Num Lock:[ ]*\([^ ]*\).*/\1/'}"=="off"}
+    ]] .. warningWarning("NumLock off") .. [[,
+    ${endif} ]]
+  elseif needNumLockOn then
+    return [[
+      ${if_match "${exec xset q | grep 'Num Lock' | sed 's/.*Num Lock:[ ]*\([^ ]*\).*/\1/'}"=="on"}
+    ]] .. warningWarning("NumLock on") .. [[,
+    ${endif} ]]
+  end
+  return ''
+end
+
 function cpuCore(coreN)
   return [[{
     "name": "CPU",
@@ -113,10 +128,7 @@ conky.text = [[
 # JSON for i3bar
 
   [
-# Next block - Num lock indicator
-  ${if_match "${exec xset q | grep 'Num Lock' | sed 's/.*Num Lock:[ ]*\([^ ]*\).*/\1/'}"=="off"}
-  ]] .. warningWarning("NumLock off") .. [[,
-  ${endif}
+  ]] .. numLock() .. [[
 # Next block - Caps lock indicator
   ${if_match "${exec xset q | grep 'Caps Lock' | sed 's/.*Caps Lock:[ ]*\([^ ]*\).*/\1/'}"=="on"}
   ]] .. warningWarning("CapsLock") .. [[,
