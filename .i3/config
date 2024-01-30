@@ -32,9 +32,9 @@ exec --no-startup-id xrandr \
   --auto --output HDMI-0 --primary \
   --auto --output DVI-D-0 --left-of HDMI-0 \
   --auto --output DP-0 --right-of HDMI-0
-exec --no-startup-id i3-msg "workspace 1, move workspace to output HDMI-0"
-exec --no-startup-id i3-msg "workspace 9, move workspace to output DVI-D-0"
-exec --no-startup-id i3-msg "workspace 10, move workspace to output DP-0"
+exec --no-startup-id i3 focus output DVI-D-0, workspace 10, focus output DP-0, workspace 11, focus output HDMI-0, workspace 1
+
+
 exec --no-startup-id nm-applet
 # exec --no-startup-id pasystray
 # 0.5 - is mouse pointer speed
