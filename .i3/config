@@ -314,7 +314,7 @@ mode $mode_utils {
 	bindsym Escape mode "default"
 }
 
-bindsym $mod+Shift+u exec --no-startup-id notify-send --expire-time=1500 $mode_utils ; mode $mode_utils
+bindsym $mod+Shift+u mode $mode_utils
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
