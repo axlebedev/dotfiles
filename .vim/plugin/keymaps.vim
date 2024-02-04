@@ -338,3 +338,5 @@ nnoremap ~ <ScriptCmd>chase.Next()<CR>
 vnoremap ~ <ScriptCmd>chase.Next()<CR>
 nnoremap ! <ScriptCmd>chase.Prev()<CR>
 vnoremap ! <ScriptCmd>chase.Prev()<CR>
+
+nnoremap zn nzt
