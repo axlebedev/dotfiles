@@ -123,6 +123,19 @@ end
 -- ###############################################################################################
 -- ###############################################################################################
 
+local cpu = ''
+for n=1,coresNum,1 do
+  cpu = cpu .. [[
+    {
+        "separator_block_width":3,
+        "min_width":"]] .. stringWidth(1) .. [[",
+        "full_text" : ${template1 cpu cpu]] .. n .. [[},
+        "color" : "\#${template2 cpu cpu]] .. n .. [[}",
+        "separator" : false
+    },
+    ]] 
+end
+
 -- Stuff after 'TEXT' will be formatted on screen
 conky.text = [[
 # JSON for i3bar
@@ -161,48 +174,7 @@ conky.text = [[
   "color" : "\#${template2 exec ~/dotfiles/.i3/getCPUTempNormalized.sh}", 
   "separator" : false
 },
-{
-    "separator_block_width":3,
-      "min_width":"]] .. stringWidth(1) .. [[",
-      "full_text" : ${template1 cpu cpu1},
-      "color" : "\#${template2 cpu cpu1}", 
-      "separator" : false
-  },
-{
-    "separator_block_width":3,
-      "min_width":"]] .. stringWidth(1) .. [[",
-      "full_text" : ${template1 cpu cpu2},
-      "color" : "\#${template2 cpu cpu2}", 
-      "separator" : false
-  },
-{
-    "separator_block_width":3,
-      "min_width":"]] .. stringWidth(1) .. [[",
-      "full_text" : ${template1 cpu cpu3},
-      "color" : "\#${template2 cpu cpu3}", 
-      "separator" : false
-  },
-{
-    "separator_block_width":3,
-      "min_width":"]] .. stringWidth(1) .. [[",
-      "full_text" : ${template1 cpu cpu4},
-      "color" : "\#${template2 cpu cpu4}", 
-      "separator" : false
-  },
-{
-    "separator_block_width":3,
-      "min_width":"]] .. stringWidth(1) .. [[",
-      "full_text" : ${template1 cpu cpu5},
-      "color" : "\#${template2 cpu cpu5}", 
-      "separator" : false
-  },
-{
-    "separator_block_width":3,
-      "min_width":"]] .. stringWidth(1) .. [[",
-      "full_text" : ${template1 cpu cpu6},
-      "color" : "\#${template2 cpu cpu6}", 
-      "separator" : false
-  },
+  ]] .. cpu .. [[
 # Next block - memory usage
 { 
   "full_text" : "",
