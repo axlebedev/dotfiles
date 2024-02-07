@@ -286,7 +286,10 @@ Plug 'rhysd/vim-textobj-anyblock'
 Plug 'glts/vim-textobj-comment' # comment: ic, ac
 
 # -----------------------------------------------------------------------------
-Plug 'ubaldot/vim-highlight-yanked'
+Plug 'machakann/vim-highlightedyank'
+g:highlightedyank_highlight_duration = 500
+autocmd ColorScheme *
+  \ highlight HighlightedyankRegion guibg=#f6b7ac
 
 # -----------------------------------------------------------------------------
 Plug 'RRethy/vim-illuminate'
