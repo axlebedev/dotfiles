@@ -19,6 +19,7 @@ set hidden
 # autoreload files when they're changed on disk
 set autoread
 
+set scrolloff=5
 # keep lines above/below cursor
 if (&diff)
     set scrolloff=5
