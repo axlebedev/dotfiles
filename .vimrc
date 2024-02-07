@@ -579,7 +579,7 @@ def CustomFixFoldMethod(): void
         savedFoldMethod = &foldmethod
         autocmd BufEnter * {
             if (bufname('%') =~ 'fugitive')
-                set foldmethod= manual
+                &foldmethod = 'manual'
             else
                 &foldmethod = savedFoldMethod
             endif
