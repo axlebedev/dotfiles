@@ -41,5 +41,8 @@ export def FilterTestEntries()
                 \ ->filter("bufname(v:val.bufnr) !~# 'api-types'")
                 \ ->filter("bufname(v:val.bufnr) !~# 'crowdin'")
                 \ ->filter("bufname(v:val.bufnr) !~# 'localization'")
+                \ ->filter("bufname(v:val.bufnr) !~# 'dictionaries'")
+                \ ->filter("bufname(v:val.bufnr) !~# 'spec.ts'")
+                \ ->filter("bufname(v:val.bufnr) !~# 'spec.js'")
     call setqflist(filtered)
 enddef
