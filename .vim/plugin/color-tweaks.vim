@@ -1,9 +1,11 @@
 vim9script
  
 # color of Visual selection
-highlight Visual guibg=#C7A575
+highlight Visual guibg=#ADCBFF guifg='NONE'
 
 # color of find result background
+# highlight QuickFixLine guibg=#B7CBED 
+highlight QuickFixLine guibg=#B1d2E8 
 highlight Search guibg=#ba91f2 guifg='NONE'
 
 #  colors of matching parens
