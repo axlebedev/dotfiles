@@ -7,6 +7,10 @@ highlight Visual guibg=#ADCBFF guifg='NONE'
 # highlight QuickFixLine guibg=#B7CBED 
 highlight QuickFixLine guibg=#B1d2E8 
 highlight Search guibg=#ba91f2 guifg='NONE'
+highlight clear IncSearch
+highlight IncSearch guibg=#ba91f2 guifg='NONE'
+
+highlight HighlightedyankRegion guibg=#D1FFBD
 
 #  colors of matching parens
 highlight MatchParen cterm=bold ctermbg=none ctermfg=magenta gui=bold guibg=#FDBED4 guifg=NONE
