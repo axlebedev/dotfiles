@@ -299,11 +299,13 @@ nnoremap <leader>lss <ScriptCmd>jsLog.JsFastLog_separator()<cr>
 nnoremap <leader>lsn <ScriptCmd>jsLog.JsFastLog_lineNumber()<cr>
 
 nnoremap <silent> K <CMD>call CocAction("doHover")<CR>
-def JumpDefinitionFindCursor()
-    exe "call CocAction('jumpDefinition')"
+def JumpDefinitionFindCursor(command: string)
+    exe "call CocAction('" .. command .. "')"
     timer_start(100, (id) => findcursor#FindCursor('#d6d8fa', 0))
 enddef
-nnoremap gd <ScriptCmd>JumpDefinitionFindCursor()<CR>
+nnoremap gd <ScriptCmd>JumpDefinitionFindCursor('jumpDefinition')<CR>
+nnoremap gt <ScriptCmd>JumpDefinitionFindCursor('jumpTypeDefinition')<CR>
+nnoremap gi <ScriptCmd>JumpDefinitionFindCursor('jumpImplementation')<CR>
 
 nnoremap <silent> co <CMD>cope<CR>
 
