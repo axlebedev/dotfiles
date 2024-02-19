@@ -183,11 +183,11 @@ def ClapOpen(command_str: string)
 enddef
 
 nnoremap <silent> <leader>t <CMD>call fzf#vim#files('', {
-            \    'source': 'ag --vimgrep --hidden --ignore node_modules --ignore dist  --ignore .git -l',
+            \    'source': 'ag --vimgrep --hidden --ignore node_modules --ignore dist  --ignore .git --ignore .ccls-cache -l',
             \    'sink': 'e'
             \ })<CR>
 vnoremap <silent> <leader>t "ly<CMD>call fzf#vim#files('', {
-            \    'source': 'ag --vimgrep --hidden --ignore node_modules --ignore dist  --ignore .git -l',
+            \    'source': 'ag --vimgrep --hidden --ignore node_modules --ignore dist  --ignore .git --ignore .ccls-cache -l',
             \    'sink': 'e',
             \    'options': '--query=' .. tolower(substitute(@l, '\.', '', ''))
             \ })<CR>
