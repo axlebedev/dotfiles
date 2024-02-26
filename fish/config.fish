@@ -40,7 +40,7 @@ abbr -a gap g add -p ./packages/callcenter-staff ./services
 # --verbose to show diff in vim when show commit
 abbr -a gi g commit --verbose
 abbr -a gia g commit --amend --no-edit
-abbr -a giw g commit -m "wip"
+abbr -a giw g commit --no-verify -m "wip"
 
 function cdf
     set resultPath ''
