@@ -170,3 +170,5 @@ abbr -a yi yarn --ignore-engines
 abbr -a yt yarn test
 
 bind ` forward-char
+bind \el forward-word
+bind \eh backward-kill-word
