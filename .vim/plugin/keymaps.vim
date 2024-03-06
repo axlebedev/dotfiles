@@ -200,7 +200,7 @@ nnoremap <silent> <leader>m <CMD>call fzf#vim#files('', {
 # FZF command
 nnoremap <silent> sft <CMD>Filetypes<CR>
 nnoremap <silent> <leader>h <CMD>History<CR>
-nnoremap <silent> <leader>e <CMD>Commands<CR>
+nnoremap <silent> <C-p> <CMD>Commands<CR>
 
 def g:GeditFile(branch: string)
     execute 'Gedit ' .. branch .. ':%'
