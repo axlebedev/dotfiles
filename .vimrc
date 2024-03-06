@@ -473,6 +473,7 @@ g:ale_sign_warning = ''
 g:ale_set_loclist = 0
 g:ale_set_quickfix = 0
 g:ale_virtualtext_cursor = 0
+g:ale_disable_lsp = 1
 
 g:ale_linters = {
     javascript: ['eslint'],
