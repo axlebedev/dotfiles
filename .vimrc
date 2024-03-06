@@ -362,10 +362,16 @@ g:UltiSnipsJumpBackwardTrigger = "<c-k>"
 Plug 'SirVer/ultisnips'
 
 # -----------------------------------------------------------------------------
-#  wrap/unwrap lists in brackets
+# wrap/unwrap lists in brackets
 Plug 'FooSoft/vim-argwrap'
 g:argwrap_padded_braces = '{'
 g:argwrap_tail_comma = 1
+
+Plug 'AndrewRadev/splitjoin.vim'
+g:splitjoin_trailing_comma = 1
+g:splitjoin_html_attributes_bracket_on_new_line = 1
+g:splitjoin_split_mapping = 'gs'
+g:splitjoin_join_mapping  = 'gj'
 
 # -----------------------------------------------------------------------------
 # autoclose parens
