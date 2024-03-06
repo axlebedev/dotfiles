@@ -85,10 +85,56 @@ g:NERDTreeDirArrowExpandable = '▸'
 g:NERDTreeDirArrowCollapsible = '▾'
 g:NERDTreeShowHidden = 1 # show hidden files
 g:NERDTreeCascadeSingleChildDir = 0 # dont collapse singlechild dir
-g:NERDTreeWinSize = 30
+g:NERDTreeWinSize = 40
 g:NERDTreeAutoDeleteBuffer = 1
 # for correct Startify update items while one session
 g:NERDTreeHijackNetrw = 0
+Plug 'PhilRunninger/nerdtree-visual-selection'
+
+Plug 'woelke/vim-nerdtree_plugin_open'
+g:nerdtree_plugin_open_cmd = 'xdg-open'
+
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+g:WebDevIconsDisableDefaultFolderSymbolColorFromNERDTreeDir = 1
+g:WebDevIconsDisableDefaultFileSymbolColorFromNERDTreeFile = 1
+g:NERDTreeFileExtensionHighlightFullName = 1
+g:NERDTreeExactMatchHighlightFullName = 1
+g:NERDTreePatternMatchHighlightFullName = 1
+g:NERDTreeHighlightFolders = 1
+g:NERDTreeHighlightFoldersFullName = 1
+
+# Disable all default file highlighting
+g:NERDTreeSyntaxDisableDefaultExtensions = 1
+g:NERDTreeSyntaxDisableDefaultExactMatches = 1
+g:NERDTreeSyntaxDisableDefaultPatternMatches = 1
+
+var brown = 'ab6924'
+var orange = 'DC4D01'
+var pink = 'D370D5'
+var black = '000000'
+var gray = '777777'
+var green = '0A5502'
+var blue = '6363F7'
+g:NERDTreeExtensionHighlightColor = {
+    'txt': brown,
+    'md': brown,
+    'js': green,
+    'jsx': green,
+    'ts': green,
+    'tsx': green,
+    'cpp': green,
+    'h': blue,
+    'css': pink,
+}
+
+g:NERDTreeExactMatchHighlightColor = {
+    'build': black,
+    'node_modules': black,
+}
+
+g:NERDTreePatternMatchHighlightColor = {
+    '\.git.*': gray,
+}
 
 # -----------------------------------------------------------------------------
 # additional bindings to NERDTree
