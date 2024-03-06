@@ -342,3 +342,6 @@ nnoremap ! <ScriptCmd>chase.Prev()<CR>
 vnoremap ! <ScriptCmd>chase.Prev()<CR>
 
 nnoremap zn nzz
+
+nnoremap q <NOP>
+nnoremap <C-q> q
