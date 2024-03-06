@@ -6,6 +6,9 @@ mkdir -p ~/chrome-users
 rm ~/.conkyrc
 ln -s ~/dotfiles/conky/.conkyrc ~/.conkyrc
 
+rm ~/.vim/coc-settings.json
+ln -s ~/dotfiles/.vim/coc-settings.json ~/.vim/coc-settings.json
+
 rm ~/.bashrc
 ln -s ~/dotfiles/.bashrc ~/.bashrc
 
