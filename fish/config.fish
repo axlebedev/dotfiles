@@ -163,12 +163,25 @@ abbr -a nl npm run lint
 abbr -a nt npm run test
 abbr -a nta npm run test-all
 
+abbr -a y yarn
 abbr -a ys yarn start
 abbr -a yss "yarn && yarn start"
 abbr -a ycc yarn cache clean
 abbr -a yi yarn --ignore-engines
 abbr -a yt yarn test
+abbr -a yl yarn lint
 
 bind ` forward-char
 bind \el forward-word
 bind \eh backward-kill-word
+
+# bind \eb backward-word
+# bind \ef forward-word
+# bind \cw backward-kill-word
+
+# bobthefish settings
+set -g theme_display_git_default_branch yes
+set -g theme_display_node yes
+set -g theme_display_date no
+set -g theme_display_cmd_duration yes
+set -g theme_color_scheme light
