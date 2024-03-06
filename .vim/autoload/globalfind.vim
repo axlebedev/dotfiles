@@ -5,6 +5,19 @@ set grepprg=ag\ --hidden\ --smart-case\ --ignore\ node_modules\ --ignore\ dist\ 
 # -w --word-regexp
 # -Q --literal
 
+export def ResizeQFHeight(): void
+    var qfLength = getqflist()->len()
+    if (qfLength == 0)
+        return
+    endif
+    resize 1000
+    var fullHeight = winheight(winnr())
+    execute 'resize ' .. min([
+        qfLength + 1,
+        fullHeight / 2,
+    ])
+enddef
+
 export def Grep()
     var initialWord = mode() != 'n'
         ? l9#getSelectedText()
@@ -16,6 +29,7 @@ export def Grep()
         setreg('/', word)
         cgetexpr system(join([&grepprg] + ['"' .. word .. '"', '.'], ' '))
         copen
+        ResizeQFHeight()
     endif
 enddef
 
@@ -44,5 +58,6 @@ export def FilterTestEntries()
                 \ ->filter("bufname(v:val.bufnr) !~# 'dictionaries'")
                 \ ->filter("bufname(v:val.bufnr) !~# 'spec.ts'")
                 \ ->filter("bufname(v:val.bufnr) !~# 'spec.js'")
-    call setqflist(filtered)
+    setqflist(filtered)
+    ResizeQFHeight()
 enddef
