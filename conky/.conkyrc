@@ -141,6 +141,17 @@ conky.text = [[
 # JSON for i3bar
 
   [
+# Next block - keyboard layout
+{ 
+  "name" : "Language", 
+  ${if_match ${exec xset -q|grep LED| awk '{ print $10 }'}<10}
+    "full_text": " EN ",
+    "color" : "]] .. textColorFg .. [["
+  ${else}
+    "full_text": " RU ",
+    "background": "]] .. errorColorFg .. [["
+  ${endif} 
+}, 
   ]] .. numLock() .. [[
 # Next block - Caps lock indicator
   ${if_match "${exec xset q | grep 'Caps Lock' | sed 's/.*Caps Lock:[ ]*\([^ ]*\).*/\1/'}"=="on"}
