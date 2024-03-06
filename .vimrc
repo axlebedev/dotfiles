@@ -12,6 +12,13 @@ vim9script
 # TODO: vim-easymotion потестить
 # TODO: https://github.com/qpkorr/vim-bufkill вместо kwbd
 #
+# TODO: https://github.com/liuchengxu/vim-clap 
+# https://github.com/stefandtw/quickfix-reflector.vim
+# https://github.com/bounceme/poppy.vim
+# https://github.com/AndrewRadev/popup_scrollbar.vim
+#
+# TODO NERDTree plugins
+#
 # Plugin settings ============================= {{{
 set shell=bash
 
