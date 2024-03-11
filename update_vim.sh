@@ -15,8 +15,13 @@ COLOR_YELLOW='\033[0;33m'
 COLOR_RESET='\033[0m' # No Color
 COLOR_INVERTED='\033[7m'
 
+IGNORE_GIT=0
+while getopts "g" v; do
+    IGNORE_GIT=1
+done
+
 # check if update necessary
-cd ~/github/vim/
+cd /home/user/github/vim/
 current_commit=$(git rev-parse HEAD)
 
 printf "Checking for updates...\n"
@@ -24,7 +29,7 @@ eval `ssh-agent -s` >>${logFile} 2>>${logFile}
 ssh-add /home/alex/.ssh/id_rsa >>${logFile} 2>>${logFile}
 git fetch >>${logFile} 2>>${logFile}
 last_commit=$(git rev-parse origin/master)
-if [ "$current_commit" == "$last_commit" ]; \
+if [[ IGNORE_GIT == 0 && "$current_commit" == "$last_commit" ]]; \
 then
     printf "${COLOR_GREEN}VIM IS ALREADY UP TO DATE${COLOR_RESET}"
     printf "${filler}"
