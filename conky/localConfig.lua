@@ -27,6 +27,8 @@ colors = {
   'FF104F',
 }
 
+black = '\\#000000'
+
 -- errorColorFg = '\\#C42021'
 errorColorFg = '\\#' .. colors[#colors-2]
 errorColorBg = '\\#FFFFFF'

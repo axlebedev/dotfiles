@@ -162,7 +162,8 @@ conky.text = [[
 # VPN 
 { 
   "full_text": "${execi 5 (bash ~/dotfiles/.i3/getVPN.sh)}",
-  "background": "]] .. errorColorFg .. [[",
+  "color": "]] .. black .. [[",
+  "background": "]] .. textColorFg .. [[",
   "separator": false
 },
 # current local ip. TODO: it is different on different machines
