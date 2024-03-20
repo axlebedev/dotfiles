@@ -149,6 +149,7 @@ conky.text = [[
     "color" : "]] .. textColorFg .. [["
   ${else}
     "full_text": " RU ",
+    "color": "]] .. black .. [[",
     "background": "]] .. errorColorFg .. [["
   ${endif} 
 }, 
@@ -232,6 +233,7 @@ conky.text = [[
     "color" : "]] .. textColorFg .. [["
   ${else}
     "full_text": " RU ",
+    "color": "]] .. black .. [[",
     "background": "]] .. errorColorFg .. [["
   ${endif} 
 } 
