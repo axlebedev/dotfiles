@@ -1,5 +1,7 @@
 vim9script
 
+import autoload './globalfind.vim'
+
 # When using in the quickfix list, remove the item from the quickfix list.
 export def RemoveQFItem()
     var filename = expand("%")
@@ -45,16 +47,15 @@ export def RemoveQFItemsVisual()
 enddef
 
 export def FilterQF(isVisualMode: bool)
-    var curpos = getpos('.')
-    var winview = winsaveview()
-
     var initialWord = isVisualMode ? l9#getSelectedText() : expand("<cword>")
 
-    var promptString = 'Filter entries with text: '
-    var word = input(promptString, initialWord)
+    var word = input('Filter entries with text: ', initialWord)
     if (empty(word))
         return
     endif
+
+    var curpos = getpos('.')
+    var winview = winsaveview()
 
     var filename = expand("%")
     if (len(filename) > 0)
@@ -70,4 +71,6 @@ export def FilterQF(isVisualMode: bool)
     setqflist(qfall, 'r')
     winrestview(winview)
     setpos('.', curpos)
+
+    globalfind.ResizeQFHeight()
 enddef
