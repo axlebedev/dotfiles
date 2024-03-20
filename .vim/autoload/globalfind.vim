@@ -58,6 +58,7 @@ export def FilterTestEntries()
                 \ ->filter("bufname(v:val.bufnr) !~# 'dictionaries'")
                 \ ->filter("bufname(v:val.bufnr) !~# 'spec.ts'")
                 \ ->filter("bufname(v:val.bufnr) !~# 'spec.js'")
+                \ ->filter("bufname(v:val.bufnr) !~# 'amrDocs'")
     setqflist(filtered)
     ResizeQFHeight()
 enddef
