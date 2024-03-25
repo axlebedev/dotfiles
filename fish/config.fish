@@ -19,10 +19,11 @@ set -x PAGER "/bin/sh -c \"unset PAGER;col -b -x | \
 # ======== ALIASES ========
 abbr -a pp pwd
 abbr -a pd pwd
-abbr -a l ls -alF
-abbr -a lr ls -lrt
+# abbr -a l ls -alF
+abbr -a l "pwd && ls -alF"
+abbr -a lr "pwd && ls -alF"
 # sudo apt install tree
-abbr -a lt tree -a -C -I "node_modules\|.git\|bower_components"
+abbr -a "pwd && lt tree -a -C -I \"node_modules\|.git\|bower_components\""
 
 # disc usage
 # abbr -a dus du -sch .[!.]* * | sort -h
