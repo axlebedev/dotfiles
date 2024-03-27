@@ -1,9 +1,18 @@
 vim9script
 
 # find word under cursor
-set grepprg=ag\ --hidden\ --smart-case\ --ignore\ node_modules\ --ignore\ dist\ --ignore\ .git\ --ignore\ stats.json\ --ignore\ .ccls-cache
+var basegrepprg = 'ag --hidden --smart-case --ignore node_modules --ignore dist --ignore .git --ignore stats.json --ignore .ccls-cache'
 # -w --word-regexp
+var isWholeWord = 0
 # -Q --literal
+var isLiteral = 0
+&grepprg = basegrepprg
+
+var popupId = 0
+
+def MakeVarsString(): string
+    return 'w' .. (isWholeWord % 2 ? '+' : '-') .. ' l' .. (isLiteral % 2 ? '+' : '-')
+enddef
 
 export def ResizeQFHeight(): void
     var qfLength = getqflist()->len()
@@ -18,19 +27,60 @@ export def ResizeQFHeight(): void
     ])
 enddef
 
+def IncWord(): string
+    isWholeWord += 1
+    popup_settext(popupId, MakeVarsString())
+    redraw
+    return ''
+enddef
+
+def IncLiteral(): string
+    isLiteral += 1
+    popup_settext(popupId, MakeVarsString())
+    redraw
+    return ''
+enddef
+
 export def Grep()
+    cmap <C-w> <C-r>=<sid>IncWord()<cr>
+    cmap <C-l> <C-r>=<sid>IncLiteral()<cr>
+
     var initialWord = mode() != 'n'
         ? l9#getSelectedText()
         : expand('<cword>')
 
-    var word = input('Search: ', initialWord)
+    popupId = popup_create(MakeVarsString(), {
+        pos: 'botleft',
+        col: 1,
+        line: 1000,
+    })
+    redraw
+    var word = input('      Search>', initialWord)
+
+    popup_close(popupId)
 
     if (!empty(word))
         setreg('/', word)
-        cgetexpr system(join([&grepprg] + ['"' .. word .. '"', '.'], ' '))
+        isWholeWord = isWholeWord % 2
+        isLiteral = isLiteral % 2
+
+        var prg = basegrepprg
+        if (isWholeWord)
+            prg = prg .. ' --word-regexp'
+        endif
+        if (isLiteral)
+            prg = prg .. ' --literal'
+        endif
+        cgetexpr system(join(
+            [prg] + ['"' .. word .. '"', '.'], 
+            ' '
+        ))
         copen
         ResizeQFHeight()
     endif
+
+    cunmap <C-w>
+    cunmap <C-l>
 enddef
 
 augroup quickfix
