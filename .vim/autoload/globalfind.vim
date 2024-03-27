@@ -1,7 +1,18 @@
 vim9script
 
+var ignored = [
+    'node_modules',
+    'dist',
+    'package-lock.json',
+    'yarn.lock',
+    'dist',
+    '.git',
+    'stats.json',
+    '.ccls-cache',
+]
+var ignoredList = map(ignored, (_, val) => '--ignore ' .. val)->join(' ')
 # find word under cursor
-var basegrepprg = 'ag --hidden --smart-case --ignore node_modules --ignore dist --ignore .git --ignore stats.json --ignore .ccls-cache'
+var basegrepprg = 'ag --hidden --smart-case ' .. ignoredList
 # -w --word-regexp
 var isWholeWord = 0
 # -Q --literal
