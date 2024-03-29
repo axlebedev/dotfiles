@@ -17,13 +17,13 @@ var basegrepprg = 'ag --hidden --smart-case ' .. ignoredList
 # -w --word-regexp
 var isWholeWord = 0
 # -Q --literal
-var isLiteral = 0
+var isLiteral = 1
 &grepprg = basegrepprg
 
 var popupId = 0
 
 def MakeVarsString(): string
-    return 'w' .. (isWholeWord % 2 ? '+' : '-') .. ' l' .. (isLiteral % 2 ? '+' : '-')
+    return 'w' .. (isWholeWord % 2 ? '+' : '-') .. ' l' .. (isLiteral % 2 ? '+' : '-') .. ' Search>'
 enddef
 
 export def ResizeQFHeight(): void
@@ -67,7 +67,7 @@ export def Grep()
         line: 1000,
     })
     redraw
-    var word = input('      Search>', initialWord)
+    var word = input('             ', initialWord)
 
     popup_close(popupId)
 
