@@ -285,8 +285,8 @@ nnoremap <leader>lk <ScriptCmd>set operatorfunc=function('jsLog.JsFastLog_variab
 nmap <leader>lkk <leader>lkiW
 vnoremap <leader>lk <ScriptCmd>jsLog.JsFastLog_variable(visualmode())<cr>
 
-nnoremap <leader>lt <ScriptCmd>set operatorfunc=function('jsLog.JsFastLog_variable_trace')<cr>g@
-nmap <leader>lkt <leader>ltiW
+nmap <leader>ltk <ScriptCmd>set operatorfunc=function('jsLog.JsFastLog_variable_trace')<cr>g@iW
+nmap <leader>lts <ScriptCmd>set operatorfunc=function('jsLog.JsFastLog_string_trace')<cr>g@iW
 vnoremap <leader>lt <ScriptCmd>jsLog.JsFastLog_variable_trace(visualmode())<cr>
 
 nnoremap <leader>ld <ScriptCmd>set operatorfunc=function('jsLog.JsFastLog_function')<cr>g@
