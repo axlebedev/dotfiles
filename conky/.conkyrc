@@ -125,13 +125,13 @@ local cpu = ''
 for n=1,coresNum,1 do
   cpu = cpu .. [[
     {
-        "separator_block_width":3,
-        "min_width":"]] .. stringWidth(1) .. [[",
-        "full_text" : ${template1 cpu cpu]] .. n .. [[},
-        "color" : "\#${template2 cpu cpu]] .. n .. [[}",
-        "separator" : false
+       "separator_block_width":3,
+       "min_width":"]] .. stringWidth(1) .. [[",
+       "full_text" : ${template1 cpu cpu]] .. n .. [[},
+       "color" : "\#${template2 cpu cpu]] .. n .. [[}",
+       "separator" : false
     },
-    ]] 
+   ]] 
 end
 
 -- Stuff after 'TEXT' will be formatted on screen
