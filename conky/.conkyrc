@@ -88,7 +88,7 @@ function wifi()
       "color" : "]] .. textColorFg .. [[",
       "min_width":"]] .. stringWidth(8) .. [[",
       "align": "center"
-    }
+    },
   ]]
 end
 
@@ -107,6 +107,109 @@ function numLock()
   return ''
 end
 
+function capsLock()
+  return [[
+    ${if_match "${exec xset q | grep 'Caps Lock' | sed 's/.*Caps Lock:[ ]*\([^ ]*\).*/\1/'}"=="on"}
+    ]] .. warningWarning("CapsLock") .. [[,
+    ${endif}
+  ]]
+end
+
+function keyboardLayout()
+  return [[
+    { 
+      "name" : "Language", 
+        ${if_match ${exec xset -q|grep LED| awk '{ print $10 }'}<10}
+      "full_text": " EN ",
+        "color" : "]] .. textColorFg .. [["
+          ${else}
+      "full_text": " RU ",
+        "color": "]] .. black .. [[",
+        "background": "]] .. errorColorFg .. [["
+          ${endif} 
+    },
+  ]]
+end
+
+function time()
+  return [[
+    { 
+      "name" : "Time",
+      "full_text" : " ${time  %H:%M} ", 
+      "color" : "]] .. black .. [[",
+      "background" : "]] .. textColorFg .. [[",
+      "separator" : false 
+    },
+  ]]
+end
+function date()
+  return [[
+    {
+      "name" : "Date",
+      "full_text" : "${time %a %d %b}",
+      "color" : "]] .. secondaryTextColorFg .. [["
+    },
+  ]]
+end
+
+function volume()
+  return [[
+    {
+      "name" : "Volume",
+      "full_text" : " ${exec ~/.i3/getVolume.sh}",
+      "color" : "]] .. textColorFg .. [["
+    },
+  ]]
+end
+
+function memory()
+  return [[
+    { 
+      "full_text" : "",
+      "min_width":"",
+      "separator_block_width":3,
+      "color" : "]] .. textColorFg .. [[",
+      "separator" : false
+    },
+    { "name" : "Memory",
+      "min_width":"▁",
+      "full_text" : ${template1 memperc},
+      "color" : "\#${template2 memperc}", 
+      "separator_block_width":10
+    },
+  ]]
+end
+
+function vpn()
+  return [[
+    { 
+      "full_text": "${execi 5 (bash ~/dotfiles/.i3/getVPN.sh)}",
+      "color": "]] .. black .. [[",
+      "background": "]] .. textColorFg .. [[",
+      "separator": false
+    },
+  ]]
+end
+
+function ip()
+  return [[
+    { 
+      "full_text": "${addr ]] .. internetInterface .. [[}",
+      "color": "]] .. textColorFg .. [[" 
+    },
+  ]]
+end
+
+function hdd()
+  return [[
+    {
+      "name" : "HDD",
+      "full_text" : " ${fs_free /home} Free",
+      "color" : "]] .. textColorFg .. [["
+    },
+  ]]
+end
+
 function cpuCore(coreN)
   return [[{
     "name": "CPU",
@@ -121,6 +224,24 @@ end
 -- ###############################################################################################
 -- ###############################################################################################
 
+function cpuHeader()
+  return [[
+    {
+      "name" : "Processor",
+      "full_text" : "",
+      "separator_block_width":3,
+      "color" : "]] .. textColorFg .. [[",
+      "separator" : false
+    },
+    { 
+      "separator_block_width":3,
+      "min_width":"▁",
+      "full_text" : "${exec cat ]] .. hwMonitorPath .. [[ | cut -c-2}",
+      "color" : "\#${template2 exec ~/dotfiles/.i3/getCPUTempNormalized.sh}", 
+      "separator" : false
+    },
+  ]]
+end
 local cpu = ''
 for n=1,coresNum,1 do
   cpu = cpu .. [[
@@ -140,117 +261,22 @@ conky.text = [[
 
   [
   ]] .. numLock() .. [[
-# Next block - Caps lock indicator
-  ${if_match "${exec xset q | grep 'Caps Lock' | sed 's/.*Caps Lock:[ ]*\([^ ]*\).*/\1/'}"=="on"}
-  ]] .. warningWarning("CapsLock") .. [[,
-  ${endif}
-# Next block - keyboard layout
-{ 
-  "name" : "Language", 
-  ${if_match ${exec xset -q|grep LED| awk '{ print $10 }'}<10}
-    "full_text": " EN ",
-    "color" : "]] .. textColorFg .. [["
-  ${else}
-    "full_text": " RU ",
-    "color": "]] .. black .. [[",
-    "background": "]] .. errorColorFg .. [["
-  ${endif} 
-}, 
-# Next 2 blocks - date and time
-{ 
-  "name" : "Time",
-  "full_text" : " ${time  %H:%M} ", 
-  "color" : "]] .. black .. [[",
-  "background" : "]] .. textColorFg .. [[",
-  "separator" : false 
-},
-{
-  "name" : "Date",
-  "full_text" : "${time %a %d %b}",
-  "color" : "]] .. secondaryTextColorFg .. [["
-},
-# Next block - system volume 
-  {
-    "name" : "Volume",
-    "full_text" : " ${exec ~/.i3/getVolume.sh}",
-    "color" : "]] .. textColorFg .. [["
-  },
-# Next 5 blocks - cpu usage
-{
-  "name" : "Processor",
-  "full_text" : "",
-  "separator_block_width":3,
-  "color" : "]] .. textColorFg .. [[",
-  "separator" : false
-},
-
-{ 
-  "separator_block_width":3,
-  "min_width":"▁",
-  "full_text" : "${exec cat ]] .. hwMonitorPath .. [[ | cut -c-2}",
-  "color" : "\#${template2 exec ~/dotfiles/.i3/getCPUTempNormalized.sh}", 
-  "separator" : false
-},
-# { 
-#   "separator_block_width":3,
-#   "min_width":"▁▁▁▁",
-#   "full_text" : "${hwmon 4 temp 1}",
-#   "separator" : false
-# },
+  ]] .. capsLock() .. [[
+  ]] .. keyboardLayout() .. [[
+  ]] .. time() .. [[
+  ]] .. date() .. [[
+  ]] .. volume() .. [[
+  ]] .. cpuHeader() .. [[
   ]] .. cpu .. [[
-# Next block - memory usage
-{ 
-  "full_text" : "",
-  "min_width":"",
-  "separator_block_width":3,
-  "color" : "]] .. textColorFg .. [[",
-  "separator" : false
-},
-{ "name" : "Memory",
-  "min_width":"▁",
-  "full_text" : ${template1 memperc},
-  "color" : "\#${template2 memperc}", 
-  "separator_block_width":10
-},
-# Next block - wi-fi 
-  ]] .. wifi() .. [[,
-# VPN 
-{ 
-  "full_text": "${execi 5 (bash ~/dotfiles/.i3/getVPN.sh)}",
-  "color": "]] .. black .. [[",
-  "background": "]] .. textColorFg .. [[",
-  "separator": false
-},
-# current local ip. TODO: it is different on different machines
-{ 
-  "full_text": "${addr ]] .. internetInterface .. [[}",
-  "color": "]] .. textColorFg .. [[" 
-},
-# Next block - main disk free space
-{
-  "name" : "HDD",
-  "full_text" : " ${fs_free /home} Free",
-  "color" : "]] .. textColorFg .. [["
-},
-{ 
-  "name" : "Time",
-  "full_text" : " ${time  %H:%M} ", 
-  "color" : "]] .. black .. [[",
-  "background" : "]] .. textColorFg .. [[",
-  "separator" : false 
-},
-
-{ 
-  "name" : "Language", 
-  ${if_match ${exec xset -q|grep LED| awk '{ print $10 }'}<10}
-    "full_text": " EN ",
-    "color" : "]] .. textColorFg .. [["
-  ${else}
-    "full_text": " RU ",
-    "color": "]] .. black .. [[",
-    "background": "]] .. errorColorFg .. [["
-  ${endif} 
-} 
+  ]] .. memory() .. [[
+  ]] .. wifi() .. [[
+  ]] .. vpn() .. [[
+  ]] .. ip() .. [[
+  ]] .. hdd() .. [[
+  ]] .. time() .. [[
+  ]] .. keyboardLayout() .. [[
+  # чтобы у всех в конце была запятая - последний пустой блок без запятой
+  { "full_text": "" }
   ],
   ]];
 
