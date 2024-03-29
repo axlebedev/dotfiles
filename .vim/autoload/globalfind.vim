@@ -9,6 +9,7 @@ var ignored = [
     '.git',
     'stats.json',
     '.ccls-cache',
+    '.tmp',
 ]
 var ignoredList = map(ignored, (_, val) => '--ignore ' .. val)->join(' ')
 # find word under cursor
