@@ -28,6 +28,8 @@ colors = {
 }
 
 black = '\\#000000'
+white = '\\#FFFFFF'
+whitepaper = '\\#EEE7DC'
 
 -- errorColorFg = '\\#C42021'
 errorColorFg = '\\#' .. colors[#colors-2]
