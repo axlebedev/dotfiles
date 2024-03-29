@@ -65,8 +65,6 @@ conky.config = {
 
   -- for anything
   template2 = getTemplateForColors(colors),
-  -- for cpu temperature
-  template3 = getTemplateForColors(colors, 30),
 };
 
 
@@ -115,7 +113,7 @@ function cpuCore(coreN)
     "separator_block_width":3,
     "min_width":"]] .. stringWidth(1) .. [[",
     "full_text" : ${template1 cpu cpu]] .. coreN .. [[},
-    "color" : "\#${template3 cpu cpu"]] .. coreN .. [["}", 
+    "color" : "\#${template2 cpu cpu"]] .. coreN .. [["}", 
     "separator" : false
   }]]
 end
