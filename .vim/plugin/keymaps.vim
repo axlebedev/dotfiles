@@ -345,3 +345,13 @@ nnoremap zn nzz
 
 nnoremap q <NOP>
 nnoremap <C-q> q
+
+vmap " S"
+vmap ' S'
+vmap ( S(
+vmap ) S)
+vmap [ S[
+vmap ] S]
+vmap { S{
+vmap } S}
+vmap _ S_
