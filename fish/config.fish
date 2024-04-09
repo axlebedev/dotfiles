@@ -23,7 +23,7 @@ abbr -a pd pwd
 abbr -a l "pwd && ls -alF"
 abbr -a lr "pwd && ls -alF"
 # sudo apt install tree
-abbr -a "pwd && lt tree -a -C -I \"node_modules\|.git\|bower_components\""
+abbr -a lt "pwd && tree -a -C -I \"node_modules\|.git\|bower_components\""
 
 # disc usage
 # abbr -a dus du -sch .[!.]* * | sort -h
