@@ -17,7 +17,7 @@ var basegrepprg = 'ag --hidden --smart-case ' .. ignoredList
 # -w --word-regexp
 var isWholeWord = 0
 # -Q --literal
-var isLiteral = 1
+var isLiteral = 0
 &grepprg = basegrepprg
 
 var popupId = 0
@@ -121,6 +121,8 @@ export def FilterTestEntries()
                 \ ->filter("bufname(v:val.bufnr) !~# 'spec.ts'")
                 \ ->filter("bufname(v:val.bufnr) !~# 'spec.js'")
                 \ ->filter("bufname(v:val.bufnr) !~# 'amrDocs'")
+                \ ->filter("bufname(v:val.bufnr) !~# 'amr-docs'")
+                \ ->filter("bufname(v:val.bufnr) !~# 'test'")
     setqflist(filtered)
     ResizeQFHeight()
 enddef
