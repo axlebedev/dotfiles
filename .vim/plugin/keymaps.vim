@@ -65,14 +65,10 @@ nnoremap <leader>w <CMD>w!<cr>
 
 # Если просто закрыть fugitive-буфер - то закроется весь вим.
 # Поэтому делаем такой костыль
-def DontCloseFugitive()
-    set bufhidden&
-enddef
-
-# By default it's set bufhidden=delete in plugin source. I dont need it
 augroup dont_close_fugitive
     autocmd!
-    autocmd BufReadPost fugitive://* <SID>DontCloseFugitive()
+    # By default it's set bufhidden=delete in plugin source. I dont need it
+    autocmd BufReadPost fugitive://* set bufhidden&
 augroup END
 def CloseBuffer()
     var buf = bufnr('%')
