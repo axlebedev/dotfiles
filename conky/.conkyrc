@@ -84,6 +84,7 @@ end
 function wifi()
   return [[
     {
+      "name" : "Network",
       "full_text" : "${downspeed ]] .. internetInterface .. [[ }/s",
       "color" : "]] .. textColorFg .. [[",
       "min_width":"]] .. stringWidth(8) .. [[",
@@ -183,6 +184,7 @@ end
 function vpn()
   return [[
     { 
+      "name": "Network",
       "full_text": "${execi 5 (bash ~/dotfiles/.i3/getVPN.sh)}",
       "color": "]] .. black .. [[",
       "background": "]] .. textColorFg .. [[",
@@ -194,6 +196,7 @@ end
 function ip()
   return [[
     { 
+      "name" : "Network",
       "full_text": "${addr ]] .. internetInterface .. [[}",
       "color": "]] .. textColorFg .. [[" 
     },
@@ -269,8 +272,8 @@ conky.text = [[
   ]] .. cpuHeader() .. [[
   ]] .. cpu .. [[
   ]] .. memory() .. [[
-  ]] .. wifi() .. [[
   ]] .. vpn() .. [[
+  ]] .. wifi() .. [[
   ]] .. ip() .. [[
   ]] .. hdd() .. [[
   # чтобы у всех в конце была запятая - последний пустой блок без запятой
