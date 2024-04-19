@@ -320,6 +320,17 @@ g:targets_pairs = '()b {}c [] <>' # replace {}B to {}c
 Plug 'terryma/vim-expand-region'
 vmap v <Plug>(expand_region_expand)
 vmap <S-v> <Plug>(expand_region_shrink)
+def Exp(): void
+    expand_region#custom_text_objects({
+        "\/\\n\\n\<CR>": 1, # Motions are supported as well. Here's a search motion that finds a blank line
+        'a]': 1, # Support nesting of 'around' brackets
+        'ab': 1, # Support nesting of 'around' parentheses
+        'aB': 1, # Support nesting of 'around' braces
+        'ii': 0, # 'inside indent'. Available through https://github.com/kana/vim-textobj-indent
+        'ai': 0, # 'around indent'. Available through https://github.com/kana/vim-textobj-indent
+    })
+enddef
+au VimEnter * Exp()
 
 # -----------------------------------------------------------------------------
 # Toggle true/false
