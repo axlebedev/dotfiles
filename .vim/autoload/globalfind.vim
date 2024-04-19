@@ -37,6 +37,7 @@ export def ResizeQFHeight(): void
         qfLength + 1,
         fullHeight / 2,
     ])
+    normal! zb
 enddef
 
 def IncWord(): string
