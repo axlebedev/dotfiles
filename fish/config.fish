@@ -21,7 +21,7 @@ abbr -a pp pwd
 abbr -a pd pwd
 # abbr -a l ls -alF
 abbr -a l "pwd && ls -alF"
-abbr -a lr "pwd && ls -alF"
+abbr -a lr "pwd && ls -lrt"
 # sudo apt install tree
 abbr -a lt "pwd && tree -a -C -I \"node_modules\|.git\|bower_components\""
 
