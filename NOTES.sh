@@ -53,6 +53,7 @@ snapd \
 nodejs npm \
 cmake libxkbfile-dev \
 flameshot \
+pavucontrol \
 autorandr
 
 # indicator-sound-switcher \ # меню звук-девайсов в трее
