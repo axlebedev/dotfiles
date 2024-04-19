@@ -42,12 +42,12 @@ do
 
     if [ "$getname" = "HDD" ]
     then
-        nautilus --class="floating" > /dev/null 2>&1 &
+        xdg-open ~/Downloads > /dev/null 2>&1 &
     fi
 
     if [ "$getname" = "Volume" ] 
     then
-        gnome-alsamixer > /dev/null 2>&1 &
+        pavucontrol --class="floating" > /dev/null 2>&1 &
     fi
     
     if [ "$getname" = "Language" ] 
