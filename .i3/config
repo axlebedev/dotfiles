@@ -70,16 +70,22 @@ for_window [class="Screenruler" instance="screenruler"] border none
 for_window [class="Screenruler" instance="screenruler"] resize set 500 200
 
 # chrome extensions
-for_window [class="Google-chrome" window_role="pop-up"]  floating enable
+for_window [class="Google-chrome" window_role="pop-up"] floating enable \
+    , resize set width 1400px height 1000px \
+    , move position center \
+    , move left 150px
+
 for_window [class="calendar.google.com, Google-chrome"]  floating enable
-for_window [instance="^crx.*$" window_role="pop-up"]  floating enable
-for_window [instance="^crx.*$" window_role="pop-up"]  sticky   enable
+for_window [instance="^crx.*$" window_role="pop-up"]  floating enable, sticky   enable
 for_window [class="zoom"]  floating   enable
 for_window [class="TelegramDesktop"]  floating   enable
 for_window [class="linphone"]  floating   enable
 for_window [class="Squadus"] floating enable
 
-for_window [class="floating"]  floating   enable
+for_window [class="floating"] floating enable \
+    , resize set width 1400px height 1000px \
+    , move position center \
+    , move left 150px
 for_window [class="sticky"]  sticky   enable
 
 # Pulse Audio controls
