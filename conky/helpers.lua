@@ -42,3 +42,26 @@ function demoCpu(i, colorsArray, charsArray) -- assume i=[0..10]
     "separator" : false
   }]]
 end
+
+function getCoreTempColor(coreN)
+  local beginArrayItem = '${if_match ${cpu cpu' .. coreN .. '}<TICK}COLOR${else}'
+  local endArrayItem = '${endif}'
+
+  local result = ''
+
+  for i=1,#colors do
+    local color = colors[i]
+    if (i == #colors) then
+      result = result .. color
+    else
+      local tick = math.floor(100 / #colors * i)
+      result = result .. beginArrayItem:gsub('TICK', tick):gsub('COLOR', color)
+    end
+  end
+
+  for i=1,(#colors - 1) do
+    result= result .. endArrayItem
+  end
+
+  return result
+end

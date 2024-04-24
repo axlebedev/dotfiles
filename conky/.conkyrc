@@ -213,20 +213,6 @@ function hdd()
   ]]
 end
 
-function cpuCore(coreN)
-  return [[{
-    "name": "CPU",
-    "separator_block_width":3,
-    "min_width":"]] .. stringWidth(1) .. [[",
-    "full_text" : ${template1 cpu cpu]] .. coreN .. [[},
-    "color" : "\#${template2 cpu cpu"]] .. coreN .. [["}", 
-    "separator" : false
-  }]]
-end
--- ###############################################################################################
--- ###############################################################################################
--- ###############################################################################################
-
 function cpuHeader()
   return [[
     {
@@ -245,17 +231,20 @@ function cpuHeader()
     },
   ]]
 end
+
+function cpuCore(coreN)
+  return [[{
+    "name": "CPU",
+    "separator_block_width":3,
+    "min_width":"]] .. stringWidth(1) .. [[",
+    "full_text" : ${template1 cpu cpu]] .. coreN .. [[},
+    "color" : "\#]] .. getCoreTempColor(coreN) .. [[", 
+    "separator" : false
+  },]]
+end
 local cpu = ''
 for n=1,coresNum,1 do
-  cpu = cpu .. [[
-    {
-       "separator_block_width":3,
-       "min_width":"]] .. stringWidth(1) .. [[",
-       "full_text" : ${template1 cpu cpu]] .. n .. [[},
-       "color" : "\#${template2 cpu cpu]] .. n .. [[}",
-       "separator" : false
-    },
-   ]] 
+  cpu = cpu .. cpuCore(n)  
 end
 
 -- Stuff after 'TEXT' will be formatted on screen
