@@ -47,7 +47,7 @@ do
 
     if [ "$getname" = "Volume" ] 
     then
-        pavucontrol --class="floating" > /dev/null 2>&1 &
+        pavucontrol --tab=3 --class="floating" > /dev/null 2>&1 &
     fi
     
     if [ "$getname" = "Language" ] 
