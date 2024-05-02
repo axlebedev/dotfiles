@@ -245,7 +245,7 @@ nnoremap <silent> cp <ScriptCmd>Cp()<CR>
 # for convenient git
 nnoremap <C-g><C-g> <CMD>Magit<CR>
 nnoremap <C-g><C-b> <CMD>Git blame<cr>
-nnoremap <C-g><C-v> <CMD>GV<cr>
+nnoremap <C-g><C-v> <CMD>GV!<cr>
 # stage current file
 nnoremap <C-g><C-w> <CMD>Gw<cr> 
 
