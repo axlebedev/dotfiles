@@ -11,6 +11,7 @@ import autoload '../autoload/htmlbeautify.vim'
 import autoload '../autoload/readmode.vim'
 import autoload '../autoload/updatebuffer.vim'
 import autoload '../autoload/yankfilename.vim'
+import autoload '../autoload/increasefoldlevel.vim'
 
 g:mapleader = "\<space>"
 nmap <space> <leader>
@@ -158,14 +159,14 @@ submode#map(resizeSubmode, 'n', '', 'j', ':resize +1<cr>')
 
 var foldlevelSubmode = 'Foldlevel'
 submode#enter_with(foldlevelSubmode, 'n', '', '<leader>fo')
-submode#map(foldlevelSubmode, 'n', '', '-', '<CMD>increasefoldlevel#decreaseFoldlevel()<cr>')
-submode#map(foldlevelSubmode, 'n', '', '<', '<CMD>increasefoldlevel#decreaseFoldlevel()<cr>')
-submode#map(foldlevelSubmode, 'n', '', 'h', '<CMD>increasefoldlevel#decreaseFoldlevel()<cr>')
-submode#map(foldlevelSubmode, 'n', '', '+', '<CMD>increasefoldlevel#increaseFoldlevel()<cr>')
-submode#map(foldlevelSubmode, 'n', '', '>', '<CMD>increasefoldlevel#increaseFoldlevel()<cr>')
-submode#map(foldlevelSubmode, 'n', '', 'l', '<CMD>increasefoldlevel#increaseFoldlevel()<cr>')
-submode#map(foldlevelSubmode, 'n', '', '0', '<CMD>set foldlevel=0<cr>')
-submode#map(foldlevelSubmode, 'n', '', '9', '<CMD>set foldlevel=99<cr>')
+submode#map(foldlevelSubmode, 'n', '', '-', '<ScriptCmd>call increasefoldlevel#decreaseFoldlevel()<cr>')
+submode#map(foldlevelSubmode, 'n', '', '<', '<ScriptCmd>call increasefoldlevel#decreaseFoldlevel()<cr>')
+submode#map(foldlevelSubmode, 'n', '', 'h', '<ScriptCmd>call increasefoldlevel#decreaseFoldlevel()<cr>')
+submode#map(foldlevelSubmode, 'n', '', '+', '<ScriptCmd>call increasefoldlevel#increaseFoldlevel()<cr>')
+submode#map(foldlevelSubmode, 'n', '', '>', '<ScriptCmd>call increasefoldlevel#increaseFoldlevel()<cr>')
+submode#map(foldlevelSubmode, 'n', '', 'l', '<ScriptCmd>call increasefoldlevel#increaseFoldlevel()<cr>')
+submode#map(foldlevelSubmode, 'n', '', '0', '<ScriptCmd>set foldlevel=0<cr>')
+submode#map(foldlevelSubmode, 'n', '', '9', '<ScriptCmd>set foldlevel=99<cr>')
 
 autocmd au_vimrc FileType help,qf,git,fugitive* nnoremap <buffer> q <CMD>q<cr>
 
