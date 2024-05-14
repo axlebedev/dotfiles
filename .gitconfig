@@ -1,6 +1,6 @@
 [user]
-	email = alexey.broadcast@gmail.com
-	name = Alex Lebedev
+	email = aleksey.lebedev@myoffice.team
+	name = Aleksey Lebedev
 [alias]
 	co = checkout
 	ci = commit
@@ -58,3 +58,5 @@
 	defaultBranch = master
 
 ; TODO: 'git rerere', google it
+[url "ssh://git@gitea.coreops.ru:32222"]
+	insteadOf = https://gitea.coreops.ru

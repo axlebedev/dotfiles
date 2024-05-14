@@ -95,7 +95,7 @@ bind \cg g-sortedbranch
 
 abbr -a go g checkout
 abbr -a gor g checkout users/l-e-b-e-d-e-v/
-abbr -a gob g checkout -b
+abbr -a gob g checkout -b WTE-
 abbr -a gbl g blame
 
 abbr -a gs g status .
@@ -187,3 +187,5 @@ set -g theme_display_node yes
 set -g theme_display_date no
 set -g theme_display_cmd_duration yes
 set -g theme_color_scheme light
+
+abbr -a gpr ~/dotfiles/fish/gpr.sh
