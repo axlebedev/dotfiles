@@ -36,7 +36,7 @@ abbr -a vv gvim
 
 abbr -a o xdg-open
 
-abbr -a ga g add -u
+abbr -a ga g add
 abbr -a gap g add -p ./packages/callcenter-staff ./services
 # --verbose to show diff in vim when show commit
 abbr -a gi g commit --verbose
