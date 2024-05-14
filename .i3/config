@@ -296,15 +296,15 @@ mode $mode_move_workspace {
 bindsym $mod+Shift+m mode $mode_move_workspace 
 
 # Work
-set $mode_yandex "Work (B)rowser"
-mode $mode_yandex {
+set $mode_work "Work (B)rowser"
+mode $mode_work {
 	bindsym $mod+b mode "default" ; exec --no-startup-id nohup google-chrome --user-data-dir="/home/user/chrome-users/debug" & disown
 
 # back to normal: Enter or Escape
 	bindsym Return mode "default"
 	bindsym Escape mode "default"
 }
-bindsym $mod+Shift+y mode $mode_yandex
+bindsym $mod+Shift+y mode $mode_work
 
 # Utils
 set $mode_utils "UTILS: Notifications (N)off (M)on | (G)romit-mpx | (L)ebedev-bro | (Y)abr"
