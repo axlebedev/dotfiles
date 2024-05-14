@@ -56,6 +56,9 @@ flameshot \
 pavucontrol \
 autorandr
 
+# install git-delta manually
+# https://dandavison.github.io/delta/installation.html
+
 # indicator-sound-switcher \ # меню звук-девайсов в трее
 # gromit-mpx \ # для рисования на экране
 # simplescreenrecorder \ # для записи скринкастов
