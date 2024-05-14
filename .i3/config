@@ -307,13 +307,12 @@ mode $mode_work {
 bindsym $mod+Shift+y mode $mode_work
 
 # Utils
-set $mode_utils "UTILS: Notifications (N)off (M)on | (G)romit-mpx | (L)ebedev-bro | (Y)abr"
+set $mode_utils "UTILS: Notifications (N)off (M)on | (G)romit-mpx | (L)ebedev-bro"
 mode $mode_utils {
 	bindsym $mod+n mode "default" ; exec --no-startup-id notify-send "PAUSE notifications" ; exec --no-startup-id notify-send DUNST_COMMAND_PAUSE
 	bindsym $mod+m mode "default" ; exec --no-startup-id notify-send DUNST_COMMAND_RESUME ; exec --no-startup-id notify-send "RESUME notifications"
     bindsym $mod+g mode "default" ; exec --no-startup-id gromit-mpx --active & disown
-	bindsym $mod+l mode "default" ; exec --no-startup-id nohup google-chrome --user-data-dir="/home/user/chrome-users/alexey-broadcast" & disown
-	bindsym $mod+y mode "default" ; exec --no-startup-id nohup yandex-browser & disown
+	bindsym $mod+l mode "default" ; exec --no-startup-id nohup yandex-browser & disown
 
 # back to normal: Enter or Escape
 	bindsym Return mode "default"
