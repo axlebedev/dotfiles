@@ -165,10 +165,10 @@ abbr -a nt npm run test
 abbr -a nta npm run test-all
 
 abbr -a y yarn
+abbr -a yi yarn
 abbr -a ys yarn start
 abbr -a yss "yarn && yarn start"
 abbr -a ycc yarn cache clean
-abbr -a yi yarn --ignore-engines
 abbr -a yt yarn test
 abbr -a yl yarn lint
 
