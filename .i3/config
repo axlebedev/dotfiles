@@ -121,7 +121,8 @@ bindsym $mod+q kill
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 bindsym $mod+d exec ulauncher
 
-bindsym $mod+c exec xeyes
+bindsym $mod+c exec xdotool mousemove 200 200
+bindsym $mod+Shift+c exec xeyes
 # XEyes window should be floating, have no border, and be focused on open
 for_window [class="XEyes"] floating enable border none focus
 
@@ -216,7 +217,7 @@ bindsym $mod+Shift+0 move container to workspace 10; workspace 10
 bindsym $mod+Shift+F1 move container to workspace 11; workspace 11
 
 # reload the configuration file
-bindsym $mod+Shift+c reload
+# bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
