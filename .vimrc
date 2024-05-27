@@ -488,7 +488,7 @@ g:ale_disable_lsp = 1
 
 g:ale_linters = {
     javascript: ['eslint'],
-    typescript: ['eslint', 'tslint']
+    typescript: ['eslint']
 }
 g:ale_javascript_eslint_executable = 'npm -s run lint %'
 g:ale_typescript_tslint_executable = 'npm -s run lint %'
