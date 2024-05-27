@@ -179,15 +179,21 @@ def ClapOpen(command_str: string)
   exe 'normal! ' .. command_str .. "\<cr>"
 enddef
 
-nnoremap <silent> <leader>t <CMD>call fzf#vim#files('', {
-            \    'source': 'ag --vimgrep --hidden --ignore node_modules --ignore dist  --ignore .git --ignore .ccls-cache -l',
-            \    'sink': 'e'
-            \ })<CR>
-vnoremap <silent> <leader>t "ly<CMD>call fzf#vim#files('', {
-            \    'source': 'ag --vimgrep --hidden --ignore node_modules --ignore dist  --ignore .git --ignore .ccls-cache -l',
-            \    'sink': 'e',
-            \    'options': '--query=' .. tolower(substitute(@l, '\.', '', ''))
-            \ })<CR>
+def LeaderT(isVMode = false)
+    if (&buftype == 'quickfix')
+        wincmd k
+    endif
+    if (&filetype == 'nerdtree')
+        wincmd l
+    endif
+    fzf#vim#files('', {
+        source: 'ag --vimgrep --hidden --ignore node_modules --ignore dist  --ignore .git --ignore .ccls-cache -l',
+        sink: 'e',
+        options: isVMode ? '--query=' .. tolower(substitute(@l, '\.', '', '')) : ''
+    })
+enddef
+nnoremap <silent> <leader>t <ScriptCmd>LeaderT()<CR>
+vnoremap <silent> <leader>t "ly<ScriptCmd>LeaderT(true)<CR>
 nnoremap <silent> <leader>b <CMD>Buffers<CR>
 nnoremap <silent> <leader>m <CMD>call fzf#vim#files('', {
             \    'source': 'g diff --name-only --diff-filter=U',
