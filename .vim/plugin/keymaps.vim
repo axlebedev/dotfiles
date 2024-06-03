@@ -367,3 +367,6 @@ vmap ] S]
 vmap { S{
 vmap } S}
 vmap _ S_
+
+# wrap visual selection into function block 
+vnoremap <C-b> "bdi{<CR>return <C-r>b;<CR>}<Esc>=ib
