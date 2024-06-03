@@ -74,12 +74,21 @@ augroup END
 def CloseBuffer()
     var buf = bufnr('%')
     var filesLength = len(filter(range(1, bufnr('$')), 'buflisted(v:val)'))
-    if (filesLength == 1)
-        Startify
+    echom 'filesLength=' .. filesLength
+    if (filesLength <= 1)
+        if (&ft == 'startify')
+            qa!
+        else
+            Startify
+        endif
     else
         bprev
     endif
     exe 'bdelete ' .. buf
+
+    if (&buftype ==# 'quickfix' || &buftype ==# 'terminal')
+        Startify
+    endif
 enddef
 nmap <silent> <leader>q <ScriptCmd>CloseBuffer()<CR>
 
