@@ -497,7 +497,8 @@ nmap <silent> <C-m> <Plug>(ale_next_wrap)
 nmap <silent> <C-n> <Plug>(ale_previous_wrap)
 
 # -----------------------------------------------------------------------------
-Plug 'neoclide/coc.nvim', { 'do': 'yarn install --frozen-lockfile', 'tag': 'v0.0.82' }
+# Plug 'neoclide/coc.nvim', { 'do': 'yarn install --frozen-lockfile', 'tag': 'v0.0.82' }
+Plug 'neoclide/coc.nvim', { 'do': 'yarn install --frozen-lockfile' }
 # Чтобы не авто-выбирал первый пункт в автокомплите:
 # :CocConfig -> "suggest.noselect": true
 g:coc_global_extensions = [
