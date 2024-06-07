@@ -15,12 +15,15 @@ export def YankGithubURL()
     remoteUrl = substitute(remoteUrl, 'git@', '', '')
     remoteUrl = substitute(remoteUrl, '\.git', '', '')
     remoteUrl = substitute(remoteUrl, ':', '/', '')
+    remoteUrl = substitute(remoteUrl, 'ssh\/\/\/', '', '')
+    remoteUrl = substitute(remoteUrl, '\:\d\+', '', '')
 
-    var branch = systemlist('git rev-parse --abbrev-ref HEAD')[0]
+    var branchName = systemlist('git rev-parse --abbrev-ref HEAD')[0]
     var filename = expand("%:.")
     var lineNr = line('.')
 
-    var result = remoteUrl .. '/blob/' .. branch .. '/' .. filename .. '#L' .. lineNr
+    var blob = remoteUrl =~ 'gitea' ? '/src/branch/' : '/blob/'
+    var result = remoteUrl .. blob .. branchName .. '/' .. filename .. '#L' .. lineNr
 
     setreg('*', result)
     setreg('+', result)
