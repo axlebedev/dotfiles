@@ -32,7 +32,7 @@ do
 
     if [ "$getname" = "Volume" ] 
     then
-        amixer -D pulse sset Master toggle > /dev/null 2>&1 & killall -USR1 i3status > /dev/null 2>&1
+        pavucontrol --tab=3 --class="floating" > /dev/null 2>&1 &
     fi
 
     if [ "$getname" = "Memory" ] || [ "$getname" = "CPU" ]  
