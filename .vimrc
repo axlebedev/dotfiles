@@ -666,3 +666,5 @@ enddef
 autocmd VimEnter * CustomFixFoldMethod()
 
 autocmd BufEnter quickfix IlluminatePauseBuf
+
+autocmd BufEnter * timer_start(1, (id) => findcursor#FindCursor('#d6d8fa', 0))
