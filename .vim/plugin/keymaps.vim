@@ -218,7 +218,7 @@ def g:GeditFile(branch: string)
     execute 'Gedit ' .. branch .. ':%'
 enddef
 # open current file version in branch
-nnoremap <silent> <C-g><C-f> <ScriptCmd>fzf#run(fzf#wrap({ 'source': 'sh ~/dotfiles/fish/sortedBranch.sh', 'sink': 'g:GeditFile' }))<CR>
+nnoremap <silent> <C-g><C-f> <ScriptCmd>fzf#run(fzf#wrap({ source: 'sh ~/dotfiles/fish/sortedBranch.sh', sink: g:GeditFile }))<CR>
 # open unmerged list
 nnoremap <silent> <C-g><C-m> <CMD>fzf#run({'source': 'git diff --name-only --diff-filter=U', 'sink': 'e', 'window': { 'width': 0.9, 'height': 0.6 }})<CR>
 
