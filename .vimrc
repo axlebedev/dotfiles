@@ -89,7 +89,6 @@ g:NERDTreeWinSize = 40
 g:NERDTreeAutoDeleteBuffer = 1
 # for correct Startify update items while one session
 g:NERDTreeHijackNetrw = 0
-Plug 'PhilRunninger/nerdtree-visual-selection'
 
 Plug 'woelke/vim-nerdtree_plugin_open'
 g:nerdtree_plugin_open_cmd = 'xdg-open'
