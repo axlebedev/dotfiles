@@ -327,6 +327,8 @@ def Exp(): void
         'aB': 1, # Support nesting of 'around' braces
         'ii': 0, # 'inside indent'. Available through https://github.com/kana/vim-textobj-indent
         'ai': 0, # 'around indent'. Available through https://github.com/kana/vim-textobj-indent
+        'ia': 1,
+        'aa': 1,
     })
 enddef
 au VimEnter * Exp()
