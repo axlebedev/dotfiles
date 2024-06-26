@@ -124,6 +124,7 @@ g:NERDTreeExtensionHighlightColor = {
     'cpp': green,
     'h': blue,
     'css': pink,
+    'scss': pink,
 }
 
 g:NERDTreeExactMatchHighlightColor = {
