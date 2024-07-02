@@ -6,7 +6,10 @@ augroup au_vimrc_js
     autocmd!
 augroup END
 
-setlocal tabstop=4 softtabstop=4 shiftwidth=4
+var indent = 2
+execute 'setlocal tabstop=' .. indent
+execute 'setlocal softtabstop=' .. indent
+execute 'setlocal shiftwidth=' .. indent
 
 nnoremap <leader>d <ScriptCmd>JsGotoDef()<CR>
 nnoremap gdd gd

@@ -66,10 +66,11 @@ set number
 set showcmd
 
 # indent settings
-set tabstop=4      # width of TAB.
+var indent = 2
+&tabstop = indent     # width of TAB.
+&softtabstop = indent  # how much spaces will be removed on backspace
+&shiftwidth = indent   # count of spaces for '<'/'>' commands
 set expandtab      # or 'noexpandtab': if set, inputs spaces instead of tabs
-set softtabstop=4  # how much spaces will be removed on backspace
-set shiftwidth=4   # count of spaces for '<'/'>' commands
 set shiftround     # smart indent for '<'/'>' commands
 set smarttab       # insert tabs on the start of a line according to shiftwidth, not tabstop
 set autoindent     # autoindents for new lines

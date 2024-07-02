@@ -6,7 +6,10 @@ augroup au_vimrc_js
     autocmd!
 augroup END
 
-setlocal tabstop=2 softtabstop=2 shiftwidth=2
+var indent = 2
+execute 'setlocal tabstop=' .. indent
+execute 'setlocal softtabstop=' .. indent
+execute 'setlocal shiftwidth=' .. indent
 
 autocmd au_vimrc_js BufWrite *.js :vim9cmd trailingspace.DeleteTrailingWS()
 

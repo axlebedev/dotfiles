@@ -1,5 +1,8 @@
 vim9script
 
-setlocal tabstop=2 softtabstop=2 shiftwidth=2
+var indent = 2
+execute 'setlocal tabstop=' .. indent
+execute 'setlocal softtabstop=' .. indent
+execute 'setlocal shiftwidth=' .. indent
 
 setlocal iskeyword+=-
