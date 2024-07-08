@@ -371,5 +371,12 @@ vmap _ S_
 # wrap visual selection into function block 
 vnoremap <C-b> "bdi{<CR>return <C-r>b;<CR>}<Esc>=ib
 
+def FoldSelection()
+  var saved = &foldmethod
+  &foldmethod = 'manual'
+  normal! zf
+enddef
+vnoremap zf <ScriptCmd>FoldSelection()<CR>
+
 nnoremap rti <ScriptCmd>requiretoimport.RequireToImport()<CR>
 nnoremap itr <ScriptCmd>requiretoimport.ImportToRequire()<CR>
