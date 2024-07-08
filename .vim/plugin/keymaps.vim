@@ -12,6 +12,7 @@ import autoload '../autoload/readmode.vim'
 import autoload '../autoload/updatebuffer.vim'
 import autoload '../autoload/yankfilename.vim'
 import autoload '../autoload/increasefoldlevel.vim'
+import autoload '../autoload/requiretoimport.vim'
 
 g:mapleader = "\<space>"
 nmap <space> <leader>
@@ -369,3 +370,6 @@ vmap _ S_
 
 # wrap visual selection into function block 
 vnoremap <C-b> "bdi{<CR>return <C-r>b;<CR>}<Esc>=ib
+
+nnoremap rti <ScriptCmd>requiretoimport.RequireToImport()<CR>
+nnoremap itr <ScriptCmd>requiretoimport.ImportToRequire()<CR>
