@@ -322,6 +322,7 @@ g:targets_pairs = '()b {}c [] <>' # replace {}B to {}c
 # expand selection
 Plug 'terryma/vim-expand-region'
 vmap v <Plug>(expand_region_expand)
+vmap V <Plug>(expand_region_shrink)
 vmap <S-v> <Plug>(expand_region_shrink)
 def Exp(): void
     expand_region#custom_text_objects({
