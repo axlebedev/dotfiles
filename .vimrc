@@ -581,6 +581,12 @@ g:FindCursorPost = function('FindCursorHookPost')
 # TODO: сделать чтобы работал бесшовно
 # Plug 'noscript/taberian.vim'
 
+Plug 'jrudess/vim-foldtext'
+g:FoldText_expansion = '   ' 
+g:FoldText_width = 0
+g:FoldText_placeholder = '⋯ '
+
+
 # -----------------------------------------------------------------------------
 plug#end()
 filetype plugin indent on
