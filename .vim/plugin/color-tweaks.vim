@@ -18,6 +18,8 @@ highlight MatchParen cterm=bold ctermbg=none ctermfg=magenta gui=bold guibg=#FDB
 # colors of fold column
 highlight FoldColumn guibg=#d9d9d9 guifg=#34352E
 
+highlight Folded guibg=#e4e4e4
+
 # colors of error column
 highlight SignColumn guibg=#d9d9d9
 augroup ClapHighlights

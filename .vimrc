@@ -576,15 +576,17 @@ def FindCursorHookPost(): void
     IlluminationEnable
 enddef
 g:FindCursorPost = function('FindCursorHookPost')
+
+Plug 'axlebedev/vim-foldtext'
+g:FoldText_expansion = '   ' 
+g:FoldText_width = 0
+g:FoldText_placeholder = '⋯ '
+g:FoldText_multiplication = ''
+g:FoldText_line = '   ▤ '
 # }}} homemade plugins
 
 # TODO: сделать чтобы работал бесшовно
 # Plug 'noscript/taberian.vim'
-
-Plug 'jrudess/vim-foldtext'
-g:FoldText_expansion = '   ' 
-g:FoldText_width = 0
-g:FoldText_placeholder = '⋯ '
 
 
 # -----------------------------------------------------------------------------
