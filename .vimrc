@@ -592,7 +592,6 @@ g:FoldText_line = '▤ '
 # TODO: сделать чтобы работал бесшовно
 # Plug 'noscript/taberian.vim'
 
-
 # -----------------------------------------------------------------------------
 plug#end()
 filetype plugin indent on
