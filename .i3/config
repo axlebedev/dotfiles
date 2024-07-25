@@ -41,6 +41,7 @@ exec --no-startup-id nm-applet
 # exec --no-startup-id xinput set-prop "Genius Optical Mouse" "Coordinate Transformation Matrix" 0.5 0 0 0 0.5 0 0 0 1
 # Чтобы numpad-dot всегда давал точку а не запятую - надо в /usr/share/X11/xkb/symbols/ru удалить вызов kpdl(comma)
 exec --no-startup-id sleep 1 && setxkbmap -layout us,ru -option 'grp:shift_caps_switch'
+exec $HOME/.i3/switch-to-english-on-terminal-focus.sh
 # Чтобы автоматически plug/unplug мониторы
 # sudo apt install autorandr
 # exec --no-startup-id sleep 2 && autorandr --change
