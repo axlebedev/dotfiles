@@ -19,6 +19,9 @@ vim9script
 #
 # TODO NERDTree plugins
 #
+# TODO
+# https://github.com/romainl/vim-qf
+# https://github.com/stefandtw/quickfix-reflector.vim
 # Plugin settings ============================= {{{
 set shell=bash
 
