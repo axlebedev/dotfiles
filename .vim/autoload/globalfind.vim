@@ -23,7 +23,7 @@ var isLiteral = 0
 var popupId = 0
 
 def MakeVarsString(): string
-    return 'w' .. (isWholeWord % 2 ? '+' : '-') .. ' l' .. (isLiteral % 2 ? '+' : '-') .. ' Search>'
+    return 'w' .. (isWholeWord % 2 ? '➕' : '－') .. ' l' .. (isLiteral % 2 ? '➕' : '－') .. ' Search>'
 enddef
 
 export def ResizeQFHeight(): void
@@ -68,7 +68,7 @@ export def Grep()
         line: 1000,
     })
     redraw
-    var word = input('             ', initialWord)
+    var word = input('           －－', initialWord)
 
     popup_close(popupId)
 
