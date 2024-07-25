@@ -380,3 +380,8 @@ vnoremap zf <ScriptCmd>FoldSelection()<CR>
 
 nnoremap rti <ScriptCmd>requiretoimport.RequireToImport()<CR>
 nnoremap itr <ScriptCmd>requiretoimport.ImportToRequire()<CR>
+
+nnoremap ZC zC
+nnoremap ZO zO
+
+nnoremap H zc
