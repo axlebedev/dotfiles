@@ -101,8 +101,8 @@ abbr -a gbl g blame
 abbr -a gs g status .
 # maybe git diff --patience
 
-abbr -a gd g diff --histogram --minimal --ignore-space-change --relative --color-words
-abbr -a gdc g diff --histogram --minimal --ignore-space-change --relative --cached --color-words
+abbr -a gd g diff --histogram --minimal --ignore-space-change --relative
+abbr -a gdc g diff --histogram --minimal --ignore-space-change --relative --cached
 abbr -a gh g hist
 abbr -a ghh g hist --first-parent -n 10
 abbr -a ghhh g hist --first-parent -n 20
