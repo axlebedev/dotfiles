@@ -586,7 +586,7 @@ g:FoldText_expansion = '   '
 g:FoldText_width = 0
 g:FoldText_placeholder = '⋯ '
 g:FoldText_multiplication = ''
-g:FoldText_line = '   ▤ '
+g:FoldText_line = '▤ '
 # }}} homemade plugins
 
 # TODO: сделать чтобы работал бесшовно
