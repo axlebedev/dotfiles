@@ -206,7 +206,7 @@ nnoremap <silent> <leader>t <ScriptCmd>LeaderT()<CR>
 vnoremap <silent> <leader>t "ly<ScriptCmd>LeaderT(true)<CR>
 nnoremap <silent> <leader>b <CMD>Buffers<CR>
 nnoremap <silent> <leader>m <CMD>call fzf#vim#files('', {
-            \    'source': 'g diff --name-only --diff-filter=U',
+            \    'source': 'git diff --name-only --diff-filter=U',
             \    'sink': 'e',
             \    'options': '--prompt="Unmerged> "'
             \ })<CR>
