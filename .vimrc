@@ -510,6 +510,7 @@ g:coc_global_extensions = [
     'coc-json',
     'coc-tsserver',
     'coc-tabnine',
+    'coc-clangd',
     'coc-yaml',
     'coc-ccls',
 ]
