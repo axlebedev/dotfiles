@@ -379,10 +379,11 @@ vnoremap <C-b> "bdi{<CR>return <C-r>b;<CR>}<Esc>=ib
 
 def FoldSelection()
   var saved = &foldmethod
-  &foldmethod = 'manual'
+  exe 'setlocal foldmethod=manual'
   normal! zf
 enddef
 vnoremap zf <ScriptCmd>FoldSelection()<CR>
+vnoremap zc <ScriptCmd>FoldSelection()<CR>
 
 nnoremap rti <ScriptCmd>requiretoimport.RequireToImport()<CR>
 nnoremap itr <ScriptCmd>requiretoimport.ImportToRequire()<CR>
