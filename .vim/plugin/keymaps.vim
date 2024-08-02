@@ -259,7 +259,13 @@ enddef
 nnoremap <silent> cp <ScriptCmd>Cp()<CR>
 
 # for convenient git
-nnoremap <C-g><C-g> <CMD>Magit<CR>
+def Magit()
+    if (&filetype == 'qf')
+        wincmd k
+    endif
+    Magit
+enddef
+nnoremap <C-g><C-g> <ScriptCmd>Magit()<CR>
 nnoremap <C-g><C-b> <CMD>Git blame<cr>
 nnoremap <C-g><C-v> <CMD>GV!<cr>
 # stage current file
