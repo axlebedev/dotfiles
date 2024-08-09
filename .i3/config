@@ -28,11 +28,15 @@ exec --no-startup-id flameshot
 #   "Coordinate Transformation Matrix" 1, 0, 0, 0, 1, 0, 0, 0, 1.5
 exec --no-startup-id unclutter -idle 3
 exec --no-startup-id indicator-sound-switcher
+
+set $OUTPUT_PRIMARY HDMI-0
+set $OUTPUT_LEFT DVI-D-0
+set $OUTPUT_RIGHT DP-4
 exec --no-startup-id xrandr \
-  --auto --output HDMI-0 --primary \
-  --auto --output DVI-D-0 --left-of HDMI-0 \
-  --auto --output DP-0 --right-of HDMI-0
-exec --no-startup-id i3 focus output DVI-D-0, workspace 10, focus output DP-0, workspace 11, focus output HDMI-0, workspace 1
+  --auto --output $OUTPUT_PRIMARY --primary \
+  --auto --output $OUTPUT_LEFT --left-of $OUTPUT_PRIMARY \
+  --auto --output $OUTPUT_RIGHT --right-of $OUTPUT_PRIMARY
+exec --no-startup-id i3 focus output $OUTPUT_LEFT, workspace 10, focus output $OUTPUT_RIGHT, workspace 11, focus output $OUTPUT_PRIMARY, workspace 1
 
 
 exec --no-startup-id nm-applet
