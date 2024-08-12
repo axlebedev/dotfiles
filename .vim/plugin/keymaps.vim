@@ -362,6 +362,8 @@ vnoremap ! <ScriptCmd>chase.Prev()<CR>
 
 nnoremap zn nzz
 
+nnoremap ad <ScriptCmd>ALEDisable<CR>
+
 nnoremap q <NOP>
 nnoremap <C-q> q
 
@@ -373,6 +375,8 @@ vmap [ S[
 vmap ] S]
 vmap { S{
 vmap _ S_
+
+nnoremap ad <ScriptCmd>ALEDisable<CR>
 
 # wrap visual selection into function block 
 vnoremap <C-b> "bdi{<CR>return <C-r>b;<CR>}<Esc>=ib

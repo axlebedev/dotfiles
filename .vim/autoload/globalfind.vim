@@ -126,6 +126,8 @@ export def FilterTestEntries()
                 \ ->filter("bufname(v:val.bufnr) !~# 'amrDocs'")
                 \ ->filter("bufname(v:val.bufnr) !~# 'amr-docs'")
                 \ ->filter("bufname(v:val.bufnr) !~# 'test'")
+                \ ->filter("bufname(v:val.bufnr) !~# 'Tests'")
+                \ ->filter("bufname(v:val.bufnr) !~# 'QtEditor'")
     setqflist(filtered)
     ResizeQFHeight()
 enddef
