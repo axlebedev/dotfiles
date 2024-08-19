@@ -391,3 +391,9 @@ nnoremap ZC zC
 nnoremap ZO zO
 
 nnoremap H zc
+
+def NextSearch(): void
+    setreg('/', getreg('*'))
+    normal! n
+enddef
+nnoremap <C-n> <ScriptCmd>NextSearch()<CR>
