@@ -62,13 +62,15 @@ export def Grep()
         ? l9#getSelectedText()
         : expand('<cword>')
 
-    popupId = popup_create(MakeVarsString(), {
+    var varsString = MakeVarsString()
+    popupId = popup_create(varsString, {
         pos: 'botleft',
         col: 1,
         line: 1000,
     })
     redraw
-    var word = input('           －－', initialWord)
+
+    var word = input(repeat(' ', varsString->strwidth()), initialWord)
 
     popup_close(popupId)
 
