@@ -583,7 +583,6 @@ enddef
 g:FindCursorPost = function('FindCursorHookPost')
 
 Plug 'axlebedev/vim-foldtext'
-g:FoldText_expansion = '   ' 
 g:FoldText_width = 0
 g:FoldText_placeholder = '⋯ '
 g:FoldText_multiplication = ''
