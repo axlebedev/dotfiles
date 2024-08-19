@@ -383,7 +383,6 @@ def FoldSelection()
   normal! zf
 enddef
 vnoremap zf <ScriptCmd>FoldSelection()<CR>
-vnoremap zc <ScriptCmd>FoldSelection()<CR>
 
 nnoremap rti <ScriptCmd>requiretoimport.RequireToImport()<CR>
 nnoremap itr <ScriptCmd>requiretoimport.ImportToRequire()<CR>
