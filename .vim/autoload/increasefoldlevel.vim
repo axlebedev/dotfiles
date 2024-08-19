@@ -1,5 +1,5 @@
 function! s:GetMaxFoldlevelInCurrentBuffer() abort
-    let &foldmethod = 'syntax'
+    let &l:foldmethod = 'syntax'
     let maxFoldlevel = 1
     let currentLine = 1
     let maxline = line('$')
@@ -14,16 +14,16 @@ function! s:GetMaxFoldlevelInCurrentBuffer() abort
 endfunction
 
 function! increasefoldlevel#increaseFoldlevel() abort
-    let &foldmethod = 'syntax'
-    let &foldlevel += 1
+    let &l:foldmethod = 'syntax'
+    let &l:foldlevel += 1
 endfunction
 
 function! increasefoldlevel#decreaseFoldlevel() abort
-    let &foldmethod = 'syntax'
+    let &l:foldmethod = 'syntax'
     let maxFoldlevel = s:GetMaxFoldlevelInCurrentBuffer()
-    if (&foldlevel - 1 >= maxFoldlevel) 
-        let &foldlevel = maxFoldlevel - 1
+    if (&l:foldlevel - 1 >= maxFoldlevel) 
+        let &l:foldlevel = maxFoldlevel - 1
     else
-        let &foldlevel -= 1
+        let &l:foldlevel -= 1
     endif
 endfunction

@@ -175,8 +175,8 @@ submode#map(foldlevelSubmode, 'n', '', 'h', '<ScriptCmd>call increasefoldlevel#d
 submode#map(foldlevelSubmode, 'n', '', '+', '<ScriptCmd>call increasefoldlevel#increaseFoldlevel()<cr>')
 submode#map(foldlevelSubmode, 'n', '', '>', '<ScriptCmd>call increasefoldlevel#increaseFoldlevel()<cr>')
 submode#map(foldlevelSubmode, 'n', '', 'l', '<ScriptCmd>call increasefoldlevel#increaseFoldlevel()<cr>')
-submode#map(foldlevelSubmode, 'n', '', '0', '<ScriptCmd>set foldlevel=0<cr>')
-submode#map(foldlevelSubmode, 'n', '', '9', '<ScriptCmd>set foldlevel=99<cr>')
+submode#map(foldlevelSubmode, 'n', '', '0', '<ScriptCmd>setlocal foldlevel=0<cr>')
+submode#map(foldlevelSubmode, 'n', '', '9', '<ScriptCmd>setlocal foldlevel=99<cr>')
 
 autocmd au_vimrc FileType help,qf,git,fugitive* nnoremap <buffer> q <CMD>q<cr>
 

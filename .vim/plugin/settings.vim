@@ -113,7 +113,8 @@ set splitright
 set foldenable 
 set foldmethod=syntax
 set foldcolumn=0
-set foldlevelstart=99
+
+autocmd au_vimrc_settings BufNewFile,BufRead * &l:foldlevel = &l:foldlevel > 0 ? &l:foldlevel : 99
 
 # Keep the cursor in the same place when switching buffers
 set nostartofline
