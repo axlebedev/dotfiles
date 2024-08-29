@@ -114,6 +114,7 @@ abbr -a gpsu g push -u origin HEAD
 abbr -a gpsf g push -f origin HEAD
 abbr -a grb g rebase --autostash
 abbr -a grbm "g fetch origin master && g rebase --autostash origin/master"
+abbr -a gmm "g fetch origin master && g merge origin/master"
 abbr -a grbc g rebase --continue
 abbr -a grba g rebase --abort
 abbr -a gcp g cherry-pick
