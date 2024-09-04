@@ -30,7 +30,7 @@ cat .ssh/id_rsa.pub
 sudo apt install -y \
 git \
 curl \
-conky \
+conky-all \
 build-essential \
 silversearcher-ag \
 network-manager-l2tp \
@@ -69,7 +69,7 @@ indicator-sound-switcher \
 gromit-mpx \
 simplescreenrecorder \
 
-sudo snap install -classic node
+sudo snap install --classic node
 
 # ----- install Chrome
 wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - 
