@@ -26,7 +26,7 @@ def GoToNextDiff()
   set scrolloff=20
   normal nzt
 
-  &scrolloff=savedScrollOff
+  &scrolloff = savedScrollOff
   setreg('/', savedSearchReg)
 enddef
 
@@ -35,28 +35,25 @@ map <buffer> <silent> gn <ScriptCmd>GoToNextDiff()<CR>
 
 # CopyWithoutStart {{{
 def CopyWithoutStart()
-  normal! yy
-  var currentLine = getreg('+')
-  var firstChar = currentLine[0]
+  normal! y
 
-  if (firstChar == '+' || firstChar == '-')
-      currentLine = currentLine[1:]
-  endif
-  setreg('*', currentLine)
-  setreg('+', currentLine)
+  var lines = getreg('+')->split("\n")
+  var resultLines = []
+
+  for line in lines
+      var firstChar = line[0]
+      if (firstChar == '+' || firstChar == '-')
+          resultLines = resultLines + [line[1 : ]]
+      else
+          resultLines = resultLines + [line]
+      endif
+  endfor
+
+  var result = resultLines->join("\n")
+
+  setreg('*', result)
+  setreg('+', result)
 enddef
 
-nnoremap <buffer> <silent> yy <ScriptCmd>call CopyWithoutStart()<CR>
-
-def Lal()
-  var yankedText = substitute(l9#getSelectedText(), "[\n^][+-]", '\n', 'g')
-
-  # remove starting + or -, expecting that visual LINE selection
-  if (yankedText[0] == '+' || yankedText[0] == '-')
-    yankedText = yankedText[1 : ]
-  endif
-  setreg('*', yankedText)
-  setreg('+', yankedText)
-enddef
-vnoremap <buffer> <silent> y <CMD>call <SID>Lal()<CR>
-# }}} CopyWithoutStart
+noremap <buffer> <silent> y <ScriptCmd>call CopyWithoutStart()<CR>
+# # }}} CopyWithoutStart
