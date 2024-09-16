@@ -1,5 +1,7 @@
 # =================================================================================================
 # === LINUX INSTALL ===============================================================================
+mkdir ~/github
+
 # ----- Установка нужных программ -----
 sudo add-apt-repository -y ppa:agornostal/ulauncher && \
 sudo add-apt-repository -y ppa:git-core/ppa && \
@@ -72,16 +74,7 @@ simplescreenrecorder \
 sudo snap install --classic node
 
 # ----- install Chrome
-wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - 
-sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-sudo apt update 
-# maybe sudo apt install libnss3
-sudo apt install google-chrome-stable
 
-# ===== dotfiles ==================================================================================
-cd ~ && \
-git clone git@github.com:axlebedev/dotfiles.git && \
-~/dotfiles/init.sh
 
 # ===== VIM =======================================================================================
 # поставить галочку в Software sources -> enable source code repositories
@@ -89,7 +82,7 @@ sudo apt install \
 liblua5.1-dev \
 luajit \
 libluajit-5.1-dev \
-python2-dev \
+python-dev-is-python3 \
 ruby-dev \
 libperl-dev
 libncurses5-dev \
@@ -106,6 +99,7 @@ mkdir build && cd build
 cmake ..
 make && sudo make install
 
+# 16.09.2024: этот пункт больше не нужен. Если в следующий раз тоже не нужен - то удалить абзац
 # В /etc/apt/sources.list надо скопипасить cтрочку
 # ...ubuntu version
 # и дать концовкy 'main restricted universe main multiverse'
@@ -113,7 +107,7 @@ make && sudo make install
 # deb-src http://mirror.yandex.ru/ubuntu xenial main restricted universe main multiverse
 
 sudo apt build-dep vim
-cd ~ && mkdir github && cd ~/github
+cd ~/github
 git clone git@github.com:vim/vim.git 
 cd vim/src
 sudo make distclean
@@ -131,13 +125,24 @@ sudo make distclean
 --enable-fontset \
 --with-features=huge \
 --enable-gui=auto \
---enable-gtk2-check \
---with-x
+--enable-gtk2-check 
 
 sudo make && sudo make install
 
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 # font here: https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/DroidSansMono/complete/Droid%20Sans%20Mono%20for%20Powerline%20Nerd%20Font%20Complete%20Mono.otf
+
+# ===== FISH ======================================================================================
+# https://hackercodex.com/guide/install-fish-shell-mac-ubuntu/
+# or-my-fish:
+curl -L http://get.oh-my.fish | fish
+omf install bobthefish # prev: agnoster # theme
+omf theme bobthefish # prev: agnoster # don't forget to enable powerline-nerd-font
+# plugins
+omf install cd
+omf install sudope # TODO: разобраться и настроить
+# for z: https://github.com/rupa/z/blob/master/z.sh to $path
+omf install z # TODO разобраться и навешать алиасов
 
 # ===== I3 GAPS ============================================
 sudo apt install libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev libxcb-icccm4-dev libyajl-dev libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev autoconf xutils-dev libtool
@@ -162,24 +167,14 @@ meson --prefix /usr/local
 ninja
 sudo ninja install
 
-
-
-
 # ----- install i3-lock
 # i3lock установить в соотв. с инструкцией, всё должно собраться 
 # https://raymond.li/i3lock-color/
 
-# ===== FISH ======================================================================================
-# https://hackercodex.com/guide/install-fish-shell-mac-ubuntu/
-# or-my-fish:
-curl -L http://get.oh-my.fish | fish
-omf install bobthefish # prev: agnoster # theme
-omf theme bobthefish # prev: agnoster # don't forget to enable powerline-nerd-font
-# plugins
-omf install cd
-omf install sudope # TODO: разобраться и настроить
-# for z: https://github.com/rupa/z/blob/master/z.sh to $path
-omf install z # TODO разобраться и навешать алиасов
+# ===== dotfiles ==================================================================================
+cd ~ && \
+git clone git@github.com:axlebedev/dotfiles.git && \
+~/dotfiles/init.sh
 
 # ===== Чтобы не отсоединялся wi-fi ===============================================================
 # ПОМОГЛО: обновить убунту до 22
