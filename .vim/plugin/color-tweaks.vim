@@ -60,6 +60,8 @@ highlight diffLine    term=bold ctermbg=magenta ctermfg=white  cterm=bold guibg=
 highlight DiffText   term=reverse,bold ctermbg=red       ctermfg=yellow   cterm=bold guibg=#191C41 guifg=NONE   gui=bold
 highlight DiffChange term=bold         ctermbg=black     ctermfg=white    cterm=bold guibg=NONE guifg=NONE
 #
+highlight PopupScrollbar term=bold ctermfg=4 guifg=#878787 guibg=#d9d9d9
+
 # # highlight jsx customizations
 # highlight jsObjectKey guifg=white
 # highlight jsxElement guifg=#f92772

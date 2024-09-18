@@ -604,11 +604,11 @@ g:FoldText_line = '▤ '
 Plug 'axlebedev/popup_scrollbar.vim'
 g:popup_scrollbar_min_size = 3
 g:popup_scrollbar_shape = {
-    \ 'head': '█',
-    \ 'body': '█',
-    \ 'tail': '█',
+    \ 'head': '▖',
+    \ 'body': '▌',
+    \ 'tail': '▘',
     \ }
-g:popup_scrollbar_highlight = 'SpecialComment'
+g:popup_scrollbar_highlight = 'PopupScrollbar'
 
 # -----------------------------------------------------------------------------
 plug#end()
