@@ -6,9 +6,7 @@ DEFAULT='#ff00ffcc'
 TEXT='#7B75CFEE'
 WRONG='#880000bb'
 VERIFYING='#bb00bbbb'
-# echo 'starting' >> /home/l-e-b-e-d-e-v/dotfiles/log
-# echo $(date +"%T") >> /home/l-e-b-e-d-e-v/dotfiles/log
-notify-send DUNST_COMMAND_PAUSE
+dunstctl set-paused true
 i3lock \
         --nofork \
         --ignore-empty-password \
@@ -37,5 +35,6 @@ i3lock \
 --indicator                  \
 --time-str="%H:%M"        \
 --date-str=""       \
---keylayout 1 && notify-send DUNST_COMMAND_RESUME
+--keylayout 1 && dunstctl set-paused false
+
 # --keylayout 1 && echo 'waited' >> /home/l-e-b-e-d-e-v/dotfiles/log && echo $(date +"%T") >> /home/l-e-b-e-d-e-v/dotfiles/log && (sleep 1 && notify-send DUNST_COMMAND_RESUME)
