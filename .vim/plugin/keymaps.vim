@@ -397,3 +397,22 @@ def NextSearch(): void
     normal! n
 enddef
 nnoremap <C-n> <ScriptCmd>NextSearch()<CR>
+
+nmap <silent>rr <Plug>(coc-rename)
+
+# Yank with keeping cursor position in visual mode {{{
+def Keepcursor_visual_wrapper(command: string)
+  execute 'normal! gv' .. command
+  execute "normal! gv\<ESC>"
+enddef
+xnoremap <silent> y :<C-u>call <SID>Keepcursor_visual_wrapper('y')<CR>
+xnoremap <silent> Y :<C-u>call <SID>Keepcursor_visual_wrapper('Y')<CR>
+# }}}
+
+# Repeat on every line {{{
+# repeat last command for each line of a visual selection
+vnoremap . :normal .<CR>
+# replay @q macro for each line of a visual selection
+vnoremap @q :normal @q<CR>
+vnoremap @@ :normal @@<CR>
+# }}}
