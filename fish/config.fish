@@ -93,9 +93,17 @@ function g-sortedbranch -d 'git or arc sorted branch'
 end
 bind \cg g-sortedbranch
 
+function g-currentbranch--saved
+    set currentBranchName (git rev-parse --abbrev-ref HEAD)
+    set currentBranchNameSaved (string join '' -- $currentBranchName "--saved") 
+    commandline -j -- "g checkout -b $currentBranchNameSaved"
+    commandline -f repaint
+end
+
 abbr -a go g checkout
 abbr -a gor g checkout users/l-e-b-e-d-e-v/
 abbr -a gob g checkout -b
+alias gobs g-currentbranch--saved
 abbr -a gbl g blame
 
 abbr -a gs g status .
