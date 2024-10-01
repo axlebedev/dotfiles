@@ -1,21 +1,12 @@
 vim9script
 
 # TODO: 'help' to be always in readmode
-# TODO: https://github.com/Shougo/denite.nvim - wants python3 even if its ebabled
-#
-# TODO https://github.com/haya14busa/.vim/
-# TODO: https://github.com/haya14busa/dotfiles/blob/master/.vimrc
-#
-# TODO: разобраться, почему не работает vip<C-v> и после этого попробовать
-# Plug 'kana/vim-niceblock'
 #
 # TODO: vim-easymotion потестить
 # TODO: https://github.com/qpkorr/vim-bufkill вместо kwbd
 #
 # TODO: https://github.com/liuchengxu/vim-clap 
-# https://github.com/stefandtw/quickfix-reflector.vim
 # https://github.com/bounceme/poppy.vim
-# https://github.com/AndrewRadev/popup_scrollbar.vim
 #
 # TODO NERDTree plugins
 #
@@ -26,6 +17,7 @@ vim9script
 # https://github.com/junkblocker/git-time-lapse?tab=readme-ov-file
 # https://www.reddit.com/r/vim/comments/mrpoa3/comment/gunv36d/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
 # Сделать чтобы если мы зашли в буфер и сразу вышли - то чтобы он закрывался
+
 # Plugin settings ============================= {{{
 set shell=bash
 
@@ -213,7 +205,6 @@ Plug 'AndrewRadev/bufferize.vim'
 # search plugins {{{
 
 # -----------------------------------------------------------------------------
-#  TODO
 # Search string or pattern in folder
 # Necessary to open files from quickfix
 Plug 'yssl/QFEnter'
@@ -292,16 +283,6 @@ g:airline_theme = 'papercolor'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-# TODO TODO
-# g:airline_theme_patch_func = 'AirlineThemePatch'
-# def AirlineThemePatch(palette): void
-# if g:airline_theme == 'jellybeans'
-#     echom a:palette
-#     # for colors in values(a:palette.inactive)
-#     # colors[3] = 245
-#     # endfor
-# endif
-# enddef
 # }}} appearance plugins
 
 # git plugins {{{

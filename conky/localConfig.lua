@@ -40,8 +40,6 @@ textColorFg = '\\#' .. colors[3]
 -- secondaryTextColorFg = '\\#8D15EE'
 secondaryTextColorFg = '\\#' .. colors[9]
 
--- TODO color for VPN?
-
 -- config local to machine
 
 internetInterface = 'wlp3s0'

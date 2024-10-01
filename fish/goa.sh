@@ -15,8 +15,6 @@ function doFilterArgs () {
 
 if [[ $PWD == /home/l-e-b-e-d-e-v/arc* ]];
 then
-    # TODO: push --force
-    
     if [[ $1 == diff ]]
     then
         argsToExclude=("--histogram" "--minimal" "--color-words")

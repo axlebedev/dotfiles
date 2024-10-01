@@ -128,7 +128,7 @@ conky.text = [[
   "background": "]] .. errorColorFg .. [[",
   "separator": false
 },
-# current local ip. TODO: it is different on different machines
+# current local ip
 { 
   "full_text": "${addr ]] .. internetInterface .. [[}",
   "color": "]] .. textColorFg .. [[" 
