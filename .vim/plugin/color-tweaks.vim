@@ -89,3 +89,12 @@ highlight PopupScrollbar term=bold ctermfg=4 guifg=#878787 guibg=#d9d9d9
 # call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', 'NONE')
 # call NERDTreeHighlightFile('scss', 'cyan', 'none', 'cyan', 'NONE')
 # call NERDTreeHighlightFile('js', 'red', 'none', '#ffa500', 'NONE')
+#
+# hl trailing spaces instead of trail:c TODO: make it work
+def Hl_trailing_spaces()
+  # Test   
+  highlight! link TrailingSpaces Error
+  syntax match TrailingSpaces containedin=ALL /\s\+$/
+enddef
+autocmd BufWinEnter,ColorScheme * call Hl_trailing_spaces()
+# }}}
