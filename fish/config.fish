@@ -43,6 +43,7 @@ abbr -a gi g commit --verbose
 abbr -a gin g commit --no-verify --verbose
 abbr -a gia g commit --amend --no-verify --no-edit
 abbr -a giw g commit --no-verify -m "wip"
+abbr -a gil g commit --no-verify -m "linted"
 
 function cdf
     set resultPath ''
