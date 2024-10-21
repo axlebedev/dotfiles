@@ -17,7 +17,8 @@ function noy
     commandline -j -- $program
     commandline -f repaint
 
-    jq '[ .scripts ]' package.json | grep \" | string trim | string split " " --fields=1 | string sub --start=2 --end=-2 | fzf --layout=reverse --bind=esc:abort --height=20 --scheme=history --tac --bind esc: | tail -1 | read -l command
+    node ~/dotfiles/fish/noy.js |\
+    read -l command
 
     commandline -j -- $program$command
     commandline -f repaint
