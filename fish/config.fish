@@ -8,7 +8,21 @@ set -g theme_nerd_fonts yes
 set -g theme_date_format "+%H:%M"
 
 alias goa="~/dotfiles/fish/goa.sh"
-alias g="~/dotfiles/fish/goa.sh"
+
+function noy
+    set program "npm run "
+    if test yarn.lock
+        set program "yarn "
+    end
+    commandline -j -- $program
+    commandline -f repaint
+
+    jq '[ .scripts ]' package.json | grep \" | string trim | string split " " --fields=1 | string sub --start=2 --end=-2 | fzf --layout=reverse --bind=esc:abort --height=20 --scheme=history --tac --bind esc: | tail -1 | read -l command
+
+    commandline -j -- $program$command
+    commandline -f repaint
+end
+abbr -a n noy
 
 # open 'man' in vim
 set -x PAGER "/bin/sh -c \"unset PAGER;col -b -x | \
@@ -180,6 +194,8 @@ abbr -a y yarn
 abbr -a yi yarn
 abbr -a ys yarn start
 abbr -a yss "yarn && yarn start"
+abbr -a yb yarn build
+abbr -a ybb "yarn && yarn build"
 abbr -a ycc yarn cache clean
 abbr -a yt yarn test
 abbr -a yl yarn lint
@@ -198,3 +214,5 @@ set -g theme_display_node yes
 set -g theme_display_date no
 set -g theme_display_cmd_duration yes
 set -g theme_color_scheme light
+
+alias files="xdg-open (pwd) > /dev/null 2>&1"
