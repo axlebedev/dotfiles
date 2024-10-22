@@ -7,7 +7,7 @@ set -g theme_color_scheme light
 set -g theme_nerd_fonts yes
 set -g theme_date_format "+%H:%M"
 
-alias goa="~/dotfiles/fish/goa.sh"
+alias g="~/dotfiles/fish/goa.sh"
 
 function noy
     set program "npm run "
