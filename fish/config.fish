@@ -10,17 +10,8 @@ set -g theme_date_format "+%H:%M"
 alias g="~/dotfiles/fish/goa.sh"
 
 function noy
-    set program "npm run "
-    if test yarn.lock
-        set program "yarn "
-    end
-    commandline -j -- $program
-    commandline -f repaint
-
-    node ~/dotfiles/fish/noy.js |\
-    read -l command
-
-    commandline -j -- $program$command
+    node ~/dotfiles/fish/noy.js | read -l command
+    commandline -j -- $command
     commandline -f repaint
 end
 abbr -a n noy
