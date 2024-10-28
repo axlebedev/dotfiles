@@ -5,13 +5,12 @@ const process = require('process');
 const FZF_CMD = 'fzf --layout=reverse --bind=esc:abort --height=20 --scheme=history --bind esc:'
 const PACKAGE_JSON = 'package.json'
 
-const getScripts = (filename, program) => {
+const getScripts = (filename) => {
     let data = fs.readFileSync(filename, 'utf8')
     data = JSON.parse(data);
     data = data.scripts
     data = Object.keys(data)
     data = data.sort()
-    data = data.map((script) => `${program} ${script}`)
     return data
 }
 
@@ -20,12 +19,10 @@ const getWorkspaces = (filename) => {
     data = JSON.parse(data);
     data = data.workspaces
     if (Array.isArray(data)) {
-        console.log('%c11111', 'background:#d0ff00', 'isArray');
-        console.log('%c11111', 'background:#d0ff00', 'data=', data);
+        console.log('%c11111', 'background:#d0ff00', 'isArray', JSON.stringify(data));
         return data
     }
-    console.log('%c11111', 'background:#d0ff00', 'isObject');
-    console.log('%c11111', 'background:#d0ff00', 'data=', data);
+    console.log('%c11111', 'background:#d0ff00', 'isObject', JSON.stringify(data));
 }
 
 const cdToWorkingDir = () => {
@@ -72,16 +69,16 @@ const main = () => {
         return
     }
 
-    const programT = getPackageManager()
-    const program = programT === 'npm' ? 'npm run' : programT
-    const scripts = getScripts(PACKAGE_JSON, program).join('\n')
+    // console.log('%c11111', 'background:#d0ff00', 'getWorkspaces(PACKAGE_JSON)=', getWorkspaces(PACKAGE_JSON));
+    const program = getPackageManager()
+    const scripts = getScripts(PACKAGE_JSON).join('\n')
 
     try {
         const result = child_process.execSync(
             `echo "${scripts}" | ${FZF_CMD}`,
             { encoding: "UTF-8" },
         )
-        console.log(result)
+        console.log(`${program} run ${result}`)
     } catch (error) {}
 }
 
