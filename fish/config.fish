@@ -52,19 +52,20 @@ abbr -a giw g commit --no-verify -m "wip"
 abbr -a gil g commit --no-verify -m "linted"
 
 function cdf
-    set resultPath ''
+    set resultPath './'
     while true
-        ls -aF | grep "/\$" | fzf --layout=reverse --bind=esc:abort --height=20 --scheme=history --tac --bind esc: | tail -1 | read -l result
+        set lslist (ls -aAF $resultPath | grep "/\$" | sort -r | string split0)
+        echo $lslist | fzf --layout=reverse --bind=esc:abort --height=20 --scheme=history --tac --bind esc: | tail -1 | read -l result
         if test $result
             set resultPath $resultPath$result
-            echo -e '\e[1A\e[K'$resultPath
-            cd $result
         else
             break
         end
     end
+    cd $resultPath
+    commandline -f repaint
 end
-abbr -a cdf cdf
+bind \ed cdf
 
 function git-sortedbranch -d 'Fuzzy-find a branch, sorted by reflog, and then all branches'
   set -l cmd (commandline -j)
