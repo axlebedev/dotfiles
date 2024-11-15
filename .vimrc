@@ -179,10 +179,6 @@ g:fzf_colors = {
 Plug 'shime/vim-livedown', { 'for': 'markdown', 'do': 'sudo npm i -g livedown' }
 
 # -----------------------------------------------------------------------------
-# :Qdo
-Plug 'henrik/vim-qargs'
-
-# -----------------------------------------------------------------------------
 # Commands to open browser + open specific pages on Github.
 Plug 'tyru/open-browser.vim'
 nmap <F3> <Plug>(openbrowser-smart-search)
