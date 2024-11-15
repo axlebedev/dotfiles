@@ -42,9 +42,9 @@ secondaryTextColorFg = '\\#' .. colors[9]
 
 -- config local to machine
 
-internetInterface = 'wlo1'
-hwMonitorPath = '/sys/devices/platform/coretemp.0/hwmon/hwmon3/temp1_input'
-coresNum = 20
+internetInterface = 'wlp0s20f3'
+hwMonitorPath = '/sys/devices/platform/coretemp.0/hwmon/hwmon4/temp1_input'
+coresNum = 12
 
 needNumLockOff = false
-needNumLockOn = true
+needNumLockOn = false
