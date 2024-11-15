@@ -25,9 +25,9 @@ do
 
     getname=`echo $line | jshon -e name -u`
 
-    if [ "$getname" = "Date" ] || [ "$getname" = "Time" ] 
+    if [ "$getname" = "Date" ]
     then
-        google-chrome --app="https://calendar.google.com/" > /dev/null 2>&1 &
+        google-chrome --app="https://mail.myoffice.team/calendar/workweek"> /dev/null 2>&1 &
     fi
 
     if [ "$getname" = "Time" ] 
