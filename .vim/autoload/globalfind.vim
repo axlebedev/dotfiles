@@ -54,6 +54,8 @@ def IncLiteral(): string
     return ''
 enddef
 
+const charsForEscape = '$'
+
 export def Grep()
     cmap <C-w> <C-r>=<sid>IncWord()<cr>
     cmap <C-l> <C-r>=<sid>IncLiteral()<cr>
@@ -71,13 +73,15 @@ export def Grep()
     redraw
 
     var word = input(repeat(' ', varsString->strwidth()), initialWord)
-
-    popup_close(popupId)
+    if (!isLiteral && word =~ escape(charsForEscape, charsForEscape))
+        IncLiteral()
+    endif
 
     if (!empty(word))
-        setreg('/', word)
         isWholeWord = isWholeWord % 2
         isLiteral = isLiteral % 2
+        word = escape(word, charsForEscape)
+        setreg('/', word)
 
         var prg = basegrepprg
         if (isWholeWord)
@@ -94,8 +98,10 @@ export def Grep()
         ResizeQFHeight()
     endif
 
+    popup_close(popupId)
     cunmap <C-w>
     cunmap <C-l>
+
 enddef
 
 augroup quickfix
