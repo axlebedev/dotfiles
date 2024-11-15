@@ -31,14 +31,19 @@ exec --no-startup-id flameshot
 exec --no-startup-id unclutter -idle 3
 exec --no-startup-id indicator-sound-switcher
 
-set $OUTPUT_PRIMARY DP-2
-set $OUTPUT_LEFT ""
-set $OUTPUT_RIGHT HDMI-0
-exec --no-startup-id xrandr \
-  --auto --output $OUTPUT_PRIMARY --primary \
-  --auto --output $OUTPUT_LEFT --left-of $OUTPUT_PRIMARY \
-  --auto --output $OUTPUT_RIGHT --right-of $OUTPUT_PRIMARY
-exec --no-startup-id i3 focus output $OUTPUT_LEFT, workspace 10, focus output $OUTPUT_RIGHT, workspace 11, focus output $OUTPUT_PRIMARY, workspace 1
+exec --no-startup-id $HOME/.i3/monitors.sh nerpa-office
+
+set $mode_monitors "Monitors (O)ffice (H)ome (S)ingle"
+mode $mode_monitors {
+	bindsym $mod+o mode "default" ; exec $HOME/.i3/monitors.sh nerpa-office
+	bindsym $mod+h mode "default" ; exec $HOME/.i3/monitors.sh nerpa-home
+	bindsym $mod+s mode "default" ; exec $HOME/.i3/monitors.sh nerpa-single
+
+# back to normal: Enter or Escape
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+bindsym $mod+Shift+w mode $mode_monitors
 
 
 exec --no-startup-id nm-applet
@@ -315,10 +320,13 @@ mode $mode_move_workspace {
 bindsym $mod+Shift+m mode $mode_move_workspace 
 
 # Work
-set $mode_work "Work (B)rowser (S)quadus"
+set $mode_work "Work (B)rowser (D)ebug (S)quadus (T)imetrack"
 mode $mode_work {
-	bindsym $mod+b mode "default" ; exec --no-startup-id nohup google-chrome --user-data-dir="/home/user/chrome-users/debug" & disown
+    bindsym $mod+b mode "default" ; exec --no-startup-id nohup google-chrome & disown
+ 	bindsym $mod+Shift+b mode "default" ; exec --no-startup-id nohup yandex-browser --user-data-dir="/home/user/aleksey.lebedev.myoffice" & disown
+    bindsym $mod+d mode "default" ; exec --no-startup-id nohup google-chrome --user-data-dir="/home/user/chrome-users/debug" & disown
 	bindsym $mod+s mode "default" ; exec --no-startup-id nohup google-chrome --app="https://im.ncloudtech.ru/rooms" & disown
+	bindsym $mod+t mode "default" ; exec --no-startup-id nohup gnome-terminal --class="floating" -- vim ~/timetrack & disown
 
 # back to normal: Enter or Escape
 	bindsym Return mode "default"

@@ -66,7 +66,7 @@ set number
 set showcmd
 
 # indent settings
-var indent = 2
+var indent = 4
 &tabstop = indent     # width of TAB.
 &softtabstop = indent  # how much spaces will be removed on backspace
 &shiftwidth = indent   # count of spaces for '<'/'>' commands

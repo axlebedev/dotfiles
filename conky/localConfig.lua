@@ -41,4 +41,4 @@ textColorFg = '\\#' .. colors[3]
 secondaryTextColorFg = '\\#' .. colors[9]
 
 needNumLockOff = false
-needNumLockOn = true
+needNumLockOn = false
