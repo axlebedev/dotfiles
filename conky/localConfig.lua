@@ -42,8 +42,10 @@ secondaryTextColorFg = '\\#' .. colors[9]
 
 -- config local to machine
 
-internetInterface = 'wlo1'
-hwMonitorPath = '/sys/devices/platform/coretemp.0/hwmon/hwmon3/temp1_input'
+-- ip addr | awk '/state UP/ {print $2}' | sed 's/.$//'
+internetInterface = 'wlp0s20f3'
+
+hwMonitorPath = '/sys/devices/platform/coretemp.0/hwmon/hwmon4/temp1_input'
 
 needNumLockOff = false
-needNumLockOn = true
+needNumLockOn = false
