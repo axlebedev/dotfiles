@@ -30,15 +30,15 @@ eval `ssh-agent -s` >>${logFile} 2>>${logFile}
 ssh-add $HOME/.ssh/id_rsa >>${logFile} 2>>${logFile}
 git fetch >>${logFile} 2>>${logFile}
 last_commit=$(git rev-parse origin/master)
-if [[ IGNORE_GIT == 0 && "$current_commit" == "$last_commit" ]]; \
-then
-    printf "${COLOR_GREEN}VIM IS ALREADY UP TO DATE${COLOR_RESET}"
-    printf "${filler}"
-    printf "\n"
-    rm ${logFile}
-    exit 0
-fi
-printf "\n"
+# if [[ IGNORE_GIT == 0 && "$current_commit" == "$last_commit" ]]; \
+# then
+#     printf "${COLOR_GREEN}VIM IS ALREADY UP TO DATE${COLOR_RESET}"
+#     printf "${filler}"
+#     printf "\n"
+#     rm ${logFile}
+#     exit 0
+# fi
+# printf "\n"
 
 printf "Starting update...\n"
 
