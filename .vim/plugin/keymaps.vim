@@ -399,6 +399,7 @@ enddef
 nnoremap <C-n> <ScriptCmd>NextSearch()<CR>
 
 nmap <silent>rr <Plug>(coc-rename)
+nmap <silent>gu <Plug>(coc-references-used)
 
 # Yank with keeping cursor position in visual mode {{{
 def Keepcursor_visual_wrapper(command: string)
