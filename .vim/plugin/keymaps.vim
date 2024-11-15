@@ -13,6 +13,7 @@ import autoload '../autoload/updatebuffer.vim'
 import autoload '../autoload/yankfilename.vim'
 import autoload '../autoload/increasefoldlevel.vim'
 import autoload '../autoload/requiretoimport.vim'
+import autoload '../autoload/logfunction.vim'
 
 g:mapleader = "\<space>"
 nmap <space> <leader>
@@ -386,6 +387,8 @@ vnoremap zf <ScriptCmd>FoldSelection()<CR>
 
 nnoremap rti <ScriptCmd>requiretoimport.RequireToImport()<CR>
 nnoremap itr <ScriptCmd>requiretoimport.ImportToRequire()<CR>
+
+nnoremap lf <ScriptCmd>logfunction.LogFunction()<CR>
 
 nnoremap ZC zC
 nnoremap ZO zO
