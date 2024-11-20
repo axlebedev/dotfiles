@@ -420,3 +420,16 @@ vnoremap . :normal .<CR>
 vnoremap @q :normal @q<CR>
 vnoremap @@ :normal @@<CR>
 # }}}
+#
+
+# select in function by coc.nvim
+xmap if <Plug>(coc-funcobj-i)
+omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap af <Plug>(coc-funcobj-a)
+
+# select in class by coc.nvim
+xmap ic <Plug>(coc-classobj-i)
+omap ic <Plug>(coc-classobj-i)
+xmap ac <Plug>(coc-classobj-a)
+omap ac <Plug>(coc-classobj-a)
