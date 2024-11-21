@@ -1,3 +1,9 @@
+# Полезные ссылки
+# https://blog.gitbutler.com/git-tips-2-new-stuff-in-git/#git-maintenance
+# https://git-scm.com/book/en/v2/Git-Tools-Rerere
+# https://github.com/tj/git-extras/blob/main/Commands.md
+#
+# TODO: git-delta
 # =================================================================================================
 # === LINUX INSTALL ===============================================================================
 mkdir ~/github
@@ -31,6 +37,7 @@ cat .ssh/id_rsa.pub
 
 sudo apt install -y \
 git \
+git-extras \
 curl \
 conky-all \
 build-essential \
