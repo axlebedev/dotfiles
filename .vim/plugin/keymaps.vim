@@ -224,6 +224,8 @@ nnoremap <silent> <C-g><C-f> <ScriptCmd>fzf#run(fzf#wrap({ source: 'sh ~/dotfile
 # open unmerged list
 nnoremap <silent> <C-g><C-m> <CMD>fzf#run({'source': 'git diff --name-only --diff-filter=U', 'sink': 'e', 'window': { 'width': 0.9, 'height': 0.6 }})<CR>
 
+nnoremap <silent> <C-r> <Plug>(refactor-commands)
+
 # get current highlight group under cursor
 map <F10> <CMD>echo "hi<" .. synIDattr(synID(line("."),col("."),1),"name") .. '> trans<'
 \ .. synIDattr(synID(line("."),col("."),0),"name") .. "> lo<"
@@ -401,7 +403,6 @@ def NextSearch(): void
 enddef
 nnoremap <C-n> <ScriptCmd>NextSearch()<CR>
 
-nmap <silent>rr <Plug>(coc-rename)
 nmap <silent>gu <Plug>(coc-references-used)
 
 # Yank with keeping cursor position in visual mode {{{
