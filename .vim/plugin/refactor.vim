@@ -7,6 +7,8 @@ var refactorCommands = {
     showSuperTypes: 'call CocAction("showSuperTypes")',
     showSubTypes: 'call CocAction("showSubTypes")',
     refactor: 'call CocAction("refactor")',
+    ALEFix: 'ALEFix',
+    ALEFileRename: ':ALEFileRename',
 }
 def RunRefactorCommand(key: string): void
     execute refactorCommands[key]
