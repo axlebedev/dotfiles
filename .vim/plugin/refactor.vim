@@ -6,7 +6,9 @@ var refactorCommands = {
     showOutline: 'call CocAction("showOutline")',
     showSuperTypes: 'call CocAction("showSuperTypes")',
     showSubTypes: 'call CocAction("showSubTypes")',
+    rename: 'call CocAction("rename")',
     refactor: 'call CocAction("refactor")',
+    codeLens: 'call CocAction("codeLensAction")',
     ALEFix: 'ALEFix',
     ALEFileRename: ':ALEFileRename',
 }
