@@ -17,7 +17,8 @@ vim9script
 # https://github.com/junkblocker/git-time-lapse?tab=readme-ov-file
 # https://www.reddit.com/r/vim/comments/mrpoa3/comment/gunv36d/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
 # Сделать чтобы если мы зашли в буфер и сразу вышли - то чтобы он закрывался
-
+# TODO https://github.com/neoclide/coc-git
+# TODO: coc.nvim suggest and next
 # Plugin settings ============================= {{{
 set shell=bash
 
