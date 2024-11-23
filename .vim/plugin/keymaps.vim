@@ -224,7 +224,7 @@ nnoremap <silent> <C-g><C-f> <ScriptCmd>fzf#run(fzf#wrap({ source: 'sh ~/dotfile
 # open unmerged list
 nnoremap <silent> <C-g><C-m> <CMD>fzf#run({'source': 'git diff --name-only --diff-filter=U', 'sink': 'e', 'window': { 'width': 0.9, 'height': 0.6 }})<CR>
 
-nnoremap <silent> <C-r> <Plug>(refactor-commands)
+nnoremap <silent> <leader>r <Plug>(refactor-commands)
 
 # get current highlight group under cursor
 map <F10> <CMD>echo "hi<" .. synIDattr(synID(line("."),col("."),1),"name") .. '> trans<'
