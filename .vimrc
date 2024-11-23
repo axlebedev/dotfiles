@@ -479,6 +479,28 @@ g:ale_set_quickfix = 0
 g:ale_virtualtext_cursor = 0
 g:ale_disable_lsp = 1
 
+# g:ale_virtualtext_cursor = 1 # TEST
+g:ale_cursor_detail = 1 # TEST FAIL
+g:ale_set_balloons = 1 # TEST
+g:ale_hover_to_preview = 1 # TEST
+g:ale_floating_preview = 1 # TEST
+g:ale_echo_cursor = 0 # TEST
+# g:ale_echo_delay
+g:ale_detail_to_floating_preview = 1 # TEST
+g:ale_floating_preview_popup_opts = { close: 'click', borderchars: [' '] }
+g:ale_hover_cursor = 1
+
+g:ale_pattern_options = { '\.min.js$': { ale_enabled: 0 } }
+
+g:ale_javascript_eslint_options = [
+  "--rule 'require-await: 1'",
+]->join(' ')
+
+g:ale_fixers = {
+  javascript: ['eslint'],
+  typescript: ['eslint'],
+}
+
 g:ale_linters = {
     javascript: ['eslint'],
     typescript: ['eslint']
@@ -501,6 +523,7 @@ g:coc_global_extensions = [
     'coc-clangd',
     'coc-yaml',
     'coc-ccls',
+    'coc-vimlsp',
 ]
 g:coc_global_config = '/home/alex/dotfiles/coc-settings.json'
 
