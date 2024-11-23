@@ -423,6 +423,8 @@ vnoremap @@ :normal @@<CR>
 # }}}
 #
 
+nnoremap U <C-r>
+
 # select in function by coc.nvim
 xmap if <Plug>(coc-funcobj-i)
 omap if <Plug>(coc-funcobj-i)
