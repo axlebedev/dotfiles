@@ -9,6 +9,8 @@ enddef
 
 # https://github.com/[owner]/[repo]/blob/[git branch]/[filename]#L[lineNr]
 export def YankGithubURL()
+    # also may be CocCommand git.copyUrl
+
     # git@github.com:[owner]/[repo].git
     var remoteUrl = system('git remote get-url --push origin')
     remoteUrl = substitute(remoteUrl, '[\r\n]', '', '')
