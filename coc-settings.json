@@ -2,8 +2,17 @@
     "explorer.previewAction.onHover": false,
 
     // ln -s coc-settings.json ~/.vim/coc-settings.json
-    "suggest.timeout": 50,
+    "suggest.timeout": 500,
     "suggest.minTriggerInputLength": 1,
     "coc.preferences.noselect": true,
-    "suggest.noselect": false
+    "suggest.noselect": false,
+
+    "diagnostic.virtualText": true,
+    "diagnostic.virtualTextCurrentLineOnly": false,
+    "git.virtualTextPrefix": " ",
+    "git.addGBlameToVirtualText": true,
+    "git.addGBlameToBufferVar": true,
+    "git.branchCharacter": "",
+
+    "git.changedSign.hlGroup": "diffChanged",
 }

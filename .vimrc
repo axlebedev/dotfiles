@@ -517,6 +517,7 @@ Plug 'neoclide/coc.nvim', { 'do': 'yarn install --frozen-lockfile' }
 # Чтобы не авто-выбирал первый пункт в автокомплите:
 # :CocConfig -> "suggest.noselect": true
 g:coc_global_extensions = [
+    'coc-diagnostic',
     'coc-json',
     'coc-tsserver',
     'coc-tabnine',
@@ -524,6 +525,9 @@ g:coc_global_extensions = [
     'coc-yaml',
     'coc-ccls',
     'coc-vimlsp',
+    'coc-html',
+    'coc-jest',
+    'coc-git',
 ]
 g:coc_global_config = '/home/alex/dotfiles/coc-settings.json'
 

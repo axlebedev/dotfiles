@@ -53,12 +53,12 @@ highlight DiffAdd   term=bold ctermbg=darkgreen ctermfg=white cterm=bold guibg=#
 highlight diffRemoved term=bold ctermbg=black    ctermfg=red      cterm=bold guibg=#f2d1ce  guifg=NONE   gui=none
 highlight DiffDelete  term=none ctermbg=darkblue ctermfg=darkblue cterm=none guibg=#f2d1ce  guifg=NONE   gui=none
 
+highlight DiffChange term=bold ctermbg=black   ctermfg=yellow cterm=bold guibg=#ebdfce  guifg=NONE gui=none
 highlight diffChanged term=bold ctermbg=black   ctermfg=yellow cterm=bold guibg=#ebdfce  guifg=NONE gui=none
 highlight diffFile    term=bold ctermbg=yellow  ctermfg=black  cterm=none guibg=#ebdfce  guifg=NONE gui=none
 highlight diffLine    term=bold ctermbg=magenta ctermfg=white  cterm=bold guibg=#ebdfce  guifg=NONE gui=none
 
 highlight DiffText   term=reverse,bold ctermbg=red       ctermfg=yellow   cterm=bold guibg=#191C41 guifg=NONE   gui=bold
-highlight DiffChange term=bold         ctermbg=black     ctermfg=white    cterm=bold guibg=NONE guifg=NONE
 #
 highlight PopupScrollbar term=bold ctermfg=4 guifg=#878787 guibg=#d9d9d9
 
