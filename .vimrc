@@ -19,6 +19,10 @@ vim9script
 # Сделать чтобы если мы зашли в буфер и сразу вышли - то чтобы он закрывался
 # TODO https://github.com/neoclide/coc-git
 # TODO: coc.nvim suggest and next
+# TODO https://github.com/typescript-eslint/typescript-eslint/blob/main/packages/eslint-plugin/docs/rules/no-floating-promises.mdx
+# TODO https://github.com/SebastienGllmt/eslint-plugin-no-floating-promise
+# TODO https://github.com/neoclide/coc-yank
+#
 # Plugin settings ============================= {{{
 set shell=bash
 
