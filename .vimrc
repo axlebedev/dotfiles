@@ -479,6 +479,7 @@ g:ale_set_balloons = 1 # TEST
 g:ale_hover_to_preview = 1 # TEST
 g:ale_floating_preview = 1 # TEST
 g:ale_echo_cursor = 0 # TEST
+g:ale_echo_delay = 2000
 # g:ale_echo_delay
 g:ale_detail_to_floating_preview = 1 # TEST
 g:ale_floating_preview_popup_opts = { close: 'click', borderchars: [' '] }
