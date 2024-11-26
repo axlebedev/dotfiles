@@ -161,8 +161,7 @@ inoremap <t_%9> <nop>
 g:submode_always_show_submode = 1
 g:submode_timeout = 0
 var resizeSubmode = 'Resize'
-submode#enter_with(resizeSubmode, 'n', '', '<M-r>')
-submode#enter_with(resizeSubmode, 'n', '', '<leader>r')
+submode#enter_with(resizeSubmode, 'n', '', '<C-r>')
 submode#map(resizeSubmode, 'n', '', 'h', ':vertical resize -1<cr>')
 submode#map(resizeSubmode, 'n', '', 'l', ':vertical resize +1<cr>')
 submode#map(resizeSubmode, 'n', '', 'k', ':resize -1<cr>')
