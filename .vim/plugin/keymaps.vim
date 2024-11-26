@@ -373,7 +373,6 @@ vmap ( S(
 vmap ) S)
 vmap [ S[
 vmap ] S]
-vmap { S{
 vmap _ S_
 
 # wrap visual selection into function block 
