@@ -62,6 +62,7 @@ snapd \
 nodejs npm \
 cmake libxkbfile-dev \
 flameshot \
+net-tools \
 pavucontrol \
 autorandr
 
