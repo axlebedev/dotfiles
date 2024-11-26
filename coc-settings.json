@@ -11,10 +11,10 @@
 
     "diagnostic.virtualText": true,
     "diagnostic.virtualTextCurrentLineOnly": false,
+
     "git.virtualTextPrefix": " ",
     "git.addGBlameToVirtualText": true,
     "git.addGBlameToBufferVar": true,
     "git.branchCharacter": "",
-
     "git.changedSign.hlGroup": "diffChanged",
 }
