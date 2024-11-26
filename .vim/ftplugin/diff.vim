@@ -55,5 +55,5 @@ def CopyWithoutStart()
   setreg('+', result)
 enddef
 
-noremap <buffer> <silent> y <ScriptCmd>call CopyWithoutStart()<CR>
+noremap <buffer> <silent> ys <ScriptCmd>call CopyWithoutStart()<CR>
 # # }}} CopyWithoutStart
