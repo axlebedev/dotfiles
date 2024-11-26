@@ -11,7 +11,8 @@ var refactorCommands = {
     codeLens: 'call CocAction("codeLensAction")',
     ALEFix: 'ALEFix',
     ALEFileRename: ':ALEFileRename',
-    foldUnchanged: 'call CocCommand git.foldUnchanged'
+    foldUnchanged: 'call CocCommand git.foldUnchanged',
+    referencesUsed: "normal \<Plug>(coc-references-used)",
 }
 def RunRefactorCommand(key: string): void
     execute refactorCommands[key]
