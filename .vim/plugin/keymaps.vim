@@ -401,7 +401,7 @@ def NextSearch(): void
 enddef
 nnoremap <C-n> <ScriptCmd>NextSearch()<CR>
 
-nmap <silent>gu <Plug>(coc-references-used)
+nmap <silent>gr <Plug>(coc-references-used)
 
 # Yank with keeping cursor position in visual mode {{{
 def Keepcursor_visual_wrapper(command: string)
