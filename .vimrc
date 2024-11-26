@@ -524,7 +524,7 @@ g:coc_global_extensions = [
     'coc-jest',
     'coc-git',
 ]
-g:coc_global_config = '/home/alex/dotfiles/coc-settings.json'
+g:coc_global_config = '/home/user/dotfiles/.vim/coc-settings.json'
 
 var filesuffix_blacklist = ['git', '']
 def DisableCocForType(): void
