@@ -85,7 +85,7 @@ sudo snap install --classic node
 
 # ===== VIM =======================================================================================
 # поставить галочку в Software sources -> enable source code repositories
-sudo apt install \
+sudo apt install -y \
 liblua5.1-dev \
 luajit \
 libluajit-5.1-dev \
@@ -105,13 +105,6 @@ cd xkb-switch/
 mkdir build && cd build
 cmake ..
 make && sudo make install
-
-# 16.09.2024: этот пункт больше не нужен. Если в следующий раз тоже не нужен - то удалить абзац
-# В /etc/apt/sources.list надо скопипасить cтрочку
-# ...ubuntu version
-# и дать концовкy 'main restricted universe main multiverse'
-# Получится что-то типа
-# deb-src http://mirror.yandex.ru/ubuntu xenial main restricted universe main multiverse
 
 sudo apt build-dep vim
 cd ~/github
@@ -139,6 +132,12 @@ sudo make && sudo make install
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 # font here: https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/DroidSansMono/complete/Droid%20Sans%20Mono%20for%20Powerline%20Nerd%20Font%20Complete%20Mono.otf
 
+# Как установить фонты:
+mkdir ~/.fonts
+# Скопировать туда все нужные ttf-файлы
+cp *.ttf ~/.fonts
+fc-cache -f -v
+
 # ===== FISH ======================================================================================
 # https://hackercodex.com/guide/install-fish-shell-mac-ubuntu/
 # or-my-fish:
@@ -152,7 +151,7 @@ omf install sudope # TODO: разобраться и настроить
 omf install z # TODO разобраться и навешать алиасов
 
 # ===== I3 GAPS ============================================
-sudo apt install libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev libxcb-icccm4-dev libyajl-dev libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev autoconf xutils-dev libtool
+sudo apt install -y libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev libxcb-icccm4-dev libyajl-dev libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev autoconf xutils-dev libtool
 
 # Install xcb-util-xrm
 cd ~/github
@@ -166,7 +165,7 @@ make && sudo make install
 cd ~/github
 
 sudo apt purge i3
-sudo apt install meson dh-autoreconf libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev xcb libxcb1-dev libxcb-icccm4-dev libyajl-dev libev-dev libxcb-xkb-dev libxcb-cursor-dev libxkbcommon-dev libxcb-xinerama0-dev libxkbcommon-x11-dev libstartup-notification0-dev libxcb-randr0-dev libxcb-xrm0 libxcb-xrm-dev libxcb-shape0 libxcb-shape0-dev
+sudo apt install -y meson dh-autoreconf libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev xcb libxcb1-dev libxcb-icccm4-dev libyajl-dev libev-dev libxcb-xkb-dev libxcb-cursor-dev libxkbcommon-dev libxcb-xinerama0-dev libxkbcommon-x11-dev libstartup-notification0-dev libxcb-randr0-dev libxcb-xrm0 libxcb-xrm-dev libxcb-shape0 libxcb-shape0-dev
 git clone https://www.github.com/Airblader/i3 i3-gaps
 cd i3-gaps
 mkdir -p build && cd build
