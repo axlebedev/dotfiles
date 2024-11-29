@@ -58,7 +58,7 @@ highlight diffChanged term=bold ctermbg=black   ctermfg=yellow cterm=bold guibg=
 highlight diffFile    term=bold ctermbg=yellow  ctermfg=black  cterm=none guibg=#ebdfce  guifg=NONE gui=none
 highlight diffLine    term=bold ctermbg=magenta ctermfg=white  cterm=bold guibg=#ebdfce  guifg=NONE gui=none
 
-highlight DiffText   term=reverse,bold ctermbg=red       ctermfg=yellow   cterm=bold guibg=#191C41 guifg=NONE   gui=bold
+highlight DiffText term=bold ctermbg=black   ctermfg=yellow cterm=bold guibg=#ebdfce  guifg=NONE gui=none
 #
 highlight PopupScrollbar term=bold ctermfg=4 guifg=#878787 guibg=#d9d9d9
 
