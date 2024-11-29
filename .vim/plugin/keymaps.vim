@@ -209,11 +209,6 @@ enddef
 nnoremap <silent> <leader>t <ScriptCmd>LeaderT()<CR>
 vnoremap <silent> <leader>t "ly<ScriptCmd>LeaderT(true)<CR>
 nnoremap <silent> <leader>b <CMD>Buffers<CR>
-nnoremap <silent> <leader>m <CMD>call fzf#vim#files('', {
-            \    'source': 'git diff --name-only --diff-filter=U',
-            \    'sink': 'e',
-            \    'options': '--prompt="Unmerged> "'
-            \ })<CR>
 # FZF command
 nnoremap <silent> sft <CMD>Filetypes<CR>
 nnoremap <silent> <leader>h <CMD>History<CR>
@@ -224,8 +219,6 @@ def g:GeditFile(branch: string)
 enddef
 # open current file version in branch
 nnoremap <silent> <C-g><C-f> <ScriptCmd>fzf#run(fzf#wrap({ source: 'sh ~/dotfiles/fish/sortedBranch.sh', sink: g:GeditFile }))<CR>
-# open unmerged list
-nnoremap <silent> <C-g><C-m> <CMD>fzf#run({'source': 'git diff --name-only --diff-filter=U', 'sink': 'e', 'window': { 'width': 0.9, 'height': 0.6 }})<CR>
 
 nnoremap <silent> <leader>r <Plug>(refactor-commands)
 

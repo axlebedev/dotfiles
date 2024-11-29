@@ -1,6 +1,15 @@
 vim9script
 
+def Unmerged(): void
+    call fzf#vim#files('', {
+                \    'source': 'git diff --name-only --diff-filter=U',
+                \    'sink': 'e',
+                \    'options': '--prompt="Unmerged> "'
+                \ })
+enddef
+
 var refactorCommands = {
+    unmerged: 'call Unmerged()', 
     showIncomingCalls: 'call CocAction("showIncomingCalls")',
     showOutgoingCalls: 'call CocAction("showOutgoingCalls")',
     showOutline: 'call CocAction("showOutline")',
