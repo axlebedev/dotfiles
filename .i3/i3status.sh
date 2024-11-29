@@ -30,9 +30,9 @@ do
         google-chrome --app="https://calendar.google.com/" > /dev/null 2>&1 &
     fi
 
-    if [ "$getname" = "Volume" ] 
+    if [ "$getname" = "Time" ] 
     then
-        pavucontrol --tab=3 --class="floating" > /dev/null 2>&1 &
+        google-chrome --app="https://mail.myoffice.team/mail" > /dev/null 2>&1 &
     fi
 
     if [ "$getname" = "Memory" ] || [ "$getname" = "CPU" ]  
@@ -53,5 +53,10 @@ do
     if [ "$getname" = "Language" ] 
     then
         xkb-switch -n
+    fi
+
+    if [ "$getname" = "Network" ] 
+    then
+        ~/dotfiles/.i3/setVpn.sh > /dev/null 2>&1
     fi
 done
