@@ -382,6 +382,16 @@ g:splitjoin_split_mapping = 'gs'
 g:splitjoin_join_mapping  = 'gj'
 
 # -----------------------------------------------------------------------------
+# autoclose parens
+Plug 'jiangmiao/auto-pairs'
+g:AutoPairsMapSpace = 0
+g:AutoPairsMultilineClose = 0 # Dont make a mess when `{ if(condition) { doSomething [cursor] }`
+imap <silent> <expr> <space> pumvisible()
+	\ ? "<space>"
+	\ : "<c-r>=AutoPairsSpace()<cr>"
+g:AutoPairsMapBS = 0
+
+# -----------------------------------------------------------------------------
 # comment lines, uncomment lines
 Plug 'tomtom/tcomment_vim'
 g:tcomment_maps = 1
@@ -520,7 +530,6 @@ g:coc_global_extensions = [
     'coc-yaml',
     'coc-ccls',
     'coc-vimlsp',
-    'coc-pairs',
     'coc-html',
     'coc-jest',
     'coc-git',

@@ -7,8 +7,6 @@
     "coc.preferences.noselect": true,
     "suggest.noselect": false,
 
-    "pairs.enableCharacters": ["(", "[", "{", "<", "'", "\"", "`", "\""],
-
     "diagnostic.virtualText": true,
     "diagnostic.virtualTextCurrentLineOnly": false,
 
