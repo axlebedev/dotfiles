@@ -34,6 +34,7 @@ cat .ssh/id_rsa.pub
 # autorandr \ # надо буудет сохранить профили
 # screenkey # для показа нажатой кнопки
 # linphone - для sip-телефонии. УСТАНОВИТЬ ОТДЕЛЬНО ВРУЧНУЮ!
+# lxpolkit - чтобы запрашивал пароль в графических приложках
 
 sudo apt install -y \
 git \
@@ -64,6 +65,7 @@ cmake libxkbfile-dev \
 flameshot \
 net-tools \
 pavucontrol \
+lxpolkit \
 autorandr
 
 # install git-delta manually
