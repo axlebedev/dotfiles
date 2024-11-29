@@ -40,6 +40,10 @@ nnoremap $$ $
 nnoremap L g_
 nnoremap LL $
 nnoremap f; g_
+nnoremap <M-l> 10l
+nnoremap <M-h> 10h
+nnoremap <M-j> 10j
+nnoremap <M-k> 10k
 
 vnoremap 0 ^
 vnoremap ^ 0
