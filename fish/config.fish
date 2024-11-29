@@ -129,21 +129,29 @@ abbr -a gps g push origin HEAD
 abbr -a gpsu g push -u origin HEAD
 abbr -a gpsf g push -f origin HEAD
 abbr -a gpsfu g push -f -u origin HEAD
+
 abbr -a grb g rebase --autostash
-abbr -a grbm "g fetch origin master && g rebase --autostash origin/master"
-abbr -a gmm "g fetch origin master && g merge origin/master"
 abbr -a grbc g rebase --continue
 abbr -a grba g rebase --abort
+abbr -a grbm "g fetch origin master && g rebase --autostash origin/master"
+
+abbr -a gmm "g fetch origin master && g merge origin/master"
+abbr -a gmc "g merge --continue"
+
 abbr -a gcp g cherry-pick
 abbr -a gcpc g cherry-pick --continue
 abbr -a gcpa g cherry-pick --abort
+
 abbr -a gfa g fetch --all
 abbr -a gfap g fetch --all -p
+
 abbr -a gb g branch
+
 abbr -a gbs g bisect start
 abbr -a gbr g bisect reset
 abbr -a gbg g bisect good
 abbr -a gbb g bisect bad
+
 abbr -a gst g stash push --keep-index
 abbr -a gsta g stash pop
 
