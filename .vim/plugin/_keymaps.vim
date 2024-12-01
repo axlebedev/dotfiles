@@ -120,7 +120,7 @@ submode#map(foldlevelSubmode, 'n', '', 'l', '<ScriptCmd>call increasefoldlevel#i
 submode#map(foldlevelSubmode, 'n', '', '0', '<ScriptCmd>setlocal foldlevel=0<cr>')
 submode#map(foldlevelSubmode, 'n', '', '9', '<ScriptCmd>setlocal foldlevel=99<cr>')
 
-autocmd au_vimrc FileType help,git,fugitive* nnoremap <buffer> q <CMD>q<cr>
+autocmd au_vimrc FileType help,qf,git,fugitive* nnoremap <buffer> q <CMD>q<cr>
 
 nnoremap <silent> <leader>a <CMD>ArgWrap<CR>
 
@@ -214,15 +214,13 @@ nnoremap <silent> <leader>k <ScriptCmd>ClapOpen(':vim9cmd opennextbuf.OpenNextBu
 
 nnoremap <leader>f <CMD>FindCursor #CC0000 500<CR>
 
-# {{{{{{{{{{{{ stopped here }}}}}}}}}}}}
-
 # Global find fix: use 'ag' and open quickfix {{{
 nnoremap <C-f> <ScriptCmd>globalfind.Grep()<CR>
 vnoremap <C-f> <ScriptCmd>globalfind.Grep()<CR>
 
 nnoremap <C-f><C-t> <ScriptCmd>globalfind.FilterTestEntries()<cr>
 
-# jsLog.JsFastLog mapping
+# jsLog.JsFastLog mapping {{{
 nnoremap <leader>l <ScriptCmd>set operatorfunc=function('jsLog.JsFastLog_simple')<cr>g@
 vnoremap <leader>l <ScriptCmd>jsLog.JsFastLog_simple(visualmode())<cr>
 
@@ -245,6 +243,7 @@ vnoremap <leader>ls <ScriptCmd>jsLog.JsFastLog_string(visualmode())<cr>
 
 nnoremap <leader>lss <ScriptCmd>jsLog.JsFastLog_separator()<cr>
 nnoremap <leader>lsn <ScriptCmd>jsLog.JsFastLog_lineNumber()<cr>
+# }}}
 
 nnoremap <silent> K <CMD>call CocAction("doHover")<CR>
 def JumpDefinitionFindCursor(command: string)
@@ -264,16 +263,12 @@ nnoremap <silent> qn <CMD>execute("cnext<bar>normal n")<CR>
 # этот момент заебал
 cnoremap <C-f> <NOP>
 
-nnoremap zj zz<CMD>execute 'normal ' .. (winheight('.') / 4) .. '<C-e>'<CR>
-
 nnoremap <BS> ==
 vnoremap <BS> =
 
 nnoremap <silent> x "_x
 # Для того чтобы поменять местами буквы - оставляем дефолтное поведение
 nnoremap xp xp
-
-nnoremap <C-;> <CMD>Commands<Cr>
 
 vnoremap SB <Plug>VSurroundBkJ
 vnoremap Sb <Plug>VSurroundbkJ
@@ -294,17 +289,6 @@ nnoremap zn nzz
 nnoremap q <NOP>
 nnoremap <C-q> q
 
-vmap " S"
-vmap ' S'
-vmap ( S(
-vmap ) S)
-vmap [ S[
-vmap ] S]
-vmap _ S_
-
-# wrap visual selection into function block 
-vnoremap <C-b> "bdi{<CR>return <C-r>b;<CR>}<Esc>=ib
-
 def FoldSelection()
   var saved = &foldmethod
   exe 'setlocal foldmethod=manual'
@@ -318,12 +302,6 @@ nnoremap ZC zC
 nnoremap ZO zO
 
 nnoremap H zc
-
-def NextSearch(): void
-    setreg('/', getreg('*'))
-    normal! n
-enddef
-nnoremap <C-n> <ScriptCmd>NextSearch()<CR>
 
 nmap <silent>gr <Plug>(coc-references-used)
 
