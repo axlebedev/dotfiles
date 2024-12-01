@@ -36,7 +36,6 @@ augroup END
 
 # colors of line number column
 highlight LineNr guibg=#d9d9d9 guifg=#34352E
- 
 highlight CursorLineNr guibg=#e4e4e4 guifg=#444444 
  
 highlight VertSplit guibg=#d9d9d9 guifg=#d9d9d9
@@ -62,39 +61,5 @@ highlight DiffText term=bold ctermbg=black   ctermfg=yellow cterm=bold guibg=#eb
 #
 highlight PopupScrollbar term=bold ctermfg=4 guifg=#878787 guibg=#d9d9d9
 
-# # highlight jsx customizations
-# highlight jsObjectKey guifg=white
-# highlight jsxElement guifg=#f92772
-# highlight jsxTag guifg=#f92772
-# highlight jsxPunct guifg=#f92772
-# highlight jsxTagName guifg=#db880d
-# highlight jsxComponentName guifg=#db880d
-# highlight jsxCloseTag guifg=#f92772
-# highlight jsxAttrib guifg=#A6E22D
-# highlight jsxEqual guifg=white
-#
 # # for Plug 'RRethy/vim-illuminate'
 # highlight illuminatedWord guibg=#191C41
-#
-# # supress tildas at empty lines
-# highlight NonText guifg=bg
-#
-# # NERDTree highlight by filetypes settings -----------------------------
-# function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg) abort
-#     exec 'autocmd FileType nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guifg='. a:guifg . ' guibg=' . a:guibg
-#     exec 'autocmd FileType nerdtree syn match ' . a:extension .' #^\s\+.*'. a:extension .'$#'
-# endfunction
-# call NERDTreeHighlightFile('md', 'blue', 'none', '#3366FF', 'NONE')
-# call NERDTreeHighlightFile('html', 'yellow', 'none', 'yellow', 'NONE')
-# call NERDTreeHighlightFile('css', 'cyan', 'none', 'cyan', 'NONE')
-# call NERDTreeHighlightFile('scss', 'cyan', 'none', 'cyan', 'NONE')
-# call NERDTreeHighlightFile('js', 'red', 'none', '#ffa500', 'NONE')
-#
-# hl trailing spaces instead of trail:c TODO: make it work
-def Hl_trailing_spaces()
-  # Test   
-  highlight! link TrailingSpaces Error
-  syntax match TrailingSpaces containedin=ALL /\s\+$/
-enddef
-autocmd BufWinEnter,ColorScheme * call Hl_trailing_spaces()
-# }}}
