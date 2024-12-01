@@ -8,8 +8,6 @@ command! BindBothOff set noscrollbind nocursorbind | wincmd p | set noscrollbind
 # type ':S<cr>' to split current buffer to right, and leave it with previous buffer
 command! S vs | wincmd h | bprev | wincmd l
 
-command! Grc Git rebase --continue
-
 command! NewInstance !gnome-terminal -- vim %
 
 # Make cnext and co wrap
@@ -18,8 +16,6 @@ command! Cprev try | cprev | catch | clast | catch | endtry
 
 command! Lnext try | lnext | catch | lfirst | catch | endtry
 command! Lprev try | lprev | catch | llast | catch | endtry
-
-command! ClearSession %bd | NERDTree | wincmd l | Startify
 
 var FindCursorPostSaved: func
 def SetDemoMode(on: bool)
