@@ -6,7 +6,6 @@ import 'chase.vim' as chase
 import autoload '../autoload/globalfind.vim'
 import autoload '../autoload/opennextbuf.vim'
 import autoload '../autoload/htmlbeautify.vim'
-import autoload '../autoload/readmode.vim'
 import autoload '../autoload/updatebuffer.vim'
 import autoload '../autoload/increasefoldlevel.vim'
 import autoload '../autoload/requiretoimport.vim'
@@ -263,7 +262,6 @@ vnoremap <leader>bj <CMD>'<,'>!jq .<cr>
 # beautify html
 nnoremap <leader>bh <ScriptCmd>htmlbeautify.Htmlbeautify()<CR>
 
-nnoremap <leader>c <ScriptCmd>readmode.ReadModeToggle()<cr>
 
 nnoremap <silent> <leader>j <ScriptCmd>ClapOpen(':vim9cmd opennextbuf.OpenNextBuf(1)')<CR>
 nnoremap <silent> <leader>k <ScriptCmd>ClapOpen(':vim9cmd opennextbuf.OpenNextBuf(0)')<CR>
