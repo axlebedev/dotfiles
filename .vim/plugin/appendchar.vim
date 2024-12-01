@@ -1,7 +1,7 @@
 vim9script
 
 # append a char
-export def AppendChar(char: string)
+def AppendChar(char: string)
     var cursor_pos = getpos(".")
 
     var text = substitute(
@@ -14,3 +14,7 @@ export def AppendChar(char: string)
 
     setpos('.', cursor_pos)
 enddef
+
+# add a symbol to current line
+nnoremap <silent> <leader>; <ScriptCmd>AppendChar(';')<CR>
+nnoremap <silent> <leader>, <ScriptCmd>AppendChar(',')<CR>

@@ -5,7 +5,6 @@ import 'chase.vim' as chase
 
 import autoload '../autoload/globalfind.vim'
 import autoload '../autoload/opennextbuf.vim'
-import autoload '../autoload/appendchar.vim'
 import autoload '../autoload/blockline.vim'
 import autoload '../autoload/htmlbeautify.vim'
 import autoload '../autoload/readmode.vim'
@@ -16,9 +15,9 @@ import autoload '../autoload/requiretoimport.vim'
 import autoload '../autoload/logfunction.vim'
 
 g:mapleader = "\<space>"
-nmap <space> <leader>
-vmap <space> <leader>
-xmap <space> <leader>
+# nmap <space> <leader>
+# vmap <space> <leader>
+# xmap <space> <leader>
 
 # Jump to matching pairs easily, with Tab
 # NOTE: recursive map for macros/matchit.vim
@@ -145,10 +144,6 @@ vnoremap <C-h> "hy:%s/<C-r>h//gc<left><left><left><C-r>h
 
 # pretty find
 vnoremap // "py/<C-R>p<CR>
-
-# add a symbol to current line
-nnoremap <silent> <leader>; <ScriptCmd>appendchar.AppendChar(';')<CR>
-nnoremap <silent> <leader>, <ScriptCmd>appendchar.AppendChar(',')<CR>
 
 # close all other buffers
 nnoremap bo <CMD>BufOnly<CR>
