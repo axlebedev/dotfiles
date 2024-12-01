@@ -16,6 +16,7 @@ def BlockSingleLineFunc()
     search('=>', 'e')
     execute "normal! a {\n}"
     normal! lDO
+    execute "normal! Ireturn "
     normal! p==
 enddef
 
@@ -37,4 +38,7 @@ def BlockLine()
 enddef
 
 # fix one-line 'if' statement
-nnoremap <silent> <leader>hh <ScriptCmd>BlockLine()<CR>
+# fix one-line function
+nnoremap <silent> <C-v> <ScriptCmd>BlockLine()<CR>
+# visual selection into function block 
+vnoremap <C-b> "bdi{<CR>return <C-r>b;<CR>}<Esc>=ib
