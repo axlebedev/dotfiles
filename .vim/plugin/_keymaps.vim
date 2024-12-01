@@ -7,7 +7,6 @@ import autoload '../autoload/globalfind.vim'
 import autoload '../autoload/opennextbuf.vim'
 import autoload '../autoload/htmlbeautify.vim'
 import autoload '../autoload/increasefoldlevel.vim'
-import autoload '../autoload/requiretoimport.vim'
 import autoload '../autoload/logfunction.vim'
 import autoload './updatebuffer.vim'
 
@@ -312,9 +311,6 @@ def FoldSelection()
   normal! zf
 enddef
 vnoremap zf <ScriptCmd>FoldSelection()<CR>
-
-nnoremap rti <ScriptCmd>requiretoimport.RequireToImport()<CR>
-nnoremap itr <ScriptCmd>requiretoimport.ImportToRequire()<CR>
 
 nnoremap lf <ScriptCmd>logfunction.LogFunction()<CR>
 

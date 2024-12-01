@@ -1,19 +1,24 @@
 vim9script
 
-export def RequireToImport()
+def RequireToImport()
     silent! g/const .\+ = require/normal! 0ciwimport
     silent! g/const \_.\+ = require/normal! 0ciwimport
 
-    # e
     :%s/= require('\(.\+\)')/from '\1'/ge
 
     :%s/module.exports =/export default/ge
 enddef
 
-export def ImportToRequire()
+def ImportToRequire()
     :%s/import/const/ge
 
     :%s/from '\(.\+\)'/= require('\1')/ge
 
     :%s/export default/module.exports =/ge
 enddef
+
+command! RequireToImport RequireToImport()
+command! ImportToRequire ImportToRequire()
+
+nnoremap rti <ScriptCmd>requiretoimport.RequireToImport()<CR>
+nnoremap itr <ScriptCmd>requiretoimport.ImportToRequire()<CR>
