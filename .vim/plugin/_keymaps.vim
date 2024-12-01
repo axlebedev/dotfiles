@@ -5,11 +5,9 @@ import 'chase.vim' as chase
 
 import autoload '../autoload/globalfind.vim'
 import autoload '../autoload/opennextbuf.vim'
-import autoload '../autoload/blockline.vim'
 import autoload '../autoload/htmlbeautify.vim'
 import autoload '../autoload/readmode.vim'
 import autoload '../autoload/updatebuffer.vim'
-import autoload '../autoload/yankfilename.vim'
 import autoload '../autoload/increasefoldlevel.vim'
 import autoload '../autoload/requiretoimport.vim'
 import autoload '../autoload/logfunction.vim'
@@ -230,9 +228,6 @@ nnoremap <silent> p p`]
 
 # I dont need ex mode
 nnoremap Q @@
-
-# fix one-line 'if' statement
-nnoremap <silent> <leader>hh <ScriptCmd>blockline.BlockLine()<CR>
 
 # quickfix next
 def Cn()

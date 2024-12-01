@@ -1,7 +1,7 @@
 vim9script
 
 # make single-line code to blocked
-export def BlockSingleLineIf()
+def BlockSingleLineIf()
     cursor(line('.'), 1)
     search('if')
     normal! f(%l"dDA {
@@ -10,7 +10,7 @@ export def BlockSingleLineIf()
 enddef
 
 # make single-line code to blocked
-export def BlockSingleLineFunc()
+def BlockSingleLineFunc()
     cursor(line('.'), 1)
     # 'e'	move to the End of the match
     search('=>', 'e')
@@ -19,7 +19,7 @@ export def BlockSingleLineFunc()
     normal! p==
 enddef
 
-export def BlockLine()
+def BlockLine()
     var currentLine = line('.')
     cursor(currentLine, 1)
     # 'n'	do Not move the cursor
@@ -35,3 +35,6 @@ export def BlockLine()
         return
     endif
 enddef
+
+# fix one-line 'if' statement
+nnoremap <silent> <leader>hh <ScriptCmd>BlockLine()<CR>
