@@ -39,10 +39,8 @@ endif # has('gui_running')
 set incsearch
 set hlsearch
 
-# Monokai settings ----------------------------- {{{
 set background=light
 colorscheme PaperColor
-# }}}
 
 # highlight current line number
 set cursorline
@@ -59,9 +57,9 @@ execute("legacy let NERDTreeMinimalUI = 1")
 if has("win32") || has("win16")
     set listchars=tab:⁞\ ,trail:·,extends:»,precedes:«,conceal:_,nbsp:•
 elseif has('gui_running')
-    set listchars=tab:·\ ,trail:·,extends:»,precedes:«,conceal:_,nbsp:•
+    set listchars=tab:·\ ,trail:•,extends:»,precedes:«,conceal:_,nbsp:•
 else
-    set listchars=tab:·\ ,trail:·,extends:»,precedes:«,conceal:_,nbsp:•
+    set listchars=tab:·\ ,trail:•,extends:»,precedes:«,conceal:_,nbsp:•
 endif
 set list
 
@@ -81,12 +79,3 @@ g:Illuminate_ftHighlightGroups = {
         'jsImport', 'Include'
     ]
 }
-highlight SpellBad term=bold ctermbg=red  guibg=#532120 guifg=NONE gui=none
-
-highlight PmenuThumb guibg=#999999
-
-highlight link ChaseChangedLetter DiffAdd
-highlight link ChaseSeparator DiffChange
-
-# for 'defined but never used' warnings
-highlight Conceal guifg=NONE guibg=#f6b7ac
