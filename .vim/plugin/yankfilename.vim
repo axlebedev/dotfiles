@@ -1,6 +1,6 @@
 vim9script
 
-export def YankFileName()
+def YankFileName()
     var filename = expand("%:.")
     setreg('*', filename)
     setreg('+', filename)
@@ -8,7 +8,7 @@ export def YankFileName()
 enddef
 
 # https://github.com/[owner]/[repo]/blob/[git branch]/[filename]#L[lineNr]
-export def YankGithubURL()
+def YankGithubURL()
     # also may be CocCommand git.copyUrl
 
     # git@github.com:[owner]/[repo].git
@@ -31,3 +31,6 @@ export def YankGithubURL()
     setreg('+', result)
     echo 'yanked: "' .. result .. '"'
 enddef
+
+nnoremap yf <ScriptCmd>yankfilename.YankFileName()<CR>
+nnoremap yg <ScriptCmd>yankfilename.YankGithubURL()<CR>

@@ -222,9 +222,6 @@ map <F10> <CMD>echo "hi<" .. synIDattr(synID(line("."),col("."),1),"name") .. '>
 \ .. synIDattr(synID(line("."),col("."),0),"name") .. "> lo<"
 \ .. synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") .. ">"<CR>
 
-nnoremap yf <ScriptCmd>yankfilename.YankFileName()<CR>
-nnoremap yg <ScriptCmd>yankfilename.YankGithubURL()<CR>
-
 nnoremap Y y$
 vmap p pgvy
 # replace word under cursor with last yanked
