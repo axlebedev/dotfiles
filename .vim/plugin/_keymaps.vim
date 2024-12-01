@@ -6,18 +6,13 @@ import 'chase.vim' as chase
 import autoload '../autoload/globalfind.vim'
 import autoload '../autoload/opennextbuf.vim'
 import autoload '../autoload/htmlbeautify.vim'
-import autoload '../autoload/updatebuffer.vim'
 import autoload '../autoload/increasefoldlevel.vim'
 import autoload '../autoload/requiretoimport.vim'
 import autoload '../autoload/logfunction.vim'
+import autoload './updatebuffer.vim'
 
 g:mapleader = "\<space>"
-# nmap <space> <leader>
-# vmap <space> <leader>
-# xmap <space> <leader>
 
-# Jump to matching pairs easily, with Tab
-# NOTE: recursive map for macros/matchit.vim
 nmap <Tab> %<CMD>FindCursor 0 500<CR>
 vmap <Tab> %
 
@@ -26,73 +21,25 @@ map  <F1> <CMD>Helptags<cr>
 imap <F1> <Esc>
 
 # Make moving in line a bit more convenient
-# NOTE: maps twice: Nnoremap and Vnoremap
-nnoremap 0 ^
-nnoremap ^ 0
-nnoremap 00 0
-nnoremap <silent> gg <CMD>vim9cmd cursor(1, 1)<CR>
+nnoremap <silent> gg <ScriptCmd>cursor(1, 1)<CR>
 nnoremap $ g_
-nnoremap $$ $
-nnoremap L g_
-nnoremap LL $
-nnoremap f; g_
-nnoremap <M-l> 10l
-nnoremap <M-h> 10h
-nnoremap <M-j> 10j
-nnoremap <M-k> 10k
-
-vnoremap 0 ^
-vnoremap ^ 0
-vnoremap 00 0
 vnoremap $ g_
-vnoremap $$ $
-vnoremap H ^
-vnoremap HH 0
-vnoremap L g_
-vnoremap LL $
-vnoremap f; g_
-
-onoremap 0 ^
-onoremap ^ 0
-onoremap 00 0
 onoremap $ g_
+nnoremap $$ $
+vnoremap $$ $
 onoremap $$ $
-onoremap H ^
-onoremap HH 0
-onoremap L g_
-onoremap LL $
+nnoremap 0 ^
+vnoremap 0 ^
+onoremap 0 ^
+nnoremap 00 0
+vnoremap 00 0
+onoremap 00 0
+nnoremap f; g_
+vnoremap f; g_
 onoremap f; g_
 
 # fast save file, close file
 nnoremap <leader>w <CMD>w!<cr>
-
-# Если просто закрыть fugitive-буфер - то закроется весь вим.
-# Поэтому делаем такой костыль
-augroup dont_close_fugitive
-    autocmd!
-    # By default it's set bufhidden=delete in plugin source. I dont need it
-    autocmd BufReadPost fugitive://* set bufhidden&
-augroup END
-def CloseBuffer()
-    var buf = bufnr('%')
-    var filesLength = len(filter(range(1, bufnr('$')), 'buflisted(v:val)'))
-    echom 'filesLength=' .. filesLength
-    if (filesLength <= 1)
-        if (&ft == 'startify')
-            qa!
-        else
-            Startify
-        endif
-    else
-        bprev
-    endif
-    exe 'bdelete ' .. buf
-
-    if (&buftype ==# 'quickfix' || &buftype ==# 'terminal')
-        Startify
-    endif
-enddef
-nmap <silent> <leader>q <ScriptCmd>CloseBuffer()<CR>
 
 # new empty buffer
 noremap <leader>x <CMD>Startify<cr>
@@ -174,16 +121,9 @@ submode#map(foldlevelSubmode, 'n', '', 'l', '<ScriptCmd>call increasefoldlevel#i
 submode#map(foldlevelSubmode, 'n', '', '0', '<ScriptCmd>setlocal foldlevel=0<cr>')
 submode#map(foldlevelSubmode, 'n', '', '9', '<ScriptCmd>setlocal foldlevel=99<cr>')
 
-autocmd au_vimrc FileType help,qf,git,fugitive* nnoremap <buffer> q <CMD>q<cr>
+autocmd au_vimrc FileType help,git,fugitive* nnoremap <buffer> q <CMD>q<cr>
 
 nnoremap <silent> <leader>a <CMD>ArgWrap<CR>
-
-def ClapOpen(command_str: string)
-  while (winnr('$') > 1 && (expand('%') =~# 'NERD_tree' || &ft == 'help' || &ft == 'qf'))
-    wincmd w
-  endwhile
-  exe 'normal! ' .. command_str .. "\<cr>"
-enddef
 
 def LeaderT(isVMode = false)
     if (&buftype == 'quickfix')
@@ -206,12 +146,6 @@ nnoremap <silent> sft <CMD>Filetypes<CR>
 nnoremap <silent> <leader>h <CMD>History<CR>
 nnoremap <silent> <C-p> <CMD>Commands<CR>
 
-def g:GeditFile(branch: string)
-    execute 'Gedit ' .. branch .. ':%'
-enddef
-# open current file version in branch
-nnoremap <silent> <C-g><C-f> <ScriptCmd>fzf#run(fzf#wrap({ source: 'sh ~/dotfiles/fish/sortedBranch.sh', sink: g:GeditFile }))<CR>
-
 nnoremap <silent> <leader>r <Plug>(refactor-commands)
 
 # get current highlight group under cursor
@@ -228,6 +162,7 @@ nnoremap <silent> p p`]
 # I dont need ex mode
 nnoremap Q @@
 
+# TODO: quickfix utils to single file
 # quickfix next
 def Cn()
     Cnext
@@ -243,6 +178,7 @@ def Cp()
 enddef
 nnoremap <silent> cp <ScriptCmd>Cp()<CR>
 
+# TODO: git utils to single file
 # for convenient git
 def Magit()
     if (&filetype == 'qf')
@@ -255,6 +191,11 @@ nnoremap <C-g><C-b> <CMD>Git blame<cr>
 nnoremap <C-g><C-v> <CMD>GV!<cr>
 # stage current file
 nnoremap <C-g><C-w> <CMD>Gw<cr> 
+def g:GeditFile(branch: string)
+    execute 'Gedit ' .. branch .. ':%'
+enddef
+# open current file version in branch
+nnoremap <silent> <C-g><C-f> <ScriptCmd>fzf#run(fzf#wrap({ source: 'sh ~/dotfiles/fish/sortedBranch.sh', sink: g:GeditFile }))<CR>
 
 # beautify json, need "sudo apt install jq"
 nnoremap <leader>bj <CMD>%!jq .<cr>
@@ -262,12 +203,19 @@ vnoremap <leader>bj <CMD>'<,'>!jq .<cr>
 # beautify html
 nnoremap <leader>bh <ScriptCmd>htmlbeautify.Htmlbeautify()<CR>
 
+def ClapOpen(command_str: string)
+  while (winnr('$') > 1 && (expand('%') =~# 'NERD_tree' || &ft == 'help' || &ft == 'qf'))
+    wincmd w
+  endwhile
+  exe 'normal! ' .. command_str .. "\<cr>"
+enddef
 
 nnoremap <silent> <leader>j <ScriptCmd>ClapOpen(':vim9cmd opennextbuf.OpenNextBuf(1)')<CR>
 nnoremap <silent> <leader>k <ScriptCmd>ClapOpen(':vim9cmd opennextbuf.OpenNextBuf(0)')<CR>
 
 nnoremap <leader>f <CMD>FindCursor #CC0000 500<CR>
 
+# {{{{{{{{{{{{ stopped here }}}}}}}}}}}}
 
 # Global find fix: use 'ag' and open quickfix {{{
 nnoremap <C-f> <ScriptCmd>globalfind.Grep()<CR>
