@@ -12,3 +12,6 @@ export def UpdateBuffer(force: bool)
 
     winrestview(winview)
 enddef
+
+nnoremap <silent> <F5> <ScriptCmd>UpdateBuffer(0)<CR>
+nnoremap <silent> <F5><F5> <ScriptCmd>UpdateBuffer(1)<CR>

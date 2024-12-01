@@ -268,8 +268,6 @@ nnoremap <silent> <leader>k <ScriptCmd>ClapOpen(':vim9cmd opennextbuf.OpenNextBu
 
 nnoremap <leader>f <CMD>FindCursor #CC0000 500<CR>
 
-nnoremap <silent> <F5> <ScriptCmd>updatebuffer.UpdateBuffer(0)<CR>
-nnoremap <silent> <F5><F5> <ScriptCmd>updatebuffer.UpdateBuffer(1)<CR>
 
 # Global find fix: use 'ag' and open quickfix {{{
 nnoremap <C-f> <ScriptCmd>globalfind.Grep()<CR>
