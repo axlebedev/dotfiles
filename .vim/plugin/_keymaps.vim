@@ -264,18 +264,16 @@ nnoremap xp xp
 vnoremap SB <Plug>VSurroundBkJ
 vnoremap Sb <Plug>VSurroundbkJ
 
-def Elf()
+def EslintFile()
     read !npx eslint --fix %
     updatebuffer.UpdateBuffer(1)
 enddef
-nnoremap <silent> elf <ScriptCmd>Elf()<CR>
+nnoremap <silent> elf <ScriptCmd>EslintFile()<CR>
 
 nnoremap ~ <ScriptCmd>chase.Next()<CR>
 vnoremap ~ <ScriptCmd>chase.Next()<CR>
 nnoremap ! <ScriptCmd>chase.Prev()<CR>
 vnoremap ! <ScriptCmd>chase.Prev()<CR>
-
-nnoremap zn nzz
 
 nnoremap q <NOP>
 nnoremap <C-q> q
