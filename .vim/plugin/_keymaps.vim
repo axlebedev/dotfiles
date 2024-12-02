@@ -189,22 +189,6 @@ nnoremap <silent> p p`]
 # I dont need ex mode
 nnoremap Q @@
 
-# TODO: quickfix utils to single file
-# quickfix next
-def Cn()
-    Cnext
-    # it should run after buffer change
-    timer_start(1, (id) => findcursor#FindCursor('#d6d8fa', 0))
-enddef
-nnoremap <silent> cn <ScriptCmd>Cn()<CR>
-# quickfix prev
-def Cp()
-    Cprev
-    # it should run after buffer change
-    timer_start(1, (id) => findcursor#FindCursor('#d6d8fa', 0))
-enddef
-nnoremap <silent> cp <ScriptCmd>Cp()<CR>
-
 # beautify json, need "sudo apt install jq"
 nnoremap <leader>bj <CMD>%!jq .<cr>
 vnoremap <leader>bj <CMD>'<,'>!jq .<cr>
@@ -266,8 +250,6 @@ nnoremap gi <ScriptCmd>JumpDefinitionFindCursor('jumpImplementation')<CR>
 nnoremap <silent> co <CMD>cope<CR>
 
 noremap <silent> <plug>(slash-after) <CMD>execute("FindCursor #d6d8fa 0<bar>ShowSearchIndex")<CR>
-# 'quickfix next'
-nnoremap <silent> qn <CMD>execute("cnext<bar>normal n")<CR>
 
 # этот момент заебал
 cnoremap <C-f> <NOP>
