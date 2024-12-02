@@ -40,6 +40,34 @@ onoremap f; g_
 # fast save file, close file
 nnoremap <leader>w <CMD>w!<cr>
 
+# Если просто закрыть fugitive-буфер - то закроется весь вим.
+# Поэтому делаем такой костыль
+augroup dont_close_fugitive
+    autocmd!
+    # By default it's set bufhidden=delete in plugin source. I dont need it
+    autocmd BufReadPost fugitive://* set bufhidden&
+augroup END
+def CloseBuffer()
+    var buf = bufnr('%')
+    var filesLength = len(filter(range(1, bufnr('$')), 'buflisted(v:val)'))
+    echom 'filesLength=' .. filesLength
+    if (filesLength <= 1)
+        if (&ft == 'startify')
+            qa!
+        else
+            Startify
+        endif
+    else
+        bprev
+    endif
+    exe 'bdelete ' .. buf
+
+    if (&buftype ==# 'quickfix' || &buftype ==# 'terminal')
+        Startify
+    endif
+enddef
+nmap <silent> <leader>q <ScriptCmd>CloseBuffer()<CR>
+
 # new empty buffer
 noremap <leader>x <CMD>Startify<cr>
 
