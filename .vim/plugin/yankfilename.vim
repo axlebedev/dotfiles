@@ -32,5 +32,5 @@ def YankGithubURL()
     echo 'yanked: "' .. result .. '"'
 enddef
 
-nnoremap yf <ScriptCmd>yankfilename.YankFileName()<CR>
-nnoremap yg <ScriptCmd>yankfilename.YankGithubURL()<CR>
+nnoremap yf <ScriptCmd>YankFileName()<CR>
+nnoremap yg <ScriptCmd>YankGithubURL()<CR>
