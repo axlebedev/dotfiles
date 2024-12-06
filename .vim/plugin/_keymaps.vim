@@ -293,6 +293,7 @@ nnoremap ZO zO
 nnoremap H zc
 
 nmap <silent>gr <Plug>(coc-references-used)
+nmap <silent>fr <Plug>(coc-references-used)
 
 # Yank with keeping cursor position in visual mode {{{
 def Keepcursor_visual_wrapper(command: string)
