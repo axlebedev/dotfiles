@@ -54,7 +54,7 @@ if has('gui_running')
     set encoding=utf-8
     set fileencoding=utf-8
     set langmenu=en_US.UTF-8    # sets the language of the menu (gvim)
-endif #has('gui_running')
+endif # has('gui_running')
 
 # mouse for gnome-terminal
 set mouse=a
