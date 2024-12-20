@@ -39,6 +39,6 @@ enddef
 
 # fix one-line 'if' statement
 # fix one-line function
-nnoremap <silent> <C-v> <ScriptCmd>BlockLine()<CR>
+nnoremap <silent> <C-b> <ScriptCmd>BlockLine()<CR>
 # visual selection into function block 
 vnoremap <C-b> "bdi{<CR>return <C-r>b;<CR>}<Esc>=ib
