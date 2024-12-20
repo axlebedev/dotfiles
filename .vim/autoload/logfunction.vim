@@ -3,7 +3,7 @@ vim9script
 import 'vim-js-fastlog.vim' as jsLog
 
 export def LogFunction()
-    normal! yiweaLAL
+    normal! yiwbeaLAL
     normal! oexport const = (...args) => {}
     execute "normal! 0eeli "
     normal! p$
