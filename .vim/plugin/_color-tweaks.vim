@@ -69,7 +69,7 @@ highlight diffLine    term=bold ctermbg=magenta ctermfg=white  cterm=bold guibg=
 
 highlight DiffText term=bold ctermbg=black   ctermfg=yellow cterm=bold guibg=#ebdfce  guifg=NONE gui=none
 #
-highlight PopupScrollbar term=bold ctermfg=4 guifg=#878787 guibg=#d9d9d9
+highlight PopupScrollbar term=bold ctermfg=4 guifg=#A7A7A7 guibg=#d9d9d9
 
 # # for Plug 'RRethy/vim-illuminate'
 # highlight illuminatedWord guibg=#191C41
