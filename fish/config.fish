@@ -137,6 +137,7 @@ abbr -a grbm "g fetch origin master && g rebase --autostash origin/master"
 
 abbr -a gmm "g fetch origin master && g merge origin/master"
 abbr -a gmc "g merge --continue"
+abbr -a gma "g merge --abort"
 
 abbr -a gcp g cherry-pick
 abbr -a gcpc g cherry-pick --continue
@@ -194,6 +195,7 @@ abbr -a nta npm run test-all
 abbr -a y yarn
 abbr -a yi yarn
 abbr -a ys yarn start
+abbr -a ysa "yarn workspace @nct/amr-demo run start & yarn workspace @nct/wte run start:amr"
 abbr -a yss "yarn && yarn start"
 abbr -a yb yarn build
 abbr -a ybb "yarn && yarn build"
