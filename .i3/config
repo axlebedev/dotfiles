@@ -272,7 +272,7 @@ mode $mode_poweroff {
 	bindsym $mod+g exec i3-msg exit
 	bindsym $mod+p exec systemctl poweroff
 	bindsym $mod+r exec systemctl reboot
-	bindsym $mod+s mode "default" ; exec $HOME/.i3/i3lock.sh ; exec systemctl suspend
+	bindsym $mod+s mode "default" ; exec systemctl suspend
 	bindsym $mod+k mode "default" ; exec $HOME/.i3/i3lock.sh 
 	bindsym $mod+l mode "default" ; exec $HOME/.i3/i3lock.sh 
 
