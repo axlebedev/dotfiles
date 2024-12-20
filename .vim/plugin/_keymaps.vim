@@ -176,9 +176,9 @@ nnoremap <silent> <C-p> <CMD>Commands<CR>
 nnoremap <silent> <leader>r <Plug>(refactor-commands)
 
 # get current highlight group under cursor
-map <F10> <CMD>echo "hi<" .. synIDattr(synID(line("."),col("."),1),"name") .. '> trans<'
-\ .. synIDattr(synID(line("."),col("."),0),"name") .. "> lo<"
-\ .. synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") .. ">"<CR>
+map <F10> <ScriptCmd>echo 'hi<' .. synID(line('.'), col('.'), 1)->synIDattr('name') .. '> '
+            \ .. 'transparent<' .. synID(line('.'), col('.'), 0)->synIDattr('name') .. '>'
+            \ .. ' lo<' .. synID(line('.'), col('.'), 1)->synIDtrans()->synIDattr('name') .. '>'<CR>
 
 nnoremap Y y$
 vmap p pgvy
