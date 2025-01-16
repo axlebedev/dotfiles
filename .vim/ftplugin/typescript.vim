@@ -6,7 +6,7 @@ augroup au_vimrc_js
     autocmd!
 augroup END
 
-var indent = 2
+var indent = 4
 execute 'setlocal tabstop=' .. indent
 execute 'setlocal softtabstop=' .. indent
 execute 'setlocal shiftwidth=' .. indent

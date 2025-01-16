@@ -21,7 +21,7 @@ while getopts "g" v; do
 done
 
 # check if update necessary
-cd /home/user/github/vim/
+cd /home/alex/github/vim/
 current_commit=$(git rev-parse HEAD)
 
 printf "Checking for updates...\n"

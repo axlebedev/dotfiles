@@ -511,6 +511,7 @@ g:ale_linters = {
     javascript: ['eslint'],
     typescript: ['eslint']
 }
+g:ale_javascript_eslint_options = "--rule 'notice/notice: off' --rule 'prettier/prettier: off' --rule 'project-structure/file-structure: off' --rule 'arrow-body-style: off'"
 g:ale_javascript_eslint_executable = 'npm -s run lint %'
 g:ale_typescript_tslint_executable = 'npm -s run lint %'
 
