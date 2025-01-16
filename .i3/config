@@ -30,7 +30,7 @@ exec --no-startup-id flameshot
 exec --no-startup-id unclutter -idle 3
 exec --no-startup-id indicator-sound-switcher
 
-set $OUTPUT_PRIMARY DP-4
+set $OUTPUT_PRIMARY DP-0
 set $OUTPUT_LEFT ""
 set $OUTPUT_RIGHT HDMI-0
 exec --no-startup-id xrandr \
