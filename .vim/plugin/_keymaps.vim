@@ -240,6 +240,7 @@ nnoremap <leader>lsn <ScriptCmd>jsLog.JsFastLog_lineNumber()<cr>
 
 nnoremap <silent> K <CMD>call CocAction("doHover")<CR>
 def JumpDefinitionFindCursor(command: string)
+    setreg('/', expand('<cword>'))
     exe "call CocAction('" .. command .. "')"
     timer_start(100, (id) => findcursor#FindCursor('#d6d8fa', 0))
 enddef
@@ -292,6 +293,10 @@ nnoremap ZO zO
 
 nnoremap H zc
 
+def RefUsed()
+    setreg('/', expand('<cword>'))
+    execute "normal \<Plug>(coc-references-used)"
+enddef
 nmap <silent>gr <Plug>(coc-references-used)
 nmap <silent>fr <Plug>(coc-references-used)
 
