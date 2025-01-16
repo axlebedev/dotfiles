@@ -7,6 +7,14 @@ def YankFileName()
     echo 'yanked: "' .. filename .. '"'
 enddef
 
+def YankFileNameForDebug()
+    var filename = expand("%:.")->split('/')[1 : ]->join('/') .. ':' .. line('.')
+    setreg('*', filename)
+    setreg('+', filename)
+    echo 'yanked: "' .. filename .. '"'
+enddef
+
+
 # https://github.com/[owner]/[repo]/blob/[git branch]/[filename]#L[lineNr]
 def YankGithubURL()
     # also may be CocCommand git.copyUrl
@@ -33,4 +41,5 @@ def YankGithubURL()
 enddef
 
 nnoremap yf <ScriptCmd>YankFileName()<CR>
+nnoremap yff <ScriptCmd>YankFileNameForDebug()<CR>
 nnoremap yg <ScriptCmd>YankGithubURL()<CR>
