@@ -9,7 +9,7 @@
 	f = fetch
 	rb = rebase
 	cp = cherry-pick
-	hist = log --color --graph --pretty=format:'%C(cyan)%h%Creset %Cgreen(%cd) -%C(yellow)%d%Creset %s %C(bold blue)<%an>%Creset' --abbrev-commit
+    hist = log --color --graph --pretty=format:'%C(cyan)%h%Creset %Cgreen%<(11)%cd %C(bold blue)<%an> -%C(yellow)%d%Creset %s%Creset' --date='human' --abbrev-commit
 	prbr = for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(authorname) (%(color:green)%(committerdate)%(color:reset))' ;show branches sorted by date
 	logfile = log -p -M --follow --stat; -Gpattern for search pattern
 	logfilelines = log -p -M --stat -L;N,M:filename - log for lines
