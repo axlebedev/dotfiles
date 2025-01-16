@@ -30,6 +30,7 @@ filetype off
 
 packadd cfilter
 
+g:plug_threads = 8
 # vim-plug installation:
 # curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 plug#begin(expand('~') .. '/.vim/bundle')
