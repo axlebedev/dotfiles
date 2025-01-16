@@ -16,7 +16,7 @@ if has('gui_running')
         set guifont=Consolas:h10
     else
         set guifont=DroidSansMonoforPowerline\ Nerd\ Font
-    endif # has("win32") || has("win16")
+    endif
 
     set guioptions-=m  # remove menu bar
     set guioptions-=T  # remove toolbar
@@ -28,7 +28,7 @@ if has('gui_running')
 else
     # number of colors in terminal: use gui-colors, assuming terminal supports it
     set termguicolors
-endif # has('gui_running')
+endif
 
 # different cursor shapes for different terminal modes
 &t_SI = "\<Esc>[6 q"
@@ -46,9 +46,8 @@ colorscheme PaperColor
 set cursorline
 
 # colors and appearance of window split column
-if has('gui_running')
-    set fillchars+=vert:│
-endif
+set fillchars+=vert:│
+set fillchars+=eob:░
 
 # NERDTree turn off 'Press ? for help' label
 execute("legacy let NERDTreeMinimalUI = 1")

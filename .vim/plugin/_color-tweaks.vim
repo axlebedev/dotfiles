@@ -48,7 +48,8 @@ augroup END
 highlight LineNr guibg=#d9d9d9 guifg=#34352E
 highlight CursorLineNr guibg=#e4e4e4 guifg=#444444 
  
-highlight VertSplit guibg=#d9d9d9 guifg=#d9d9d9
+# highlight VertSplit guibg=#d9d9d9 guifg=#d9d9d9
+highlight VertSplit guibg=#eeeeee guifg=#eeeeee
  
 # ale-vim customizations
 highlight ALESignColumnWithErrors guibg=#f6b7ac
@@ -69,7 +70,7 @@ highlight diffLine    term=bold ctermbg=magenta ctermfg=white  cterm=bold guibg=
 
 highlight DiffText term=bold ctermbg=black   ctermfg=yellow cterm=bold guibg=#ebdfce  guifg=NONE gui=none
 #
-highlight PopupScrollbar term=bold ctermfg=4 guifg=#A7A7A7 guibg=#d9d9d9
+highlight PopupScrollbar term=bold ctermfg=4 guifg=#A7A7A7 guibg=NONE
 
 # # for Plug 'RRethy/vim-illuminate'
 # highlight illuminatedWord guibg=#191C41
