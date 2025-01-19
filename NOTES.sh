@@ -35,7 +35,9 @@ cat .ssh/id_rsa.pub
 # screenkey # для показа нажатой кнопки
 # linphone - для sip-телефонии. УСТАНОВИТЬ ОТДЕЛЬНО ВРУЧНУЮ!
 # lxpolkit - чтобы запрашивал пароль в графических приложках
+# vlc, mpv - для просмотра .mp4
 
+sudo apt install ubuntu-restricted-extras
 sudo apt install -y \
 git \
 git-extras \
@@ -67,6 +69,8 @@ net-tools \
 pavucontrol \
 lxpolkit \
 vokoscreenNG \
+vlc \
+mpv \
 autorandr
 
 # install git-delta manually
