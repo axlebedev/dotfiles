@@ -57,7 +57,6 @@ if sudo apt install -y \
     liblua5.1-dev \
     luajit \
     libluajit-5.1-dev \
-    python2-dev \
     ruby-dev \
     libperl-dev \
     libncurses5-dev \
