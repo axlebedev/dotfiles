@@ -66,6 +66,7 @@ flameshot \
 net-tools \
 pavucontrol \
 lxpolkit \
+vokoscreenNG \
 autorandr
 
 # install git-delta manually

@@ -69,6 +69,7 @@ for_window [class="Gnome-control-center"] floating enable
 for_window [class="Simplescreenrecorder"] floating enable
 for_window [class="Chromium-browser"] floating enable
 for_window [class="Pavucontrol"] floating enable
+for_window [class="vokoscreenNG"] floating enable
 
 for_window [class="Doublecmd"] floating enable
 for_window [class="Doublecmd" title="Double Commander"] floating disable
@@ -323,12 +324,13 @@ mode $mode_work {
 bindsym $mod+Shift+y mode $mode_work
 
 # Utils
-set $mode_utils "UTILS: Notifications (N)off (M)on | (G)romit-mpx | (L)ebedev-bro"
+set $mode_utils "UTILS: Notifications (N)off (M)on | (G)romit-mpx | (V)okoscreenNG | (L)ebedev-bro"
 mode $mode_utils {
 	bindsym $mod+n mode "default" ; exec --no-startup-id notify-send "PAUSE notifications" ; exec --no-startup-id notify-send DUNST_COMMAND_PAUSE
 	bindsym $mod+m mode "default" ; exec --no-startup-id notify-send DUNST_COMMAND_RESUME ; exec --no-startup-id notify-send "RESUME notifications"
     bindsym $mod+g mode "default" ; exec --no-startup-id gromit-mpx --active & disown
 	bindsym $mod+l mode "default" ; exec --no-startup-id nohup yandex-browser & disown
+	bindsym $mod+v mode "default" ; exec --no-startup-id nohup vokoscreenNG & disown
 
 # back to normal: Enter or Escape
 	bindsym Return mode "default"
