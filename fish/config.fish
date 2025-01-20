@@ -52,17 +52,18 @@ abbr -a giw g commit --no-verify -m "wip"
 abbr -a gil g commit --no-verify -m "linted"
 
 function cdf
+    set -l cmd (commandline -j)
     set resultPath './'
     while true
         set lslist (ls -aAF $resultPath | grep "/\$" | sort -r | string split0)
-        echo $lslist | fzf --layout=reverse --bind=esc:abort --height=20 --scheme=history --tac --bind esc: | tail -1 | read -l result
+        echo $lslist | fzf --prompt="$cmd $resultPath" --layout=reverse --bind=esc:abort --height=20 --scheme=history --tac --bind esc: | tail -1 | read -l result
         if test $result
             set resultPath $resultPath$result
         else
             break
         end
     end
-    cd $resultPath
+    commandline -j -- $cmd$resultPath
     commandline -f repaint
 end
 bind \ed cdf
