@@ -1,0 +1,4 @@
+[*] file: message
+
+# git config commit.template .git-commit-template
+# git config --global commit.template .git-commit-template
