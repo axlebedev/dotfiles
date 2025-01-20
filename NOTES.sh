@@ -35,6 +35,7 @@ cat .ssh/id_rsa.pub
 # screenkey # для показа нажатой кнопки
 # linphone - для sip-телефонии. УСТАНОВИТЬ ОТДЕЛЬНО ВРУЧНУЮ!
 # lxpolkit - чтобы запрашивал пароль в графических приложках
+# vokoscreenNG - для записи видео скринкаста
 # vlc, mpv - для просмотра .mp4
 
 sudo apt install ubuntu-restricted-extras
