@@ -72,6 +72,7 @@ lxpolkit \
 vokoscreenNG \
 vlc \
 mpv \
+mailnag \
 autorandr
 
 # install git-delta manually
