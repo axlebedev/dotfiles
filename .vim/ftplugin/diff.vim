@@ -2,21 +2,6 @@ vim9script
 
 setlocal nocursorline
 
-# DiffFold {{{
-def DiffFold(lnum: number)
-  var line = getline(lnum)
-  if line =~ '^\(diff\|---\|+++\|@@\) '
-    return 1
-  elseif line[0] =~ '[-+ ]'
-    return 2
-  else
-    return 0
-  endif
-enddef
-
-setlocal foldmethod=expr foldexpr=DiffFold(v:lnum)
-# }}} DiffFold
-
 # GoToNextDiff {{{
 def GoToNextDiff()
   var savedSearchReg = getreg('/')
