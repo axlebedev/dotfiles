@@ -243,6 +243,12 @@ function cpuCore(coreN)
   },]]
 end
 local cpu = ''
+
+local handle = io.popen('cat /proc/cpuinfo | grep processor | wc -l')
+local output = handle:read('*a')
+handle:close()
+local coresNum = tonumber(output)
+
 for n=1,coresNum,1 do
   cpu = cpu .. cpuCore(n)  
 end

@@ -44,7 +44,6 @@ secondaryTextColorFg = '\\#' .. colors[9]
 
 internetInterface = 'wlo1'
 hwMonitorPath = '/sys/devices/platform/coretemp.0/hwmon/hwmon3/temp1_input'
-coresNum = 20
 
 needNumLockOff = false
 needNumLockOn = true
