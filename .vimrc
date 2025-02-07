@@ -586,9 +586,9 @@ Plug 'axlebedev/vim-gotoline-popup'
 nmap <C-g> <plug>(gotoline-popup)
 
 Plug 'axlebedev/footprints'
-# g:footprintsColor = '#38403b'
-g:footprintsEasingFunction = 'easeinout'
-g:footprintsHistoryDepth = 10
+g:footprintsColor = '#dbd3de'
+g:footprintsEasingFunction = 'easein'
+g:footprintsHistoryDepth = 20
 g:footprintsExcludeFiletypes = ['magit', 'nerdtree', 'diff']
 
 Plug 'axlebedev/find-my-cursor'
