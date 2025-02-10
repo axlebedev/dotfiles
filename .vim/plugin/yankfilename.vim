@@ -16,7 +16,7 @@ enddef
 
 
 # https://github.com/[owner]/[repo]/blob/[git branch]/[filename]#L[lineNr]
-def YankGithubURL()
+def YankGithubURL(isMasterBranch: bool)
     # also may be CocCommand git.copyUrl
 
     # git@github.com:[owner]/[repo].git
@@ -28,7 +28,7 @@ def YankGithubURL()
     remoteUrl = substitute(remoteUrl, 'ssh\/\/\/', '', '')
     remoteUrl = substitute(remoteUrl, '\:\d\+', '', '')
 
-    var branchName = systemlist('git rev-parse --abbrev-ref HEAD')[0]
+    var branchName = isMasterBranch ? 'master' : systemlist('git rev-parse --abbrev-ref HEAD')[0]
     var filename = expand("%:.")
     var lineNr = line('.')
 
@@ -42,4 +42,5 @@ enddef
 
 nnoremap yf <ScriptCmd>YankFileName()<CR>
 nnoremap yff <ScriptCmd>YankFileNameForDebug()<CR>
-nnoremap yg <ScriptCmd>YankGithubURL()<CR>
+nnoremap yg <ScriptCmd>YankGithubURL(true)<CR>
+nnoremap ygg <ScriptCmd>YankGithubURL(false)<CR>
