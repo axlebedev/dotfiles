@@ -44,6 +44,7 @@ abbr -a o xdg-open
 
 abbr -a ga g add
 abbr -a gau g add -u .
+abbr -a gap g add packages
 # --verbose to show diff in vim when show commit
 abbr -a gi g commit --verbose
 abbr -a gin g commit --no-verify --verbose
