@@ -6,6 +6,8 @@ import autoload '../autoload/globalfind.vim'
 nnoremap <silent> <buffer> dd <ScriptCmd>removeqfitem.RemoveQFItem()<CR>
 vnoremap <silent> <buffer> d <ScriptCmd>removeqfitem.RemoveQFItemsVisual()<CR>
 
+nnoremap <silent> <buffer> yy <CMD>normal! 0f ly$<CR>
+
 nnoremap <buffer> <leader>f <ScriptCmd>removeqfitem.FilterQF(0)<CR> 
 xnoremap <buffer> <leader>f <ScriptCmd>removeqfitem.FilterQF(1)<CR> 
 
