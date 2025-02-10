@@ -105,7 +105,7 @@ bind \cg g-sortedbranch
 function g-currentbranch--saved
     set currentBranchName (git rev-parse --abbrev-ref HEAD)
     set currentBranchNameSaved (string join '' -- $currentBranchName "--saved") 
-    commandline -j -- "g checkout -b $currentBranchNameSaved"
+    commandline -j -- "g checkout -b $currentBranchNameSaved && g branch -D $currentBranchName"
     commandline -f repaint
 end
 
