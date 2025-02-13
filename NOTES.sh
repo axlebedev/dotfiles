@@ -23,6 +23,9 @@ gsettings set org.gnome.Terminal.Legacy.Settings headerbar "@mb false"
 # Добавить ключи ssh для гитхаба
 ssh-keygen -t rsa -C "alexey.broadcast@gmail.com"
 cat .ssh/id_rsa.pub
+# Если ключ уже есть (проверить email!), то добавить его можно так
+# eval $(ssh-agent -s)
+# ssh-add ~/.ssh/id_rsa
 
 # initial installation
 # jshon \ # for clickable i3-status
