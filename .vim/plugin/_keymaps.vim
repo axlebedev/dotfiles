@@ -248,7 +248,14 @@ nnoremap gd <ScriptCmd>JumpDefinitionFindCursor('jumpDefinition')<CR>
 nnoremap gt <ScriptCmd>JumpDefinitionFindCursor('jumpTypeDefinition')<CR>
 nnoremap gi <ScriptCmd>JumpDefinitionFindCursor('jumpImplementation')<CR>
 
-nnoremap <silent> co <CMD>cope<CR>
+def ToggleQuickFix()
+    if getwininfo()->filter((id, info) => info.quickfix)->empty()
+        copen
+    else
+        cclose
+    endif
+enddef
+nnoremap <silent> co <ScriptCmd>ToggleQuickFix()<CR>
 
 noremap <silent> <plug>(slash-after) <CMD>execute("FindCursor #d6d8fa 0<bar>ShowSearchIndex")<CR>
 
