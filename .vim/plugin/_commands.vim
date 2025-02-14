@@ -33,3 +33,10 @@ enddef
 
 command! DemoOn SetDemoMode(1)
 command! DemoOff SetDemoMode(0)
+
+def RunWinNew()
+    var fname = expand("%")
+    silent exec "!gnome-terminal -- vim " .. fname .. " > /dev/null"
+    redraw!
+enddef
+command! WinNew RunWinNew()
