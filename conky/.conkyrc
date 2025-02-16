@@ -38,30 +38,18 @@ conky.config = {
   -- set to 1 to disable averaging
   cpu_avg_samples = 4,
 
-
   font = 'pango: FontAwesome 8',
 
-  template1 = [[
-    ${if_match ${\1 \2}<10}
-      " "
-    ${else} ${if_match ${\1 \2}<20} 
-      "▁"
-    ${else} ${if_match ${\1 \2}<30}
-      "▂" 
-    ${else} ${if_match ${\1 \2}<40}
-      "▃"
-    ${else} ${if_match ${\1 \2}<50} 
-      "▄"
-    ${else} ${if_match ${\1 \2}<60}
-      "▅" 
-    ${else} ${if_match ${\1 \2}<70}
-      "▆"
-    ${else} ${if_match ${\1 \2}<80}
-      "▇"
-    ${else}
-      "█" 
-    ${endif} ${endif} ${endif} ${endif} ${endif} ${endif} ${endif} ${endif} 
-  ]],
+  template1 = [[${if_match ${\1 \2}<10} " "
+        ${else} ${if_match ${\1 \2}<20} "▁"
+        ${else} ${if_match ${\1 \2}<30} "▂" 
+        ${else} ${if_match ${\1 \2}<40} "▃"
+        ${else} ${if_match ${\1 \2}<50} "▄"
+        ${else} ${if_match ${\1 \2}<60} "▅" 
+        ${else} ${if_match ${\1 \2}<70} "▆"
+        ${else} ${if_match ${\1 \2}<80} "▇"
+        ${else}                         "█" 
+    ${endif} ${endif} ${endif} ${endif} ${endif} ${endif} ${endif} ${endif}]],
 
   -- for anything
   template2 = getTemplateForColors(colors),
@@ -84,10 +72,10 @@ end
 function wifi()
   return [[
     {
-      "name" : "Network",
-      "full_text" : " ${downspeed ]] .. internetInterface .. [[ }/s",
-      "color" : "]] .. textColorFg .. [[",
-      "min_width":"]] .. stringWidth(8) .. [[",
+      "name": "Network",
+      "full_text": " ${downspeed ]] .. internetInterface .. [[ }/s",
+      "color": "]] .. textColorFg .. [[",
+      "min_width": "]] .. stringWidth(8) .. [[",
       "align": "center"
     },
   ]]
@@ -119,15 +107,15 @@ end
 function keyboardLayout()
   return [[
     { 
-      "name" : "Language", 
-        ${if_match ${exec xset -q|grep LED| awk '{ print $10 }'}<10}
+      "name": "Language", 
+    ${if_match ${exec xset -q|grep LED| awk '{ print $10 }'}<10}
       "full_text": " EN ",
-        "color" : "]] .. textColorFg .. [["
-          ${else}
+      "color": "]] .. textColorFg .. [["
+    ${else}
       "full_text": " RU ",
-        "color": "]] .. black .. [[",
-        "background": "]] .. errorColorFg .. [["
-          ${endif} 
+      "color": "]] .. black .. [[",
+      "background": "]] .. errorColorFg .. [["
+    ${endif} 
     },
   ]]
 end
@@ -135,11 +123,11 @@ end
 function time()
   return [[
     { 
-      "name" : "Time",
-      "full_text" : " ${time  %H:%M} ", 
-      "color" : "]] .. black .. [[",
-      "background" : "]] .. textColorFg .. [[",
-      "separator" : false 
+      "name": "Time",
+      "full_text": " ${time  %H:%M} ", 
+      "color": "]] .. black .. [[",
+      "background": "]] .. textColorFg .. [[",
+      "separator": false 
     },
   ]]
 end
@@ -156,9 +144,9 @@ end
 function volume()
   return [[
     {
-      "name" : "Volume",
-      "full_text" : "   ${exec ~/.i3/getVolume.sh}",
-      "color" : "]] .. textColorFg .. [["
+      "name": "Volume",
+      "full_text": "   ${exec ~/.i3/getVolume.sh}",
+      "color": "]] .. textColorFg .. [["
     },
   ]]
 end
@@ -166,17 +154,19 @@ end
 function memory()
   return [[
     { 
-      "full_text" : " ",
-      "min_width":"",
-      "separator_block_width":3,
-      "color" : "]] .. textColorFg .. [[",
-      "separator" : false
+      "name": "Memory_icon",
+      "full_text": " ",
+      "min_width": "",
+      "separator_block_width": 3,
+      "color": "]] .. textColorFg .. [[",
+      "separator": false
     },
-    { "name" : "Memory",
-      "min_width":"▁",
-      "full_text" : ${template1 memperc},
-      "color" : "\#${template2 memperc}", 
-      "separator_block_width":10
+    { 
+      "name": "Memory",
+      "min_width": "▁",
+      "full_text": ${template1 memperc},
+      "color": "\#${template2 memperc}", 
+      "separator_block_width": 10
     },
   ]]
 end
@@ -196,7 +186,7 @@ end
 function ip()
   return [[
     { 
-      "name" : "Network",
+      "name": "Network",
       "full_text": "${addr ]] .. internetInterface .. [[}",
       "color": "]] .. textColorFg .. [[" 
     },
@@ -206,9 +196,9 @@ end
 function hdd()
   return [[
     {
-      "name" : "HDD",
-      "full_text" : " ${fs_free /home} Free",
-      "color" : "]] .. textColorFg .. [["
+      "name": "HDD",
+      "full_text": " ${fs_free /home} Free",
+      "color": "]] .. textColorFg .. [["
     },
   ]]
 end
@@ -216,18 +206,19 @@ end
 function cpuHeader()
   return [[
     {
-      "name" : "Processor",
-      "full_text" : " ",
-      "separator_block_width":3,
-      "color" : "]] .. textColorFg .. [[",
-      "separator" : false
+      "name": "CPU_header",
+      "full_text": " ",
+      "separator_block_width": 3,
+      "color": "]] .. textColorFg .. [[",
+      "separator": false
     },
     { 
-      "separator_block_width":3,
-      "min_width":"▁",
-      "full_text" : "${exec cat ]] .. hwMonitorPath .. [[ | cut -c-2}",
-      "color" : "\#${template2 exec ~/dotfiles/.i3/getCPUTempNormalized.sh}", 
-      "separator" : false
+      "name": "CPU_temperature",
+      "separator_block_width": 3,
+      "min_width": "▁",
+      "full_text": "${exec cat ]] .. hwMonitorPath .. [[ | cut -c-2}",
+      "color": "\#${template2 exec ~/dotfiles/.i3/getCPUTempNormalized.sh}", 
+      "separator": false
     },
   ]]
 end
@@ -235,20 +226,22 @@ end
 function cpuCore(coreN)
   return [[{
     "name": "CPU",
-    "separator_block_width":3,
-    "min_width":"]] .. stringWidth(1) .. [[",
-    "full_text" : ${template1 cpu cpu]] .. coreN .. [[},
-    "color" : "\#]] .. getCoreTempColor(coreN) .. [[", 
-    "separator" : false
-  },]]
+    "separator_block_width": 3,
+    "min_width": "]] .. stringWidth(1) .. [[",
+    "full_text": ${template1 cpu cpu]] .. coreN .. [[},
+    "color": "\#]] .. getCoreTempColor(coreN) .. [[", 
+    "separator": false
+  },
+    ]]
 end
+
+-- local handle = io.popen('cat /proc/cpuinfo | grep processor | wc -l')
+-- local output = handle:read('*a')
+-- handle:close()
+-- local coresNum = tonumber(output)
+local coresNum = 20
+
 local cpu = ''
-
-local handle = io.popen('cat /proc/cpuinfo | grep processor | wc -l')
-local output = handle:read('*a')
-handle:close()
-local coresNum = tonumber(output)
-
 for n=1,coresNum,1 do
   cpu = cpu .. cpuCore(n)  
 end
@@ -256,7 +249,6 @@ end
 -- Stuff after 'TEXT' will be formatted on screen
 conky.text = [[
 # JSON for i3bar
-
   [
   ]] .. numLock() .. [[
   ]] .. capsLock() .. [[
