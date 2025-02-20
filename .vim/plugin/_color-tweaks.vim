@@ -48,8 +48,7 @@ augroup END
 highlight LineNr guibg=#d9d9d9 guifg=#34352E
 highlight CursorLineNr guibg=#e4e4e4 guifg=#444444 
  
-# highlight VertSplit guibg=#d9d9d9 guifg=#d9d9d9
-highlight VertSplit guibg=#eeeeee guifg=#eeeeee
+highlight VertSplit guibg=#d9d9d9 guifg=#d9d9d9
  
 # ale-vim customizations
 highlight ALESignColumnWithErrors guibg=#f6b7ac
