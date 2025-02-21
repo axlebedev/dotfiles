@@ -328,8 +328,8 @@ bindsym $mod+Shift+y mode $mode_work
 # Utils
 set $mode_utils "UTILS: Notifications (N)off (M)on | (L)ebedev-bro"
 mode $mode_utils {
-	bindsym $mod+n mode "default" ; exec --no-startup-id notify-send "PAUSE notifications" ; exec --no-startup-id notify-send DUNST_COMMAND_PAUSE
-	bindsym $mod+m mode "default" ; exec --no-startup-id notify-send DUNST_COMMAND_RESUME ; exec --no-startup-id notify-send "RESUME notifications"
+	bindsym $mod+n mode "default" ; exec --no-startup-id notify-send "PAUSE notifications" ; exec --no-startup-id dunstctl set-paused true
+	bindsym $mod+m mode "default" ; exec --no-startup-id dunstctl set-paused false ; exec --no-startup-id notify-send "RESUME notifications"
 	bindsym $mod+l mode "default" ; exec --no-startup-id nohup yandex-browser & disown
 
 # back to normal: Enter or Escape

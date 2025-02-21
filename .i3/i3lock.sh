@@ -36,5 +36,3 @@ i3lock \
 --time-str="%H:%M"        \
 --date-str=""       \
 --keylayout 1 && dunstctl set-paused false
-
-# --keylayout 1 && echo 'waited' >> /home/l-e-b-e-d-e-v/dotfiles/log && echo $(date +"%T") >> /home/l-e-b-e-d-e-v/dotfiles/log && (sleep 1 && notify-send DUNST_COMMAND_RESUME)
