@@ -305,7 +305,6 @@ def RefUsed()
     execute "normal \<Plug>(coc-references-used)"
 enddef
 nmap <silent>gr <Plug>(coc-references-used)
-nmap <silent>fr <Plug>(coc-references-used)
 
 # Yank with keeping cursor position in visual mode {{{
 def Keepcursor_visual_wrapper(command: string)
