@@ -257,8 +257,6 @@ def AirlineInit(): void
     # like default, but without keyboard layout indicator
     g:airline_section_a = '%#__accent_bold#%{airline#util#wrap(airline#parts#mode(),0)}%#__restore__#%{airline#util#append(airline#parts#crypt(),0)}%{airline#util#append(airline#parts#paste(),0)}%{airline#util#append(airline#extensions#keymap#status(),0)}%{airline#util#append(airline#parts#spell(),0)}%{airline#util#append("",0)}%{airline#util#append(airline#parts#iminsert(),0)}'
 
-    g:airline_section_b = '' # dont show git branch at airline
-
     g:airline_section_y = '' # dont show encoding
 
     # remove excess symbols from right part
