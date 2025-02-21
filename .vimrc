@@ -382,13 +382,15 @@ g:splitjoin_join_mapping  = 'gj'
 
 # -----------------------------------------------------------------------------
 # autoclose parens
-Plug 'jiangmiao/auto-pairs'
+Plug 'LunarWatcher/auto-pairs'
 g:AutoPairsMapSpace = 0
 g:AutoPairsMultilineClose = 0 # Dont make a mess when `{ if(condition) { doSomething [cursor] }`
-imap <silent> <expr> <space> pumvisible()
+inoremap <silent> <> <space> pumvisible()
 	\ ? "<space>"
 	\ : "<c-r>=AutoPairsSpace()<cr>"
 g:AutoPairsMapBS = 0
+
+g:AutoPairsFlyMode = 1
 
 # -----------------------------------------------------------------------------
 # comment lines, uncomment lines
