@@ -390,8 +390,6 @@ inoremap <silent> <> <space> pumvisible()
 	\ : "<c-r>=AutoPairsSpace()<cr>"
 g:AutoPairsMapBS = 0
 
-g:AutoPairsFlyMode = 1
-
 # -----------------------------------------------------------------------------
 # comment lines, uncomment lines
 Plug 'tomtom/tcomment_vim'

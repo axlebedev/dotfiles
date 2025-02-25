@@ -4,7 +4,12 @@ def Magit()
     if (&filetype == 'qf')
         wincmd k
     endif
-    Magit
+    var isStartify = getbufinfo()->len() <= 2 && &filetype == 'startify'
+    if (isStartify)
+        MagitOnly
+    else
+        Magit
+    endif
 enddef
 nnoremap <C-g><C-g> <ScriptCmd>Magit()<CR>
 nnoremap <C-g><C-b> <CMD>Git blame<cr>
