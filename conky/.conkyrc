@@ -5,6 +5,8 @@ dofile(currentdir .. 'localConfig.lua')
 dofile(currentdir .. 'helpers.lua')
 
 conky.config = {
+  max_user_text = 131072,
+
   out_to_x = false,
   own_window = false,
   out_to_console = true,
@@ -235,11 +237,10 @@ function cpuCore(coreN)
     ]]
 end
 
--- local handle = io.popen('cat /proc/cpuinfo | grep processor | wc -l')
--- local output = handle:read('*a')
--- handle:close()
--- local coresNum = tonumber(output)
-local coresNum = 20
+local handle = io.popen('cat /proc/cpuinfo | grep processor | wc -l')
+local output = handle:read('*a')
+handle:close()
+local coresNum = tonumber(output)
 
 local cpu = ''
 for n=1,coresNum,1 do
