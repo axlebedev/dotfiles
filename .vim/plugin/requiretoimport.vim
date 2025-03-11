@@ -20,5 +20,5 @@ enddef
 command! RequireToImport RequireToImport()
 command! ImportToRequire ImportToRequire()
 
-nnoremap rti <ScriptCmd>requiretoimport.RequireToImport()<CR>
-nnoremap itr <ScriptCmd>requiretoimport.ImportToRequire()<CR>
+nnoremap rti <ScriptCmd>RequireToImport()<CR>
+nnoremap itr <ScriptCmd>ImportToRequire()<CR>
