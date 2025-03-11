@@ -22,3 +22,4 @@ enddef
 # open current file version in branch
 nnoremap <silent> <C-g><C-f> <ScriptCmd>fzf#run(fzf#wrap({ source: 'sh ~/dotfiles/fish/sortedBranch.sh', sink: g:GeditFile }))<CR>
 
+nnoremap <C-g><C-o> <ScriptCmd>Git checkout %<CR>
