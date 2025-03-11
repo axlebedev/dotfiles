@@ -46,14 +46,7 @@ export def RemoveQFItemsVisual()
     execute 'normal! ' .. mode()
 enddef
 
-export def FilterQF(isVisualMode: bool)
-    var initialWord = isVisualMode ? l9#getSelectedText() : expand("<cword>")
-
-    var word = input('Filter entries with text: ', initialWord)
-    if (empty(word))
-        return
-    endif
-
+export def FilterQFWithWord(word: string)
     var curpos = getpos('.')
     var winview = winsaveview()
 
@@ -73,4 +66,15 @@ export def FilterQF(isVisualMode: bool)
     setpos('.', curpos)
 
     globalfind.ResizeQFHeight()
+enddef
+
+export def FilterQF(isVisualMode: bool)
+    var initialWord = isVisualMode ? l9#getSelectedText() : expand("<cword>")
+
+    var word = input('Filter entries with text: ', initialWord)
+    if (empty(word))
+        return
+    endif
+
+    FilterQFWithWord(word)
 enddef

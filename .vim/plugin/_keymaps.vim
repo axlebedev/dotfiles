@@ -8,6 +8,7 @@ import autoload '../autoload/opennextbuf.vim'
 import autoload '../autoload/htmlbeautify.vim'
 import autoload '../autoload/increasefoldlevel.vim'
 import autoload '../autoload/logfunction.vim'
+import autoload '../autoload/removeqfitem.vim'
 import autoload './updatebuffer.vim'
 
 g:mapleader = "\<space>"
@@ -300,11 +301,24 @@ nnoremap ZO zO
 
 nnoremap H zc
 
-def RefUsed()
-    setreg('/', expand('<cword>'))
+def RefUsed(cleanImports: bool)
+    const word = expand('<cword>')
+    setreg('/', word)
     execute "normal \<Plug>(coc-references-used)"
+    if (cleanImports)
+        var DoCleanImports = () => {
+            if (&ft == 'qf')
+                removeqfitem.FilterQFWithWord('import')
+            else
+                # timer_start(100, (id) => DoCleanImports())
+            endif
+        } 
+        timer_start(300, (id) => DoCleanImports())
+    endif
 enddef
-nmap <silent>gr <Plug>(coc-references-used)
+# nmap <silent>gr <Plug>(coc-references-used)
+nmap <silent>gr <ScriptCmd>RefUsed(false)<CR>
+nmap <silent>grr <ScriptCmd>RefUsed(true)<CR>
 
 # Yank with keeping cursor position in visual mode {{{
 def Keepcursor_visual_wrapper(command: string)
