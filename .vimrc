@@ -221,7 +221,7 @@ g:indexed_search_mappings = 0
 g:indexed_search_numbered_only = 1
 g:indexed_search_shortmess = 1
 g:indexed_search_show_term = 0
-Plug 'axlebedev/vim-indexed-search' # own fork
+Plug 'axlebedev/vim-indexed-search' # my own fork
 
 # -----------------------------------------------------------------------------
 # Clear highlight on cursor move
