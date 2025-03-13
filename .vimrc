@@ -534,6 +534,8 @@ g:coc_global_extensions = [
     'coc-html',
     'coc-jest',
     'coc-git',
+    'coc-import-cost',
+    'coc-cssmodules',
 ]
 g:coc_global_config = '/home/user/dotfiles/.vim/coc-settings.json'
 
