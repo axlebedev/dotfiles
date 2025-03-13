@@ -318,8 +318,8 @@ def RefUsed(cleanImports: bool)
     endif
 enddef
 # nmap <silent>gr <Plug>(coc-references-used)
-nmap <silent>gr <ScriptCmd>RefUsed(false)<CR>
-nmap <silent>grr <ScriptCmd>RefUsed(true)<CR>
+nmap <silent>gr <ScriptCmd>RefUsed(true)<CR>
+nmap <silent>grr <ScriptCmd>RefUsed(false)<CR>
 
 # Yank with keeping cursor position in visual mode {{{
 def Keepcursor_visual_wrapper(command: string)
