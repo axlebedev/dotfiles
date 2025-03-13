@@ -294,6 +294,12 @@ Plug 'jreybert/vimagit'
 autocmd User VimagitUpdateFile normal! zt
 autocmd User VimagitRefresh normal! zt
 autocmd FileType magit setlocal nocursorline
+def LastCommitMessage()
+    var msg = system('git log -1 --pretty=%s')
+    setline('.', msg->trim())
+    normal! WWW
+enddef
+autocmd User VimagitEnterCommit LastCommitMessage()
 Plug 'rhysd/conflict-marker.vim'
 Plug 'junegunn/gv.vim'
 
