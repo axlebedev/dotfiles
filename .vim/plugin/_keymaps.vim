@@ -309,6 +309,7 @@ def RefUsed(cleanImports: bool)
         var DoCleanImports = () => {
             if (&ft == 'qf')
                 removeqfitem.FilterQFWithWord('import')
+                removeqfitem.FilterQFWithWord('\<\/')
             else
                 # timer_start(100, (id) => DoCleanImports())
             endif
