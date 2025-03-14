@@ -61,7 +61,7 @@ g:XkbSwitchSkipIMappings = {'*': ["'", '"', '[', ']', '<', '>']}
 
 # -----------------------------------------------------------------------------
 #  Start screen for vim
-Plug 'mhinz/vim-startify'
+Plug 'axlebedev/vim-startify' # my own fork
 g:startify_disable_at_vimenter = 1
 g:startify_lists = [
     { type: 'dir',       header: ['   MRU ' .. getcwd()] },
