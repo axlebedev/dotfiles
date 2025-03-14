@@ -13,17 +13,33 @@ var ignored = [
 ]
 var ignoredList = map(ignored, (_, val) => '--ignore ' .. val)->join(' ')
 # find word under cursor
-var basegrepprg = 'ag --hidden --smart-case ' .. ignoredList
+var basegrepprg = 'ag --hidden ' .. ignoredList
 # -w --word-regexp
 var isWholeWord = 0
 # -Q --literal
 var isLiteral = 0
+# case
+# -i --ignore-case        Match case insensitively
+# -s --case-sensitive     Match case sensitively
+# -S --smart-case         Match case insensitively unless PATTERN contains
+#                         uppercase characters (Enabled by default)
+var caseArray = ['--smart-case', '--ignore-case', '--case-sensitive']
+var case = caseArray[0]
+
 &grepprg = basegrepprg
 
 var popupId = 0
 
+def CaseToString(): string
+    if (case == caseArray[1])
+        return '－'
+    elseif (case == caseArray[2])
+        return '➕'
+    endif
+    return 'S'
+enddef
 def MakeVarsString(): string
-    return 'w' .. (isWholeWord % 2 ? '➕' : '－') .. ' l' .. (isLiteral % 2 ? '➕' : '－') .. ' Search>'
+    return 'w' .. (isWholeWord % 2 ? '➕' : '－') .. ' l' .. (isLiteral % 2 ? '➕' : '－') .. ' i' .. CaseToString() .. ' Search>'
 enddef
 
 export def ResizeQFHeight(): void
@@ -54,11 +70,20 @@ def IncLiteral(): string
     return ''
 enddef
 
+def IncCase(): string
+    var nextCaseIndex = (caseArray->index(case) + 1) % caseArray->len()
+    case = caseArray[nextCaseIndex]
+    popup_settext(popupId, MakeVarsString())
+    redraw
+    return ''
+enddef
+
 const charsForEscape = '$'
 
 export def Grep()
     cmap <C-w> <C-r>=<sid>IncWord()<cr>
     cmap <C-l> <C-r>=<sid>IncLiteral()<cr>
+    cmap <C-i> <C-r>=<sid>IncCase()<cr>
 
     var initialWord = mode() != 'n'
         ? l9#getSelectedText()
@@ -90,6 +115,7 @@ export def Grep()
         if (isLiteral)
             prg = prg .. ' --literal'
         endif
+        prg = prg .. ' ' .. case
         cgetexpr system(join(
             [prg] + ['"' .. word .. '"', '.'], 
             ' '
