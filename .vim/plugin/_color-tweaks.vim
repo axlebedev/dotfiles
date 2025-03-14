@@ -73,3 +73,6 @@ highlight PopupScrollbar term=bold ctermfg=4 guifg=#A7A7A7 guibg=NONE
 
 # # for Plug 'RRethy/vim-illuminate'
 # highlight illuminatedWord guibg=#191C41
+
+#  indexed search popup
+highlight IndexedSearchPopup cterm=bold ctermbg=none ctermfg=magenta gui=bold guibg=#FDBED4 guifg=NONE
