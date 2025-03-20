@@ -209,6 +209,17 @@ bind ` forward-char
 bind \el forward-word
 bind \eh backward-kill-word
 
+function simulate_empty_commands
+    set height (tput lines)
+    for i in (seq $height)
+        fish_prompt
+        echo
+    end
+    fish_prompt
+end
+bind \cl simulate_empty_commands
+
+
 # bind \eb backward-word
 # bind \ef forward-word
 # bind \cw backward-kill-word
