@@ -247,9 +247,21 @@ def JumpDefinitionFindCursor(command: string)
     exe "call CocAction('" .. command .. "')"
     timer_start(100, (id) => findcursor#FindCursor('#d6d8fa', 0))
 enddef
-nnoremap gd <ScriptCmd>JumpDefinitionFindCursor('jumpDefinition')<CR>
+def GoToDef()
+    if (expand('<cword>') == 'import')
+        keepjumps search('from')
+        keepjumps normal! Wl
+        JumpDefinitionFindCursor('jumpDefinition')
+        return
+    endif
+    var savedCursor = getcurpos()
+    JumpDefinitionFindCursor('jumpImplementation')
+    if (savedCursor == getcurpos())
+        JumpDefinitionFindCursor('jumpDefinition')
+    endif
+enddef
+nnoremap gd <ScriptCmd>GoToDef()<CR>
 nnoremap gt <ScriptCmd>JumpDefinitionFindCursor('jumpTypeDefinition')<CR>
-nnoremap gi <ScriptCmd>JumpDefinitionFindCursor('jumpImplementation')<CR>
 
 def ToggleQuickFix()
     if getwininfo()->filter((id, info) => info.quickfix)->empty()
