@@ -8,6 +8,13 @@ def Unmerged(): void
                 \ })
 enddef
 
+def RenameSymbol()
+    var newname = input('New name: ')
+    if (!empty(newname))
+        execute "call CocAction('rename', '" .. newname .. "')"
+    endif
+enddef
+
 var refactorCommands = {
     unmerged: 'call Unmerged()', 
     showIncomingCalls: 'call CocAction("showIncomingCalls")',
@@ -15,7 +22,7 @@ var refactorCommands = {
     showOutline: 'call CocAction("showOutline")',
     showSuperTypes: 'call CocAction("showSuperTypes")',
     showSubTypes: 'call CocAction("showSubTypes")',
-    rename: 'call CocAction("rename")',
+    rename: 'call RenameSymbol()',
     refactor: 'call CocAction("refactor")',
     codeLens: 'call CocAction("codeLensAction")',
     ALEFix: 'ALEFix',
