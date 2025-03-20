@@ -28,7 +28,7 @@
 
     "outline.autoPreview": false,
     "outline.autoHide": false,
-    "outline.expandLevel": 1,
+    "outline.expandLevel": 0,
     "outline.autoWidth": true,
     "outline.checkBufferSwitch": true,
     "outline.followCursor": true,
@@ -51,5 +51,11 @@
     "git.branchCharacter": "",
     "git.addedSign.text": "•",
 
-    "cssmodules.hintName": "css"
+    "importCost.typescriptExtensions": [ "\\.tsx?$" ],
+    "importCost.javascriptExtensions": [ "\\.jsx?$" ],
+    "javascript.preferGoToSourceDefinition": true,
+
+    "eslint.options": "--rule 'notice/notice: off'",
+
+    "cssmodules.hintName": "css",
 }
