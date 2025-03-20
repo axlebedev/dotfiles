@@ -542,6 +542,8 @@ g:coc_global_extensions = [
     'coc-git',
     'coc-import-cost',
     'coc-cssmodules',
+    'coc-eslint',
+    'coc-react-refactor',
 ]
 g:coc_global_config = '/home/user/dotfiles/.vim/coc-settings.json'
 
