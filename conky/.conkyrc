@@ -4,6 +4,11 @@ currentdir = os.getenv("HOME") .. '/dotfiles/conky/'
 dofile(currentdir .. 'localConfig.lua')
 dofile(currentdir .. 'helpers.lua')
 
+-- ip addr | awk '/state UP/ {print $2}' | sed 's/.$//'
+local handleIntInt = io.popen("ip addr | awk '/state UP/ {print $2}' | sed 's/.$//'")
+local internetInterface = handleIntInt:read('*a')
+handleIntInt:close()
+
 conky.config = {
   max_user_text = 131072,
 

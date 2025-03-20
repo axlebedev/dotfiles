@@ -58,6 +58,7 @@ bindsym ctrl+F9 exec gromit-mpx --active
 exec --no-startup-id syndaemon -i .3 -d -t -K   
 exec --no-startup-id gnome-keyring-daemon
 exec --no-startup-id touchpad-indicator
+exec --no-startup-id mailnag
 
 # Heal short left shift
 exec --no-startup-id xmodmap -e "keycode 94 = Shift_L"   
