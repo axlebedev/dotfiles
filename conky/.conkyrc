@@ -4,10 +4,34 @@ currentdir = os.getenv("HOME") .. '/dotfiles/conky/'
 dofile(currentdir .. 'localConfig.lua')
 dofile(currentdir .. 'helpers.lua')
 
--- ip addr | awk '/state UP/ {print $2}' | sed 's/.$//'
+-- get internetInterface {{{
 local handleIntInt = io.popen("ip addr | awk '/state UP/ {print $2}' | sed 's/.$//'")
 local internetInterface = handleIntInt:read('*a')
 handleIntInt:close()
+-- }}}
+
+-- get hwMonitorPath {{{
+local function read_file(path)
+    local file = io.open(path, "r")
+    if not file then
+        return nil
+    end
+    local content = file:read("*a")
+    file:close()
+    return content:gsub("%s+", "")  -- Remove any trailing whitespace
+end
+
+local current_hwmon = ''
+for hwmon in io.popen('ls -d /sys/devices/platform/coretemp.0/hwmon/hwmon*'):lines() do
+    -- Check if the 'name' file contains 'coretemp'
+    local name = read_file(hwmon .. "/name")
+    if name == "coretemp" then
+        current_hwmon = name
+        break
+    end
+end
+hwMonitorPath = '/sys/devices/platform/coretemp.0/hwmon/' .. '' .. '/temp1_input'
+-- }}}
 
 conky.config = {
   max_user_text = 131072,

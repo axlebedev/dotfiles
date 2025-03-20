@@ -40,8 +40,5 @@ textColorFg = '\\#' .. colors[3]
 -- secondaryTextColorFg = '\\#8D15EE'
 secondaryTextColorFg = '\\#' .. colors[9]
 
--- config local to machine
-hwMonitorPath = '/sys/devices/platform/coretemp.0/hwmon/hwmon3/temp1_input'
-
 needNumLockOff = false
 needNumLockOn = true
