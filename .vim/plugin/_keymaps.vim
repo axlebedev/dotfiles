@@ -10,6 +10,7 @@ import autoload '../autoload/increasefoldlevel.vim'
 import autoload '../autoload/logfunction.vim'
 import autoload '../autoload/removeqfitem.vim'
 import autoload './updatebuffer.vim'
+import autoload './quickfix-utils.vim' as quickfixUtils
 
 g:mapleader = "\<space>"
 
@@ -215,6 +216,7 @@ nnoremap <C-f> <ScriptCmd>globalfind.Grep()<CR>
 vnoremap <C-f> <ScriptCmd>globalfind.Grep()<CR>
 
 nnoremap <C-f><C-t> <ScriptCmd>globalfind.FilterTestEntries()<cr>
+nnoremap <C-f><C-d> <ScriptCmd>quickfixUtils.DeduplicateQuickfixList()<cr>
 
 # jsLog.JsFastLog mapping {{{
 nnoremap <leader>l <ScriptCmd>set operatorfunc=function('jsLog.JsFastLog_simple')<cr>g@
