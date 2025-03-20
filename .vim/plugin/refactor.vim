@@ -22,6 +22,10 @@ var refactorCommands = {
     ALEFileRename: ':ALEFileRename',
     foldUnchanged: 'call CocCommand git.foldUnchanged',
     referencesUsed: "normal \<Plug>(coc-references-used)",
+    findAllFileReferences: 'CocCommand tsserver.findAllFileReferences',
+    goToSourceDefinition: 'CocCommand tsserver.goToSourceDefinition',
+    executeAutofix: 'CocCommand tsserver.executeAutofix',
+    executeEslintAutofix: 'CocCommand eslint.executeAutofix',
 }
 def RunRefactorCommand(key: string): void
     execute refactorCommands[key]
