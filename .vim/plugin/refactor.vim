@@ -71,18 +71,19 @@ var refactorCommands = {
 }
 
 const winWidth = 100
+const separator = '·'
 var maxLen = 0
 def GetLine(i: number, key: string): string
     var command = refactorCommands[key].command
-    return key .. repeat(' ', maxLen - key->len()) .. ' |' .. repeat(' ', winWidth - maxLen - command->len()) .. command
+    return key .. repeat(' ', maxLen - key->len()) .. ' ' .. separator .. repeat(' ', winWidth - maxLen - command->len()) .. command
 enddef
 def GetCommandsView(): list<string> 
     maxLen = max(refactorCommands->keys()->map((i, v) => v->len()))
     return refactorCommands->keys()->map(GetLine)
 enddef
 
-def RunRefactorCommand(line: any): void
-    var key = (line->split('|')->map((i, v) => v->trim()))[0]
+def RunRefactorCommand(line: string): void
+    var key = (line->split(separator))[0]->trim()
     execute refactorCommands[key].command
 enddef
 
