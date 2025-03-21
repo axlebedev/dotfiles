@@ -295,7 +295,16 @@ autocmd User VimagitUpdateFile normal! zt
 autocmd User VimagitRefresh normal! zt
 autocmd FileType magit setlocal nocursorline
 def LastCommitMessage()
-    var msg = system('git log -1 --pretty=%s')
+    var index = 1
+    var MakeCmd = (i) => 'git log -' .. i .. ' --pretty=%s | sed -n ' .. i .. 'p'
+    var msg = system(MakeCmd(index))
+    while (msg =~? 'merge')
+        index = index + 1
+        msg = system(MakeCmd(index))
+    endwhile
+
+    exe "normal! I# "
+    normal! O
     setline('.', msg->trim())
     normal! WWW
 enddef
