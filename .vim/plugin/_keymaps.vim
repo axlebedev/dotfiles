@@ -256,6 +256,12 @@ def GoToDef()
         JumpDefinitionFindCursor('jumpDefinition')
         return
     endif
+    var single_letter = getline('.')[col('.') - 1]
+    while (single_letter == ' ' || single_letter == '<')
+        normal! w
+        single_letter = getline('.')[col('.') - 1]
+    endwhile
+
     var savedCursor = getcurpos()
     JumpDefinitionFindCursor('jumpImplementation')
     if (savedCursor == getcurpos())
