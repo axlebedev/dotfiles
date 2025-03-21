@@ -51,9 +51,13 @@
     "git.branchCharacter": "",
     "git.addedSign.text": "•",
 
+    "typescript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": true,
+    "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
+
     "importCost.typescriptExtensions": [ "\\.tsx?$" ],
     "importCost.javascriptExtensions": [ "\\.jsx?$" ],
     "javascript.preferGoToSourceDefinition": true,
+    "javascript.updateImportsOnFileMove.enabled": true,
 
     "eslint.options": "--rule 'notice/notice: off'",
 
