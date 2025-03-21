@@ -9,7 +9,8 @@ def Unmerged(): void
 enddef
 
 def RenameSymbol()
-    var newname = input('New name: ')
+    var word = expand('<cword>')
+    var newname = input('New name: ', word)
     if (!empty(newname))
         execute "call CocAction('rename', '" .. newname .. "')"
     endif
