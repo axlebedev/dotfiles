@@ -70,12 +70,16 @@ var refactorCommands = {
     },
 }
 
+def GetLine(i: number, key: string): string
+    return key .. '  |  ' .. refactorCommands[key].command
+enddef
 def GetCommandsView(): list<string> 
-    return refactorCommands->keys()->map((key, val) => val .. '  |  ' .. refactorCommands[val].command)
+    return refactorCommands->keys()->map(GetLine)
 enddef
 
-def RunRefactorCommand(key: string): void
-    execute refactorCommands.command
+def RunRefactorCommand(line: any): void
+    var key = (line->split('|')->map((i, v) => v->trim()))[0]
+    execute refactorCommands[key].command
 enddef
 
 command! RefactorCommands fzf#run(fzf#wrap({ source: GetCommandsView(), sink: RunRefactorCommand }))
