@@ -6,6 +6,16 @@ function stringWidth(number)
   return result
 end
 
+function warningWarning(text)
+  return [[{
+    "full_text":"]] .. text .. [[",
+      "color": "]] .. errorColorBg .. [[",  
+      "background": "]] .. errorColorFg .. [[",  
+      "align": "center",
+      "min_width":"]] .. stringWidth(32) .. [["
+  }]]
+end
+
 beginArrayItem = '${if_match ${\\1 \\2}<TICK}COLOR${else}'
 endArrayItem = '${endif}'
 function getTemplateForColors(colorsArray, offset)
