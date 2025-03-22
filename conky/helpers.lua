@@ -16,6 +16,46 @@ function warningWarning(text)
   }]]
 end
 
+function runShellCmd(cmd, raw)
+  local f = assert(io.popen(cmd, 'r'))
+  local s = assert(f:read('*a'))
+  f:close()
+  if raw then return s end
+  s = string.gsub(s, '^%s+', '')
+  s = string.gsub(s, '%s+$', '')
+  s = string.gsub(s, '[\n\r]+', ' ')
+  return s
+end
+
+
+function numLock()
+  local str = runShellCmd('xset q | grep -o "Num Lock:[[:space:]]*\\(on\\|off\\)"')
+  local status = string.match(str, "on|off")
+
+  if needNumLockOff and status == "off" then
+    return warningWarning("NumLock off")
+  end
+
+  if needNumLockOn and status == "on" then
+    return warningWarning("NumLock on")
+  end
+
+  return ''
+end
+
+function capsLock()
+  local str = runShellCmd('xset q | grep -o "Caps Lock:[[:space:]]*\\(on\\|off\\)"')
+  local status = string.match(str, "on|off")
+
+  if (status == "on") then
+    return warningWarning("CapsLock")
+  end
+
+  return ''
+end
+
+-- ###########################################################
+
 beginArrayItem = '${if_match ${\\1 \\2}<TICK}COLOR${else}'
 endArrayItem = '${endif}'
 function getTemplateForColors(colorsArray, offset)
