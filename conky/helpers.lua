@@ -65,3 +65,8 @@ function getCoreTempColor(coreN)
 
   return result
 end
+
+function conky_memoryStr()
+  local s = conky_parse('${memperc}')
+  return "A" .. s .. "B"
+end
