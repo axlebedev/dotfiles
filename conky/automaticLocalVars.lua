@@ -32,3 +32,10 @@ for hwmon in io.popen('ls -d /sys/devices/platform/coretemp.0/hwmon/hwmon*'):lin
 end
 hwMonitorPath = '/sys/devices/platform/coretemp.0/hwmon/' .. current_hwmon .. '/temp1_input'
 -- }}}
+
+-- coresNum {{{
+local handle_coresNum = io.popen('cat /proc/cpuinfo | grep processor | wc -l')
+coresNum = tonumber(handle_coresNum:read('*a'))
+handle_coresNum:close()
+-- }}}
+
