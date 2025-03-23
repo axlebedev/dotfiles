@@ -71,16 +71,18 @@ function capsLock()
   return ''
 end
 
-function conky_cpuChar(coreNum)
-  local s = conky_parse(string.format('${cpu cpu%d}', coreNum))
+function getChar(str)
+  local s = conky_parse(str)
   local i = valueToSteps({ value = tonumber(s), rangeMax = 90, stepsMax = #chars - 1 })
   return chars[i]
 end
 
+function conky_cpuChar(coreNum)
+  return getChar(string.format('${cpu cpu%d}', coreNum))
+end
+
 function conky_memoryStr()
-  local s = conky_parse('${memperc}')
-  local i = valueToSteps({ value = tonumber(s), rangeMax = 90, stepsMax = #chars - 1 })
-  return chars[i]
+  return getChar('${memperc}')
 end
 
 -- ###########################################################
