@@ -1,4 +1,21 @@
 -- vim: ts=2 sw=2 et ai cindent syntax=lua
+dofile(os.getenv("HOME") .. '/dotfiles/conky/' .. 'localConfig.lua')
+
+local function clamp(value, min, max)
+    return math.max(min, math.min(max, value))
+end
+
+function valueToSteps(params)
+  local value = params.value
+  local rangeMin = params.rangeMin or 0
+  local rangeMax = params.rangeMax or 100
+  local stepsMin = params.stepsMin or 1
+  local stepsMax = params.stepsMax or 10
+
+  local p = (value - rangeMin) / (rangeMax - rangeMin)
+  local result = math.floor(p * (stepsMax - stepsMin)) + stepsMin
+  return clamp(result, stepsMin, stepsMax)
+end
 
 function stringWidth(number)
   local result = ""
@@ -52,6 +69,22 @@ function capsLock()
   end
 
   return ''
+end
+
+function conky_getChar(conkyStr, conkyStr2)
+  conkyStr2 = conkyStr2 or ''
+  local fullStr = conkyStr2 and conkyStr .. ' ' .. conkyStr2 or conkyStr
+  local value = conky_parse("${" .. fullStr .. "}")
+  return value
+  -- local i = valueToSteps({ value, rangeMax = 90, stepsMax = #chars - 1 })
+  -- return i
+  -- return chars[i]
+end
+
+function conky_cpuChar(coreNum)
+  local s = conky_parse(string.format('${cpu cpu%d}', coreNum))
+  local i = valueToSteps({ value = tonumber(s), rangeMax = 90, stepsMax = #chars - 1 })
+  return chars[i]
 end
 
 -- ###########################################################

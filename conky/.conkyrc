@@ -199,7 +199,7 @@ function cpuCore(coreN)
     "name": "CPU",
     "separator_block_width": 3,
     "min_width": "]] .. stringWidth(1) .. [[",
-    "full_text": ${template1 cpu cpu]] .. coreN .. [[},
+    "full_text": "${lua cpuChar ]] .. coreN .. [[}",
     "color": "\#]] .. getCoreTempColor(coreN) .. [[", 
     "separator": false
   },
@@ -236,5 +236,4 @@ conky.text = [[
   # чтобы у всех в конце была запятая - последний пустой блок без запятой
   { "full_text": "" }
   ],
-  ]];
-
+]];
