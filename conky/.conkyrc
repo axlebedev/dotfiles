@@ -42,17 +42,6 @@ conky.config = {
 
   font = 'pango: FontAwesome 8',
 
-  template1 = [[${if_match ${\1 \2}<10} " "
-        ${else} ${if_match ${\1 \2}<20} "▁"
-        ${else} ${if_match ${\1 \2}<30} "▂" 
-        ${else} ${if_match ${\1 \2}<40} "▃"
-        ${else} ${if_match ${\1 \2}<50} "▄"
-        ${else} ${if_match ${\1 \2}<60} "▅" 
-        ${else} ${if_match ${\1 \2}<70} "▆"
-        ${else} ${if_match ${\1 \2}<80} "▇"
-        ${else}                         "█" 
-    ${endif} ${endif} ${endif} ${endif} ${endif} ${endif} ${endif} ${endif}]],
-
   -- for anything
   template2 = getTemplateForColors(colors),
 
