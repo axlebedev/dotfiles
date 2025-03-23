@@ -172,6 +172,11 @@ function cpuHeader()
       "color": "]] .. textColorFg .. [[",
       "separator": false
     },
+  ]]
+end
+
+function cpuTemperature()
+  return [[
     { 
       "name": "CPU_temperature",
       "separator_block_width": 3,
@@ -216,6 +221,7 @@ conky.text = [[
   ]] .. date() .. [[
   ]] .. volume() .. [[
   ]] .. cpuHeader() .. [[
+  ]] .. cpuTemperature() .. [[
   ]] .. cpu .. [[
   ]] .. memory() .. [[
   ]] .. vpn() .. [[
