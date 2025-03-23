@@ -185,23 +185,6 @@ function cpuTemperature()
   ]]
 end
 
-function cpuCore(coreN)
-  return [[{
-    "name": "CPU",
-    "separator_block_width": 3,
-    "min_width": "]] .. stringWidth(1) .. [[",
-    "full_text": "${lua cpuCoreChar ]] .. coreN .. [[}",
-    "color": "${lua cpuCoreColor ]] .. coreN .. [[}",
-    "separator": false
-  },
-    ]]
-end
-
-local cpu = ''
-for n=1,coresNum,1 do
-  cpu = cpu .. cpuCore(n)  
-end
-
 function cpuTopN(n)
   return [[
     { 
