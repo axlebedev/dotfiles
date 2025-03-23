@@ -77,6 +77,12 @@ function conky_cpuChar(coreNum)
   return chars[i]
 end
 
+function conky_memoryStr()
+  local s = conky_parse('${memperc}')
+  local i = valueToSteps({ value = tonumber(s), rangeMax = 90, stepsMax = #chars - 1 })
+  return chars[i]
+end
+
 -- ###########################################################
 
 beginArrayItem = '${if_match ${\\1 \\2}<TICK}COLOR${else}'
@@ -123,9 +129,4 @@ function getCoreTempColor(coreN)
   end
 
   return result
-end
-
-function conky_memoryStr()
-  local s = conky_parse('${memperc}')
-  return "A" .. s .. "B"
 end
