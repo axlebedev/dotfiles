@@ -1,4 +1,6 @@
 -- vim: ts=2 sw=2 et ai cindent syntax=lua
+
+-- 'chars', 'colors'
 dofile(os.getenv("HOME") .. '/dotfiles/conky/' .. 'localConfig.lua')
 
 local function clamp(value, min, max)
@@ -16,6 +18,12 @@ function valueToSteps(params)
   local result = math.floor(p * (stepsMax - stepsMin)) + stepsMin
   return clamp(result, stepsMin, stepsMax)
 end
+
+function getColor(value)
+  local i = valueToSteps({ value = value, stepsMax = #colors, rangeMax = 80 })
+  return colors[i]
+end
+
 
 function stringWidth(number)
   local result = ""
@@ -83,6 +91,23 @@ end
 
 function conky_memoryStr()
   return getChar('${memperc}')
+end
+
+function conky_cpuTemperature()
+  -- `cat /sys/class/thermal/thermal_zone2/type` should be "x86_pkg_temp"
+  local file = io.open("/sys/class/thermal/thermal_zone2/temp", "r")
+  if file then
+    local temp = file:read("*n") / 1000  -- Convert to degrees Celsius
+    file:close()
+    return string.format("%.1f", temp)
+  else
+    return "N/A"
+  end
+end
+
+function conky_cpuTemperature_color()
+  local s = tonumber(conky_cpuTemperature())
+  return '#' .. getColor(tonumber(s))
 end
 
 -- ###########################################################

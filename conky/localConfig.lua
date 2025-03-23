@@ -17,10 +17,6 @@ colors = {
   '3A0891',
   '7B75CF',
   'ADCBFF',
-  'ADCBFF',
-  'ADCBFF',
-  'ADCBFF',
-  'ADCBFF',
   'AFC5FC',
   'D370D5',
   'F41BAD',
@@ -38,7 +34,7 @@ errorColorBg = '\\#FFFFFF'
 -- textColorFg = '\\#ADCBFF'
 textColorFg = '\\#' .. colors[3]
 -- secondaryTextColorFg = '\\#8D15EE'
-secondaryTextColorFg = '\\#' .. colors[9]
+secondaryTextColorFg = '\\#' .. colors[#colors-2]
 
 needNumLockOff = false
 needNumLockOn = true

@@ -181,8 +181,8 @@ function cpuTemperature()
       "name": "CPU_temperature",
       "separator_block_width": 3,
       "min_width": "▁",
-      "full_text": "${exec cat ]] .. hwMonitorPath .. [[ | cut -c-2}",
-      "color": "\#${template2 exec ~/dotfiles/.i3/getCPUTempNormalized.sh}", 
+      "full_text": "${lua cpuTemperature}",
+      "color": "${lua cpuTemperature_color}",
       "separator": false
     },
   ]]
