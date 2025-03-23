@@ -202,6 +202,19 @@ for n=1,coresNum,1 do
   cpu = cpu .. cpuCore(n)  
 end
 
+function cpuTopN(n)
+  return [[
+    { 
+      "name": "CPU_top_]] .. n .. [[",
+      "separator_block_width": 3,
+      "min_width": "▁",
+      "full_text": "${lua top_cpu_char ]] .. n .. [[}",
+      "color": "${lua top_cpu_color ]] .. n .. [[}",
+      "separator": false
+    },
+  ]]
+end
+
 -- Stuff after 'TEXT' will be formatted on screen
 conky.text = [[
 # JSON for i3bar
@@ -214,7 +227,10 @@ conky.text = [[
   ]] .. volume() .. [[
   ]] .. cpuHeader() .. [[
   ]] .. cpuTemperature() .. [[
-  ]] .. cpu .. [[
+  ]] .. cpuTopN(1) .. [[
+  ]] .. cpuTopN(4) .. [[
+  ]] .. cpuTopN(8) .. [[
+  ]] .. cpuTopN(coresNum) .. [[
   ]] .. memory() .. [[
   ]] .. vpn() .. [[
   ]] .. wifi() .. [[

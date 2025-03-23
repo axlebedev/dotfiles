@@ -2,9 +2,43 @@
 
 -- 'chars', 'colors'
 dofile(os.getenv("HOME") .. '/dotfiles/conky/' .. 'localConfig.lua')
+dofile(os.getenv("HOME") .. '/dotfiles/conky/' .. 'automaticLocalVars.lua')
 
 local function clamp(value, min, max)
     return math.max(min, math.min(max, value))
+end
+
+local function sum(arr)
+  -- Calculate the sum of the array
+  local sum = 0
+  for _, value in ipairs(arr) do
+    sum = sum + value
+  end
+  return sum
+end
+
+local function avg(arr)
+  return sum(arr) / #arr
+end
+
+local function getMaxN(arr, n)
+    -- Create a copy of the array to avoid modifying the original
+    local sortedArr = {}
+    for i, v in ipairs(arr) do
+        sortedArr[i] = v
+    end
+
+    -- Sort the array in descending order
+    table.sort(sortedArr, function(a, b)
+        return a > b
+    end)
+
+    local result = {}
+    -- Copy the first n elements from a to result
+    for i = 1, n do
+      result[i] = sortedArr[i]
+    end
+    return result
 end
 
 function valueToSteps(params)
@@ -103,6 +137,25 @@ function conky_memory_color()
   return '#' .. getColor(tonumber(s))
 end
 
+function conky_top_cpu(topN)
+  topN = tonumber(topN)
+  local cpuCores = {}
+  for i = 0, coresNum - 1 do
+    cpuCores[i+1] = tonumber(conky_parse(string.format("${cpu cpu%d}", i)))
+  end
+
+  return math.floor(avg(getMaxN(cpuCores, topN)))
+end
+
+function conky_top_cpu_char(topN)
+  return getChar(conky_top_cpu(topN))
+end
+
+function conky_top_cpu_color(topN)
+  topN = tonumber(topN)
+  local s = conky_top_cpu(topN)
+  return '#' .. getColor(tonumber(s))
+end
 
 function conky_cpuTemperature()
   -- `cat /sys/class/thermal/thermal_zone2/type` should be "x86_pkg_temp"
