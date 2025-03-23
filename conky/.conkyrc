@@ -42,9 +42,6 @@ conky.config = {
 
   font = 'pango: FontAwesome 8',
 
-  -- for anything
-  template2 = getTemplateForColors(colors),
-
   lua_load = path .. 'helpers.lua',
 };
 
@@ -125,7 +122,7 @@ function memory()
       "name": "Memory",
       "min_width": "▁",
       "full_text": "${lua memoryStr}",
-      "color": "\#${template2 memperc}", 
+      "color": "\#${lua memory_color}", 
       "separator_block_width": 10
     },
   ]]

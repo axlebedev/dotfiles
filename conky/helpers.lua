@@ -93,13 +93,19 @@ function conky_memoryStr()
   return getChar('${memperc}')
 end
 
+function conky_memory_color()
+  local s = tonumber(conky_memoryStr())
+  return '#' .. getColor(tonumber(s))
+end
+
+
 function conky_cpuTemperature()
   -- `cat /sys/class/thermal/thermal_zone2/type` should be "x86_pkg_temp"
   local file = io.open("/sys/class/thermal/thermal_zone2/temp", "r")
   if file then
     local temp = file:read("*n") / 1000  -- Convert to degrees Celsius
     file:close()
-    return string.format("%.1f", temp)
+    return string.format("%.0f", temp)
   else
     return "N/A"
   end
