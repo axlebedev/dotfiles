@@ -65,16 +65,6 @@ function stringWidth(number)
   return result
 end
 
-function warningWarning(text)
-  return [[{
-    "full_text":"]] .. text .. [[",
-      "color": "]] .. errorColorBg .. [[",  
-      "background": "]] .. errorColorFg .. [[",  
-      "align": "center",
-      "min_width":"]] .. stringWidth(32) .. [["
-  }]]
-end
-
 function runShellCmd(cmd, raw)
   local f = assert(io.popen(cmd, 'r'))
   local s = assert(f:read('*a'))
@@ -86,6 +76,15 @@ function runShellCmd(cmd, raw)
   return s
 end
 
+function warningWarning(text)
+  return [[{
+    "full_text":"]] .. text .. [[",
+      "color": "]] .. errorColorBg .. [[",  
+      "background": "]] .. errorColorFg .. [[",  
+      "align": "center",
+      "min_width":"]] .. stringWidth(32) .. [["
+  }]]
+end
 
 function numLock()
   local str = runShellCmd('xset q | grep -o "Num Lock:[[:space:]]*\\(on\\|off\\)"')
@@ -119,21 +118,12 @@ function getChar(str)
   return chars[i]
 end
 
-function conky_cpuCoreChar(coreNum)
-  return getChar(string.format('${cpu cpu%d}', coreNum))
-end
-
-function conky_cpuCoreColor(coreNum)
-  local s = conky_parse(string.format('${cpu cpu%d}', coreNum))
-  return '#' .. getColor(tonumber(s))
-end
-
-function conky_memoryStr()
+function conky_memory_str()
   return getChar('${memperc}')
 end
 
 function conky_memory_color()
-  local s = tonumber(conky_memoryStr())
+  local s = tonumber(conky_parse('${memperc}'))
   return '#' .. getColor(tonumber(s))
 end
 

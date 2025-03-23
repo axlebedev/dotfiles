@@ -121,8 +121,8 @@ function memory()
     { 
       "name": "Memory",
       "min_width": "▁",
-      "full_text": "${lua memoryStr}",
-      "color": "\#${lua memory_color}", 
+      "full_text": "${lua memory_str}",
+      "color": "${lua memory_color}", 
       "separator_block_width": 10
     },
   ]]
