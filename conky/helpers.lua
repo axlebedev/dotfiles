@@ -85,8 +85,13 @@ function getChar(str)
   return chars[i]
 end
 
-function conky_cpuChar(coreNum)
+function conky_cpuCoreChar(coreNum)
   return getChar(string.format('${cpu cpu%d}', coreNum))
+end
+
+function conky_cpuCoreColor(coreNum)
+  local s = conky_parse(string.format('${cpu cpu%d}', coreNum))
+  return '#' .. getColor(tonumber(s))
 end
 
 function conky_memoryStr()

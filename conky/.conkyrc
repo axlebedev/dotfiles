@@ -190,8 +190,8 @@ function cpuCore(coreN)
     "name": "CPU",
     "separator_block_width": 3,
     "min_width": "]] .. stringWidth(1) .. [[",
-    "full_text": "${lua cpuChar ]] .. coreN .. [[}",
-    "color": "\#]] .. getCoreTempColor(coreN) .. [[", 
+    "full_text": "${lua cpuCoreChar ]] .. coreN .. [[}",
+    "color": "${lua cpuCoreColor ]] .. coreN .. [[}",
     "separator": false
   },
     ]]
