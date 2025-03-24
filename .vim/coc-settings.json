@@ -41,7 +41,7 @@
 
     "callHierarchy.enableTooltip": true,
 
-    "codeLens.enable": true,
+    "codeLens.enable": false,
 
     "semanticTokens.enable": true,
 
