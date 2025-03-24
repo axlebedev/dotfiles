@@ -42,6 +42,11 @@ printf "\n"
 printf "Starting update...\n"
 
 printf "${COLOR_YELLOW}pull vim sources...${COLOR_RESET}\r"
+if [[ $(basename "$PWD") == "dotfiles" ]]; then
+    echo "You're in dotfiles"
+    exit 1
+fi
+
 if git reset --hard origin/master >>${logFile} 2>>${logFile}; \
 then
     printf "${COLOR_GREEN}pull vim sources OK${COLOR_RESET}"
