@@ -211,8 +211,10 @@ conky.text = [[
   ]] .. cpuHeader() .. [[
   ]] .. cpuTemperature() .. [[
   ]] .. cpuTopN(1) .. [[
+  ]] .. cpuTopN(2) .. [[
   ]] .. cpuTopN(4) .. [[
   ]] .. cpuTopN(8) .. [[
+  ]] .. cpuTopN(16) .. [[
   ]] .. cpuTopN(coresNum) .. [[
   ]] .. memory() .. [[
   ]] .. vpn() .. [[
