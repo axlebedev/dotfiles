@@ -49,6 +49,28 @@ conky.config = {
 -- ###############################################################################################
 -- ###############################################################################################
   -- ###############################################################################################
+function numLock()
+  return [[{
+    "name": "NumLock",
+    "full_text":"${lua numLock_str}",
+    "color": "]] .. errorColorBg .. [[",  
+    "background": "]] .. errorColorFg .. [[",  
+    "align": "center",
+    "min_width":"]] .. stringWidth(32) .. [["
+  },]]
+end
+
+function capsLock()
+  return [[{
+    "name": "CapsLock",
+    "full_text":"${lua capsLock_str}",
+    "color": "]] .. errorColorBg .. [[",  
+    "background": "]] .. errorColorFg .. [[",  
+    "align": "center",
+    "min_width":"]] .. stringWidth(32) .. [["
+  },]]
+end
+
 function wifi()
   return [[
     {

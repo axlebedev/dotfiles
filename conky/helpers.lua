@@ -76,37 +76,27 @@ function runShellCmd(cmd, raw)
   return s
 end
 
-function warningWarning(text)
-  return [[{
-    "full_text":"]] .. text .. [[",
-      "color": "]] .. errorColorBg .. [[",  
-      "background": "]] .. errorColorFg .. [[",  
-      "align": "center",
-      "min_width":"]] .. stringWidth(32) .. [["
-  }]]
-end
-
-function numLock()
+function conky_numLock_str()
   local str = runShellCmd('xset q | grep -o "Num Lock:[[:space:]]*\\(on\\|off\\)"')
-  local status = string.match(str, "on|off")
+  local status = str:match("%S+$")
 
   if needNumLockOff and status == "off" then
-    return warningWarning("NumLock off")
+    return "NumLock off"
   end
 
   if needNumLockOn and status == "on" then
-    return warningWarning("NumLock on")
+    return "NumLock on"
   end
 
   return ''
 end
 
-function capsLock()
+function conky_capsLock_str()
   local str = runShellCmd('xset q | grep -o "Caps Lock:[[:space:]]*\\(on\\|off\\)"')
-  local status = string.match(str, "on|off")
+  local status = str:match("%S+$")
 
   if (status == "on") then
-    return warningWarning("CapsLock")
+    return "CapsLock"
   end
 
   return ''
