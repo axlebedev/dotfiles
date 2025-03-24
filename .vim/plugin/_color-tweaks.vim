@@ -58,12 +58,15 @@ highlight ALEWarning cterm=underline guibg=#f0eab4
 # Diff styling
 highlight diffAdded term=bold ctermbg=black     ctermfg=green cterm=bold guibg=#d0f2d4 guifg=NONE gui=none
 highlight DiffAdd   term=bold ctermbg=darkgreen ctermfg=white cterm=bold guibg=#d0f2d4 guifg=NONE gui=bold
+highlight GitSignsAdd guifg=#b1f5b9 guibg=#b1f5b9 
 
 highlight diffRemoved term=bold ctermbg=black    ctermfg=red      cterm=bold guibg=#f2d1ce  guifg=NONE   gui=none
 highlight DiffDelete  term=none ctermbg=darkblue ctermfg=darkblue cterm=none guibg=#f2d1ce  guifg=NONE   gui=none
+highlight GitSignsDelete guifg=#f2b7b1 guibg=#f2b7b1 
 
 highlight DiffChange term=bold ctermbg=black   ctermfg=yellow cterm=bold guibg=#ebdfce  guifg=NONE gui=none
 highlight diffChanged term=bold ctermbg=black   ctermfg=yellow cterm=bold guibg=#ebdfce  guifg=NONE gui=none
+highlight GitSignsChange guifg=#ffe79f guibg=#ffe79f 
 highlight diffFile    term=bold ctermbg=yellow  ctermfg=black  cterm=none guibg=#ebdfce  guifg=NONE gui=none
 highlight diffLine    term=bold ctermbg=magenta ctermfg=white  cterm=bold guibg=#ebdfce  guifg=NONE gui=none
 

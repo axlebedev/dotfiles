@@ -49,7 +49,11 @@
 
     "git.virtualTextPrefix": " ",
     "git.branchCharacter": "",
-    "git.addedSign.text": "•",
+    "git.addedSign.hlGroup": "GitSignsAdd",
+    "git.changedSign.hlGroup": "GitSignsChange",
+    "git.removedSign.hlGroup": "GitSignsDelete",
+    "git.changeRemovedSign.hlGroup": "GitSignsDelete",
+    "git.topRemovedSign.hlGroup": "GitSignsDelete",
 
     "typescript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": true,
     "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
