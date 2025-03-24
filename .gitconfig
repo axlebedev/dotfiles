@@ -16,7 +16,7 @@
 [core]
 ; https://github.com/so-fancy/diff-so-fancy
 	pager = diff-so-fancy | less --tabs=4 -RFX
-	editor = gnome-terminal -- vim
+	editor = gnome-terminal --wait -- vim
 	autoclrf
 [credential]
 	helper = cache --timeout=86400
