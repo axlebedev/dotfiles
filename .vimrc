@@ -584,8 +584,8 @@ inoremap <silent><expr> <CR> coc#pum#visible()
   \ : "\<CR>"
 
 inoremap <silent><expr> <BS> <SID>CheckBackSpace()
-  \ ? "\<C-r>=AutoPairsDelete()<CR>"
-  \ : "\<C-r>=AutoPairsDelete() \<bar> coc#refresh()<CR>"
+  \ ? "\<BS>"
+  \ : "\<BS> \<bar> coc#refresh()<CR>"
 
 # }}} js/html/css... plugins
 
