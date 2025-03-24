@@ -2,6 +2,8 @@
 
 filler="                                   "
 
+curhome="/home/alex/"
+
 # clear log file, if exists
 logFile="$(pwd)/update_vim.log"
 echo "starting at $(date)" >${logFile}
@@ -21,12 +23,12 @@ while getopts "g" v; do
 done
 
 # check if update necessary
-cd /home/alex/github/vim/
+cd $curhome/github/vim/
 current_commit=$(git rev-parse HEAD)
 
 printf "Checking for updates...\n"
 eval `ssh-agent -s` >>${logFile} 2>>${logFile}
-ssh-add /home/alex/.ssh/id_rsa >>${logFile} 2>>${logFile}
+ssh-add $curhome/.ssh/id_rsa >>${logFile} 2>>${logFile}
 git fetch >>${logFile} 2>>${logFile}
 last_commit=$(git rev-parse origin/master)
 if [[ IGNORE_GIT == 0 && "$current_commit" == "$last_commit" ]]; \
