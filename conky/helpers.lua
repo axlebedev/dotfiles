@@ -138,11 +138,9 @@ function conky_top_cpu_color(topN)
 end
 
 function conky_cpuTemperature()
-  -- `cat /sys/class/thermal/thermal_zone2/type` should be "x86_pkg_temp"
-  local file = io.open("/sys/class/thermal/thermal_zone2/temp", "r")
-  if file then
-    local temp = file:read("*n") / 1000  -- Convert to degrees Celsius
-    file:close()
+  local cmdTemp = runShellCmd("cat /sys/class/thermal/"..thermalZone.."/temp"):match("^%s*(.-)%s*$")
+  local temp = tonumber(cmdTemp) / 1000
+  if temp then
     return string.format("%.0f", temp)
   else
     return "N/A"

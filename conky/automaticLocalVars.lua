@@ -39,3 +39,8 @@ coresNum = tonumber(handle_coresNum:read('*a'))
 handle_coresNum:close()
 -- }}}
 
+-- {{{
+local handle_thermal_zone = io.popen("grep -E 'x86_pkg_temp' /sys/class/thermal/thermal_zone*/type | cut -d'/' -f5 | xargs -I{} echo {}")
+thermalZone = handle_thermal_zone:read('*a'):match("^%s*(.-)%s*$")
+handle_thermal_zone:close()
+-- }}}
