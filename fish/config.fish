@@ -119,13 +119,21 @@ abbr -a gbl g blame
 abbr -a gs g status .
 # maybe git diff --patience
 
+function g-gh
+    if string match "master" (git rev-parse --abbrev-ref HEAD)
+        g hist --first-parent $argv
+    else
+        g hist --branches --not master $argv
+    end
+end
+
 abbr -a gd g diff --histogram --minimal --ignore-space-change --relative
 abbr -a gdc g diff --histogram --minimal --ignore-space-change --relative --cached
-abbr -a gh g hist
-abbr -a ghh g hist --first-parent -n 10
-abbr -a ghhh g hist --first-parent -n 20
-abbr -a ghhhh g hist --first-parent -n 30
-abbr -a ghs g hist --stat --first-parent
+abbr -a gh g-gh
+abbr -a ghh g-gh -n 10
+abbr -a ghhh g-gh -n 20
+abbr -a ghhhh g-gh -n 30
+abbr -a ghs g-gh --stat --first-parent
 abbr -a gpl g pull
 abbr -a gps g push origin HEAD
 abbr -a gpsu g push -u origin HEAD
