@@ -730,3 +730,11 @@ autocmd BufEnter quickfix IlluminatePauseBuf
 autocmd BufEnter * timer_start(1, (id) => findcursor#FindCursor('#d6d8fa', 0))
 
 autocmd au_vimrc VimResized * :wincmd =
+
+def FoldDiffFiles()
+  setlocal foldmethod=expr
+  setlocal foldexpr=getline(v:lnum)=~'^diff\\s'?'>1':1
+  setlocal foldtext=getline(v:foldstart)
+enddef
+
+autocmd FileType gitcommit,diff <ScriptCmd>FoldDiffFiles()<CR>
