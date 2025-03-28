@@ -117,7 +117,6 @@ alias gobs g-gobs
 abbr -a gbl g blame
 
 abbr -a gs g status .
-# maybe git diff --patience
 
 function g-gh
     if string match "master" (git rev-parse --abbrev-ref HEAD)
@@ -127,6 +126,7 @@ function g-gh
     end
 end
 
+# maybe git diff --patience
 abbr -a gd g diff --histogram --minimal --ignore-space-change --relative
 abbr -a gdc g diff --histogram --minimal --ignore-space-change --relative --cached
 abbr -a gh g-gh
