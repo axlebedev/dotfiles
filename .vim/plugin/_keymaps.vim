@@ -269,6 +269,8 @@ def GoToDef()
     endif
 enddef
 nnoremap gd <ScriptCmd>GoToDef()<CR>
+nnoremap gdd <ScriptCmd>JumpDefinitionFindCursor('jumpDefinition')<CR>
+nnoremap gi <ScriptCmd>JumpDefinitionFindCursor('jumpImplementation')<CR>
 nnoremap gt <ScriptCmd>JumpDefinitionFindCursor('jumpTypeDefinition')<CR>
 
 def ToggleQuickFix()
