@@ -65,9 +65,9 @@ var refactorCommands = {
     'Execute autofix': {
         command: 'CocCommand tsserver.executeAutofix',
     },
-    'Execute eslint autofix': {
-        command: 'CocCommand eslint.executeAutofix',
-    },
+    # 'Execute eslint autofix': {
+    #     command: 'CocCommand eslint.executeAutofix',
+    # },
 }
 
 const winWidth = 100
