@@ -344,7 +344,7 @@ bindsym $mod+Shift+u mode $mode_utils
 set $mode_tools "TOOLS: (G)romit-mpx | (V)okoscreenNG | (S)creenruler | (M)agnifier"
 mode $mode_tools {
     bindsym $mod+g mode "default" ; exec --no-startup-id gromit-mpx --active & disown
-	bindsym $mod+v mode "default" ; exec --no-startup-id nohup vokoscreenNG & disown
+	bindsym $mod+v mode "default" ; exec --no-startup-id exec $HOME/.i3/runOrKill.sh vokoscreenNG
 	bindsym $mod+s mode "default" ; exec --no-startup-id nohup screenruler & disown
 	bindsym $mod+m mode "default" ; exec --no-startup-id nohup xzoom & disown
 
