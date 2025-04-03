@@ -98,6 +98,8 @@ export def Grep()
     redraw
 
     var word = input(repeat(' ', varsString->strwidth()), initialWord)
+    popup_close(popupId)
+    var savedIsLiteral = isLiteral
     if (!isLiteral && word =~ escape(charsForEscape, charsForEscape))
         IncLiteral()
     endif
@@ -124,10 +126,9 @@ export def Grep()
         ResizeQFHeight()
     endif
 
-    popup_close(popupId)
+    isLiteral = savedIsLiteral
     cunmap <C-w>
     cunmap <C-l>
-
 enddef
 
 augroup quickfix
