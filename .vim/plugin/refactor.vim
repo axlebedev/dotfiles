@@ -1,5 +1,7 @@
 vim9script
 
+import autoload '../autoload/updatebuffer.vim'
+
 def Unmerged(): void
     call fzf#vim#files('', {
                 \    'source': 'git diff --name-only --diff-filter=U',
@@ -14,6 +16,20 @@ def RenameSymbol()
     if (!empty(newname))
         execute "call CocAction('rename', '" .. newname .. "')"
     endif
+enddef
+
+export def EslintFile()
+    read !npx eslint --fix %
+    updatebuffer.UpdateBuffer(1)
+enddef
+
+def TsserverAutofix()
+    legacy call CocAction('runCommand', 'tsserver.executeAutofix')
+    :w
+    :%s/from 'packages/from '@nct/g
+    :w
+    EslintFile()
+    :w
 enddef
 
 var refactorCommands = {
@@ -62,8 +78,8 @@ var refactorCommands = {
     'Go to source definition': {
         command: 'CocCommand tsserver.goToSourceDefinition',
     },
-    'Execute autofix': {
-        command: 'CocCommand tsserver.executeAutofix',
+    'Execute TsserverAutofix': {
+        command: 'call TsserverAutofix()',
     },
     # 'Execute eslint autofix': {
     #     command: 'CocCommand eslint.executeAutofix',

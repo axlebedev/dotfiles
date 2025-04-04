@@ -9,7 +9,8 @@ import autoload '../autoload/htmlbeautify.vim'
 import autoload '../autoload/increasefoldlevel.vim'
 import autoload '../autoload/logfunction.vim'
 import autoload '../autoload/removeqfitem.vim'
-import autoload './updatebuffer.vim'
+import autoload '../autoload/updatebuffer.vim'
+import autoload './refactor.vim'
 import autoload './quickfix-utils.vim' as quickfixUtils
 
 g:mapleader = "\<space>"
@@ -229,9 +230,7 @@ nnoremap <leader>lk <ScriptCmd>set operatorfunc=function('jsLog.JsFastLog_variab
 nmap <leader>lkk <leader>lkiW
 vnoremap <leader>lk <ScriptCmd>jsLog.JsFastLog_variable(visualmode())<cr>
 
-nmap <leader>ltk <ScriptCmd>set operatorfunc=function('jsLog.JsFastLog_variable_trace')<cr>g@iW
-nmap <leader>lts <ScriptCmd>set operatorfunc=function('jsLog.JsFastLog_string_trace')<cr>g@iW
-vnoremap <leader>lt <ScriptCmd>jsLog.JsFastLog_variable_trace(visualmode())<cr>
+vnoremap <leader>lt <ScriptCmd>jsLog.JsFastLog_string_trace(visualmode())<cr>
 
 nnoremap <leader>ld <ScriptCmd>set operatorfunc=function('jsLog.JsFastLog_function')<cr>g@
 vnoremap <leader>ld <ScriptCmd>jsLog.JsFastLog_function(visualmode())<cr>
@@ -297,11 +296,12 @@ nnoremap xp xp
 vnoremap SB <Plug>VSurroundBkJ
 vnoremap Sb <Plug>VSurroundbkJ
 
-def EslintFile()
-    read !npx eslint --fix %
+nnoremap <silent> elf <ScriptCmd>refactor.EslintFile()<CR>
+def EslintChanged()
+    read !yarn lint:fix
     updatebuffer.UpdateBuffer(1)
 enddef
-nnoremap <silent> elf <ScriptCmd>EslintFile()<CR>
+nnoremap <silent> elff <ScriptCmd>EslintChanged()<CR>
 
 nnoremap ~ <ScriptCmd>chase.Next()<CR>
 vnoremap ~ <ScriptCmd>chase.Next()<CR>
