@@ -1,5 +1,7 @@
 vim9script
 
+import autoload '../autoload/globalfind.vim'
+
 # quickfix next
 def Cn()
     Cnext
@@ -35,4 +37,5 @@ export def DeduplicateQuickfixList()
 
     # Replace the quickfix list with the deduplicated list
     setqflist([], 'r', {'items': new_quickfix_list})
+    globalfind.ResizeQFHeight()
 enddef
