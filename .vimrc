@@ -256,7 +256,18 @@ g:airline_detect_spelllang = 0
 
 def AirlineInit(): void
     # like default, but without keyboard layout indicator
-    g:airline_section_a = '%#__accent_bold#%{airline#util#wrap(airline#parts#mode(),0)}%#__restore__#%{airline#util#append(airline#parts#crypt(),0)}%{airline#util#append(airline#parts#paste(),0)}%{airline#util#append(airline#extensions#keymap#status(),0)}%{airline#util#append(airline#parts#spell(),0)}%{airline#util#append("",0)}%{airline#util#append(airline#parts#iminsert(),0)}'
+    g:airline_section_a = [
+        '%#__accent_bold#',                                             # 1. Apply bold accent color
+        '%{airline#util#wrap(airline#parts#mode(),0)}',                 # 2. Display current mode
+        '%#__restore__#',                                               # 3. Restore normal colors
+                                                        # The rest are conditionally appended items:
+        '%{airline#util#append(airline#parts#crypt(),0)}',              # 4. Encryption status
+        '%{airline#util#append(airline#parts#paste(),0)}',              # 5. Paste mode
+        '%{airline#util#append(airline#extensions#keymap#status(),0)}', # 6. Keymap
+        '%{airline#util#append(airline#parts#spell(),0)}',              # 7. Spell check
+        '%{airline#util#append("",0)}',                                 # 8. Empty space
+        '%{airline#util#append(airline#parts#iminsert(),0)}'            # 9. Input method
+    ]->join('')
 
     g:airline_section_y = '' # dont show encoding
 
