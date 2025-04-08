@@ -1,6 +1,7 @@
 vim9script
 
 import autoload '../autoload/updatebuffer.vim'
+import autoload '../autoload/longcommandwithpopup.vim'
 
 def Unmerged(): void
     call fzf#vim#files('', {
@@ -22,6 +23,8 @@ export def EslintFile()
     read !npx eslint --fix %
     updatebuffer.UpdateBuffer(1)
 enddef
+
+var EslintChanged = longcommandwithpopup.CreateLongRunningFunction('yarn lint:fix', 'Eslint', () => updatebuffer.UpdateBuffer(1))
 
 def TsserverAutofix()
     legacy call CocAction('runCommand', 'tsserver.executeAutofix')
@@ -81,9 +84,9 @@ var refactorCommands = {
     'Execute TsserverAutofix': {
         command: 'call TsserverAutofix()',
     },
-    # 'Execute eslint autofix': {
-    #     command: 'CocCommand eslint.executeAutofix',
-    # },
+    'Execute EslintChanged': {
+        command: 'call EslintChanged()',
+    },
 }
 
 const winWidth = 100
