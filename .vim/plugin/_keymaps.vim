@@ -293,15 +293,7 @@ nnoremap <silent> x "_x
 # Для того чтобы поменять местами буквы - оставляем дефолтное поведение
 nnoremap xp xp
 
-vnoremap SB <Plug>VSurroundBkJ
-vnoremap Sb <Plug>VSurroundbkJ
-
 nnoremap <silent> elf <ScriptCmd>refactor.EslintFile()<CR>
-def EslintChanged()
-    read !yarn lint:fix
-    updatebuffer.UpdateBuffer(1)
-enddef
-nnoremap <silent> elff <ScriptCmd>EslintChanged()<CR>
 
 nnoremap ~ <ScriptCmd>chase.Next()<CR>
 vnoremap ~ <ScriptCmd>chase.Next()<CR>
