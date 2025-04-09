@@ -1,6 +1,8 @@
 vim9script
 
 setlocal nocursorline
+# setlocal foldmethod=expr
+# setlocal foldexpr=getline(v:lnum)=~'^diff\\s'?'>1':1
 
 # GoToNextDiff {{{
 def GoToNextDiff()
