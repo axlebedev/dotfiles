@@ -594,9 +594,13 @@ inoremap <silent><expr> <CR> coc#pum#visible()
   \ ? coc#_select_confirm()
   \ : "\<CR>"
 
-inoremap <silent><expr> <BS> <SID>CheckBackSpace()
-  \ ? "\<BS>"
-  \ : "\<BS> \<bar> coc#refresh()<CR>"
+inoremap <silent><expr> <BS> coc#pum#visible()
+  \ ? <SID>CheckBackSpace()
+  \   ? "\<BS>"
+  \   : "\<BS>\<C-r>=coc#refresh()\<CR>"
+  \ : "\<BS>"
+
+
 
 # }}} js/html/css... plugins
 
