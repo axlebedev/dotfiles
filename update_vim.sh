@@ -2,13 +2,12 @@
 
 filler="                                   "
 
-curhome="/home/alex/"
-
 # clear log file, if exists
 logFile="$(pwd)/update_vim.log"
 echo "starting at $(date)" >${logFile}
 
-[ "$UID" -eq 0 ] || exec sudo "$0" "$@"
+# '-E' is to save use variables, $HOME
+[ "$UID" -eq 0 ] || exec sudo -E "$0" "$@"
 
 # define colors
 COLOR_RED='\033[0;31m'
@@ -23,12 +22,12 @@ while getopts "g" v; do
 done
 
 # check if update necessary
-cd $curhome/github/vim/
+cd $HOME/github/vim/
 current_commit=$(git rev-parse HEAD)
 
 printf "Checking for updates...\n"
 eval `ssh-agent -s` >>${logFile} 2>>${logFile}
-ssh-add $curhome/.ssh/id_rsa >>${logFile} 2>>${logFile}
+ssh-add $HOME/.ssh/id_rsa >>${logFile} 2>>${logFile}
 git fetch >>${logFile} 2>>${logFile}
 last_commit=$(git rev-parse origin/master)
 if [[ IGNORE_GIT == 0 && "$current_commit" == "$last_commit" ]]; \
