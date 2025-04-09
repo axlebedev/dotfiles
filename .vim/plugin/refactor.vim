@@ -19,21 +19,17 @@ def RenameSymbol()
     endif
 enddef
 
-export def EslintFile()
-    read !npx eslint --fix %
-    updatebuffer.UpdateBuffer(1)
-enddef
+var EslintChanged = longcommandwithpopup.CreateLongRunningFunctionSystem('yarn lint:fix', 'Eslint', () => updatebuffer.UpdateBuffer(1))
 
-var EslintChanged = longcommandwithpopup.CreateLongRunningFunction('yarn lint:fix', 'Eslint', () => updatebuffer.UpdateBuffer(1))
-
-def TsserverAutofix()
+def TsserverAutofixInner()
     legacy call CocAction('runCommand', 'tsserver.executeAutofix')
-    :w
-    :%s/from 'packages/from '@nct/g
-    :w
-    EslintFile()
-    :w
+    :%s/from 'packages/from '@nct/ge
+    read !npx eslint --fix %
 enddef
+var TsserverAutofix = longcommandwithpopup.CreateLongRunningFunctionVim(
+    TsserverAutofixInner,
+    'Tsserver Autofix'
+)
 
 var refactorCommands = {
     'Unmerged': {
