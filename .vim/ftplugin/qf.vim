@@ -17,5 +17,4 @@ nnoremap <buffer> <silent> <leader>rr <ScriptCmd>globalfind.ResizeQFHeight()<CR>
 
 setlocal cursorline
 
-autocmd FileType qf wincmd J
 nnoremap <buffer> <silent> <C-k> <C-W>k<C-W>l
