@@ -95,10 +95,10 @@ g:NERDTreeAutoDeleteBuffer = 1
 # for correct Startify update items while one session
 g:NERDTreeHijackNetrw = 0
 
-Plug 'woelke/vim-nerdtree_plugin_open'
+Plug 'woelke/vim-nerdtree_plugin_open', { 'on': 'NERDTreeToggle' }
 g:nerdtree_plugin_open_cmd = 'xdg-open'
 
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight', { 'on': 'NERDTreeToggle' }
 g:WebDevIconsDisableDefaultFolderSymbolColorFromNERDTreeDir = 1
 g:WebDevIconsDisableDefaultFileSymbolColorFromNERDTreeFile = 1
 g:NERDTreeFileExtensionHighlightFullName = 1
@@ -148,12 +148,12 @@ g:NERDTreePatternMatchHighlightColor = {
 
 # -----------------------------------------------------------------------------
 # additional bindings to NERDTree
-Plug 'PhilRunninger/nerdtree-visual-selection'
+Plug 'PhilRunninger/nerdtree-visual-selection', { 'on': 'NERDTreeToggle' }
 
 # -----------------------------------------------------------------------------
 # 'gf' from a diff file
-Plug 'kana/vim-gf-user'
-Plug 'kana/vim-gf-diff'
+Plug 'kana/vim-gf-user', { 'for': 'diff' }
+Plug 'kana/vim-gf-diff', { 'for': 'diff' }
 
 # -----------------------------------------------------------------------------
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -209,7 +209,7 @@ Plug 'AndrewRadev/bufferize.vim'
 # -----------------------------------------------------------------------------
 # Search string or pattern in folder
 # Necessary to open files from quickfix
-Plug 'yssl/QFEnter'
+Plug 'yssl/QFEnter', { 'for': 'qf' }
 g:qfenter_keymap = {}
 g:qfenter_keymap.open = ['<CR>', '<2-LeftMouse>', 'o']
 g:qfenter_keymap.vopen = ['<C-v>', 'i']
@@ -322,12 +322,6 @@ enddef
 autocmd User VimagitEnterCommit LastCommitMessage()
 Plug 'rhysd/conflict-marker.vim'
 Plug 'junegunn/gv.vim'
-
-# -----------------------------------------------------------------------------
-# 'gf' from a diff file
-Plug 'kana/vim-gf-user'
-Plug 'kana/vim-gf-diff'
-# }}} git plugins
 
 # text-edit plugins {{{
 # -----------------------------------------------------------------------------
@@ -443,11 +437,11 @@ Plug 'svban/YankAssassin.vim'
 
 # js/html/css... plugins {{{
 # -----------------------------------------------------------------------------
-Plug 'moll/vim-node'
+Plug 'moll/vim-node', { 'for': ['javascript', 'javascriptreact', 'typescript', 'typescriptreact'] }
 
 # -----------------------------------------------------------------------------
 # Generate jsdoc easily
-Plug 'heavenshell/vim-jsdoc', { 'for': 'javascript' }
+Plug 'heavenshell/vim-jsdoc', { 'for': ['javascript', 'javascriptreact', 'typescript', 'typescriptreact'] }
 g:jsdoc_enable_es6 = 1
 g:jsdoc_allow_input_prompt = 1
 g:jsdoc_input_description = 1
@@ -457,39 +451,39 @@ g:jsdoc_param_description_separator = ' - '
 
 # -----------------------------------------------------------------------------
 # One plugin to rule all the languages
-Plug 'othree/html5.vim', { 'for': ['html', 'javascript', 'typescript'] }
+Plug 'othree/html5.vim', { 'for': ['html', 'javascript', 'javascriptreact', 'typescript', 'typescriptreact'] }
 
 # -----------------------------------------------------------------------------
 # JavaScript bundle for vim, this bundle provides syntax and indent plugins
-Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascriptreact', 'typescript', 'typescriptreact'] }
 g:javascript_enable_domhtmlcss = 1
 g:javascript_plugin_jsdoc = 1
 
-Plug 'othree/javascript-libraries-syntax.vim', { 'for': 'javascript' }
+Plug 'othree/javascript-libraries-syntax.vim', { 'for': ['javascript', 'javascriptreact', 'typescript', 'typescriptreact'] }
 g:used_javascript_libs = 'underscore,react'
 # Plug 'othree/es.next.syntax.vim'
 
 # -----------------------------------------------------------------------------
 # jsx support
-Plug 'MaxMEllon/vim-jsx-pretty', { 'for': ['javascript', 'typescript'] }
+Plug 'MaxMEllon/vim-jsx-pretty', { 'for': ['javascript', 'javascriptreact', 'typescript', 'typescriptreact'] }
 g:vim_jsx_pretty_template_tags = []
 g:vim_jsx_pretty_colorful_config = 1
 
 # -----------------------------------------------------------------------------
 # Highlight matching html tag
 # forked from 'vim-scripts/MatchTag'
-# Plug 'axlebedev/MatchTag', { 'for': ['javascript', 'html'] }
+# Plug 'axlebedev/MatchTag', { 'for': ['javascript', 'javascriptreact', 'html'] }
 
 # -----------------------------------------------------------------------------
 # autoclose html tags
-Plug 'alvan/vim-closetag', { 'for': ['javascript', 'html'] }
+Plug 'alvan/vim-closetag', { 'for': ['javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'html'] }
 g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.js,*.jsx"
 # TODO: doesn't close if we use neocomplete
 
 # -----------------------------------------------------------------------------
 # typescript
-Plug 'leafgarland/typescript-vim'
-Plug 'HerringtonDarkholme/yats.vim'
+Plug 'leafgarland/typescript-vim', { 'for': ['javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'html'] }
+Plug 'HerringtonDarkholme/yats.vim', { 'for': ['javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'html'] }
 
 # -----------------------------------------------------------------------------
 # color highlight in text
@@ -497,7 +491,7 @@ Plug 'ap/vim-css-color'
 
 # -----------------------------------------------------------------------------
 # Highlight eslint errors
-Plug 'dense-analysis/ale'
+Plug 'dense-analysis/ale', { 'for': ['javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'html'] }
 g:ale_lint_on_save = 0
 g:ale_open_list = 0
 g:ale_change_sign_column_color = 1
@@ -608,7 +602,7 @@ inoremap <silent><expr> <BS> coc#pum#visible()
 # -----------------------------------------------------------------------------
 # homemade ^^
 
-Plug 'axlebedev/vim-js-fastlog'
+Plug 'axlebedev/vim-js-fastlog', { 'for': ['javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'html'] }
 g:js_fastlog_prefix = '11111'
 
 Plug 'axlebedev/vim-smart-insert-tab'
@@ -752,4 +746,4 @@ def FoldDiffFiles()
   setlocal foldtext=getline(v:foldstart)
 enddef
 
-autocmd FileType gitcommit,diff <ScriptCmd>FoldDiffFiles()<CR>
+autocmd FileType gitcommit,diff FoldDiffFiles()
