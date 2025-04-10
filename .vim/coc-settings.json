@@ -10,6 +10,7 @@
         "watchDirectory": "useFsEvents",
         "fallbackPolling": "dynamicPriority"
     },
+    "tsserver.jsx": "react",
 
     "diagnostic.displayByAle": true,
     "diagnostic.virtualText": true,
