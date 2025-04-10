@@ -144,7 +144,7 @@
     #   %%  Literal %
     # Markup is allowed
     # format = "%a\n<b>%s</b>\n%b"
-    format = "<b>%s</b>\n%b %p\n<i>%a</i>"
+    format = "<b>%s</b> <i>%a</i> %b\n%p"
 
     # Alignment of message text.
     # Possible values are "left", "center" and "right".
