@@ -11,20 +11,12 @@ def Unmerged(): void
                 \ })
 enddef
 
-def RenameSymbol()
-    var word = expand('<cword>')
-    var newname = input('New name: ', word)
-    if (!empty(newname))
-        execute "call CocAction('rename', '" .. newname .. "')"
-    endif
-enddef
-
 var EslintChanged = longcommandwithpopup.CreateLongRunningFunctionSystem('yarn lint:fix', 'Eslint', () => updatebuffer.UpdateBuffer(1))
 
 def TsserverAutofixInner()
     legacy call CocAction('runCommand', 'tsserver.executeAutofix')
     :%s/from 'packages/from '@nct/ge
-    read !npx eslint --fix %
+    silent read !npx eslint --fix % > /dev/null 2>1
 enddef
 var TsserverAutofix = longcommandwithpopup.CreateLongRunningFunctionVim(
     TsserverAutofixInner,
@@ -51,7 +43,7 @@ var refactorCommands = {
         command: 'call CocAction("showSubTypes")',
     },
     'Rename': {
-        command: 'call RenameSymbol()',
+        command: 'call CocActionAsync("rename")',
     },
     'Refactor': {
         command: 'call CocAction("refactor")',
