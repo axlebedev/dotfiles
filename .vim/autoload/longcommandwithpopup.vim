@@ -1,6 +1,7 @@
 vim9script
 
 var spinner_frames = ['▉', '▊', '▋', '▌', '▍', '▎', '▏', '▎', '▍', '▌', '▋', '▊', '▉']
+var popup_args = { line: 2, col: 'cursor+1', minwidth: 20, time: 0, highlight: 'Question', border: [], padding: [0, 1, 0, 1] }
 
 export def CreateLongRunningFunctionSystem(command: string, message: string, EndHook: func = () => 0): func
     return () => {
@@ -12,7 +13,7 @@ export def CreateLongRunningFunctionSystem(command: string, message: string, End
 
         var popup_id = popup_create(
             spinner_frames[0] .. ' Running ' .. message .. '...',
-            { line: 2, col: 'cursor+1', minwidth: 20, time: 0, highlight: 'Question', border: [], padding: [0, 1, 0, 1] }
+            popup_args
         )
         var spinner_timer = timer_start(100, (timer) => UpdateSpinner(popup_id), { repeat: -1 })
 
@@ -38,7 +39,7 @@ export def CreateLongRunningFunctionVim(Function: func, message: string): func
     return () => {
         var popup_id = popup_create(
             'Running ' .. message .. '...',
-            { line: 2, col: 'cursor+1', minwidth: 20, time: 0, highlight: 'Question', border: [], padding: [0, 1, 0, 1] }
+            popup_args
         )
 
         timer_start(0, (_) => {
@@ -48,7 +49,7 @@ export def CreateLongRunningFunctionVim(Function: func, message: string): func
                 popup_close(popup_id)
                 popup_notification(
                     message .. ' failed: ' .. v:exception,
-                    { line: 2, col: 'cursor+1', minwidth: 20, time: 0, highlight: 'Error', border: [], padding: [0, 1, 0, 1] }
+                    popup_args
                 )
             endtry
             popup_close(popup_id)
