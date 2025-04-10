@@ -81,6 +81,9 @@ autorandr
 # install git-delta manually
 # https://dandavison.github.io/delta/installation.html
 
+# Install watchman
+# https://facebook.github.io/watchman/docs/install#ubuntu-prebuilt-debs
+
 # indicator-sound-switcher \ # меню звук-девайсов в трее
 # gromit-mpx \ # для рисования на экране
 # simplescreenrecorder \ # для записи скринкастов
