@@ -34,6 +34,7 @@
     // "javascript.inlayHints.functionLikeReturnTypes.enabled": true,
     // "javascript.inlayHints.enumMemberValues.enabled": true,
 
+    "diagnostic.checkCurrentLine": true,
     "diagnostic.displayByAle": true,
     "diagnostic.virtualText": true,
     "diagnostic.virtualTextCurrentLineOnly": false,
@@ -85,7 +86,11 @@
 
     "callHierarchy.enableTooltip": true,
 
-    "codeLens.enable": false,
+    "codeLens.enable": true,
+    "codeLens.position": "eol",
+    "codeLens.separator": "//",
+
+    "colors.enable": true,
 
     "semanticTokens.enable": true,
 
