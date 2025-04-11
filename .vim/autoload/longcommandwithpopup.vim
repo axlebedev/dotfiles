@@ -1,7 +1,29 @@
 vim9script
 
+const border_chars = {
+  top:     '▔',
+  bottom:  '▁',
+  left:    '▏',
+  right:   '▕',
+  topleft:  '🭽',
+  topright: '🭾',
+  botleft:  '🭼',
+  botright: '🭿',
+}
+
+const border_chars_array = [
+    border_chars.top,
+    border_chars.right,
+    border_chars.bottom,
+    border_chars.left,
+    border_chars.topleft,
+    border_chars.topright,
+    border_chars.botright,
+    border_chars.botleft,
+]
+
 var spinner_frames = ['▉', '▊', '▋', '▌', '▍', '▎', '▏', '▎', '▍', '▌', '▋', '▊', '▉']
-var popup_args = { line: 2, col: 'cursor+1', minwidth: 20, time: 0, highlight: 'Question', border: [], padding: [0, 1, 0, 1] }
+var popup_args = { line: 2, col: 'cursor+1', minwidth: 20, time: 0, highlight: 'Question', border: [], padding: [0, 1, 0, 1], borderchars: border_chars_array }
 
 export def CreateLongRunningFunctionSystem(command: string, message: string, EndHook: func = () => 0): func
     return () => {
