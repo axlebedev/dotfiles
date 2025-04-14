@@ -1,5 +1,7 @@
 vim9script
 
+import autoload '../autoload/showmapping.vim'
+
 # Scroll/cursor bind the current window and the previous window. 
 # TODO: fix it (сейчас если поскроллить - то они разъедутся)
 command! BindBoth set scrollbind cursorbind | wincmd p | set scrollbind cursorbind | wincmd p
@@ -40,3 +42,6 @@ def RunWinNew()
     redraw!
 enddef
 command! WinNew RunWinNew()
+
+# Create commands for common mapping types
+command! -nargs=1 MapQf call showmapping.ShowMappingsInQuickfix('map ' .. <q-args>)
