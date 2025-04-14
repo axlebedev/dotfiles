@@ -31,15 +31,7 @@ exec --no-startup-id flameshot
 exec --no-startup-id unclutter -idle 3
 exec --no-startup-id indicator-sound-switcher
 
-set $OUTPUT_PRIMARY DP-2
-set $OUTPUT_LEFT ""
-set $OUTPUT_RIGHT HDMI-0
-exec --no-startup-id xrandr \
-  --auto --output $OUTPUT_PRIMARY --primary \
-  --auto --output $OUTPUT_LEFT --left-of $OUTPUT_PRIMARY \
-  --auto --output $OUTPUT_RIGHT --right-of $OUTPUT_PRIMARY
-exec --no-startup-id i3 focus output $OUTPUT_LEFT, workspace 10, focus output $OUTPUT_RIGHT, workspace 11, focus output $OUTPUT_PRIMARY, workspace 1
-
+exec --no-startup-id $HOME/.i3/monitors.sh DP-2 0 HDMI-0
 
 exec --no-startup-id nm-applet
 # exec --no-startup-id pasystray
