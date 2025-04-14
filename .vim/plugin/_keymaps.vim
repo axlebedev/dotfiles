@@ -242,7 +242,7 @@ nnoremap <leader>lss <ScriptCmd>jsLog.JsFastLog_separator()<cr>
 nnoremap <leader>lsn <ScriptCmd>jsLog.JsFastLog_lineNumber()<cr>
 # }}}
 
-nnoremap <silent> K <CMD>call CocAction("doHover")<CR>
+nnoremap <silent> K <CMD>call CocActionAsync("doHover")<CR>
 def JumpDefinitionFindCursor(command: string)
     setreg('/', expand('<cword>'))
     exe "call CocAction('" .. command .. "')"
