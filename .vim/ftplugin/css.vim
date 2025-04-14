@@ -1,8 +1,9 @@
 vim9script
 
-var indent = 2
-execute 'setlocal tabstop=' .. indent
-execute 'setlocal softtabstop=' .. indent
-execute 'setlocal shiftwidth=' .. indent
+import autoload '../autoload/variables.vim'
+
+execute 'setlocal tabstop=' .. variables.indent
+execute 'setlocal softtabstop=' .. variables.indent
+execute 'setlocal shiftwidth=' .. variables.indent
 
 setlocal iskeyword+=-

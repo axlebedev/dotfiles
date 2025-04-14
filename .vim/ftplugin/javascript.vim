@@ -1,15 +1,16 @@
 vim9script
 
 import '../autoload/trailingspace.vim'
+import autoload '../autoload/variables.vim'
+
 
 augroup au_vimrc_js
     autocmd!
 augroup END
 
-var indent = 2
-execute 'setlocal tabstop=' .. indent
-execute 'setlocal softtabstop=' .. indent
-execute 'setlocal shiftwidth=' .. indent
+execute 'setlocal tabstop=' .. variables.indent
+execute 'setlocal softtabstop=' .. variables.indent
+execute 'setlocal shiftwidth=' .. variables.indent
 
 autocmd au_vimrc_js BufWrite *.js :vim9cmd trailingspace.DeleteTrailingWS()
 
