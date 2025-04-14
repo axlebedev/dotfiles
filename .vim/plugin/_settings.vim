@@ -1,5 +1,7 @@
 vim9script
 
+import autoload '../autoload/variables.vim'
+
 augroup au_vimrc_settings
     autocmd!
 augroup END
