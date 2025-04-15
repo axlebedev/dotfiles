@@ -24,4 +24,4 @@ export const border_chars_array = [
 ]
 # }}}
 
-export const indent = 2
+export const indent = 4

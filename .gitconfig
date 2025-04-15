@@ -1,6 +1,6 @@
 [user]
-	email = alexey.broadcast@gmail.com
-	name = Alex Lebedev
+	email = aleksey.lebedev@myoffice.team
+	name = Aleksey Lebedev
 [alias]
 	co = checkout
 	ci = commit
@@ -19,7 +19,8 @@
 	editor = gnome-terminal --wait -- vim
 	autoclrf
 [credential]
-	helper = cache --timeout=86400
+	helper = "!f() { echo password=\"$CORE_GITEA_PASS\"; }; f"
+	username = 
 [diff]
 	tool = vimdiff
     algorithm = histogram
@@ -58,3 +59,5 @@
 	defaultBranch = master
 
 ; TODO: 'git rerere', google it
+[url "ssh://git@gitea.coreops.ru:32222"]
+	insteadOf = https://gitea.coreops.ru

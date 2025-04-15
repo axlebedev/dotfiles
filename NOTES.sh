@@ -338,5 +338,9 @@ sudo apt install touchpad-indicator
 # Сильно шумят кулеры. Пробую решение
 # На уровне железа возможно есть биндинг fn+1, кот вкл/выкл max fan
 #
+# =================== VPN ===================================
+# printf '\n\nPASSWORD\ny' | /opt/cisco/anyconnect/bin/vpn -s connect vpn.ncloudtech.ru
+# /opt/cisco/anyconnect/bin/vpn -s disconnect
+#
 # ================ C++ boost ============
 # https://linux.how2shout.com/how-to-install-boost-c-on-ubuntu-20-04-or-22-04/

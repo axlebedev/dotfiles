@@ -27,15 +27,19 @@ exec --no-startup-id flameshot
 # xinput --set-prop <ID> "Coordinate Transformation Matrix" 1, 0, 0, 0, 1, 0, 0, 0, <NUMBER>
 # <ID>: run 'xinput', get id there
 # mouse speed: last number. Bigger is slower
+# exec --no-startup-id xinput --set-prop "Logitech USB Optical Mouse" \
+exec --no-startup-id xinput --set-prop 13 "Coordinate Transformation Matrix" 1, 0, 0, 0, 1, 0, 0, 0, 2.05
 #   "Coordinate Transformation Matrix" 1, 0, 0, 0, 1, 0, 0, 0, 1.5
 exec --no-startup-id unclutter -idle 3
 exec --no-startup-id indicator-sound-switcher
 
-exec --no-startup-id $HOME/.i3/monitors.sh DP-2 0 HDMI-0
+exec --no-startup-id $HOME/.i3/monitors.sh DP-1 eDP-1 HDMI-1
 
-set $mode_monitors "Monitors (H)ome"
+set $mode_monitors "Monitors (O)ffice (H)ome (S)ingle"
 mode $mode_monitors {
-	bindsym $mod+h mode "default" ; exec $HOME/.i3/monitors.sh DP-2 0 HDMI-0
+	bindsym $mod+o mode "default" ; exec $HOME/.i3/monitors.sh DP-1 eDP-1 HDMI-1
+	bindsym $mod+h mode "default" ; exec $HOME/.i3/monitors.sh HDMI-1 eDP-1 DP-1
+	bindsym $mod+s mode "default" ; exec $HOME/.i3/monitors.sh eDP-1 0 0
 
 # back to normal: Enter or Escape
 	bindsym Return mode "default"
@@ -318,10 +322,14 @@ mode $mode_move_workspace {
 bindsym $mod+Shift+m mode $mode_move_workspace 
 
 # Work
-set $mode_work "Work (B)rowser (S)quadus"
+set $mode_work "Work (B)rowser (D)ebug (S)quadus (P)asswords"
 mode $mode_work {
-	bindsym $mod+d mode "default" ; exec --no-startup-id nohup google-chrome --user-data-dir="/home/user/chrome-users/debug" & disown
+    bindsym $mod+b mode "default" ; exec --no-startup-id nohup google-chrome & disown
+ 	bindsym $mod+Shift+b mode "default" ; exec --no-startup-id nohup yandex-browser --user-data-dir="/home/user/aleksey.lebedev.myoffice" & disown
+    bindsym $mod+d mode "default" ; exec --no-startup-id nohup google-chrome --user-data-dir="/home/user/chrome-users/debug" & disown
 	bindsym $mod+s mode "default" ; exec --no-startup-id nohup google-chrome --app="https://im.ncloudtech.ru/rooms" & disown
+	bindsym $mod+p mode "default" ; exec --no-startup-id nohup gnome-terminal --class="floating" -- vim ~/passwords & disown
+	bindsym $mod+shift+s mode "default" ; exec --no-startup-id nohup squadus & disown
 
 # back to normal: Enter or Escape
 	bindsym Return mode "default"
