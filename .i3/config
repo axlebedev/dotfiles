@@ -33,6 +33,17 @@ exec --no-startup-id indicator-sound-switcher
 
 exec --no-startup-id $HOME/.i3/monitors.sh DP-2 0 HDMI-0
 
+set $mode_monitors "Monitors (H)ome"
+mode $mode_monitors {
+	bindsym $mod+h mode "default" ; exec $HOME/.i3/monitors.sh DP-2 0 HDMI-0
+
+# back to normal: Enter or Escape
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+bindsym $mod+Shift+w mode $mode_monitors
+
+
 exec --no-startup-id nm-applet
 # exec --no-startup-id pasystray
 # 0.5 - is mouse pointer speed
