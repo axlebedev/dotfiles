@@ -113,7 +113,7 @@ function conky_memory_str()
 end
 
 function conky_memory_color()
-  local s = tonumber(conky_parse('${memperc}'))
+  local s = tonumber(conky_parse('${memperc}') + 20)
   return '#' .. getColor(tonumber(s))
 end
 
