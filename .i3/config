@@ -320,7 +320,7 @@ bindsym $mod+Shift+m mode $mode_move_workspace
 # Work
 set $mode_work "Work (B)rowser (S)quadus"
 mode $mode_work {
-	bindsym $mod+b mode "default" ; exec --no-startup-id nohup google-chrome --user-data-dir="/home/user/chrome-users/debug" & disown
+	bindsym $mod+d mode "default" ; exec --no-startup-id nohup google-chrome --user-data-dir="/home/user/chrome-users/debug" & disown
 	bindsym $mod+s mode "default" ; exec --no-startup-id nohup google-chrome --app="https://im.ncloudtech.ru/rooms" & disown
 
 # back to normal: Enter or Escape
