@@ -303,6 +303,11 @@ vnoremap ! <ScriptCmd>chase.Prev()<CR>
 nnoremap q <NOP>
 nnoremap <C-q> q
 
+nnoremap ad <ScriptCmd>ALEDisable<CR>
+
+# wrap visual selection into function block 
+vnoremap <C-b> "bdi{<CR>return <C-r>b;<CR>}<Esc>=ib
+
 def FoldSelection()
   var saved = &foldmethod
   exe 'setlocal foldmethod=manual'
