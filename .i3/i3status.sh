@@ -30,11 +30,6 @@ do
         google-chrome --app="https://calendar.google.com/" > /dev/null 2>&1 &
     fi
 
-    if [ "$getname" = "Time" ] 
-    then
-        google-chrome --app="https://mail.myoffice.team/mail" > /dev/null 2>&1 &
-    fi
-
     if [ "$getname" = "Memory" ] || [ "$getname" = "CPU" ]  
     then
         gnome-system-monitor > /dev/null 2>&1 &
