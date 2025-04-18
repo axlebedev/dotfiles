@@ -24,6 +24,24 @@ var TsserverAutofix = longcommandwithpopup.CreateLongRunningFunctionVim(
 )
 
 var refactorCommands = {
+    'coc-format-selected': {
+        command: 'call CocActionAsync("formatSelected", visualmode())',
+    },
+    'coc-codeaction': {
+        command: 'call CocActionAsync("codeAction", "")',
+    },
+    'coc-codeaction-source': {
+        command: 'call CocActionAsync("codeAction", "", ["source"], v:true)',
+    },
+    'coc-codeaction-line': {
+        command: 'call CocActionAsync("codeAction", "currline")',
+    },
+    'coc-codeaction-cursor': {
+        command: 'call CocActionAsync("codeAction", "cursor")',
+    },
+    'coc-fix-current': {
+        command: 'call CocActionAsync("doQuickfix")',
+    },
     'Unmerged': {
         command: 'call Unmerged()',
     },
