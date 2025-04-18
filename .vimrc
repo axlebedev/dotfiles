@@ -538,7 +538,7 @@ nmap <silent> <C-m> <Plug>(ale_next_wrap)
 nmap <silent> <C-M> <Plug>(ale_next_wrap)
 
 # -----------------------------------------------------------------------------
-Plug 'neoclide/coc.nvim', { 'do': 'npm i && npm build' }
+Plug 'neoclide/coc.nvim', { 'do': 'npm i && npm build', 'branch': 'release' }
 # Чтобы не авто-выбирал первый пункт в автокомплите:
 # :CocConfig -> "suggest.noselect": true
 g:coc_global_extensions = [
@@ -559,6 +559,7 @@ g:coc_global_extensions = [
     'coc-react-refactor',
 ]
 g:coc_global_config = '/home/user/dotfiles/.vim/coc-settings.json'
+g:coc_enable_locationlist = 0
 
 var filesuffix_blacklist = ['git', '']
 def DisableCocForType(): void

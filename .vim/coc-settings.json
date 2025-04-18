@@ -1,4 +1,6 @@
 {
+    "coc.preferences.useQuickfixForLocations": true,
+
     "suggest.noselect": true,
     "suggest.timeout": 500,
     "suggest.minTriggerInputLength": 1,
