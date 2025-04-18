@@ -376,3 +376,6 @@ omap ac <Plug>(coc-classobj-a)
 
 nnoremap <silent> <F5> <ScriptCmd>updatebuffer.UpdateBuffer(0)<CR>
 nnoremap <silent> <F5><F5> <ScriptCmd>updatebuffer.UpdateBuffer(1)<CR>
+
+vnoremap v <Plug>(coc-range-select)
+vnoremap V <Plug>(coc-range-select-backward)

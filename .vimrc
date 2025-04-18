@@ -330,26 +330,6 @@ Plug 'wellle/targets.vim'
 g:targets_pairs = '()b {}c [] <>' # replace {}B to {}c
 
 # -----------------------------------------------------------------------------
-# expand selection
-Plug 'terryma/vim-expand-region'
-vmap v <Plug>(expand_region_expand)
-vmap V <Plug>(expand_region_shrink)
-vmap <S-v> <Plug>(expand_region_shrink)
-def Exp(): void
-    expand_region#custom_text_objects({
-        "\/\\n\\n\<CR>": 1, # Motions are supported as well. Here's a search motion that finds a blank line
-        'a]': 1, # Support nesting of 'around' brackets
-        'ab': 1, # Support nesting of 'around' parentheses
-        'aB': 1, # Support nesting of 'around' braces
-        'ii': 0, # 'inside indent'. Available through https://github.com/kana/vim-textobj-indent
-        'ai': 0, # 'around indent'. Available through https://github.com/kana/vim-textobj-indent
-        'ia': 1,
-        'aa': 1,
-    })
-enddef
-au VimEnter * Exp()
-
-# -----------------------------------------------------------------------------
 # Toggle true/false
 Plug 'AndrewRadev/switch.vim'
 g:switch_mapping = "<C-t>"
