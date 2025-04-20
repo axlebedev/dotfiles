@@ -32,12 +32,15 @@ var refactorCommands = {
     },
     'coc-codeaction-source': {
         command: 'call CocActionAsync("codeAction", "", ["source"], v:true)',
+        hint: 'Remove unused, fix imports',
     },
     'coc-codeaction-line': {
         command: 'call CocActionAsync("codeAction", "currline")',
+        hint: 'Extract to function',
     },
     'coc-codeaction-cursor': {
         command: 'call CocActionAsync("codeAction", "cursor")',
+        hint: 'Inline variable',
     },
     'coc-fix-current': {
         command: 'call CocActionAsync("doQuickfix")',
@@ -106,10 +109,10 @@ enddef
 
 def GetLine(i: number, key: string): string
   var colorKey = Colored(key, { r: 62, g: 50, b: 168 }) 
-  var spacer1 = repeat(' ', maxLen - key->len()) # between left part and separator
-  var command = Colored(refactorCommands[key].command, { r: 255, g: 100, b: 0 }) 
-  var spacer2 = repeat(' ', winWidth - maxLen - command->len()) # between separator and right part
-  return colorKey .. spacer1 .. ' ' .. separator .. spacer2 .. command
+  var rightPart = refactorCommands[key]->has_key('hint')
+    ? Colored(refactorCommands[key].hint, { r: 255, g: 100, b: 0 }) 
+    : Colored(refactorCommands[key].command, { r: 255, g: 150, b: 90 }) 
+  return colorKey .. ' ' .. separator .. ' ' .. rightPart
 enddef
 
 def GetCommandsView(): list<string> 
