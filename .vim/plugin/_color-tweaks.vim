@@ -81,5 +81,3 @@ highlight PopupScrollbar term=bold ctermfg=4 guifg=#A7A7A7 guibg=NONE
 highlight IndexedSearchPopup cterm=bold ctermbg=none ctermfg=magenta gui=bold guibg=#FDBED4 guifg=NONE
 
 highlight link CocCodeLens Comment
-
-highlight CocFloating guibg=#c1d7ff
