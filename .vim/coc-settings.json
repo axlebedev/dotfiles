@@ -90,7 +90,7 @@
 
     "codeLens.enable": true,
     "codeLens.position": "eol",
-    "codeLens.separator": "//",
+    "codeLens.separator": "///",
 
     "colors.enable": true,
 
@@ -100,6 +100,7 @@
 
     "git.virtualTextPrefix": " ",
     "git.branchCharacter": "",
+
     "git.addedSign.hlGroup": "GitSignsAdd",
     "git.changedSign.hlGroup": "GitSignsChange",
     "git.removedSign.hlGroup": "GitSignsDelete",
