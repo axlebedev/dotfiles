@@ -191,10 +191,6 @@ nmap <F3> <Plug>(openbrowser-smart-search)
 vmap <F3> <Plug>(openbrowser-smart-search)
 
 # -----------------------------------------------------------------------------
-g:ranger_map_keys = 0
-Plug 'francoiscabrol/ranger.vim'
-
-# -----------------------------------------------------------------------------
 # Delete all buffers but current
 Plug 'schickling/vim-bufonly'
 
@@ -360,14 +356,6 @@ Plug 'RRethy/vim-illuminate'
 Plug 'osyo-manga/vim-trip'
 nmap <C-a> <Plug>(trip-increment)
 nmap <C-x> <Plug>(trip-decrement)
-
-# -----------------------------------------------------------------------------
-# TODO: make it work
-g:UltiSnipsSnippetDirectories = [expand('~') .. '/dotfiles/.vim/UltiSnips', 'UltiSnips']
-g:UltiSnipsExpandTrigger = "<c-k>"
-g:UltiSnipsJumpForwardTrigger = "<c-j>"
-g:UltiSnipsJumpBackwardTrigger = "<c-k>"
-Plug 'SirVer/ultisnips'
 
 # -----------------------------------------------------------------------------
 # wrap/unwrap lists in brackets
