@@ -137,7 +137,6 @@ function memory()
       "full_text": " ",
       "min_width": "",
       "separator_block_width": 3,
-      "color": "${lua memory_color}", 
       "separator": false
     },
     { 
@@ -188,7 +187,6 @@ function cpuHeader()
       "name": "CPU_header",
       "full_text": " ",
       "separator_block_width": 3,
-      "color": "${lua cpuTemperature_color}",
       "separator": false
     },
   ]]
