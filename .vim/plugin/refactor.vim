@@ -79,7 +79,7 @@ var refactorCommands = {
         command: ':ALEFileRename',
     },
     'Fold unchanged': {
-        command: 'call CocCommand git.foldUnchanged',
+        command: 'CocCommand git.foldUnchanged',
     },
     'References used': {
         command: "normal \<Plug>(coc-references-used)",
@@ -100,7 +100,6 @@ var refactorCommands = {
 
 const winWidth = 100
 const separator = '·'
-var maxLen = 0
 
 def Colored(word: string, color: dict<number>): string # color: { r: number, g: number, b: number }
   # [48;2 for background
@@ -116,7 +115,6 @@ def GetLine(i: number, key: string): string
 enddef
 
 def GetCommandsView(): list<string> 
-    maxLen = max(refactorCommands->keys()->map((i, v) => v->len()))
     return refactorCommands->keys()->map(GetLine)
 enddef
 
