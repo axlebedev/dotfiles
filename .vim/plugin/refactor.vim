@@ -11,10 +11,10 @@ def Unmerged(): void
                 \ })
 enddef
 
-var EslintChanged = longcommandwithpopup.CreateLongRunningFunctionSystem('yarn lint:fix', 'Eslint', () => updatebuffer.UpdateBuffer(1))
+var EslintChanged = longcommandwithpopup.CreateLongRunningFunctionSystem('yarn lint:fix', 'yarn lint:fix', () => updatebuffer.UpdateBuffer(1))
 
 def TsserverAutofixInner()
-    legacy call CocAction('runCommand', 'tsserver.executeAutofix')
+    CocCommand tsserver.executeAutofix
     :%s/from 'packages/from '@nct/ge
     silent read !npx eslint --fix % > /dev/null 2>1
 enddef
