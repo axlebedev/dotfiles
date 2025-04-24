@@ -96,7 +96,11 @@ var refactorCommands = {
     'Execute EslintChanged': {
         command: 'call EslintChanged()',
     },
+    'coc: file references': {
+        command: 'CocCommand tsserver.findAllFileReferences',
+    }
 }
+
 
 const winWidth = 100
 const separator = '·'

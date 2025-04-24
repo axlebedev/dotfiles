@@ -9,6 +9,9 @@
     "tsserver.enable": true,
     "tsserver.maxTsServerMemory": 16184,
     "tsserver.experimental.enableProjectDiagnostics": true,
+    "tsserver.fileReferences": true,
+    "tsserver.disableAutomaticTypeAcquisition": false,
+
     // : (Experimental) Enables project wide error reporting. Default: false
     "typescript.updateImportsOnFileMove.enabled": "always",
     "typescript.implementationsCodeLens.enabled": true,
@@ -23,7 +26,6 @@
     "javascript.referencesCodeLens.enabled": true,
     "javascript.referencesCodeLens.showOnAllFunctions": true,
     "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
-    "tsserver.disableAutomaticTypeAcquisition": false,
     // "typescript.inlayHints.parameterNames.enabled": "all",
     // "typescript.inlayHints.parameterTypes.enabled": true,
     // "typescript.inlayHints.variableTypes.enabled": true,
@@ -54,6 +56,11 @@
                 },
                 "highlight": { "lsRanges": true } 
             }
+        },
+        "tsserver": {
+            "command": "tsserver",
+            "filetypes": ["typescript", "typescriptreact"],
+            "args": ["--stdio"]
         }
     },
     "clangd.enabled": true,
