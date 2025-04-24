@@ -68,12 +68,11 @@ g:startify_lists = [
     { type: 'sessions',  header: ['   Sessions']       },
     { type: 'bookmarks', header: ['   Bookmarks']      },
     { type: 'commands',  header: ['   Commands']       },
-    { type: 'files',     header: ['   MRU']            },
 ]
 
 g:startify_bookmarks = [ { c: '~/.vimrc' } ]
 g:startify_commands = [':PlugUpdate', ':PlugInstall', ':CocUpdate']
-g:startify_files_number = 15
+g:startify_files_number = 30
 g:startify_update_oldfiles = 1
 g:startify_change_to_dir = 0
 g:startify_custom_header = []
