@@ -379,3 +379,5 @@ nnoremap <silent> <F5><F5> <ScriptCmd>updatebuffer.UpdateBuffer(1)<CR>
 
 vnoremap v <Plug>(coc-range-select)
 vnoremap V <Plug>(coc-range-select-backward)
+
+nnoremap <silent> <expr> l foldclosed('.') != -1 ? 'zo' : 'l'
