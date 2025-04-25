@@ -78,9 +78,6 @@ var refactorCommands = {
     'COC: References used': {
         command: "normal \<Plug>(coc-references-used)",
     },
-    'COC: Find all file references': {
-        command: 'CocCommand tsserver.findAllFileReferences',
-    },
     'COC: Go to source definition': {
         command: 'CocCommand tsserver.goToSourceDefinition',
     },
@@ -127,3 +124,4 @@ command! RefactorCommands fzf#run(fzf#wrap({
       \   options: '--ansi',
       \ }))
 nnoremap <silent> <Plug>(refactor-commands) <ScriptCmd>RefactorCommands<CR>
+vnoremap <silent> <Plug>(refactor-commands) <ScriptCmd>RefactorCommands<CR>
