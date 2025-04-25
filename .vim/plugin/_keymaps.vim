@@ -244,14 +244,19 @@ nnoremap <leader>lsn <ScriptCmd>jsLog.JsFastLog_lineNumber()<cr>
 nnoremap <silent> K <CMD>call CocActionAsync("doHover")<CR>
 def JumpDefinitionFindCursor(command: string)
     setreg('/', expand('<cword>'))
-    exe "call CocAction('" .. command .. "')"
+    exe command
     timer_start(100, (id) => findcursor#FindCursor('#d6d8fa', 0))
 enddef
 def GoToDef()
+    if (['typescript', 'typescriptreact', 'javascript', 'javascriptreact']->index(&ft) != -1)
+        JumpDefinitionFindCursor("CocCommand tsserver.goToSourceDefinition")
+        return
+    endif
+
     if (expand('<cword>') == 'import')
         keepjumps search('from')
         keepjumps normal! Wl
-        JumpDefinitionFindCursor('jumpDefinition')
+        JumpDefinitionFindCursor("call CocAction('jumpDefinition')")
         return
     endif
     var single_letter = getline('.')[col('.') - 1]
@@ -261,9 +266,9 @@ def GoToDef()
     endwhile
 
     var savedCursor = getcurpos()
-    JumpDefinitionFindCursor('jumpImplementation')
+    JumpDefinitionFindCursor("call CocAction('jumpImplementation')")
     if (savedCursor == getcurpos())
-        JumpDefinitionFindCursor('jumpDefinition')
+        JumpDefinitionFindCursor("call CocAction('jumpDefinition')")
     endif
 enddef
 nnoremap gd <ScriptCmd>GoToDef()<CR>
