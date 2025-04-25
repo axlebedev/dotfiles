@@ -53,7 +53,6 @@ augroup END
 def CloseBuffer()
     var buf = bufnr('%')
     var filesLength = len(filter(range(1, bufnr('$')), 'buflisted(v:val)'))
-    echom 'filesLength=' .. filesLength
     if (filesLength <= 1)
         if (&ft == 'startify')
             qa!
