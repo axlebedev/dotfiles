@@ -154,8 +154,6 @@ autocmd au_vimrc FileType help,qf,git,fugitive* nnoremap <buffer> q <CMD>q<cr>
 
 nnoremap <silent> <leader>a <CMD>ArgWrap<CR>
 
-nnoremap rr <Plug>(coc-codeaction-selected) | redraw
-vnoremap rr <Plug>(coc-codeaction-selected) | redraw
 def LeaderT(isVMode = false)
     if (&buftype == 'quickfix')
         wincmd k
@@ -178,6 +176,8 @@ nnoremap <silent> <leader>h <CMD>History<CR>
 nnoremap <silent> <C-p> <CMD>Commands<CR>
 
 nnoremap <silent> <leader>r <Plug>(refactor-commands)
+nnoremap <silent> rr <Plug>(refactor-commands)
+vnoremap <silent> rr <Plug>(refactor-commands)
 
 # get current highlight group under cursor
 map <F10> <ScriptCmd>echo 'hi<' .. synID(line('.'), col('.'), 1)->synIDattr('name') .. '> '
