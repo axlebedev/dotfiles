@@ -11,7 +11,7 @@ def Unmerged(): void
                 \ })
 enddef
 
-var EslintChanged = longcommandwithpopup.CreateLongRunningFunctionSystem('yarn lint:fix', 'yarn lint:fix', () => updatebuffer.UpdateBuffer(1))
+var EslintChangedFix = longcommandwithpopup.CreateLongRunningFunctionSystem('yarn lint:fix', 'yarn lint:fix', () => updatebuffer.UpdateBuffer(1))
 
 def TsserverAutofixInner()
     CocCommand tsserver.executeAutofix
@@ -27,9 +27,10 @@ var refactorCommands = {
     'COC: format-selected': {
         command: 'call CocActionAsync("formatSelected", visualmode())',
     },
-    'COC: codeaction': {
-        command: 'call CocActionAsync("codeAction", "")',
-    },
+    # Nos only 'move to file' and 'move to a new file'
+    # 'COC: codeaction': {
+    #     command: 'call CocActionAsync("codeAction", "")',
+    # },
     'COC: codeaction-source': {
         command: 'call CocActionAsync("codeAction", "", ["source"], v:true)',
         hint: 'Remove unused, fix imports',
@@ -47,47 +48,53 @@ var refactorCommands = {
     },
     'GIT: Unmerged': {
         command: 'call Unmerged()',
+        hint: 'List Unmerged files',
     },
     'COC: Show incoming calls': {
-        command: 'call CocAction("showIncomingCalls")',
+        command: 'call CocActionAsync("showIncomingCalls")',
     },
     'COC: Show outgoing calls': {
-        command: 'call CocAction("showOutgoingCalls")',
+        command: 'call CocActionAsync("showOutgoingCalls")',
     },
     'COC: Show outline': {
-        command: 'call CocAction("showOutline")',
+        command: 'call CocActionAsync("showOutline")',
     },
     'COC: Show super types': {
-        command: 'call CocAction("showSuperTypes")',
+        command: 'call CocActionAsync("showSuperTypes")',
     },
     'COC: Show subTypes': {
-        command: 'call CocAction("showSubTypes")',
+        command: 'call CocActionAsync("showSubTypes")',
     },
     'COC: Rename': {
         command: 'call CocActionAsync("rename")',
     },
-    'COC: Refactor': {
-        command: 'call CocAction("refactor")',
+    'COC: Rename file (ts)': {
+        command: 'CocCommand tsserver.renameFile',
     },
-    'COC: codeLensAction': {
-        command: 'call CocAction("codeLensAction")',
-    },
+    # 25.04.2025 Throws error. Check it later
+    # 'COC: Refactor': {
+    #     command: 'call CocActionAsync("refactor")',
+    # },
+    # Deepseek can tell what is this used for. Maybe show coverage?
+    # 'COC: codeLensAction': {
+    #     command: 'call CocActionAsync("codeLensAction")',
+    # },
     'GIT: Fold unchanged': {
         command: 'CocCommand git.foldUnchanged',
     },
     'COC: References used': {
-        command: "normal \<Plug>(coc-references-used)",
+        command: "call CocActionAsync('jumpUsed')",
     },
-    'COC: Go to source definition': {
+    'COC: Go to source definition (ts)': {
         command: 'CocCommand tsserver.goToSourceDefinition',
     },
     'TsserverAutofix()': {
         command: 'call TsserverAutofix()',
     },
-    'EslintChanged()': {
-        command: 'call EslintChanged()',
+    'EslintChangedFix()': {
+        command: 'call EslintChangedFix()',
     },
-    'COC: file references': {
+    'COC: file references (ts)': {
         command: 'CocCommand tsserver.findAllFileReferences',
     }
 }

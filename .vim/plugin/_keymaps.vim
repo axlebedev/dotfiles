@@ -176,6 +176,7 @@ nnoremap <silent> <leader>h <CMD>History<CR>
 nnoremap <silent> <C-p> <CMD>Commands<CR>
 
 nnoremap <silent> <leader>r <Plug>(refactor-commands)
+vnoremap <silent> <leader>r <Plug>(refactor-commands)
 nnoremap <silent> rr <Plug>(refactor-commands)
 vnoremap <silent> rr <Plug>(refactor-commands)
 
