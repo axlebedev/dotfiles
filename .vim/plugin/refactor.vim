@@ -24,79 +24,73 @@ var TsserverAutofix = longcommandwithpopup.CreateLongRunningFunctionVim(
 )
 
 var refactorCommands = {
-    'coc-format-selected': {
+    'COC: format-selected': {
         command: 'call CocActionAsync("formatSelected", visualmode())',
     },
-    'coc-codeaction': {
+    'COC: codeaction': {
         command: 'call CocActionAsync("codeAction", "")',
     },
-    'coc-codeaction-source': {
+    'COC: codeaction-source': {
         command: 'call CocActionAsync("codeAction", "", ["source"], v:true)',
         hint: 'Remove unused, fix imports',
     },
-    'coc-codeaction-line': {
+    'COC: codeaction-line': {
         command: 'call CocActionAsync("codeAction", "currline")',
         hint: 'Extract to function',
     },
-    'coc-codeaction-cursor': {
+    'COC: codeaction-cursor': {
         command: 'call CocActionAsync("codeAction", "cursor")',
         hint: 'Inline variable',
     },
-    'coc-fix-current': {
+    'COC: doQuickfix': {
         command: 'call CocActionAsync("doQuickfix")',
     },
-    'Unmerged': {
+    'GIT: Unmerged': {
         command: 'call Unmerged()',
     },
-    'Show incoming calls': {
+    'COC: Show incoming calls': {
         command: 'call CocAction("showIncomingCalls")',
     },
-    'Show outgoing calls': {
+    'COC: Show outgoing calls': {
         command: 'call CocAction("showOutgoingCalls")',
     },
-    'Show outline': {
+    'COC: Show outline': {
         command: 'call CocAction("showOutline")',
     },
-    'Show super types': {
+    'COC: Show super types': {
         command: 'call CocAction("showSuperTypes")',
     },
-    'Show subTypes': {
+    'COC: Show subTypes': {
         command: 'call CocAction("showSubTypes")',
     },
-    'Rename': {
+    'COC: Rename': {
         command: 'call CocActionAsync("rename")',
     },
-    'Refactor': {
+    'COC: Refactor': {
         command: 'call CocAction("refactor")',
     },
-    'Code lens': {
+    'COC: codeLensAction': {
         command: 'call CocAction("codeLensAction")',
     },
-    'ALE fix': {
-        command: 'ALEFix',
-    },
-    'ALE file rename': {
-        command: ':ALEFileRename',
-    },
-    'Fold unchanged': {
+    'GIT: Fold unchanged': {
         command: 'CocCommand git.foldUnchanged',
     },
-    'References used': {
+    'COC: References used': {
         command: "normal \<Plug>(coc-references-used)",
     },
-    'Find all file references': {
+    'COC: Find all file references': {
         command: 'CocCommand tsserver.findAllFileReferences',
     },
-    'Go to source definition': {
+    'COC: Go to source definition': {
         command: 'CocCommand tsserver.goToSourceDefinition',
     },
-    'Execute TsserverAutofix': {
+    'TsserverAutofix()': {
         command: 'call TsserverAutofix()',
     },
-    'Execute EslintChanged': {
+    'EslintChanged()': {
         command: 'call EslintChanged()',
     },
-    'coc: file references': {
+    'COC: file references': {
         command: 'CocCommand tsserver.findAllFileReferences',
     }
 }
