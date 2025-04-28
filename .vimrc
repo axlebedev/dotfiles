@@ -505,7 +505,8 @@ nmap <silent> <C-m> <Plug>(ale_next_wrap)
 nmap <silent> <C-M> <Plug>(ale_next_wrap)
 
 # -----------------------------------------------------------------------------
-Plug 'neoclide/coc.nvim', { 'do': 'npm i && npm build', 'branch': 'release' }
+# Last good commit: 3381d89d
+Plug 'neoclide/coc.nvim', { 'do': 'git checkout 3381d89d && npm i && npm run build' }
 # Чтобы не авто-выбирал первый пункт в автокомплите:
 # :CocConfig -> "suggest.noselect": true
 g:coc_global_extensions = [
