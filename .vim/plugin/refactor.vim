@@ -26,10 +26,7 @@ var TsserverAutofix = longcommandwithpopup.CreateLongRunningFunctionVim(
     'Tsserver Autofix'
 )
 
-def EslintFixCurrent()
-    var F = longcommandwithpopup.CreateLongRunningFunctionSystem('npx eslint --fix ' .. expand("%:."), 'npx eslint --fix %', () => updatebuffer.UpdateBuffer(1))
-    F()
-enddef
+var EslintFixCurrent = longcommandwithpopup.CreateLongRunningFunctionSystem('npx eslint --fix ' .. expand("%:."), 'npx eslint --fix %', () => updatebuffer.UpdateBuffer(1))
 
 var LintChangedFiles = longcommandwithpopup.CreateLongRunningFunctionVim(
     () => {
