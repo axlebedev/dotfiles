@@ -122,7 +122,7 @@ function g-gh
     if string match "master" (git rev-parse --abbrev-ref HEAD)
         g hist --first-parent $argv
     else
-        g hist --branches --not master $argv
+        g hist --first-parent $argv
     end
 end
 
