@@ -11,16 +11,62 @@ def Unmerged(): void
                 \ })
 enddef
 
-var EslintChangedFix = longcommandwithpopup.CreateLongRunningFunctionSystem('yarn lint:fix', 'yarn lint:fix', () => updatebuffer.UpdateBuffer(1))
+var EslintChangedFix = longcommandwithpopup.CreateLongRunningFunctionSystem(
+    'yarn lint:fix',
+    'yarn lint:fix',
+    () => updatebuffer.UpdateBuffer(1),
+)
 
-def TsserverAutofixInner()
-    CocCommand tsserver.executeAutofix
-    :%s/from 'packages/from '@nct/ge
-    silent read !npx eslint --fix % > /dev/null 2>1
-enddef
 var TsserverAutofix = longcommandwithpopup.CreateLongRunningFunctionVim(
-    TsserverAutofixInner,
+    () => {
+        CocCommand tsserver.executeAutofix
+        :%s/from 'packages/from '@nct/ge
+        silent read !npx eslint --fix % > /dev/null 2>1
+    },
     'Tsserver Autofix'
+)
+
+def EslintFixCurrent()
+    var F = longcommandwithpopup.CreateLongRunningFunctionSystem('npx eslint --fix ' .. expand("%:."), 'npx eslint --fix %', () => updatebuffer.UpdateBuffer(1))
+    F()
+enddef
+
+var LintChangedFiles = longcommandwithpopup.CreateLongRunningFunctionVim(
+    () => {
+        var files = systemlist('git diff --diff-filter=ACM --name-only $(git merge-base HEAD origin/master) -- "*.js" "*.jsx" "*.ts" "*.tsx"')
+        if (empty(files)) | return | endif
+
+        # Run eslint directly and parse output to quickfix
+        var cmd = 'npx eslint --cache --no-error-on-unmatched-pattern --format=compact ' .. join(files, ' ')
+        var output = system(cmd)
+
+        var qflist = []
+        var regex = '\v(Error|Warning)'
+
+        for line in split(output, "\n")
+            if line =~# regex
+                var parts = split(line, ':')
+                var filename = parts[0]
+                var other = parts[1 : ]->join('')
+
+                var linenr = matchlist(other, '\vline (\d+)')[1]
+                var colnr = matchlist(other, '\vcol (\d+)')[1]
+                var text = matchlist(other, '\vcol \d+, (.*)')[1]
+
+                qflist->add({
+                    filename: filename,
+                    lnum: linenr->str2nr(),
+                    col: colnr->str2nr(),
+                    text: text->trim(),
+                    type: line =~# ' error:' ? 'E' : 'W' })
+            endif
+        endfor
+
+        echo qflist
+        setqflist([], ' ', { items: qflist, title: 'ESLint Errors' })
+        if (!empty(qflist)) | copen | endif
+    },
+    'LintChangedFiles'
 )
 
 var refactorCommands = {
@@ -96,6 +142,12 @@ var refactorCommands = {
     },
     'COC: file references (ts)': {
         command: 'CocCommand tsserver.findAllFileReferences',
+    },
+    '!npx eslint --fix %': {
+        command: 'call EslintFixCurrent()',
+    },
+    'LintChangedFiles': {
+        command: 'call LintChangedFiles()',
     }
 }
 
