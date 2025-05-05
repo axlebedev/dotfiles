@@ -545,6 +545,7 @@ g:coc_global_extensions = [
     'coc-cssmodules',
     'coc-eslint',
     'coc-react-refactor',
+    'coc-groovy',
 ]
 g:coc_global_config = '/home/user/dotfiles/.vim/coc-settings.json'
 g:coc_enable_locationlist = 0
