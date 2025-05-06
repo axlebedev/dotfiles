@@ -1,5 +1,7 @@
 vim9script
 
+import '~/dotfiles/.vim/autoload/detectindent.vim'
+
 # TODO: 'help' to be always in readmode
 #
 # TODO: vim-easymotion потестить
@@ -736,3 +738,13 @@ def FoldDiffFiles()
 enddef
 
 autocmd FileType gitcommit,diff FoldDiffFiles()
+
+augroup au_AutoDetectIndent
+    autocmd!
+    autocmd BufEnter * :
+        var indent_size = detectindent.DetectIndent()
+        if (indent_size > 0)
+            execute 'setlocal shiftwidth=' .. indent_size
+            execute 'setlocal tabstop=' .. indent_size
+        endif
+augroup END
