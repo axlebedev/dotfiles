@@ -2,6 +2,7 @@ vim9script
 
 import autoload '../autoload/updatebuffer.vim'
 import autoload '../autoload/longcommandwithpopup.vim'
+import autoload '../autoload/eslinttoquickfix.vim'
 
 def Unmerged(): void
     call fzf#vim#files('', {
@@ -26,8 +27,6 @@ var TsserverAutofix = longcommandwithpopup.CreateLongRunningFunctionVim(
     'Tsserver Autofix'
 )
 
-var EslintFixCurrent = longcommandwithpopup.CreateLongRunningFunctionSystem('npx eslint --fix ' .. expand("%:."), 'npx eslint --fix %', () => updatebuffer.UpdateBuffer(1))
-
 var LintChangedFiles = longcommandwithpopup.CreateLongRunningFunctionVim(
     () => {
         var files = systemlist('git diff --diff-filter=ACM --name-only $(git merge-base HEAD origin/master) -- "*.js" "*.jsx" "*.ts" "*.tsx"')
@@ -35,33 +34,8 @@ var LintChangedFiles = longcommandwithpopup.CreateLongRunningFunctionVim(
 
         # Run eslint directly and parse output to quickfix
         var cmd = 'npx eslint --cache --no-error-on-unmatched-pattern --format=compact ' .. join(files, ' ')
-        var output = system(cmd)
-
-        var qflist = []
-        var regex = '\v(Error|Warning)'
-
-        for line in split(output, "\n")
-            if line =~# regex
-                var parts = split(line, ':')
-                var filename = parts[0]
-                var other = parts[1 : ]->join('')
-
-                var linenr = matchlist(other, '\vline (\d+)')[1]
-                var colnr = matchlist(other, '\vcol (\d+)')[1]
-                var text = matchlist(other, '\vcol \d+, (.*)')[1]
-
-                qflist->add({
-                    filename: filename,
-                    lnum: linenr->str2nr(),
-                    col: colnr->str2nr(),
-                    text: text->trim(),
-                    type: line =~# ' error:' ? 'E' : 'W' })
-            endif
-        endfor
-
-        echo qflist
-        setqflist([], ' ', { items: qflist, title: 'ESLint Errors' })
-        if (!empty(qflist)) | copen | endif
+        eslinttoquickfix.EslintToQuickfix(cmd)
+        if (!empty(getqflist())) | copen | endif
     },
     'LintChangedFiles'
 )
@@ -140,10 +114,7 @@ var refactorCommands = {
     'COC: file references (ts)': {
         command: 'CocCommand tsserver.findAllFileReferences',
     },
-    '!npx eslint --fix %': {
-        command: 'call EslintFixCurrent()',
-    },
-    'LintChangedFiles': {
+    'EslintChangedFiles': {
         command: 'call LintChangedFiles()',
     }
 }
