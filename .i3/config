@@ -101,7 +101,7 @@ for_window [class="Squadus"] floating enable
 for_window [title="^xzoom"] floating enable
 
 for_window [class="floating"] floating enable \
-    , resize set width 1400px height 1000px \
+    , resize set width 1400px height 1200px \
     , move position center \
     , move left 150px
 for_window [class="sticky"]  sticky   enable
