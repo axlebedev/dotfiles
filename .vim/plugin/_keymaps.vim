@@ -273,9 +273,9 @@ def GoToDef()
     endif
 enddef
 nnoremap gd <ScriptCmd>GoToDef()<CR>
-nnoremap gdd <ScriptCmd>JumpDefinitionFindCursor('jumpDefinition')<CR>
-nnoremap gi <ScriptCmd>JumpDefinitionFindCursor('jumpImplementation')<CR>
-nnoremap gt <ScriptCmd>JumpDefinitionFindCursor('jumpTypeDefinition')<CR>
+nnoremap gdd <ScriptCmd>JumpDefinitionFindCursor("call CocAction('jumpDefinition')")<CR>
+nnoremap gi <ScriptCmd>JumpDefinitionFindCursor("call CocAction('jumpImplementation')")<CR>
+nnoremap gt <ScriptCmd>JumpDefinitionFindCursor("call CocAction('jumpTypeDefinition')")<CR>
 
 def ToggleQuickFix()
     if getwininfo()->filter((id, info) => info.quickfix)->empty()
