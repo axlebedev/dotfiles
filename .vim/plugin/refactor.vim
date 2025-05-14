@@ -18,13 +18,18 @@ var EslintChangedFix = longcommandwithpopup.CreateLongRunningFunctionSystem(
     () => updatebuffer.UpdateBuffer(1),
 )
 
+var EslintAutofix = longcommandwithpopup.CreateLongRunningFunctionSystem(
+    'npx eslint --fix %',
+    'npx eslint --fix %',
+    () => updatebuffer.UpdateBuffer(1)
+)
+
 var TsserverAutofix = longcommandwithpopup.CreateLongRunningFunctionVim(
     () => {
-        CocCommand tsserver.executeAutofix
         :%s/from 'packages/from '@nct/ge
-        silent read !npx eslint --fix % > /dev/null 2>1
+        CocCommand tsserver.executeAutofix
     },
-    'Tsserver Autofix'
+    'tsserver.executeAutofix',
 )
 
 var LintChangedFiles = longcommandwithpopup.CreateLongRunningFunctionVim(
@@ -104,6 +109,9 @@ var refactorCommands = {
     },
     'COC: Go to source definition (ts)': {
         command: 'CocCommand tsserver.goToSourceDefinition',
+    },
+    'EslintAutofix': {
+        command: 'call EslintAutofix()',
     },
     'TsserverAutofix()': {
         command: 'call TsserverAutofix()',

@@ -28,7 +28,7 @@ export def CreateLongRunningFunctionSystem(command: string, message: string, End
         )
         var spinner_timer = timer_start(100, (timer) => UpdateSpinner(popup_id), { repeat: -1 })
 
-        job_start(command, {
+        job_start(substitute(command, '%', expand('%'), ''), {
             close_cb: (channel) => {
                 timer_stop(spinner_timer)
                 popup_close(popup_id)
@@ -46,24 +46,23 @@ export def CreateLongRunningFunctionSystem(command: string, message: string, End
 enddef
 
 
-export def CreateLongRunningFunctionVim(Function: func, message: string): func
+export def CreateLongRunningFunctionVim(Function: func, message: string, EndHook: func = () => 0): func
     return () => {
         var popup_id = popup_create(
             'Running ' .. message .. '...',
             popup_args
         )
 
-        timer_start(0, (_) => {
-            try
-                Function()
-            catch
-                popup_close(popup_id)
-                popup_notification(
-                    message .. ' failed: ' .. v:exception,
-                    popup_args
-                )
-            endtry
+        try
+            Function()
+        catch
             popup_close(popup_id)
-        })
+            popup_notification(
+                message .. ' failed: ' .. v:exception,
+                popup_args
+            )
+        endtry
+        popup_close(popup_id)
+        EndHook()
     }
 enddef
