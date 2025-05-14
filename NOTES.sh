@@ -40,6 +40,7 @@ cat .ssh/id_rsa.pub
 # lxpolkit - чтобы запрашивал пароль в графических приложках
 # vokoscreenNG - для записи видео скринкаста
 # vlc, mpv - для просмотра .mp4
+# arandr - GUI for xrandr
 
 sudo apt install ubuntu-restricted-extras
 sudo apt install -y \
@@ -76,6 +77,7 @@ vokoscreenNG \
 vlc \
 mpv \
 mailnag \
+arandr \
 autorandr
 
 # install git-delta manually
