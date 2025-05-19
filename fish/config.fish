@@ -218,12 +218,21 @@ bind \el forward-word
 bind \eh backward-kill-word
 
 function simulate_empty_commands
-    set height (tput lines)
+    set -l full_height (tput lines)
+    set -l height (math "ceil($full_height * 0.7)")
+    set -l prompt (fish_prompt)
+    
+    # Print with progress updates
+    printf '\n'
     for i in (seq $height)
-        fish_prompt
-        echo
+        printf '%s\n' $prompt
+        
+        # Update every 10 lines or last line
+        if test (math "$i % 10") -eq 0; or test $i -eq $height
+            printf '\r'  # Optional: clears the line
+        end
     end
-    fish_prompt
+    printf '%s' $prompt
 end
 bind \cl simulate_empty_commands
 
