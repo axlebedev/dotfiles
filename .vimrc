@@ -627,6 +627,8 @@ g:FoldText_width = 0
 g:FoldText_placeholder = '⋯ '
 g:FoldText_multiplication = ''
 g:FoldText_line = '▤ '
+
+Plug 'axlebedev/vim-yank-filename'
 # }}} homemade plugins
 
 # TODO: сделать чтобы работал бесшовно

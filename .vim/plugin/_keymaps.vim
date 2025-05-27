@@ -382,4 +382,9 @@ omap ac <Plug>(coc-classobj-a)
 nnoremap <silent> <F5> <ScriptCmd>updatebuffer.UpdateBuffer(0)<CR>
 nnoremap <silent> <F5><F5> <ScriptCmd>updatebuffer.UpdateBuffer(1)<CR>
 
+nnoremap yf <ScriptCmd>YankFileName<CR>
+nnoremap yff <ScriptCmd>YankFileNameForDebug<CR>
+nnoremap yg <ScriptCmd>YankGithubURLMaster<CR>
+nnoremap ygg <ScriptCmd>YankGithubURL<CR>
+
 nnoremap <silent> <expr> l foldclosed('.') != -1 ? 'zo' : 'l'
