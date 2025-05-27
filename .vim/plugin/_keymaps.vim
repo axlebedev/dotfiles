@@ -387,4 +387,7 @@ nnoremap yff <ScriptCmd>YankFileNameForDebug<CR>
 nnoremap yg <ScriptCmd>YankGithubURLMaster<CR>
 nnoremap ygg <ScriptCmd>YankGithubURL<CR>
 
+nnoremap rti <ScriptCmd>RequireToImport<CR>
+nnoremap itr <ScriptCmd>ImportToRequire<CR>
+
 nnoremap <silent> <expr> l foldclosed('.') != -1 ? 'zo' : 'l'
