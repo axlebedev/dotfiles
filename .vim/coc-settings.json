@@ -83,7 +83,7 @@
 
     "outline.autoPreview": false,
     "outline.autoHide": false,
-    "outline.expandLevel": 1,
+    "outline.expandLevel": 0,
     "outline.autoWidth": true,
     "outline.checkBufferSwitch": true,
     "outline.followCursor": true,
