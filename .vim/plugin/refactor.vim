@@ -32,6 +32,29 @@ var TsserverAutofix = longcommandwithpopup.CreateLongRunningFunctionVim(
     'tsserver.executeAutofix',
 )
 
+var CommonAutofix = () => {
+
+    var EsAutofix = longcommandwithpopup.CreateLongRunningFunctionSystem(
+        'npx eslint --fix %',
+        'npx eslint --fix %',
+        () => updatebuffer.UpdateBuffer(1)
+    )
+
+    var TsAutofix = longcommandwithpopup.CreateLongRunningFunctionVim(
+        () => {
+            var cmd = "call CocAction('runCommand', 'tsserver.executeAutofix')"
+            exe cmd
+        },
+        'tsserver.executeAutofix',
+        () => {
+            :%s/from 'packages/from '@nct/ge
+            EsAutofix()
+        }
+    )
+
+    TsAutofix()
+}
+
 var LintChangedFiles = longcommandwithpopup.CreateLongRunningFunctionVim(
     () => {
         var files = systemlist('git diff --diff-filter=ACM --name-only $(git merge-base HEAD origin/master) -- "*.js" "*.jsx" "*.ts" "*.tsx"')
@@ -110,12 +133,12 @@ var refactorCommands = {
     'COC: Go to source definition (ts)': {
         command: 'CocCommand tsserver.goToSourceDefinition',
     },
-    'EslintAutofix': {
-        command: 'call EslintAutofix()',
-    },
-    'TsserverAutofix()': {
-        command: 'call TsserverAutofix()',
-    },
+    # 'EslintAutofix': {
+    #     command: 'call EslintAutofix()',
+    # },
+    # 'TsserverAutofix()': {
+    #     command: 'call TsserverAutofix()',
+    # },
     'EslintChangedFix()': {
         command: 'call EslintChangedFix()',
     },
@@ -124,6 +147,9 @@ var refactorCommands = {
     },
     'EslintChangedFiles': {
         command: 'call LintChangedFiles()',
+    },
+    'CommonAutofix': {
+        command: 'call CommonAutofix()',
     }
 }
 
