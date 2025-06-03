@@ -645,6 +645,10 @@ g:popup_scrollbar_shape = {
     \ }
 g:popup_scrollbar_highlight = 'PopupScrollbar'
 
+Plug 'axlebedev/vim-fold-unfold'
+nnoremap <silent> h <scriptcmd>FoldOrMoveLeft<CR>
+nnoremap <silent> L <scriptcmd>UnfoldOrMoveRight<CR>
+
 # -----------------------------------------------------------------------------
 plug#end()
 filetype plugin indent on
