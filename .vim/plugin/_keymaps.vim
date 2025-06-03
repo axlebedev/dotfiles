@@ -391,3 +391,5 @@ nnoremap rti <ScriptCmd>RequireToImport<CR>
 nnoremap itr <ScriptCmd>ImportToRequire<CR>
 
 nnoremap <silent> <expr> l foldclosed('.') != -1 ? 'zo' : 'l'
+
+nnoremap <2-LeftMouse> yiW
