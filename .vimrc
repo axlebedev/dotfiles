@@ -679,7 +679,7 @@ autocmd au_vimrc BufLeave *
 
 
 # close vim if only window is NERDTree
-autocmd au_vimrc bufenter *
+autocmd au_vimrc BufEnter *
     \ if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree())
     \   | q
     \ | endif
