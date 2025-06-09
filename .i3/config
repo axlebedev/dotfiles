@@ -322,14 +322,14 @@ mode $mode_move_workspace {
 bindsym $mod+Shift+m mode $mode_move_workspace 
 
 # Work
-set $mode_work "Work (B)rowser (D)ebug (S)quadus (P)asswords"
+set $mode_work "Work (B)rowser (D)ebug (S)quadus (P)asswords (T)imetrack"
 mode $mode_work {
     bindsym $mod+b mode "default" ; exec --no-startup-id nohup google-chrome & disown
  	bindsym $mod+Shift+b mode "default" ; exec --no-startup-id nohup yandex-browser --user-data-dir="/home/user/aleksey.lebedev.myoffice" & disown
     bindsym $mod+d mode "default" ; exec --no-startup-id nohup google-chrome --user-data-dir="/home/user/chrome-users/debug" & disown
 	bindsym $mod+s mode "default" ; exec --no-startup-id nohup google-chrome --app="https://im.ncloudtech.ru/rooms" & disown
-	bindsym $mod+p mode "default" ; exec --no-startup-id nohup gnome-terminal --class="floating" -- vim ~/passwords & disown
-	bindsym $mod+shift+s mode "default" ; exec --no-startup-id nohup squadus & disown
+    bindsym $mod+p mode "default" ; exec --no-startup-id nohup gnome-terminal --class="floating" -- vim ~/passwords & disown
+	bindsym $mod+t mode "default" ; exec --no-startup-id nohup google-chrome --app="https://web.telegram.org/a/#-1002598035034" & disown
 
 # back to normal: Enter or Escape
 	bindsym Return mode "default"

@@ -250,6 +250,7 @@ set -g theme_color_scheme light
 
 alias files="xdg-open (pwd) > /dev/null 2>&1"
 
+abbr -a showbranch ~/dotfiles/fish/showBranch.sh
 abbr -a gpr ~/dotfiles/fish/gpr.sh
 
 abbr -a grbnm "g stash && g co NERPA && g rebase master && g stash apply"
