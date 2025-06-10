@@ -1,6 +1,6 @@
 vim9script
 
-var ignored = [
+const ignored = [
     'node_modules',
     'dist',
     'package-lock.json',
@@ -11,9 +11,11 @@ var ignored = [
     '.ccls-cache',
     '.tmp',
 ]
-var ignoredList = map(ignored, (_, val) => '--ignore ' .. val)->join(' ')
+const charsForEscape = '$'
+
+const ignoredList = map(ignored, (_, val) => '--ignore ' .. val)->join(' ')
 # find word under cursor
-var basegrepprg = 'ag --hidden ' .. ignoredList
+const basegrepprg = 'ag --hidden ' .. ignoredList
 # -w --word-regexp
 var isWholeWord = 0
 # -Q --literal
@@ -38,6 +40,7 @@ def CaseToString(): string
     endif
     return 'S'
 enddef
+
 def MakeVarsString(): string
     return 'w' .. (isWholeWord % 2 ? '➕' : '－') .. ' l' .. (isLiteral % 2 ? '➕' : '－') .. ' i' .. CaseToString() .. ' Search>'
 enddef
@@ -47,11 +50,9 @@ export def ResizeQFHeight(): void
     if (qfLength == 0)
         return
     endif
-    resize 1000
-    var fullHeight = winheight(winnr())
     execute 'resize ' .. min([
         qfLength + 1,
-        fullHeight / 2,
+        &lines / 2, # &lines - full height of vim window
     ])
     normal! zb
 enddef
@@ -78,8 +79,6 @@ def IncCase(): string
     return ''
 enddef
 
-const charsForEscape = '$'
-
 export def Grep()
     cmap <C-w> <C-r>=<sid>IncWord()<cr>
     cmap <C-l> <C-r>=<sid>IncLiteral()<cr>
@@ -98,6 +97,7 @@ export def Grep()
     redraw
 
     var word = input(repeat(' ', varsString->strwidth()), initialWord)
+    # Waiting for user input...
     popup_close(popupId)
     var savedIsLiteral = isLiteral
     if (!isLiteral && word =~ escape(charsForEscape, charsForEscape))
@@ -129,6 +129,7 @@ export def Grep()
     isLiteral = savedIsLiteral
     cunmap <C-w>
     cunmap <C-l>
+    cunmap <C-i>
 enddef
 
 augroup quickfix
