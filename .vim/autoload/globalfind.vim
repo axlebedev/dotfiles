@@ -1,7 +1,7 @@
 vim9script
 
-const ignored = [
-    'node_modules',
+var ignored = [
+    '',
     'dist',
     'package-lock.json',
     'yarn.lock',
@@ -11,11 +11,12 @@ const ignored = [
     '.ccls-cache',
     '.tmp',
 ]
-const charsForEscape = '$'
 
-const ignoredList = map(ignored, (_, val) => '--ignore ' .. val)->join(' ')
+const ignoredList = ignored->map((_, val) => '--ignore ' .. val)->join(' ')
 # find word under cursor
 const basegrepprg = 'ag --hidden ' .. ignoredList
+
+const charsForEscape = '$'
 # -w --word-regexp
 var isWholeWord = 0
 # -Q --literal

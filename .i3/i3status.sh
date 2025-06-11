@@ -47,6 +47,7 @@ do
     
     if [ "$getname" = "Language" ] 
     then
+        setxkbmap -layout us,ru -option 'grp:shift_caps_switch' -option 'kpdl:dot'
         xkb-switch -n
     fi
 
