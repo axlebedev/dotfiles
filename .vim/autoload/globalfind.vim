@@ -1,7 +1,6 @@
 vim9script
 
 var ignored = [
-    '',
     'dist',
     'package-lock.json',
     'yarn.lock',
