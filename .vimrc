@@ -326,12 +326,12 @@ g:targets_pairs = '()b {}c [] <>' # replace {}B to {}c
 
 # -----------------------------------------------------------------------------
 # expand selection
-Plug 'terryma/vim-expand-region'
+Plug 'axlebedev/vim-expand-region' # forked
 vmap <silent> <nowait> v <Plug>(expand_region_expand)
 vmap <silent> <nowait> V <Plug>(expand_region_shrink)
 vmap <silent> <nowait> <S-v> <Plug>(expand_region_shrink)
 def Exp(): void
-    expand_region#custom_text_objects({
+    g:CustomTextObjects({
         "\/\\n\\n\<CR>": 1, # Motions are supported as well. Here's a search motion that finds a blank line
         'a]': 1, # Support nesting of 'around' brackets
         'ab': 1, # Support nesting of 'around' parentheses
