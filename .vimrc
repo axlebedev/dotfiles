@@ -297,6 +297,7 @@ Plug 'vim-airline/vim-airline-themes'
 # Pretty work with git
 Plug 'tpope/vim-fugitive'
 Plug 'jreybert/vimagit'
+g:magit_auto_close = 1
 autocmd User VimagitUpdateFile normal! zt
 autocmd User VimagitRefresh normal! zt
 autocmd FileType magit setlocal nocursorline
