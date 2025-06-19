@@ -5,7 +5,7 @@ vim9script
 # TODO: vim-easymotion потестить
 # TODO: https://github.com/qpkorr/vim-bufkill вместо kwbd
 #
-# TODO: https://github.com/liuchengxu/vim-clap 
+# TODO: https://github.com/liuchengxu/vim-clap
 # https://github.com/bounceme/poppy.vim
 #
 # TODO NERDTree plugins
@@ -64,10 +64,10 @@ g:XkbSwitchSkipIMappings = {'*': ["'", '"', '[', ']', '<', '>']}
 Plug 'axlebedev/vim-startify' # my own fork
 g:startify_disable_at_vimenter = 1
 g:startify_lists = [
-    { type: 'dir',       header: ['   MRU ' .. getcwd()] },
-    { type: 'sessions',  header: ['   Sessions']       },
-    { type: 'bookmarks', header: ['   Bookmarks']      },
-    { type: 'commands',  header: ['   Commands']       },
+    { type: 'dir', header: ['   MRU ' .. getcwd()] },
+    { type: 'sessions', header: ['   Sessions'] },
+    { type: 'bookmarks', header: ['   Bookmarks'] },
+    { type: 'commands', header: ['   Commands'] },
 ]
 
 g:startify_bookmarks = [ { c: '~/.vimrc' } ]
@@ -394,8 +394,8 @@ Plug 'LunarWatcher/auto-pairs'
 g:AutoPairsMapSpace = 0
 g:AutoPairsMultilineClose = 0 # Dont make a mess when `{ if(condition) { doSomething [cursor] }`
 inoremap <silent> <> <space> pumvisible()
-	\ ? "<space>"
-	\ : "<c-r>=AutoPairsSpace()<cr>"
+  \ ? "<space>"
+  \ : "<c-r>=AutoPairsSpace()<cr>"
 g:AutoPairsMapBS = 0
 
 # -----------------------------------------------------------------------------
