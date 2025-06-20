@@ -264,6 +264,7 @@ def AirlineInit(): void
         '%{airline#util#append(airline#parts#iminsert(),0)}'            # 9. Input method
     ]->join('')
 
+    # airline#extensions#fugitiveline#bufname()
     g:airline_section_y = '' # dont show encoding
 
     # remove excess symbols from right part

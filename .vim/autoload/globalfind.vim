@@ -130,6 +130,7 @@ export def Grep()
     cunmap <C-w>
     cunmap <C-l>
     cunmap <C-i>
+    redraw # ensure popup_close is on screen
 enddef
 
 augroup quickfix
