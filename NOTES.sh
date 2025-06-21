@@ -168,29 +168,6 @@ omf install sudope # TODO: разобраться и настроить
 # for z: https://github.com/rupa/z/blob/master/z.sh to $path
 omf install z # TODO разобраться и навешать алиасов
 
-# ===== I3 GAPS ============================================
-sudo apt install -y libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev libxcb-icccm4-dev libyajl-dev libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev autoconf xutils-dev libtool
-
-# Install xcb-util-xrm
-cd ~/github
-git clone https://github.com/Airblader/xcb-util-xrm
-cd xcb-util-xrm
-git submodule update --init
-./autogen.sh --prefix=/usr
-make && sudo make install
-
-# Install i3-gaps
-cd ~/github
-
-sudo apt purge i3
-sudo apt install -y meson dh-autoreconf libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev xcb libxcb1-dev libxcb-icccm4-dev libyajl-dev libev-dev libxcb-xkb-dev libxcb-cursor-dev libxkbcommon-dev libxcb-xinerama0-dev libxkbcommon-x11-dev libstartup-notification0-dev libxcb-randr0-dev libxcb-xrm0 libxcb-xrm-dev libxcb-shape0 libxcb-shape0-dev
-git clone https://www.github.com/Airblader/i3 i3-gaps
-cd i3-gaps
-mkdir -p build && cd build
-meson --prefix /usr/local
-ninja
-sudo ninja install
-
 # ----- install i3-lock
 # i3lock установить в соотв. с инструкцией, всё должно собраться 
 # https://raymond.li/i3lock-color/
