@@ -17,7 +17,11 @@ default_floating_border pixel 2
 gaps inner 10
 smart_gaps on
 smart_borders no_gaps
+hide_edge_borders smart_no_gaps
 # gaps outer 10
+
+# new config from 4.24
+popup_during_fullscreen all
 
 exec --no-startup-id lxpolkit
 
