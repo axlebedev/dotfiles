@@ -52,6 +52,8 @@ abbr -a gia g commit --amend --no-verify --no-edit
 abbr -a giw g commit --no-verify -m "wip"
 abbr -a gil g commit --no-verify -m "linted"
 
+abbr -a gm g merge
+
 function cdf
     set -l cmd (commandline -j)
     set resultPath './'

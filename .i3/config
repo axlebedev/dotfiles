@@ -15,10 +15,12 @@ default_floating_border pixel 2
 
 # Experimental gaps stuff
 gaps inner 10
-smart_gaps on
+gaps outer 0
 smart_borders no_gaps
 hide_edge_borders smart_no_gaps
 # gaps outer 10
+
+tiling_drag modifier
 
 # new config from 4.24
 popup_during_fullscreen all

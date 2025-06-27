@@ -31,6 +31,7 @@ filetype off
 packadd cfilter
 
 g:plug_threads = 8
+
 # vim-plug installation:
 # curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 plug#begin(expand('~') .. '/.vim/bundle')
@@ -460,7 +461,7 @@ g:vim_jsx_pretty_colorful_config = 1
 # -----------------------------------------------------------------------------
 # Highlight matching html tag
 # forked from 'vim-scripts/MatchTag'
-# Plug 'axlebedev/MatchTag', { 'for': ['javascript', 'javascriptreact', 'html'] }
+# Plug 'axlebedev/MatchTag', { 'for': ['javascript', 'javascriptreact', 'html'] } # fork
 
 # -----------------------------------------------------------------------------
 # autoclose html tags
@@ -621,7 +622,7 @@ def FindCursorHookPost(): void
 enddef
 g:FindCursorPost = function('FindCursorHookPost')
 
-Plug 'axlebedev/vim-foldtext'
+Plug 'axlebedev/vim-foldtext' # fork
 g:FoldText_width = 0
 g:FoldText_placeholder = '⋯ '
 g:FoldText_multiplication = ''
@@ -635,7 +636,7 @@ Plug 'axlebedev/vim-require-to-import'
 # TODO: сделать чтобы работал бесшовно
 # Plug 'noscript/taberian.vim'
 
-Plug 'axlebedev/popup_scrollbar.vim'
+Plug 'axlebedev/popup_scrollbar.vim' # fork
 g:popup_scrollbar_min_size = 3
 g:popup_scrollbar_shape = {
     \ 'head': '▌',
