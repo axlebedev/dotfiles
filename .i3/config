@@ -376,7 +376,7 @@ bar {
     status_command $HOME/.i3/i3status.sh 
     output DP-2
     output HDMI-0
-    output VMON_BOTTOM_LEFT_PRIMARY
+    output VMON_PRIMARY
     tray_output primary
     height 27
 
@@ -390,6 +390,8 @@ bar {
 bar {
     output VMON_RIGHT
     output VMON_TOP
+    output VMON_BOTTOM
+    output VMON_LEFT
     tray_output primary
     height 27
     mode hide

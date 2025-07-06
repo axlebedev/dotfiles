@@ -4,33 +4,55 @@
 const { execSync } = require('child_process')
 const { argv } = require('process')
 
+// xrandr --current | grep -w "HDMI-0" | awk '{print $3}' > 2560x1440+0+0
+// full   : 2560 1440
+// primary: 1920 1080
+// padding-left:  320
+// padding-right: 320
+// padding-top:  180
+// padding-bottom: 180
+
 /*
- * ###########################################
- * #                            #            #
- * #     VMON_TOP               #            #
- * #                            #            #
- * ##############################            #
- * #                            #            #
- * #                            # VMON_RIGHT #
- * #     VMON_PRIMARY           #            #
- * #                            #            #
- * #                            #            #
- * ##############################            #
- * #                            #            #
- * #     VMON_BOTTOM (not used) #            #
- * #                            #            #
- * ###########################################
+ * ##########################################################
+ * #              #                            #            #
+ * #              #     VMON_TOP               #            #
+ * #              #                            #            #
+ * #              ##############################            #
+ * #              #                            #            #
+ * # VMON_LEFT    #                            # VMON_RIGHT #
+ * #              #     VMON_PRIMARY           #            #
+ * #              #                            #            #
+ * #              #                            #            #
+ * #              ##############################            #
+ * #              #                            #            #
+ * #              #     VMON_BOTTOM (not used) #            #
+ * #              #                            #            #
+ * ##########################################################
  */
 
-const OUTPUT = 'HDMI-0'
-const targetWidth_px = 2050
-const targetHeight_px = 1300
+// VMON_LEFT: { top: 0, left: 0, width: padding_left, height: full_height }
+// VMON_RIGHT: { top: 0, left: full_width - padding_right, width:  padding_raigh, height: full_height }
+// VMON_TOP: { top: 0, left: padding_left, width: full_width - padding_left - padding_right, height: padding_top }
+// VMON_BOTTOM: { top: full_height - padding_bottom, left: padding_left, width: full_width - padding_left - padding_right, height: padding_bottom }
+//
+// VMON_PRIMARY: { top: padding_top, left: padding_left, width: full_width - padding_left - padding_right, height: full_height - padding_top - padding_bottom }
 
-  const I3_MSG_CMD = "i3-msg"
-const VMON_PRIMARY = 'VMON_BOTTOM_LEFT_PRIMARY'
+const OUTPUT = 'HDMI-0'
+const targetVals = {
+  paddingLeft:  320,
+  paddingRight: 320,
+  paddingTop:  180,
+  paddingBottom: 180,
+}
+// const targetWidth_px = 2050
+// const targetHeight_px = 1300
+
+const I3_MSG_CMD = "i3-msg"
+const VMON_PRIMARY = 'VMON_PRIMARY'
 const VMON_TOP = 'VMON_TOP'
-// const VMON_BOTTOM = 'VMON_BOTTOM'
+const VMON_BOTTOM = 'VMON_BOTTOM'
 const VMON_RIGHT = 'VMON_RIGHT'
+const VMON_LEFT = 'VMON_LEFT'
 
 function runCommand(command) {
   try {
@@ -67,59 +89,94 @@ function getCurrentResolutionAndSize() {
   return { width_px, height_px, offsetX, offsetY, width_mm, height_mm }
 }
 
+function pxToMm(monitorConfig, px) {
+  console.log('%c11111', 'background:#00ff9f', Date.now() % 10000, 'virtual-monitors:92 pxToMm', monitorConfig, px);
+  console.log('%c11111', 'background:#00ff9f', 'px=', px);
+  console.log('%c11111', 'background:#00ff9f', 'monitorConfig.width_px=', monitorConfig.width_px);
+  console.log('%c11111', 'background:#00ff9f', 'monitorConfig.width_mm=', monitorConfig.width_mm);
+  return Math.floor((px / monitorConfig.width_px) * monitorConfig.width_mm)
+}
+
 const getConfigStr = ({ width_px, height_px, offsetX, offsetY, width_mm, height_mm }) =>
   `${width_px}/${width_mm}x${height_px}/${height_mm}${offsetStr(offsetX)}${offsetStr(offsetY)}`
 
+function getLeftConfig(monitorConfig) {
+  // VMON_LEFT: { top: 0, left: 0, width: padding_left, height: full_height }
+  const newWidth_px = targetVals.paddingLeft;
+  const newHeight_px = monitorConfig.height_px;
+  const res = {
+    width_px: newWidth_px,
+    width_mm: pxToMm(monitorConfig, newWidth_px),
+    height_px: newHeight_px,
+    height_mm: pxToMm(monitorConfig, newHeight_px),
+    offsetX: monitorConfig.offsetX,
+    offsetY: monitorConfig.offsetY,
+  }
+  console.log('%c11111', 'background:#00ff9f', 'res=', res);
+  return res;
+}
+
 function getTopConfig(monitorConfig) {
-  const newWidth_px = targetWidth_px
-  const newWidth_mm = Math.floor((newWidth_px / monitorConfig.width_px) * monitorConfig.width_mm)
-
-  const newHeight_px = monitorConfig.height_px - targetHeight_px
-  const newHeight_mm = Math.floor((newHeight_px / monitorConfig.height_px) * monitorConfig.height_mm)
-
+  // VMON_TOP: { top: 0, left: padding_left, width: full_width - padding_left - padding_right, height: padding_top }
+  const newWidth_px = monitorConfig.width_px - targetVals.paddingLeft - targetVals.paddingRight;
+  const newHeight_px = targetVals.paddingTop;
+  const { width_px } = getLeftConfig(monitorConfig);
   return {
     width_px: newWidth_px,
-    width_mm: newWidth_mm,
+    width_mm: pxToMm(monitorConfig, newWidth_px),
     height_px: newHeight_px,
-    height_mm: newHeight_mm,
-    offsetX: monitorConfig.offsetX,
+    height_mm: pxToMm(monitorConfig, newHeight_px),
+    offsetX: monitorConfig.offsetX + width_px,
     offsetY: monitorConfig.offsetY,
   }
 }
 
-
-// `${newWidth_px}/${newWidth_mm}x${height_px}/${height_mm}${offsetStr(offsetX)}${offsetStr(offsetY)}`
-// `2000/777x1000/555+3200+0`
-function getPrimaryConfig(monitorConfig, topConfig) {
-  const newWidth_px = targetWidth_px
-  const newWidth_mm = Math.floor((newWidth_px / monitorConfig.width_px) * monitorConfig.width_mm)
-
-  const newHeight_px = targetHeight_px
-  const newHeight_mm = Math.floor((newHeight_px / monitorConfig.height_px) * monitorConfig.height_mm)
-
+function getPrimaryConfig(monitorConfig) {
+  // VMON_PRIMARY: { top: padding_top, left: padding_left, width: full_width - padding_left - padding_right, height: full_height - padding_top - padding_bottom }
+  const newWidth_px = monitorConfig.width_px - targetVals.paddingLeft - targetVals.paddingRight;
+  const newHeight_px = monitorConfig.height_px - targetVals.paddingTop - targetVals.paddingBottom;
+  const { width_px } = getLeftConfig(monitorConfig);
+  const { height_px } = getTopConfig(monitorConfig);
   return {
     width_px: newWidth_px,
-    width_mm: newWidth_mm,
+    width_mm: pxToMm(monitorConfig, newWidth_px),
     height_px: newHeight_px,
-    height_mm: newHeight_mm,
-    offsetX: monitorConfig.offsetX,
-    offsetY: monitorConfig.offsetY + topConfig.height_px,
+    height_mm: pxToMm(monitorConfig, newHeight_px),
+    offsetX: monitorConfig.offsetX + width_px,
+    offsetY: monitorConfig.offsetY + height_px,
   }
 }
 
-function getRightConfig(monitorConfig, primaryConfig) {
-  const newWidth_px = monitorConfig.width_px - targetWidth_px
-  const newWidth_mm = Math.floor((newWidth_px / monitorConfig.width_px) * monitorConfig.width_mm)
-
-  const newHeight_px = monitorConfig.height_px
-  const newHeight_mm = monitorConfig.height_mm
-
+function getBottomConfig(monitorConfig) {
+  // VMON_BOTTOM: { top: full_height - padding_bottom, left: padding_left, width: full_width - padding_left - padding_right, height: padding_bottom }
+  const newWidth_px = monitorConfig.width_px - targetVals.paddingLeft - targetVals.paddingRight;
+  const newHeight_px = targetVals.paddingBottom;
+  const le = getLeftConfig(monitorConfig)
+  const pr = getPrimaryConfig(monitorConfig)
+  const to = getTopConfig(monitorConfig)
   return {
     width_px: newWidth_px,
-    width_mm: newWidth_mm,
+    width_mm: pxToMm(monitorConfig, newWidth_px),
     height_px: newHeight_px,
-    height_mm: newHeight_mm,
-    offsetX: monitorConfig.offsetX + primaryConfig.width_px,
+    height_mm: pxToMm(monitorConfig, newHeight_px),
+    offsetX: monitorConfig.offsetX + le.width_px,
+    offsetY: monitorConfig.offsetY + to.height_px + pr.height_px,
+  }
+}
+
+function getRightConfig(monitorConfig) {
+  // VMON_RIGHT: { top: 0, left: full_width - padding_right, width:  padding_raigh, height: full_height }
+  const newWidth_px = targetVals.paddingRight;
+  const newHeight_px = monitorConfig.height_px;
+
+  const le = getLeftConfig(monitorConfig);
+  const pr = getPrimaryConfig(monitorConfig);
+  return {
+    width_px: newWidth_px,
+    width_mm: pxToMm(monitorConfig, newWidth_px),
+    height_px: newHeight_px,
+    height_mm: pxToMm(monitorConfig, newHeight_px),
+    offsetX: monitorConfig.offsetX + le.width_px + pr.width_px,
     offsetY: monitorConfig.offsetY,
   }
 }
@@ -131,17 +188,15 @@ function splitMonitor() {
   }
 
   const monitorConfig = getCurrentResolutionAndSize()
-  const topConfig = getTopConfig(monitorConfig)
-  const primaryConfig = getPrimaryConfig(monitorConfig, topConfig)
-  const rightConfig = getRightConfig(monitorConfig, primaryConfig)
 
-  runCommand(`xrandr --setmonitor ${VMON_PRIMARY} ${getConfigStr(primaryConfig)} ${OUTPUT}`)
-  runCommand(`xrandr --setmonitor ${VMON_TOP} ${getConfigStr(topConfig)} none`)
-  runCommand(`xrandr --setmonitor ${VMON_RIGHT} ${getConfigStr(rightConfig)} none`)
+  runCommand(`xrandr --setmonitor ${VMON_LEFT} ${getConfigStr(getLeftConfig(monitorConfig))} ${OUTPUT}`)
+  runCommand(`xrandr --setmonitor ${VMON_TOP} ${getConfigStr(getTopConfig(monitorConfig))} ${OUTPUT}`)
+  runCommand(`xrandr --setmonitor ${VMON_RIGHT} ${getConfigStr(getRightConfig(monitorConfig))} ${OUTPUT}`)
+  runCommand(`xrandr --setmonitor ${VMON_BOTTOM} ${getConfigStr(getBottomConfig(monitorConfig))} ${OUTPUT}`)
+  runCommand(`xrandr --setmonitor ${VMON_PRIMARY} ${getConfigStr(getPrimaryConfig(monitorConfig))} ${OUTPUT}`)
 
   // runCommand(`${I3_MSG_CMD} focus output ${VMON_TOP}, workspace 11`)
   // runCommand(`${I3_MSG_CMD} focus output ${VMON_RIGHT}, workspace 10`)
-fi
 
   notifySend('Virtual monitors were created')
 }
@@ -150,6 +205,8 @@ function unsplitMonitor() {
   runCommand(`xrandr --delmonitor ${VMON_PRIMARY}`)
   runCommand(`xrandr --delmonitor ${VMON_TOP}`)
   runCommand(`xrandr --delmonitor ${VMON_RIGHT}`)
+  runCommand(`xrandr --delmonitor ${VMON_BOTTOM}`)
+  runCommand(`xrandr --delmonitor ${VMON_LEFT}`)
 
   notifySend('Virtual monitors were deleted')
 }
