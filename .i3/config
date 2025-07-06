@@ -364,12 +364,35 @@ mode $mode_tools {
 
 bindsym $mod+Shift+t mode $mode_tools
 
+# DP-2
+# HDMI-0
+# VIRTUAL-MONITOR-BOTTOM-LEFT-PRIMARY
+# VIRTUAL-MONITOR-TOP
+# VIRTUAL-MONITOR-RIGHT
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
     status_command $HOME/.i3/i3status.sh 
+    output DP-2
+    output HDMI-0
+    output VMON_BOTTOM_LEFT_PRIMARY
     tray_output primary
     height 27
+
+    colors {
+        focused_workspace #0d61ac #0d61ac #eeeeee
+        active_workspace  #3d91dc #324420 #ffffff
+        inactive_workspace #000000 #000000 #999999
+        urgent_workspace   #ffffff #900000
+    }
+}
+bar {
+    output VMON_RIGHT
+    output VMON_TOP
+    tray_output primary
+    height 27
+    mode hide
 
     colors {
         focused_workspace #0d61ac #0d61ac #eeeeee
