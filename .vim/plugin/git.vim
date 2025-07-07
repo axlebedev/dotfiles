@@ -1,5 +1,7 @@
 vim9script
 
+import autoload '../autoload/unmerged.vim'
+
 g:fzf_commits_log_options = "--color --graph --pretty=format:'%C(cyan)%h%Creset %Cgreen%<(11)%cd %C(bold blue)<%an> -%C(yellow)%d%Creset %s%Creset' --date='human' --abbrev-commit"
 
 def Magit()
@@ -11,6 +13,7 @@ enddef
 nnoremap <C-g><C-g> <ScriptCmd>Magit()<CR>
 nnoremap <C-g><C-b> <CMD>Git blame<cr>
 nnoremap <C-g><C-v> <CMD>GV!<cr>
+nnoremap <C-g><C-u> <ScriptCmd>unmerged.Unmerged()<cr>
 # stage current file
 nnoremap <C-g><C-w> <CMD>Gw<cr> 
 def g:GeditFile(branch: string)
