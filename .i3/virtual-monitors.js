@@ -90,10 +90,6 @@ function getCurrentResolutionAndSize() {
 }
 
 function pxToMm(monitorConfig, px) {
-  console.log('%c11111', 'background:#00ff9f', Date.now() % 10000, 'virtual-monitors:92 pxToMm', monitorConfig, px);
-  console.log('%c11111', 'background:#00ff9f', 'px=', px);
-  console.log('%c11111', 'background:#00ff9f', 'monitorConfig.width_px=', monitorConfig.width_px);
-  console.log('%c11111', 'background:#00ff9f', 'monitorConfig.width_mm=', monitorConfig.width_mm);
   return Math.floor((px / monitorConfig.width_px) * monitorConfig.width_mm)
 }
 
@@ -104,7 +100,7 @@ function getLeftConfig(monitorConfig) {
   // VMON_LEFT: { top: 0, left: 0, width: padding_left, height: full_height }
   const newWidth_px = targetVals.paddingLeft;
   const newHeight_px = monitorConfig.height_px;
-  const res = {
+  return {
     width_px: newWidth_px,
     width_mm: pxToMm(monitorConfig, newWidth_px),
     height_px: newHeight_px,
@@ -112,21 +108,18 @@ function getLeftConfig(monitorConfig) {
     offsetX: monitorConfig.offsetX,
     offsetY: monitorConfig.offsetY,
   }
-  console.log('%c11111', 'background:#00ff9f', 'res=', res);
-  return res;
 }
 
 function getTopConfig(monitorConfig) {
   // VMON_TOP: { top: 0, left: padding_left, width: full_width - padding_left - padding_right, height: padding_top }
   const newWidth_px = monitorConfig.width_px - targetVals.paddingLeft - targetVals.paddingRight;
   const newHeight_px = targetVals.paddingTop;
-  const { width_px } = getLeftConfig(monitorConfig);
   return {
     width_px: newWidth_px,
     width_mm: pxToMm(monitorConfig, newWidth_px),
     height_px: newHeight_px,
     height_mm: pxToMm(monitorConfig, newHeight_px),
-    offsetX: monitorConfig.offsetX + width_px,
+    offsetX: monitorConfig.offsetX + targetVals.paddingLeft,
     offsetY: monitorConfig.offsetY,
   }
 }
@@ -135,15 +128,13 @@ function getPrimaryConfig(monitorConfig) {
   // VMON_PRIMARY: { top: padding_top, left: padding_left, width: full_width - padding_left - padding_right, height: full_height - padding_top - padding_bottom }
   const newWidth_px = monitorConfig.width_px - targetVals.paddingLeft - targetVals.paddingRight;
   const newHeight_px = monitorConfig.height_px - targetVals.paddingTop - targetVals.paddingBottom;
-  const { width_px } = getLeftConfig(monitorConfig);
-  const { height_px } = getTopConfig(monitorConfig);
   return {
     width_px: newWidth_px,
     width_mm: pxToMm(monitorConfig, newWidth_px),
     height_px: newHeight_px,
     height_mm: pxToMm(monitorConfig, newHeight_px),
-    offsetX: monitorConfig.offsetX + width_px,
-    offsetY: monitorConfig.offsetY + height_px,
+    offsetX: monitorConfig.offsetX + targetVals.paddingLeft,
+    offsetY: monitorConfig.offsetY + targetVals.paddingTop,
   }
 }
 
@@ -151,16 +142,13 @@ function getBottomConfig(monitorConfig) {
   // VMON_BOTTOM: { top: full_height - padding_bottom, left: padding_left, width: full_width - padding_left - padding_right, height: padding_bottom }
   const newWidth_px = monitorConfig.width_px - targetVals.paddingLeft - targetVals.paddingRight;
   const newHeight_px = targetVals.paddingBottom;
-  const le = getLeftConfig(monitorConfig)
-  const pr = getPrimaryConfig(monitorConfig)
-  const to = getTopConfig(monitorConfig)
   return {
     width_px: newWidth_px,
     width_mm: pxToMm(monitorConfig, newWidth_px),
     height_px: newHeight_px,
     height_mm: pxToMm(monitorConfig, newHeight_px),
-    offsetX: monitorConfig.offsetX + le.width_px,
-    offsetY: monitorConfig.offsetY + to.height_px + pr.height_px,
+    offsetX: monitorConfig.offsetX + targetVals.paddingLeft,
+    offsetY: monitorConfig.offsetY + monitorConfig.height_px - targetVals.paddingBottom,
   }
 }
 
@@ -168,15 +156,12 @@ function getRightConfig(monitorConfig) {
   // VMON_RIGHT: { top: 0, left: full_width - padding_right, width:  padding_raigh, height: full_height }
   const newWidth_px = targetVals.paddingRight;
   const newHeight_px = monitorConfig.height_px;
-
-  const le = getLeftConfig(monitorConfig);
-  const pr = getPrimaryConfig(monitorConfig);
   return {
     width_px: newWidth_px,
     width_mm: pxToMm(monitorConfig, newWidth_px),
     height_px: newHeight_px,
     height_mm: pxToMm(monitorConfig, newHeight_px),
-    offsetX: monitorConfig.offsetX + le.width_px + pr.width_px,
+    offsetX: monitorConfig.offsetX + monitorConfig.width_px - targetVals.paddingRight,
     offsetY: monitorConfig.offsetY,
   }
 }
