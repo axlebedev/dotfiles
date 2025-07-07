@@ -54,6 +54,8 @@ const VMON_BOTTOM = 'VMON_BOTTOM'
 const VMON_RIGHT = 'VMON_RIGHT'
 const VMON_LEFT = 'VMON_LEFT'
 
+let monitorConfig = null
+
 function runCommand(command) {
   try {
     return execSync(command).toString().trim()
@@ -75,7 +77,7 @@ const offsetStr = (offset) => offset < 0 ? offset : `+${offset}`
 // 2560x1440+1920+0
 // 1: 1280x1440+1920+0
 // 2: 1280x1440+3200+0
-function getCurrentResolutionAndSize() {
+function initCurrentResolutionAndSize() {
   // 2560x1440+1920+0 {width}x{height}+{offset_x}+{offset_y}
   const resolutionString = runCommand(`xrandr --current | grep -w "${OUTPUT}"`)
   const match = resolutionString.match(/^.* (\d+)x(\d+)([+-]\d+)([+-]\d+).* (\d+)mm.* (\d+)mm$/);
@@ -86,7 +88,7 @@ function getCurrentResolutionAndSize() {
   const offsetY = parseInt(match[4], 10);
   const width_mm = parseInt(match[5], 10);
   const height_mm = parseInt(match[6], 10);
-  return { width_px, height_px, offsetX, offsetY, width_mm, height_mm }
+  monitorConfig = { width_px, height_px, offsetX, offsetY, width_mm, height_mm }
 }
 
 function pxToMm(monitorConfig, px) {
@@ -96,7 +98,7 @@ function pxToMm(monitorConfig, px) {
 const getConfigStr = ({ width_px, height_px, offsetX, offsetY, width_mm, height_mm }) =>
   `${width_px}/${width_mm}x${height_px}/${height_mm}${offsetStr(offsetX)}${offsetStr(offsetY)}`
 
-function getLeftConfig(monitorConfig) {
+function getLeftConfig() {
   // VMON_LEFT: { top: 0, left: 0, width: padding_left, height: full_height }
   const newWidth_px = targetVals.paddingLeft;
   const newHeight_px = monitorConfig.height_px;
@@ -110,7 +112,7 @@ function getLeftConfig(monitorConfig) {
   }
 }
 
-function getTopConfig(monitorConfig) {
+function getTopConfig() {
   // VMON_TOP: { top: 0, left: padding_left, width: full_width - padding_left - padding_right, height: padding_top }
   const newWidth_px = monitorConfig.width_px - targetVals.paddingLeft - targetVals.paddingRight;
   const newHeight_px = targetVals.paddingTop;
@@ -124,7 +126,7 @@ function getTopConfig(monitorConfig) {
   }
 }
 
-function getPrimaryConfig(monitorConfig) {
+function getPrimaryConfig() {
   // VMON_PRIMARY: { top: padding_top, left: padding_left, width: full_width - padding_left - padding_right, height: full_height - padding_top - padding_bottom }
   const newWidth_px = monitorConfig.width_px - targetVals.paddingLeft - targetVals.paddingRight;
   const newHeight_px = monitorConfig.height_px - targetVals.paddingTop - targetVals.paddingBottom;
@@ -138,7 +140,7 @@ function getPrimaryConfig(monitorConfig) {
   }
 }
 
-function getBottomConfig(monitorConfig) {
+function getBottomConfig() {
   // VMON_BOTTOM: { top: full_height - padding_bottom, left: padding_left, width: full_width - padding_left - padding_right, height: padding_bottom }
   const newWidth_px = monitorConfig.width_px - targetVals.paddingLeft - targetVals.paddingRight;
   const newHeight_px = targetVals.paddingBottom;
@@ -152,7 +154,7 @@ function getBottomConfig(monitorConfig) {
   }
 }
 
-function getRightConfig(monitorConfig) {
+function getRightConfig() {
   // VMON_RIGHT: { top: 0, left: full_width - padding_right, width:  padding_raigh, height: full_height }
   const newWidth_px = targetVals.paddingRight;
   const newHeight_px = monitorConfig.height_px;
@@ -172,13 +174,13 @@ function splitMonitor() {
     return
   }
 
-  const monitorConfig = getCurrentResolutionAndSize()
+  initCurrentResolutionAndSize()
 
-  runCommand(`xrandr --setmonitor ${VMON_LEFT} ${getConfigStr(getLeftConfig(monitorConfig))} ${OUTPUT}`)
-  runCommand(`xrandr --setmonitor ${VMON_TOP} ${getConfigStr(getTopConfig(monitorConfig))} ${OUTPUT}`)
-  runCommand(`xrandr --setmonitor ${VMON_RIGHT} ${getConfigStr(getRightConfig(monitorConfig))} ${OUTPUT}`)
-  runCommand(`xrandr --setmonitor ${VMON_BOTTOM} ${getConfigStr(getBottomConfig(monitorConfig))} ${OUTPUT}`)
-  runCommand(`xrandr --setmonitor ${VMON_PRIMARY} ${getConfigStr(getPrimaryConfig(monitorConfig))} ${OUTPUT}`)
+  runCommand(`xrandr --setmonitor ${VMON_LEFT} ${getConfigStr(getLeftConfig())} ${OUTPUT}`)
+  runCommand(`xrandr --setmonitor ${VMON_TOP} ${getConfigStr(getTopConfig())} ${OUTPUT}`)
+  runCommand(`xrandr --setmonitor ${VMON_RIGHT} ${getConfigStr(getRightConfig())} ${OUTPUT}`)
+  runCommand(`xrandr --setmonitor ${VMON_BOTTOM} ${getConfigStr(getBottomConfig())} ${OUTPUT}`)
+  runCommand(`xrandr --setmonitor ${VMON_PRIMARY} ${getConfigStr(getPrimaryConfig())} ${OUTPUT}`)
 
   // runCommand(`${I3_MSG_CMD} focus output ${VMON_TOP}, workspace 11`)
   // runCommand(`${I3_MSG_CMD} focus output ${VMON_RIGHT}, workspace 10`)
