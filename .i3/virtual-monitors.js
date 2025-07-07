@@ -91,7 +91,7 @@ function initCurrentResolutionAndSize() {
   display = { width_px, height_px, offsetX, offsetY, width_mm, height_mm }
 }
 
-function pxToMm(display, px) {
+function pxToMm(px) {
   return Math.floor((px / display.width_px) * display.width_mm)
 }
 
@@ -104,9 +104,9 @@ function getLeftConfig() {
   const newHeight_px = display.height_px;
   return {
     width_px: newWidth_px,
-    width_mm: pxToMm(display, newWidth_px),
+    width_mm: pxToMm(newWidth_px),
     height_px: newHeight_px,
-    height_mm: pxToMm(display, newHeight_px),
+    height_mm: pxToMm(newHeight_px),
     offsetX: display.offsetX,
     offsetY: display.offsetY,
   }
@@ -118,9 +118,9 @@ function getTopConfig() {
   const newHeight_px = targetVals.paddingTop;
   return {
     width_px: newWidth_px,
-    width_mm: pxToMm(display, newWidth_px),
+    width_mm: pxToMm(newWidth_px),
     height_px: newHeight_px,
-    height_mm: pxToMm(display, newHeight_px),
+    height_mm: pxToMm(newHeight_px),
     offsetX: display.offsetX + targetVals.paddingLeft,
     offsetY: display.offsetY,
   }
@@ -132,9 +132,9 @@ function getPrimaryConfig() {
   const newHeight_px = display.height_px - targetVals.paddingTop - targetVals.paddingBottom;
   return {
     width_px: newWidth_px,
-    width_mm: pxToMm(display, newWidth_px),
+    width_mm: pxToMm(newWidth_px),
     height_px: newHeight_px,
-    height_mm: pxToMm(display, newHeight_px),
+    height_mm: pxToMm(newHeight_px),
     offsetX: display.offsetX + targetVals.paddingLeft,
     offsetY: display.offsetY + targetVals.paddingTop,
   }
@@ -146,9 +146,9 @@ function getBottomConfig() {
   const newHeight_px = targetVals.paddingBottom;
   return {
     width_px: newWidth_px,
-    width_mm: pxToMm(display, newWidth_px),
+    width_mm: pxToMm(newWidth_px),
     height_px: newHeight_px,
-    height_mm: pxToMm(display, newHeight_px),
+    height_mm: pxToMm(newHeight_px),
     offsetX: display.offsetX + targetVals.paddingLeft,
     offsetY: display.offsetY + display.height_px - targetVals.paddingBottom,
   }
@@ -160,9 +160,9 @@ function getRightConfig() {
   const newHeight_px = display.height_px;
   return {
     width_px: newWidth_px,
-    width_mm: pxToMm(display, newWidth_px),
+    width_mm: pxToMm(newWidth_px),
     height_px: newHeight_px,
-    height_mm: pxToMm(display, newHeight_px),
+    height_mm: pxToMm(newHeight_px),
     offsetX: display.offsetX + display.width_px - targetVals.paddingRight,
     offsetY: display.offsetY,
   }
