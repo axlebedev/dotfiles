@@ -54,7 +54,7 @@ const VMON_BOTTOM = 'VMON_BOTTOM'
 const VMON_RIGHT = 'VMON_RIGHT'
 const VMON_LEFT = 'VMON_LEFT'
 
-let monitorConfig = null
+let display = null
 
 function runCommand(command) {
   try {
@@ -88,11 +88,11 @@ function initCurrentResolutionAndSize() {
   const offsetY = parseInt(match[4], 10);
   const width_mm = parseInt(match[5], 10);
   const height_mm = parseInt(match[6], 10);
-  monitorConfig = { width_px, height_px, offsetX, offsetY, width_mm, height_mm }
+  display = { width_px, height_px, offsetX, offsetY, width_mm, height_mm }
 }
 
-function pxToMm(monitorConfig, px) {
-  return Math.floor((px / monitorConfig.width_px) * monitorConfig.width_mm)
+function pxToMm(display, px) {
+  return Math.floor((px / display.width_px) * display.width_mm)
 }
 
 const getConfigStr = ({ width_px, height_px, offsetX, offsetY, width_mm, height_mm }) =>
@@ -101,70 +101,70 @@ const getConfigStr = ({ width_px, height_px, offsetX, offsetY, width_mm, height_
 function getLeftConfig() {
   // VMON_LEFT: { top: 0, left: 0, width: padding_left, height: full_height }
   const newWidth_px = targetVals.paddingLeft;
-  const newHeight_px = monitorConfig.height_px;
+  const newHeight_px = display.height_px;
   return {
     width_px: newWidth_px,
-    width_mm: pxToMm(monitorConfig, newWidth_px),
+    width_mm: pxToMm(display, newWidth_px),
     height_px: newHeight_px,
-    height_mm: pxToMm(monitorConfig, newHeight_px),
-    offsetX: monitorConfig.offsetX,
-    offsetY: monitorConfig.offsetY,
+    height_mm: pxToMm(display, newHeight_px),
+    offsetX: display.offsetX,
+    offsetY: display.offsetY,
   }
 }
 
 function getTopConfig() {
   // VMON_TOP: { top: 0, left: padding_left, width: full_width - padding_left - padding_right, height: padding_top }
-  const newWidth_px = monitorConfig.width_px - targetVals.paddingLeft - targetVals.paddingRight;
+  const newWidth_px = display.width_px - targetVals.paddingLeft - targetVals.paddingRight;
   const newHeight_px = targetVals.paddingTop;
   return {
     width_px: newWidth_px,
-    width_mm: pxToMm(monitorConfig, newWidth_px),
+    width_mm: pxToMm(display, newWidth_px),
     height_px: newHeight_px,
-    height_mm: pxToMm(monitorConfig, newHeight_px),
-    offsetX: monitorConfig.offsetX + targetVals.paddingLeft,
-    offsetY: monitorConfig.offsetY,
+    height_mm: pxToMm(display, newHeight_px),
+    offsetX: display.offsetX + targetVals.paddingLeft,
+    offsetY: display.offsetY,
   }
 }
 
 function getPrimaryConfig() {
   // VMON_PRIMARY: { top: padding_top, left: padding_left, width: full_width - padding_left - padding_right, height: full_height - padding_top - padding_bottom }
-  const newWidth_px = monitorConfig.width_px - targetVals.paddingLeft - targetVals.paddingRight;
-  const newHeight_px = monitorConfig.height_px - targetVals.paddingTop - targetVals.paddingBottom;
+  const newWidth_px = display.width_px - targetVals.paddingLeft - targetVals.paddingRight;
+  const newHeight_px = display.height_px - targetVals.paddingTop - targetVals.paddingBottom;
   return {
     width_px: newWidth_px,
-    width_mm: pxToMm(monitorConfig, newWidth_px),
+    width_mm: pxToMm(display, newWidth_px),
     height_px: newHeight_px,
-    height_mm: pxToMm(monitorConfig, newHeight_px),
-    offsetX: monitorConfig.offsetX + targetVals.paddingLeft,
-    offsetY: monitorConfig.offsetY + targetVals.paddingTop,
+    height_mm: pxToMm(display, newHeight_px),
+    offsetX: display.offsetX + targetVals.paddingLeft,
+    offsetY: display.offsetY + targetVals.paddingTop,
   }
 }
 
 function getBottomConfig() {
   // VMON_BOTTOM: { top: full_height - padding_bottom, left: padding_left, width: full_width - padding_left - padding_right, height: padding_bottom }
-  const newWidth_px = monitorConfig.width_px - targetVals.paddingLeft - targetVals.paddingRight;
+  const newWidth_px = display.width_px - targetVals.paddingLeft - targetVals.paddingRight;
   const newHeight_px = targetVals.paddingBottom;
   return {
     width_px: newWidth_px,
-    width_mm: pxToMm(monitorConfig, newWidth_px),
+    width_mm: pxToMm(display, newWidth_px),
     height_px: newHeight_px,
-    height_mm: pxToMm(monitorConfig, newHeight_px),
-    offsetX: monitorConfig.offsetX + targetVals.paddingLeft,
-    offsetY: monitorConfig.offsetY + monitorConfig.height_px - targetVals.paddingBottom,
+    height_mm: pxToMm(display, newHeight_px),
+    offsetX: display.offsetX + targetVals.paddingLeft,
+    offsetY: display.offsetY + display.height_px - targetVals.paddingBottom,
   }
 }
 
 function getRightConfig() {
   // VMON_RIGHT: { top: 0, left: full_width - padding_right, width:  padding_raigh, height: full_height }
   const newWidth_px = targetVals.paddingRight;
-  const newHeight_px = monitorConfig.height_px;
+  const newHeight_px = display.height_px;
   return {
     width_px: newWidth_px,
-    width_mm: pxToMm(monitorConfig, newWidth_px),
+    width_mm: pxToMm(display, newWidth_px),
     height_px: newHeight_px,
-    height_mm: pxToMm(monitorConfig, newHeight_px),
-    offsetX: monitorConfig.offsetX + monitorConfig.width_px - targetVals.paddingRight,
-    offsetY: monitorConfig.offsetY,
+    height_mm: pxToMm(display, newHeight_px),
+    offsetX: display.offsetX + display.width_px - targetVals.paddingRight,
+    offsetY: display.offsetY,
   }
 }
 
