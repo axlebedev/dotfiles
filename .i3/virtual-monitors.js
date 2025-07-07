@@ -54,6 +54,8 @@ const VMON_BOTTOM = 'VMON_BOTTOM'
 const VMON_RIGHT = 'VMON_RIGHT'
 const VMON_LEFT = 'VMON_LEFT'
 
+let display = null
+
 function runCommand(command) {
   try {
     return execSync(command).toString().trim()
@@ -75,7 +77,7 @@ const offsetStr = (offset) => offset < 0 ? offset : `+${offset}`
 // 2560x1440+1920+0
 // 1: 1280x1440+1920+0
 // 2: 1280x1440+3200+0
-function getCurrentResolutionAndSize() {
+function initCurrentResolutionAndSize() {
   // 2560x1440+1920+0 {width}x{height}+{offset_x}+{offset_y}
   const resolutionString = runCommand(`xrandr --current | grep -w "${OUTPUT}"`)
   const match = resolutionString.match(/^.* (\d+)x(\d+)([+-]\d+)([+-]\d+).* (\d+)mm.* (\d+)mm$/);
@@ -86,98 +88,83 @@ function getCurrentResolutionAndSize() {
   const offsetY = parseInt(match[4], 10);
   const width_mm = parseInt(match[5], 10);
   const height_mm = parseInt(match[6], 10);
-  return { width_px, height_px, offsetX, offsetY, width_mm, height_mm }
+  display = { width_px, height_px, offsetX, offsetY, width_mm, height_mm }
 }
 
-function pxToMm(monitorConfig, px) {
-  console.log('%c11111', 'background:#00ff9f', Date.now() % 10000, 'virtual-monitors:92 pxToMm', monitorConfig, px);
-  console.log('%c11111', 'background:#00ff9f', 'px=', px);
-  console.log('%c11111', 'background:#00ff9f', 'monitorConfig.width_px=', monitorConfig.width_px);
-  console.log('%c11111', 'background:#00ff9f', 'monitorConfig.width_mm=', monitorConfig.width_mm);
-  return Math.floor((px / monitorConfig.width_px) * monitorConfig.width_mm)
+function pxToMm(px) {
+  return Math.floor((px / display.width_px) * display.width_mm)
 }
 
 const getConfigStr = ({ width_px, height_px, offsetX, offsetY, width_mm, height_mm }) =>
   `${width_px}/${width_mm}x${height_px}/${height_mm}${offsetStr(offsetX)}${offsetStr(offsetY)}`
 
-function getLeftConfig(monitorConfig) {
+function getLeftConfig() {
   // VMON_LEFT: { top: 0, left: 0, width: padding_left, height: full_height }
   const newWidth_px = targetVals.paddingLeft;
-  const newHeight_px = monitorConfig.height_px;
-  const res = {
+  const newHeight_px = display.height_px;
+  return {
     width_px: newWidth_px,
-    width_mm: pxToMm(monitorConfig, newWidth_px),
+    width_mm: pxToMm(newWidth_px),
     height_px: newHeight_px,
-    height_mm: pxToMm(monitorConfig, newHeight_px),
-    offsetX: monitorConfig.offsetX,
-    offsetY: monitorConfig.offsetY,
+    height_mm: pxToMm(newHeight_px),
+    offsetX: display.offsetX,
+    offsetY: display.offsetY,
   }
-  console.log('%c11111', 'background:#00ff9f', 'res=', res);
-  return res;
 }
 
-function getTopConfig(monitorConfig) {
+function getTopConfig() {
   // VMON_TOP: { top: 0, left: padding_left, width: full_width - padding_left - padding_right, height: padding_top }
-  const newWidth_px = monitorConfig.width_px - targetVals.paddingLeft - targetVals.paddingRight;
+  const newWidth_px = display.width_px - targetVals.paddingLeft - targetVals.paddingRight;
   const newHeight_px = targetVals.paddingTop;
-  const { width_px } = getLeftConfig(monitorConfig);
   return {
     width_px: newWidth_px,
-    width_mm: pxToMm(monitorConfig, newWidth_px),
+    width_mm: pxToMm(newWidth_px),
     height_px: newHeight_px,
-    height_mm: pxToMm(monitorConfig, newHeight_px),
-    offsetX: monitorConfig.offsetX + width_px,
-    offsetY: monitorConfig.offsetY,
+    height_mm: pxToMm(newHeight_px),
+    offsetX: display.offsetX + targetVals.paddingLeft,
+    offsetY: display.offsetY,
   }
 }
 
-function getPrimaryConfig(monitorConfig) {
+function getPrimaryConfig() {
   // VMON_PRIMARY: { top: padding_top, left: padding_left, width: full_width - padding_left - padding_right, height: full_height - padding_top - padding_bottom }
-  const newWidth_px = monitorConfig.width_px - targetVals.paddingLeft - targetVals.paddingRight;
-  const newHeight_px = monitorConfig.height_px - targetVals.paddingTop - targetVals.paddingBottom;
-  const { width_px } = getLeftConfig(monitorConfig);
-  const { height_px } = getTopConfig(monitorConfig);
+  const newWidth_px = display.width_px - targetVals.paddingLeft - targetVals.paddingRight;
+  const newHeight_px = display.height_px - targetVals.paddingTop - targetVals.paddingBottom;
   return {
     width_px: newWidth_px,
-    width_mm: pxToMm(monitorConfig, newWidth_px),
+    width_mm: pxToMm(newWidth_px),
     height_px: newHeight_px,
-    height_mm: pxToMm(monitorConfig, newHeight_px),
-    offsetX: monitorConfig.offsetX + width_px,
-    offsetY: monitorConfig.offsetY + height_px,
+    height_mm: pxToMm(newHeight_px),
+    offsetX: display.offsetX + targetVals.paddingLeft,
+    offsetY: display.offsetY + targetVals.paddingTop,
   }
 }
 
-function getBottomConfig(monitorConfig) {
+function getBottomConfig() {
   // VMON_BOTTOM: { top: full_height - padding_bottom, left: padding_left, width: full_width - padding_left - padding_right, height: padding_bottom }
-  const newWidth_px = monitorConfig.width_px - targetVals.paddingLeft - targetVals.paddingRight;
+  const newWidth_px = display.width_px - targetVals.paddingLeft - targetVals.paddingRight;
   const newHeight_px = targetVals.paddingBottom;
-  const le = getLeftConfig(monitorConfig)
-  const pr = getPrimaryConfig(monitorConfig)
-  const to = getTopConfig(monitorConfig)
   return {
     width_px: newWidth_px,
-    width_mm: pxToMm(monitorConfig, newWidth_px),
+    width_mm: pxToMm(newWidth_px),
     height_px: newHeight_px,
-    height_mm: pxToMm(monitorConfig, newHeight_px),
-    offsetX: monitorConfig.offsetX + le.width_px,
-    offsetY: monitorConfig.offsetY + to.height_px + pr.height_px,
+    height_mm: pxToMm(newHeight_px),
+    offsetX: display.offsetX + targetVals.paddingLeft,
+    offsetY: display.offsetY + display.height_px - targetVals.paddingBottom,
   }
 }
 
-function getRightConfig(monitorConfig) {
+function getRightConfig() {
   // VMON_RIGHT: { top: 0, left: full_width - padding_right, width:  padding_raigh, height: full_height }
   const newWidth_px = targetVals.paddingRight;
-  const newHeight_px = monitorConfig.height_px;
-
-  const le = getLeftConfig(monitorConfig);
-  const pr = getPrimaryConfig(monitorConfig);
+  const newHeight_px = display.height_px;
   return {
     width_px: newWidth_px,
-    width_mm: pxToMm(monitorConfig, newWidth_px),
+    width_mm: pxToMm(newWidth_px),
     height_px: newHeight_px,
-    height_mm: pxToMm(monitorConfig, newHeight_px),
-    offsetX: monitorConfig.offsetX + le.width_px + pr.width_px,
-    offsetY: monitorConfig.offsetY,
+    height_mm: pxToMm(newHeight_px),
+    offsetX: display.offsetX + display.width_px - targetVals.paddingRight,
+    offsetY: display.offsetY,
   }
 }
 
@@ -187,13 +174,13 @@ function splitMonitor() {
     return
   }
 
-  const monitorConfig = getCurrentResolutionAndSize()
+  initCurrentResolutionAndSize()
 
-  runCommand(`xrandr --setmonitor ${VMON_LEFT} ${getConfigStr(getLeftConfig(monitorConfig))} ${OUTPUT}`)
-  runCommand(`xrandr --setmonitor ${VMON_TOP} ${getConfigStr(getTopConfig(monitorConfig))} ${OUTPUT}`)
-  runCommand(`xrandr --setmonitor ${VMON_RIGHT} ${getConfigStr(getRightConfig(monitorConfig))} ${OUTPUT}`)
-  runCommand(`xrandr --setmonitor ${VMON_BOTTOM} ${getConfigStr(getBottomConfig(monitorConfig))} ${OUTPUT}`)
-  runCommand(`xrandr --setmonitor ${VMON_PRIMARY} ${getConfigStr(getPrimaryConfig(monitorConfig))} ${OUTPUT}`)
+  runCommand(`xrandr --setmonitor ${VMON_LEFT} ${getConfigStr(getLeftConfig())} ${OUTPUT}`)
+  runCommand(`xrandr --setmonitor ${VMON_TOP} ${getConfigStr(getTopConfig())} ${OUTPUT}`)
+  runCommand(`xrandr --setmonitor ${VMON_RIGHT} ${getConfigStr(getRightConfig())} ${OUTPUT}`)
+  runCommand(`xrandr --setmonitor ${VMON_BOTTOM} ${getConfigStr(getBottomConfig())} ${OUTPUT}`)
+  runCommand(`xrandr --setmonitor ${VMON_PRIMARY} ${getConfigStr(getPrimaryConfig())} ${OUTPUT}`)
 
   // runCommand(`${I3_MSG_CMD} focus output ${VMON_TOP}, workspace 11`)
   // runCommand(`${I3_MSG_CMD} focus output ${VMON_RIGHT}, workspace 10`)
