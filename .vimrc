@@ -536,7 +536,7 @@ g:coc_global_extensions = [
     'coc-diagnostic',
     'coc-json',
     'coc-tsserver',
-    'coc-tabnine',
+    # 'coc-tabnine',
     'coc-clangd',
     'coc-yaml',
     # 'coc-ccls',
@@ -549,6 +549,7 @@ g:coc_global_extensions = [
     'coc-eslint',
     'coc-react-refactor',
     'coc-groovy',
+    # 'coc-codellama'
 ]
 g:coc_global_config = '/home/user/dotfiles/.vim/coc-settings.json'
 g:coc_enable_locationlist = 0
