@@ -3,14 +3,7 @@ vim9script
 import autoload '../autoload/updatebuffer.vim'
 import autoload '../autoload/longcommandwithpopup.vim'
 import autoload '../autoload/eslinttoquickfix.vim'
-
-def Unmerged(): void
-    call fzf#vim#files('', {
-                \    'source': 'git diff --name-only --diff-filter=U',
-                \    'sink': 'e',
-                \    'options': '--prompt="Unmerged> "'
-                \ })
-enddef
+import autoload '../autoload/unmerged.vim'
 
 var EslintChangedFix = longcommandwithpopup.CreateLongRunningFunctionSystem(
     'yarn lint:fix',
@@ -67,6 +60,8 @@ var LintChangedFiles = longcommandwithpopup.CreateLongRunningFunctionVim(
     },
     'LintChangedFiles'
 )
+
+var Unmerged = () => unmerged.Unmerged()
 
 var refactorCommands = {
     'COC: format-selected': {
