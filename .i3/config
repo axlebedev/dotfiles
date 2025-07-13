@@ -14,11 +14,11 @@ default_border pixel 4
 default_floating_border pixel 2
 
 # Experimental gaps stuff
-gaps inner 10
+gaps inner 0
 gaps outer 0
 smart_borders no_gaps
 hide_edge_borders smart_no_gaps
-# gaps outer 10
+# smart_gaps on|off|inverse_outer
 
 tiling_drag modifier
 
@@ -394,14 +394,9 @@ bar {
     output VMON_LEFT
     tray_output primary
     height 27
-    mode hide
-
-    colors {
-        focused_workspace #0d61ac #0d61ac #eeeeee
-        active_workspace  #3d91dc #324420 #ffffff
-        inactive_workspace #000000 #000000 #999999
-        urgent_workspace   #ffffff #900000
-    }
+    mode invisible
+    # mode dock|hide|invisible
+    # hidden_state hide|show
 }
 
 #ass                    border  backgr. text    indicator
