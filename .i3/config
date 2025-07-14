@@ -377,7 +377,8 @@ bar {
     output DP-2
     output HDMI-0
     output VMON_PRIMARY
-    tray_output primary
+    tray_output HDMI-0
+    tray_output VMON_PRIMARY
     height 27
 
     colors {
@@ -392,7 +393,6 @@ bar {
     output VMON_TOP
     output VMON_BOTTOM
     output VMON_LEFT
-    tray_output primary
     height 27
     mode invisible
     # mode dock|hide|invisible
