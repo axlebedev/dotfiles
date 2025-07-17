@@ -75,7 +75,7 @@ function wifi()
   return [[
     {
       "name": "Network",
-      "full_text": " ${downspeed ]] .. internetInterface .. [[ }/s",
+      "full_text": "  ${downspeed ]] .. internetInterface .. [[}/s",
       "color": "]] .. textColorFg .. [[",
       "min_width": "]] .. stringWidth(8) .. [[",
       "align": "center"
@@ -175,7 +175,7 @@ function hdd()
   return [[
     {
       "name": "HDD",
-      "full_text": " ${fs_free /home} Free",
+      "full_text": "  ${fs_free /home} Free",
       "color": "]] .. textColorFg .. [["
     },
   ]]

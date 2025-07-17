@@ -14,11 +14,12 @@ default_border pixel 4
 default_floating_border pixel 2
 
 # Experimental gaps stuff
+smart_gaps on
+# smart_gaps on|off|inverse_outer
 gaps inner 0
 gaps outer 0
 smart_borders no_gaps
 hide_edge_borders smart_no_gaps
-# smart_gaps on|off|inverse_outer
 
 tiling_drag modifier
 
@@ -382,10 +383,11 @@ bindsym $mod+Shift+t mode $mode_tools
 # finds out, if available)
 bar {
     status_command $HOME/.i3/i3status.sh 
-    output DP-2
-    output HDMI-0
+    output DP-1
+    output HDMI-1
+    output eDP-1
     output VMON_PRIMARY
-    tray_output HDMI-0
+    tray_output DP-1
     tray_output VMON_PRIMARY
     height 27
 
