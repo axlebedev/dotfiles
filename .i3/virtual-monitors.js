@@ -39,10 +39,10 @@ const { argv } = require('process')
 
 const OUTPUT = 'HDMI-0'
 const targetVals = {
-  paddingLeft:  320,
-  paddingRight: 320,
-  paddingTop:  180,
-  paddingBottom: 180,
+  paddingLeft:  370,
+  paddingRight: 270,
+  paddingTop:  200,
+  paddingBottom: 160,
 }
 // const targetWidth_px = 2050
 // const targetHeight_px = 1300
@@ -176,14 +176,16 @@ function splitMonitor() {
 
   initCurrentResolutionAndSize()
 
+  runCommand(`xrandr --setmonitor ${VMON_PRIMARY} ${getConfigStr(getPrimaryConfig())} ${OUTPUT}`)
   runCommand(`xrandr --setmonitor ${VMON_LEFT} ${getConfigStr(getLeftConfig())} ${OUTPUT}`)
   runCommand(`xrandr --setmonitor ${VMON_TOP} ${getConfigStr(getTopConfig())} ${OUTPUT}`)
   runCommand(`xrandr --setmonitor ${VMON_RIGHT} ${getConfigStr(getRightConfig())} ${OUTPUT}`)
   runCommand(`xrandr --setmonitor ${VMON_BOTTOM} ${getConfigStr(getBottomConfig())} ${OUTPUT}`)
-  runCommand(`xrandr --setmonitor ${VMON_PRIMARY} ${getConfigStr(getPrimaryConfig())} ${OUTPUT}`)
-
-  // runCommand(`${I3_MSG_CMD} focus output ${VMON_TOP}, workspace 11`)
-  // runCommand(`${I3_MSG_CMD} focus output ${VMON_RIGHT}, workspace 10`)
+  runCommand(`${I3_MSG_CMD} "focus output ${VMON_LEFT}; workspace 101"`)
+  runCommand(`${I3_MSG_CMD} "focus output ${VMON_TOP}; workspace 102"`)
+  runCommand(`${I3_MSG_CMD} "focus output ${VMON_RIGHT}; workspace 103"`)
+  runCommand(`${I3_MSG_CMD} "focus output ${VMON_BOTTOM}; workspace 104"`)
+  runCommand(`${I3_MSG_CMD} "focus output ${VMON_PRIMARY}"`)
 
   notifySend('Virtual monitors were created')
 }
