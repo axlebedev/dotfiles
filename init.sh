@@ -43,5 +43,6 @@ mkdir ~/.config/fish/
 rm -rf ~/.config/fish/config.fish
 ln -s ~/dotfiles/fish/config.fish ~/.config/fish/config.fish
 
-cp ~/dotfiles/desktop/skypeweb.desktop ~/.local/share/applications/
-
+mkdir ~/.config/kitty
+rm -rf ~/.config/kitty/kitty.conf
+ln -s ~/dotfiles/kitty.conf ~/.config/kitty/kitty.conf
