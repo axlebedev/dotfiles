@@ -82,6 +82,11 @@ kitty \
 alacritty \
 autorandr
 
+# Set alacritty as default terminal:
+sudo update-alternatives --config x-terminal-emulator
+# Verify the change:
+update-alternatives --query x-terminal-emulator | grep "Value:"
+
 # install git-delta manually
 # https://dandavison.github.io/delta/installation.html
 
