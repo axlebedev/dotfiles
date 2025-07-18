@@ -41,8 +41,13 @@ function kittyvim
     kitty -e vim $argv > /dev/null 2>&1 &
     disown
 end
-abbr -a v kittyvim
-abbr -a vv gnome-terminal -- vim
+function alacrittyvim
+    alacritty -e vim $argv > /dev/null 2>&1 &
+    disown
+end
+abbr -a v alacrittyvim
+abbr -a vv kittyvim
+abbr -a vvv gnome-terminal -- vim
 
 abbr -a o xdg-open
 

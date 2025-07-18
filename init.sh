@@ -46,3 +46,7 @@ ln -s ~/dotfiles/fish/config.fish ~/.config/fish/config.fish
 mkdir ~/.config/kitty
 rm -rf ~/.config/kitty/kitty.conf
 ln -s ~/dotfiles/kitty.conf ~/.config/kitty/kitty.conf
+
+mkdir ~/.config/alacritty
+rm -rf ~/.config/alacritty/alacritty.yml
+ln -s ~/dotfiles/alacritty.yml ~/.config/alacritty/alacritty.yml
