@@ -78,6 +78,8 @@ vlc \
 mpv \
 mailnag \
 arandr \
+kitty \
+alacritty \
 autorandr
 
 # install git-delta manually
