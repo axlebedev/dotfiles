@@ -200,6 +200,14 @@ function unsplitMonitor() {
   notifySend('Virtual monitors were deleted')
 }
 
+function toggleMonitor() {
+  if (isMonitorSplit(VMON_PRIMARY)) {
+    unsplitMonitor()
+  } else {
+    splitMonitor()
+  }
+}
+
 // Main execution
 const action = argv[2]
 
@@ -211,6 +219,12 @@ switch (action) {
     unsplitMonitor()
     break
   default:
-    console.log('Usage: monitor-split on|off')
-    process.exit(1)
+    toggleMonitor()
+    break
 }
+
+runCommand('killall dunst')
+setTimeout(
+  () => runCommand(I3_MSG_CMD + ' restart'),
+  300,
+)

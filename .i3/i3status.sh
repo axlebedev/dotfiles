@@ -55,4 +55,9 @@ do
     then
         ~/dotfiles/.i3/setVpn.sh > /dev/null 2>&1
     fi
+
+    if [ "$getname" = "VirtMon" ] 
+    then
+        ~/dotfiles/.i3/virtual-monitors.js > /dev/null 2>&1
+    fi
 done
