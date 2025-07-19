@@ -191,11 +191,11 @@ function splitMonitor() {
 }
 
 function unsplitMonitor() {
-  runCommand(`xrandr --delmonitor ${VMON_PRIMARY}`)
   runCommand(`xrandr --delmonitor ${VMON_TOP}`)
   runCommand(`xrandr --delmonitor ${VMON_RIGHT}`)
   runCommand(`xrandr --delmonitor ${VMON_BOTTOM}`)
   runCommand(`xrandr --delmonitor ${VMON_LEFT}`)
+  runCommand(`xrandr --delmonitor ${VMON_PRIMARY}`)
 
   notifySend('Virtual monitors were deleted')
 }
@@ -222,9 +222,3 @@ switch (action) {
     toggleMonitor()
     break
 }
-
-runCommand('killall dunst')
-setTimeout(
-  () => runCommand(I3_MSG_CMD + ' restart'),
-  300,
-)

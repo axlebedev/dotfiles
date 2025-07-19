@@ -58,6 +58,6 @@ do
 
     if [ "$getname" = "VirtMon" ] 
     then
-        ~/dotfiles/.i3/virtual-monitors.js > /dev/null 2>&1
+        ~/dotfiles/.i3/virtual-monitors.js
     fi
 done
