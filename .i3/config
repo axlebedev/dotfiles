@@ -374,6 +374,8 @@ bindsym $mod+Shift+t mode $mode_tools
 bar {
     status_command $HOME/.i3/i3status.sh 
     height 27
+    output HDMI-0
+    output VMON_PRIMARY
 
     colors {
         focused_workspace #0d61ac #0d61ac #eeeeee
