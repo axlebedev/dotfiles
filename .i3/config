@@ -389,7 +389,6 @@ bar {
     output VMON_TOP
     output VMON_BOTTOM
     output VMON_LEFT
-    height 27
     mode invisible
     # mode dock|hide|invisible
     # hidden_state hide|show
