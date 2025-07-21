@@ -23,15 +23,16 @@ fi
 XRANDR_CMD="xrandr --auto --output $OUTPUT_PRIMARY --primary"
 
 # Add left output if not 0
-if [ "$OUTPUT_LEFT" != "0" ]; then
+if [ -v OUTPUT_LEFT ] && [ "$OUTPUT_LEFT" != "0" ]; then
     XRANDR_CMD="$XRANDR_CMD --auto --output $OUTPUT_LEFT --left-of $OUTPUT_PRIMARY"
 fi
 
 # Add right output if not 0
-if [ "$OUTPUT_RIGHT" != "0" ]; then
+if [ -v OUTPUT_RIGHT ] && [ "$OUTPUT_RIGHT" != "0" ]; then
     XRANDR_CMD="$XRANDR_CMD --auto --output $OUTPUT_RIGHT --right-of $OUTPUT_PRIMARY"
 fi
 
+echo $XRANDR_CMD
 # Execute xrandr command
 eval $XRANDR_CMD
 
@@ -39,13 +40,13 @@ eval $XRANDR_CMD
 I3_MSG_CMD="i3-msg"
 
 # Add workspace commands for left output if not 0
-if [ "$OUTPUT_LEFT" != "0" ]; then
+if [ -v OUTPUT_LEFT ] && [ "$OUTPUT_LEFT" != "0" ]; then
     I3_MSG_CMD="$I3_MSG_CMD focus output $OUTPUT_LEFT, workspace 20,"
     I3_MSG_CMD="$I3_MSG_CMD focus output $OUTPUT_LEFT, workspace 10,"
 fi
 
 # Add workspace commands for right output if not 0
-if [ "$OUTPUT_RIGHT" != "0" ]; then
+if [ -v OUTPUT_RIGHT ] && [ "$OUTPUT_RIGHT" != "0" ]; then
     I3_MSG_CMD="$I3_MSG_CMD focus output $OUTPUT_RIGHT, workspace 21,"
     I3_MSG_CMD="$I3_MSG_CMD focus output $OUTPUT_RIGHT, workspace 11,"
 fi
