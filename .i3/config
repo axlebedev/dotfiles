@@ -34,7 +34,6 @@ exec --no-startup-id flameshot
 # xinput --set-prop <ID> "Coordinate Transformation Matrix" 1, 0, 0, 0, 1, 0, 0, 0, <NUMBER>
 # <ID>: run 'xinput', get id there
 # mouse speed: last number. Bigger is slower
-#   "Coordinate Transformation Matrix" 1, 0, 0, 0, 1, 0, 0, 0, 1.5
 exec --no-startup-id unclutter -idle 3
 exec --no-startup-id indicator-sound-switcher
 
