@@ -32,7 +32,6 @@ if [ -v OUTPUT_RIGHT ] && [ "$OUTPUT_RIGHT" != "0" ]; then
     XRANDR_CMD="$XRANDR_CMD --auto --output $OUTPUT_RIGHT --right-of $OUTPUT_PRIMARY"
 fi
 
-echo $XRANDR_CMD
 # Execute xrandr command
 eval $XRANDR_CMD
 
