@@ -1,0 +1,60 @@
+[colors.bright]
+black = "#5e5c64"
+blue = "#2a7bde"
+cyan = "#33c7de"
+green = "#33da7a"
+magenta = "#c061cb"
+red = "#f66151"
+white = "#ffffff"
+yellow = "#e9ad0c"
+
+[colors.normal]
+black = "#171421"
+blue = "#12488b"
+cyan = "#2aa1b3"
+green = "#26a269"
+magenta = "#a347ba"
+red = "#c01c28"
+white = "#d0cfcc"
+yellow = "#a2734c"
+
+[colors.primary]
+background = "#ffffff"
+foreground = "#171421"
+
+[cursor]
+blink_interval = 0
+style = "Block"
+unfocused_hollow = true
+
+[font]
+size = 12.0
+
+[font.bold]
+family = "ComicShannsMono Nerd Font Mono"
+style = "Bold"
+
+[font.italic]
+family = "ComicShannsMono Nerd Font Mono"
+style = "Italic"
+
+[font.normal]
+family = "ComicShannsMono Nerd Font Mono"
+style = "Regular"
+
+[[keyboard.bindings]]
+action = "Copy"
+key = "C"
+mods = "Control|Shift"
+
+[[keyboard.bindings]]
+action = "Paste"
+key = "V"
+mods = "Control|Shift"
+
+[scrolling]
+history = 100000
+multiplier = 5
+
+[window]
+dynamic_title = true

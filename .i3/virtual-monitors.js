@@ -191,13 +191,21 @@ function splitMonitor() {
 }
 
 function unsplitMonitor() {
-  runCommand(`xrandr --delmonitor ${VMON_PRIMARY}`)
   runCommand(`xrandr --delmonitor ${VMON_TOP}`)
   runCommand(`xrandr --delmonitor ${VMON_RIGHT}`)
   runCommand(`xrandr --delmonitor ${VMON_BOTTOM}`)
   runCommand(`xrandr --delmonitor ${VMON_LEFT}`)
+  runCommand(`xrandr --delmonitor ${VMON_PRIMARY}`)
 
   notifySend('Virtual monitors were deleted')
+}
+
+function toggleMonitor() {
+  if (isMonitorSplit(VMON_PRIMARY)) {
+    unsplitMonitor()
+  } else {
+    splitMonitor()
+  }
 }
 
 // Main execution
@@ -211,6 +219,6 @@ switch (action) {
     unsplitMonitor()
     break
   default:
-    console.log('Usage: monitor-split on|off')
-    process.exit(1)
+    toggleMonitor()
+    break
 }

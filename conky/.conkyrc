@@ -218,6 +218,17 @@ function cpuTopN(n)
   ]]
 end
 
+function virtMon()
+  return [[{
+    "name": "VirtMon",
+    "full_text": "M",
+    "color": "\#000000",
+    "background": "${lua virtualMonitor_color}",
+    "align": "center",
+    "min_width":"]] .. stringWidth(1) .. [["
+  },]]
+end
+
 -- Stuff after 'TEXT' will be formatted on screen
 conky.text = [[
 # JSON for i3bar
@@ -241,6 +252,7 @@ conky.text = [[
   ]] .. wifi() .. [[
   ]] .. ip() .. [[
   ]] .. hdd() .. [[
+  ]] .. virtMon() .. [[
   # чтобы у всех в конце была запятая - последний пустой блок без запятой
   { "full_text": "" }
   ],
