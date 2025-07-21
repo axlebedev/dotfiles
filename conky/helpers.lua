@@ -80,11 +80,11 @@ function conky_numLock_str()
   local str = runShellCmd('xset q | grep -o "Num Lock:[[:space:]]*\\(on\\|off\\)"')
   local status = str:match("%S+$")
 
-  if needNumLockOff and status == "off" then
+  if os.getenv("NEED_NUM_LOCK_OFF") and status == "off" then
     return "NumLock off"
   end
 
-  if needNumLockOn and status == "on" then
+  if os.getenv("NEED_NUM_LOCK_ON") and status == "on" then
     return "NumLock on"
   end
 

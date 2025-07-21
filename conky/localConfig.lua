@@ -35,6 +35,3 @@ errorColorBg = '\\#FFFFFF'
 textColorFg = '\\#' .. colors[3]
 -- secondaryTextColorFg = '\\#8D15EE'
 secondaryTextColorFg = '\\#' .. colors[#colors-2]
-
-needNumLockOff = false
-needNumLockOn = true
