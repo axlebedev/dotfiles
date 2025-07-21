@@ -327,10 +327,8 @@ mode $mode_move_workspace {
 bindsym $mod+Shift+m mode $mode_move_workspace 
 
 # Work
-set $mode_work "Work (B)rowser (D)ebug (S)quadus (P)asswords (T)imetrack"
+set $mode_work "Work (D)ebug (S)quadus (P)asswords (T)imetrack"
 mode $mode_work {
-    bindsym $mod+b mode "default" ; exec --no-startup-id nohup google-chrome & disown
- 	bindsym $mod+Shift+b mode "default" ; exec --no-startup-id nohup yandex-browser --user-data-dir="/home/user/aleksey.lebedev.myoffice" & disown
     bindsym $mod+d mode "default" ; exec --no-startup-id nohup google-chrome --user-data-dir="/home/user/chrome-users/debug" & disown
 	bindsym $mod+s mode "default" ; exec --no-startup-id nohup google-chrome --app="https://im.ncloudtech.ru/rooms" & disown
     bindsym $mod+p mode "default" ; exec --no-startup-id nohup gnome-terminal --class="floating" -- vim ~/passwords & disown
@@ -371,22 +369,10 @@ mode $mode_tools {
 
 bindsym $mod+Shift+t mode $mode_tools
 
-# DP-2
-# HDMI-0
-# VIRTUAL-MONITOR-BOTTOM-LEFT-PRIMARY
-# VIRTUAL-MONITOR-TOP
-# VIRTUAL-MONITOR-RIGHT
-
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
     status_command $HOME/.i3/i3status.sh 
-    output DP-1
-    output HDMI-1
-    output eDP-1
-    output VMON_PRIMARY
-    tray_output DP-1
-    tray_output VMON_PRIMARY
     height 27
 
     colors {
