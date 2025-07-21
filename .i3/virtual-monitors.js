@@ -34,18 +34,15 @@ const { argv } = require('process')
 // VMON_RIGHT: { top: 0, left: full_width - padding_right, width:  padding_raigh, height: full_height }
 // VMON_TOP: { top: 0, left: padding_left, width: full_width - padding_left - padding_right, height: padding_top }
 // VMON_BOTTOM: { top: full_height - padding_bottom, left: padding_left, width: full_width - padding_left - padding_right, height: padding_bottom }
-//
 // VMON_PRIMARY: { top: padding_top, left: padding_left, width: full_width - padding_left - padding_right, height: full_height - padding_top - padding_bottom }
 
-const OUTPUT = 'HDMI-0'
+const OUTPUT = runCommand("xrandr --current | grep primary | awk '{print $1}'")
 const targetVals = {
   paddingLeft:  370,
   paddingRight: 270,
   paddingTop:  200,
   paddingBottom: 160,
 }
-// const targetWidth_px = 2050
-// const targetHeight_px = 1300
 
 const I3_MSG_CMD = "i3-msg"
 const VMON_PRIMARY = 'VMON_PRIMARY'
