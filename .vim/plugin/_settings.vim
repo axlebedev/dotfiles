@@ -67,10 +67,6 @@ set number
 # display currently inputed command
 set showcmd
 
-# indent settings
-&tabstop = variables.indent     # width of TAB.
-&softtabstop = variables.indent  # how much spaces will be removed on backspace
-&shiftwidth = variables.indent   # count of spaces for '<'/'>' commands
 set expandtab      # or 'noexpandtab': if set, inputs spaces instead of tabs
 set shiftround     # smart indent for '<'/'>' commands
 set smarttab       # insert tabs on the start of a line according to shiftwidth, not tabstop
