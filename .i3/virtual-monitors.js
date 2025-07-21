@@ -65,6 +65,11 @@ function runCommand(command) {
   }
 }
 
+function runI3msg(...commands) {
+  const command = commands.join('; ')
+  return runCommand(I3_MSG_CMD + ' ' + command)
+}
+
 function notifySend(title, message = '') {
   return runCommand(`notify-send '${title}' '${message}'`)
 }
@@ -169,8 +174,7 @@ function getRightConfig() {
 }
 
 function getWorkspaces() {
-  // const res = JSON.parse(runCommand(I3_MSG_CMD + ' -t get_outputs'))
-  const res = JSON.parse(runCommand(I3_MSG_CMD + ' -t get_workspaces'))
+  const res = JSON.parse(runI3msg('-t get_workspaces'))
   const primary = [OUTPUT, VMON_PRIMARY]
   const paddings = [VMON_TOP, VMON_LEFT, VMON_RIGHT, VMON_BOTTOM]
   const onPrimary = res
@@ -185,9 +189,10 @@ function getWorkspaces() {
 
 function moveWorkspacesOnPrimary() {
   const { onPrimary, onPaddings } = getWorkspaces()
-  [onPrimary, onPaddings].forEach(workspace => {
-    runCommand(I3_MSG_CMD + ' focus workspace ' + workspace + '; move workspace to output ' + OUTPUT)
-  })
+  const commands = [onPrimary, onPaddings].reduce(workspace => {
+    return [`focus workspace ${workspace}`, `move workspace to output ${OUTPUT}`]
+  }, [])
+  runI3msg(...commands)
 }
 
 function splitMonitor() {
@@ -203,11 +208,13 @@ function splitMonitor() {
   runCommand(`xrandr --setmonitor ${VMON_TOP} ${getConfigStr(getTopConfig())} ${OUTPUT}`)
   runCommand(`xrandr --setmonitor ${VMON_RIGHT} ${getConfigStr(getRightConfig())} ${OUTPUT}`)
   runCommand(`xrandr --setmonitor ${VMON_BOTTOM} ${getConfigStr(getBottomConfig())} ${OUTPUT}`)
-  runCommand(`${I3_MSG_CMD} "focus output ${VMON_LEFT}; workspace 101"`)
-  runCommand(`${I3_MSG_CMD} "focus output ${VMON_TOP}; workspace 102"`)
-  runCommand(`${I3_MSG_CMD} "focus output ${VMON_RIGHT}; workspace 103"`)
-  runCommand(`${I3_MSG_CMD} "focus output ${VMON_BOTTOM}; workspace 104"`)
-  runCommand(`${I3_MSG_CMD} "focus output ${VMON_PRIMARY}"`)
+  runI3msg(
+    `focus output ${VMON_LEFT}`, 'workspace 101',
+    `focus output ${VMON_TOP}`, 'workspace 102',
+    `focus output ${VMON_RIGHT}`, 'workspace 103',
+    `focus output ${VMON_BOTTOM}`, 'workspace 104',
+    `focus output ${VMON_PRIMARY}`
+  )
 
   notifySend('Virtual monitors were created')
 }
