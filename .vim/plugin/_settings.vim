@@ -168,3 +168,6 @@ set nrformats-=octal # Interpret octal as decimal when incrementing numbers.
 
 # Rewrite files history on vim leave window
 autocmd au_vimrc_settings FocusLost * wviminfo
+
+# for alacritty
+set paste
