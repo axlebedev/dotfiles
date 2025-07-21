@@ -34,18 +34,15 @@ const { argv } = require('process')
 // VMON_RIGHT: { top: 0, left: full_width - padding_right, width:  padding_raigh, height: full_height }
 // VMON_TOP: { top: 0, left: padding_left, width: full_width - padding_left - padding_right, height: padding_top }
 // VMON_BOTTOM: { top: full_height - padding_bottom, left: padding_left, width: full_width - padding_left - padding_right, height: padding_bottom }
-//
 // VMON_PRIMARY: { top: padding_top, left: padding_left, width: full_width - padding_left - padding_right, height: full_height - padding_top - padding_bottom }
 
-const OUTPUT = 'HDMI-0'
+const OUTPUT = runCommand("xrandr --current | grep primary | awk '{print $1}'")
 const targetVals = {
-  paddingLeft:  370,
-  paddingRight: 270,
-  paddingTop:  200,
-  paddingBottom: 160,
+  paddingLeft: process.env.PADDING_LEFT,
+  paddingRight: process.env.PADDING_RIGHT,
+  paddingTop: process.env.PADDING_TOP,
+  paddingBottom: process.env.PADDING_BOTTOM,
 }
-// const targetWidth_px = 2050
-// const targetHeight_px = 1300
 
 const I3_MSG_CMD = "i3-msg"
 const VMON_PRIMARY = 'VMON_PRIMARY'
@@ -213,19 +210,19 @@ function splitMonitor() {
   runCommand(`xrandr --setmonitor ${VMON_PRIMARY} ${getConfigStr(getPrimaryConfig())} ${OUTPUT}`)
   if (targetVals.paddingLeft) {
     runCommand(`xrandr --setmonitor ${VMON_LEFT} ${getConfigStr(getLeftConfig())} ${OUTPUT}`)
-    runI3msg('workspace 101', `move workspace to output ${VMON_LEFT}`)
+    runI3msg('workspace "LEFT"', `move workspace to output ${VMON_LEFT}`)
   }
   if (targetVals.paddingTop) {
     runCommand(`xrandr --setmonitor ${VMON_TOP} ${getConfigStr(getTopConfig())} ${OUTPUT}`)
-    runI3msg('workspace 102', `move workspace to output ${VMON_TOP}`)
+    runI3msg('workspace "TOP"', `move workspace to output ${VMON_TOP}`)
   }
   if (targetVals.paddingRight) {
     runCommand(`xrandr --setmonitor ${VMON_RIGHT} ${getConfigStr(getRightConfig())} ${OUTPUT}`)
-    runI3msg('workspace 103', `move workspace to output ${VMON_RIGHT}`)
+    runI3msg('workspace "RIGHT"', `move workspace to output ${VMON_RIGHT}`)
   }
   if (targetVals.paddingBottom) {
     runCommand(`xrandr --setmonitor ${VMON_BOTTOM} ${getConfigStr(getBottomConfig())} ${OUTPUT}`)
-    runI3msg('workspace 104', `move workspace to output ${VMON_BOTTOM}`)
+    runI3msg('workspace "BOTTOM"', `move workspace to output ${VMON_BOTTOM}`)
   }
   runI3msg(`focus output ${VMON_PRIMARY}`)
   moveWorkspaces(VMON_PRIMARY, [...onPrimary, ...onPaddings])
