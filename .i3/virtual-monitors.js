@@ -66,12 +66,17 @@ function runCommand(command) {
 }
 
 function runI3msg(...commands) {
-  const command = commands.join('; ')
+  const command = ` "${commands.join('; ')}"`
   return runCommand(I3_MSG_CMD + ' ' + command)
 }
 
 function notifySend(title, message = '') {
   return runCommand(`notify-send '${title}' '${message}'`)
+}
+
+function getActiveWorkspace() {
+  return runCommand(I3_MSG_CMD + " -t get_workspaces | jq -r '.[] | select(.focused==true).name'")
+
 }
 
 const isMonitorSplit = (vmonName) => runCommand('xrandr --listmonitors').includes(vmonName)
@@ -174,7 +179,7 @@ function getRightConfig() {
 }
 
 function getWorkspaces() {
-  const res = JSON.parse(runI3msg('-t get_workspaces'))
+  const res = JSON.parse(runCommand(I3_MSG_CMD + ' -t get_workspaces'))
   const primary = [OUTPUT, VMON_PRIMARY]
   const paddings = [VMON_TOP, VMON_LEFT, VMON_RIGHT, VMON_BOTTOM]
   const onPrimary = res
@@ -187,10 +192,9 @@ function getWorkspaces() {
   return { onPrimary, onPaddings }
 }
 
-function moveWorkspacesOnPrimary() {
-  const { onPrimary, onPaddings } = getWorkspaces()
-  const commands = [onPrimary, onPaddings].reduce(workspace => {
-    return [`focus workspace ${workspace}`, `move workspace to output ${OUTPUT}`]
+function moveWorkspaces(targetMon, workspaces) {
+  const commands = workspaces.reduce((acc, workspace) => {
+    return [...acc, `workspace ${workspace}`, `move workspace to output ${targetMon}`]
   }, [])
   runI3msg(...commands)
 }
@@ -201,31 +205,45 @@ function splitMonitor() {
     return
   }
 
+  const { onPrimary, onPaddings } = getWorkspaces()
+  const activeWorkspace = getActiveWorkspace()
+
   initCurrentResolutionAndSize()
 
   runCommand(`xrandr --setmonitor ${VMON_PRIMARY} ${getConfigStr(getPrimaryConfig())} ${OUTPUT}`)
-  runCommand(`xrandr --setmonitor ${VMON_LEFT} ${getConfigStr(getLeftConfig())} ${OUTPUT}`)
-  runCommand(`xrandr --setmonitor ${VMON_TOP} ${getConfigStr(getTopConfig())} ${OUTPUT}`)
-  runCommand(`xrandr --setmonitor ${VMON_RIGHT} ${getConfigStr(getRightConfig())} ${OUTPUT}`)
-  runCommand(`xrandr --setmonitor ${VMON_BOTTOM} ${getConfigStr(getBottomConfig())} ${OUTPUT}`)
-  runI3msg(
-    `focus output ${VMON_LEFT}`, 'workspace 101',
-    `focus output ${VMON_TOP}`, 'workspace 102',
-    `focus output ${VMON_RIGHT}`, 'workspace 103',
-    `focus output ${VMON_BOTTOM}`, 'workspace 104',
-    `focus output ${VMON_PRIMARY}`
-  )
+  if (targetVals.paddingLeft) {
+    runCommand(`xrandr --setmonitor ${VMON_LEFT} ${getConfigStr(getLeftConfig())} ${OUTPUT}`)
+    runI3msg('workspace 101', `move workspace to output ${VMON_LEFT}`)
+  }
+  if (targetVals.paddingTop) {
+    runCommand(`xrandr --setmonitor ${VMON_TOP} ${getConfigStr(getTopConfig())} ${OUTPUT}`)
+    runI3msg('workspace 102', `move workspace to output ${VMON_TOP}`)
+  }
+  if (targetVals.paddingRight) {
+    runCommand(`xrandr --setmonitor ${VMON_RIGHT} ${getConfigStr(getRightConfig())} ${OUTPUT}`)
+    runI3msg('workspace 103', `move workspace to output ${VMON_RIGHT}`)
+  }
+  if (targetVals.paddingBottom) {
+    runCommand(`xrandr --setmonitor ${VMON_BOTTOM} ${getConfigStr(getBottomConfig())} ${OUTPUT}`)
+    runI3msg('workspace 104', `move workspace to output ${VMON_BOTTOM}`)
+  }
+  runI3msg(`focus output ${VMON_PRIMARY}`)
+  moveWorkspaces(VMON_PRIMARY, [...onPrimary, ...onPaddings])
+  runI3msg(`workspace ${activeWorkspace}`)
 
   notifySend('Virtual monitors were created')
 }
 
 function unsplitMonitor() {
+  const { onPrimary, onPaddings } = getWorkspaces()
+  const activeWorkspace = getActiveWorkspace()
   runCommand(`xrandr --delmonitor ${VMON_TOP}`)
   runCommand(`xrandr --delmonitor ${VMON_RIGHT}`)
   runCommand(`xrandr --delmonitor ${VMON_BOTTOM}`)
   runCommand(`xrandr --delmonitor ${VMON_LEFT}`)
   runCommand(`xrandr --delmonitor ${VMON_PRIMARY}`)
-  moveWorkspacesOnPrimary()
+  moveWorkspaces(OUTPUT, [...onPrimary, ...onPaddings])
+  runI3msg(`workspace ${activeWorkspace}`)
 
   notifySend('Virtual monitors were deleted')
 }
