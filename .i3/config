@@ -25,6 +25,8 @@ tiling_drag modifier
 # new config from 4.24
 popup_during_fullscreen all
 
+exec --no-startup-id source ~/dotfiles/.env
+
 exec --no-startup-id lxpolkit
 
 # screenshot
