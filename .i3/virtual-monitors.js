@@ -37,12 +37,10 @@ const { argv } = require('process')
 // VMON_PRIMARY: { top: padding_top, left: padding_left, width: full_width - padding_left - padding_right, height: full_height - padding_top - padding_bottom }
 
 const OUTPUT = runCommand("xrandr --current | grep primary | awk '{print $1}'")
-const targetVals = {
-  paddingLeft: parseInt(process.env.PADDING_LEFT),
-  paddingRight: parseInt(process.env.PADDING_RIGHT),
-  paddingTop: parseInt(process.env.PADDING_TOP),
-  paddingBottom: parseInt(process.env.PADDING_BOTTOM),
-}
+const paddingLeft = parseInt(process.env.PADDING_LEFT);
+const paddingRight = parseInt(process.env.PADDING_RIGHT);
+const paddingTop = parseInt(process.env.PADDING_TOP);
+const paddingBottom = parseInt(process.env.PADDING_BOTTOM);
 
 const I3_MSG_CMD = "i3-msg"
 const VMON_PRIMARY = 'VMON_PRIMARY'
@@ -107,7 +105,7 @@ const getConfigStr = ({ width_px, height_px, offsetX, offsetY, width_mm, height_
 
 function getLeftConfig() {
   // VMON_LEFT: { top: 0, left: 0, width: padding_left, height: full_height }
-  const newWidth_px = targetVals.paddingLeft;
+  const newWidth_px = paddingLeft;
   const newHeight_px = display.height_px;
   return {
     width_px: newWidth_px,
@@ -121,56 +119,56 @@ function getLeftConfig() {
 
 function getTopConfig() {
   // VMON_TOP: { top: 0, left: padding_left, width: full_width - padding_left - padding_right, height: padding_top }
-  const newWidth_px = display.width_px - targetVals.paddingLeft - targetVals.paddingRight;
-  const newHeight_px = targetVals.paddingTop;
+  const newWidth_px = display.width_px - paddingLeft - paddingRight;
+  const newHeight_px = paddingTop;
   return {
     width_px: newWidth_px,
     width_mm: pxToMm(newWidth_px),
     height_px: newHeight_px,
     height_mm: pxToMm(newHeight_px),
-    offsetX: display.offsetX + targetVals.paddingLeft,
+    offsetX: display.offsetX + paddingLeft,
     offsetY: display.offsetY,
   }
 }
 
 function getPrimaryConfig() {
   // VMON_PRIMARY: { top: padding_top, left: padding_left, width: full_width - padding_left - padding_right, height: full_height - padding_top - padding_bottom }
-  const newWidth_px = display.width_px - targetVals.paddingLeft - targetVals.paddingRight;
-  const newHeight_px = display.height_px - targetVals.paddingTop - targetVals.paddingBottom;
+  const newWidth_px = display.width_px - paddingLeft - paddingRight;
+  const newHeight_px = display.height_px - paddingTop - paddingBottom;
   return {
     width_px: newWidth_px,
     width_mm: pxToMm(newWidth_px),
     height_px: newHeight_px,
     height_mm: pxToMm(newHeight_px),
-    offsetX: display.offsetX + targetVals.paddingLeft,
-    offsetY: display.offsetY + targetVals.paddingTop,
+    offsetX: display.offsetX + paddingLeft,
+    offsetY: display.offsetY + paddingTop,
   }
 }
 
 function getBottomConfig() {
   // VMON_BOTTOM: { top: full_height - padding_bottom, left: padding_left, width: full_width - padding_left - padding_right, height: padding_bottom }
-  const newWidth_px = display.width_px - targetVals.paddingLeft - targetVals.paddingRight;
-  const newHeight_px = targetVals.paddingBottom;
+  const newWidth_px = display.width_px - paddingLeft - paddingRight;
+  const newHeight_px = paddingBottom;
   return {
     width_px: newWidth_px,
     width_mm: pxToMm(newWidth_px),
     height_px: newHeight_px,
     height_mm: pxToMm(newHeight_px),
-    offsetX: display.offsetX + targetVals.paddingLeft,
-    offsetY: display.offsetY + display.height_px - targetVals.paddingBottom,
+    offsetX: display.offsetX + paddingLeft,
+    offsetY: display.offsetY + display.height_px - paddingBottom,
   }
 }
 
 function getRightConfig() {
   // VMON_RIGHT: { top: 0, left: full_width - padding_right, width:  padding_raigh, height: full_height }
-  const newWidth_px = targetVals.paddingRight;
+  const newWidth_px = paddingRight;
   const newHeight_px = display.height_px;
   return {
     width_px: newWidth_px,
     width_mm: pxToMm(newWidth_px),
     height_px: newHeight_px,
     height_mm: pxToMm(newHeight_px),
-    offsetX: display.offsetX + display.width_px - targetVals.paddingRight,
+    offsetX: display.offsetX + display.width_px - paddingRight,
     offsetY: display.offsetY,
   }
 }
@@ -208,19 +206,19 @@ function splitMonitor() {
   initCurrentResolutionAndSize()
 
   runCommand(`xrandr --setmonitor ${VMON_PRIMARY} ${getConfigStr(getPrimaryConfig())} ${OUTPUT}`)
-  if (targetVals.paddingLeft) {
+  if (paddingLeft) {
     runCommand(`xrandr --setmonitor ${VMON_LEFT} ${getConfigStr(getLeftConfig())} ${OUTPUT}`)
     runI3msg('workspace "LEFT"', `move workspace to output ${VMON_LEFT}`)
   }
-  if (targetVals.paddingTop) {
+  if (paddingTop) {
     runCommand(`xrandr --setmonitor ${VMON_TOP} ${getConfigStr(getTopConfig())} ${OUTPUT}`)
     runI3msg('workspace "TOP"', `move workspace to output ${VMON_TOP}`)
   }
-  if (targetVals.paddingRight) {
+  if (paddingRight) {
     runCommand(`xrandr --setmonitor ${VMON_RIGHT} ${getConfigStr(getRightConfig())} ${OUTPUT}`)
     runI3msg('workspace "RIGHT"', `move workspace to output ${VMON_RIGHT}`)
   }
-  if (targetVals.paddingBottom) {
+  if (paddingBottom) {
     runCommand(`xrandr --setmonitor ${VMON_BOTTOM} ${getConfigStr(getBottomConfig())} ${OUTPUT}`)
     runI3msg('workspace "BOTTOM"', `move workspace to output ${VMON_BOTTOM}`)
   }
