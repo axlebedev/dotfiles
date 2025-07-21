@@ -155,5 +155,5 @@ end
 function conky_virtualMonitor_color()
   local mons = runShellCmd('xrandr --listactivemonitors')
   local isVirt = string.find(mons, 'VMON_PRIMARY')
-  return '#' .. (isVirt and colors[4] or colors[1])
+  return '#' .. (isVirt and colors[5] or colors[4])
 end
