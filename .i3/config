@@ -368,10 +368,6 @@ bindsym $mod+Shift+t mode $mode_tools
 # finds out, if available)
 bar {
     status_command $HOME/.i3/i3status.sh 
-    output HDMI-0
-    output VMON_PRIMARY
-    tray_output HDMI-0
-    tray_output VMON_PRIMARY
     height 27
 
     colors {
