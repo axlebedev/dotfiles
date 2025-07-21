@@ -14,11 +14,12 @@ default_border pixel 4
 default_floating_border pixel 2
 
 # Experimental gaps stuff
+smart_gaps on
+# smart_gaps on|off|inverse_outer
 gaps inner 0
 gaps outer 0
 smart_borders no_gaps
 hide_edge_borders smart_no_gaps
-# smart_gaps on|off|inverse_outer
 
 tiling_drag modifier
 
