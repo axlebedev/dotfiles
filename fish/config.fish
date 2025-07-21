@@ -37,7 +37,11 @@ abbr -a lt "pwd && tree -a -C -I \"node_modules\|.git\|bower_components\""
 abbr -a rm rm -rf
 abbr -a cp cp -r
 
-abbr -a v alacritty -e vim
+function alacrittyvim
+    alacritty -e vim $argv > /dev/null 2>&1 &
+    disown
+end
+abbr -a v alacrittyvim
 
 abbr -a o xdg-open
 
