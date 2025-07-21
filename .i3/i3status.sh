@@ -27,7 +27,7 @@ do
 
     if [ "$getname" = "Date" ] || [ "$getname" = "Time" ] 
     then
-        google-chrome --app="https://calendar.google.com/" > /dev/null 2>&1 &
+        google-chrome --app="$URL_CALENDAR" > /dev/null 2>&1 &
     fi
 
     if [ "$getname" = "Memory" ] || [ "$getname" = "CPU" ]  
