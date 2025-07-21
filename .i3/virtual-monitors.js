@@ -38,10 +38,10 @@ const { argv } = require('process')
 
 const OUTPUT = runCommand("xrandr --current | grep primary | awk '{print $1}'")
 const targetVals = {
-  paddingLeft: process.env.PADDING_LEFT,
-  paddingRight: process.env.PADDING_RIGHT,
-  paddingTop: process.env.PADDING_TOP,
-  paddingBottom: process.env.PADDING_BOTTOM,
+  paddingLeft: parseInt(process.env.PADDING_LEFT),
+  paddingRight: parseInt(process.env.PADDING_RIGHT),
+  paddingTop: parseInt(process.env.PADDING_TOP),
+  paddingBottom: parseInt(process.env.PADDING_BOTTOM),
 }
 
 const I3_MSG_CMD = "i3-msg"
