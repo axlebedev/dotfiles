@@ -43,8 +43,8 @@ exec --no-startup-id $HOME/.i3/monitors.sh DP-1 eDP-1 HDMI-1
 set $mode_monitors "Monitors (O)ffice (H)ome (S)ingle"
 mode $mode_monitors {
 	bindsym $mod+o mode "default" ; exec $HOME/.i3/monitors.sh DP-1 eDP-1 HDMI-1
-	bindsym $mod+h mode "default" ; exec $HOME/.i3/monitors.sh HDMI-1 eDP-1 DP-1
-	bindsym $mod+s mode "default" ; exec $HOME/.i3/monitors.sh eDP-1 0 0
+	bindsym $mod+h mode "default" ; exec $HOME/.i3/monitors.sh HDMI-1 eDP-1
+	bindsym $mod+s mode "default" ; exec $HOME/.i3/monitors.sh eDP-1
 
 # back to normal: Enter or Escape
 	bindsym Return mode "default"
