@@ -168,6 +168,28 @@ function getRightConfig() {
   }
 }
 
+function getWorkspaces() {
+  // const res = JSON.parse(runCommand(I3_MSG_CMD + ' -t get_outputs'))
+  const res = JSON.parse(runCommand(I3_MSG_CMD + ' -t get_workspaces'))
+  const primary = [OUTPUT, VMON_PRIMARY]
+  const paddings = [VMON_TOP, VMON_LEFT, VMON_RIGHT, VMON_BOTTOM]
+  const onPrimary = res
+    .filter(item => primary.includes(item.output))
+    .map(item => item.name)
+
+  const onPaddings = res
+    .filter(item => paddings.includes(item.output))
+    .map(item => item.name)
+  return { onPrimary, onPaddings }
+}
+
+function moveWorkspacesOnPrimary() {
+  const { onPrimary, onPaddings } = getWorkspaces()
+  [onPrimary, onPaddings].forEach(workspace => {
+    runCommand(I3_MSG_CMD + ' focus workspace ' + workspace + '; move workspace to output ' + OUTPUT)
+  })
+}
+
 function splitMonitor() {
   if (isMonitorSplit(VMON_PRIMARY)) {
     notifySend('Monitor is already split')
@@ -196,6 +218,7 @@ function unsplitMonitor() {
   runCommand(`xrandr --delmonitor ${VMON_BOTTOM}`)
   runCommand(`xrandr --delmonitor ${VMON_LEFT}`)
   runCommand(`xrandr --delmonitor ${VMON_PRIMARY}`)
+  moveWorkspacesOnPrimary()
 
   notifySend('Virtual monitors were deleted')
 }
