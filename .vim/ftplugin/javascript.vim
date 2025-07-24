@@ -8,10 +8,6 @@ augroup au_vimrc_js
     autocmd!
 augroup END
 
-execute 'setlocal tabstop=' .. variables.indent
-execute 'setlocal softtabstop=' .. variables.indent
-execute 'setlocal shiftwidth=' .. variables.indent
-
 autocmd au_vimrc_js BufWrite *.js :vim9cmd trailingspace.DeleteTrailingWS()
 
 # make Vim recognize ES6 import statements
