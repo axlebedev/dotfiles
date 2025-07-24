@@ -23,3 +23,5 @@ export const border_chars_array = [
     border_chars.botleft,
 ]
 # }}}
+
+export const indent = 2

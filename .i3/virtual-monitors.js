@@ -224,7 +224,7 @@ function splitMonitor() {
   }
   runI3msg(`focus output ${VMON_PRIMARY}`)
   moveWorkspaces(VMON_PRIMARY, [...onPrimary, ...onPaddings])
-  runI3msg(`workspace ${activeWorkspace}`)
+  runI3msg(`focus workspace ${activeWorkspace}`)
 
   notifySend('Virtual monitors were created')
 }

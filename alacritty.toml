@@ -58,3 +58,6 @@ multiplier = 5
 
 [window]
 dynamic_title = true
+
+ [mouse]
+bindings = [{ mouse = "Right", action = "Paste" }]

@@ -1,0 +1,36 @@
+diff --git a/.i3/config b/.i3/config
+index 342151c..7113398 100755
+--- a/.i3/config
++++ b/.i3/config
+@@ -34,14 +34,17 @@ exec --no-startup-id flameshot
+ # xinput --set-prop <ID> "Coordinate Transformation Matrix" 1, 0, 0, 0, 1, 0, 0, 0, <NUMBER>
+ # <ID>: run 'xinput', get id there
+ # mouse speed: last number. Bigger is slower
++exec --no-startup-id xinput --set-prop 13 "Coordinate Transformation Matrix" 1, 0, 0, 0, 1, 0, 0, 0, 2.05
+ exec --no-startup-id unclutter -idle 3
+ exec --no-startup-id indicator-sound-switcher
+ 
+-exec --no-startup-id $HOME/.i3/monitors.sh HDMI-0
++exec --no-startup-id $HOME/.i3/monitors.sh DP-1 eDP-1 HDMI-1
+ 
+-set $mode_monitors "Monitors (H)ome"
++set $mode_monitors "Monitors (O)ffice (H)ome (S)ingle"
+ mode $mode_monitors {
+-	bindsym $mod+h mode "default" ; exec $HOME/.i3/monitors.sh HDMI-0
++	bindsym $mod+o mode "default" ; exec $HOME/.i3/monitors.sh DP-1 eDP-1 HDMI-1
++	bindsym $mod+h mode "default" ; exec $HOME/.i3/monitors.sh HDMI-1 eDP-1
++	bindsym $mod+s mode "default" ; exec $HOME/.i3/monitors.sh eDP-1
+ 
+ # back to normal: Enter or Escape
+ 	bindsym Return mode "default"
+@@ -372,6 +375,10 @@ bar {
+     status_command $HOME/.i3/i3status.sh 
+     height 27
+     output HDMI-0
++    output HDMI-1
++    tray_output DP-1
++    output DP-1
++    output eDP-1
+     output VMON_PRIMARY
+ 
+     colors {
