@@ -22,6 +22,7 @@ vim9script
 # TODO https://github.com/typescript-eslint/typescript-eslint/blob/main/packages/eslint-plugin/docs/rules/no-floating-promises.mdx
 # TODO https://github.com/SebastienGllmt/eslint-plugin-no-floating-promise
 # TODO https://github.com/neoclide/coc-yank
+# TODO https://github.com/girishji/vimsuggest
 #
 # Plugin settings ============================= {{{
 set shell=bash
