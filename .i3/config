@@ -23,6 +23,8 @@ hide_edge_borders smart_no_gaps
 
 tiling_drag modifier
 
+workspace_layout tabbed
+
 # new config from 4.24
 popup_during_fullscreen all
 
