@@ -108,6 +108,8 @@ sudo snap install --edge vokoscreen-ng
 
 # ----- install Chrome
 
+# ===== I3 ================================
+# https://i3wm.org/docs/repositories.html
 
 # ===== VIM =======================================================================================
 # поставить галочку в Software sources -> enable source code repositories
