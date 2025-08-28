@@ -61,7 +61,7 @@ screenruler \
 fzf fish \
 ttf-ancient-fonts \
 python3-smbc samba
-xkb-switch \
+# xkb-switch \ budet ustanovleno v razdele s vim
 unclutter \
 autorandr \
 xserver-xorg-input-libinput \
@@ -73,7 +73,7 @@ flameshot \
 net-tools \
 pavucontrol \
 lxpolkit \
-vokoscreenNG \
+# vokoscreenNG \ v apt ego nety, install 4erez snap
 vlc \
 mpv \
 mailnag \
@@ -101,9 +101,10 @@ sudo snap install \
 diff-so-fancy \
 indicator-sound-switcher \
 gromit-mpx \
-simplescreenrecorder \
+simplescreenrecorder
 
-sudo snap install --classic node
+# vrode uzhe ne nado sudo snap install --classic node
+sudo snap install --edge vokoscreen-ng
 
 # ----- install Chrome
 
@@ -154,8 +155,9 @@ sudo make distclean
 
 sudo make && sudo make install
 
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-# font here: https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/DroidSansMono/complete/Droid%20Sans%20Mono%20for%20Powerline%20Nerd%20Font%20Complete%20Mono.otf
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+# font here: https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/ComicShannsMono
 
 # Как установить фонты:
 mkdir ~/.fonts
@@ -165,8 +167,9 @@ fc-cache -f -v
 
 # ===== FISH ======================================================================================
 # https://hackercodex.com/guide/install-fish-shell-mac-ubuntu/
+# v gnome-terminal vmesto "chsh -s /usr/bin/fish" nado izmenit login command v nastroikah
 # or-my-fish:
-curl -L http://get.oh-my.fish | fish
+curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish
 omf install bobthefish # prev: agnoster # theme
 omf theme bobthefish # prev: agnoster # don't forget to enable powerline-nerd-font
 # plugins
@@ -175,54 +178,22 @@ omf install sudope # TODO: разобраться и настроить
 # for z: https://github.com/rupa/z/blob/master/z.sh to $path
 omf install z # TODO разобраться и навешать алиасов
 
-# ----- install i3-lock
+# ----- install i3-lock (now it is i3lock-fancy)
 # i3lock установить в соотв. с инструкцией, всё должно собраться 
-# https://raymond.li/i3lock-color/
+# sna4ala eto
+# https://github.com/Raymo111/i3lock-color
+sudo apt install -y imagemagick util-linux wmctrl maim
+# potom i3lock-fancy
+git clone https://github.com/meskarune/i3lock-fancy.git
+cd i3lock-fancy
+sudo make install
+
 
 # ===== dotfiles ==================================================================================
 cd ~ && \
 git clone git@github.com:axlebedev/dotfiles.git && \
 ~/dotfiles/init.sh
 
-# ===== Чтобы не отсоединялся wi-fi ===============================================================
-# ПОМОГЛО: обновить убунту до 22
-# sudo  journalctl -b 0 -u NetworkManager
-#
-# Another way to debug the issue is to raise the logging level with the following change to /etc/NetworkManager/NetworkManager.conf:
-# [logging]
-# level=DEBUG
-# Then run the following to get better messages in /var/log/syslog:
-# sudo systemctl restart NetworkManager
-#
-# Alternative Solution
-# Another option is to disable connectivity checking:
-# [connectivity]
-# interval=0
-#
-# 1
-# Try disabling powersave for Wi-Fi. In /etc/NetworkManager/conf.d/default-wifi-powersave-on.conf set:
-# wifi.powersave = 2
-
-# 2
-# nmcli connection modify <Your VPN connection name> connection.autoconnect-retries 0
-# nmcli connection modify <Your VPN connection name> vpn.persistent yes
-
-# 3
-gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing'
-
-# 4 Disable IPV6
-# 5 Если ничего не помогло - в стандартном убунтовском окошке с настройками wi-fi можно указать авто-VPN
-
-# 6 В старом гисте был ещё такой коммент:
-# Чтобы не выключался wi-fi https://askubuntu.com/questions/1030653/wifi-randomly-disconnected-on-ubuntu-18-04-lts
-
-# 7
-# /etc/NetworkManager/NetworkManager.conf
-# change
-# `managed=false`
-# to
-# `managed=true`
-# and reboot
 
 ===================================================================================================
 
