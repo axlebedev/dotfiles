@@ -180,16 +180,9 @@ omf install sudope # TODO: разобраться и настроить
 # for z: https://github.com/rupa/z/blob/master/z.sh to $path
 omf install z # TODO разобраться и навешать алиасов
 
-# ----- install i3-lock (now it is i3lock-fancy)
+# ----- install i3-lock (now it is i3lock-color)
 # i3lock установить в соотв. с инструкцией, всё должно собраться 
-# sna4ala eto
 # https://github.com/Raymo111/i3lock-color
-sudo apt install -y imagemagick util-linux wmctrl maim
-# potom i3lock-fancy
-git clone https://github.com/meskarune/i3lock-fancy.git
-cd i3lock-fancy
-sudo make install
-
 
 # ===== dotfiles ==================================================================================
 cd ~ && \
