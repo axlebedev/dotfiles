@@ -1,12 +1,13 @@
 #!/bin/bash
 
+dunstctl set-paused true
+
 BLANK='#00000000'
 CLEAR='#ffffff22'
 DEFAULT='#ff00ffcc'
 TEXT='#7B75CFEE'
 WRONG='#880000bb'
 VERIFYING='#bb00bbbb'
-dunstctl set-paused true
 i3lock \
         --nofork \
         --ignore-empty-password \
