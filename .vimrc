@@ -577,7 +577,7 @@ inoremap <silent><expr> <S-Tab> coc#pum#visible()
   \ ? coc#pum#prev(1)
   \ : "\<S-Tab>"
 
-inoremap <silent><expr> <CR> coc#pum#visible()
+inoremap <silent><expr> <CR> coc#pum#visible() && coc#pum#has_item_selected()
   \ ? coc#_select_confirm()
   \ : "\<CR>"
 
