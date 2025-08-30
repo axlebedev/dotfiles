@@ -115,7 +115,7 @@ function g-gobs
     commandline -f repaint
 end
 
-abbr -a go g checkout
+abbr -a gco g checkout
 abbr -a gor g checkout users/l-e-b-e-d-e-v/
 abbr -a gom g checkout master
 abbr -a gob g checkout -b
