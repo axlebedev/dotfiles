@@ -549,7 +549,8 @@ g:coc_global_extensions = [
     'coc-eslint',
     'coc-react-refactor',
     'coc-groovy',
-    # 'coc-codellama'
+    # 'coc-codellama',
+    'coc-go' # sudo apt install gopls
 ]
 g:coc_global_config = '/home/user/dotfiles/.vim/coc-settings.json'
 g:coc_enable_locationlist = 0
