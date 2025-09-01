@@ -218,6 +218,8 @@ systemctl enable autorandr.service
 # Чтобы не выключался звук https://askubuntu.com/questions/1015384/keep-audio-awake
 # закомментить "idle" в /etc/pulse/default.pa и system.pa
 
+# В ulauncher не забыть поменять хоткей, ctrl+space нужен dunst'у
+
 # ===== HINTS =====================================================================================
 # mount disks:
 # http://www.linuxstall.com/fstab/
