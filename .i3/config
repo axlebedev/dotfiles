@@ -116,7 +116,7 @@ for_window [class="sticky"]  sticky   enable
 
 for_window [class="screenruler"] , move scratchpad
 
-exec --no-startup-id ~/dotfiles/.i3/virtual-monitors.js
+exec --no-startup-id ~/dotfiles/.i3/virtual-monitors.js --notify=off
 
 # Pulse Audio controls
 bindsym XF86AudioLowerVolume exec amixer -D pulse sset Master 2%- & killall -USR1 i3status 

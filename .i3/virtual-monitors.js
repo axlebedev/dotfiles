@@ -51,6 +51,29 @@ const VMON_LEFT = 'VMON_LEFT'
 
 let display = null
 
+// process args: "./script.js --dir=out --name -p" => "args= { dir: 'out', name: true, p: true }"
+// {{{
+const args = argv.slice(2)
+    .map((arg) => {
+        if (arg.startsWith('--')) {
+            const [name, val] = arg.replace('--', '').split('=')
+            return { name, val: val ?? true }
+        }
+        if (arg.startsWith('-')) {
+            const [name] = arg.replace('-', '')
+            return { name, val: true }
+        }
+        return arg
+    })
+    .reduce((acc, cur) => {
+        return {
+            ...acc,
+            [cur.name]: cur.val
+        }
+    }, {})
+
+// }}} process args
+
 function runCommand(command) {
   try {
     return execSync(command).toString().trim()
@@ -66,6 +89,10 @@ function runI3msg(...commands) {
 }
 
 function notifySend(title, message = '') {
+  if (args.notify === 'off') {
+    return
+  }
+
   return runCommand(`notify-send '${title}' '${message}'`)
 }
 
@@ -252,16 +279,10 @@ function toggleMonitor() {
 }
 
 // Main execution
-const action = argv[2]
-
-switch (action) {
-  case 'on':
+if (args.on) {
     splitMonitor()
-    break
-  case 'off':
+} else if (args.off) {
     unsplitMonitor()
-    break
-  default:
-    toggleMonitor()
-    break
+} else {
+  toggleMonitor()
 }
