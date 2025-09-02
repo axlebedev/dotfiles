@@ -393,13 +393,7 @@ g:splitjoin_join_mapping  = 'gj'
 
 # -----------------------------------------------------------------------------
 # autoclose parens
-Plug 'LunarWatcher/auto-pairs'
-g:AutoPairsMapSpace = 0
-g:AutoPairsMultilineClose = 0 # Dont make a mess when `{ if(condition) { doSomething [cursor] }`
-inoremap <silent> <> <space> pumvisible()
-  \ ? "<space>"
-  \ : "<c-r>=AutoPairsSpace()<cr>"
-g:AutoPairsMapBS = 0
+Plug 'cohama/lexima.vim'
 
 # -----------------------------------------------------------------------------
 # comment lines, uncomment lines
