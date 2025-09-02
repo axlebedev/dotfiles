@@ -80,6 +80,7 @@ mailnag \
 arandr \
 kitty \
 alacritty \
+xbanish \
 autorandr
 
 # Set alacritty as default terminal:
