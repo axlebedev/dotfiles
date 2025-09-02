@@ -42,6 +42,7 @@ onoremap f; g_
 
 # fast save file, close file
 nnoremap <leader>w <CMD>w!<cr>
+vnoremap <leader>w <CMD>w!<cr>
 
 # Если просто закрыть fugitive-буфер - то закроется весь вим.
 # Поэтому делаем такой костыль
