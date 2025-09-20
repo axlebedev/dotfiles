@@ -399,9 +399,10 @@ Plug 'cohama/lexima.vim'
 # comment lines, uncomment lines
 Plug 'tomtom/tcomment_vim'
 g:tcomment_maps = 1
-g:tcomment_textobject_inlinecomment = 'ix'
+g:tcomment#rstrip_on_uncomment = 2
+g:tcomment_textobject_inlinecomment = 'ic'
 nnoremap <C-_> <CMD>TComment<CR>
-vnoremap <C-_> :TComment<CR>gv
+vnoremap <C-_> :TCommentMaybeInline<CR>gv
 
 # -----------------------------------------------------------------------------
 # Surround.
