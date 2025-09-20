@@ -253,7 +253,7 @@ function splitMonitor() {
   moveWorkspaces(VMON_PRIMARY, [...onPrimary, ...onPaddings])
   runI3msg(`workspace ${activeWorkspace}`)
 
-  notifySend('Virtual monitors were created')
+  notifySend('Virtual monitors ON')
 }
 
 function unsplitMonitor() {
@@ -267,7 +267,7 @@ function unsplitMonitor() {
   moveWorkspaces(OUTPUT, [...onPrimary, ...onPaddings])
   runI3msg(`workspace ${activeWorkspace}`)
 
-  notifySend('Virtual monitors were deleted')
+  notifySend('Virtual monitors OFF')
 }
 
 function toggleMonitor() {
