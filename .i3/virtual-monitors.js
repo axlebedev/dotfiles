@@ -36,7 +36,7 @@ const { argv } = require('process')
 // VMON_BOTTOM: { top: full_height - padding_bottom, left: padding_left, width: full_width - padding_left - padding_right, height: padding_bottom }
 // VMON_PRIMARY: { top: padding_top, left: padding_left, width: full_width - padding_left - padding_right, height: full_height - padding_top - padding_bottom }
 
-const OUTPUT = runCommand("xrandr --current | grep primary | awk '{print $1}'")
+const OUTPUT = runCommand("xrandr --current | grep primary | awk '{print $1}'") || 'None-1'
 const paddingLeft = parseInt(process.env.PADDING_LEFT);
 const paddingRight = parseInt(process.env.PADDING_RIGHT);
 const paddingTop = parseInt(process.env.PADDING_TOP);
