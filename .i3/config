@@ -33,6 +33,7 @@ exec --no-startup-id lxpolkit
 # screenshot
 exec --no-startup-id flameshot
 
+exec --no-startup-id xrandr --output HDMI-0 --auto --primary
 # xinput --set-prop <ID> "Coordinate Transformation Matrix" 1, 0, 0, 0, 1, 0, 0, 0, <NUMBER>
 # <ID>: run 'xinput', get id there
 # mouse speed: last number. Bigger is slower
