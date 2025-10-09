@@ -1,4 +1,5 @@
 # local/bin to PATH
+source ~/dotfiles/.env
 set -g -x PATH /usr/local/bin $PATH
 
 # omf install bobthefish
