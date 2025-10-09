@@ -545,7 +545,8 @@ g:coc_global_extensions = [
     'coc-react-refactor',
     'coc-groovy',
     # 'coc-codellama',
-    'coc-go' # sudo apt install gopls
+    'coc-go', # sudo apt install gopls
+    '@yaegassy/coc-volar', # vue 3
 ]
 g:coc_global_config = '/home/user/dotfiles/.vim/coc-settings.json'
 g:coc_enable_locationlist = 0
