@@ -293,3 +293,7 @@ sudo apt install touchpad-indicator
 #
 # ================ C++ boost ============
 # https://linux.how2shout.com/how-to-install-boost-c-on-ubuntu-20-04-or-22-04/
+#
+# ================ i3wm audio popping
+# 1. Найти имя устройства через `pacmd list-sinks`
+# 2. pacmd update-sink-proplist "NAME" device.buffering.buffer_size=1048576

@@ -9,3 +9,5 @@ https://github.com/idanarye/vim-merginal
 https://github.com/sodapopcan/vim-twiggy
 
 vim: сделать чтобы git-буферы не закрывались по выходу из них
+
+bash command: 'mkcd = mkdir foo && cd foo'
