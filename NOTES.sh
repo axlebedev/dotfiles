@@ -10,8 +10,7 @@ mkdir ~/github
 
 # ----- Установка нужных программ -----
 sudo add-apt-repository -y ppa:agornostal/ulauncher && \
-sudo add-apt-repository -y ppa:git-core/ppa && \
-sudo apt-add-repository -y ppa:fish-shell/release-3 %% \
+sudo apt-add-repository ppa:fish-shell/release-4 && \
 sudo apt update
 
 # Убрать заголовок в окне gnome-terminal
@@ -81,17 +80,21 @@ arandr \
 kitty \
 alacritty \
 xbanish \
+nodejs \
 autorandr
 
+# TODO: kitty
 # Set alacritty as default terminal:
 sudo update-alternatives --config x-terminal-emulator
 # Verify the change:
 update-alternatives --query x-terminal-emulator | grep "Value:"
 
+# TODO
 # install git-delta manually
 # https://dandavison.github.io/delta/installation.html
 
 # Install watchman
+# TODO: написать здесь как его устанавливать
 # https://facebook.github.io/watchman/docs/install#ubuntu-prebuilt-debs
 
 # indicator-sound-switcher \ # меню звук-девайсов в трее
@@ -132,6 +135,8 @@ cd ~/github
 git clone git@github.com:grwlf/xkb-switch.git
 cd xkb-switch/
 mkdir build && cd build
+sudo snap install --classic cmake
+sudo apt-get install libx11-dev libxkbfile-dev
 cmake ..
 make && sudo make install
 
@@ -141,6 +146,7 @@ git clone git@github.com:vim/vim.git
 cd vim/src
 sudo make distclean
 
+# TODO: пересмотреть эти флаги
 ./configure \
 --enable-luainterp=yes \
 --enable-mzschemeinterp \
@@ -175,12 +181,13 @@ fc-cache -f -v
 curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish
 omf install bobthefish # prev: agnoster # theme
 omf theme bobthefish # prev: agnoster # don't forget to enable powerline-nerd-font
-# plugins
+# plugins TODO: первый уже не нужен, остальные 2 не работают
 omf install cd
 omf install sudope # TODO: разобраться и настроить
 # for z: https://github.com/rupa/z/blob/master/z.sh to $path
 omf install z # TODO разобраться и навешать алиасов
 
+# TODO: это я пропустил
 # ----- install i3-lock (now it is i3lock-color)
 # i3lock установить в соотв. с инструкцией, всё должно собраться 
 # https://github.com/Raymo111/i3lock-color
@@ -256,11 +263,6 @@ sudo apt-get update
 # 1. 'map xp' чтобы работал как xp но не засирал регистр с copypaste
 #
 
-# How to prevent xkbmap reset?
-# --
-# Edit the /etc/default/keyboard file:
-# XKBLAYOUT="us,ru"
-# XKBOPTIONS="grp:shift_caps_switch"
 # ===============
 # Чтобы починить ubuntu-логин-скрин + убикей:
 # https://bytefreaks.net/gnulinux/ubuntu-22-04lts-forces-the-use-of-yubikey-on-login-without-activating-it
@@ -282,10 +284,6 @@ sudo apt install touchpad-indicator
 # =====
 # Генерация SSH ключей
 # https://doc.yandex-team.ru/help/diy/common/auth/ssh-keys.html
-#
-# ===============
-# Чтобы починить ubuntu-логин-скрин + убикей:
-# https://bytefreaks.net/gnulinux/ubuntu-22-04lts-forces-the-use-of-yubikey-on-login-without-activating-it
 #
 # ================================================================
 # Сильно шумят кулеры. Пробую решение
