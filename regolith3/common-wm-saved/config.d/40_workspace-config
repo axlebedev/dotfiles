@@ -1,0 +1,82 @@
+###############################################################################
+# Window and Workspace Configuration
+###############################################################################
+
+## Modify // Window Position // <><Shift> ↑ ↓ ← → ##
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+## Modify // Window Position // <><Shift> k j h l ##
+bindsym $mod+$wm.binding.move_left move left
+bindsym $mod+$wm.binding.move_down move down
+bindsym $mod+$wm.binding.move_up move up
+bindsym $mod+$wm.binding.move_right move right
+
+## Modify // Vertical Window Orientation // <> v ##
+bindsym $mod+v split vertical
+bindsym $mod+h split horizontal
+bindsym $mod+f fullscreen toggle
+bindsym $mod+Shift+f floating toggle
+## Modify // Tile/Float Focus Toggle // <><Shift> t ##
+set_from_resource $wm.binding.focus_toggle wm.binding.focus_toggle Shift+t
+bindsym $mod+$wm.binding.focus_toggle focus mode_toggle
+
+## Modify // Window Layout Mode // <> t ##
+set_from_resource $wm.binding.layout_mode wm.binding.layout_mode t
+bindsym $mod+$wm.binding.layout_mode layout toggle tabbed splith splitv
+
+# move focused container to workspace
+set_from_resource $wm.move_container_to_ws_key wm.move_container_to_ws_key Shift
+## Modify // Move Window to Workspace 1 - 10 // <><Shift> 0..9 ##
+bindsym $mod+$wm.move_container_to_ws_key+$ws1_key move container to workspace number $ws1
+bindsym $mod+$wm.move_container_to_ws_key+$ws2_key move container to workspace number $ws2
+bindsym $mod+$wm.move_container_to_ws_key+$ws3_key move container to workspace number $ws3
+bindsym $mod+$wm.move_container_to_ws_key+$ws4_key move container to workspace number $ws4
+bindsym $mod+$wm.move_container_to_ws_key+$ws5_key move container to workspace number $ws5
+bindsym $mod+$wm.move_container_to_ws_key+$ws6_key move container to workspace number $ws6
+bindsym $mod+$wm.move_container_to_ws_key+$ws7_key move container to workspace number $ws7
+bindsym $mod+$wm.move_container_to_ws_key+$ws8_key move container to workspace number $ws8
+bindsym $mod+$wm.move_container_to_ws_key+$ws9_key move container to workspace number $ws9
+bindsym $mod+$wm.move_container_to_ws_key+$ws10_key move container to workspace number $ws10
+## Modify // Move Window to Workspace 11 - 19// <><Ctrl><Shift> 1..9 ##
+bindsym $mod+$wm.move_container_to_ws_key+$ws_high_key+$ws1_key move container to workspace number $ws11
+bindsym $mod+$wm.move_container_to_ws_key+$ws_high_key+$ws2_key move container to workspace number $ws12
+bindsym $mod+$wm.move_container_to_ws_key+$ws_high_key+$ws3_key move container to workspace number $ws13
+bindsym $mod+$wm.move_container_to_ws_key+$ws_high_key+$ws4_key move container to workspace number $ws14
+bindsym $mod+$wm.move_container_to_ws_key+$ws_high_key+$ws5_key move container to workspace number $ws15
+bindsym $mod+$wm.move_container_to_ws_key+$ws_high_key+$ws6_key move container to workspace number $ws16
+bindsym $mod+$wm.move_container_to_ws_key+$ws_high_key+$ws7_key move container to workspace number $ws17
+bindsym $mod+$wm.move_container_to_ws_key+$ws_high_key+$ws8_key move container to workspace number $ws18
+bindsym $mod+$wm.move_container_to_ws_key+$ws_high_key+$ws9_key move container to workspace number $ws19
+
+# move focused container to workspace, move to workspace
+set_from_resource $wm.carry_container_to_ws_key wm.carry_container_to_ws_key Mod1
+## Modify // Carry Window to Workspace 1 - 10// <><Alt> 0..9 ##
+bindsym $mod+$wm.carry_container_to_ws_key+$ws1_key move container to workspace number $ws1; workspace number $ws1
+bindsym $mod+$wm.carry_container_to_ws_key+$ws2_key move container to workspace number $ws2; workspace number $ws2
+bindsym $mod+$wm.carry_container_to_ws_key+$ws3_key move container to workspace number $ws3; workspace number $ws3
+bindsym $mod+$wm.carry_container_to_ws_key+$ws4_key move container to workspace number $ws4; workspace number $ws4
+bindsym $mod+$wm.carry_container_to_ws_key+$ws5_key move container to workspace number $ws5; workspace number $ws5
+bindsym $mod+$wm.carry_container_to_ws_key+$ws6_key move container to workspace number $ws6; workspace number $ws6
+bindsym $mod+$wm.carry_container_to_ws_key+$ws7_key move container to workspace number $ws7; workspace number $ws7
+bindsym $mod+$wm.carry_container_to_ws_key+$ws8_key move container to workspace number $ws8; workspace number $ws8
+bindsym $mod+$wm.carry_container_to_ws_key+$ws9_key move container to workspace number $ws9; workspace number $ws9
+bindsym $mod+$wm.carry_container_to_ws_key+$ws10_key move container to workspace number $ws10; workspace number $ws10
+## Modify // Carry Window to Workspace 11 - 19 // <><Alt><Ctrl> 1..9 ##
+bindsym $mod+$wm.carry_container_to_ws_key+$ws_high_key+$ws1_key move container to workspace number $ws11; workspace number $ws11
+bindsym $mod+$wm.carry_container_to_ws_key+$ws_high_key+$ws2_key move container to workspace number $ws12; workspace number $ws12
+bindsym $mod+$wm.carry_container_to_ws_key+$ws_high_key+$ws3_key move container to workspace number $ws13; workspace number $ws13
+bindsym $mod+$wm.carry_container_to_ws_key+$ws_high_key+$ws4_key move container to workspace number $ws14; workspace number $ws14
+bindsym $mod+$wm.carry_container_to_ws_key+$ws_high_key+$ws5_key move container to workspace number $ws15; workspace number $ws15
+bindsym $mod+$wm.carry_container_to_ws_key+$ws_high_key+$ws6_key move container to workspace number $ws16; workspace number $ws16
+bindsym $mod+$wm.carry_container_to_ws_key+$ws_high_key+$ws7_key move container to workspace number $ws17; workspace number $ws17
+bindsym $mod+$wm.carry_container_to_ws_key+$ws_high_key+$ws8_key move container to workspace number $ws18; workspace number $ws18
+bindsym $mod+$wm.carry_container_to_ws_key+$ws_high_key+$ws9_key move container to workspace number $ws19; workspace number $ws19
+
+set_from_resource $wm.workspace.auto_back_and_forth wm.workspace.auto_back_and_forth no
+workspace_auto_back_and_forth $wm.workspace.auto_back_and_forth
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod

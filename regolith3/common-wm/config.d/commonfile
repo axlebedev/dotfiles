@@ -1,0 +1,136 @@
+workspace_auto_back_and_forth yes
+floating_modifier $mod
+set_from_resource $wm.resize.small wm.resize.small 6
+# Start Rofication for notifications
+exec --no-startup-id /usr/bin/rofication-daemon
+# Launch first time user experience script
+exec --no-startup-id /usr/bin/regolith-ftue
+# Load nm-applet to provide auth dialogs for network access
+exec --no-startup-id /usr/bin/nm-applet
+
+###############################################################################
+###############################################################################
+###############################################################################
+
+###############################################################################
+# Launcher dialogs
+###############################################################################
+
+## Launch // Terminal // <> Enter ##
+bindsym $mod+Return exec --no-startup-id systemd-run --user --scope /usr/bin/x-terminal-emulator
+
+###############################################################################
+# Window and Workspace Navigation
+###############################################################################
+bindsym $mod+a focus parent
+bindsym $mod+z focus child
+
+bindsym $mod+Left  focus left
+bindsym $mod+Down  focus down
+bindsym $mod+Up    focus up
+bindsym $mod+Right focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+## Navigate // Workspaces 1-10 // <> 0..9 ##
+bindsym $mod+$ws1_key workspace number $ws1
+bindsym $mod+$ws2_key workspace number $ws2
+bindsym $mod+$ws3_key workspace number $ws3
+bindsym $mod+$ws4_key workspace number $ws4
+bindsym $mod+$ws5_key workspace number $ws5
+bindsym $mod+$ws6_key workspace number $ws6
+bindsym $mod+$ws7_key workspace number $ws7
+bindsym $mod+$ws8_key workspace number $ws8
+bindsym $mod+$ws9_key workspace number $ws9
+bindsym $mod+$ws10_key workspace number $ws10
+## Navigate // Workspace 11 - 19 // <><Ctrl> 1..9 ##
+bindsym $mod+Ctrl+$ws1_key workspace number $ws11
+bindsym $mod+Ctrl+$ws2_key workspace number $ws12
+bindsym $mod+Ctrl+$ws3_key workspace number $ws13
+bindsym $mod+Ctrl+$ws4_key workspace number $ws14
+bindsym $mod+Ctrl+$ws5_key workspace number $ws15
+bindsym $mod+Ctrl+$ws6_key workspace number $ws16
+bindsym $mod+Ctrl+$ws7_key workspace number $ws17
+bindsym $mod+Ctrl+$ws8_key workspace number $ws18
+bindsym $mod+Ctrl+$ws9_key workspace number $ws19
+
+bindsym $mod+n workspace next_on_output
+bindsym $mod+p workspace prev_on_output
+
+## Navigate // Last Focused Window // <> . ##
+exec --no-startup-id i3-swap-focus
+bindsym $mod+period exec --no-startup-id pkill -USR1 -F "${XDG_RUNTIME_DIR}/swap_focus.pid"
+
+###############################################################################
+# Window and Workspace Configuration
+###############################################################################
+bindsym $mod+Shift+Left  move left
+bindsym $mod+Shift+Down  move down
+bindsym $mod+Shift+Up    move up
+bindsym $mod+Shift+Right move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+bindsym $mod+Ctrl+Shift+Left  move workspace to output left
+bindsym $mod+Ctrl+Shift+Right move workspace to output right
+bindsym $mod+Ctrl+Shift+Up    move workspace to output up
+bindsym $mod+Ctrl+Shift+Down  move workspace to output down
+bindsym $mod+Ctrl+Shift+h move workspace to output left
+bindsym $mod+Ctrl+Shift+j move workspace to output down
+bindsym $mod+Ctrl+Shift+k move workspace to output up
+bindsym $mod+Ctrl+Shift+l move workspace to output right
+
+bindsym $mod+f fullscreen toggle
+# TODO
+bindsym $mod+Shift+f floating toggle
+bindsym $mod+Shift+t focus mode_toggle
+
+# bindsym $mod+v split vertical
+# bindsym $mod+h split horizontal
+bindsym $mod+w layout toggle tabbed splitv splith
+
+# move focused container to workspace, move to workspace
+bindsym $mod+Shift+$ws1_key      move container to workspace number $ws1; workspace number $ws1
+bindsym $mod+Shift+$ws2_key      move container to workspace number $ws2; workspace number $ws2
+bindsym $mod+Shift+$ws3_key      move container to workspace number $ws3; workspace number $ws3
+bindsym $mod+Shift+$ws4_key      move container to workspace number $ws4; workspace number $ws4
+bindsym $mod+Shift+$ws5_key      move container to workspace number $ws5; workspace number $ws5
+bindsym $mod+Shift+$ws6_key      move container to workspace number $ws6; workspace number $ws6
+bindsym $mod+Shift+$ws7_key      move container to workspace number $ws7; workspace number $ws7
+bindsym $mod+Shift+$ws8_key      move container to workspace number $ws8; workspace number $ws8
+bindsym $mod+Shift+$ws9_key      move container to workspace number $ws9; workspace number $ws9
+bindsym $mod+Shift+$ws10_key     move container to workspace number $ws10; workspace number $ws10
+bindsym $mod+Shift+Ctrl+$ws1_key move container to workspace number $ws11; workspace number $ws11
+bindsym $mod+Shift+Ctrl+$ws2_key move container to workspace number $ws12; workspace number $ws12
+bindsym $mod+Shift+Ctrl+$ws3_key move container to workspace number $ws13; workspace number $ws13
+bindsym $mod+Shift+Ctrl+$ws4_key move container to workspace number $ws14; workspace number $ws14
+bindsym $mod+Shift+Ctrl+$ws5_key move container to workspace number $ws15; workspace number $ws15
+bindsym $mod+Shift+Ctrl+$ws6_key move container to workspace number $ws16; workspace number $ws16
+bindsym $mod+Shift+Ctrl+$ws7_key move container to workspace number $ws17; workspace number $ws17
+bindsym $mod+Shift+Ctrl+$ws8_key move container to workspace number $ws18; workspace number $ws18
+bindsym $mod+Shift+Ctrl+$ws9_key move container to workspace number $ws19; workspace number $ws19
+
+## Resize // Enter Resize Mode // <> r ##
+mode "Resize Mode" {
+        bindsym Left resize shrink width $wm.resize.small px or $wm.resize.small ppt
+        bindsym Down resize grow height $wm.resize.small px or $wm.resize.small ppt
+        bindsym Up resize shrink height $wm.resize.small px or $wm.resize.small ppt
+        bindsym Right resize grow width $wm.resize.small px or $wm.resize.small ppt
+
+        bindsym h resize shrink width $wm.resize.small px or $wm.resize.small ppt
+        bindsym k resize grow height $wm.resize.small px or $wm.resize.small ppt
+        bindsym j resize shrink height $wm.resize.small px or $wm.resize.small ppt
+        bindsym l resize grow width $wm.resize.small px or $wm.resize.small ppt
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+bindsym $mod+r mode "Resize Mode"
+
+## Launch // Notification Viewer // <> n ##
+bindsym Ctrl+Space exec --no-startup-id ilia -p notifications
