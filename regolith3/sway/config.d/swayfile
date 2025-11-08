@@ -1,0 +1,199 @@
+exec systemctl --user import-environment XDG_CURRENT_DESKTOP DISPLAY WAYLAND_DISPLAY SWAYSOCK I3SOCK
+exec hash dbus-update-activation-environment 2>/dev/null && \
+     dbus-update-activation-environment --systemd XDG_CURRENT_DESKTOP DISPLAY WAYLAND_DISPLAY SWAYSOCK I3SOCK
+# Load stylesheet if exists
+set_from_resource $ilia.stylesheet ilia.stylesheet
+
+## Launch // Application // <> Space ##
+bindsym $mod+space exec --no-startup-id ilia -p apps -t $ilia.stylesheet
+
+## Launch // Command // <><Shift> Space ##
+bindsym $mod+Shift+space exec --no-startup-id ilia -p terminal -t $ilia.stylesheet
+
+## Launch // Keybinding Viewer // <><Shift> ? ##
+bindsym --to-code $mod+question exec --no-startup-id ilia -p keybindings -a -t $ilia.stylesheet
+
+## Navigate // Window by Name // <><Ctrl> Space ##
+bindsym $mod+Ctrl+space exec --no-startup-id ilia -p windows -t $ilia.stylesheet
+
+## Launch // File Search // <><Alt> Space ##
+bindsym $mod+$alt+space exec --no-startup-id ilia -p tracker -t $ilia.stylesheet
+
+## Launch // Look Selector // <><Alt> l ##
+bindsym $mod+$alt+l exec --no-startup-id regolith-look-selector -t $ilia.stylesheet
+exec systemctl start --user xdg-desktop-portal.service
+
+###############################################################################
+# Cycle Keyboard layout
+###############################################################################
+# TODO
+## Modify // Next Layout // <><Alt> BackSpace ##
+bindsym $mod+Mod1+BackSpace input * xkb_switch_layout next
+
+## Modify // Prev Layout // <><Alt><Shift> BackSpace ##
+bindsym $mod+Mod1+Shift+BackSpace input * xkb_switch_layout prev
+
+###############################################################################
+# gaps Window Resize
+###############################################################################
+bindsym $mod+minus gaps inner current minus 6
+bindsym $mod+plus gaps inner current plus 6
+
+###############################################################################
+# gaps Appearance and Behavior
+###############################################################################
+
+# Specify the distance between windows in pixels
+gaps inner 5
+gaps outer 0
+
+# Only enable gaps on a workspace when there is at least one container
+smart_gaps on
+
+## Navigate // Next Free Workspace // <> ` ##
+bindsym $mod+grave exec --no-startup-id childe
+
+## Modify // Move Window to Next Free Workspace // <><Shift> ` ##
+bindsym $mod+Shift+grave exec --no-startup-id childe --move-window
+
+## Modify // Carry Window to Next Free Workspace // <><Alt> ` ##
+bindsym $mod+$alt+grave exec --no-startup-id childe --move-window --follow
+# Provide window class to float above tiled windows
+floating_maximum_size -1 x -1
+for_window [class="floating_window"] floating enable
+
+# Set titlebar mode
+default_floating_border pixel 1
+default_border pixel 1
+
+# Work-around for bug in 4.21, remove when fixed
+# See https://github.com/i3/i3/issues/5149
+for_window [title=".*"] border pixel 1
+
+# Enable popup during fullscreen
+popup_during_fullscreen smart
+
+# window focus follows your mouse movements as the mouse crosses window borders
+focus_follows_mouse no
+
+# Hiding borders adjacent to the screen edges.
+# The "smart" setting hides borders on workspaces with only one window visible.
+hide_edge_borders smart
+## Session // Lock Screen // <> Escape ##
+bindsym $mod+Escape exec gtklock --background $(trawlcat regolith.lockscreen.wallpaper.file /dev/null)
+
+###############################################################################
+# Session Management
+###############################################################################
+exec_always swaymsg -t send_tick '{"status": "reload_done"}'
+
+## Session // Exit App // <><Shift> q ##
+bindsym $mod+q [con_id="__focused__"] kill
+
+## Session // Terminate App // <><Alt> q ##
+bindsym $mod+$alt+q [con_id="__focused__"] exec --no-startup-id kill -9 $(xdotool getwindowfocus getwindowpid)
+
+## Session // Reload Sway Config // <><Shift> c ##
+bindsym $mod+Shift+c exec swaymsg -t send_tick '{"status": "reload_pending"}' && swaymsg reload
+
+## Session // Refresh Session // <><Shift> r ##
+bindsym $mod+Shift+r exec /usr/bin/regolith-look refresh
+
+## Session // Logout // <><Shift> e ##
+bindsym $mod+Shift+e exec "swaynag -t warning -m 'Do you really want to logout?' -b 'Logout' '/usr/bin/gnome-session-quit --logout --no-prompt && swaymsg exit'"
+
+## Session // Reboot // <><Shift> b ##
+bindsym $mod+Shift+b exec "swaynag -t warning -m 'Do you really want to reboot your system?' -b 'Reboot' '/usr/bin/gnome-session-quit --reboot --no-prompt'" 
+
+## Session // Power Down // <><Shift> p ##
+bindsym $mod+Shift+p exec "swaynag -t warning -m 'Do you really want to shutdown' -b 'Shutdown' '/usr/bin/gnome-session-quit --power-off --no-prompt'" 
+
+## Session // Sleep // <><Shift> s ##
+bindsym --locked $mod+Shift+s exec systemctl suspend
+
+###############################################################################
+# System Management
+###############################################################################
+## Modify // Settings // <> c ##
+bindsym $mod+c exec --no-startup-id regolith-control-center
+
+## Modify // Display Settings // <> d ##
+bindsym $mod+d exec --no-startup-id regolith-control-center display
+
+## Modify // Bluetooth Settings // <> b ##
+bindsym $mod+b exec --no-startup-id regolith-control-center bluetooth
+
+## Launch // File Browser // <><Shift> n ##
+bindsym $mod+Shift+n exec --no-startup-id /usr/bin/nautilus --new-window
+
+for_window [app_id="org.regolith.Settings"] floating enable
+
+### Bindings managed by gsd_media_keys
+
+# Volume Controls
+bindsym --locked XF86AudioRaiseVolume exec volumectl -u + 5
+bindsym --locked XF86AudioLowerVolume exec volumectl -u - 5
+bindsym --locked XF86AudioMute exec volumectl %
+bindsym --locked XF86AudioMicMute exec volumectl -m %
+
+# Brightness Controls
+bindsym XF86MonBrightnessUp exec lightctl + 5
+bindsym XF86MonBrightnessDown exec lightctl - 5
+
+# Player Controls
+# The keycodes 172 and 208 are both bound to XF86AudioPlay but have different meanings
+bindcode --locked 172 exec playerctl play-pause
+bindcode --locked 208 exec playerctl play
+bindsym --locked XF86AudioPause exec playerctl pause   
+bindsym --locked XF86AudioNext exec playerctl next
+bindsym --locked XF86AudioPrev exec playerctl previous
+
+# Start avizo for overlays
+exec avizo-service
+
+# Start Playerctl service
+exec playerctld daemon
+
+###############################################################################
+# i3 Bar
+###############################################################################
+
+# The bar configuration
+bar {
+  position bottom
+  mode dock
+  font pango:monospace
+  separator_symbol " "
+  status_command i3status-rs /etc/regolith/i3status-rust/config.toml
+  strip_workspace_numbers yes
+  workspace_min_width 36
+
+  colors {
+      background $wm.bar.background.color
+      statusline $wm.bar.statusline.color
+      separator  $wm.bar.separator.color
+
+#                        BORDER  BACKGROUND TEXT
+      focused_workspace  $wm.bar.workspace.focused.border.color      $wm.bar.workspace.focused.background.color   $wm.bar.workspace.focused.text.color
+      active_workspace   $wm.bar.workspace.active.border.color       $wm.bar.workspace.active.background.color    $wm.bar.workspace.active.text.color
+      inactive_workspace $wm.bar.workspace.inactive.border.color     $wm.bar.workspace.inactive.background.color  $wm.bar.workspace.inactive.text.color
+      urgent_workspace   $wm.bar.workspace.urgent.border.color       $wm.bar.workspace.urgent.background.color    $wm.bar.workspace.urgent.text.color
+  }
+}
+
+## Session // Window Snapshot // <><Prtscr> ##
+bindsym $mod+Print exec grimshot copy active
+
+## Session // Screenshot // <><Shift><Prtscr> ##
+bindsym $mod+Shift+Print exec grimshot --notify savecopy anything
+
+## Session // Capture All Screens // <><Shift><Ctrl><Prtscr> ##
+bindsym $mod+Shift+Ctrl+Print exec grimshot --notify save screen
+exec_always --no-startup-id /usr/bin/regolith-set-swaybgexec_always systemctl restart --user regolith-init-kanshi.service
+exec sway-audio-idle-inhibit
+exec mate-polkit
+# Hide the mouse pointer if unused for a duration
+seat * hide_cursor 5000 
+seat * hide_cursor when-typing enable
+bindswitch --locked --reload lid:on exec regolith-sway-clamshell LID_CLOSE
+bindswitch --locked --reload lid:off exec regolith-sway-clamshell LID_OPEN
