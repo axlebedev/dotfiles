@@ -1,3 +1,7 @@
+output * nvidia {
+    drm_privileged 1
+}
+
 # Start the systemd target manually is the session is not started by systemd
 # Notify systemd about successful session start otherwise
 exec --no-startup-id [ -z "${NOTIFY_SOCKET-}" ] \
@@ -7,9 +11,17 @@ exec --no-startup-id [ -z "${NOTIFY_SOCKET-}" ] \
 ###############################################################################
 # wm config file for the Regolith Desktop Environment
 ###############################################################################
-# Meta Key - Alt key is Mod1, and Windows key is Mod4
+# Mod4 = Windows key 
 set $mod Mod4
+# Mod1 = Alt key 
 set $alt Mod1
+
+# TODO: po4emu-to ne rabotaet
+input * {
+    xkb_layout us,ru
+    xkb_options grp:shift_caps_switch
+    xkb_options kpdl:dot
+}
 
 ###############################################################################
 # Colors and Fonts
