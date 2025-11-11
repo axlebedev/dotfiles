@@ -42,7 +42,7 @@ do
 
     if [ "$getname" = "Volume" ] 
     then
-        pavucontrol --tab=3 --class="floating" > /dev/null 2>&1 &
+        regolith-control-center sound > /dev/null 2>&1 &
     fi
     
     if [ "$getname" = "Language" ] 
