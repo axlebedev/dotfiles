@@ -1,3 +1,6 @@
+# TODO: sound up, sound down, sound show, mute: make it work
+# TODO: switch-to-english-on-terminal-focus: make it work
+
 # Meta Key - Alt key is Mod1, and Windows key is Mod4
 set $mod  Mod4
 set $alt  Mod1
@@ -48,10 +51,10 @@ exec --no-startup-id /usr/bin/regolith-ftue
 # Load nm-applet to provide auth dialogs for network access
 exec --no-startup-id /usr/bin/nm-applet
 
+# default regolith's exec's
 exec --no-startup-id systemctl --user import-environment XDG_CURRENT_DESKTOP DISPLAY I3SOCK
 exec --no-startup-id hash dbus-update-activation-environment 2>/dev/null && \
      dbus-update-activation-environment --systemd XDG_CURRENT_DESKTOP DISPLAY I3SOCK
-
 exec --no-startup-id /usr/libexec/gnome-flashback-media-keys
 
 # Start the installed regolith-compositor
@@ -70,9 +73,6 @@ exec --no-startup-id indicator-sound-switcher
 # Usage: $0 <config> [OUTPUT_PRIMARY] [OUTPUT_LEFT] [OUTPUT_RIGHT]
 # exec --no-startup-id $HOME/.i3/monitors.sh HDMI-0
 
-exec --no-startup-id nm-applet
-exec --no-startup-id pasystray
-
 # Чтобы numpad-dot всегда давал точку а не запятую - надо в /usr/share/X11/xkb/symbols/ru удалить вызов kpdl(comma)
 exec_always setxkbmap -model pc105 -layout us,ru -option grp:shift_caps_switch -option kpdl:dot
 
@@ -83,7 +83,6 @@ exec --no-startup-id syndaemon -i .3 -d -t -K
 
 exec --no-startup-id gnome-keyring-daemon
 exec --no-startup-id touchpad-indicator
-exec --no-startup-id mailnag
 
 # Heal short left shift
 exec --no-startup-id xmodmap -e "keycode 94 = Shift_L"   
@@ -184,7 +183,7 @@ bindsym $mod+shift+n move container to workspace next_on_output; workspace next_
 bindsym $mod+p workspace prev_on_output
 bindsym $mod+shift+p move container to workspace prev_on_output; workspace prev_on_output
 
-## Navigate // Last Focused Window // <> . ##
+## Navigate // Last Focused Window
 exec --no-startup-id i3-swap-focus
 bindsym $mod+period exec --no-startup-id pkill -USR1 -F "${XDG_RUNTIME_DIR}/swap_focus.pid"
 
@@ -234,22 +233,16 @@ bindsym $mod+Shift+Ctrl+7 move container to workspace number 17; workspace numbe
 bindsym $mod+Shift+Ctrl+8 move container to workspace number 18; workspace number 18
 bindsym $mod+Shift+Ctrl+9 move container to workspace number 19; workspace number 19
 
-## Launch // Terminal // <> Enter ##
 bindsym $mod+Return exec --no-startup-id xkb-switch -s us | systemd-run --user --scope /usr/bin/x-terminal-emulator
 
-bindsym ctrl+F9 exec gromit-mpx --active
-
-## Session // Exit App // <><Shift> q ##
 bindsym $mod+q [con_id="__focused__"] kill
 bindsym --release $mod+shift+q exec xkill
-## Session // Terminate App // <><Alt> q ##
 bindsym $mod+$alt+q [con_id="__focused__"] exec --no-startup-id kill -9 $(xdotool getwindowfocus getwindowpid)
 
-## Session // Refresh Session // <><Shift> r ##
 # bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r exec --no-startup-id /usr/bin/regolith-look refresh
 
-# Pulse Audio controls
+# Pulse Audio controls TODO
 bindsym XF86AudioLowerVolume exec amixer -D pulse sset Master 2%- & killall -USR1 i3status 
 bindsym XF86AudioRaiseVolume exec amixer -D pulse sset Master 2%+ & killall -USR1 i3status 
 bindsym XF86AudioMute exec amixer -D pulse sset Master toggle & killall -USR1 i3status 
@@ -257,7 +250,6 @@ bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 bindsym XF86AudioStop exec playerctl stop
-
 # bindsym $mod+plus exec amixer -D pulse sset Master 2%+ & killall -USR1 i3status 
 bindsym $mod+plus exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +2% & killall -USR1 i3status
 # bindsym $mod+minus exec amixer -D pulse sset Master 2%- & killall -USR1 i3status 
@@ -276,6 +268,13 @@ for_window [class="XEyes"] floating enable border none focus
 bindsym Print exec flameshot gui
 bindsym $mod+F12 exec flameshot gui
 
+# work
+bindsym $mod+Shift+y exec --no-startup-id ~/.i3/tools-rofi.sh  "google-chrome --user-data-dir=\"/home/user/chrome-users/debug\"\ngnome-terminal --class=\"floating\" -- vim ~/passwords"
+
+# utils
+bindsym $mod+u exec --no-startup-id ~/.i3/tools-rofi.sh "Gromit-mpx\nVokoscreenNG\nScreenruler\nMagnifier\nnotify-send 'PAUSE notifications' | dunstctl set-paused true\ndunstctl set-paused false | notify-send 'RESUME notifications'\nyandex-browser"
+
+
 ###################################################################################################
 # bindings }}}
 ###################################################################################################
@@ -284,7 +283,6 @@ bindsym $mod+F12 exec flameshot gui
 # modes {{{
 ###################################################################################################
 
-## Resize // Enter Resize Mode // <> r ##
 set $resize_value 5
 set $mode_resize "Resize (L) (H) (J) (K)"
 mode $mode_resize {
@@ -346,48 +344,6 @@ mode $mode_move_workspace {
     bindsym Escape mode "default"
 }
 bindsym $mod+Shift+m mode $mode_move_workspace 
-
-
-# Work
-set $mode_work "Work (D)ebug (S)quadus (P)asswords (T)imetrack"
-mode $mode_work {
-    bindsym $mod+d mode "default" ; exec --no-startup-id nohup google-chrome --user-data-dir="/home/user/chrome-users/debug" & disown
-    bindsym $mod+s mode "default" ; exec --no-startup-id nohup google-chrome --app="https://im.ncloudtech.ru/rooms" & disown
-    bindsym $mod+p mode "default" ; exec --no-startup-id nohup gnome-terminal --class="floating" -- vim ~/passwords & disown
-    bindsym $mod+t mode "default" ; exec --no-startup-id nohup google-chrome --app="https://web.telegram.org/a/#-1002598035034" & disown
-
-    # back to normal: Enter or Escape
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-bindsym $mod+Shift+y mode $mode_work
-
-# Utils
-set $mode_utils "UTILS: Notifications (N)off (M)on | (L)ebedev-bro"
-mode $mode_utils {
-    bindsym $mod+n mode "default" ; exec --no-startup-id notify-send "PAUSE notifications" ; exec --no-startup-id dunstctl set-paused true
-    bindsym $mod+m mode "default" ; exec --no-startup-id dunstctl set-paused false ; exec --no-startup-id notify-send "RESUME notifications"
-    bindsym $mod+l mode "default" ; exec --no-startup-id nohup yandex-browser & disown
-
-    # back to normal: Enter or Escape
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-bindsym $mod+Shift+u mode $mode_utils
-
-# Tools
-set $mode_tools "TOOLS: (G)romit-mpx | (V)okoscreenNG | (S)creenruler | (M)agnifier"
-mode $mode_tools {
-    bindsym $mod+g mode "default" ; exec --no-startup-id gromit-mpx --active & disown
-	bindsym $mod+v mode "default" ; exec --no-startup-id exec $HOME/.i3/runOrKill.sh vokoscreenNG
-	bindsym $mod+s mode "default" ; exec --no-startup-id nohup screenruler & disown
-	bindsym $mod+m mode "default" ; exec --no-startup-id nohup xzoom & disown
-
-# back to normal: Enter or Escape
-	bindsym Return mode "default"
-	bindsym Escape mode "default"
-}
-bindsym $mod+u mode $mode_utils
 
 # Gaps
 set $mode_gaps "GAPS: h j k l"
