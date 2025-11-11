@@ -187,7 +187,6 @@ omf install sudope # TODO: разобраться и настроить
 # for z: https://github.com/rupa/z/blob/master/z.sh to $path
 omf install z # TODO разобраться и навешать алиасов
 
-# TODO: это я пропустил
 # ----- install i3-lock (now it is i3lock-color)
 # i3lock установить в соотв. с инструкцией, всё должно собраться 
 # https://github.com/Raymo111/i3lock-color

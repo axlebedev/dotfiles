@@ -43,8 +43,6 @@ exec --no-startup-id [ -z "${NOTIFY_SOCKET-}" ] \
   && systemctl --user start regolith-x11.target \
   || systemd-notify --ready
 
-# Start Rofication for notifications
-exec --no-startup-id /usr/bin/rofication-daemon
 # Launch first time user experience script
 exec --no-startup-id /usr/bin/regolith-ftue
 # Load nm-applet to provide auth dialogs for network access
@@ -69,9 +67,6 @@ exec --no-startup-id flameshot
 
 exec --no-startup-id indicator-sound-switcher
 
-# Чтобы курсор пропадал при вводе с клавиатуры TODO: nado li eto?
-# exec --no-startup-id xbanish -i all -s -t 3
-
 # Usage: $0 <config> [OUTPUT_PRIMARY] [OUTPUT_LEFT] [OUTPUT_RIGHT]
 # exec --no-startup-id $HOME/.i3/monitors.sh HDMI-0
 
@@ -79,7 +74,8 @@ exec --no-startup-id nm-applet
 exec --no-startup-id pasystray
 
 # Чтобы numpad-dot всегда давал точку а не запятую - надо в /usr/share/X11/xkb/symbols/ru удалить вызов kpdl(comma)
-exec --no-startup-id sleep 1 && setxkbmap -layout us,ru -option 'grp:shift_caps_switch' -option 'kpdl:dot'
+exec_always setxkbmap -model pc105 -layout us,ru -option grp:shift_caps_switch -option kpdl:dot
+
 exec $HOME/.i3/switch-to-english-on-terminal-focus.sh
 
 # Чтобы выключать тачпад при наборе текста
@@ -92,13 +88,7 @@ exec --no-startup-id mailnag
 # Heal short left shift
 exec --no-startup-id xmodmap -e "keycode 94 = Shift_L"   
 
-# TODO: eto prevent sound popping. Proverit', nado li eto
-# exec --no-startup-id pulseaudio --start
-# exec_always start-pulseaudio-x11
-
-# TODO monitor power saving options: 1 hour
-# exec --no-startup-id xset s 3600
-# exec --no-startup-id xset dpms 0 0 4600
+exec --no-startup-id dunst
 
 ###################################################################################################
 # exec }}}
@@ -218,12 +208,9 @@ bindsym $mod+Ctrl+Shift+l move workspace to output right
 
 bindsym $mod+f fullscreen toggle
 bindsym $mod+z sticky toggle
-# TODO
 bindsym $mod+Shift+f floating toggle
-bindsym $mod+Shift+t focus mode_toggle
+bindsym $mod+$alt+f focus mode_toggle
 
-# bindsym $mod+v split vertical
-# bindsym $mod+h split horizontal
 bindsym $mod+w layout toggle tabbed splitv splith
 
 # move focused container to workspace, move to workspace
@@ -247,48 +234,90 @@ bindsym $mod+Shift+Ctrl+7 move container to workspace number 17; workspace numbe
 bindsym $mod+Shift+Ctrl+8 move container to workspace number 18; workspace number 18
 bindsym $mod+Shift+Ctrl+9 move container to workspace number 19; workspace number 19
 
+## Launch // Terminal // <> Enter ##
+bindsym $mod+Return exec --no-startup-id xkb-switch -s us | systemd-run --user --scope /usr/bin/x-terminal-emulator
+
+bindsym ctrl+F9 exec gromit-mpx --active
+
+## Session // Exit App // <><Shift> q ##
+bindsym $mod+q [con_id="__focused__"] kill
+bindsym --release $mod+shift+q exec xkill
+## Session // Terminate App // <><Alt> q ##
+bindsym $mod+$alt+q [con_id="__focused__"] exec --no-startup-id kill -9 $(xdotool getwindowfocus getwindowpid)
+
+## Session // Refresh Session // <><Shift> r ##
+# bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r exec --no-startup-id /usr/bin/regolith-look refresh
+
+# Pulse Audio controls
+bindsym XF86AudioLowerVolume exec amixer -D pulse sset Master 2%- & killall -USR1 i3status 
+bindsym XF86AudioRaiseVolume exec amixer -D pulse sset Master 2%+ & killall -USR1 i3status 
+bindsym XF86AudioMute exec amixer -D pulse sset Master toggle & killall -USR1 i3status 
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioStop exec playerctl stop
+
+# bindsym $mod+plus exec amixer -D pulse sset Master 2%+ & killall -USR1 i3status 
+bindsym $mod+plus exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +2% & killall -USR1 i3status
+# bindsym $mod+minus exec amixer -D pulse sset Master 2%- & killall -USR1 i3status 
+bindsym $mod+minus exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -2% & killall -USR1 i3status
+
+bindsym $mod+t exec google-chrome --new-window  --app="https://web.telegram.org"
+
+bindsym $mod+d exec ulauncher
+
+bindsym $mod+c exec xdotool mousemove 200 200
+bindsym $mod+Shift+c exec xeyes
+# XEyes window should be floating, have no border, and be focused on open
+for_window [class="XEyes"] floating enable border none focus
+
+# sudo apt install flameshot
+bindsym Print exec flameshot gui
+bindsym $mod+F12 exec flameshot gui
+
+###################################################################################################
+# bindings }}}
+###################################################################################################
+
+###################################################################################################
+# modes {{{
+###################################################################################################
+
 ## Resize // Enter Resize Mode // <> r ##
 set $resize_value 5
 set $mode_resize "Resize (L) (H) (J) (K)"
 mode $mode_resize {
-        # These bindings trigger as soon as you enter the resize mode
-
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
         bindsym h resize shrink width $resize_value px or $resize_value ppt
         bindsym j resize grow height $resize_value px or $resize_value ppt
         bindsym k resize shrink height $resize_value px or $resize_value ppt
         bindsym l resize grow width $resize_value px or $resize_value ppt
 
-        # same bindings, but for the arrow keys
         bindsym Left resize shrink width $resize_value px or $resize_value ppt
         bindsym Down resize grow height $resize_value px or $resize_value ppt
         bindsym Up resize shrink height $resize_value px or $resize_value ppt
         bindsym Right resize grow width $resize_value px or $resize_value ppt
 
-        # back to normal: Enter or Escape
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
 bindsym $mod+r mode $mode_resize
 
-# TODO Create Log out, Reboot, Poweroff bindings
-# set $mode_poweroff "(E)xit, (P)oweroff, (R)eboot, lo(G)out, (L)oc(K) screen, (S)uspend"
-# mode $mode_poweroff {
-# 	bindsym $mod+g exec i3-msg exit
-# 	bindsym $mod+p exec systemctl poweroff
-# 	bindsym $mod+r exec systemctl reboot
-# 	bindsym $mod+s mode "default" ; exec systemctl suspend
-# 	bindsym $mod+k mode "default" ; exec $HOME/.i3/i3lock.sh 
-# 	bindsym $mod+l mode "default" ; exec $HOME/.i3/i3lock.sh 
-#
-# # back to normal: Enter or Escape
-# 	bindsym Return mode "default"
-# 	bindsym Escape mode "default"
-# }
-# bindsym $mod+Shift+e mode $mode_poweroff
+set $mode_poweroff "(E)xit, (P)oweroff, (R)eboot, lo(G)out, (L)oc(K) screen, (S)uspend"
+mode $mode_poweroff {
+	bindsym $mod+g exec i3-msg exit
+	bindsym $mod+p exec systemctl poweroff
+	bindsym $mod+r exec systemctl reboot
+	bindsym $mod+s mode "default" ; exec systemctl suspend
+	bindsym $mod+k mode "default" ; exec $HOME/.i3/i3lock.sh
+	bindsym $mod+l mode "default" ; exec $HOME/.i3/i3lock.sh
+
+# back to normal: Enter or Escape
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+bindsym $mod+Shift+e mode $mode_poweroff
+
 
 # Move workspace to another monitor
 set $mode_move_workspace "Move workspace to another monitor"
@@ -303,45 +332,46 @@ mode $mode_move_workspace {
     bindsym $mod+8 workspace number 8
     bindsym $mod+9 workspace number 9
     bindsym $mod+0 workspace number 10
-	bindsym $mod+Shift+l move workspace to output right; focus output left
-	bindsym $mod+Shift+h move workspace to output left; focus output right
-	bindsym $mod+Shift+j move workspace to output next; focus output prev
-	bindsym $mod+Shift+k move workspace to output prev; focus output next
+    bindsym $mod+Shift+l move workspace to output right; focus output left
+    bindsym $mod+Shift+h move workspace to output left; focus output right
+    bindsym $mod+Shift+j move workspace to output next; focus output prev
+    bindsym $mod+Shift+k move workspace to output prev; focus output next
     bindsym $mod+h focus output left
     bindsym $mod+j focus output down
     bindsym $mod+k focus output up
     bindsym $mod+l focus output right
 
-# back to normal: Enter or Escape
-	bindsym Return mode "default"
-	bindsym Escape mode "default"
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
 bindsym $mod+Shift+m mode $mode_move_workspace 
+
 
 # Work
 set $mode_work "Work (D)ebug (S)quadus (P)asswords (T)imetrack"
 mode $mode_work {
-	bindsym $mod+d mode "default" ; exec --no-startup-id nohup google-chrome --user-data-dir="/home/user/chrome-users/debug" & disown
-	bindsym $mod+s mode "default" ; exec --no-startup-id nohup google-chrome --app="https://im.ncloudtech.ru/rooms" & disown
-  bindsym $mod+p mode "default" ; exec --no-startup-id nohup gnome-terminal --class="floating" -- vim ~/passwords & disown
-	bindsym $mod+t mode "default" ; exec --no-startup-id nohup google-chrome --app="https://web.telegram.org/a/#-1002598035034" & disown
+    bindsym $mod+d mode "default" ; exec --no-startup-id nohup google-chrome --user-data-dir="/home/user/chrome-users/debug" & disown
+    bindsym $mod+s mode "default" ; exec --no-startup-id nohup google-chrome --app="https://im.ncloudtech.ru/rooms" & disown
+    bindsym $mod+p mode "default" ; exec --no-startup-id nohup gnome-terminal --class="floating" -- vim ~/passwords & disown
+    bindsym $mod+t mode "default" ; exec --no-startup-id nohup google-chrome --app="https://web.telegram.org/a/#-1002598035034" & disown
 
-# back to normal: Enter or Escape
-	bindsym Return mode "default"
-	bindsym Escape mode "default"
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
 bindsym $mod+Shift+y mode $mode_work
 
 # Utils
 set $mode_utils "UTILS: Notifications (N)off (M)on | (L)ebedev-bro"
 mode $mode_utils {
-	bindsym $mod+n mode "default" ; exec --no-startup-id notify-send "PAUSE notifications" ; exec --no-startup-id dunstctl set-paused true
-	bindsym $mod+m mode "default" ; exec --no-startup-id dunstctl set-paused false ; exec --no-startup-id notify-send "RESUME notifications"
-	bindsym $mod+l mode "default" ; exec --no-startup-id nohup yandex-browser & disown
+    bindsym $mod+n mode "default" ; exec --no-startup-id notify-send "PAUSE notifications" ; exec --no-startup-id dunstctl set-paused true
+    bindsym $mod+m mode "default" ; exec --no-startup-id dunstctl set-paused false ; exec --no-startup-id notify-send "RESUME notifications"
+    bindsym $mod+l mode "default" ; exec --no-startup-id nohup yandex-browser & disown
 
-# back to normal: Enter or Escape
-	bindsym Return mode "default"
-	bindsym Escape mode "default"
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
 bindsym $mod+Shift+u mode $mode_utils
 
@@ -360,112 +390,47 @@ mode $mode_tools {
 bindsym $mod+u mode $mode_utils
 
 # Gaps
-set $mode_gaps "GAPS: hjkl - minus (to edges), +shift - plus (to center)"
+set $mode_gaps "GAPS: h j k l"
+set $mode_gaps_left "GAPS: LEFT: h - l"
+set $mode_gaps_top "GAPS: TOP: j - k"
+set $mode_gaps_right "GAPS: RIGHT: h - l"
+set $mode_gaps_bottom "GAPS: BOTTOM: j - k"
 mode $mode_gaps {
-    bindsym h gaps left current minus 5
-    bindsym Shift+h gaps left current plus 5
-    bindsym j gaps bottom current minus 5
-    bindsym Shift+j gaps bottom current plus 5
-    bindsym k gaps top current minus 5
-    bindsym Shift+k gaps top current plus 5
-    bindsym l gaps right current minus 5
-    bindsym Shift+l gaps right current plus 5
+    bindsym h mode $mode_gaps_left
+    bindsym j mode $mode_gaps_bottom
+    bindsym k mode $mode_gaps_top
+    bindsym l mode $mode_gaps_right
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
+mode $mode_gaps_left {
+    bindsym h gaps left current minus 5
+    bindsym l gaps left current plus 5
+    bindsym Return mode $mode_gaps
+    bindsym Escape mode $mode_gaps
+}
+mode $mode_gaps_right {
+    bindsym l gaps right current minus 5
+    bindsym h gaps right current plus 5
+    bindsym Return mode $mode_gaps
+    bindsym Escape mode $mode_gaps
+}
+mode $mode_gaps_top {
+    bindsym k gaps top current minus 5
+    bindsym j gaps top current plus 5
+    bindsym Return mode $mode_gaps
+    bindsym Escape mode $mode_gaps
+}
+mode $mode_gaps_bottom {
+    bindsym j gaps bottom current minus 5
+    bindsym k gaps bottom current plus 5
+    bindsym Return mode $mode_gaps
+    bindsym Escape mode $mode_gaps
+}
 bindsym $mod+Shift+g mode $mode_gaps
 
-## Launch // Terminal // <> Enter ##
-bindsym $mod+Return exec --no-startup-id xkb-switch -s us | systemd-run --user --scope /usr/bin/x-terminal-emulator
-# bindsym $mod+Return exec xkb-switch -s us | exec --no-startup-id systemd-run --user --scope /usr/bin/x-terminal-emulator
-
-## Launch // Notification Viewer // <> n ##
-bindsym Ctrl+space exec --no-startup-id ilia -p notifications
-
-# Regolith shit, TODO {{{
-# Load stylesheet if exists
-set_from_resource $ilia.stylesheet ilia.stylesheet
-
-## Launch // Application // <> space ##
-# bindsym $mod+space exec --no-startup-id ilia -p apps -t $ilia.stylesheet
-
-## Launch // Command // <><Shift> space ##
-bindsym $mod+Shift+space exec --no-startup-id ilia -p terminal -t $ilia.stylesheet
-
-## Launch // Keybinding Viewer // <><Shift> ? ##
-bindsym $mod+Shift+question exec --no-startup-id ilia -p keybindings -a -t $ilia.stylesheet
-
-## Navigate // Window by Name // <><Ctrl> space ##
-bindsym $mod+Ctrl+space exec --no-startup-id ilia -p windows -t $ilia.stylesheet
-
-## Launch // File Search // <><Alt> space ##
-bindsym $mod+$alt+space exec --no-startup-id ilia -p tracker -t $ilia.stylesheet
-
-## Launch // Look Selector // <><Alt> l ##
-bindsym $mod+$alt+l exec --no-startup-id regolith-look-selector -t $ilia.stylesheet
-# Regolith shit, TODO }}}
-
-# session management TODO {{{
-## Session // Exit App // <><Shift> q ##
-bindsym $mod+q [con_id="__focused__"] kill
-bindsym --release $mod+shift+q exec xkill
-## Session // Terminate App // <><Alt> q ##
-bindsym $mod+$alt+q [con_id="__focused__"] exec --no-startup-id kill -9 $(xdotool getwindowfocus getwindowpid)
-
-## Session // Reload WM Config // <><Shift> c ##
-# bindsym $mod+Shift+c reload
-
-## Session // Refresh Session // <><Shift> r ##
-bindsym $mod+Ctrl+r exec --no-startup-id /usr/bin/regolith-look refresh
-
-## Session // Restart WM // <><Ctrl> r ##
-bindsym $mod+Shift+r restart
-
-## Session // Logout // <><Shift> e ##
-bindsym $mod+Shift+e exec /usr/bin/gnome-session-quit --logout
-
-## Session // Reboot // <><Shift> b ##
-bindsym $mod+Shift+b exec /usr/bin/gnome-session-quit --reboot
-
-## Session // Power Down // <><Shift> p ##
-# bindsym $mod+Shift+p exec /usr/bin/gnome-session-quit --power-off
-
-## Session // Lock Screen // <> Escape ##
-bindsym $mod+Escape exec dbus-send --type=method_call --dest=org.gnome.ScreenSaver /org/gnome/ScreenSaver org.gnome.ScreenSaver.Lock
-
-## Session // Sleep // <><Shift> s ##
-bindsym $mod+Shift+s exec systemctl suspend
-# }}}
-
-bindsym ctrl+F9 exec gromit-mpx --active
-
-# Pulse Audio controls
-bindsym XF86AudioLowerVolume exec amixer -D pulse sset Master 2%- & killall -USR1 i3status 
-bindsym XF86AudioRaiseVolume exec amixer -D pulse sset Master 2%+ & killall -USR1 i3status 
-bindsym XF86AudioMute exec amixer -D pulse sset Master toggle & killall -USR1 i3status 
-bindsym XF86AudioPlay exec playerctl play-pause
-bindsym XF86AudioNext exec playerctl next
-bindsym XF86AudioPrev exec playerctl previous
-bindsym XF86AudioStop exec playerctl stop
-
-bindsym $mod+plus exec amixer -D pulse sset Master 2%+ & killall -USR1 i3status 
-bindsym $mod+minus exec amixer -D pulse sset Master 2%- & killall -USR1 i3status 
-
-bindsym $mod+t exec google-chrome --new-window  --app="https://web.telegram.org"
-
-bindsym $mod+d exec ulauncher
-
-bindsym $mod+c exec xdotool mousemove 200 200
-bindsym $mod+Shift+c exec xeyes
-# XEyes window should be floating, have no border, and be focused on open
-for_window [class="XEyes"] floating enable border none focus
-
-# sudo apt install flameshot
-bindsym Print exec flameshot gui
-bindsym $mod+F12 exec flameshot gui
-
 ###################################################################################################
-# bindings }}}
+# modes }}}
 ###################################################################################################
 
 ###################################################################################################
