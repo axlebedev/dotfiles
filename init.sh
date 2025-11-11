@@ -30,6 +30,9 @@ ln -s ~/dotfiles/.vim/coc-settings.json ~/.vim/coc-settings.json
 rm -rf ~/.vim/pack
 ln -s ~/dotfiles/.vim/pack ~/.vim/pack
 
+rm -rf ~/.config/regolith3
+ln -s ~/dotfiles/regolith3 ~/.config/regolith3
+
 rm -rf ~/.i3
 ln -s ~/dotfiles/.i3 ~/.i3
 
