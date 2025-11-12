@@ -30,6 +30,9 @@ ln -s ~/dotfiles/.vim/coc-settings.json ~/.vim/coc-settings.json
 rm -rf ~/.vim/pack
 ln -s ~/dotfiles/.vim/pack ~/.vim/pack
 
+rm -rf ~/.config/regolith3
+ln -s ~/dotfiles/regolith3 ~/.config/regolith3
+
 rm -rf ~/.i3
 ln -s ~/dotfiles/.i3 ~/.i3
 
@@ -46,9 +49,5 @@ ln -s ~/dotfiles/fish/config.fish ~/.config/fish/config.fish
 mkdir ~/.config/kitty
 rm -rf ~/.config/kitty/kitty.conf
 ln -s ~/dotfiles/kitty.conf ~/.config/kitty/kitty.conf
-
-mkdir ~/.config/alacritty
-rm -rf ~/.config/alacritty/alacritty.toml
-ln -s ~/dotfiles/alacritty.toml ~/.config/alacritty/alacritty.toml
 
 echo "source ~/dotfiles/.env" >> ~/.profile

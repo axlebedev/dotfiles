@@ -1,0 +1,368 @@
+output * nvidia {
+    drm_privileged 1
+}
+
+# Start the systemd target manually is the session is not started by systemd
+# Notify systemd about successful session start otherwise
+exec --no-startup-id [ -z "${NOTIFY_SOCKET-}" ] \
+  && systemctl --user start regolith-wayland.target \
+  || systemd-notify --ready
+
+###############################################################################
+# wm config file for the Regolith Desktop Environment
+###############################################################################
+# Mod4 = Windows key 
+set $mod Mod4
+# Mod1 = Alt key 
+set $alt Mod1
+
+# TODO: po4emu-to ne rabotaet
+input * {
+    xkb_layout us,ru
+    xkb_options grp:shift_caps_switch
+    xkb_options kpdl:dot
+}
+
+###############################################################################
+# Colors and Fonts
+###############################################################################
+
+# Window Border color
+# class                 border     background   text        indicator   child_border
+client.focused          "#002b36"  "#586e75"    "#fdf6e3"   "#268bd2"
+client.focused_inactive "#002b36"  "#073642"    "#839496"   "#073642"
+client.unfocused        "#002b36"  "#073642"    "#839496"   "#073642"
+client.urgent           "#002b36"  "#dc322f"    "#fdf6e3"   "#002b36"
+
+# Sets wm font for dialogs
+font pango:Sans 16
+
+###############################################################################
+# Bar
+###############################################################################
+bar {
+  position bottom
+  mode dock
+  font pango:monospace
+  separator_symbol " "
+  status_command i3status-rs /etc/regolith/i3status-rust/config.toml
+  strip_workspace_numbers yes
+  workspace_min_width 36
+
+  colors {
+      background "#002b36"
+      statusline "#93a1a1"
+      separator  "#268bd2"
+
+#                        BORDER      BACKGROUND   TEXT
+      focused_workspace  "#073642"   "#073642"    "#eee8d5"
+      active_workspace   "#073642"   "#073642"    "#586e75"
+      inactive_workspace "#002b36"   "#002b36"    "#586e75"
+      urgent_workspace   "#dc322f"   "#dc322f"    "#fdf6e3"
+  }
+}
+
+###################################################################################################
+################## settings options config
+###################################################################################################
+workspace_auto_back_and_forth yes
+floating_modifier $mod
+# Specify the distance between windows in pixels
+gaps inner 5
+gaps outer 0
+# Only enable gaps on a workspace when there is at least one container
+smart_gaps on
+
+floating_maximum_size -1 x -1
+for_window [class="floating_window"] floating enable
+
+# Set titlebar mode
+default_floating_border pixel 1
+default_border pixel 1
+# Work-around for bug in 4.21, remove when fixed (see https://github.com/i3/i3/issues/5149 )
+for_window [title=".*"] border pixel 1
+
+# Enable popup during fullscreen
+popup_during_fullscreen smart
+
+# window focus follows your mouse movements as the mouse crosses window borders
+focus_follows_mouse no
+
+for_window [app_id="org.regolith.Settings"] floating enable
+
+# Hiding borders adjacent to the screen edges.
+# The "smart" setting hides borders on workspaces with only one window visible.
+hide_edge_borders smart
+
+# Hide the mouse pointer if unused for a duration
+seat * hide_cursor 5000 
+seat * hide_cursor when-typing enable
+bindswitch --locked --reload lid:on exec regolith-sway-clamshell LID_CLOSE
+bindswitch --locked --reload lid:off exec regolith-sway-clamshell LID_OPEN
+
+###################################################################################################
+################## exec
+###################################################################################################
+# Start Rofication for notifications
+exec --no-startup-id /usr/bin/rofication-daemon
+# Launch first time user experience script
+exec --no-startup-id /usr/bin/regolith-ftue
+# Load nm-applet to provide auth dialogs for network access
+exec --no-startup-id /usr/bin/nm-applet
+
+exec systemctl --user import-environment XDG_CURRENT_DESKTOP DISPLAY WAYLAND_DISPLAY SWAYSOCK I3SOCK
+exec hash dbus-update-activation-environment 2>/dev/null && \
+     dbus-update-activation-environment --systemd XDG_CURRENT_DESKTOP DISPLAY WAYLAND_DISPLAY SWAYSOCK I3SOCK
+
+exec_always swaymsg -t send_tick '{"status": "reload_done"}'
+
+# Start avizo for overlays
+exec avizo-service
+
+# Start Playerctl service
+exec playerctld daemon
+
+exec_always --no-startup-id /usr/bin/regolith-set-swaybgexec_always systemctl restart --user regolith-init-kanshi.service
+exec sway-audio-idle-inhibit
+exec mate-polkit
+
+###################################################################################################
+################## bind
+###################################################################################################
+## Terminal 
+bindsym $mod+Return exec --no-startup-id systemd-run --user --scope /usr/bin/x-terminal-emulator
+
+###############################################################################
+# Window and Workspace Navigation
+###############################################################################
+bindsym $mod+a focus parent
+bindsym $mod+z focus child
+
+bindsym $mod+Left  focus left
+bindsym $mod+Down  focus down
+bindsym $mod+Up    focus up
+bindsym $mod+Right focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+## Navigate // Workspaces 1-10 // <> 0..9 ##
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 10
+## Navigate // Workspace 11 - 19 // <><Ctrl> 1..9 ##
+bindsym $mod+Ctrl+1 workspace number 11
+bindsym $mod+Ctrl+2 workspace number 12
+bindsym $mod+Ctrl+3 workspace number 13
+bindsym $mod+Ctrl+4 workspace number 14
+bindsym $mod+Ctrl+5 workspace number 15
+bindsym $mod+Ctrl+6 workspace number 16
+bindsym $mod+Ctrl+7 workspace number 17
+bindsym $mod+Ctrl+8 workspace number 18
+bindsym $mod+Ctrl+9 workspace number 19
+
+bindsym $mod+n workspace next_on_output
+bindsym $mod+p workspace prev_on_output
+
+## Navigate // Last Focused Window // <> . ##
+exec --no-startup-id i3-swap-focus
+bindsym $mod+period exec --no-startup-id pkill -USR1 -F "${XDG_RUNTIME_DIR}/swap_focus.pid"
+
+###############################################################################
+# Window and Workspace Configuration
+###############################################################################
+bindsym $mod+Shift+Left  move left
+bindsym $mod+Shift+Down  move down
+bindsym $mod+Shift+Up    move up
+bindsym $mod+Shift+Right move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+bindsym $mod+Ctrl+Shift+Left  move workspace to output left
+bindsym $mod+Ctrl+Shift+Right move workspace to output right
+bindsym $mod+Ctrl+Shift+Up    move workspace to output up
+bindsym $mod+Ctrl+Shift+Down  move workspace to output down
+bindsym $mod+Ctrl+Shift+h move workspace to output left
+bindsym $mod+Ctrl+Shift+j move workspace to output down
+bindsym $mod+Ctrl+Shift+k move workspace to output up
+bindsym $mod+Ctrl+Shift+l move workspace to output right
+
+bindsym $mod+f fullscreen toggle
+# TODO
+bindsym $mod+Shift+f floating toggle
+bindsym $mod+Shift+t focus mode_toggle
+
+# bindsym $mod+v split vertical
+# bindsym $mod+h split horizontal
+bindsym $mod+w layout toggle tabbed splitv splith
+
+# move focused container to workspace, move to workspace
+bindsym $mod+Shift+1      move container to workspace number 1; workspace number 1
+bindsym $mod+Shift+2      move container to workspace number 2; workspace number 2
+bindsym $mod+Shift+3      move container to workspace number 3; workspace number 3
+bindsym $mod+Shift+4      move container to workspace number 4; workspace number 4
+bindsym $mod+Shift+5      move container to workspace number 5; workspace number 5
+bindsym $mod+Shift+6      move container to workspace number 6; workspace number 6
+bindsym $mod+Shift+7      move container to workspace number 7; workspace number 7
+bindsym $mod+Shift+8      move container to workspace number 8; workspace number 8
+bindsym $mod+Shift+9      move container to workspace number 9; workspace number 9
+bindsym $mod+Shift+0      move container to workspace number 10; workspace number 10
+bindsym $mod+Shift+Ctrl+1 move container to workspace number 11; workspace number 11
+bindsym $mod+Shift+Ctrl+2 move container to workspace number 12; workspace number 12
+bindsym $mod+Shift+Ctrl+3 move container to workspace number 13; workspace number 13
+bindsym $mod+Shift+Ctrl+4 move container to workspace number 14; workspace number 14
+bindsym $mod+Shift+Ctrl+5 move container to workspace number 15; workspace number 15
+bindsym $mod+Shift+Ctrl+6 move container to workspace number 16; workspace number 16
+bindsym $mod+Shift+Ctrl+7 move container to workspace number 17; workspace number 17
+bindsym $mod+Shift+Ctrl+8 move container to workspace number 18; workspace number 18
+bindsym $mod+Shift+Ctrl+9 move container to workspace number 19; workspace number 19
+
+## Resize // Enter Resize Mode // <> r ##
+set $resize 6
+mode "Resize Mode" {
+        bindsym Left resize shrink width $resize px or $resize ppt
+        bindsym Down resize grow height $resize px or $resize ppt
+        bindsym Up resize shrink height $resize px or $resize ppt
+        bindsym Right resize grow width $resize px or $resize ppt
+
+        bindsym h resize shrink width $resize px or $resize ppt
+        bindsym k resize grow height $resize px or $resize ppt
+        bindsym j resize shrink height $resize px or $resize ppt
+        bindsym l resize grow width $resize px or $resize ppt
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+bindsym $mod+r mode "Resize Mode"
+
+## Launch // Notification Viewer // <> n ##
+bindsym Ctrl+Space exec --no-startup-id ilia -p notifications
+
+###################################################################################################
+################## SWAYFILE 
+###################################################################################################
+
+# {{{ ilia
+# Load stylesheet if exists
+set_from_resource $ilia.stylesheet ilia.stylesheet
+
+## Launch // Application // <> Space ##
+bindsym $mod+space exec --no-startup-id ilia -p apps -t $ilia.stylesheet
+
+## Launch // Command // <><Shift> Space ##
+bindsym $mod+Shift+space exec --no-startup-id ilia -p terminal -t $ilia.stylesheet
+
+## Launch // Keybinding Viewer // <><Shift> ? ##
+bindsym --to-code $mod+question exec --no-startup-id ilia -p keybindings -a -t $ilia.stylesheet
+
+## Navigate // Window by Name // <><Ctrl> Space ##
+bindsym $mod+Ctrl+space exec --no-startup-id ilia -p windows -t $ilia.stylesheet
+
+## Launch // File Search // <><Alt> Space ##
+bindsym $mod+$alt+space exec --no-startup-id ilia -p tracker -t $ilia.stylesheet
+
+## Launch // Look Selector // <><Alt> l ##
+bindsym $mod+$alt+l exec --no-startup-id regolith-look-selector -t $ilia.stylesheet
+exec systemctl start --user xdg-desktop-portal.service
+# }}}
+
+###############################################################################
+# Cycle Keyboard layout
+###############################################################################
+# TODO
+## Modify // Next Layout // <><Alt> BackSpace ##
+bindsym $mod+Mod1+BackSpace input * xkb_switch_layout next
+
+## Modify // Prev Layout // <><Alt><Shift> BackSpace ##
+bindsym $mod+Mod1+Shift+BackSpace input * xkb_switch_layout prev
+
+###############################################################################
+# gaps Appearance and Behavior
+###############################################################################
+# TODO
+bindsym $mod+minus gaps inner current minus 6
+bindsym $mod+plus gaps inner current plus 6
+
+## Session // Lock Screen // <> Escape ##
+bindsym $mod+Escape exec gtklock --background $(trawlcat regolith.lockscreen.wallpaper.file /dev/null)
+
+###############################################################################
+# Session Management
+###############################################################################
+## Session // Exit App // <><Shift> q ##
+bindsym $mod+q [con_id="__focused__"] kill
+
+## Session // Terminate App // <><Alt> q ##
+bindsym $mod+$alt+q [con_id="__focused__"] exec --no-startup-id kill -9 $(xdotool getwindowfocus getwindowpid)
+
+## Session // Reload Sway Config // <><Shift> c ##
+bindsym $mod+Shift+c exec swaymsg -t send_tick '{"status": "reload_pending"}' && swaymsg reload
+
+## Session // Refresh Session // <><Shift> r ##
+bindsym $mod+Shift+r exec /usr/bin/regolith-look refresh
+
+## Session // Logout // <><Shift> e ##
+bindsym $mod+Shift+e exec "swaynag -t warning -m 'Do you really want to logout?' -b 'Logout' '/usr/bin/gnome-session-quit --logout --no-prompt && swaymsg exit'"
+
+## Session // Reboot // <><Shift> b ##
+bindsym $mod+Shift+b exec "swaynag -t warning -m 'Do you really want to reboot your system?' -b 'Reboot' '/usr/bin/gnome-session-quit --reboot --no-prompt'" 
+
+## Session // Power Down // <><Shift> p ##
+bindsym $mod+Shift+p exec "swaynag -t warning -m 'Do you really want to shutdown' -b 'Shutdown' '/usr/bin/gnome-session-quit --power-off --no-prompt'" 
+
+## Session // Sleep // <><Shift> s ##
+bindsym --locked $mod+Shift+s exec systemctl suspend
+
+###############################################################################
+# System Management
+###############################################################################
+## Modify // Settings // <> c ##
+bindsym $mod+c exec --no-startup-id regolith-control-center
+
+## Modify // Display Settings // <> d ##
+bindsym $mod+d exec --no-startup-id regolith-control-center display
+
+## Modify // Bluetooth Settings // <> b ##
+bindsym $mod+b exec --no-startup-id regolith-control-center bluetooth
+
+## Launch // File Browser // <><Shift> n ##
+bindsym $mod+Shift+n exec --no-startup-id /usr/bin/nautilus --new-window
+
+### Bindings managed by gsd_media_keys
+# Volume Controls
+bindsym --locked XF86AudioRaiseVolume exec volumectl -u + 5
+bindsym --locked XF86AudioLowerVolume exec volumectl -u - 5
+bindsym --locked XF86AudioMute exec volumectl %
+bindsym --locked XF86AudioMicMute exec volumectl -m %
+
+# Brightness Controls
+bindsym XF86MonBrightnessUp exec lightctl + 5
+bindsym XF86MonBrightnessDown exec lightctl - 5
+
+# Player Controls
+# The keycodes 172 and 208 are both bound to XF86AudioPlay but have different meanings
+bindcode --locked 172 exec playerctl play-pause
+bindcode --locked 208 exec playerctl play
+bindsym --locked XF86AudioPause exec playerctl pause   
+bindsym --locked XF86AudioNext exec playerctl next
+bindsym --locked XF86AudioPrev exec playerctl previous
+
+## Session // Window Snapshot // <><Prtscr> ##
+bindsym $mod+Print exec grimshot copy active
+
+## Session // Screenshot // <><Shift><Prtscr> ##
+bindsym $mod+Shift+Print exec grimshot --notify savecopy anything
+
+## Session // Capture All Screens // <><Shift><Ctrl><Prtscr> ##
+bindsym $mod+Shift+Ctrl+Print exec grimshot --notify save screen

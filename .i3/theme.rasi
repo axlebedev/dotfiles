@@ -1,0 +1,57 @@
+window {
+    background: #FFFFFF;
+    border-color: #5555FF;
+    border-radius: 0px;
+    border-width: 2px;
+    padding: 5px;
+}
+
+inputbar {
+    visible: true;
+    background: #FFFFFF;
+    border-color: #5555FF;
+    border-width: 1px;
+    border-radius: 0px;
+}
+
+inputbar-prompt {
+    color: #111111;
+    font: "monospace 12";
+}
+
+inputbar-text {
+    color: #222222;
+    font: "monospace 12";
+}
+
+element {
+    border-radius: 0px;
+}
+
+element-background {
+    background: #FFFFFF;
+}
+
+element-text {
+    color: #222222;
+    font: "monospace 12";
+}
+
+element-alt {
+    background: #FF5555;
+    color: #FFFFFF;
+}
+
+element-selected {
+    background: #5555FF;
+    color: #FFFFFF;
+}
+
+element-icon {
+    /* icon styles if used */
+}
+
+element-match {
+    foreground: #FFAAAA;
+    font-weight: bold;
+}

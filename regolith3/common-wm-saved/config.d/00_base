@@ -1,0 +1,1 @@
+bindsym $mod+Return exec --no-startup-id systemd-run --user --scope /usr/bin/x-terminal-emulator

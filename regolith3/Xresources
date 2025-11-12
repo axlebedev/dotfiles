@@ -1,0 +1,7 @@
+gnome.terminal.update: false
+regolith.wallpaper.file: 
+regolith.wallpaper.color.primary: black
+! regolith.wallpaper.color.secondary: green
+! regolith.wallpaper.color.shading.type: vertical
+regolith.lockscreen.file: 
+regolith.lockscreen.color.primary: black

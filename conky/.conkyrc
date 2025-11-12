@@ -133,7 +133,7 @@ end
 function memory()
   return [[
     { 
-      "name": "Memory_icon",
+      "name": "Memory",
       "full_text": " ",
       "min_width": "",
       "separator_block_width": 3,
@@ -184,7 +184,7 @@ end
 function cpuHeader()
   return [[
     {
-      "name": "CPU_header",
+      "name": "CPU",
       "full_text": " ",
       "separator_block_width": 3,
       "separator": false
@@ -195,7 +195,7 @@ end
 function cpuTemperature()
   return [[
     { 
-      "name": "CPU_temperature",
+      "name": "CPU",
       "separator_block_width": 3,
       "min_width": "▁",
       "full_text": "${lua cpuTemperature}",
@@ -208,7 +208,7 @@ end
 function cpuTopN(n)
   return [[
     { 
-      "name": "CPU_top_]] .. n .. [[",
+      "name": "CPU",
       "separator_block_width": 3,
       "min_width": "▁",
       "full_text": "${lua top_cpu_char ]] .. n .. [[}",
@@ -216,17 +216,6 @@ function cpuTopN(n)
       "separator": false
     },
   ]]
-end
-
-function virtMon()
-  return [[{
-    "name": "VirtMon",
-    "full_text": "M",
-    "color": "\#000000",
-    "background": "${lua virtualMonitor_color}",
-    "align": "center",
-    "min_width":"]] .. stringWidth(1) .. [["
-  },]]
 end
 
 -- Stuff after 'TEXT' will be formatted on screen
@@ -252,7 +241,6 @@ conky.text = [[
   ]] .. wifi() .. [[
   ]] .. ip() .. [[
   ]] .. hdd() .. [[
-  ]] .. virtMon() .. [[
   # чтобы у всех в конце была запятая - последний пустой блок без запятой
   { "full_text": "" }
   ],
