@@ -22,7 +22,7 @@ font pango:Ubuntu Bold 14
 
 bar {
     status_command $HOME/.i3/i3status.sh 
-    height 27
+    height 37
     output HDMI-0
     tray_output HDMI-0
     separator_symbol " "
