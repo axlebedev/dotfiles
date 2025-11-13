@@ -271,7 +271,7 @@ bindsym $mod+F12 exec flameshot gui
 bindsym $mod+Shift+y exec --no-startup-id ~/.i3/tools-rofi.sh  "google-chrome --user-data-dir=\"/home/user/chrome-users/debug\"\ngnome-terminal --class=\"floating\" -- vim ~/passwords"
 
 # utils
-bindsym $mod+u exec --no-startup-id ~/.i3/tools-rofi.sh "Gromit-mpx\nVokoscreenNG\nScreenruler\nMagnifier\nnotify-send 'PAUSE notifications' | dunstctl set-paused true\ndunstctl set-paused false | notify-send 'RESUME notifications'\nyandex-browser"
+bindsym $mod+u exec --no-startup-id ~/.i3/tools-rofi.sh "Gromit-mpx\nVokoscreenNG\nScreenruler\nMagnifier\ndunstctl set-paused true\ndunstctl set-paused false\nyandex-browser"
 
 
 ###################################################################################################
