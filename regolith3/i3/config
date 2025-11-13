@@ -12,7 +12,7 @@ set $alt  Mod1
 client.focused          #227DC4 #227DC4 #dddddd #585858
 client.focused_inactive #444444 #444444 #ffffff #444444
 client.unfocused        #28282b #28282b #666666 #444444
-client.urgent           #F41BAD #F41BAD #ffffff #000000
+client.urgent           #cc1866 #cc1866 #ffffff #000000
 
 font pango:Ubuntu Nerd Font 14
 
@@ -33,7 +33,7 @@ bar {
         focused_workspace  #227DC4      #227DC4      #eeeeee
         active_workspace   #3A0891      #324420      #ffffff
         inactive_workspace #000000      #000000      #999999
-        urgent_workspace   #ffffff      #F41BAD
+        urgent_workspace   #ffffff      #cc1866
     }
 }
 
