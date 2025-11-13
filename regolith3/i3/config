@@ -14,7 +14,7 @@ client.focused_inactive #444444 #444444 #ffffff #444444
 client.unfocused        #28282b #28282b #666666 #444444
 client.urgent           #ed5057 #ed5057 #ffffff #000000
 
-font pango:Ubuntu Bold 14
+font pango:DroidSansM Nerd Font Mono 14
 
 ###############################################################################
 # WM Bar

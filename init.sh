@@ -39,6 +39,9 @@ ln -s ~/dotfiles/.i3 ~/.i3
 rm -rf ~/.fzf.bash
 ln -s ~/dotfiles/.fzf.bash ~/.fzf.bash
 
+rm -rf ~/.fonts
+ln -s ~/dotfiles/.fonts ~/.fonts
+
 rm -rf ~/.config/dunst
 ln -s ~/dotfiles/dunst ~/.config/dunst
 
