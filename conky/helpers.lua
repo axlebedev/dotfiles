@@ -134,7 +134,7 @@ end
 function conky_top_cpu_color(topN)
   topN = tonumber(topN)
   local s = conky_top_cpu(topN)
-  return '#' .. getColor(tonumber(s))
+  return '#' .. getColor(tonumber(s) + 20)
 end
 
 function conky_cpuTemperature()

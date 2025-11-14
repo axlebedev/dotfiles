@@ -198,7 +198,7 @@ function cpuTemperature()
       "name": "CPU",
       "separator_block_width": 3,
       "min_width": "▁",
-      "full_text": "${lua cpuTemperature}",
+      "full_text": "${lua cpuTemperature}°",
       "color": "${lua cpuTemperature_color}",
       "separator": false
     },
