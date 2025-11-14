@@ -304,7 +304,7 @@ bindsym $mod+r mode $mode_resize
 
 set $mode_poweroff "(E)xit, (P)oweroff, (R)eboot, lo(G)out, (L)oc(K) screen, (S)uspend"
 mode $mode_poweroff {
-	bindsym $mod+g exec i3-msg exit
+	bindsym $mod+g exec /usr/bin/gnome-session-quit --no-prompt --logout
 	bindsym $mod+p exec systemctl poweroff
 	bindsym $mod+r exec systemctl reboot
 	bindsym $mod+s mode "default" ; exec systemctl suspend
