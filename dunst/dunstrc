@@ -63,7 +63,7 @@
     # The transparency of the window.  Range: [0; 100].
     # This option will only work if a compositing window manager is
     # present (e.g. xcompmgr, compiz, etc.).
-    transparency = 50
+    transparency = 10
 
     # Draw a line of "separator_height" pixel height between two
     # notifications.
@@ -217,7 +217,7 @@
     # corners.
     # The radius will be automatically lowered if it exceeds half of the
     # notification height to avoid clipping text and/or icons.
-    corner_radius = 7
+    corner_radius = 2
 
     ### Legacy
 
