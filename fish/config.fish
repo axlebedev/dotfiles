@@ -105,18 +105,21 @@ function g-sortedbranch -d 'git or arc sorted branch'
 end
 bind \cg g-sortedbranch
 
-function g-gobs
-    set currentBranchName (git rev-parse --abbrev-ref HEAD)
-    set currentBranchNameSaved (string join '' -- $currentBranchName "--saved") 
-    commandline -j -- "g checkout -b $currentBranchNameSaved && g branch -D $currentBranchName"
-    commandline -f repaint
-end
-
 abbr -a gco g checkout
 abbr -a gor g checkout users/l-e-b-e-d-e-v/
-abbr -a gom g checkout master
+abbr -a gom "git checkout (git symbolic-ref refs/remotes/origin/HEAD | awk -F'/' '{ print \$NF }')"
+# function gom 
+#     set masterBranch (git symbolic-ref refs/remotes/origin/HEAD | awk -F'/' '{ print $NF }')
+#     commandline -j -- "git checkout $masterBranch"
+#     commandline -f repaint
+# end
 abbr -a gob g checkout -b
-alias gobs g-gobs
+function gobs
+    set currentBranchName (git rev-parse --abbrev-ref HEAD)
+    set currentBranchNameSaved (string join '' -- $currentBranchName "--saved") 
+    commandline -j -- "git checkout -b $currentBranchNameSaved"
+    commandline -f repaint
+end
 abbr -a gbl g blame
 
 abbr -a gs g status .
@@ -146,7 +149,11 @@ abbr -a gpsfu g push -f -u origin HEAD
 abbr -a grb g rebase --autostash
 abbr -a grbc g rebase --continue
 abbr -a grba g rebase --abort
-abbr -a grbm "g fetch origin master && g rebase --autostash origin/master"
+function grbm
+  set masterBranch (git symbolic-ref refs/remotes/origin/HEAD | awk -F'/' '{ print $NF }')
+  commandline -j -- "g fetch origin $masterBranch && g rebase --autostash origin/$masterBranch"
+  commandline -f repaint
+end
 
 abbr -a gmm "g fetch origin master && g merge origin/master"
 abbr -a gmc "g merge --continue"
@@ -201,6 +208,8 @@ abbr -a nis npm i --save
 abbr -a ncc npm cache clean -f
 abbr -a nb npm run build
 abbr -a ns npm start
+abbr -a nd npm run start:dev
+abbr -a ndd "npm i && npm run start:dev"
 abbr -a nl npm run lint
 abbr -a nt npm run test
 abbr -a nta npm run test-all
@@ -208,7 +217,6 @@ abbr -a nta npm run test-all
 abbr -a y yarn
 abbr -a yi yarn
 abbr -a ys yarn start
-abbr -a ysa "yarn workspace @nct/amr-demo run start & yarn workspace @nct/wte run start:amr"
 abbr -a yss "yarn && yarn start"
 abbr -a yb yarn build
 abbr -a ybb "yarn && yarn build"
