@@ -81,11 +81,12 @@ kitty \
 alacritty \
 xbanish \
 nodejs \
+xzoom \
 autorandr
 
-# TODO: kitty
-# Set alacritty as default terminal:
-sudo update-alternatives --config x-terminal-emulator
+# sudo update-alternatives --config x-terminal-emulator
+# Set kitty as default terminal:
+sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator /usr/bin/kitty 50
 # Verify the change:
 update-alternatives --query x-terminal-emulator | grep "Value:"
 
