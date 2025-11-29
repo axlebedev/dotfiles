@@ -98,7 +98,7 @@ exec --no-startup-id dunst
 # options setings {{{
 ###################################################################################################
 
-workspace_auto_back_and_forth yes
+workspace_auto_back_and_forth no
 floating_modifier $mod
 
 # Experimental gaps stuff
@@ -209,7 +209,7 @@ bindsym $mod+Ctrl+Shift+l move workspace to output right
 bindsym $mod+f fullscreen toggle
 bindsym $mod+z sticky toggle
 bindsym $mod+Shift+f floating toggle
-bindsym $mod+$alt+f focus mode_toggle
+bindsym $mod+Space focus mode_toggle
 
 bindsym $mod+w layout toggle tabbed splitv splith
 
@@ -240,8 +240,8 @@ bindsym $mod+q [con_id="__focused__"] kill
 bindsym --release $mod+shift+q exec xkill
 bindsym $mod+$alt+q [con_id="__focused__"] exec --no-startup-id kill -9 $(xdotool getwindowfocus getwindowpid)
 
-# bindsym $mod+Shift+c reload
-bindsym $mod+Shift+r exec --no-startup-id /usr/bin/regolith-look refresh
+bindsym $mod+Shift+r reload
+# bindsym $mod+Shift+r exec --no-startup-id /usr/bin/regolith-look refresh
 
 # Pulse Audio controls TODO
 bindsym XF86AudioLowerVolume exec amixer -D pulse sset Master 2%- & killall -USR1 i3status 
@@ -270,7 +270,6 @@ bindsym Print exec flameshot gui
 bindsym $mod+F12 exec flameshot gui
 
 # work
-bindsym $mod+Shift+y exec --no-startup-id ~/.i3/tools-rofi.sh  "google-chrome --user-data-dir=\"/home/user/chrome-users/debug\"\ngnome-terminal --class=\"floating\" -- vim ~/passwords"
 
 # utils
 bindsym $mod+u exec --no-startup-id ~/.i3/tools-rofi.sh "Gromit-mpx\nVokoscreenNG\nScreenruler\nMagnifier\ndunstctl set-paused true\ndunstctl set-paused false\nyandex-browser"
@@ -385,6 +384,20 @@ mode $mode_gaps_bottom {
     bindsym Escape mode $mode_gaps
 }
 bindsym $mod+Shift+g mode $mode_gaps
+
+# Work
+set $mode_work "Work (b)rowser (d)ebug (t)band"
+mode $mode_work {
+	bindsym $mod+b mode "default" ; exec --no-startup-id nohup google-chrome --user-data-dir=chrome-users/wildberries & disown
+	bindsym $mod+d mode "default" ; exec --no-startup-id nohup google-chrome --user-data-dir=chrome-users/wildberriesdebug & disown
+  bindsym $mod+t mode "default" ; exec google-chrome --new-window  --app="https://band.wb.ru/wb" --user-data-dir=chrome-users/wildberries
+	# bindsym $mod+b mode "default" ; exec --no-startup-id nohup google-chrome --app="https://band.wb.ru/wb" --user-data-dir=chrome-users/wildberries & disown
+
+# back to normal: enter or escape
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+}
+bindsym $mod+Shift+y mode $mode_work
 
 ###################################################################################################
 # modes }}}
