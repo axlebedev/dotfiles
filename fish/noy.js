@@ -5,15 +5,6 @@ const process = require('process');
 const FZF_CMD = 'fzf --layout=reverse --bind=esc:abort --height=20 --scheme=history --bind esc:'
 const PACKAGE_JSON = 'package.json'
 
-const getScripts = (filename) => {
-    let data = fs.readFileSync(filename, 'utf8')
-    data = JSON.parse(data);
-    data = data.scripts
-    data = Object.keys(data)
-    data = data.sort()
-    return data
-}
-
 const getWorkspaces = (filename) => {
     let data = fs.readFileSync(filename, 'utf8')
     data = JSON.parse(data);
@@ -71,7 +62,7 @@ const main = () => {
 
     // console.log('%c11111', 'background:#d0ff00', 'getWorkspaces(PACKAGE_JSON)=', getWorkspaces(PACKAGE_JSON));
     const program = getPackageManager()
-    const scripts = getScripts(PACKAGE_JSON).join('\n')
+    const scripts = child_process.execSync(`jq -r '.scripts | keys[]' ${PACKAGE_JSON}`).toString()
 
     try {
         const result = child_process.execSync(
