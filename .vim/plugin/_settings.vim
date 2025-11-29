@@ -72,6 +72,11 @@ set shiftround     # smart indent for '<'/'>' commands
 set smarttab       # insert tabs on the start of a line according to shiftwidth, not tabstop
 set autoindent     # autoindents for new lines
 
+# default indent
+set shiftwidth=4
+set tabstop=4
+set softtabstop=4
+
 set timeoutlen=300 # how long will vim wait for key sequence completion
 
 # Don't redraw while executing macros
