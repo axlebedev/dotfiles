@@ -9,7 +9,7 @@ case "$CHOICE" in
     gromit-mpx --active &
     ;;
   "VokoscreenNG")
-    $HOME/.i3/runOrKill.sh vokoscreenNG &
+    $HOME/.i3/runOrKill.sh vokoscreen-ng vokoscreenNG &
     ;;
   "Screenruler")
     nohup screenruler &
@@ -18,5 +18,6 @@ case "$CHOICE" in
     nohup xzoom &
     ;;
   *)
+    $CHOICE
     ;;
 esac
