@@ -392,3 +392,29 @@ nnoremap rti <ScriptCmd>RequireToImport<CR>
 nnoremap itr <ScriptCmd>ImportToRequire<CR>
 
 nnoremap <2-LeftMouse> yiW
+
+def CloseCoctreeWindowsPreserveCursor(): void
+  var save_view = winsaveview()
+  var save_win = winnr()
+
+  var have_coctree = false
+
+  for w in range(winnr('$'), 1, -1)
+    execute(':' .. w .. 'wincmd w')
+    if &filetype ==# 'coctree'
+      have_coctree = true
+      execute 'close'
+    endif
+  endfor
+
+  if win_gotoid(win_getid(save_win)) == 0
+    wincmd w
+  endif
+  winrestview(save_view)
+
+  if !have_coctree
+    execute 'call CocAction("showOutline")'
+  endif
+enddef
+
+nnoremap <F4> <ScriptCmd>CloseCoctreeWindowsPreserveCursor()<CR>
