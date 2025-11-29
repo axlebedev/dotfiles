@@ -7,14 +7,16 @@ if [ -z "$1" ]; then
 fi
 
 PROGRAM=$1
+WINDOW_NAME=${2:-$PROGRAM}
 
 # Check if program is running
-if pgrep -x "$PROGRAM" > /dev/null; then
-    pkill -x "$PROGRAM"
-    # Wait for processes to terminate
-    while pgrep -x "$PROGRAM" > /dev/null; do
-        sleep 0.1
-    done
+if pgrep -x "$WINDOW_NAME" > /dev/null; then
+    killall $WINDOW_NAME
+    # pkill -x "$WINDOW_NAqE"
+    # # Wait for processes to terminate
+    # while pgrep -x "$WINDOW_NAME" > /dev/null; do
+    #     sleep 0.1
+    # done
 else
     exec "$PROGRAM" &
     disown
