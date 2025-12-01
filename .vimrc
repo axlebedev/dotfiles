@@ -135,6 +135,7 @@ g:NERDTreeExtensionHighlightColor = {
     'cpp': green,
     'h': blue,
     'css': pink,
+    'less': pink,
     'scss': pink,
 }
 
