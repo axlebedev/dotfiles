@@ -155,7 +155,11 @@ function grbm
   commandline -f repaint
 end
 
-abbr -a gmm "g fetch origin master && g merge origin/master"
+function gmm
+  set masterBranch (git symbolic-ref refs/remotes/origin/HEAD | awk -F'/' '{ print $NF }')
+  commandline -j -- "g fetch origin $masterBranch && g merge origin/$masterBranch"
+  commandline -f repaint
+end
 abbr -a gmc "g merge --continue"
 abbr -a gma "g merge --abort"
 
