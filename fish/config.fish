@@ -201,8 +201,6 @@ abbr -a cb copyBranch
 
 abbr -a nemo nemo --no-desktop
 
-abbr -a gt gnome-terminal
-
 abbr -a ni npm i
 abbr -a nis npm i --save
 abbr -a ncc npm cache clean -f
