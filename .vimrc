@@ -53,6 +53,7 @@ Plug 'pbrisbin/vim-mkdir'
 # -----------------------------------------------------------------------------
 # Make '.' work on plugin commands (not all maybe)
 Plug 'tpope/vim-repeat'
+nnoremap <Plug>(RepeatRedo) U
 
 # -----------------------------------------------------------------------------
 # autoswitch language on leave insert mode
