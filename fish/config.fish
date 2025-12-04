@@ -10,6 +10,11 @@ set -g theme_date_format "+%H:%M"
 
 alias g="~/dotfiles/fish/goa.sh"
 
+function get_master_branch
+  set masterBranch (git symbolic-ref refs/remotes/origin/HEAD | awk -F'/' '{ print $NF }')
+  echo $masterBranch
+end
+
 function noy
     node ~/dotfiles/fish/noy.js | read -l command
     commandline -j -- $command
@@ -39,6 +44,7 @@ abbr -a rm rm -rf
 abbr -a cp cp -r
 
 abbr -a v gnome-terminal -- vim
+# abbr -a v "kitty -- vim > /dev/null 2>&1 &"
 
 abbr -a o xdg-open
 
@@ -51,8 +57,8 @@ abbr -a gin g commit --no-verify --verbose
 abbr -a gia g commit --amend --no-verify --no-edit
 abbr -a giw g commit --no-verify -m "wip"
 abbr -a gil g commit --no-verify -m "linted"
-
 abbr -a gm g merge
+abbr -a gcl g clean -fd
 
 function cdf
     set -l cmd (commandline -j)
@@ -107,12 +113,11 @@ bind \cg g-sortedbranch
 
 abbr -a gco g checkout
 abbr -a gor g checkout users/l-e-b-e-d-e-v/
-abbr -a gom "git checkout (git symbolic-ref refs/remotes/origin/HEAD | awk -F'/' '{ print \$NF }')"
-# function gom 
-#     set masterBranch (git symbolic-ref refs/remotes/origin/HEAD | awk -F'/' '{ print $NF }')
-#     commandline -j -- "git checkout $masterBranch"
-#     commandline -f repaint
-# end
+function gom
+    set masterBranch (get_master_branch)
+    commandline -j -- "git checkout $masterBranch"
+    commandline -f repaint
+end
 abbr -a gob g checkout -b
 function gobs
     set currentBranchName (git rev-parse --abbrev-ref HEAD)
@@ -125,7 +130,8 @@ abbr -a gbl g blame
 abbr -a gs g status .
 
 function g-gh
-    if string match "master" (git rev-parse --abbrev-ref HEAD)
+    set masterBranch (get_master_branch)
+    if string match $masterBranch (git rev-parse --abbrev-ref HEAD)
         g hist --first-parent $argv
     else
         g hist --first-parent $argv
@@ -150,13 +156,13 @@ abbr -a grb g rebase --autostash
 abbr -a grbc g rebase --continue
 abbr -a grba g rebase --abort
 function grbm
-  set masterBranch (git symbolic-ref refs/remotes/origin/HEAD | awk -F'/' '{ print $NF }')
+  set masterBranch (get_master_branch)
   commandline -j -- "g fetch origin $masterBranch && g rebase --autostash origin/$masterBranch"
   commandline -f repaint
 end
 
 function gmm
-  set masterBranch (git symbolic-ref refs/remotes/origin/HEAD | awk -F'/' '{ print $NF }')
+  set masterBranch (get_master_branch)
   commandline -j -- "g fetch origin $masterBranch && g merge origin/$masterBranch"
   commandline -f repaint
 end
@@ -210,8 +216,8 @@ abbr -a nis npm i --save
 abbr -a ncc npm cache clean -f
 abbr -a nb npm run build
 abbr -a ns npm start
-abbr -a nd npm run start:dev
-abbr -a ndd "npm i && npm run start:dev"
+abbr -a nd npm run start:dev:all
+abbr -a ndd "npm i && npm run start:dev:all"
 abbr -a nl npm run lint
 abbr -a nt npm run test
 abbr -a nta npm run test-all
