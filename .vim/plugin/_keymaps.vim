@@ -418,3 +418,5 @@ def CloseCoctreeWindowsPreserveCursor(): void
 enddef
 
 nnoremap <F4> <ScriptCmd>CloseCoctreeWindowsPreserveCursor()<CR>
+
+nnoremap sw <ScriptCmd>&wrap = !&wrap<CR>
