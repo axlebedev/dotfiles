@@ -404,6 +404,10 @@ Plug 'tomtom/tcomment_vim'
 g:tcomment_maps = 1
 g:tcomment#rstrip_on_uncomment = 2
 g:tcomment_textobject_inlinecomment = 'ic'
+# for kitty
+nnoremap <C-/> <CMD>TComment<CR>
+vnoremap <C-/> :TCommentMaybeInline<CR>gv
+# for gnome-terminal
 nnoremap <C-_> <CMD>TComment<CR>
 vnoremap <C-_> :TCommentMaybeInline<CR>gv
 
