@@ -105,7 +105,7 @@ floating_modifier $mod
 smart_gaps off
 # smart_gaps on|off|inverse_outer
 gaps inner 10
-gaps top 40
+gaps top 37
 gaps left 260
 gaps bottom 170
 gaps right 440
