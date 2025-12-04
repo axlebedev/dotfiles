@@ -119,7 +119,7 @@ var orange = 'DC4D01'
 var pink = 'D370D5'
 var black = '000000'
 var gray = '777777'
-var green = '0A5502'
+var green = '119603'
 var lightgreen = '16bf04'
 var blue = '6363F7'
 g:NERDTreeExtensionHighlightColor = {
@@ -135,6 +135,7 @@ g:NERDTreeExtensionHighlightColor = {
     'spec.jsx': lightgreen,
     'cpp': green,
     'h': blue,
+    'html': blue,
     'css': pink,
     'less': pink,
     'scss': pink,
