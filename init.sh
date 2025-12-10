@@ -54,3 +54,7 @@ rm -rf ~/.config/kitty/kitty.conf
 ln -s ~/dotfiles/kitty.conf ~/.config/kitty/kitty.conf
 
 echo "source ~/dotfiles/.env" >> ~/.profile
+
+rm -rf ~/.bin
+mkdir ~/.bin
+go build -o ~/.bin/showbranches ~/dotfiles/fish/showbranches.go
