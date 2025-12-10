@@ -272,3 +272,5 @@ set -g theme_color_scheme light
 alias files="xdg-open (pwd) > /dev/null 2>&1"
 
 abbr -a gpr ~/dotfiles/fish/gpr.sh
+
+abbr showbranches go run ~/dotfiles/fish/showbranches.go
