@@ -3,7 +3,7 @@
 # https://git-scm.com/book/en/v2/Git-Tools-Rerere
 # https://github.com/tj/git-extras/blob/main/Commands.md
 #
-# TODO: git-delta
+# TODO: git-delta 
 # =================================================================================================
 # === LINUX INSTALL ===============================================================================
 mkdir ~/github
@@ -11,6 +11,8 @@ mkdir ~/github
 # ----- Установка нужных программ -----
 sudo add-apt-repository -y ppa:agornostal/ulauncher && \
 sudo apt-add-repository ppa:fish-shell/release-4 && \
+sudo add-apt-repository universe -y && \
+sudo add-apt-repository ppa:agornostal/ulauncher -y
 sudo apt update
 
 # Убрать заголовок в окне gnome-terminal
@@ -23,8 +25,8 @@ gsettings set org.gnome.Terminal.Legacy.Settings headerbar "@mb false"
 ssh-keygen -t rsa -C "alexey.broadcast@gmail.com"
 cat .ssh/id_rsa.pub
 # Если ключ уже есть (проверить email!), то добавить его можно так
-# eval $(ssh-agent -s)
-# ssh-add ~/.ssh/id_rsa
+eval $(ssh-agent -s)
+ssh-add ~/.ssh/id_rsa
 
 # initial installation
 # jshon \ # for clickable i3-status
@@ -60,9 +62,7 @@ screenruler \
 fzf fish \
 ttf-ancient-fonts \
 python3-smbc samba
-# xkb-switch \ budet ustanovleno v razdele s vim
 unclutter \
-autorandr \
 xserver-xorg-input-libinput \
 screenkey \
 snapd \
@@ -72,7 +72,6 @@ flameshot \
 net-tools \
 pavucontrol \
 lxpolkit \
-# vokoscreenNG \ v apt ego nety, install 4erez snap
 vlc \
 mpv \
 mailnag \
@@ -82,7 +81,13 @@ alacritty \
 xbanish \
 nodejs \
 xzoom \
-autorandr
+autorandr \
+alacritty \
+vokoscreen-ng \
+nodejs npm \
+golang
+
+# xkb-switch \ budet ustanovleno v razdele s vim
 
 # sudo update-alternatives --config x-terminal-emulator
 # Set kitty as default terminal:
@@ -90,6 +95,7 @@ sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emula
 # Verify the change:
 update-alternatives --query x-terminal-emulator | grep "Value:"
 
+# {{{ ne delal at thinkpad
 # TODO
 # install git-delta manually
 # https://dandavison.github.io/delta/installation.html
@@ -97,6 +103,7 @@ update-alternatives --query x-terminal-emulator | grep "Value:"
 # Install watchman
 # TODO: написать здесь как его устанавливать
 # https://facebook.github.io/watchman/docs/install#ubuntu-prebuilt-debs
+# }}}
 
 # indicator-sound-switcher \ # меню звук-девайсов в трее
 # gromit-mpx \ # для рисования на экране
@@ -105,16 +112,18 @@ update-alternatives --query x-terminal-emulator | grep "Value:"
 sudo snap install \
 diff-so-fancy \
 indicator-sound-switcher \
-gromit-mpx \
-simplescreenrecorder
+gromit-mpx
 
-# vrode uzhe ne nado sudo snap install --classic node
-sudo snap install --edge vokoscreen-ng
+sudo snap install --classic cmake
 
 # ----- install Chrome
 
+# {{{ use regolith instead
 # ===== I3 ================================
 # https://i3wm.org/docs/repositories.html
+# }}}
+# ======== regolith =============
+https://regolith-desktop.com/docs/using-regolith/install/
 
 # ===== VIM =======================================================================================
 # поставить галочку в Software sources -> enable source code repositories
@@ -136,8 +145,7 @@ cd ~/github
 git clone git@github.com:grwlf/xkb-switch.git
 cd xkb-switch/
 mkdir build && cd build
-sudo snap install --classic cmake
-sudo apt-get install libx11-dev libxkbfile-dev
+sudo apt-get install -y libx11-dev libxkbfile-dev
 cmake ..
 make && sudo make install
 
