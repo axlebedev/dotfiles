@@ -656,10 +656,34 @@ nnoremap <silent> L <scriptcmd>UnfoldOrMoveRight<CR>
 
 Plug 'axlebedev/vim-detect-indent'
 
+# Plug 'gergap/vim-ollama'
+
 # -----------------------------------------------------------------------------
 plug#end()
 filetype plugin indent on
 # }}}
 
+# g:loglog = "start"
+# def OnBufEnter()
+#   g:loglog ..= "OnBufEnter\n"
+#   if (!exists('b:keepThisBuffer'))
+#     b:keepThisBuffer = 0
+#   endif
+# enddef
+# autocmd BufEnter * OnBufEnter()
+# def OnTextChanged()
+#   g:loglog ..= "OnTextChanged\n"
+#   if (exists('b:keepThisBuffer'))
+#     b:keepThisBuffer += 1
+#   endif
+# enddef
+# autocmd TextChanged * OnTextChanged()
+# def OnBufLeave()
+#   g:loglog ..= "OnBufLeave " .. b:keepThisBuffer .. "\n"
+#   if (b:keepThisBuffer < 1 && &modifiable)
+#     bdelete
+#   endif
+# enddef
+# autocmd BufLeave * OnBufLeave()
 
 &rtp = &rtp .. ',' .. expand('~') .. '/dotfiles/.vim'

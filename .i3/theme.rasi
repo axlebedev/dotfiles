@@ -2,6 +2,8 @@ configuration {
     hover-select: true;
     me-select-entry: "";
     me-accept-entry: "MousePrimary";
+    // kb-row-down: "!Control+j,Down";
+    // kb-row-up: "!Control+k,Up";
 }
 
 * {

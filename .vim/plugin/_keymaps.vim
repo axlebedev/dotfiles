@@ -245,7 +245,7 @@ nnoremap <leader>lsn <ScriptCmd>jsLog.JsFastLog_lineNumber()<cr>
 
 nnoremap <silent> K <CMD>call CocActionAsync("doHover")<CR>
 def JumpDefinitionFindCursor(command: string)
-    setreg('/', expand('<cword>'))
+    # setreg('/', expand('<cword>'))
     exe command
     timer_start(100, (id) => findcursor#FindCursor('#d6d8fa', 0))
 enddef

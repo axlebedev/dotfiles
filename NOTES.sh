@@ -175,6 +175,9 @@ mkdir ~/.fonts
 cp *.ttf ~/.fonts
 fc-cache -f -v
 
+# set terminal (for example alacritty)
+sudo update-alternatives --config x-terminal-emulator
+
 # ===== FISH ======================================================================================
 # https://hackercodex.com/guide/install-fish-shell-mac-ubuntu/
 # v gnome-terminal vmesto "chsh -s /usr/bin/fish" nado izmenit login command v nastroikah

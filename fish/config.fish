@@ -43,10 +43,13 @@ abbr -a lt "pwd && tree -a -C -I \"node_modules\|.git\|bower_components\""
 abbr -a rm rm -rf
 abbr -a cp cp -r
 
-function v
-  gnome-terminal -- bash -c "sleep 0.2; vim"
-end
+# function v
+#   gnome-terminal -- bash -c "sleep 0.2; vim"
+# end
 # abbr -a v "kitty -- vim > /dev/null 2>&1 &"
+function v
+  nohup alacritty --command vim > /dev/null 2>&1 &
+end
 
 abbr -a o xdg-open
 

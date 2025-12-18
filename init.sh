@@ -57,4 +57,5 @@ echo "source ~/dotfiles/.env" >> ~/.profile
 
 rm -rf ~/.bin
 mkdir ~/.bin
+export PATH="$PATH:$HOME/.bin"
 go build -o ~/.bin/showbranches ~/dotfiles/fish/showbranches.go
