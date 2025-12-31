@@ -257,7 +257,7 @@ bindsym $mod+plus exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +2% 
 # bindsym $mod+minus exec amixer -D pulse sset Master 2%- & killall -USR1 i3status 
 bindsym $mod+minus exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -2% & killall -USR1 i3status
 
-bindsym $mod+t exec google-chrome --new-window  --app="https://web.telegram.org"
+bindsym $mod+t exec google-chrome --new-window  --app="https://web.telegram.org/k"
 
 bindsym $mod+d exec ulauncher
 
