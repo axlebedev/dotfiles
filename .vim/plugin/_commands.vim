@@ -11,7 +11,7 @@ command! BindBothOff set noscrollbind nocursorbind | wincmd p | set noscrollbind
 command! S vs | wincmd h | bprev | wincmd l
 
 # command! NewInstance !gnome-terminal -- vim %
-command! NewInstance !alacritty --command=vim %
+command! NewInstance !gnome-terminal -- vim %
 
 # Make cnext and co wrap
 command! Cnext try | cnext | catch | cfirst | catch | endtry

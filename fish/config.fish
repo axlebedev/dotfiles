@@ -48,7 +48,7 @@ abbr -a cp cp -r
 # end
 # abbr -a v "kitty -- vim > /dev/null 2>&1 &"
 function v
-  nohup alacritty --command vim > /dev/null 2>&1 &
+  nohup gnome-terminal -- vim $argv > /dev/null 2>&1 &
 end
 
 abbr -a o xdg-open

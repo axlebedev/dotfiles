@@ -307,3 +307,7 @@ sudo apt install touchpad-indicator
 # ================ i3wm audio popping
 # 1. Найти имя устройства через `pacmd list-sinks`
 # 2. pacmd update-sink-proplist "NAME" device.buffering.buffer_size=1048576
+#
+# =========================
+# Почему я отказываюсь от alacritty
+# 22.12.2025 на рабочем ноуте (wb thinkpad) курсор очень часто (300/сек) мигает

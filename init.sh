@@ -53,6 +53,10 @@ mkdir ~/.config/kitty
 rm -rf ~/.config/kitty/kitty.conf
 ln -s ~/dotfiles/kitty.conf ~/.config/kitty/kitty.conf
 
+mkdir ~/.config/alacritty
+rm -rf ~/.config/alacritty/alacritty.toml
+ln -s ~/dotfiles/alacritty.toml ~/.config/alacritty/alacritty.toml
+
 echo "source ~/dotfiles/.env" >> ~/.profile
 
 rm -rf ~/.bin

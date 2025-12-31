@@ -24,11 +24,11 @@ foreground = "#171421"
 
 [cursor]
 blink_interval = 0
-style = "Block"
+style = { shape = "Beam", blinking = "Always" }
 unfocused_hollow = true
 
 [font]
-size = 12.0
+size = 14.0
 
 [font.bold]
 family = "ComicShannsMono Nerd Font Mono"
