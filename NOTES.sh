@@ -86,6 +86,7 @@ alacritty \
 vokoscreen-ng \
 nodejs npm \
 golang
+ripgrep \
 
 # xkb-switch \ budet ustanovleno v razdele s vim
 

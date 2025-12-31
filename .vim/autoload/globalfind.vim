@@ -11,11 +11,12 @@ var ignored = [
     '.tmp',
 ]
 
-const ignoredList = ignored->map((_, val) => '--ignore ' .. val)->join(' ')
+const ignoredList = ignored->map((_, val) => '--iglob !' .. val)->join(' ')
 # find word under cursor
-const basegrepprg = 'ag --hidden ' .. ignoredList
+# const basegrepprg = 'rg --hidden --no-heading -N ' .. ignoredList
+const basegrepprg = 'rg --hidden --no-heading --with-filename --line-number --column -N ' .. ignoredList
 
-const charsForEscape = '$'
+const charsForEscape = '*'
 # -w --word-regexp
 var isWholeWord = 0
 # -Q --literal
@@ -25,7 +26,7 @@ var isLiteral = 0
 # -s --case-sensitive     Match case sensitively
 # -S --smart-case         Match case insensitively unless PATTERN contains
 #                         uppercase characters (Enabled by default)
-var caseArray = ['--smart-case', '--ignore-case', '--case-sensitive']
+var caseArray = ['--smart-case', '-i', '-s']
 var case = caseArray[0]
 
 &grepprg = basegrepprg
@@ -107,15 +108,15 @@ export def Grep()
     if (!empty(word))
         isWholeWord = isWholeWord % 2
         isLiteral = isLiteral % 2
-        word = escape(word, charsForEscape)
+        word = isLiteral ? shellescape(word) : escape(word, charsForEscape)
         setreg('/', word)
 
         var prg = basegrepprg
         if (isWholeWord)
-            prg = prg .. ' --word-regexp'
+            prg = prg .. ' -w'
         endif
         if (isLiteral)
-            prg = prg .. ' --literal'
+            prg = prg .. ' -F'
         endif
         prg = prg .. ' ' .. case
         cgetexpr system(join(
