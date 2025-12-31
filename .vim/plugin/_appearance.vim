@@ -28,12 +28,14 @@ if has('gui_running')
 else
     # number of colors in terminal: use gui-colors, assuming terminal supports it
     set termguicolors
+    &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
 
 # different cursor shapes for different terminal modes
-&t_SI = "\<Esc>[6 q"
+&t_SI = "\<Esc>[5 q"
 &t_SR = "\<Esc>[4 q"
-&t_EI = "\<Esc>[2 q"
+&t_EI = "\<Esc>[1 q"
 
 # highlights search results immediately
 set incsearch

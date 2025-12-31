@@ -36,7 +36,7 @@
     #
     # If this option is set to mouse or keyboard, the monitor option
     # will be ignored.
-    follow = none
+    follow = keyboard
 
     # dynamic width from 0 to 300
     width = 1000

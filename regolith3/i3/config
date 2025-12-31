@@ -24,8 +24,9 @@ font pango:Ubuntu Nerd Font 14
 bar {
     status_command $HOME/.i3/i3status.sh 
     height 37
-    output HDMI-0
-    tray_output HDMI-0
+    output eDP-1
+    output DP-1
+    tray_output eDP-1
     separator_symbol " "
 
     colors {
@@ -275,6 +276,8 @@ bindsym $mod+F12 exec flameshot gui
 # utils
 bindsym $mod+u exec --no-startup-id ~/.i3/tools-rofi.sh "Gromit-mpx\nVokoscreenNG\nScreenruler\nMagnifier\ndunstctl set-paused true\ndunstctl set-paused false\nyandex-browser"
 
+bindsym $mod+F5 exec brightnessctl set 10-
+bindsym $mod+F6 exec brightnessctl set 10+
 
 ###################################################################################################
 # bindings }}}
@@ -391,7 +394,7 @@ set $mode_work "Work (b)rowser (d)ebug (t)band"
 mode $mode_work {
 	bindsym $mod+b mode "default" ; exec --no-startup-id nohup google-chrome --user-data-dir=chrome-users/wildberries & disown
 	bindsym $mod+d mode "default" ; exec --no-startup-id nohup google-chrome --user-data-dir=chrome-users/wildberriesdebug & disown
-  bindsym $mod+t mode "default" ; exec google-chrome --new-window  --app="https://band.wb.ru/wb" --user-data-dir=chrome-users/wildberries
+  bindsym $mod+t mode "default" ; exec google-chrome --new-window  --app="https://band.wb.ru/site" --user-data-dir=chrome-users/wildberries
 	# bindsym $mod+b mode "default" ; exec --no-startup-id nohup google-chrome --app="https://band.wb.ru/wb" --user-data-dir=chrome-users/wildberries & disown
 
 # back to normal: enter or escape
