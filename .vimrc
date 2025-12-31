@@ -547,6 +547,7 @@ g:coc_global_extensions = [
     'coc-jest',
     'coc-git',
     # 'coc-import-cost',
+    'coc-css',
     'coc-cssmodules',
     'coc-eslint',
     'coc-react-refactor',
