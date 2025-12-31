@@ -1,0 +1,17 @@
+пустая ubuntu 24.04
+
+apt update && apt upgrade -y && apt install wget ca-certificates -y
+
+# install and launch server
+wget https://git.io/vpn -O openvpn-install.sh
+chmod +x openvpn-install.sh
+./openvpn-install.sh
+
+# enable auto start
+systemctl enable openvpn@server
+
+# verify
+systemctl status openvpn@server  # active (running)
+ss -tulpn | grep 1194  # UDP listening
+journalctl -u openvpn@server -n 50  # no errors
+ip route | grep default  # note outbound interface (eth0/ens3)
