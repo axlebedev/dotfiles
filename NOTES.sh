@@ -85,8 +85,14 @@ autorandr \
 alacritty \
 vokoscreen-ng \
 nodejs npm \
-golang
 ripgrep \
+golang \
+brightnessctl \
+x11-utils \
+arandr \
+rofi \
+xzoom \
+flameshot
 
 # xkb-switch \ budet ustanovleno v razdele s vim
 
@@ -109,7 +115,6 @@ update-alternatives --query x-terminal-emulator | grep "Value:"
 # indicator-sound-switcher \ # меню звук-девайсов в трее
 # gromit-mpx \ # для рисования на экране
 # simplescreenrecorder \ # для записи скринкастов
-# flameshot # для скриншотов
 sudo snap install \
 diff-so-fancy \
 indicator-sound-switcher \
