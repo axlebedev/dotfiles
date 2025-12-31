@@ -61,7 +61,7 @@ feh \
 screenruler \
 fzf fish \
 ttf-ancient-fonts \
-python3-smbc samba
+python3-smbc samba \
 unclutter \
 xserver-xorg-input-libinput \
 screenkey \
@@ -96,11 +96,13 @@ flameshot
 
 # xkb-switch \ budet ustanovleno v razdele s vim
 
+# set default terminal:
 # sudo update-alternatives --config x-terminal-emulator
+
 # Set kitty as default terminal:
-sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator /usr/bin/kitty 50
+# sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator /usr/bin/kitty 50
 # Verify the change:
-update-alternatives --query x-terminal-emulator | grep "Value:"
+# update-alternatives --query x-terminal-emulator | grep "Value:"
 
 # {{{ ne delal at thinkpad
 # TODO
