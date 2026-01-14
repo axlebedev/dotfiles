@@ -14,7 +14,7 @@ var ignored = [
 const ignoredList = ignored->map((_, val) => '--iglob !' .. val)->join(' ')
 # find word under cursor
 # const basegrepprg = 'rg --hidden --no-heading -N ' .. ignoredList
-const basegrepprg = 'rg --hidden --no-heading --with-filename --line-number --column -N ' .. ignoredList
+const basegrepprg = 'rg --hidden --no-heading --with-filename --line-number -H ' .. ignoredList
 
 const charsForEscape = '*'
 # -w --word-regexp
@@ -119,8 +119,9 @@ export def Grep()
             prg = prg .. ' -F'
         endif
         prg = prg .. ' ' .. case
+
         cgetexpr system(join(
-            [prg] + ['"' .. word .. '"', '.'], 
+            [prg, '"' .. word .. '"', '.'], 
             ' '
         ))
         copen
