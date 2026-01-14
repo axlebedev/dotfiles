@@ -107,7 +107,7 @@ smart_gaps off
 gaps inner 10
 gaps top 36
 gaps left 260
-gaps bottom 170
+gaps bottom 140
 gaps right 440
 
 smart_borders no_gaps
