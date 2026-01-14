@@ -92,6 +92,8 @@ x11-utils \
 arandr \
 rofi \
 xzoom \
+tree-sitter-cli \
+fd-find \
 flameshot
 
 # xkb-switch \ budet ustanovleno v razdele s vim
@@ -122,7 +124,9 @@ diff-so-fancy \
 indicator-sound-switcher \
 gromit-mpx
 
-sudo snap install --classic cmake
+sudo snap install --classic \
+cmake \
+nvim
 
 # ----- install Chrome
 

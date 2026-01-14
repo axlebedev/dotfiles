@@ -1,0 +1,46 @@
+Plugin	Works in Neovim	Notes / Issues	Recommended Alternative
+*    vim-scripts/l9	Yes	Legacy lib, rarely problematic vim-polyglot (bundled utils)
+---  kana/vim-submode	Partial	Frequent mode/mapping bugs in 0.9+ nvimtools/hydra.nvim or folke/which-key.nvim
++    pbrisbin/vim-mkdir	Yes	Simple autocmd, fully compatible	Built-in : autocmd BufWritePre * call mkdir(expand('%:p:h'), 'p')
++    tpope/vim-repeat	Yes	Excellent compatibility, core plugin	None needed
+---  lyokha/vim-xkbswitch	Partial	X11-specific, may fail on Wayland/Neovim	neovim/nvim-lspconfig (keyboard hooks)
+*    axlebedev/vim-startify	Yes	Your fork of mhinz/vim-startify, Neovim-tested	alpha-nvim (Lua-native startup screen)
+     scrooloose/nerdtree (+ extensions)	Partial	Works but slow; syntax/highlight extensions flaky	nvim-tree.lua or neo-tree.nvim
+     kana/vim-gf-user / vim-gf-diff	Yes	Diff-specific, stable	Built-in gf enhancements
+     junegunn/fzf.vim	Yes	Fully supported, install fzf binary	Telescope.nvim (Lua-native fuzzy finder)
+     shime/vim-livedown	Partial	Node dep issues in Neovim	markdown-preview.nvim
+     tyru/open-browser.vim	Yes	Basic URL handling works	Built-in gx or open-browser-web-extension
+     schickling/vim-bufonly	Yes	Simple command	:bufdo bd or bufdelete.nvim
+     AndrewRadev/bufferize.vim	Yes	Reliable	None needed
+     yssl/QFEnter	Yes	QF mappings stable	Built-in quickfix enhancements
+     axlebedev/vim-indexed-search	Yes	Your fork, Neovim-compatible	None needed
+     junegunn/vim-slash	Yes	Search perf great	Built-in or flash.nvim
+     NLKNguyen/papercolor-theme	Yes	Colorscheme works	tokyonight.nvim (modern Lua)
+     rhysd/clever-f.vim	Yes	f/t motion stable	flash.nvim
+     psliwka/vim-smoothie	Partial	Scroll jitter in latest Neovim	neoscroll.nvim
+     vim-airline/vim-airline (+ themes)	Yes	Works, but heavier	lualine.nvim (faster Lua)
+     tpope/vim-fugitive	Yes	Gold standard Git plugin	neogit or fugitive.lua port
+     jreybert/vimagit	Yes	Git UI stable	lazygit (external) + Telescope
+     rhysd/conflict-marker.vim	Yes	Works well	nvim-conflict-marker
+     junegunn/gv.vim	Yes	Git log browser	gitgraph.nvim
+     wellle/targets.vim	Yes	Text objects reliable	nvim-treesitter-textobjects
+     axlebedev/vim-expand-region	Yes	Your fork tested in Neovim None needed
+     AndrewRadev/switch.vim	Yes	Toggle cases stable	None needed
+     kana/vim-textobj-* (all)	Mostly Yes	Some indent/lastpat quirks	nvim-treesitter-textobjects
+     Julian/vim-textobj-variable-segment	Yes	CamelCase works	treesitter-textobjects
+     rhysd/vim-textobj-anyblock	Yes	Reliable	treesitter
+     glts/vim-textobj-comment	Yes	Comment objects fine	Comment.nvim
+     machakann/vim-highlightedyank	Yes	Yank highlight good	illuminate.nvim (similar)
+     RRethy/vim-illuminate	Yes	Word highlight stable	None needed
+     osyo-manga/vim-trip	Partial	Older motion plugin, test mappings	leap.nvim
+     FooSoft/vim-argwrap	Yes	Text reflow works	None needed
+     AndrewRadev/splitjoin.vim	Yes	JS/TS tag splitting great	mini.splitjoin
+     cohama/lexima.vim	Partial	Pair matching conflicts	nvim-autopairs
+     tomtom/tcomment_vim	Yes	Commenting solid	Comment.nvim
+     tpope/vim-surround	Yes	Essential, perfect	nvim-surround (Lua port)
+     axlebedev/vim-chase	Yes	Your plugin, compatible	None needed
+     svban/YankAssassin.vim	Yes	Motion yanks stable	None needed
+     moll/vim-node (+ JS/TS ecosystem: pangloss/vim-javascript, etc.)	Partial	Syntax heavy/slow; coc integrates	nvim-lspconfig + treesitter
+     dense-analysis/ale	Yes	Linter works	nvim-lint or conform.nvim
+     neoclide/coc.nvim	Yes	LSP leader, fully supported	nvim-lspconfig + mason.nvim
+     axlebedev custom plugins (js-fastlog, smart-insert-tab, etc.)	Yes	Your forks, Neovim-ready	None needed
