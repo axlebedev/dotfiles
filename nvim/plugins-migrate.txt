@@ -5,13 +5,13 @@ Plugin	Works in Neovim	Notes / Issues	Recommended Alternative
 +    tpope/vim-repeat	Yes	Excellent compatibility, core plugin	None needed
 ---  lyokha/vim-xkbswitch	Partial	X11-specific, may fail on Wayland/Neovim	neovim/nvim-lspconfig (keyboard hooks)
 *    axlebedev/vim-startify	Yes	Your fork of mhinz/vim-startify, Neovim-tested	alpha-nvim (Lua-native startup screen)
-     scrooloose/nerdtree (+ extensions)	Partial	Works but slow; syntax/highlight extensions flaky	nvim-tree.lua or neo-tree.nvim
-     kana/vim-gf-user / vim-gf-diff	Yes	Diff-specific, stable	Built-in gf enhancements
-     junegunn/fzf.vim	Yes	Fully supported, install fzf binary	Telescope.nvim (Lua-native fuzzy finder)
-     shime/vim-livedown	Partial	Node dep issues in Neovim	markdown-preview.nvim
-     tyru/open-browser.vim	Yes	Basic URL handling works	Built-in gx or open-browser-web-extension
-     schickling/vim-bufonly	Yes	Simple command	:bufdo bd or bufdelete.nvim
-     AndrewRadev/bufferize.vim	Yes	Reliable	None needed
+*    scrooloose/nerdtree (+ extensions)	Partial	Works but slow; syntax/highlight extensions flaky	nvim-tree.lua or neo-tree.nvim
+---  kana/vim-gf-user / vim-gf-diff	Yes	Diff-specific, stable	Built-in gf enhancements
+*    junegunn/fzf.vim	Yes	Fully supported, install fzf binary	Telescope.nvim (Lua-native fuzzy finder)
+*    shime/vim-livedown	Partial	Node dep issues in Neovim	markdown-preview.nvim
++    tyru/open-browser.vim	Yes	Basic URL handling works	Built-in gx or open-browser-web-extension
++    schickling/vim-bufonly	Yes	Simple command	:bufdo bd or bufdelete.nvim
+-?-  AndrewRadev/bufferize.vim	Yes	Reliable	None needed
      yssl/QFEnter	Yes	QF mappings stable	Built-in quickfix enhancements
      axlebedev/vim-indexed-search	Yes	Your fork, Neovim-compatible	None needed
      junegunn/vim-slash	Yes	Search perf great	Built-in or flash.nvim
