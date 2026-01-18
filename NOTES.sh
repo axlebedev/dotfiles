@@ -128,6 +128,12 @@ sudo snap install --classic \
 cmake \
 nvim
 
+sudo npm i -g \
+tree-sitter-cli
+typescript \
+typescript-language-server \
+yarn
+
 # ----- install Chrome
 
 # {{{ use regolith instead

@@ -24,32 +24,33 @@
 + Plug 'psliwka/vim-smoothie'
 + Plug 'vim-airline/vim-airline'
 + Plug 'vim-airline/vim-airline-themes'
-Plug 'tpope/vim-fugitive'
-Plug 'jreybert/vimagit'
-Plug 'rhysd/conflict-marker.vim'
-Plug 'junegunn/gv.vim'
-Plug 'wellle/targets.vim'
-Plug 'axlebedev/vim-expand-region'
-Plug 'AndrewRadev/switch.vim'
++ Plug 'tpope/vim-fugitive'
++ Plug 'jreybert/vimagit'
+-! Plug 'rhysd/conflict-marker.vim'
++ Plug 'junegunn/gv.vim'
+-! Plug 'wellle/targets.vim'
 Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-entire'
 Plug 'kana/vim-textobj-indent'
 Plug 'kana/vim-textobj-lastpat'
 Plug 'kana/vim-textobj-line'
 Plug 'kana/vim-textobj-underscore'
-Plug 'Julian/vim-textobj-variable-segment'
-Plug 'rhysd/vim-textobj-anyblock'
 Plug 'glts/vim-textobj-comment'
-Plug 'machakann/vim-highlightedyank'
-Plug 'RRethy/vim-illuminate'
-Plug 'osyo-manga/vim-trip'
-Plug 'FooSoft/vim-argwrap'
-Plug 'AndrewRadev/splitjoin.vim'
-Plug 'cohama/lexima.vim'
-Plug 'tomtom/tcomment_vim'
-Plug 'tpope/vim-surround'
-Plug 'axlebedev/vim-chase'
-Plug 'svban/YankAssassin.vim'
+Plug 'rhysd/vim-textobj-anyblock'
+Plug 'Julian/vim-textobj-variable-segment'
+-! Plug 'axlebedev/vim-expand-region' -- https://www.reddit.com/r/neovim/comments/194xood/which_expandregion_plugin_for_lazyvim_would_you/ There's <C-space> which makes use of Treesitter's incremental selection. Feel free to try out its behavior.
++ Plug 'AndrewRadev/switch.vim'
+- Plug 'machakann/vim-highlightedyank'
++ Plug 'RRethy/vim-illuminate'
+-! Plug 'osyo-manga/vim-trip' -- maybe search alternatives
+- Plug 'FooSoft/vim-argwrap' -- use https://git.sr.ht/~foosoft/argonaut.nvim
+-! Plug 'AndrewRadev/splitjoin.vim' -- dont work in nvim
++ Plug 'cohama/lexima.vim' -- switched to nvim autopairs
+- Plug 'tomtom/tcomment_vim' -- TODO: search others
++ Plug 'tpope/vim-surround'
+- Plug 'axlebedev/vim-chase' -- TODO: rewrite to lua. Look at 'textcase' plugin
++ Plug 'svban/YankAssassin.vim'
+
 Plug 'moll/vim-node'
 Plug 'heavenshell/vim-jsdoc'
 Plug 'othree/html5.vim'
@@ -60,8 +61,10 @@ Plug 'alvan/vim-closetag'
 Plug 'leafgarland/typescript-vim'
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'ap/vim-css-color'
-Plug 'dense-analysis/ale'
-Plug 'neoclide/coc.nvim'
+
+-! Plug 'dense-analysis/ale' -- switched to mfussenegger/nvim-lint TODO config it after LSP
+- Plug 'neoclide/coc.nvim' -- TODO I dont need it?
+
 Plug 'axlebedev/vim-js-fastlog'
 Plug 'axlebedev/vim-smart-insert-tab'
 Plug 'isomoar/vim-css-to-inline'
@@ -76,3 +79,9 @@ Plug 'axlebedev/vim-fold-unfold'
 Plug 'axlebedev/vim-detect-indent'
 
 TODO: treesitter
+TODO: research
+{ 'folke/flash.nvim' }          -- Best: Subsecond search preview
+{ 'junegunn/vim-over' }         -- Substitute preview (same author) 
+{ 'folke/noice.nvim' }          -- Native cmdline UI + preview
+https://git.sr.ht/~foosoft/argonaut.nvim
+Supermaven plugin and claude code

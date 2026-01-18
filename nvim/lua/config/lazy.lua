@@ -25,6 +25,7 @@ vim.opt.mousemoveevent = true
 -- Setup lazy.nvim
 require('lazy').setup({
   spec = {
+    -- WORKS, nothing to do {{{ ===================================================================
     { 'sheerun/vim-polyglot' },
 
     -- Automatically create parent directories on write when don't exist already.
@@ -40,7 +41,7 @@ require('lazy').setup({
       config = function ()
         local startify = require'alpha.themes.startify'
         startify.section.header.val = {}
-        startify.config.opts.keymap = { press = 'o' }
+        startify.config.opts.keymap = { press = { 'o', '<CR>' } }
         table.insert( startify.section.bottom_buttons.val, startify.button('u', 'Plug update' , '<cmd>Lazy update<CR>'))
         require'alpha'.setup(startify.config)
       end
@@ -63,8 +64,7 @@ require('lazy').setup({
         }
 
         -- Keymaps (NERDTree-like)
-        vim.keymap.set('n', '<C-n>', ':NvimTreeToggle<CR>')
-        vim.keymap.set('n', '<leader>e', ':NvimTreeFocus<CR>')
+        vim.keymap.set('n', '<F2>', ':NvimTreeToggle<CR>')
       end,
     },
 
@@ -75,11 +75,20 @@ require('lazy').setup({
         'nvim-lua/plenary.nvim',
         -- optional but recommended
         { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
-      }
+      },
+      config = function()
+        require('telescope').setup{
+          defaults = {
+            preview = false,
+          },
+          pickers = {},
+          extensions = {}
+        }
+        vim.keymap.set('n', '<leader>t', '<cmd>Telescope find_files<CR>', { noremap = false })
+      end
     },
 
     -- Markdown
-    -- NOTE: need installed 'yarn': 'sudo npm i -g yarn'
     {
       'iamcco/markdown-preview.nvim',
       cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
@@ -98,9 +107,6 @@ require('lazy').setup({
         { '<F3>', '<Plug>(openbrowser-smart-search)', mode = 'v' },
       },
     },
-
-    -- bufonly
-    { 'schickling/vim-bufonly' },
 
     -- clear hlsearch on cursor move
     {
@@ -278,7 +284,7 @@ require('lazy').setup({
       config = function()
         require('bufferline').setup({
           options = {
-            right_mouse_command = false,
+            right_mouse_command = "bdelete! %d",
             tab_size = 3,
             max_name_length = 100,
             name_formatter = function(buf)
@@ -306,9 +312,90 @@ require('lazy').setup({
         })
       end,
     },
+
+    -- git
+    { 'tpope/vim-fugitive' },
+    { 'jreybert/vimagit' },
+    { 'junegunn/gv.vim', cmd = 'GV' }, -- Lazy-load on command 
+
+    -- auto pairs
+    {
+      'windwp/nvim-autopairs',
+      event = 'InsertEnter',
+      opts = {
+        check_ts = true,  -- Treesitter integration
+        disable_filetype = { 'TelescopePrompt' }
+      }
+    },
+
+    -- true/false
+    {
+      'AndrewRadev/switch.vim',
+      keys = '<C-t>',
+      config = function()
+        vim.keymap.set('n', '<C-t>', '<cmd>Switch<CR>')
+      end
+    },
+
+    --
+    { 'tpope/vim-surround', keys = { 'ds', 'cs', 'ys', 'S' } },
+
+    -- quality of life
+    { 'svban/YankAssassin.vim', event = 'VeryLazy' },
+
+    -- bufonly
+    {
+      'schickling/vim-bufonly',
+      keys = 'bo',
+      config = function() vim.keymap.set('n', 'bo', '<cmd>BufOnly<CR>') end
+    },
+
+    --
+    { 'RRethy/vim-illuminate' },
+
+    -- }}} WORKS, nothing to do ===================================================================
+    
+    -- { 'https://git.sr.ht/~foosoft/vim-argwrap' }, -- does not work!
+
+    -- textobj
+    -- { 'kana/vim-textobj-user' },
+    -- { 'kana/vim-textobj-entire' },
+    -- { 'kana/vim-textobj-indent' },
+    -- { 'kana/vim-textobj-lastpat' },
+    -- { 'kana/vim-textobj-line' },
+    -- { 'kana/vim-textobj-underscore' },
+    -- { 'glts/vim-textobj-comment' },
+    -- -- { 'rhysd/vim-textobj-anyblock' }, TODO. Not work (vim and nvim)
+    -- { 'Julian/vim-textobj-variable-segment' },
+
+    -- --
+    -- { 'AndrewRadev/splitjoin.vim' },
   },
 })
 
-vim.opt.termguicolors = true
-vim.opt.background = 'light'
 vim.cmd('colorscheme PaperColor')
+vim.api.nvim_create_autocmd('TextYankPost', {
+  callback = function() vim.highlight.on_yank { higroup='IncSearch', timeout=200 } end,
+})
+
+-- -- Enable TypeScript via the Language Server Protocol (LSP)
+-- vim.lsp.enable('tsserver')
+--
+-- -- Set the TS config for the LSP
+-- vim.lsp.config('tsserver', {
+--   -- Make sure this is on your path
+--   cmd = {'typescript-language-server', '--stdio'},
+--   filetypes = { 'typescript' },
+--   -- This is a hint to tell nvim to find your project root from a file within the tree
+--   root_dir = vim.fs.root(0, {'package.json', '.git'}),
+--   on_attach = on_attach,
+--   capabilities = capabilities,
+--   -- optional settings = {...} go here, refer to language server code: https://github.com/typescript-language-server/typescript-language-server/blob/5c483349b7b4b6f79d523f8f4d854cbc5cec7ecd/src/ts-protocol.ts#L379
+-- })
+--
+-- -- lsp keymaps
+-- vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, {})
+-- vim.keymap.set('n', 'gd', vim.lsp.buf.definition, {})
+-- vim.keymap.set('n', '<leader>f', function()
+--   vim.lsp.buf.format { async = true }
+-- end, {})
