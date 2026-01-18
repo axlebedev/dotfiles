@@ -351,7 +351,17 @@ require('lazy').setup({
     },
 
     --
-    { 'RRethy/vim-illuminate' },
+    {
+      'RRethy/vim-illuminate',
+      dependencies = { "nvim-lua/plenary.nvim" },
+      config = function()
+        require('illuminate').configure({
+          providers = { 'lsp', 'treesitter', 'regex' },
+          delay = 100,
+          filetypes_denylist = { 'quickfix', 'fugitive' },
+        })
+      end,
+    },
 
     -- }}} WORKS, nothing to do ===================================================================
     
