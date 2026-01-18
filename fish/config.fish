@@ -50,6 +50,9 @@ abbr -a cp cp -r
 function v
   nohup gnome-terminal -- vim $argv > /dev/null 2>&1 &
 end
+function vv
+  nohup gnome-terminal -- nvim $argv > /dev/null 2>&1 &
+end
 
 abbr -a o xdg-open
 
