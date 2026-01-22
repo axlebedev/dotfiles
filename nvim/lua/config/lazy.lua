@@ -24,7 +24,16 @@ vim.g.maplocalleader = '\\'
 vim.opt.mousemoveevent = true
 -- Setup lazy.nvim
 require('lazy').setup({
+  checker = {
+    enabled = false,  -- Полностью отключить проверки обновлений
+    notify = false,   -- Отключить уведомления (на всякий случай)
+  },
+  change_detection = {
+    notify = false,   -- Отключить уведомления об изменениях конфига
+  },
   spec = {
+    -- { import = "plugins" }, -- TODO
+
     -- WORKS, nothing to do {{{ ===================================================================
     { 'sheerun/vim-polyglot' },
 
