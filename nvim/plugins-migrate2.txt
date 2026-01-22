@@ -85,3 +85,8 @@ TODO: research
 { 'folke/noice.nvim' }          -- Native cmdline UI + preview
 https://git.sr.ht/~foosoft/argonaut.nvim
 Supermaven plugin and claude code
+
+plugin/blockline - это я пропустил и весь дальнейший plugin/ отложил до времён после "autoload"
+autoload/eslinttoquickfix
+autoload/globalfind - отложил на потом
+autoload/htmlbeautify - давно не использую
