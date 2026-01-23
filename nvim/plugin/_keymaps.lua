@@ -296,7 +296,7 @@ local ToggleQuickFix = function()
 end
 vim.keymap.set("n", "co", ToggleQuickFix, { silent = true })
 
--- TODO plugin FindCursor
+-- TODO plugin vim-indexed-search
 -- noremap <silent> <plug>(slash-after) <CMD>execute("FindCursor #d6d8fa 0<bar>ShowSearchIndex")<CR>
 
 -- этот момент заебал
@@ -327,13 +327,12 @@ vim.keymap.set("n", "<C-q>", "q")
 -- wrap visual selection into function block 
 vim.keymap.set("v", "<C-b>", '"bdi{<CR>return <C-r>b;<CR>}<Esc>=ib')
 
--- TODO todo
--- def FoldSelection()
---   var saved = &foldmethod
---   exe 'setlocal foldmethod=manual'
---   normal! zf
--- enddef
--- vnoremap zf <ScriptCmd>FoldSelection()<CR>
+local FoldSelection = function()
+  local saved = vim.opt.foldmethod
+  vim.opt_local.foldmethod = 'manual'
+  vim.cmd('normal! zf')
+end
+vim.keymap.set('v', 'zf', FoldSelection)
 
 -- TODO autoload logfunction
 -- nnoremap lf <ScriptCmd>logfunction.LogFunction()<CR>
