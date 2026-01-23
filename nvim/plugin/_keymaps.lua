@@ -391,11 +391,10 @@ vim.keymap.set("n", "U", "<C-r>")
 -- nnoremap <silent> <F5> <ScriptCmd>updatebuffer.UpdateBuffer(0)<CR>
 -- nnoremap <silent> <F5><F5> <ScriptCmd>updatebuffer.UpdateBuffer(1)<CR>
 
--- TODO plugin yankfilename
--- nnoremap yf <ScriptCmd>YankFileName<CR>
--- nnoremap yff <ScriptCmd>YankFileNameForDebug<CR>
--- nnoremap yg <ScriptCmd>YankGithubURLMaster<CR>
--- nnoremap ygg <ScriptCmd>YankGithubURL<CR>
+vim.keymap.set('n', 'yf', '<cmd>YankFileName<cr>')
+vim.keymap.set('n', 'yff', '<cmd>YankFileNameForDebug<cr>')
+vim.keymap.set('n', 'yg', '<cmd>YankGithubURLMaster<cr>')
+vim.keymap.set('n', 'ygg', '<cmd>YankGithubURL<cr>')
 
 -- TODO: plugin vim-require-to-import
 -- nnoremap rti <ScriptCmd>RequireToImport<CR>
@@ -431,3 +430,5 @@ vim.keymap.set("n", "<2-LeftMouse>", "yiW")
 -- nnoremap <F4> <ScriptCmd>CloseCoctreeWindowsPreserveCursor()<CR>
 
 vim.keymap.set("n", "sw", function() vim.o.wrap = not vim.o.wrap end)
+
+vim.keymap.set("n", "<F1>", "<cmd>Telescope help_tags<cr>")

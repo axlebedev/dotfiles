@@ -386,10 +386,14 @@ require('lazy').setup({
         },
     },
 
-    { 'FooSoft/vim-argwrap' }, -- does not work!
+    { 'FooSoft/vim-argwrap' },
+
+    {
+      'axlebedev/yank-filename.nvim',
+      cmd = { 'YankFileName', 'YankFileNameForDebug', 'YankGithubURLMaster', 'YankGithubURL' },
+    },
 
     -- }}} WORKS, nothing to do ===================================================================
-    
 
     -- textobj
     -- { 'kana/vim-textobj-user' },
