@@ -386,9 +386,10 @@ require('lazy').setup({
         },
     },
 
+    { 'FooSoft/vim-argwrap' }, -- does not work!
+
     -- }}} WORKS, nothing to do ===================================================================
     
-    -- { 'https://git.sr.ht/~foosoft/vim-argwrap' }, -- does not work!
 
     -- textobj
     -- { 'kana/vim-textobj-user' },
