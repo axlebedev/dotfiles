@@ -62,5 +62,3 @@ vim.api.nvim_create_user_command('WinNew', function()
   vim.system({ 'kitty', '--', 'vim', fname }, { text = true }):wait()
   vim.cmd('redraw!')
 end, {})
-
--- TODO: commands for footprints/findcursor
