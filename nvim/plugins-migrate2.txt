@@ -43,7 +43,7 @@ Plug 'Julian/vim-textobj-variable-segment'
 - Plug 'machakann/vim-highlightedyank'
 + Plug 'RRethy/vim-illuminate'
 -! Plug 'osyo-manga/vim-trip' -- maybe search alternatives
-- Plug 'FooSoft/vim-argwrap' -- use https://git.sr.ht/~foosoft/argonaut.nvim
++ Plug 'FooSoft/vim-argwrap'
 -! Plug 'AndrewRadev/splitjoin.vim' -- dont work in nvim
 + Plug 'cohama/lexima.vim' -- switched to nvim autopairs
 - Plug 'tomtom/tcomment_vim' -- TODO: search others
@@ -70,7 +70,7 @@ Plug 'axlebedev/vim-smart-insert-tab'
 Plug 'isomoar/vim-css-to-inline'
 Plug 'axlebedev/vim-gotoline-popup'
 Plug 'axlebedev/footprints'
-Plug 'axlebedev/find-my-cursor'
++ Plug 'axlebedev/find-my-cursor'
 Plug 'axlebedev/vim-foldtext'
 Plug 'axlebedev/vim-yank-filename'
 Plug 'axlebedev/vim-require-to-import'
@@ -85,6 +85,7 @@ TODO: research
 { 'folke/noice.nvim' }          -- Native cmdline UI + preview
 https://git.sr.ht/~foosoft/argonaut.nvim
 Supermaven plugin and claude code
+https://github.com/lukas-reineke/indent-blankline.nvim
 
 plugin/blockline - это я пропустил и весь дальнейший plugin/ отложил до времён после "autoload"
 autoload/eslinttoquickfix
