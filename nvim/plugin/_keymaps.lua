@@ -39,33 +39,37 @@ vim.keymap.set("o", "f;", "g_")
 vim.keymap.set("n", "<leader>w", "<cmd>w!<cr>")
 vim.keymap.set("v", "<leader>w", "<cmd>w!<cr>")
 
--- TODO   проверить актуально ли это
--- # Если просто закрыть fugitive-буфер - то закроется весь вим.
--- # Поэтому делаем такой костыль
--- augroup dont_close_fugitive
---     autocmd!
---     # By default it's set bufhidden=delete in plugin source. I dont need it
---     autocmd BufReadPost fugitive://* set bufhidden&
--- augroup END
--- def CloseBuffer()
---     var buf = bufnr('%')
---     var filesLength = len(filter(range(1, bufnr('$')), 'buflisted(v:val)'))
---     if (filesLength <= 1)
---         if (&ft == 'startify')
---             qa!
---         else
---             Startify
---         endif
---     else
---         bprev
---     endif
---     exe 'bdelete ' .. buf
---
---     if (&buftype ==# 'quickfix' || &buftype ==# 'terminal')
---         Startify
---     endif
--- enddef
--- nmap <silent> <leader>q <ScriptCmd>CloseBuffer()<CR>
+-- Если просто закрыть fugitive-буфер - то закроется весь вим.
+-- Поэтому делаем такой костыль
+local au_dont_close_fugitive = vim.api.nvim_create_augroup("au_dont_close_fugitive", { clear = true })
+vim.api.nvim_create_autocmd({ "BufReadPost" }, {
+  pattern = "fugitive://*",
+  group = au_dont_close_fugitive,
+  callback = function()
+    -- By default it's set bufhidden=delete in plugin source. I dont need it
+    vim.opt.bufhidden = ''
+  end,
+})
+local CloseBufferSafeFugitive = function()
+    local buf = vim.fn.bufnr('%')
+    local filesLength = #vim.api.nvim_list_bufs()
+    if filesLength <= 1 then
+      if vim.bo.filetype == 'alpha' then
+        vim.cmd('qa!')
+      else
+        vim.cmd('Alpha')
+      end
+    else
+      vim.cmd('bprev')
+    end
+
+    vim.api.nvim_buf_delete(buf, {})
+
+    if vim.bo.buftype == 'quickfix' or vim.bo.buftype == 'terminal' then
+      vim.cmd('Alpha')
+    end
+end
+vim.keymap.set('n', '<leader>q', CloseBufferSafeFugitive, { silent = true })
 
 -- new empty buffer
 vim.keymap.set({ "n", "v" }, "<leader>x", "<cmd>Alpha<cr>")
@@ -155,9 +159,15 @@ submode.create("Resize", {
 -- submode#enter_with(foldlevelSubmode, 'n', '', '<leader>fo')
 
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "help", "qf", "git", "fugitive*" },
+  pattern = { "help", "qf" },
   callback = function()
     vim.keymap.set("n", "q", "<cmd>q<cr>", { buffer = true })
+  end,
+})
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "fugitive*", "git" },
+  callback = function()
+    vim.keymap.set("n", "q", CloseBufferSafeFugitive, { buffer = true })
   end,
 })
 
