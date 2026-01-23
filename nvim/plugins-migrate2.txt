@@ -78,9 +78,10 @@ Plug 'axlebedev/popup_scrollbar.vim'
 Plug 'axlebedev/vim-fold-unfold'
 Plug 'axlebedev/vim-detect-indent'
 
++ { 'folke/flash.nvim' }          -- Best: Subsecond search preview
+
 TODO: treesitter
 TODO: research
-{ 'folke/flash.nvim' }          -- Best: Subsecond search preview
 { 'junegunn/vim-over' }         -- Substitute preview (same author) 
 { 'folke/noice.nvim' }          -- Native cmdline UI + preview
 https://git.sr.ht/~foosoft/argonaut.nvim

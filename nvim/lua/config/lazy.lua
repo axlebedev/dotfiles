@@ -393,6 +393,8 @@ require('lazy').setup({
       cmd = { 'YankFileName', 'YankFileNameForDebug', 'YankGithubURLMaster', 'YankGithubURL' },
     },
 
+    -- Clear highlight on cursor move
+    { 'folke/flash.nvim', event = "VeryLazy" }
     -- }}} WORKS, nothing to do ===================================================================
 
     -- textobj
@@ -405,9 +407,6 @@ require('lazy').setup({
     -- { 'glts/vim-textobj-comment' },
     -- -- { 'rhysd/vim-textobj-anyblock' }, TODO. Not work (vim and nvim)
     -- { 'Julian/vim-textobj-variable-segment' },
-
-    -- --
-    -- { 'AndrewRadev/splitjoin.vim' },
   },
 })
 
