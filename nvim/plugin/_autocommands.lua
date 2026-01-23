@@ -15,18 +15,19 @@ vim.api.nvim_create_autocmd('BufReadPost', {
   end,
 })
 
+-- TODO
 -- Close empty buffer (REQUIRES kwbd.vim plugin)
-vim.api.nvim_create_autocmd('BufLeave', {
-  group = vimrc_group,
-  callback = function()
-    if vim.api.nvim_buf_line_count(0) == 1 
-       and vim.api.nvim_buf_get_lines(0, 0, 1, false)[1] == ''
-       and vim.fn.expand('%:t') == ''
-       and vim.bo.filetype ~= 'qf' then
-      vim.cmd('Kwbd 1')
-    end
-  end,
-})
+-- vim.api.nvim_create_autocmd('BufLeave', {
+--   group = vimrc_group,
+--   callback = function()
+--     if vim.api.nvim_buf_line_count(0) == 1 
+--        and vim.api.nvim_buf_get_lines(0, 0, 1, false)[1] == ''
+--        and vim.fn.expand('%:t') == ''
+--        and vim.bo.filetype ~= 'qf' then
+--       vim.cmd('Kwbd 1')
+--     end
+--   end,
+-- })
 
 -- TODO: make it work
 -- winview plugin autocmds (REQUIRES winview.vim)
@@ -61,8 +62,13 @@ vim.api.nvim_create_autocmd('BufEnter', {
   end,
 })
 
--- TODO: uncomment when support FindCursor
--- autocmd BufEnter * timer_start(1, (id) => findcursor#FindCursor('#d6d8fa', 0))
+vim.api.nvim_create_autocmd('BufEnter', {
+  group = vimrc_group,
+  callback = function()
+    vim.fn.timer_start(100, function() vim.cmd('FindCursor #d6d8fa 1000') end)
+  end
+  -- callback = function() vim.cmd('echo "LALALA"') end
+})
 
 -- Window resize
 vim.api.nvim_create_autocmd('VimResized', {

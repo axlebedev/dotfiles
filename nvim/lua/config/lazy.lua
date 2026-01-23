@@ -71,9 +71,6 @@ require('lazy').setup({
             highlight_git = true,
           },
         }
-
-        -- Keymaps (NERDTree-like)
-        vim.keymap.set('n', '<F2>', ':NvimTreeToggle<CR>')
       end,
     },
 
@@ -91,9 +88,8 @@ require('lazy').setup({
             preview = false,
           },
           pickers = {},
-          extensions = {}
+          extensions = {},
         }
-        vim.keymap.set('n', '<leader>t', '<cmd>Telescope find_files<CR>', { noremap = false })
       end
     },
 
@@ -370,6 +366,24 @@ require('lazy').setup({
           filetypes_denylist = { 'quickfix', 'fugitive' },
         })
       end,
+    },
+
+    { "pogyomo/submode.nvim", lazy = true },
+
+    {
+      "axlebedev/find-my-cursor.nvim",
+      lazy = true,
+      cmd = 'FindCursor',
+      opts = {
+          FindCursorHookPre = function()
+            -- FootprintsDisable
+            -- IlluminationDisable
+          end,
+          FindCursorHookPost = function()
+            -- FootprintsEnable
+            -- IlluminationEnable
+          end,
+        },
     },
 
     -- }}} WORKS, nothing to do ===================================================================
