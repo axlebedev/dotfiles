@@ -140,23 +140,29 @@ submode.create("Resize", {
     end
 })
 
--- TODO autoload foldlevel
--- submode.create("Foldlevel", {
---     mode = "n",
---     enter = "<C-r>",
---     leave = { "q", "<Esc>" },
---     default = function(register)
---       register('-', '<ScriptCmd>call increasefoldlevel#decreaseFoldlevel()<cr>')
---       register('<', '<ScriptCmd>call increasefoldlevel#decreaseFoldlevel()<cr>')
---       register('h', '<ScriptCmd>call increasefoldlevel#decreaseFoldlevel()<cr>')
---       register('+', '<ScriptCmd>call increasefoldlevel#increaseFoldlevel()<cr>')
---       register('>', '<ScriptCmd>call increasefoldlevel#increaseFoldlevel()<cr>')
---       register('l', '<ScriptCmd>call increasefoldlevel#increaseFoldlevel()<cr>')
---       register('0', '<ScriptCmd>setlocal foldlevel=0<cr>')
---       register('9', '<ScriptCmd>setlocal foldlevel=99<cr>')
---     end
--- })
--- submode#enter_with(foldlevelSubmode, 'n', '', '<leader>fo')
+submode.create("Foldlevel", {
+  mode = "n",
+  enter = "<leader>fo",
+  leave = { "q", "<Esc>" },
+  default = function(register)
+    register('-', require('foldlevel').decreaseFoldlevel)
+    register('<', require('foldlevel').decreaseFoldlevel)
+    register('h', require('foldlevel').decreaseFoldlevel)
+    register('+', require('foldlevel').increaseFoldlevel)
+    register('>', require('foldlevel').increaseFoldlevel)
+    register('l', require('foldlevel').increaseFoldlevel)
+    register('0', ':setlocal foldlevel=0<cr>')
+    register('9', ':setlocal foldlevel=99<cr>')
+  end,
+})
+
+vim.api.nvim_create_autocmd("User", {
+  group = vim.api.nvim_create_augroup("user-event", {}),
+  pattern = "SubmodeEnterPre", -- Name of user events
+  callback = function(env)
+    require('notify')(string.format("submode: %s", env.data.name), vim.log.levels.WARN)
+  end
+})
 
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "help", "qf" },

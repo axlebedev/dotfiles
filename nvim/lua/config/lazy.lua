@@ -394,7 +394,18 @@ require('lazy').setup({
     },
 
     -- Clear highlight on cursor move
-    { 'folke/flash.nvim', event = "VeryLazy" }
+    { 'folke/flash.nvim', event = "VeryLazy" },
+
+    {
+      'rcarriga/nvim-notify',
+      event = "VeryLazy",
+      opts = {
+        timeout = 2000,
+        top_down = false,
+        render = 'compact',
+        stages = 'fade',
+      },
+    },
     -- }}} WORKS, nothing to do ===================================================================
 
     -- textobj
