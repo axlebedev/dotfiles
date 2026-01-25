@@ -184,7 +184,7 @@ vim.keymap.set('n', '<leader>b', '<cmd>Telescope buffers<CR>', { noremap = false
 vim.keymap.set('n', '<C-p>', '<cmd>Telescope commands<CR>', { noremap = false })
 vim.keymap.set('n', 'sft', '<cmd>Telescope filetypes<CR>', { noremap = false })
 
--- TODO refactor
+-- TODO refactor (after lsp)
 -- nnoremap <silent> <leader>r <Plug>(refactor-commands)
 -- vnoremap <silent> <leader>r <Plug>(refactor-commands)
 -- nnoremap <silent> rr <Plug>(refactor-commands)
@@ -219,9 +219,8 @@ ClapOpen = function(command_str)
   vim.cmd("normal! " .. command_str .. "<cr>")
 end
 
--- TODO autoload opennextbuf
--- nnoremap <silent> <leader>j <ScriptCmd>ClapOpen(':vim9cmd opennextbuf.OpenNextBuf(1)')<CR>
--- nnoremap <silent> <leader>k <ScriptCmd>ClapOpen(':vim9cmd opennextbuf.OpenNextBuf(0)')<CR>
+vim.keymap.set("n", "<leader>j", require('opennextbuf').openNextBuf)
+vim.keymap.set("n", "<leader>k", require('opennextbuf').openPrevBuf)
 
 vim.keymap.set("n", "<leader>f", "<cmd>FindCursor #CC0000 500<cr>")
 
@@ -293,12 +292,12 @@ vim.keymap.set("n", "<leader>f", "<cmd>FindCursor #CC0000 500<cr>")
 -- nnoremap gt <ScriptCmd>JumpDefinitionFindCursor("call CocAction('jumpTypeDefinition')")<CR>
 
 local ToggleQuickFix = function()
-  local quickfix_windows = vim.fn.getwininfo():filter(function(info) return info.quickfix end)
-  if vim.tbl_isempty(quickfix_windows) then
-    vim.cmd("copen")
-  else
-    vim.cmd("cclose")
+  local isQuickfixHere = false
+  for _, win in pairs(vim.fn.getwininfo()) do
+    isQuickfixHere = isQuickfixHere or win.quickfix ~= 0
   end
+
+  vim.cmd(isQuickfixHere and 'cclose' or 'copen')
 end
 vim.keymap.set("n", "co", ToggleQuickFix, { silent = true })
 
