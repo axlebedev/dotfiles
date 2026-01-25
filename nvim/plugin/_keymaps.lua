@@ -314,7 +314,7 @@ vim.keymap.set("n", "x", "\"_x", { silent = true })
 -- Для того чтобы поменять местами буквы - оставляем дефолтное поведение
 vim.keymap.set("n", "xp", "xp")
 
--- TODO autoload refactor
+-- TODO autoload refactor after lsp
 -- nnoremap <silent> elf <ScriptCmd>refactor.EslintFile()<CR>
 
 -- TODO plugin Chase
@@ -401,9 +401,8 @@ vim.keymap.set("n", "U", "<C-r>")
 -- xmap ac <Plug>(coc-classobj-a)
 -- omap ac <Plug>(coc-classobj-a)
 
--- TODO autoload updatebuffer
--- nnoremap <silent> <F5> <ScriptCmd>updatebuffer.UpdateBuffer(0)<CR>
--- nnoremap <silent> <F5><F5> <ScriptCmd>updatebuffer.UpdateBuffer(1)<CR>
+vim.keymap.set('n', '<F5>', require('updatebuffer').updateBuffer)
+vim.keymap.set('n', '<F5><F5>', require('updatebuffer').updateBufferForce)
 
 vim.keymap.set('n', 'yf', '<cmd>YankFileName<cr>')
 vim.keymap.set('n', 'yff', '<cmd>YankFileNameForDebug<cr>')
