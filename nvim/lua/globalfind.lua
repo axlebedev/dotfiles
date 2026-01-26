@@ -51,9 +51,9 @@ local function caseToString()
 end
 
 local function makeVarsString()
-    return 'w' .. (isWholeWord and '➕' or '－')
+    return ' w' .. (isWholeWord and '➕' or '－')
         .. ' l' .. (isLiteral and '➕' or '－')
-        .. ' i' .. caseToString() .. ' Search>'
+        .. ' i' .. caseToString() .. ' '
 end
 
 local function incWord()
@@ -87,7 +87,7 @@ M.Grep = function()
     popupBuf, popupWin = popup.createPopup(varsString, varsStringWidth)
 
     local word = vim.fn.input(
-        string.rep(' ', varsStringWidth),
+        'Search > ',
         initialWord
     )
 
