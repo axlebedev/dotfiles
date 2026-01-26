@@ -3,7 +3,7 @@ local M = {}
 local openNextBufInner = function(isPrev)
     local command = isPrev and "bprev" or "bnext"
     vim.cmd(command)
-    if vim.bo.buftype == 'quickfix' or vim.bo.buftype == 'quickfix' then
+    if vim.bo.buftype == 'quickfix' or vim.bo.buftype == 'terminal' then
         M.openNextBuf(isPrev)
     end
 end
