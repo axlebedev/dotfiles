@@ -16,10 +16,6 @@ local ignored = {
 }
 
 local ignoredList = array.join(array.map(ignored, function(item) return '--iglob !' .. item end), ' ')
--- local ignoredList = ''
--- for _, v in pairs(ignored) do
---     ignoredList = ignoredList .. ' --iglob !' .. v
--- end
 
 local basegrepprg = 'rg --hidden --no-heading --with-filename --line-number -H ' .. ignoredList
 
@@ -48,6 +44,17 @@ local function caseToString()
         return '➕'
     end
     return 'S'
+end
+
+local function resizeQFHeight()
+    local qfLength = #vim.fn.getqflist()
+    if qfLength == 0 then
+        return
+    end
+
+    local height = math.min(qfLength + 1, math.floor(vim.o.lines / 2))
+    vim.cmd.resize(height)
+    vim.cmd('normal! zb')
 end
 
 local function makeVarsString()
@@ -116,7 +123,7 @@ M.Grep = function()
         local output = vim.fn.systemlist(prg .. ' ' .. word .. ' .')
         vim.fn.setqflist({}, ' ', { lines = output })
         vim.cmd('copen')
-    --     ResizeQFHeight()
+        resizeQFHeight()
     end
 
     isLiteral = savedIsLiteral
@@ -158,7 +165,7 @@ M.filterTestEntries = function()
         end
     end
     vim.fn.setqflist(res)
-    -- ResizeQFHeight()
+    resizeQFHeight()
 end
 
 return M

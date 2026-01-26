@@ -226,12 +226,10 @@ vim.keymap.set("n", "<leader>k", require('opennextbuf').openPrevBuf)
 
 vim.keymap.set("n", "<leader>f", "<cmd>FindCursor #CC0000 500<cr>")
 
--- TODO autoload globalfind
--- # Global find fix: use 'ag' and open quickfix {{{
 vim.keymap.set('n', '<C-f>', require('globalfind').Grep)
 vim.keymap.set('v', '<C-f>', require('globalfind').Grep)
 vim.keymap.set('n', '<C-f><C-t>', require('globalfind').filterTestEntries)
--- nnoremap <C-f><C-t> <ScriptCmd>globalfind.FilterTestEntries()<cr>
+-- TODO autoload quickfixutils
 -- nnoremap <C-f><C-d> <ScriptCmd>quickfixUtils.DeduplicateQuickfixList()<cr>
 
 -- TODO plugin JsFastLog
@@ -369,7 +367,7 @@ vim.keymap.set("n", "H", "zc")
 -- nmap <silent>gr <ScriptCmd>RefUsed(true)<CR>
 -- nmap <silent>grr <ScriptCmd>RefUsed(false)<CR>
 
--- Yank with keeping cursor position in visual mode {{{
+-- Yank with keeping cursor position in visual mode {{{ TODO: работает глючно!
 local Keepcursor_visual_wrapper = function(command)
   vim.cmd("normal! gv" .. command)
   vim.cmd("normal! gv<ESC>")
