@@ -230,6 +230,7 @@ vim.keymap.set("n", "<leader>f", "<cmd>FindCursor #CC0000 500<cr>")
 -- # Global find fix: use 'ag' and open quickfix {{{
 vim.keymap.set('n', '<C-f>', require('globalfind').Grep)
 vim.keymap.set('v', '<C-f>', require('globalfind').Grep)
+vim.keymap.set('n', '<C-f><C-t>', require('globalfind').filterTestEntries)
 -- nnoremap <C-f><C-t> <ScriptCmd>globalfind.FilterTestEntries()<cr>
 -- nnoremap <C-f><C-d> <ScriptCmd>quickfixUtils.DeduplicateQuickfixList()<cr>
 
