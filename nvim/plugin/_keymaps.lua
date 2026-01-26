@@ -1,3 +1,5 @@
+local array = require('utils/array')
+
 -- import 'vim-js-fastlog.vim' as jsLog
 -- import 'chase.vim' as chase
 --
@@ -226,8 +228,8 @@ vim.keymap.set("n", "<leader>f", "<cmd>FindCursor #CC0000 500<cr>")
 
 -- TODO autoload globalfind
 -- # Global find fix: use 'ag' and open quickfix {{{
--- nnoremap <C-f> <ScriptCmd>globalfind.Grep()<CR>
--- vnoremap <C-f> <ScriptCmd>globalfind.Grep()<CR>
+vim.keymap.set('n', '<C-f>', require('globalfind').Grep)
+vim.keymap.set('v', '<C-f>', require('globalfind').Grep)
 -- nnoremap <C-f><C-t> <ScriptCmd>globalfind.FilterTestEntries()<cr>
 -- nnoremap <C-f><C-d> <ScriptCmd>quickfixUtils.DeduplicateQuickfixList()<cr>
 
@@ -292,11 +294,10 @@ vim.keymap.set("n", "<leader>f", "<cmd>FindCursor #CC0000 500<cr>")
 -- nnoremap gt <ScriptCmd>JumpDefinitionFindCursor("call CocAction('jumpTypeDefinition')")<CR>
 
 local ToggleQuickFix = function()
-  local isQuickfixHere = false
-  for _, win in pairs(vim.fn.getwininfo()) do
-    isQuickfixHere = isQuickfixHere or win.quickfix ~= 0
-  end
-
+  local isQuickfixHere = array.some(
+    vim.fn.getwininfo(),
+    function(i) return i.quickfix ~= 0 end
+  )
   vim.cmd(isQuickfixHere and 'cclose' or 'copen')
 end
 vim.keymap.set("n", "co", ToggleQuickFix, { silent = true })

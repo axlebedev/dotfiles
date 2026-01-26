@@ -1,0 +1,128 @@
+local array = require('utils/array')
+local popup = require('utils/popup')
+local utils = require('utils/utils')
+
+local M = {}
+
+local ignored = {
+    'dist',
+    'package-lock.json',
+    'yarn.lock',
+    'dist',
+    '.git',
+    'stats.json',
+    '.ccls-cache',
+    '.tmp'
+}
+
+local ignoredList = array.join(array.map(ignored, function(item) return '--iglob !' .. item end), ' ')
+-- local ignoredList = ''
+-- for _, v in pairs(ignored) do
+--     ignoredList = ignoredList .. ' --iglob !' .. v
+-- end
+
+local basegrepprg = 'rg --hidden --no-heading --with-filename --line-number -H ' .. ignoredList
+
+local charsForEscape = '*'
+-- -w --word-regexp
+local isWholeWord = false
+-- -Q --literal
+local isLiteral = false
+-- case
+-- -i --ignore-case        Match case insensitively
+-- -s --case-sensitive     Match case sensitively
+-- -S --smart-case         Match case insensitively unless PATTERN contains
+--                         uppercase characters (Enabled by default)
+local caseArray = {'--smart-case', '-i', '-s'}
+local case = caseArray[1]
+
+vim.opt.grepprg = basegrepprg
+
+local popupBuf = -1
+local popupWun = -1
+
+local function caseToString() 
+    if case == caseArray[1] then
+        return '－'
+    elseif case == caseArray[2] then
+        return '➕'
+    end
+    return 'S'
+end
+
+local function makeVarsString()
+    return 'w' .. (isWholeWord and '➕' or '－')
+        .. ' l' .. (isLiteral and '➕' or '－')
+        .. ' i' .. caseToString() .. ' Search>'
+end
+
+local function incWord()
+    isWholeWord = not isWholeWord
+    popup.updateText(popupBuf, makeVarsString())
+end
+
+local function incLiteral()
+    isLiteral = not isLiteral
+    popup.updateText(popupBuf, makeVarsString())
+end
+
+local function incCase()
+    local nextCaseIndex = (array.index(caseArray, case) + 1) % #caseArray + 1
+    case = caseArray[nextCaseIndex]
+    popup.updateText(popupBuf, makeVarsString())
+end
+
+M.Grep = function()
+    vim.keymap.set("c", "<C-w>", incWord)
+    vim.keymap.set("c", "<C-l>", incLiteral)
+    vim.keymap.set("c", "<C-i>", incCase)
+
+    local initialWord = vim.fn.mode() ~= 'n'
+        and utils.get_visual_selection()
+        or vim.fn.expand('<cword>')
+
+    local varsString = makeVarsString()
+
+    local varsStringWidth = vim.api.nvim_strwidth(varsString)
+    popupBuf, popupWin = popup.createPopup(varsString, varsStringWidth)
+
+    local word = vim.fn.input(
+        string.rep(' ', varsStringWidth),
+        initialWord
+    )
+
+    -- Waiting for user input...
+    popup.closePopup(popupWin)
+    local savedIsLiteral = isLiteral
+    if not isLiteral and word:find(vim.pesc(charsForEscape)) then
+        incLiteral()
+    end
+
+    if not utils.empty(word) then
+        isWholeWord = not isWholeWord
+        isLiteral = not isLiteral
+        word = vim.fn.shellescape(isLiteral and word or vim.fn.escape(word, charsForEscape)) 
+        vim.fn.setreg('/', word)
+
+        local prg = basegrepprg
+        if isWholeWord then
+            prg = prg .. ' -w'
+        end
+        if isLiteral then
+            prg = prg .. ' -F'
+        end
+        prg = prg .. ' ' .. case
+
+        local output = vim.fn.systemlist(prg .. ' ' .. word .. ' .')
+        vim.fn.setqflist({}, ' ', { lines = output })
+        vim.cmd('copen')
+    --     ResizeQFHeight()
+    end
+
+    isLiteral = savedIsLiteral
+    vim.keymap.del('c', '<C-w>')
+    vim.keymap.del('c', '<C-l>')
+    vim.keymap.del('c', '<C-i>')
+end
+
+return M

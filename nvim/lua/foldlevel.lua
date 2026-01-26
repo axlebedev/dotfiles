@@ -23,11 +23,9 @@ end
 M.decreaseFoldlevel = function()
     vim.wo.foldmethod = 'syntax'
     local maxFoldlevel = getMaxFoldlevelInCurrentBuffer()
-    if vim.wo.foldlevel - 1 >= maxFoldlevel then
-        vim.wo.foldlevel = maxFoldlevel - 1
-    else
-        vim.wo.foldlevel = vim.wo.foldlevel - 1
-    end
+    vim.wo.foldlevel = vim.wo.foldlevel - 1 >= maxFoldlevel 
+        and maxFoldlevel - 1 
+        or vim.wo.foldlevel - 1
 end
 
 return M
