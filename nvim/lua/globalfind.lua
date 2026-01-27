@@ -17,7 +17,7 @@ local ignored = {
 
 local ignoredList = array.join(array.map(ignored, function(item) return '--iglob !' .. item end), ' ')
 
-local basegrepprg = 'rg --hidden --no-heading --with-filename --line-number -H ' .. ignoredList
+local basegrepprg = 'rg --hidden --vimgrep ' .. ignoredList
 
 local charsForEscape = '*'
 -- -w --word-regexp
