@@ -12,6 +12,17 @@ M.cp = function()
     vim.fn.timer_start(10, function() vim.cmd('FindCursor #d6d8fa 0') end)
 end
 
+M.resizeQFHeight = function()
+    local qfLength = #vim.fn.getqflist()
+    if qfLength == 0 then
+        return
+    end
+
+    local height = math.min(qfLength + 1, math.floor(vim.o.lines / 2))
+    vim.cmd.resize(height)
+    vim.cmd('normal! zb')
+end
+
 M.deduplicateQuickfixList = function()
     -- Dictionary to track seen files
     local seen_files = {}
@@ -31,7 +42,7 @@ M.deduplicateQuickfixList = function()
 
     -- Replace the quickfix list with the deduplicated list
     vim.fn.setqflist(new_quickfix_list)
-    require('globalfind').resizeQFHeight()
+    M.resizeQFHeight()
 end
 
 return M
