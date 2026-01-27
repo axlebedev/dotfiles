@@ -231,6 +231,8 @@ vim.keymap.set('v', '<C-f>', require('globalfind').Grep)
 vim.keymap.set('n', '<C-f><C-t>', require('globalfind').filterTestEntries)
 -- TODO autoload quickfixutils
 -- nnoremap <C-f><C-d> <ScriptCmd>quickfixUtils.DeduplicateQuickfixList()<cr>
+vim.keymap.set('n', 'cn', require('quickfix-utils').cn, { silent = true })
+vim.keymap.set('n', 'cp', require('quickfix-utils').cp, { silent = true })
 
 -- TODO plugin JsFastLog
 -- # jsLog.JsFastLog mapping {{{
