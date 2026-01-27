@@ -46,17 +46,6 @@ local function caseToString()
     return 'S'
 end
 
-M.resizeQFHeight = function()
-    local qfLength = #vim.fn.getqflist()
-    if qfLength == 0 then
-        return
-    end
-
-    local height = math.min(qfLength + 1, math.floor(vim.o.lines / 2))
-    vim.cmd.resize(height)
-    vim.cmd('normal! zb')
-end
-
 local function makeVarsString()
     return ' w' .. (isWholeWord and '➕' or '－')
         .. ' l' .. (isLiteral and '➕' or '－')
@@ -123,7 +112,7 @@ M.Grep = function()
         local output = vim.fn.systemlist(prg .. ' ' .. word .. ' .')
         vim.fn.setqflist({}, ' ', { lines = output })
         vim.cmd('copen')
-        M.resizeQFHeight()
+        require('quickfix-utils').resizeQFHeight()
     end
 
     isLiteral = savedIsLiteral
@@ -165,7 +154,7 @@ M.filterTestEntries = function()
         end
     end
     vim.fn.setqflist(res)
-    M.resizeQFHeight()
+    require('quickfix-utils').resizeQFHeight()
 end
 
 return M
