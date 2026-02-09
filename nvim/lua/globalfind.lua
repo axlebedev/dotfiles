@@ -97,8 +97,8 @@ M.Grep = function()
     if not utils.empty(word) then
         isWholeWord = not isWholeWord
         isLiteral = not isLiteral
+        local savedWord = word
         word = vim.fn.shellescape(isLiteral and word or vim.fn.escape(word, charsForEscape)) 
-        vim.fn.setreg('/', word)
 
         local prg = basegrepprg
         if isWholeWord then
@@ -113,6 +113,9 @@ M.Grep = function()
         vim.fn.setqflist({}, ' ', { lines = output })
         vim.cmd('copen')
         require('quickfix-utils').resizeQFHeight()
+
+        vim.fn.setreg('/', savedWord) 
+        vim.cmd('norm! n')
     end
 
     isLiteral = savedIsLiteral
