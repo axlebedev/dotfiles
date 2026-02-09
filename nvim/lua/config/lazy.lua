@@ -406,6 +406,11 @@ require('lazy').setup({
         stages = 'fade',
       },
     },
+
+    {
+      'axlebedev/nvim-js-fastlog',
+      opts = { js_fastlog_prefix = '11111' },
+    },
     -- }}} WORKS, nothing to do ===================================================================
 
     -- textobj

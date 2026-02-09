@@ -233,31 +233,24 @@ vim.keymap.set('n', '<C-f><C-d>', require('quickfix-utils').deduplicateQuickfixL
 vim.keymap.set('n', 'cn', require('quickfix-utils').cn, { silent = true })
 vim.keymap.set('n', 'cp', require('quickfix-utils').cp, { silent = true })
 
--- TODO plugin JsFastLog
--- # jsLog.JsFastLog mapping {{{
--- nnoremap <leader>l <ScriptCmd>set operatorfunc=function('jsLog.JsFastLog_simple')<cr>g@
--- vnoremap <leader>l <ScriptCmd>jsLog.JsFastLog_simple(visualmode())<cr>
---
--- nnoremap <leader>ll <ScriptCmd>set operatorfunc=function('jsLog.JsFastLog_JSONstringify')<cr>g@
--- vnoremap <leader>ll <ScriptCmd>jsLog.JsFastLog_JSONstringify(visualmode())<cr>
---
--- nnoremap <leader>lk <ScriptCmd>set operatorfunc=function('jsLog.JsFastLog_variable')<cr>g@
--- nmap <leader>lkk <leader>lkiW
--- vnoremap <leader>lk <ScriptCmd>jsLog.JsFastLog_variable(visualmode())<cr>
---
--- vnoremap <leader>lt <ScriptCmd>jsLog.JsFastLog_string_trace(visualmode())<cr>
---
--- nnoremap <leader>ld <ScriptCmd>set operatorfunc=function('jsLog.JsFastLog_function')<cr>g@
--- vnoremap <leader>ld <ScriptCmd>jsLog.JsFastLog_function(visualmode())<cr>
---
--- nnoremap <leader>ls <ScriptCmd>set operatorfunc=function('jsLog.JsFastLog_string')<cr>g@
--- vnoremap <leader>ls <ScriptCmd>jsLog.JsFastLog_string(visualmode())<cr>
---
--- nnoremap <leader>lss <ScriptCmd>jsLog.JsFastLog_separator()<cr>
--- nnoremap <leader>lsn <ScriptCmd>jsLog.JsFastLog_lineNumber()<cr>
--- # }}}
+-- jsLog.JsFastLog mapping {{{
+local fastlog = require('nvim-js-fastlog')
+vim.keymap.set({ 'n', 'v' }, '<leader>l', fastlog.JsFastLog_simple)
+vim.keymap.set({ 'n', 'v' }, '<leader>lt', fastlog.JsFastLog_simple_trace)
+vim.keymap.set({ 'n', 'v' }, '<leader>ll', fastlog.JsFastLog_JSONstringify)
+vim.keymap.set({ 'n', 'v' }, '<leader>lk', fastlog.JsFastLog_variable)
+vim.keymap.set({ 'n', 'v' }, '<leader>lkt', fastlog.JsFastLog_variable_trace)
+vim.keymap.set('n', '<leader>lkk', function()
+  fastlog.JsFastLog_variable()
+  vim.api.nvim_input("iW")
+end)
+vim.keymap.set({ 'n', 'v' }, '<leader>ld', fastlog.JsFastLog_function)
+vim.keymap.set({ 'n', 'v' }, '<leader>ls', fastlog.JsFastLog_string)
+vim.keymap.set({ 'n', 'v' }, '<leader>lss', fastlog.JsFastLog_separator)
+vim.keymap.set({ 'n', 'v' }, '<leader>lsn', fastlog.JsFastLog_lineNumber)
+-- }}}
 
--- TODO lsp hover
+-- TODO- lsp hover
 -- nnoremap <silent> K <CMD>call CocActionAsync("doHover")<CR>
 -- def JumpDefinitionFindCursor(command: string)
 --     # setreg('/', expand('<cword>'))
