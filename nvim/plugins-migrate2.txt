@@ -65,18 +65,18 @@ Plug 'ap/vim-css-color'
 -! Plug 'dense-analysis/ale' -- switched to mfussenegger/nvim-lint TODO config it after LSP
 - Plug 'neoclide/coc.nvim' -- TODO I dont need it?
 
-Plug 'axlebedev/vim-js-fastlog'
++ Plug 'axlebedev/vim-js-fastlog'
 Plug 'axlebedev/vim-smart-insert-tab'
 Plug 'isomoar/vim-css-to-inline'
 Plug 'axlebedev/vim-gotoline-popup'
 Plug 'axlebedev/footprints'
 + Plug 'axlebedev/find-my-cursor'
-Plug 'axlebedev/vim-foldtext'
+- Plug 'axlebedev/vim-foldtext' -- overwhelmed by nvim-ufo
 + Plug 'axlebedev/vim-yank-filename'
 Plug 'axlebedev/vim-require-to-import'
 Plug 'axlebedev/popup_scrollbar.vim'
 Plug 'axlebedev/vim-fold-unfold'
-Plug 'axlebedev/vim-detect-indent'
++ Plug 'axlebedev/vim-detect-indent'
 
 + { 'folke/flash.nvim' }          -- Best: Subsecond search preview
 
