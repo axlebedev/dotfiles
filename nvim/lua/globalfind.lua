@@ -115,7 +115,7 @@ M.Grep = function()
         require('quickfix-utils').resizeQFHeight()
 
         vim.fn.setreg('/', savedWord) 
-        vim.cmd('norm! n')
+        vim.cmd('silent! norm! n')
     end
 
     isLiteral = savedIsLiteral

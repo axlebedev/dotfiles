@@ -447,6 +447,17 @@ require('lazy').setup({
         end
       },
     },
+
+    {
+      "axlebedev/nvim-footprints",
+      config = function()
+        require("nvim-footprints").setup({
+          footprintsColor = "#C1C1C1",
+        })
+      end
+    },
+
+    { 'isomoar/vim-css-to-inline' },
     -- }}} WORKS, nothing to do ===================================================================
 
     -- textobj
