@@ -37,6 +37,41 @@ require('lazy').setup({
     -- WORKS, nothing to do {{{ ===================================================================
     { 'sheerun/vim-polyglot' },
 
+    -- sudo apt install tree-sitter-cli tar curl
+    {
+      'nvim-treesitter/nvim-treesitter',
+      lazy = false,
+      build = ':TSUpdate',
+      config = function()
+        require("nvim-treesitter").setup({
+          -- ensure_installed = { 'javascript', 'awk', 'bash', 'c', 'cmake', 'cpp', 'css', 'csv', 'diff', 'dockerfile', 
+          --   'fish', 'git_config', 'git_rebase', 'gitattributes', 'gitcommit', 'gitignore', 'go', 'html', 'http', 'ini', 'jq', 'jsdoc',
+          --   'json', 'json5', 'jsx', 'lua', 'make', 'markdown', 'markdown_inline', 'printf', 'regex', 'scss', 'typescript', 'vim',
+          --   'vimdoc', 'vue', 'yaml' },
+          ensure_installed = { 'javascript', 'typescript', 'html' },
+          highlight = { enable = true },
+          indent = { enable = true },
+          textobjects = { enable = true },
+        })
+      end
+    },
+    {
+      "MeanderingProgrammer/treesitter-modules.nvim",
+      dependencies = { "nvim-treesitter/nvim-treesitter" },
+      opts = {
+        incremental_selection = {
+          enable = true,
+          disable = false,
+          keymaps = {
+            init_selection = false,
+            node_incremental = "v",
+            scope_incremental = false,
+            node_decremental = "V",
+          },
+        },
+      },
+    },
+
     -- Automatically create parent directories on write when don't exist already.
     { 'pbrisbin/vim-mkdir' },
 
@@ -73,6 +108,24 @@ require('lazy').setup({
         }
       end,
     },
+
+    -- { -- этот плагин ломает FindCursor и боковую line для фолдов
+    --   "lukas-reineke/indent-blankline.nvim",
+    --   main = "ibl",
+    --   opts = {},
+    --   config = function()
+    --     local hooks = require "ibl.hooks"
+    --     -- create the highlight groups in the highlight setup hook, so they are reset
+    --     -- every time the colorscheme changes
+    --     hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+    --       vim.api.nvim_set_hl(0, 'IblIndent', { fg = "#dddddd" })
+    --     end)
+    --     require("ibl").setup({
+    --       indent = { char = '┊', highlight = 'IblIndent' },
+    --       scope = { enabled = false }
+    --     })
+    --   end
+    -- },
 
     -- fzf
     {
@@ -350,9 +403,8 @@ require('lazy').setup({
 
     -- bufonly
     {
-      'schickling/vim-bufonly',
-      keys = 'bo',
-      config = function() vim.keymap.set('n', 'bo', '<cmd>BufOnly<CR>') end
+      "numtostr/BufOnly.nvim",
+      cmd = "BufOnly",
     },
 
     --
@@ -452,12 +504,21 @@ require('lazy').setup({
       "axlebedev/nvim-footprints",
       config = function()
         require("nvim-footprints").setup({
-          footprintsColor = "#C1C1C1",
+          footprintsColor = "#D9D9D9",
         })
       end
     },
 
     { 'isomoar/vim-css-to-inline' },
+
+    {
+      'windwp/nvim-ts-autotag',
+      opts = {
+        enable_close = true, -- Auto close tags
+        enable_rename = true, -- Auto rename pairs of tags
+        enable_close_on_slash = false -- Auto close on trailing </
+      },
+    }
     -- }}} WORKS, nothing to do ===================================================================
 
     -- textobj
@@ -478,24 +539,77 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   callback = function() vim.highlight.on_yank { higroup='IncSearch', timeout=200 } end,
 })
 
--- -- Enable TypeScript via the Language Server Protocol (LSP)
--- vim.lsp.enable('tsserver')
---
--- -- Set the TS config for the LSP
--- vim.lsp.config('tsserver', {
---   -- Make sure this is on your path
---   cmd = {'typescript-language-server', '--stdio'},
---   filetypes = { 'typescript' },
---   -- This is a hint to tell nvim to find your project root from a file within the tree
---   root_dir = vim.fs.root(0, {'package.json', '.git'}),
---   on_attach = on_attach,
---   capabilities = capabilities,
---   -- optional settings = {...} go here, refer to language server code: https://github.com/typescript-language-server/typescript-language-server/blob/5c483349b7b4b6f79d523f8f4d854cbc5cec7ecd/src/ts-protocol.ts#L379
--- })
---
--- -- lsp keymaps
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'javascript', 'typescript', 'typescriptreact', 'javascriptreact' },
+  callback = function()
+    vim.treesitter.start()
+
+    vim.wo[0][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+    vim.wo[0][0].foldmethod = 'expr'
+
+    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+  end,
+})
+
+-- Enable TypeScript via the Language Server Protocol (LSP)
+vim.lsp.enable('tsserver')
+
+-- Set the TS config for the LSP
+vim.lsp.config('tsserver', {
+  -- Make sure this is on your path
+  cmd = {'typescript-language-server', '--stdio'},
+  filetypes = { 'javascript', 'typescript', 'typescriptreact', 'javascriptreact' },
+  -- This is a hint to tell nvim to find your project root from a file within the tree
+  root_dir = vim.fs.root(0, {'package.json', '.git'}),
+  on_attach = on_attach,
+  capabilities = capabilities,
+  -- optional settings = {...} go here, refer to language server code: https://github.com/typescript-language-server/typescript-language-server/blob/5c483349b7b4b6f79d523f8f4d854cbc5cec7ecd/src/ts-protocol.ts#L379
+})
+-- lsp keymaps
 -- vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, {})
--- vim.keymap.set('n', 'gd', vim.lsp.buf.definition, {})
+vim.keymap.set('n', 'gd', vim.lsp.buf.definition, {})
 -- vim.keymap.set('n', '<leader>f', function()
 --   vim.lsp.buf.format { async = true }
 -- end, {})
+
+--------------------------------------------------------------------
+
+vim.o.complete = ".,o" -- use buffer and omnifunc
+vim.o.completeopt = "fuzzy,menuone,noselect" -- add 'popup' for docs (sometimes)
+vim.o.autocomplete = true
+vim.o.pumheight = 15
+
+vim.lsp.enable({ "typescript-language-server" })
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(ev)
+    vim.lsp.completion.enable(true, ev.data.client_id, ev.buf, {
+      -- Optional formating of items
+      convert = function(item)
+        -- Remove leading misc chars for abbr name,
+        -- and cap field to 25 chars
+        --local abbr = item.label
+        --abbr = abbr:match("[%w_.]+.*") or abbr
+        --abbr = #abbr > 25 and abbr:sub(1, 24) .. "…" or abbr
+        --
+        -- Remove return value
+        --local menu = ""
+
+        -- Only show abbr name, remove leading misc chars (bullets etc.),
+        -- and cap field to 15 chars
+        local abbr = item.label
+        abbr = abbr:gsub("%b()", ""):gsub("%b{}", "")
+        abbr = abbr:match("[%w_.]+.*") or abbr
+        abbr = #abbr > 15 and abbr:sub(1, 14) .. "…" or abbr
+
+        -- Cap return value field to 15 chars
+        local menu = item.detail or ""
+        menu = #menu > 15 and menu:sub(1, 14) .. "…" or menu
+
+        return { abbr = abbr, menu = menu }
+      end,
+    })
+  end,
+})
+vim.api.nvim_set_keymap('i', '<Tab>', ' pumvisible() ? "\\<C-n>" : "\\<Tab>"', { expr = true, silent = true })
+vim.api.nvim_set_keymap('i', '<S-Tab>', 'pumvisible() ? "\\<C-p>" : "\\<S-Tab>"', { expr = true, silent = true })

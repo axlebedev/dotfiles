@@ -18,6 +18,7 @@ end
 M.increaseFoldlevel = function()
     vim.wo.foldmethod = 'syntax'
     vim.wo.foldlevel = vim.wo.foldlevel + 1
+    vim.cmd('redraw')
 end
 
 M.decreaseFoldlevel = function()
@@ -26,6 +27,7 @@ M.decreaseFoldlevel = function()
     vim.wo.foldlevel = vim.wo.foldlevel - 1 >= maxFoldlevel 
         and maxFoldlevel - 1 
         or vim.wo.foldlevel - 1
+    vim.cmd('redraw')
 end
 
 return M
