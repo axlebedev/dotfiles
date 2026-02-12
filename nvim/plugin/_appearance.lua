@@ -11,8 +11,6 @@ vim.cmd('colorscheme PaperColor')  -- Install via Lazy first
 vim.opt.termguicolors = true
 vim.opt.cursorline = true
 
-vim.opt.fillchars = { vert = "│", eob = "░" }
-
 vim.opt.list = true
 vim.opt.listchars = "tab:· ,trail:•,extends:»,precedes:«,conceal:_,nbsp:•"
 

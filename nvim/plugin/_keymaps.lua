@@ -15,31 +15,19 @@ local array = require('utils/array')
 
 vim.g.mapleader = " "
 
-vim.keymap.set("n", "<Tab>", "%<CMD>FindCursor 0 500<CR>")
-
-vim.keymap.set("v", "<Tab>", "%")
+vim.keymap.set("n", "<Tab>", "%<CMD>FindCursor 0 500<CR>", { remap = true })
+vim.keymap.set("v", "<Tab>", "%", { remap = true })
 
 -- Make moving in line a bit more convenient
-vim.keymap.set("n", "gg", "cursor(1, 1)", { silent = true })
-vim.keymap.set("n", "$", "g_")
-vim.keymap.set("v", "$", "g_")
-vim.keymap.set("o", "$", "g_")
-vim.keymap.set("n", "$$", "$")
-vim.keymap.set("v", "$$", "$")
-vim.keymap.set("o", "$$", "$")
-vim.keymap.set("n", "0", "^")
-vim.keymap.set("v", "0", "^")
-vim.keymap.set("o", "0", "^")
-vim.keymap.set("n", "00", "0")
-vim.keymap.set("v", "00", "0")
-vim.keymap.set("o", "00", "0")
-vim.keymap.set("n", "f;", "g_")
-vim.keymap.set("v", "f;", "g_")
-vim.keymap.set("o", "f;", "g_")
+vim.keymap.set("n", "gg", ":lua vim.fn.cursor(1, 1)<CR>", { silent = true })
+vim.keymap.set({ "n", "v", "o" }, "$", "g_")
+vim.keymap.set({ "n", "v", "o" }, "$$", "$")
+vim.keymap.set({ "n", "v", "o" }, "0", "^")
+vim.keymap.set({ "n", "v", "o" }, "00", "0")
+vim.keymap.set({ "n", "v", "o" }, "f;", "g_")
 
 -- fast save file, close file
-vim.keymap.set("n", "<leader>w", "<cmd>w!<cr>")
-vim.keymap.set("v", "<leader>w", "<cmd>w!<cr>")
+vim.keymap.set({ "n", "v" }, "<leader>w", "<cmd>w!<cr>")
 
 -- Если просто закрыть fugitive-буфер - то закроется весь вим.
 -- Поэтому делаем такой костыль
@@ -186,7 +174,7 @@ vim.keymap.set('n', '<leader>b', '<cmd>Telescope buffers<CR>', { noremap = false
 vim.keymap.set('n', '<C-p>', '<cmd>Telescope commands<CR>', { noremap = false })
 vim.keymap.set('n', 'sft', '<cmd>Telescope filetypes<CR>', { noremap = false })
 
--- TODO refactor (after lsp)
+-- TODO- refactor (after lsp)
 -- nnoremap <silent> <leader>r <Plug>(refactor-commands)
 -- vnoremap <silent> <leader>r <Plug>(refactor-commands)
 -- nnoremap <silent> rr <Plug>(refactor-commands)
@@ -308,7 +296,7 @@ vim.keymap.set("n", "x", "\"_x", { silent = true })
 -- Для того чтобы поменять местами буквы - оставляем дефолтное поведение
 vim.keymap.set("n", "xp", "xp")
 
--- TODO autoload refactor after lsp
+-- TODO- autoload refactor after lsp
 -- nnoremap <silent> elf <ScriptCmd>refactor.EslintFile()<CR>
 
 -- TODO plugin Chase
@@ -320,14 +308,14 @@ vim.keymap.set("n", "xp", "xp")
 vim.keymap.set("n", "q", "<NOP>")
 vim.keymap.set("n", "<C-q>", "q")
 
--- TODO linting
+-- TODO- linting
 -- nnoremap ad <ScriptCmd>ALEDisable<CR>
 
 -- wrap visual selection into function block 
 vim.keymap.set("v", "<C-b>", '"bdi{<CR>return <C-r>b;<CR>}<Esc>=ib')
 
 local FoldSelection = function()
-  local saved = vim.opt.foldmethod
+  -- local saved = vim.opt.foldmethod
   vim.opt_local.foldmethod = 'manual'
   vim.cmd('normal! zf')
 end
@@ -341,7 +329,7 @@ vim.keymap.set("n", "ZO", "zO")
 
 vim.keymap.set("n", "H", "zc")
 
--- TODO lsp reference used
+-- TODO- lsp reference used
 -- def RefUsed(cleanImports: bool)
 --     const word = expand('<cword>')
 --     setreg('/', word)
@@ -362,12 +350,12 @@ vim.keymap.set("n", "H", "zc")
 -- nmap <silent>grr <ScriptCmd>RefUsed(false)<CR>
 
 -- Yank with keeping cursor position in visual mode {{{ TODO: работает глючно!
-local Keepcursor_visual_wrapper = function(command)
-  vim.cmd("normal! gv" .. command)
-  vim.cmd("normal! gv<ESC>")
-end
-vim.keymap.set("x", "y", function() Keepcursor_visual_wrapper("y") end, { silent = true })
-vim.keymap.set("x", "Y", function() Keepcursor_visual_wrapper("Y") end, { silent = true })
+-- local Keepcursor_visual_wrapper = function(command)
+--   vim.cmd("normal! gv" .. command)
+--   vim.cmd("normal! gv<ESC>")
+-- end
+-- vim.keymap.set("x", "y", function() Keepcursor_visual_wrapper("y") end, { silent = true })
+-- vim.keymap.set("x", "Y", function() Keepcursor_visual_wrapper("Y") end, { silent = true })
 -- }}}
 
 -- Repeat on every line {{{
@@ -409,7 +397,7 @@ vim.keymap.set('n', 'ygg', '<cmd>YankGithubURL<cr>')
 
 vim.keymap.set("n", "<2-LeftMouse>", "yiW")
 
--- TODO lsp coctree analog
+-- TODO- lsp coctree analog
 -- def CloseCoctreeWindowsPreserveCursor(): void
 --   var save_view = winsaveview()
 --   var save_win = winnr()

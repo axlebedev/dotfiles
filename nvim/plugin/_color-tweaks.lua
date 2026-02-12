@@ -37,8 +37,8 @@ vim.api.nvim_create_autocmd('ColorScheme', {
 
     -- Fold column
     vim.api.nvim_set_hl(0, 'FoldColumn', { bg = '#d9d9d9', fg = '#34352E' })
-    vim.api.nvim_set_hl(0, 'Folded', { bg = '#e4e4e4' })
-    vim.api.nvim_set_hl(0, 'UfoFoldedBg', { bg = '#e4e4e4' })
+    vim.api.nvim_set_hl(0, 'Folded', { bg = '#cee6eb' })
+    vim.api.nvim_set_hl(0, 'UfoFoldedBg', { bg = '#cee6eb' })
 
     -- SignColumn
     vim.api.nvim_set_hl(0, 'SignColumn', { bg = '#d9d9d9' })
@@ -87,63 +87,26 @@ vim.api.nvim_create_autocmd('ColorScheme', {
     vim.api.nvim_set_hl(0, 'ALESignColumnWithErrors', { bg = '#f6b7ac' })
 
     -- Diff / GitSigns
-    vim.api.nvim_set_hl(0, 'diffAdded', {
-      bg = '#d0f2d4',
-      fg = 'NONE',
-    })
-    vim.api.nvim_set_hl(0, 'DiffAdd', {
-      bg = '#d0f2d4',
-      fg = 'NONE',
-      bold = true,
-    })
+    vim.api.nvim_set_hl(0, 'diffAdded', { bg = '#d0f2d4', fg = 'NONE' })
+    vim.api.nvim_set_hl(0, 'DiffAdd', { bg = '#d0f2d4', fg = 'NONE', bold = true })
     vim.api.nvim_set_hl(0, 'GitSignsAdd', { fg = '#b1f5b9', bg = '#b1f5b9' })
 
-    vim.api.nvim_set_hl(0, 'diffRemoved', {
-      bg = '#f2d1ce',
-      fg = 'NONE',
-    })
-    vim.api.nvim_set_hl(0, 'DiffDelete', {
-      bg = '#f2d1ce',
-      fg = 'NONE',
-    })
+    vim.api.nvim_set_hl(0, 'diffRemoved', { bg = '#f2d1ce', fg = 'NONE' })
+    vim.api.nvim_set_hl(0, 'DiffDelete', { bg = '#f2d1ce', fg = 'NONE' })
     vim.api.nvim_set_hl(0, 'GitSignsDelete', { fg = '#f2b7b1', bg = '#f2b7b1' })
 
-    vim.api.nvim_set_hl(0, 'DiffChange', {
-      bg = '#ebdfce',
-      fg = 'NONE',
-    })
-    vim.api.nvim_set_hl(0, 'diffChanged', {
-      bg = '#ebdfce',
-      fg = 'NONE',
-    })
+    vim.api.nvim_set_hl(0, 'DiffChange', { bg = '#ebdfce', fg = 'NONE' })
+    vim.api.nvim_set_hl(0, 'diffChanged', { bg = '#ebdfce', fg = 'NONE' })
     vim.api.nvim_set_hl(0, 'GitSignsChange', { fg = '#ffe79f', bg = '#ffe79f' })
-    vim.api.nvim_set_hl(0, 'diffFile', {
-      bg = '#ebdfce',
-      fg = 'NONE',
-    })
-    vim.api.nvim_set_hl(0, 'diffLine', {
-      bg = '#ebdfce',
-      fg = 'NONE',
-      bold = true,
-    })
-    vim.api.nvim_set_hl(0, 'DiffText', {
-      bg = '#ebdfce',
-      fg = 'NONE',
-      bold = true,
-    })
+    vim.api.nvim_set_hl(0, 'diffFile', { bg = '#ebdfce', fg = 'NONE' })
+    vim.api.nvim_set_hl(0, 'diffLine', { bg = '#ebdfce', fg = 'NONE', bold = true })
+    vim.api.nvim_set_hl(0, 'DiffText', { bg = '#ebdfce', fg = 'NONE', bold = true })
 
     -- Popup scrollbar
-    vim.api.nvim_set_hl(0, 'PopupScrollbar', {
-      fg = '#A7A7A7',
-      bg = 'NONE'
-    })
+    vim.api.nvim_set_hl(0, 'PopupScrollbar', { fg = '#A7A7A7', bg = 'NONE' })
 
     -- Indexed search popup
-    vim.api.nvim_set_hl(0, 'IndexedSearchPopup', {
-      bold = true,
-      bg = '#FDBED4',
-      fg = 'NONE'
-    })
+    vim.api.nvim_set_hl(0, 'IndexedSearchPopup', { bold = true, bg = '#FDBED4', fg = 'NONE' })
 
     -- Coc
     vim.api.nvim_set_hl(0, 'CocCodeLens', { link = 'Comment' })

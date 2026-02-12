@@ -90,6 +90,16 @@ vim.opt.foldenable = true
 vim.opt.foldmethod = "syntax"
 vim.opt.foldcolumn = "0"
 vim.opt.foldlevel = 99
+vim.opt.fillchars = {
+  eob = ' ',
+  fold = ' ',
+  foldopen = '-',
+  foldsep = ' ',
+  foldinner = ' ',
+  foldclose = '+',
+  vert = ' ',
+  eob = "░"
+}
 
 -- UI
 vim.opt.mouse = "a"

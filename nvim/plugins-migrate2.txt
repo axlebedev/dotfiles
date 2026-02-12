@@ -1,5 +1,5 @@
 - Plug 'vim-scripts/l9'
--! Plug 'kana/vim-submode'
+-! Plug 'kana/vim-submode' -- нашёл замену
 + Plug 'pbrisbin/vim-mkdir'
 + Plug 'tpope/vim-repeat'
 - Plug 'lyokha/vim-xkbswitch'
@@ -17,7 +17,6 @@
 + Plug 'schickling/vim-bufonly'
 - Plug 'AndrewRadev/bufferize.vim'
 -! Plug 'yssl/QFEnter' -- сделать map 'o' и <CR>
--! Plug 'axlebedev/vim-indexed-search' -- переписать! Плагин не nvim-frienly
 + Plug 'junegunn/vim-slash'
 + Plug 'NLKNguyen/papercolor-theme'
 + Plug 'rhysd/clever-f.vim'
@@ -28,7 +27,7 @@
 + Plug 'jreybert/vimagit'
 -! Plug 'rhysd/conflict-marker.vim'
 + Plug 'junegunn/gv.vim'
--! Plug 'wellle/targets.vim'
+-! Plug 'wellle/targets.vim' -- кажется не очень нужен
 Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-entire'
 Plug 'kana/vim-textobj-indent'
@@ -39,16 +38,16 @@ Plug 'glts/vim-textobj-comment'
 Plug 'rhysd/vim-textobj-anyblock'
 Plug 'Julian/vim-textobj-variable-segment'
 -! Plug 'axlebedev/vim-expand-region' -- https://www.reddit.com/r/neovim/comments/194xood/which_expandregion_plugin_for_lazyvim_would_you/ There's <C-space> which makes use of Treesitter's incremental selection. Feel free to try out its behavior.
+ -- TS expand selection is outdated! Use LSP
 + Plug 'AndrewRadev/switch.vim'
-- Plug 'machakann/vim-highlightedyank'
+. Plug 'machakann/vim-highlightedyank' -- нашёл замену
 + Plug 'RRethy/vim-illuminate'
 -! Plug 'osyo-manga/vim-trip' -- maybe search alternatives
 + Plug 'FooSoft/vim-argwrap'
--! Plug 'AndrewRadev/splitjoin.vim' -- dont work in nvim
+. Plug 'AndrewRadev/splitjoin.vim' -- dont work in nvim -- нашёл замену
 + Plug 'cohama/lexima.vim' -- switched to nvim autopairs
 - Plug 'tomtom/tcomment_vim' -- TODO: search others
 + Plug 'tpope/vim-surround'
-- Plug 'axlebedev/vim-chase' -- TODO: rewrite to lua. Look at 'textcase' plugin
 + Plug 'svban/YankAssassin.vim'
 
 Plug 'moll/vim-node'
@@ -66,10 +65,10 @@ Plug 'ap/vim-css-color'
 - Plug 'neoclide/coc.nvim' -- TODO I dont need it?
 
 + Plug 'axlebedev/vim-js-fastlog'
-Plug 'axlebedev/vim-smart-insert-tab'
-Plug 'isomoar/vim-css-to-inline'
+- Plug 'axlebedev/vim-smart-insert-tab' -- наверное пока не буду даже начинать
++ Plug 'isomoar/vim-css-to-inline'
 Plug 'axlebedev/vim-gotoline-popup'
-Plug 'axlebedev/footprints'
++ Plug 'axlebedev/footprints'
 + Plug 'axlebedev/find-my-cursor'
 - Plug 'axlebedev/vim-foldtext' -- overwhelmed by nvim-ufo
 + Plug 'axlebedev/vim-yank-filename'
@@ -77,6 +76,8 @@ Plug 'axlebedev/vim-require-to-import'
 Plug 'axlebedev/popup_scrollbar.vim'
 Plug 'axlebedev/vim-fold-unfold'
 + Plug 'axlebedev/vim-detect-indent'
+Plug 'axlebedev/vim-chase' -- TODO: rewrite to lua. Look at 'textcase' plugin
+Plug 'axlebedev/vim-indexed-search' -- переписать! Плагин не nvim-frienly
 
 + { 'folke/flash.nvim' }          -- Best: Subsecond search preview
 
@@ -88,7 +89,9 @@ https://git.sr.ht/~foosoft/argonaut.nvim
 Supermaven plugin and claude code
 https://github.com/lukas-reineke/indent-blankline.nvim
 
-plugin/blockline - это я пропустил и весь дальнейший plugin/ отложил до времён после "autoload"
+plugin/blockline
 autoload/eslinttoquickfix
-autoload/globalfind - отложил на потом
 autoload/htmlbeautify - давно не использую
+
+TODO: когда я нажимаю * - сразу прыгаю к след. слову. В vim на первом нажатии я просто подсвечивал слово но никуда не прыгал
+TODO: когда я ввожу <div> - хочу чтобы сразу подстаился закрывающий </div>
