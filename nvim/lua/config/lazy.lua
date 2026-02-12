@@ -136,9 +136,21 @@ require('lazy').setup({
         { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
       },
       config = function()
+        local actions = require("telescope.actions")
+
         require('telescope').setup{
           defaults = {
             preview = false,
+            mappings = {
+              i = {
+                ["<C-j>"] = actions.move_selection_next,
+                ["<C-k>"] = actions.move_selection_previous,
+              },
+              n = {
+                ["<C-j>"] = actions.move_selection_next,
+                ["<C-k>"] = actions.move_selection_previous,
+              },
+            },
           },
           pickers = {},
           extensions = {},
