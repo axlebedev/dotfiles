@@ -209,8 +209,8 @@ ClapOpen = function(command_str)
   vim.cmd("normal! " .. command_str .. "<cr>")
 end
 
-vim.keymap.set("n", "<leader>j", require('opennextbuf').openNextBuf)
-vim.keymap.set("n", "<leader>k", require('opennextbuf').openPrevBuf)
+vim.keymap.set("n", "<leader>k", require('opennextbuf').openNextBuf)
+vim.keymap.set("n", "<leader>j", require('opennextbuf').openPrevBuf)
 
 vim.keymap.set("n", "<leader>f", "<cmd>FindCursor #CC0000 500<cr>")
 
