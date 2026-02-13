@@ -38,8 +38,7 @@ require('lazy').setup({
     { 'sheerun/vim-polyglot' },
 
     -- sudo apt install tree-sitter-cli tar curl
-    {
-      'nvim-treesitter/nvim-treesitter',
+    { 'nvim-treesitter/nvim-treesitter',
       lazy = false,
       build = ':TSUpdate',
       config = function()
@@ -55,8 +54,7 @@ require('lazy').setup({
         })
       end
     },
-    {
-      "MeanderingProgrammer/treesitter-modules.nvim",
+    { "MeanderingProgrammer/treesitter-modules.nvim",
       dependencies = { "nvim-treesitter/nvim-treesitter" },
       opts = {
         incremental_selection = {
@@ -79,8 +77,7 @@ require('lazy').setup({
     { 'tpope/vim-repeat' }, -- TODO: nnoremap <Plug>(RepeatRedo) U
 
     -- Start screen for vim
-    {
-      'goolord/alpha-nvim',
+    { 'goolord/alpha-nvim',
       dependencies = { 'nvim-mini/mini.icons' },
       config = function ()
         local startify = require'alpha.themes.startify'
@@ -92,8 +89,7 @@ require('lazy').setup({
     },
 
     -- NERDTree
-    {
-      'nvim-tree/nvim-tree.lua', -- NvimTreeToggle
+    { 'nvim-tree/nvim-tree.lua', -- NvimTreeToggle
       dependencies = { 'nvim-tree/nvim-web-devicons' },
       config = function()
         require('nvim-tree').setup {
@@ -128,8 +124,7 @@ require('lazy').setup({
     -- },
 
     -- fzf
-    {
-      'nvim-telescope/telescope.nvim',
+    { 'nvim-telescope/telescope.nvim',
       dependencies = {
         'nvim-lua/plenary.nvim',
         -- optional but recommended
@@ -159,8 +154,7 @@ require('lazy').setup({
     },
 
     -- Markdown
-    {
-      'iamcco/markdown-preview.nvim',
+    { 'iamcco/markdown-preview.nvim',
       cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
       build = 'cd app && yarn install',
       init = function()
@@ -170,8 +164,7 @@ require('lazy').setup({
     },
 
     -- open browser
-    {
-      'tyru/open-browser.vim',
+    { 'tyru/open-browser.vim',
       keys = {
         { '<F3>', '<Plug>(openbrowser-smart-search)', mode = 'n' },
         { '<F3>', '<Plug>(openbrowser-smart-search)', mode = 'v' },
@@ -179,8 +172,7 @@ require('lazy').setup({
     },
 
     -- clear hlsearch on cursor move
-    {
-      'nvimdev/hlsearch.nvim',
+    { 'nvimdev/hlsearch.nvim',
       event = 'BufRead',
       config = function()
         require('hlsearch').setup()
@@ -188,14 +180,12 @@ require('lazy').setup({
     },
 
     -- color scheme
-    {
-      'NLKNguyen/papercolor-theme',
+    { 'NLKNguyen/papercolor-theme',
       priority = 1000, -- ensures the colorscheme loads first
     },
 
     -- highlight 'f' character
-    {
-      'rhysd/clever-f.vim',
+    { 'rhysd/clever-f.vim',
       config = function()
         vim.g.clever_f_smart_case = 1
         vim.g.clever_f_across_no_line = 1
@@ -204,16 +194,14 @@ require('lazy').setup({
     },
 
     -- vim-smoothie
-    {
-      'karb94/neoscroll.nvim',
+    { 'karb94/neoscroll.nvim',
       opts = {
         mappings = { '<C-u>', '<C-d>', '<C-b>', '<C-f>', 'zt', 'zz', 'zb', },
       },
     },
 
     -- airline
-    {
-      'nvim-lualine/lualine.nvim',
+    { 'nvim-lualine/lualine.nvim',
       dependencies = { 'nvim-tree/nvim-web-devicons' },
       options = {
         theme = 'papercolor',
@@ -348,8 +336,7 @@ require('lazy').setup({
     },
 
     -- bufferline
-    {
-      'akinsho/bufferline.nvim',
+    { 'akinsho/bufferline.nvim',
       dependencies = 'nvim-tree/nvim-web-devicons',
       config = function()
         require('bufferline').setup({
@@ -389,8 +376,7 @@ require('lazy').setup({
     { 'junegunn/gv.vim', cmd = 'GV' }, -- Lazy-load on command 
 
     -- auto pairs
-    {
-      'windwp/nvim-autopairs',
+    { 'windwp/nvim-autopairs',
       event = 'InsertEnter',
       opts = {
         check_ts = true,  -- Treesitter integration
@@ -399,8 +385,7 @@ require('lazy').setup({
     },
 
     -- true/false
-    {
-      'AndrewRadev/switch.vim',
+    { 'AndrewRadev/switch.vim',
       keys = '<C-t>',
       config = function()
         vim.keymap.set('n', '<C-t>', '<cmd>Switch<CR>')
@@ -414,14 +399,12 @@ require('lazy').setup({
     { 'svban/YankAssassin.vim', event = 'VeryLazy' },
 
     -- bufonly
-    {
-      "numtostr/BufOnly.nvim",
+    { "numtostr/BufOnly.nvim",
       cmd = "BufOnly",
     },
 
     --
-    {
-      'RRethy/vim-illuminate',
+    { 'RRethy/vim-illuminate',
       dependencies = { "nvim-lua/plenary.nvim" },
       config = function()
         require('illuminate').configure({
@@ -434,8 +417,7 @@ require('lazy').setup({
 
     { "pogyomo/submode.nvim", lazy = true },
 
-    {
-      "axlebedev/find-my-cursor.nvim",
+    { "axlebedev/find-my-cursor.nvim",
       lazy = true,
       cmd = 'FindCursor',
       opts = {
@@ -452,16 +434,14 @@ require('lazy').setup({
 
     { 'FooSoft/vim-argwrap' },
 
-    {
-      'axlebedev/yank-filename.nvim',
+    { 'axlebedev/yank-filename.nvim',
       cmd = { 'YankFileName', 'YankFileNameForDebug', 'YankGithubURLMaster', 'YankGithubURL' },
     },
 
     -- Clear highlight on cursor move
     { 'folke/flash.nvim', event = "VeryLazy" },
 
-    {
-      'rcarriga/nvim-notify',
+    { 'rcarriga/nvim-notify',
       event = "VeryLazy",
       opts = {
         timeout = 2000,
@@ -519,8 +499,7 @@ require('lazy').setup({
       },
     },
 
-    {
-      "axlebedev/nvim-footprints",
+    { "axlebedev/nvim-footprints",
       config = function()
         require("nvim-footprints").setup({
           footprintsColor = "#D9D9D9",
@@ -530,8 +509,7 @@ require('lazy').setup({
 
     { 'isomoar/vim-css-to-inline' },
 
-    {
-      'windwp/nvim-ts-autotag',
+    { 'windwp/nvim-ts-autotag',
       opts = {
         enable_close = true, -- Auto close tags
         enable_rename = true, -- Auto rename pairs of tags
