@@ -2,13 +2,19 @@ local M = {}
 
 -- quickfix next
 M.cn = function()
-    vim.cmd.cnext()
+    local ok, err = pcall(vim.cmd, "cnext")
+    if not ok then
+        vim.cmd.cfirst()
+    end
     vim.fn.timer_start(10, function() vim.cmd('FindCursor #d6d8fa 0') end)
 end
 
 -- quickfix prev
 M.cp = function()
-    vim.cmd.cprev()
+    local ok, err = pcall(vim.cmd, "cprev")
+    if not ok then
+        vim.cmd.clast()
+    end
     vim.fn.timer_start(10, function() vim.cmd('FindCursor #d6d8fa 0') end)
 end
 
