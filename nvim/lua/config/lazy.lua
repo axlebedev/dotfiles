@@ -51,7 +51,10 @@ require('lazy').setup({
           'fish', 'git_config', 'git_rebase', 'gitattributes', 'gitcommit', 'gitignore', 'go', 'html', 'http', 'ini', 'jq', 'jsdoc',
           'json', 'json5', 'jsx', 'lua', 'make', 'markdown', 'markdown_inline', 'printf', 'regex', 'scss', 'typescript', 'vim',
           'vimdoc', 'vue', 'yaml' },
-        highlight = { enable = true },
+        highlight = {
+          enable = true,
+          additional_vim_regex_highlighting = { "javascript", "typescript", "javascriptreact", "typescriptreact" },
+        },
         indent = { enable = true },
         textobjects = { enable = true },
       })
@@ -196,15 +199,24 @@ ft = { 'markdown' },
 
 -- color scheme
 {
-  "projekt0n/github-nvim-theme",
-  lazy = false,
-  priority = 1000,
-  config = function()
-    require("github-theme").setup({})
-    vim.cmd.colorscheme("github_light")
-    vim.opt.cursorline = true
-  end,
+    "yorik1984/newpaper.nvim",
+    priority = 1000,
+    config = function()
+      require("newpaper").setup({ style = "light" })
+      vim.cmd.colorscheme("newpaper")
+      vim.opt.foldcolumn = "1"
+    end,
 },
+-- {
+--   "projekt0n/github-nvim-theme",
+--   lazy = false,
+--   priority = 1000,
+--   config = function()
+--     require("github-theme").setup({})
+--     vim.cmd.colorscheme("github_light")
+--     vim.opt.cursorline = true
+--   end,
+-- },
     -- highlight 'f' character
     { 'rhysd/clever-f.vim',
     config = function()
@@ -842,3 +854,6 @@ vim.keymap.set({ "n" }, "*", function()
     vim.fn.search(pat, "n")  -- 'n' flag = no movement
   end
 end)
+
+vim.keymap.set('n', '<C-m>', vim.diagnostic.goto_next, { noremap = true, silent = true })
+vim.keymap.set('n', '<C-n>', vim.diagnostic.goto_prev, { noremap = true, silent = true })

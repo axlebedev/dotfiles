@@ -75,13 +75,13 @@ vim.opt.termguicolors = true
     })
 
     -- Line numbers
-    local sidebar_bg_cursor = '#f4f4f4'
+    local sidebar_bg_cursor = '#e3e3e3'
     vim.api.nvim_set_hl(0, 'CursorLineNr', { bg = sidebar_bg_cursor, bold = true })
     vim.api.nvim_set_hl(0, 'CursorLineSign', { bg = sidebar_bg_cursor, bold = true })
     vim.api.nvim_set_hl(0, 'CursorLineFold', { bg = sidebar_bg_cursor, bold = true })
     vim.api.nvim_set_hl(0, 'CursorLine', { bg = sidebar_bg_cursor })
 
-    local sidebar_bg = '#e6e8ea'
+    local sidebar_bg = '#CBCCCB'
     vim.api.nvim_set_hl(0, 'LineNr', { bg = sidebar_bg })
     vim.api.nvim_set_hl(0, 'SignColumn', { bg = sidebar_bg })
     vim.api.nvim_set_hl(0, 'FoldColumn', { bg = sidebar_bg })

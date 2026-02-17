@@ -88,7 +88,6 @@ vim.opt.splitright = true
 -- Фолдинг
 vim.opt.foldenable = true
 vim.opt.foldmethod = "syntax"
-vim.opt.foldcolumn = "0"
 vim.opt.foldlevel = 99
 vim.opt.fillchars = {
   eob = ' ',
