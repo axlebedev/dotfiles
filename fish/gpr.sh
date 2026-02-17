@@ -9,4 +9,4 @@ url=${url/".git"/""}
 url=${url/":"/"/"}
 
 echo "https://$url/-/merge_requests/new?merge_request%5Bsource_branch%5D=$branch"
-eval "google-chrome --user-data-dir=/home/alex/chrome-users/wildberries https://$url/-/merge_requests/new?merge_request%5Bsource_branch%5D=$branch"
+eval "google-chrome --user-data-dir=/home/lebedev.aleksey101/chrome-users/wildberries https://$url/-/merge_requests/new?merge_request%5Bsource_branch%5D=$branch"
