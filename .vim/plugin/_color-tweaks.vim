@@ -50,11 +50,6 @@ highlight CursorLineNr guibg=#e4e4e4 guifg=#444444
  
 highlight VertSplit guibg=#d9d9d9 guifg=#d9d9d9
  
-# ale-vim customizations
-highlight ALESignColumnWithErrors guibg=#f6b7ac
-highlight ALEError cterm=underline guibg=#f6b7ac
-highlight ALEWarning cterm=underline guibg=#f0eab4
-
 # Diff styling
 highlight diffAdded term=bold ctermbg=black     ctermfg=green cterm=bold guibg=#d0f2d4 guifg=NONE gui=none
 highlight DiffAdd   term=bold ctermbg=darkgreen ctermfg=white cterm=bold guibg=#d0f2d4 guifg=NONE gui=bold

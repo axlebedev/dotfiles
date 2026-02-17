@@ -6,10 +6,11 @@ vim.opt.incsearch = true
 vim.opt.hlsearch = true
 
 vim.opt.background = 'light'
-vim.cmd('colorscheme PaperColor')  -- Install via Lazy first
 
 vim.opt.termguicolors = true
-vim.opt.cursorline = true
+vim.defer_fn(function()
+  vim.opt.cursorline = true
+end, 100)
 
 vim.opt.list = true
 vim.opt.listchars = "tab:· ,trail:•,extends:»,precedes:«,conceal:_,nbsp:•"

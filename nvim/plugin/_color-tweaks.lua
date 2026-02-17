@@ -1,7 +1,5 @@
 vim.opt.termguicolors = true
 
-vim.api.nvim_create_autocmd('ColorScheme', {
-  callback = function()
     -- SpellBad
     vim.api.nvim_set_hl(0, 'SpellBad', {
       bg = '#532120',
@@ -77,11 +75,18 @@ vim.api.nvim_create_autocmd('ColorScheme', {
     })
 
     -- Line numbers
-    vim.api.nvim_set_hl(0, 'LineNr', { bg = '#d9d9d9', fg = '#34352E' })
-    vim.api.nvim_set_hl(0, 'CursorLineNr', { bg = '#e4e4e4', fg = '#444444' })
+    local sidebar_bg_cursor = '#f4f4f4'
+    vim.api.nvim_set_hl(0, 'CursorLineNr', { bg = sidebar_bg_cursor, bold = true })
+    vim.api.nvim_set_hl(0, 'CursorLineSign', { bg = sidebar_bg_cursor, bold = true })
+    vim.api.nvim_set_hl(0, 'CursorLineFold', { bg = sidebar_bg_cursor, bold = true })
+    vim.api.nvim_set_hl(0, 'CursorLine', { bg = sidebar_bg_cursor })
 
+    local sidebar_bg = '#e6e8ea'
+    vim.api.nvim_set_hl(0, 'LineNr', { bg = sidebar_bg })
+    vim.api.nvim_set_hl(0, 'SignColumn', { bg = sidebar_bg })
+    vim.api.nvim_set_hl(0, 'FoldColumn', { bg = sidebar_bg })
     -- VertSplit
-    vim.api.nvim_set_hl(0, 'VertSplit', { bg = '#d9d9d9', fg = '#d9d9d9' })
+    vim.api.nvim_set_hl(0, 'VertSplit', { bg = sidebar_bg, fg = '#d9d9d9' })
 
     -- ALE (skip if not using ALE)
     vim.api.nvim_set_hl(0, 'ALESignColumnWithErrors', { bg = '#f6b7ac' })
@@ -115,5 +120,8 @@ vim.api.nvim_create_autocmd('ColorScheme', {
     -- highlight link ChaseChangedLetter DiffAdd
     -- highlight link ChaseSeparator DiffChange
 
-  end
-})
+    vim.api.nvim_set_hl(0, 'ALEErrorSign', { fg = '#ff0000', bg = '#330000' })
+    vim.api.nvim_set_hl(0, 'ALEWarningSign', { fg = '#ffff00', bg = '#333300' })
+    vim.api.nvim_set_hl(0, 'ALEInfoSign', { fg = '#00ff00', bg = '#003300' })
+
+    vim.api.nvim_set_hl(0, 'MoreMsg', { bg = '#cecfeb', bold = true })

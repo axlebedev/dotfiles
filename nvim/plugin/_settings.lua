@@ -97,7 +97,7 @@ vim.opt.fillchars = {
   foldsep = ' ',
   foldinner = ' ',
   foldclose = '+',
-  vert = ' ',
+  vert = '░',
   eob = "░"
 }
 
@@ -194,11 +194,11 @@ vim.api.nvim_create_autocmd({ "FocusLost" }, {
   end,
 })
 
--- for nvim-ufo {{{
-vim.o.foldcolumn = '1' -- '0' is not bad
-vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
-vim.o.foldlevelstart = 99
-vim.o.foldenable = true
-vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
-vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
--- }}} for nvim-ufo
+-- -- for nvim-ufo {{{
+-- vim.o.foldcolumn = '1' -- '0' is not bad
+-- vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+-- vim.o.foldlevelstart = 99
+-- vim.o.foldenable = true
+-- vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
+-- vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
+-- -- }}} for nvim-ufo

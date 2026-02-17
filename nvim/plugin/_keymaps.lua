@@ -50,10 +50,12 @@ local CloseBufferSafeFugitive = function()
         vim.cmd('Alpha')
       end
     else
+      vim.cmd('set nowinfixbuf')
       vim.cmd('bprev')
     end
 
     vim.api.nvim_buf_delete(buf, {})
+    vim.api.nvim_win_close(0, true)
 
     if vim.bo.buftype == 'quickfix' or vim.bo.buftype == 'terminal' then
       vim.cmd('Alpha')
@@ -238,41 +240,34 @@ vim.keymap.set({ 'n', 'v' }, '<leader>lss', fastlog.JsFastLog_separator)
 vim.keymap.set({ 'n', 'v' }, '<leader>lsn', fastlog.JsFastLog_lineNumber)
 -- }}}
 
--- TODO- lsp hover
--- nnoremap <silent> K <CMD>call CocActionAsync("doHover")<CR>
--- def JumpDefinitionFindCursor(command: string)
---     # setreg('/', expand('<cword>'))
---     exe command
---     timer_start(100, (id) => findcursor#FindCursor('#d6d8fa', 0))
--- enddef
--- def GoToDef()
---     if (['typescript', 'typescriptreact', 'javascript', 'javascriptreact']->index(&ft) != -1)
---         JumpDefinitionFindCursor("CocCommand tsserver.goToSourceDefinition")
---         return
---     endif
---
---     if (expand('<cword>') == 'import')
---         keepjumps search('from')
---         keepjumps normal! Wl
---         JumpDefinitionFindCursor("call CocAction('jumpDefinition')")
---         return
---     endif
---     var single_letter = getline('.')[col('.') - 1]
---     while (single_letter == ' ' || single_letter == '<')
---         normal! w
---         single_letter = getline('.')[col('.') - 1]
---     endwhile
---
---     var savedCursor = getcurpos()
---     JumpDefinitionFindCursor("call CocAction('jumpImplementation')")
---     if (savedCursor == getcurpos())
---         JumpDefinitionFindCursor("call CocAction('jumpDefinition')")
---     endif
--- enddef
--- nnoremap gd <ScriptCmd>GoToDef()<CR>
--- nnoremap gdd <ScriptCmd>JumpDefinitionFindCursor("call CocAction('jumpDefinition')")<CR>
--- nnoremap gi <ScriptCmd>JumpDefinitionFindCursor("call CocAction('jumpImplementation')")<CR>
--- nnoremap gt <ScriptCmd>JumpDefinitionFindCursor("call CocAction('jumpTypeDefinition')")<CR>
+vim.keymap.set({ 'n' }, 'gd', function()
+  vim.lsp.buf.definition()
+  vim.fn.timer_start(100, function() vim.cmd('FindCursor #d6d8fa 0') end)
+end)
+vim.keymap.set({ 'n' }, 'gt', function()
+  vim.lsp.buf.type_definition()
+  vim.fn.timer_start(100, function() vim.cmd('FindCursor #d6d8fa 0') end)
+end)
+vim.keymap.set({ 'n' }, 'gi', function()
+  vim.lsp.buf.implementation()
+  vim.fn.timer_start(100, function() vim.cmd('FindCursor #d6d8fa 0') end)
+end)
+vim.keymap.set({ 'n' }, 'gr', function()
+  vim.lsp.buf.references()
+end)
+-- vim.keymap.set({ 'n' }, 'grr', function()
+--   vim.lsp.buf.references()
+--   local function DoCleanImports()
+--     if vim.bo.filetype == 'qf' then
+--       require('removeqfitem').FilterQFWithWord('import')
+--       require('removeqfitem').FilterQFWithWord('\\<\\/')
+--     else
+--       vim.defer_fn(DoCleanImports, 100)
+--     end
+--   end
+--   
+--   vim.defer_fn(DoCleanImports, 300)
+-- end)
 
 local ToggleQuickFix = function()
   local isQuickfixHere = array.some(
@@ -321,33 +316,10 @@ local FoldSelection = function()
 end
 vim.keymap.set('v', 'zf', FoldSelection)
 
--- TODO autoload logfunction
--- nnoremap lf <ScriptCmd>logfunction.LogFunction()<CR>
-
 vim.keymap.set("n", "ZC", "zC")
 vim.keymap.set("n", "ZO", "zO")
 
 vim.keymap.set("n", "H", "zc")
-
--- TODO- lsp reference used
--- def RefUsed(cleanImports: bool)
---     const word = expand('<cword>')
---     setreg('/', word)
---     execute "normal \<Plug>(coc-references-used)"
---     if (cleanImports)
---         var DoCleanImports = () => {
---             if (&ft == 'qf')
---                 removeqfitem.FilterQFWithWord('import')
---                 removeqfitem.FilterQFWithWord('\<\/')
---             else
---                 # timer_start(100, (id) => DoCleanImports())
---             endif
---         } 
---         timer_start(300, (id) => DoCleanImports())
---     endif
--- enddef
--- nmap <silent>gr <ScriptCmd>RefUsed(true)<CR>
--- nmap <silent>grr <ScriptCmd>RefUsed(false)<CR>
 
 -- Yank with keeping cursor position in visual mode {{{ TODO: работает глючно!
 -- local Keepcursor_visual_wrapper = function(command)
@@ -368,20 +340,6 @@ vim.keymap.set("v", "@@", ":normal @@<CR>")
 -- }}}
 
 vim.keymap.set("n", "U", "<C-r>")
-
--- TODO function object
--- # select in function by coc.nvim
--- xmap if <Plug>(coc-funcobj-i)
--- omap if <Plug>(coc-funcobj-i)
--- xmap af <Plug>(coc-funcobj-a)
--- omap af <Plug>(coc-funcobj-a)
-
--- TODO class object
--- # select in class by coc.nvim
--- xmap ic <Plug>(coc-classobj-i)
--- omap ic <Plug>(coc-classobj-i)
--- xmap ac <Plug>(coc-classobj-a)
--- omap ac <Plug>(coc-classobj-a)
 
 vim.keymap.set('n', '<F5>', require('updatebuffer').updateBuffer)
 vim.keymap.set('n', '<F5><F5>', require('updatebuffer').updateBufferForce)
