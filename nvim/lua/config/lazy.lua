@@ -408,9 +408,6 @@ end
       "nvim-telescope/telescope.nvim", -- optional
     },
     cmd = "Neogit",
-    keys = {
-      { "<C-g><C-g>", "<cmd>Neogit<cr>", desc = "Show Neogit UI" }
-    },
     opts = {
       kind = 'vsplit',
       diff_viewer = 'diffview',
