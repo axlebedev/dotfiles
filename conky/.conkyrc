@@ -197,7 +197,7 @@ function cpuTemperature()
     { 
       "name": "CPU",
       "separator_block_width": 3,
-      "min_width": "▁",
+      "min_width": "▁▁▁",
       "full_text": "${lua cpuTemperature}°",
       "color": "${lua cpuTemperature_color}",
       "separator": false
@@ -229,13 +229,13 @@ conky.text = [[
   ]] .. date() .. [[
   ]] .. volume() .. [[
   ]] .. cpuHeader() .. [[
-  ]] .. cpuTemperature() .. [[
   ]] .. cpuTopN(1) .. [[
   ]] .. cpuTopN(2) .. [[
   ]] .. cpuTopN(4) .. [[
   ]] .. cpuTopN(8) .. [[
   ]] .. cpuTopN(16) .. [[
   ]] .. cpuTopN(coresNum) .. [[
+  ]] .. cpuTemperature() .. [[
   ]] .. memory() .. [[
   ]] .. vpn() .. [[
   ]] .. wifi() .. [[
