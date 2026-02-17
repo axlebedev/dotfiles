@@ -122,6 +122,7 @@ function gom
     set masterBranch (get_master_branch)
     commandline -j -- "git checkout $masterBranch"
     commandline -f repaint
+    commandline -f execute
 end
 abbr -a gob g checkout -b
 function gobs
