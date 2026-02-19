@@ -95,12 +95,9 @@ M.Grep = function()
     end
 
     if not utils.empty(word) then
-        isWholeWord = not isWholeWord
-        isLiteral = not isLiteral
         local savedWord = word
-        word = vim.fn.shellescape(isLiteral and word or vim.fn.escape(word, charsForEscape)) 
-
         local prg = basegrepprg
+
         if isWholeWord then
             prg = prg .. ' -w'
         end
@@ -109,7 +106,7 @@ M.Grep = function()
         end
         prg = prg .. ' ' .. case
 
-        local output = vim.fn.systemlist(prg .. ' ' .. word .. ' .')
+        local output = vim.fn.systemlist(prg .. ' "' .. word .. '" .')
         vim.fn.setqflist({}, ' ', { lines = output })
         vim.cmd('copen')
         require('quickfix-utils').resizeQFHeight()

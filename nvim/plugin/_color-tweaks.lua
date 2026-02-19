@@ -19,9 +19,10 @@ vim.opt.termguicolors = true
     vim.api.nvim_set_hl(0, 'Visual', { bg = '#ADCBFF', fg = 'NONE' })
 
     -- Search highlights
-    vim.api.nvim_set_hl(0, 'QuickFixLine', { bg = '#B1d2E8' })
-    vim.api.nvim_set_hl(0, 'Search', { bg = '#ba91f2', fg = 'NONE' })
-    vim.api.nvim_set_hl(0, 'IncSearch', { bg = '#ba91f2', fg = 'NONE' })
+    vim.api.nvim_set_hl(0, 'QuickFixLine', { bg = '#cdadf7' })
+    vim.api.nvim_set_hl(0, 'Search', { bg = '#cdadf7', fg = 'NONE' })
+    vim.api.nvim_set_hl(0, 'IncSearch', { bg = '#cdadf7', fg = 'NONE' })
+    vim.api.nvim_set_hl(0, 'CurSearch', { bg = '#ba91f2', fg = 'NONE' })
 
     -- Highlightedyank
     vim.api.nvim_set_hl(0, 'HighlightedyankRegion', { bg = '#acde95' })

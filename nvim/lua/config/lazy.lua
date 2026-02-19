@@ -2,6 +2,44 @@
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
+local foldtext_fn = function(virtText, lnum, endLnum, width, truncate)
+  local newVirtText = {}
+  local suffix = (' %d↘ '):format(endLnum - lnum)
+  local sufWidth = vim.fn.strdisplaywidth(suffix)
+  local targetWidth = width - sufWidth
+  local curWidth = 0
+  for _, chunk in ipairs(virtText) do
+    local chunkText = chunk[1]
+    local chunkWidth = vim.fn.strdisplaywidth(chunkText)
+    if targetWidth > curWidth + chunkWidth then
+      table.insert(newVirtText, chunk)
+    else
+      chunkText = truncate(chunkText, targetWidth - curWidth)
+      local hlGroup = chunk[2]
+      table.insert(newVirtText, {chunkText, hlGroup})
+      chunkWidth = vim.fn.strdisplaywidth(chunkText)
+      break
+    end
+    curWidth = curWidth + chunkWidth
+  end
+
+  local croppedWidth = 0
+  while croppedWidth < sufWidth do
+    local remainingWidth = sufWidth - croppedWidth
+    local text = newVirtText[1][1]
+    local textWidth =  vim.fn.strdisplaywidth(text)
+    if textWidth < remainingWidth then
+      table.remove(newVirtText, 1)
+    else
+      newVirtText[1][1] = string.sub(text, sufWidth - croppedWidth + 1)
+    end
+    croppedWidth = croppedWidth + textWidth
+  end
+  table.insert(newVirtText, 1, {suffix, 'MoreMsg'})
+  return newVirtText
+end
+
+
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -104,6 +142,7 @@ end
           side = 'left',
           number = false,
           relativenumber = false,
+          adaptive_size = false,
         },
         filters = {
           dotfiles = false, -- Show hidden files (like NERDTree)
@@ -411,30 +450,8 @@ end
 
   -- git
   { 'tpope/vim-fugitive' },
-  {
-    "NeogitOrg/neogit",
-    lazy = true,
-    dependencies = {
-      "nvim-lua/plenary.nvim",         -- required
-      "sindrets/diffview.nvim",        -- optional
-      "nvim-telescope/telescope.nvim", -- optional
-    },
-    cmd = "Neogit",
-    opts = {
-      kind = 'vsplit',
-      diff_viewer = 'diffview',
-      sections = {
-        staged    = { folded = false },
-        unstaged  = { folded = false },
-        untracked = { folded = false },
-        stashes   = { folded = true, hidden = true  },
-        unpulled_upstream   = { folded = true, hidden = true },
-        unmerged_upstream   = { folded = true, hidden = true },
-        recent    = { folded = true, hidden = true  },
-      },
-    }
-  },
-  { 'junegunn/gv.vim', cmd = 'GV' }, -- Lazy-load on command 
+  { 'jreybert/vimagit' },
+  { 'junegunn/gv.vim', cmd = 'GV' },
 
   -- auto pairs
   { 'windwp/nvim-autopairs',
@@ -530,45 +547,17 @@ opts = {
   { 'axlebedev/nvim-detect-indent' },
 
   { 'kevinhwang91/nvim-ufo',
-  dependencies = 'kevinhwang91/promise-async',
-  opts = {
-    fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate)
-      local newVirtText = {}
-      local suffix = (' %d↘ '):format(endLnum - lnum)
-      local sufWidth = vim.fn.strdisplaywidth(suffix)
-      local targetWidth = width - sufWidth
-      local curWidth = 0
-      for _, chunk in ipairs(virtText) do
-        local chunkText = chunk[1]
-        local chunkWidth = vim.fn.strdisplaywidth(chunkText)
-        if targetWidth > curWidth + chunkWidth then
-          table.insert(newVirtText, chunk)
-        else
-          chunkText = truncate(chunkText, targetWidth - curWidth)
-          local hlGroup = chunk[2]
-          table.insert(newVirtText, {chunkText, hlGroup})
-          chunkWidth = vim.fn.strdisplaywidth(chunkText)
-          break
+    dependencies = 'kevinhwang91/promise-async',
+    opts = {
+      open_fold_hl_timeout = 0,
+      fold_virt_text_handler = foldtext_fn,
+      provider_selector = function(bufnr, filetype, buftype)
+        if filetype == 'magit' then
+          return ''
         end
-        curWidth = curWidth + chunkWidth
+        return {'lsp', 'indent'}  -- Your normal providers
       end
-
-      local croppedWidth = 0
-      while croppedWidth < sufWidth do
-        local remainingWidth = sufWidth - croppedWidth
-        local text = newVirtText[1][1]
-        local textWidth =  vim.fn.strdisplaywidth(text)
-        if textWidth < remainingWidth then
-          table.remove(newVirtText, 1)
-        else
-          newVirtText[1][1] = string.sub(text, sufWidth - croppedWidth + 1)
-        end
-        croppedWidth = croppedWidth + textWidth
-      end
-      table.insert(newVirtText, 1, {suffix, 'MoreMsg'})
-      return newVirtText
-    end
-  },
+    },
   },
 
 { "axlebedev/nvim-footprints",
@@ -622,35 +611,35 @@ end,
 
     -- npm i -g vscode-langservers-extracted (?)
     -- npm i -g @fsouza/prettierd vscode-langservers-extracted
-    -- { 'neovim/nvim-lspconfig',
-    --   config = function()
-    --     -- go install github.com/mattn/efm-langserver@latest
-    --     local lang = {
-    --       formatCommand = "eslint_d --stdin --stdin-filename ${INPUT} --fix-to-stdout",
-    --       lintCommand = "eslint_d -f unix --stdin --stdin-filename ${INPUT}",
-    --       lintStylish = true,
-    --       lintFormats = {"%f:%l:%c: %m"}
-    --     }
-    --     vim.lsp.config(
-    --       'efm',
-    --       {
-    --         settings = {
-    --           filetypes = { "javascript", "typescript", "javascriptreact", "typescriptreact" },
-    --           init_options = { documentFormatting = true },
-    --           settings = {
-    --             rootMarkers = {".git/", "eslint.config.mjs", "package.json"},
-    --             languages = {
-    --               javascript = lang,
-    --               typescript = lang,
-    --               javascriptreact = lang,
-    --               typescriptreact = lang,
-    --             },
-    --           },
-    --         }
-    --       }
-    --     )
-    --   end
-    -- },
+    { 'neovim/nvim-lspconfig',
+      config = function()
+        -- go install github.com/mattn/efm-langserver@latest
+        local lang = {
+          formatCommand = "eslint_d --stdin --stdin-filename ${INPUT} --fix-to-stdout",
+          lintCommand = "eslint_d -f unix --stdin --stdin-filename ${INPUT}",
+          lintStylish = true,
+          lintFormats = {"%f:%l:%c: %m"}
+        }
+        vim.lsp.config(
+          'efm',
+          {
+            settings = {
+              filetypes = { "javascript", "typescript", "javascriptreact", "typescriptreact" },
+              init_options = { documentFormatting = true },
+              settings = {
+                rootMarkers = {".git/", "eslint.config.mjs", "package.json"},
+                languages = {
+                  javascript = lang,
+                  typescript = lang,
+                  javascriptreact = lang,
+                  typescriptreact = lang,
+                },
+              },
+            }
+          }
+        )
+      end
+    },
     -- {
     --   'esmuellert/nvim-eslint',
     --   on_attach = function(client, bufnr)
@@ -733,6 +722,25 @@ end,
     --     -- maybe vim.opt.signcolumn = 'number'
     --   end
     -- },
+    {
+      'akinsho/git-conflict.nvim',
+      version = "*",
+      config = true,
+      opts = {
+        default_mappings = {
+          ours = 'co',
+          theirs = 'ct',
+          both = 'cb',
+          next = ']c',
+          prev = '[c',
+        },
+      }
+    },
+    { "brenoprata10/nvim-highlight-colors",
+      config = function()
+        require('nvim-highlight-colors').setup({})
+      end
+    }
   },
 })
 
@@ -755,7 +763,11 @@ vim.api.nvim_create_autocmd('FileType', {
 
 -- Enable TypeScript via the Language Server Protocol (LSP)
 vim.lsp.enable('tsserver')
-
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.foldingRange = {
+    dynamicRegistration = false,
+    lineFoldingOnly = true
+}
 -- Set the TS config for the LSP
 vim.lsp.config('tsserver', {
   -- Make sure this is on your path
@@ -781,26 +793,14 @@ vim.api.nvim_create_autocmd("LspAttach", {
       -- Optional formating of items
       convert = function(item)
         -- Remove leading misc chars for abbr name,
-        -- and cap field to 25 chars
-        --local abbr = item.label
-        --abbr = abbr:match("[%w_.]+.*") or abbr
-        --abbr = #abbr > 25 and abbr:sub(1, 24) .. "…" or abbr
-        --
-        -- Remove return value
-        --local menu = ""
-
         -- Only show abbr name, remove leading misc chars (bullets etc.),
-        -- and cap field to 15 chars
         local abbr = item.label
         abbr = abbr:gsub("%b()", ""):gsub("%b{}", "")
         abbr = abbr:match("[%w_.]+.*") or abbr
-        abbr = #abbr > 15 and abbr:sub(1, 14) .. "…" or abbr
 
-        -- Cap return value field to 15 chars
         local menu = item.detail or ""
-        menu = #menu > 15 and menu:sub(1, 14) .. "…" or menu
 
-        return { abbr = abbr, menu = menu }
+        return { abbr = abbr, menu = menu, kind = "" }
       end,
     })
   end,
@@ -857,3 +857,56 @@ end)
 
 vim.keymap.set('n', '<C-m>', vim.diagnostic.goto_next, { noremap = true, silent = true })
 vim.keymap.set('n', '<C-n>', vim.diagnostic.goto_prev, { noremap = true, silent = true })
+
+vim.diagnostic.config({
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = "●", -- Example: a red circle
+      [vim.diagnostic.severity.WARN]  = "▲", -- Example: a yellow triangle
+      [vim.diagnostic.severity.INFO]  = "i",
+      [vim.diagnostic.severity.HINT]  = "?",
+    },
+    -- You can also configure highlights, etc.
+  },
+  update_in_insert = false,
+  -- other diagnostic options...
+})
+vim.api.nvim_create_autocmd("FileType", {
+    -- обычно когда открывается quickfix - он залезает под nvimtree
+  pattern = "qf",
+  callback = function()
+    -- Use pcall to avoid errors if Nvim-Tree isn't open
+    pcall(function()
+      vim.cmd("NvimTreeFocus")
+      local nt_width = vim.api.nvim_win_get_width(0)
+      vim.cmd("wincmd H")
+      vim.api.nvim_win_set_width(0, nt_width)
+      vim.cmd("wincmd p") -- Jump back to the quickfix window
+    end)
+  end,
+})
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "alpha",
+  callback = function()
+    vim.wo.cursorline = true
+  end,
+})
+
+vim.api.nvim_create_autocmd("BufEnter", {
+    -- если мы сделали <C-f> из буфера Alpha - то по дефолту Alpha не закроется и результат поиска будет в split window
+  callback = function()
+    -- Check if we just came from a quickfix window
+    local prev_buf = vim.fn.bufnr("#")
+    if prev_buf > 0 and vim.bo[prev_buf].filetype == "qf" then
+      
+      -- Look for and close the Alpha dashboard
+      for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+        if vim.api.nvim_buf_is_valid(buf) and vim.bo[buf].filetype == "alpha" then
+          vim.api.nvim_buf_delete(buf, { force = true })
+          break
+        end
+      end
+      
+    end
+  end,
+})
