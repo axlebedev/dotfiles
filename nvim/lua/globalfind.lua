@@ -95,7 +95,6 @@ M.Grep = function()
     end
 
     if not utils.empty(word) then
-        local savedWord = word
         local prg = basegrepprg
 
         if isWholeWord then
@@ -108,11 +107,11 @@ M.Grep = function()
 
         local output = vim.fn.systemlist(prg .. ' "' .. word .. '" .')
         vim.fn.setqflist({}, ' ', { lines = output })
-        vim.cmd('copen')
+        vim.cmd.copen()
         require('quickfix-utils').resizeQFHeight()
 
-        vim.fn.setreg('/', savedWord) 
-        vim.cmd('silent! norm! n')
+        vim.fn.setreg('/', word) 
+        vim.fn.search(word)
     end
 
     isLiteral = savedIsLiteral

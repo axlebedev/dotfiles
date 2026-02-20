@@ -44,10 +44,10 @@ local CloseBufferSafeFugitive = function()
     local buf = vim.fn.bufnr('%')
     local filesLength = #vim.api.nvim_list_bufs()
     if filesLength <= 1 then
-      if vim.bo.filetype == 'alpha' then
+      if vim.bo.filetype == 'startify' then
         vim.cmd('qa!')
       else
-        vim.cmd('Alpha')
+        vim.cmd('Startify')
       end
     else
       vim.cmd('set nowinfixbuf')
@@ -58,13 +58,13 @@ local CloseBufferSafeFugitive = function()
     vim.api.nvim_win_close(0, true)
 
     if vim.bo.buftype == 'quickfix' or vim.bo.buftype == 'terminal' then
-      vim.cmd('Alpha')
+      vim.cmd('Startify')
     end
 end
 vim.keymap.set('n', '<leader>q', CloseBufferSafeFugitive, { silent = true })
 
 -- new empty buffer
-vim.keymap.set({ "n", "v" }, "<leader>x", "<cmd>Alpha<cr>")
+vim.keymap.set({ "n", "v" }, "<leader>x", "<cmd>Startify<cr>")
 
 -- split line
 vim.keymap.set("n", "<leader>s", "a<CR><Esc>")
@@ -385,3 +385,5 @@ vim.keymap.set("n", "<2-LeftMouse>", "yiW")
 vim.keymap.set("n", "sw", function() vim.o.wrap = not vim.o.wrap end)
 
 vim.keymap.set("n", "<F1>", "<cmd>Telescope help_tags<cr>")
+
+vim.keymap.set("n", "<C-t>", "<cmd>Telescope<cr>")

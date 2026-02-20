@@ -121,15 +121,50 @@ require('lazy').setup({
 { 'tpope/vim-repeat' }, -- TODO: nnoremap <Plug>(RepeatRedo) U
 
 -- Start screen for vim
-{ 'goolord/alpha-nvim',
-dependencies = { 'nvim-mini/mini.icons' },
-config = function ()
-  local startify = require'alpha.themes.startify'
-  startify.section.header.val = {}
-  startify.config.opts.keymap = { press = { 'o', '<CR>' } }
-  table.insert( startify.section.bottom_buttons.val, startify.button('u', 'Plug update' , '<cmd>Lazy update<CR>'))
-  require'alpha'.setup(startify.config)
-end
+-- { 'goolord/alpha-nvim',
+-- dependencies = { 'nvim-mini/mini.icons' },
+-- config = function ()
+--   local startify = require'alpha.themes.startify'
+--   startify.section.header.val = {}
+--   startify.config.opts.keymap = { press = { 'o', '<CR>' } }
+--   table.insert( startify.section.bottom_buttons.val, startify.button('u', 'Plug update' , '<cmd>Lazy update<CR>'))
+--   require'alpha'.setup(startify.config)
+-- end
+--     },
+    {
+      'axlebedev/vim-startify',
+      config = function()
+        vim.g.startify_disable_at_vimenter = 1
+        vim.g.startify_lists = {
+          { type = 'dir', header = { '   MRU ' .. vim.fn.getcwd() } },
+          { type = 'sessions', header = { '   Sessions' } },
+          -- { type = 'bookmarks', header = { '   Bookmarks' } },
+          { type = 'commands', header = { '   Commands' } },
+        }
+
+        vim.g.startify_commands = { ':Lazy update', ':TSUpdate' }
+        vim.g.startify_files_number = 30
+        vim.g.startify_update_oldfiles = 1
+        vim.g.startify_change_to_dir = 0
+        vim.g.startify_custom_header = {}
+        -- vim.g.startify_custom_indices = vim.tbl_map(function(v) return tostring(v) end, vim.range(1, 100))
+
+        -- Remap 'o' to open file in Startify window
+        vim.api.nvim_create_autocmd('User', {
+            pattern = 'Startified',
+            callback = function()
+              vim.keymap.set('n', 'o', '<plug>(startify-open-buffers)', { buffer = true })
+            end,
+          })
+
+        vim.api.nvim_create_autocmd('VimEnter', {
+            callback = function()
+              vim.cmd('NvimTree')
+              vim.cmd('wincmd l')
+              vim.cmd('Startify')
+            end,
+          })
+      end,
     },
 
     -- NERDTree
