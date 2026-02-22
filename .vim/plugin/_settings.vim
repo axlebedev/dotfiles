@@ -32,9 +32,6 @@ endif
 # where to search files to open
 set path=.,,**
 
-# lets insert-mode backspace to work everywhere
-set backspace=indent,eol,start
-
 # ignore files and folders on search
 set wildignore+=*.sqp,*.log
 var isWin = has('win32') || has('win16')
