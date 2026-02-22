@@ -435,11 +435,11 @@ require('lazy').setup({
       cmd = 'FindCursor',
       opts = {
         FindCursorHookPre = function()
-          -- vim.cmd('FootprintsDisable')
+          vim.cmd('FootprintsDisable')
           vim.cmd('IlluminatePause')
         end,
         FindCursorHookPost = function()
-          -- vim.cmd('FootprintsEnable')
+          vim.cmd('FootprintsEnable')
           vim.cmd('IlluminateResume')
         end,
       },
