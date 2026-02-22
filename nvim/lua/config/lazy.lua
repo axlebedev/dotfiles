@@ -508,6 +508,7 @@ require('lazy').setup({
     },
 
     { 'osyo-manga/vim-trip',
+      event = "VeryLazy",
       config = function()
         vim.keymap.set('n', '<C-a>', '<Plug>(trip-increment-ignore-minus)')
         vim.keymap.set('n', '<C-x>', '<Plug>(trip-decrement-ignore-minus)')
@@ -535,6 +536,27 @@ require('lazy').setup({
           lintStylish = true,
           lintFormats = {"%f:%l:%c: %m"}
         }
+
+        -- vim.lsp.config(
+        --   'lua_ls',
+        --   {
+        --     on_init = function(client)
+        --       client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
+        --           runtime = {
+        --             version = 'LuaJIT',
+        --             path = { 'lua/?.lua', 'lua/?/init.lua', },
+        --           },
+        --           workspace = {
+        --             checkThirdParty = false,
+        --             library = { vim.env.VIMRUNTIME },
+        --           },
+        --         })
+        --     end,
+        --     settings = {
+        --       Lua = {},
+        --     },
+        --   }
+        -- )
         vim.lsp.config(
           'efm',
           {
@@ -552,7 +574,7 @@ require('lazy').setup({
               },
             }
           }
-          )
+        )
       end
     },
 
@@ -713,29 +735,3 @@ vim.diagnostic.config({
           --     -- end)
       --   end,
     -- })
-
-  vim.api.nvim_create_autocmd("FileType", {
-      pattern = "alpha",
-      callback = function()
-        vim.wo.cursorline = true
-      end,
-    })
-
-  vim.api.nvim_create_autocmd("BufEnter", {
-      -- если мы сделали <C-f> из буфера Alpha - то по дефолту Alpha не закроется и результат поиска будет в split window
-      callback = function()
-        -- Check if we just came from a quickfix window
-          local prev_buf = vim.fn.bufnr("#")
-          if prev_buf > 0 and vim.bo[prev_buf].filetype == "qf" then
-
-            -- Look for and close the Alpha dashboard
-            for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-              if vim.api.nvim_buf_is_valid(buf) and vim.bo[buf].filetype == "alpha" then
-                vim.api.nvim_buf_delete(buf, { force = true })
-                break
-              end
-            end
-
-          end
-        end,
-      })
