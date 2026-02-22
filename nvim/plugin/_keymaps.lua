@@ -184,11 +184,18 @@ vim.keymap.set('n', 'sft', '<cmd>Telescope filetypes<CR>', { noremap = false })
 
 -- get current highlight group under cursor
 vim.keymap.set({ "n", "v" }, "<F10>", function()
-  vim.cmd([[
-    echo 'hi<' .. synID(line('.'), col('.'), 1)->synIDattr('name') .. '> '
-          .. 'transparent<' .. synID(line('.'), col('.'), 0)->synIDattr('name') .. '>'
-          .. ' lo<' .. synID(line('.'), col('.'), 1)->synIDtrans()->synIDattr('name') .. '>'
-  ]])
+  local line = vim.fn.line('.')
+  local col = vim.fn.col('.')
+
+  local hi_id = vim.fn.synID(line, col, 1)
+  local hi_name = vim.fn.synIDattr(hi_id, 'name')
+
+  local trans_id = vim.fn.synID(line, col, 0)
+  local trans_name = vim.fn.synIDattr(trans_id, 'name')
+
+  local lo_name = vim.fn.synIDattr(vim.fn.synIDtrans(hi_id), 'name')
+
+  print(string.format('hi<%s> transparent<%s> lo<%s>', hi_name, trans_name, lo_name))
 end)
 
 vim.keymap.set("n", "Y", "y$")
