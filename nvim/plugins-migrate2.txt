@@ -62,7 +62,6 @@ Plug 'HerringtonDarkholme/yats.vim'
 Plug 'ap/vim-css-color'
 
 +! Plug 'dense-analysis/ale' -- switched to mfussenegger/nvim-lint TODO config it after LSP
-+- Plug 'neoclide/coc.nvim' -- TODO I dont need it?
 
 + Plug 'axlebedev/vim-js-fastlog'
 + Plug 'axlebedev/vim-smart-insert-tab' -- наверное пока не буду даже начинать
