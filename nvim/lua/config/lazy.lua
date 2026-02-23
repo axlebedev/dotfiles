@@ -395,9 +395,9 @@ require('lazy').setup({
 
     -- true/false
     { 'AndrewRadev/switch.vim',
-      keys = '<C-t>',
+      keys = '<C-s>',
       config = function()
-        vim.keymap.set('n', '<C-t>', '<cmd>Switch<CR>')
+        vim.keymap.set('n', '<C-s>', '<cmd>Switch<CR>')
       end
     },
 
