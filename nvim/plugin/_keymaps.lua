@@ -148,14 +148,6 @@ submode.create("Foldlevel", {
   end,
 })
 
-vim.api.nvim_create_autocmd("User", {
-  group = vim.api.nvim_create_augroup("user-event", {}),
-  pattern = "SubmodeEnterPre", -- Name of user events
-  callback = function(env)
-    require('notify')(string.format("submode: %s", env.data.name), vim.log.levels.WARN)
-  end
-})
-
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "help", "qf" },
   callback = function()

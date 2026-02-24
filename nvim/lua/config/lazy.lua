@@ -55,7 +55,19 @@ require('lazy').setup({
     -- bufonly
     { "numtostr/BufOnly.nvim", cmd = "BufOnly" },
 
-    { "pogyomo/submode.nvim", lazy = true },
+    {
+      "pogyomo/submode.nvim",
+      lazy = true,
+      config = function()
+        vim.api.nvim_create_autocmd("User", {
+            group = vim.api.nvim_create_augroup("user-event", {}),
+            pattern = "SubmodeEnterPre",
+            callback = function(env)
+              require('notify')(string.format("submode: %s", env.data.name), vim.log.levels.WARN)
+            end
+          })
+      end
+    },
 
     { 'rcarriga/nvim-notify',
       event = "VeryLazy",
