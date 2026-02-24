@@ -217,8 +217,22 @@ return {
           git = { enable = true, ignore = false },
           actions = { open_file = { quit_on_open = false } },
           renderer = {
-            icons = { glyphs = { default = '', git = { unstaged = '✗' } } },
-            highlight_git = true,
+            icons = {
+              git_placement = "after",
+              glyphs = {
+                default = '',
+                git = {
+                  unstaged = '●',
+                  staged = '➕',
+                  unmerged = '⚡',
+                  renamed = '➜',
+                  untracked = '❓',
+                  deleted = '',
+                  ignored = '◌',
+                },
+              },
+            },
+            highlight_git = false,
           },
         }
 
