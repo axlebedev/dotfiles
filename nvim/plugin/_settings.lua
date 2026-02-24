@@ -201,3 +201,6 @@ vim.api.nvim_create_autocmd({ "FocusLost" }, {
 -- vim.keymap.set('n', 'zR', require('ufo').openAllFolds)
 -- vim.keymap.set('n', 'zM', require('ufo').closeAllFolds)
 -- -- }}} for nvim-ufo
+
+-- always show signcolumn, избегаем дёргания через пару секунд после открытия буфера
+vim.opt.signcolumn = 'yes'
