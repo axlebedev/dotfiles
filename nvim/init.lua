@@ -14,3 +14,4 @@ vim.g.maplocalleader = '\\'
 vim.opt.mousemoveevent = true
 
 require("config.lazy")
+require("functions/appendchar")

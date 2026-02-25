@@ -21,4 +21,10 @@ M.empty = function(s)
   return s == mil or s == ''
 end
 
+M.trunc = function(v, min, max)
+  if v < min then return min end
+  if v > max then return max end
+  return v
+end
+
 return M

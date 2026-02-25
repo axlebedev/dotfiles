@@ -3,6 +3,8 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
 local search = require("config.search")
+local appearance = require("config.appearance")
+local git = require("config.git")
 local lsp = require("config.lsp")
 local diagnostic = require("config.diagnostic")
 local edit = require("config.edit")
@@ -19,9 +21,9 @@ require('lazy').setup({
   },
   spec = {
     { import = "config.workspace-widgets" },
-    { import = "config.git" },
+    git.plugins,
     search.plugins,
-    { import = "config.colors" },
+    appearance.plugins,
     edit.plugins,
     lsp.plugins,
     { import = "config.treesitter" },
@@ -53,7 +55,12 @@ require('lazy').setup({
     },
 
     -- bufonly
-    { "numtostr/BufOnly.nvim", cmd = "BufOnly" },
+    {
+      "numtostr/BufOnly.nvim",
+      config = function()
+        vim.keymap.set("n", "bo", "<cmd>BufOnly<CR>")
+      end
+    },
 
     {
       "pogyomo/submode.nvim",
@@ -69,13 +76,27 @@ require('lazy').setup({
       end
     },
 
+    { 'folke/snacks.nvim', -- или notify? это одно и то же
+      notifier = {
+        enabled = true,
+        timeout = 1500, -- Global default of 1.5s
+      },
+      styles = {
+        notification = {
+          relative = "editor",
+          row = -2,    -- 2 lines from the bottom
+          col = 0.5,   -- 50% from the left (centered)
+          anchor = "s", -- Anchor to the "South" (bottom-center)
+          width = 0.4, -- Optional: limit width to 40% of screen
+        }
+      }
+    },
     { 'rcarriga/nvim-notify',
       event = "VeryLazy",
       opts = {
         timeout = 2000,
         top_down = false,
         render = 'compact',
-        stages = 'fade',
       },
     },
 
@@ -94,10 +115,27 @@ require('lazy').setup({
         end
       },
     },
+
+    {
+      'stevearc/quicker.nvim',
+      ft = "qf",
+      opts = {},
+      config = function()
+        require("quicker").setup()
+
+        vim.keymap.set("n", "co", function()
+          require("quicker").toggle()
+        end, {
+          desc = "Toggle quickfix",
+        })
+      end,
+    }
   },
 })
 
 edit.init_config()
+git.init_config()
+appearance.init_config()
 lsp.init_config()
 diagnostic.init_config()
 search.init_config()

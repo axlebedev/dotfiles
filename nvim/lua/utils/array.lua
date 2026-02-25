@@ -36,4 +36,14 @@ M.index = function(arr, value)
   return -1
 end
 
+M.filter = function(arr, cb)
+  local result = {}
+  for _, item in pairs(arr) do
+    if (cb(item)) then
+      table.insert(result, item)
+    end
+  end
+  return result
+end
+
 return M

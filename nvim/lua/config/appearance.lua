@@ -1,4 +1,4 @@
-return {
+local plugins = {
     -- color scheme
     { "yorik1984/newpaper.nvim",
       priority = 1000,
@@ -37,6 +37,16 @@ return {
     { 'RRethy/vim-illuminate',
       dependencies = { "nvim-lua/plenary.nvim" },
       config = function()
+        vim.g.Illuminate_delay = 100
+        vim.g.Illuminate_ftblacklist = { 'nerdtree', 'magit' }
+        vim.g.Illuminate_ftHighlightGroups = {
+          javascript = {
+            blacklist = {
+              'Statement', 'Noise', 'PreProc', 'Type', 
+              'jsStorageClass', 'jsImport', 'Include'
+            }
+          }
+        }
         require('illuminate').configure({
           providers = { 'lsp', 'treesitter', 'regex' },
           delay = 100,
@@ -51,4 +61,30 @@ return {
         require('nvim-highlight-colors').setup({})
       end
     }
+}
+
+local init_config = function()
+  vim.opt.synmaxcol = 1000
+
+  vim.opt.colorcolumn = "100"
+
+  vim.opt.incsearch = true
+  vim.opt.hlsearch = true
+
+  vim.opt.background = 'light'
+
+  vim.opt.termguicolors = true
+  vim.defer_fn(function()
+    vim.opt.cursorline = true
+  end, 100)
+
+  vim.opt.list = true
+  vim.opt.listchars = "tab:· ,trail:•,extends:»,precedes:«,conceal:_,nbsp:•"
+
+  vim.opt.showbreak = "»"
+end
+
+return {
+  plugins = plugins,
+  init_config = init_config,
 }

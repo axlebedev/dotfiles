@@ -41,9 +41,19 @@ vim.api.nvim_create_autocmd({ "BufReadPost" }, {
   end,
 })
 local CloseBufferSafeFugitive = function()
-    local buf = vim.fn.bufnr('%')
-    local filesLength = #vim.api.nvim_list_bufs()
-    if filesLength <= 1 then
+    local curBuf = vim.fn.bufnr('%')
+    if vim.bo.filetype == 'fugitiveblame' then
+      vim.cmd('q')
+      return
+    end
+
+    local bufs = require('utils.array').filter(
+      vim.api.nvim_list_bufs(),
+      function(buf)
+        return vim.api.nvim_buf_get_option(buf, "filetype") ~= 'NvimTree'
+      end
+    )
+    if #bufs <= 1 then
       if vim.bo.filetype == 'startify' then
         vim.cmd('qa!')
       else
@@ -54,8 +64,7 @@ local CloseBufferSafeFugitive = function()
       vim.cmd('bprev')
     end
 
-    vim.api.nvim_buf_delete(buf, {})
-    vim.api.nvim_win_close(0, true)
+    vim.api.nvim_buf_delete(curBuf, {})
 
     if vim.bo.buftype == 'quickfix' or vim.bo.buftype == 'terminal' then
       vim.cmd('Startify')
@@ -107,9 +116,6 @@ vim.keymap.set("v", "<C-h>", '"hy:%s/<C-r>h//gc<left><left><left><C-r>h')
 
 -- pretty find
 vim.keymap.set("v", "//", '"py/<C-R>p<CR>')
-
--- close all other buffers
-vim.keymap.set("n", "bo", "<cmd>BufOnly<CR>")
 
 -- Now we don't have to move our fingers so far when we want to scroll through
 -- the command history; also, don't forget the q: command
@@ -203,13 +209,6 @@ vim.keymap.set("n", "Q", "@@")
 vim.keymap.set("n", "<leader>bj", "<cmd>%!jq .<cr>")
 vim.keymap.set("v", "<leader>bj", "<cmd>'<,'>!jq .<cr>")
 
-ClapOpen = function(command_str)
-  while vim.fn.winnr("$") > 1 and (vim.fn.expand("%"):match("NERD_tree") or vim.bo.ft == "help" or vim.bo.ft == "qf") do
-    vim.cmd("wincmd w")
-  end
-  vim.cmd("normal! " .. command_str .. "<cr>")
-end
-
 vim.keymap.set("n", "<leader>k", require('opennextbuf').openNextBuf)
 vim.keymap.set("n", "<leader>j", require('opennextbuf').openPrevBuf)
 
@@ -267,15 +266,6 @@ end)
 --   
 --   vim.defer_fn(DoCleanImports, 300)
 -- end)
-
-local ToggleQuickFix = function()
-  local isQuickfixHere = array.some(
-    vim.fn.getwininfo(),
-    function(i) return i.quickfix ~= 0 end
-  )
-  vim.cmd(isQuickfixHere and 'cclose' or 'copen')
-end
-vim.keymap.set("n", "co", ToggleQuickFix, { silent = true })
 
 -- TODO plugin vim-indexed-search
 -- noremap <silent> <plug>(slash-after) <CMD>execute("FindCursor #d6d8fa 0<bar>ShowSearchIndex")<CR>

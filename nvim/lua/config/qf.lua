@@ -1,4 +1,25 @@
 local init_config = function()
+    -- Quickfix wrap (native)
+    vim.api.nvim_create_user_command(
+        'Cnext', 
+        'try | cnext | catch | cfirst | catch | endtry', 
+        {})
+
+    vim.api.nvim_create_user_command(
+        'Cprev', 
+        'try | cprev | catch | clast | catch | endtry', 
+        {})
+
+    vim.api.nvim_create_user_command(
+        'Lnext', 
+        'try | lnext | catch | lfirst | catch | endtry', 
+        {})
+
+    vim.api.nvim_create_user_command(
+        'Lprev', 
+        'try | lprev | catch | llast | catch | endtry', 
+        {})
+
     vim.api.nvim_create_autocmd("FileType", {
             pattern = "qf",
             callback = function()
