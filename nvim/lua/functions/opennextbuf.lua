@@ -1,6 +1,5 @@
 -- Skip quickfix on traversing buffers
-local M = {}
-local openNextBufInner = function(isPrev)
+local openNextBuf = function(isPrev)
     local command = isPrev and "bprev" or "bnext"
     vim.cmd(command)
     if vim.bo.buftype == 'quickfix' or vim.bo.buftype == 'terminal' then
@@ -8,7 +7,5 @@ local openNextBufInner = function(isPrev)
     end
 end
 
-M.openNextBuf = function() openNextBufInner(false) end
-M.openPrevBuf = function() openNextBufInner(true) end
-
-return M
+vim.keymap.set("n", "<leader>k", function() openNextBuf(false) end)
+vim.keymap.set("n", "<leader>j", function() openNextBuf(true) end)

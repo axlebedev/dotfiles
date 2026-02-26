@@ -193,9 +193,6 @@ vim.keymap.set("n", "Q", "@@")
 vim.keymap.set("n", "<leader>bj", "<cmd>%!jq .<cr>")
 vim.keymap.set("v", "<leader>bj", "<cmd>'<,'>!jq .<cr>")
 
-vim.keymap.set("n", "<leader>k", require('opennextbuf').openNextBuf)
-vim.keymap.set("n", "<leader>j", require('opennextbuf').openPrevBuf)
-
 vim.keymap.set("n", "<leader>f", "<cmd>FindCursor #CC0000 500<cr>")
 
 vim.keymap.set('n', '<C-f>', require('globalfind').Grep)
