@@ -44,6 +44,28 @@ local plugins = {
             },
         }
     },
+    { 'sindrets/diffview.nvim', 
+        config = function()
+            local actions = require("diffview/actions")
+            require("diffview").setup({
+                keymaps = {
+                    view = {
+                        -- Navigate to the next/previous commit in the history from the diff buffer
+                        -- TODO: форкнуть diffview и сделать чтобы select_next_entry не ходил по кругу (не wrap)
+                        { "n", "<C-n>", actions.select_next_entry, { desc = "Next commit (newer)" } },
+                        { "n", "<C-p>", actions.select_prev_entry, { desc = "Previous commit (older)" } },
+                    },
+                    file_history_panel = {
+                        -- Same mappings for the sidebar for consistency
+                        { "n", "<C-n>", actions.select_next_entry, { desc = "Next commit" } },
+                        { "n", "<C-p>", actions.select_prev_entry, { desc = "Previous commit" } },
+                    },
+                },
+            })
+
+        vim.api.nvim_set_hl(0, "DiffviewFilePanelSelected", { bg = "#ffa500", bold = true, fg = "#FFFFFF" })
+        end,
+    },
 }
 
 local init_config = function()
