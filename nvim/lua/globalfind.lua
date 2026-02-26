@@ -89,10 +89,6 @@ M.Grep = function()
 
     -- Waiting for user input...
     popup.closePopup(popupWin)
-    local savedIsLiteral = isLiteral
-    if not isLiteral and word:find(vim.pesc(charsForEscape)) then
-        incLiteral()
-    end
 
     if not utils.empty(word) then
         local prg = basegrepprg
@@ -114,7 +110,6 @@ M.Grep = function()
         vim.fn.search(word)
     end
 
-    isLiteral = savedIsLiteral
     vim.keymap.del('c', '<C-w>')
     vim.keymap.del('c', '<C-l>')
     vim.keymap.del('c', '<C-i>')
