@@ -138,22 +138,6 @@ submode.create("Resize", {
     end
 })
 
-submode.create("Foldlevel", {
-  mode = "n",
-  enter = "<leader>fo",
-  leave = { "q", "<Esc>" },
-  default = function(register)
-    register('-', require('foldlevel').decreaseFoldlevel)
-    register('<', require('foldlevel').decreaseFoldlevel)
-    register('h', require('foldlevel').decreaseFoldlevel)
-    register('+', require('foldlevel').increaseFoldlevel)
-    register('>', require('foldlevel').increaseFoldlevel)
-    register('l', require('foldlevel').increaseFoldlevel)
-    register('0', ':setlocal foldlevel=0<cr>')
-    register('9', ':setlocal foldlevel=99<cr>')
-  end,
-})
-
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "help", "qf" },
   callback = function()

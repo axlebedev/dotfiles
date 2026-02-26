@@ -44,13 +44,6 @@ vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
   command = 'setf css'
 })
 
-local vimagit_group = vim.api.nvim_create_augroup('autoupdate_on_vimagit', { clear = true })
-vim.api.nvim_create_autocmd('User', {
-  group = vimagit_group,
-  pattern = 'VimagitUpdateFile',
-  command = 'checktime'
-})
-
 -- Fugitive foldmethod fix (simplified)
 local fold_group = vim.api.nvim_create_augroup('au_vimrc_foldmethod', { clear = true })
 vim.api.nvim_create_autocmd('BufEnter', {
@@ -67,13 +60,6 @@ vim.api.nvim_create_autocmd('BufEnter', {
   callback = function()
     vim.fn.timer_start(100, function() vim.cmd('FindCursor #d6d8fa 1000') end)
   end
-  -- callback = function() vim.cmd('echo "LALALA"') end
-})
-
--- Window resize
-vim.api.nvim_create_autocmd('VimResized', {
-  group = vimrc_group,
-  command = 'wincmd ='
 })
 
 -- Diff folding (native)

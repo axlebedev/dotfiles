@@ -78,7 +78,8 @@ local plugins = {
         local textobjs = require('various-textobjs')
         textobjs.setup({ 
           keymaps = {
-            useDefaults = true 
+            useDefaults = true, 
+            disabledDefaults = { 'r' },
           }
         })
         vim.keymap.set({ "o", "x" }, "as", function() textobjs.subword("outer") end)

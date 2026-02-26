@@ -1,5 +1,3 @@
-local M = {}
-
 local maxFoldlevel_cache = {}
 
 local getMaxFoldlevelInCurrentBuffer = function()
@@ -23,7 +21,7 @@ local getMaxFoldlevelInCurrentBuffer = function()
     return maxFoldlevel
 end
 
-M.increaseFoldlevel = function()
+local increaseFoldlevel = function()
     vim.wo.foldmethod = 'syntax'
     local maxFoldlevel = getMaxFoldlevelInCurrentBuffer()
     local new_foldlevel = require('utils.utils').trunc(vim.wo.foldlevel + 1, 0, maxFoldlevel)
@@ -33,7 +31,7 @@ M.increaseFoldlevel = function()
     end
 end
 
-M.decreaseFoldlevel = function()
+local decreaseFoldlevel = function()
     vim.wo.foldmethod = 'syntax'
     local maxFoldlevel = getMaxFoldlevelInCurrentBuffer()
     local new_foldlevel = require('utils.utils').trunc(vim.wo.foldlevel - 1, 0, maxFoldlevel - 1)
@@ -43,4 +41,18 @@ M.decreaseFoldlevel = function()
     end
 end
 
-return M
+require("submode").create("Foldlevel", {
+  mode = "n",
+  enter = "<leader>fo",
+  leave = { "q", "<Esc>" },
+  default = function(register)
+    register('-', decreaseFoldlevel)
+    register('<', decreaseFoldlevel)
+    register('h', decreaseFoldlevel)
+    register('+', increaseFoldlevel)
+    register('>', increaseFoldlevel)
+    register('l', increaseFoldlevel)
+    register('0', ':setlocal foldlevel=0<cr>')
+    register('9', ':setlocal foldlevel=99<cr>')
+  end,
+})

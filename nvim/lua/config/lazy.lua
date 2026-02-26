@@ -26,6 +26,7 @@ require('lazy').setup({
     appearance.plugins,
     edit.plugins,
     lsp.plugins,
+    qf.plugins,
     { import = "config.treesitter" },
 
     { 'sheerun/vim-polyglot' },
@@ -115,21 +116,6 @@ require('lazy').setup({
         end
       },
     },
-
-    {
-      'stevearc/quicker.nvim',
-      ft = "qf",
-      opts = {},
-      config = function()
-        require("quicker").setup()
-
-        vim.keymap.set("n", "co", function()
-          require("quicker").toggle()
-        end, {
-          desc = "Toggle quickfix",
-        })
-      end,
-    }
   },
 })
 

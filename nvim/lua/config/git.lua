@@ -11,14 +11,18 @@ local plugins = {
     },
     { 'jreybert/vimagit',
         config = function()
-            local function MagitF()
+            vim.keymap.set("n", "<C-g><C-g>", function() --  MagitF
                 if vim.o.ft == 'qf' then
                     vim.cmd('wincmd k | wincmd l')
                 end
                 vim.cmd('Magit')
-            end
+            end)
 
-            vim.keymap.set("n", "<C-g><C-g>", MagitF)
+            vim.api.nvim_create_autocmd('User', {
+                group = vim.api.nvim_create_augroup('autoupdate_on_vimagit', { clear = true }),
+                pattern = 'VimagitUpdateFile',
+                command = 'checktime'
+            })
         end
     },
     { 'junegunn/gv.vim',
