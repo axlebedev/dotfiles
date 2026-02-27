@@ -1,5 +1,3 @@
-local M = {}
-
 local defaults = vim.fn.has('multi_byte') == 1
     and { placeholder = '⋯', countFormat = '%s↘ ' }
     or { placeholder = '...', countFormat = '%s ' }
@@ -68,7 +66,7 @@ local function get_beginning()
 end
 
 -- MAIN function exported to _G for v:lua access
-M.foldtext_fn = function()
+function foldtext_fn()
     if vim.v.foldend == 0 then return '' end
 
     local fold_line = get_beginning() .. ' ' .. vim.g.FoldText_placeholder .. ' ' .. get_ending()
@@ -81,4 +79,12 @@ M.foldtext_fn = function()
     return content_line .. vim.fn.strcharpart(expansion, vim.fn.strwidth(content_line))
 end
 
-return M
+local plugins = {}
+local function init_config()
+    vim.opt.foldtext = "v:lua.foldtext_fn()"
+end
+
+return {
+    plugins = plugins,
+    init_config = init_config,
+}

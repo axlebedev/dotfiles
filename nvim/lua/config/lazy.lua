@@ -9,6 +9,7 @@ local lsp = require("config.lsp")
 local diagnostic = require("config.diagnostic")
 local edit = require("config.edit")
 local qf = require("config.qf")
+local fold = require("config.fold")
 
 -- Setup lazy.nvim
 require('lazy').setup({
@@ -137,6 +138,8 @@ require('lazy').setup({
     --   },
     -- },
   },
+
+  -- TODO chrisgrieser/nvim-origami
 })
 
 edit.init_config()
@@ -146,8 +149,7 @@ lsp.init_config()
 diagnostic.init_config()
 search.init_config()
 qf.init_config()
-
-vim.opt.foldtext = "v:lua.require('foldtext').foldtext_fn()"
+fold.init_config()
 
 -- vim.api.nvim_create_autocmd("FileType", {
     --     -- обычно когда открывается quickfix - он залезает под nvimtree
