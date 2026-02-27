@@ -80,7 +80,9 @@ M.Grep = function()
     local varsString = makeVarsString()
 
     local varsStringWidth = vim.api.nvim_strwidth(varsString)
-    popupBuf, popupWin = popup.createPopup(varsString, varsStringWidth)
+    popupBuf, popupWin = popup.createPopup(varsString, {
+        width = varsStringWidth,
+    })
 
     local word = vim.fn.input(
         'Search > ',

@@ -1,9 +1,10 @@
+local utils = require('utils/utils')
 local maxFoldlevel_cache = {}
 
 local getMaxFoldlevelInCurrentBuffer = function()
     local bufnr = vim.api.nvim_get_current_buf()
     if maxFoldlevel_cache[bufnr] ~= nil then
-        return maxFoldlevel_cache[bufnr] 
+        return maxFoldlevel_cache[bufnr]
     end
 
     vim.wo.foldmethod = 'syntax'
@@ -24,7 +25,7 @@ end
 local increaseFoldlevel = function()
     vim.wo.foldmethod = 'syntax'
     local maxFoldlevel = getMaxFoldlevelInCurrentBuffer()
-    local new_foldlevel = require('utils.utils').trunc(vim.wo.foldlevel + 1, 0, maxFoldlevel)
+    local new_foldlevel = utils.trunc(vim.wo.foldlevel + 1, 0, maxFoldlevel)
     if new_foldlevel ~= vim.wo.foldlevel then
         vim.wo.foldlevel = new_foldlevel
         vim.cmd('redraw')
@@ -34,7 +35,7 @@ end
 local decreaseFoldlevel = function()
     vim.wo.foldmethod = 'syntax'
     local maxFoldlevel = getMaxFoldlevelInCurrentBuffer()
-    local new_foldlevel = require('utils.utils').trunc(vim.wo.foldlevel - 1, 0, maxFoldlevel - 1)
+    local new_foldlevel = utils.trunc(vim.wo.foldlevel - 1, 0, maxFoldlevel - 1)
     if new_foldlevel ~= vim.wo.foldlevel then
         vim.wo.foldlevel = new_foldlevel
         vim.cmd('redraw')

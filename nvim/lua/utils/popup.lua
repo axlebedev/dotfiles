@@ -1,18 +1,17 @@
 local M = {}
 
-M.createPopup = function(text, width) 
+M.createPopup = function(text, opts)
     -- Create the scratch buffer displayed in the floating window
     local buf = vim.api.nvim_create_buf(false, true)
-    vim.api.nvim_buf_set_lines(buf, 0, 1, false, { text })
+    vim.api.nvim_buf_set_lines(buf, 0, 1, false, type(text) == 'string' and { text } or text)
 
     -- Get the current UI
-    local ui = vim.api.nvim_list_uis()[0]
-    print(vim.inspect(ui))
+    -- local ui = vim.api.nvim_list_uis()[0]
 
     -- Create the floating window
-    local opts = {
+    local defaultOpts = {
         relative = 'editor',
-        width = width,
+        width = 10,
         height = 1,
         col = 0,
         row = 999,
@@ -21,7 +20,13 @@ M.createPopup = function(text, width)
         focusable = false,
         mouse = false,
         fixed = true,
+        border = 'rounded',
     }
+    for k, v in pairs(defaultOpts) do
+        if opts[k] == nil then
+            opts[k] = v
+        end
+    end
     local win = vim.api.nvim_open_win(buf, 1, opts)
     vim.cmd('redraw')
 

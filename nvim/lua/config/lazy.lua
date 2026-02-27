@@ -67,11 +67,30 @@ require('lazy').setup({
       "pogyomo/submode.nvim",
       lazy = true,
       config = function()
+        local popupUtils = require('utils/popup')
+        local group = vim.api.nvim_create_augroup("user-event", {})
+        local popupBuf
+        local popupWin
+        vim.api.nvim_create_autocmd("User", {
+            pattern = "SubmodeEnterPost",
+            callback = function(env)
+              local width = #env.data.name + 4
+              _, popupWin = popupUtils.createPopup(
+                { '', '  ' .. env.data.name },
+                {
+                  width = width,
+                  height = 3,
+                  row = 5,
+                  col = math.floor((vim.o.columns - width) / 2),
+                })
+            end
+          })
+
         vim.api.nvim_create_autocmd("User", {
             group = vim.api.nvim_create_augroup("user-event", {}),
-            pattern = "SubmodeEnterPre",
+            pattern = "SubmodeLeavePost",
             callback = function(env)
-              require('notify')(string.format("submode: %s", env.data.name), vim.log.levels.WARN)
+              popupUtils.closePopup(popupWin)
             end
           })
       end
@@ -103,19 +122,20 @@ require('lazy').setup({
 
     { 'axlebedev/nvim-detect-indent' },
 
-    { 'kevinhwang91/nvim-ufo',
-      dependencies = 'kevinhwang91/promise-async',
-      opts = {
-        open_fold_hl_timeout = 0,
-        fold_virt_text_handler = require('foldtext').foldtext_fn,
-        provider_selector = function(bufnr, filetype, buftype)
-          if filetype == 'magit' then
-            return ''
-          end
-          return {'lsp', 'indent'}  -- Your normal providers
-        end
-      },
-    },
+    -- проблема когда делаешь fold submode, после этого buffer write - ставит свой рандомный foldlevel
+    -- { 'kevinhwang91/nvim-ufo',
+    --   dependencies = 'kevinhwang91/promise-async',
+    --   opts = {
+    --     open_fold_hl_timeout = 0,
+    --     fold_virt_text_handler = require('foldtext').foldtext_fn,
+    --     provider_selector = function(bufnr, filetype, buftype)
+    --       if filetype == 'magit' then
+    --         return ''
+    --       end
+    --       return {'lsp', 'indent'}  -- Your normal providers
+    --     end
+    --   },
+    -- },
   },
 })
 
@@ -126,6 +146,8 @@ lsp.init_config()
 diagnostic.init_config()
 search.init_config()
 qf.init_config()
+
+vim.opt.foldtext = "v:lua.require('foldtext').foldtext_fn()"
 
 -- vim.api.nvim_create_autocmd("FileType", {
     --     -- обычно когда открывается quickfix - он залезает под nvimtree
