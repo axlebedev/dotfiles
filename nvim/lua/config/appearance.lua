@@ -42,7 +42,7 @@ local plugins = {
         vim.g.Illuminate_ftHighlightGroups = {
           javascript = {
             blacklist = {
-              'Statement', 'Noise', 'PreProc', 'Type', 
+              'Statement', 'Noise', 'PreProc', 'Type',
               'jsStorageClass', 'jsImport', 'Include'
             }
           }

@@ -1,6 +1,6 @@
 local plugins = {
     -- git
-    { 'tpope/vim-fugitive', 
+    { 'tpope/vim-fugitive',
         config = function()
             vim.keymap.set("n", "<C-g><C-b>", function() vim.cmd('G blame') end)
             vim.keymap.set("n", "<C-g><C-w>", function()
@@ -26,7 +26,7 @@ local plugins = {
         end
     },
     { 'junegunn/gv.vim',
-        cmd = 'GV', 
+        cmd = 'GV',
         config = function()
             vim.keymap.set("n", "<C-g><C-v>", function() vim.cmd('GV!') end)
         end
@@ -44,7 +44,7 @@ local plugins = {
             },
         }
     },
-    { 'sindrets/diffview.nvim', 
+    { 'sindrets/diffview.nvim',
         config = function()
             local actions = require("diffview/actions")
             require("diffview").setup({

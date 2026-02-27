@@ -37,7 +37,7 @@ vim.opt.grepprg = basegrepprg
 local popupBuf = -1
 local popupWun = -1
 
-local function caseToString() 
+local function caseToString()
     if case == caseArray[1] then
         return '－'
     elseif case == caseArray[2] then
@@ -108,7 +108,7 @@ M.Grep = function()
         vim.cmd.copen()
         require('quickfix-utils').resizeQFHeight()
 
-        vim.fn.setreg('/', word) 
+        vim.fn.setreg('/', word)
         vim.fn.search(word)
     end
 

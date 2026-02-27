@@ -3,7 +3,7 @@ local M = {}
 M.some = function(arr, cb)
   for _, item in pairs(arr) do
     if cb(item) then
-      return true 
+      return true
     end
   end
   return false

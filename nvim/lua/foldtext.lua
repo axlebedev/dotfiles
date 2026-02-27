@@ -52,14 +52,14 @@ end
 local function get_beginning()
     local start_nr = get_fold_start_line_nr()
     local line = vim.fn.getline(vim.v.foldstart)
-    
+
     if start_nr <= vim.v.foldend then
         local spaces = string.rep(' ', vim.bo.tabstop)
         line = vim.fn.getline(start_nr):gsub('\t', spaces)
     end
 
     local fold_ending = get_ending()
-    if vim.fn.match(fold_ending, END_COMMENT_REGEX) ~= -1 
+    if vim.fn.match(fold_ending, END_COMMENT_REGEX) ~= -1
        and vim.fn.match(vim.fn.getline(vim.v.foldstart), START_COMMENT_BLANK_REGEX) ~= -1 then
         local next_line = vim.fn.getline(vim.v.foldstart + 1):gsub([[\v\s*\*]], '')
         line = line .. next_line
@@ -73,11 +73,11 @@ M.foldtext_fn = function()
 
     local fold_line = get_beginning() .. ' ' .. vim.g.FoldText_placeholder .. ' ' .. get_ending()
     local count = get_lines_count()
-    
+
     -- Truncate/Combine with count
     local content_line = count .. vim.fn.strcharpart(fold_line, vim.fn.strwidth(count))
     local expansion = string.rep(' ', get_width())
-    
+
     return content_line .. vim.fn.strcharpart(expansion, vim.fn.strwidth(content_line))
 end
 

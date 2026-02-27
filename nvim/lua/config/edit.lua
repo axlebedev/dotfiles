@@ -76,9 +76,9 @@ local plugins = {
       event = "VeryLazy",
       config = function()
         local textobjs = require('various-textobjs')
-        textobjs.setup({ 
+        textobjs.setup({
           keymaps = {
-            useDefaults = true, 
+            useDefaults = true,
             disabledDefaults = { 'r' },
           }
         })

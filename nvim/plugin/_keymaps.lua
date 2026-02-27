@@ -244,7 +244,7 @@ end)
 --       vim.defer_fn(DoCleanImports, 100)
 --     end
 --   end
---   
+--
 --   vim.defer_fn(DoCleanImports, 300)
 -- end)
 
@@ -276,7 +276,7 @@ vim.keymap.set("n", "<C-q>", "q")
 -- TODO- linting
 -- nnoremap ad <ScriptCmd>ALEDisable<CR>
 
--- wrap visual selection into function block 
+-- wrap visual selection into function block
 vim.keymap.set("v", "<C-b>", '"bdi{<CR>return <C-r>b;<CR>}<Esc>=ib')
 
 local FoldSelection = function()
