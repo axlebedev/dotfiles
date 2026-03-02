@@ -47,6 +47,32 @@ local init_config = function()
                 end, { desc = "Toggle quickfix", })
             end,
         })
+
+    -- format lines in qf
+    function _G.qftf(info)
+        local items, ret = {}, {}
+        -- Fetch items based on whether it's a quickfix or location list
+        if info.quickfix == 1 then
+            items = vim.fn.getqflist({ id = info.id, items = 0 }).items
+        else
+            items = vim.fn.getloclist(info.winid, { id = info.id, items = 0 }).items
+        end
+
+        for i = info.start_idx, info.end_idx do
+            local e = items[i]
+            local fname = e.bufnr > 0 and vim.fn.bufname(e.bufnr) or ""
+            -- Shorten home directory to ~
+            fname = fname:gsub("^" .. vim.env.HOME, "~"):gsub("^%.%/", "")
+
+            -- Format: filename:line:col: type text
+            local str = string.format("%s|%d|%s", fname, e.lnum, e.text)
+            table.insert(ret, str)
+        end
+        return ret
+    end
+
+    -- Enable the custom function
+    vim.o.quickfixtextfunc = "{info -> v:lua._G.qftf(info)}"
 end
 
 return {
