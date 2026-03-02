@@ -308,9 +308,6 @@ vim.keymap.set("v", "@@", ":normal @@<CR>")
 
 vim.keymap.set("n", "U", "<C-r>")
 
-vim.keymap.set('n', '<F5>', require('updatebuffer').updateBuffer)
-vim.keymap.set('n', '<F5><F5>', require('updatebuffer').updateBufferForce)
-
 vim.keymap.set('n', 'yf', '<cmd>YankFileName<cr>')
 vim.keymap.set('n', 'yff', '<cmd>YankFileNameForDebug<cr>')
 vim.keymap.set('n', 'yg', '<cmd>YankGithubURLMaster<cr>')
