@@ -15,6 +15,7 @@ vim.opt.mousemoveevent = true
 
 require("config/lazy")
 
+require("features/globalfind")
 require("features/appendchar")
 require("features/foldlevel")
 require("features/opennextbuf")
