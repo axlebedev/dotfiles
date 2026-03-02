@@ -1,6 +1,7 @@
 local array = require('utils/array')
 local popup = require('utils/popup')
 local utils = require('utils/utils')
+local resizeQFHeight = require('features/globalfind/resizeQFHeight')
 
 local M = {}
 
@@ -106,7 +107,7 @@ M.Grep = function()
         local output = vim.fn.systemlist(prg .. ' "' .. word .. '" .')
         vim.fn.setqflist({}, ' ', { lines = output })
         vim.cmd.copen()
-        require('quickfix-utils').resizeQFHeight()
+        resizeQFHeight()
 
         vim.fn.setreg('/', word)
         vim.fn.search(word)

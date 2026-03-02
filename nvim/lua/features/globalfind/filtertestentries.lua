@@ -1,4 +1,5 @@
 local array = require('utils/array')
+local resizeQFHeight = require('features/globalfind/resizeQFHeight')
 
 local M = {}
 
@@ -35,7 +36,7 @@ M.filterTestEntries = function()
         end
     end
     vim.fn.setqflist(res)
-    require('quickfix-utils').resizeQFHeight()
+    resizeQFHeight()
 end
 
 return M
