@@ -9,6 +9,15 @@ M.some = function(arr, cb)
   return false
 end
 
+M.find = function(arr, cb)
+  for _, item in pairs(arr) do
+    if cb(item) then
+      return item
+    end
+  end
+  return nil
+end
+
 M.map = function(arr, cb)
   local result = {}
   for _, item in pairs(arr) do

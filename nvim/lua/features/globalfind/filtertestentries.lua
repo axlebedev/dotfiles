@@ -8,6 +8,7 @@ local filtered = {
     'json',
     'test__',
     'git',
+    'svg',
     'diff',
     'commonMock',
     'yarn.lock',
@@ -23,7 +24,6 @@ local filtered = {
     'test',
     'Tests',
     'QtEditor',
-    '--'
 }
 M.filterTestEntries = function()
     local list = vim.fn.getqflist()
@@ -31,7 +31,7 @@ M.filterTestEntries = function()
 
     for _, v in pairs(list) do
         local bufname = vim.fn.bufname(v.bufnr)
-        if not array.some(filtered, function(v) return v:match(bufname) end) then
+        if not array.some(filtered, function(v) return bufname:match(v) end) then
             table.insert(res, v)
         end
     end
