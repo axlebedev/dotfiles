@@ -127,7 +127,7 @@ end
 abbr -a gob g checkout -b
 function gobs
     set currentBranchName (git rev-parse --abbrev-ref HEAD)
-    set currentBranchNameSaved (string join '' -- $currentBranchName "--saved") 
+    set currentBranchNameSaved (string join '' -- $currentBranchName "--saved")
     commandline -j -- "git checkout -b $currentBranchNameSaved"
     commandline -f repaint
 end
@@ -228,6 +228,8 @@ abbr -a nl npm run lint
 abbr -a nt npm run test
 abbr -a nta npm run test-all
 
+abbr -a gplndd "git pull && npm i && npm run start:dev:all"
+
 abbr -a y yarn
 abbr -a yi yarn
 abbr -a ys yarn start
@@ -246,12 +248,12 @@ function simulate_empty_commands
     set -l full_height (tput lines)
     set -l height (math "ceil($full_height * 0.7)")
     set -l prompt (fish_prompt)
-    
+
     # Print with progress updates
     printf '\n'
     for i in (seq $height)
         printf '%s\n' $prompt
-        
+
         # Update every 10 lines or last line
         if test (math "$i % 10") -eq 0; or test $i -eq $height
             printf '\r'  # Optional: clears the line
