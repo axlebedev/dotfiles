@@ -9,6 +9,7 @@ return {
         local colors = {
           red = '#ca1243',
           grey = '#a0a1a7',
+          lightgrey = '#cbcccb',
           black = '#383a42',
           white = '#f3f3f3',
           light_green = '#83a598',
@@ -20,7 +21,7 @@ return {
           normal = {
             a = { fg = colors.white, bg = colors.black },
             b = { fg = colors.white, bg = colors.grey },
-            c = { fg = colors.black, bg = colors.white },
+            c = { fg = colors.black, bg = colors.lightgrey },
             z = { fg = colors.white, bg = colors.black },
           },
           insert = { a = { fg = colors.black, bg = colors.light_green } },
