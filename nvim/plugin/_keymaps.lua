@@ -1,5 +1,3 @@
-local array = require('utils/array')
-
 -- import 'vim-js-fastlog.vim' as jsLog
 -- import 'chase.vim' as chase
 --
@@ -47,7 +45,7 @@ local CloseBufferSafeFugitive = function()
       return
     end
 
-    local bufs = require('utils.array').filter(
+    local bufs = require('utils/array').filter(
       vim.api.nvim_list_bufs(),
       function(buf)
         return vim.api.nvim_buf_get_option(buf, "filetype") ~= 'NvimTree'

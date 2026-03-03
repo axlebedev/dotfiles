@@ -27,4 +27,12 @@ M.trunc = function(v, min, max)
   return v
 end
 
+M.trim = function(s)
+  -- The pattern matches:
+  -- ^%s* : optional leading whitespace at the start of the string
+  -- (.-) : a capture group for the actual content (non-greedy match until next pattern)
+  -- %s*$ : optional trailing whitespace at the end of the string
+  return s:match("^%s*(.-)%s*$") or ""
+end
+
 return M

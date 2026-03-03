@@ -1,3 +1,4 @@
+local utils = require('utils/utils')
 local plugins = {
 }
 local init_config = function()
@@ -29,6 +30,7 @@ local init_config = function()
                 vim.keymap.set("n", "o", "<CR>", { buffer = true, silent = true })
                 vim.keymap.set("n", "<CR>", "<CR>", { buffer = true, silent = true })
                 vim.keymap.set("n", "q", "<cmd>cclose | wincmd l<cr>", { buffer = true, silent = true, remap = true })
+                vim.keymap.set('n', 'yy', '02f|wy$', { buffer = true, silent = true })
 
                 vim.keymap.set("n", "co", function()
                     local isQuickfixHere = require('utils/array').some(
@@ -45,6 +47,8 @@ local init_config = function()
                         vim.cmd('copen')
                     end
                 end, { desc = "Toggle quickfix", })
+
+            vim.api.nvim_set_hl(0, 'qfLineNr', { fg = '#ef7932', bold = true })
             end,
         })
 
@@ -65,7 +69,7 @@ local init_config = function()
             fname = fname:gsub("^" .. vim.env.HOME, "~"):gsub("^%.%/", "")
 
             -- Format: filename:line:col: type text
-            local str = string.format("%s|%d|%s", fname, e.lnum, e.text)
+            local str = string.format("%s|%d|  %s", fname, e.lnum, utils.trim(e.text))
             table.insert(ret, str)
         end
         return ret
