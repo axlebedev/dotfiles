@@ -193,6 +193,7 @@ return {
           pattern = 'Startified',
           callback = function()
             vim.keymap.set('n', 'o', '<plug>(startify-open-buffers)', { buffer = true })
+            vim.wo.cursorline = true
           end,
         })
       end,
