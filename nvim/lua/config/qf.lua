@@ -31,6 +31,10 @@ local init_config = function()
                 vim.keymap.set("n", "<CR>", "<CR>", { buffer = true, silent = true })
                 vim.keymap.set("n", "q", "<cmd>cclose | wincmd l<cr>", { buffer = true, silent = true, remap = true })
                 vim.keymap.set('n', 'yy', '02f|wy$', { buffer = true, silent = true })
+                vim.keymap.set('n', '<leader>t', function()
+                    vim.cmd('wincmd k | wincmd l')
+                    vim.cmd('Telescope find_files hidden=true')
+                end, { buffer = true, silent = true })
 
                 vim.keymap.set("n", "co", function()
                     local isQuickfixHere = require('utils/array').some(
