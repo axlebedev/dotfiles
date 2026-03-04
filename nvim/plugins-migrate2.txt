@@ -82,7 +82,7 @@ Plug 'axlebedev/vim-indexed-search' -- переписать! Плагин не n
 
 +T+ODO: treesitter
 TODO: research
-{ 'junegunn/vim-over' }         -- Substitute preview (same author) 
+{ 'junegunn/vim-over' }         -- Substitute preview (same author)
 https://git.sr.ht/~foosoft/argonaut.nvim
 Supermaven plugin and claude code
 
@@ -97,7 +97,7 @@ T+ODO: когда я ввожу <div> - хочу чтобы сразу подс�
 
 TODO: to refactor?
 vim.lsp.buf.definition()           -- Jump to definition
-vim.lsp.buf.type_definition()      -- Jump to type definition  
+vim.lsp.buf.type_definition()      -- Jump to type definition
 vim.lsp.buf.implementation()       -- Jump to implementation
 vim.lsp.buf.references()           -- List all references
 vim.lsp.buf.declaration()          -- Jump to declaration
@@ -122,3 +122,20 @@ text
 vim.lsp.buf.document_symbol()      -- Document symbols outline
 vim.lsp.buf.workspace_symbol()     -- Workspace symbols
 vim.lsp.inlay_hint(bufnr, line, col) -- Toggle inlay hints
+
+--
+
+.vim/
+autoload/ -- OK
+ plugin
+ appendchar.vim -- OK
+ blockline.vim -- OK
+ git.vim -- TODO: Gedit file
+ quickfix-utils.vim -- OK
+ readmode.vim -- OK
+ refactor.vim -- TODO
+ftplugin/ -- TODO
+
+TODOs:
+lint
+chase
