@@ -151,11 +151,6 @@ vim.api.nvim_create_autocmd("FileType", {
 
 vim.keymap.set("n", "<leader>a", "<cmd>ArgWrap<CR>", { silent = true })
 
-vim.keymap.set('n', '<leader>t', '<cmd>Telescope find_files hidden=true<CR>', { noremap = false })
-vim.keymap.set('n', '<leader>b', '<cmd>Telescope buffers<CR>', { noremap = false })
-vim.keymap.set('n', '<C-p>', '<cmd>Telescope commands<CR>', { noremap = false })
-vim.keymap.set('n', 'sft', '<cmd>Telescope filetypes<CR>', { noremap = false })
-
 -- TODO- refactor (after lsp)
 -- nnoremap <silent> <leader>r <Plug>(refactor-commands)
 -- vnoremap <silent> <leader>r <Plug>(refactor-commands)

@@ -277,6 +277,15 @@ return {
           pickers = {},
           extensions = {},
         }
+
+        local builtin = require('telescope/builtin')
+        vim.keymap.set('n', '<leader>t', builtin.find_files, { noremap = false })
+        vim.keymap.set('v', '<leader>t', function() builtin.find_files({
+                default_text = require('utils/utils').get_visual_selection()
+          }) end, {noremap = false})
+        vim.keymap.set('n', '<leader>b', builtin.buffers, { noremap = false })
+        vim.keymap.set('n', '<C-p>', builtin.commands, { noremap = false })
+        vim.keymap.set('n', 'sft', builtin.filetypes, { noremap = false })
       end
     },
 }
