@@ -1,9 +1,10 @@
 -- Skip quickfix on traversing buffers
-local openNextBuf = function(isPrev)
+local openNextBuf
+openNextBuf = function(isPrev)
     local command = isPrev and "bprev" or "bnext"
     vim.cmd(command)
     if vim.bo.buftype == 'quickfix' or vim.bo.buftype == 'terminal' then
-        M.openNextBuf(isPrev)
+        openNextBuf(isPrev)
     end
 end
 
