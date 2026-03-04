@@ -137,5 +137,6 @@ autoload/ -- OK
 ftplugin/ -- TODO
 
 TODOs:
-lint
++ lint
+  + *telescope.builtin.diagnostics()*
 chase

@@ -3,14 +3,6 @@ local plugins = {
     -- npm install -g @fsouza/prettierd vscode-langservers-extracted
     { 'neovim/nvim-lspconfig',
       config = function()
-        -- go install github.com/mattn/efm-langserver@latest
-        local lang = {
-          formatCommand = "eslint_d --stdin --stdin-filename ${INPUT} --fix-to-stdout",
-          lintCommand = "eslint_d -f unix --stdin --stdin-filename ${INPUT}",
-          lintStylish = true,
-          lintFormats = {"%f:%l:%c: %m"}
-        }
-
         -- vim.lsp.config(
         --   'lua_ls',
         --   {
@@ -31,25 +23,19 @@ local plugins = {
         --     },
         --   }
         -- )
-        vim.lsp.config(
-          'efm',
-          {
-            settings = {
-              filetypes = { "javascript", "typescript", "javascriptreact", "typescriptreact" },
-              init_options = { documentFormatting = true },
-              settings = {
-                rootMarkers = {".git/", "eslint.config.mjs", "package.json"},
-                languages = {
-                  javascript = lang,
-                  typescript = lang,
-                  javascriptreact = lang,
-                  typescriptreact = lang,
-                },
-              },
-            }
-          }
-        )
       end
+    },
+
+    { 'esmuellert/nvim-eslint',
+      config = function()
+        require('nvim-eslint').setup({
+            -- settings = {
+            --   options = {
+            --     ['@stylistic/no-trailing-spaces'] = 0,
+            --   },
+            -- }
+          })
+      end,
     },
 }
 
@@ -69,6 +55,9 @@ local init_config = function()
       -- This is a hint to tell nvim to find your project root from a file within the tree
       root_dir = vim.fs.root(0, {'package.json', '.git'}),
       capabilities = capabilities,
+      settings = {
+        diagnostics = { ignoredCodes = { 6133 } }
+      }
     })
 
   vim.o.complete = ".,o" -- use buffer and omnifunc
@@ -107,6 +96,14 @@ local init_config = function()
 
   vim.api.nvim_set_keymap('i', '<Tab>', ' pumvisible() ? "\\<C-n>" : "\\<Tab>"', { expr = true, silent = true })
   vim.api.nvim_set_keymap('i', '<S-Tab>', 'pumvisible() ? "\\<C-p>" : "\\<S-Tab>"', { expr = true, silent = true })
+
+  vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+      pattern = { "*.js", "*.ts", "*.jsx", "*.tsx" },  -- используйте wildcards
+      callback = function()
+        vim.lsp.buf.code_action({ context = { only = { 'source.fixAll.eslint' } }, apply = true })
+        vim.cmd('e!')
+      end
+    })
 end
 
 return {
