@@ -69,8 +69,14 @@ local plugins = {
 }
 
 local init_config = function()
-    -- vim.keymap.set("n", "<C-g><C-u>", function() unmerged() end)
-    -- vim.keymap.set("n", "<C-g><C-w>", function() vim.cmd('G add %') end)
+    local builtin = require('telescope/builtin')
+    vim.keymap.set("n", "<C-g><C-u>", function()
+      builtin.find_files({
+          prompt_title = "Unmerged Files",
+          find_command = { "git", "diff", "--name-only", "--diff-filter=U" },
+        })
+    end, { desc = "Git unmerged files" })
+
     -- function GeditFile(branch)
     --     vim.cmd('Gedit ' .. branch .. ':%')
     -- end
