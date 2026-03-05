@@ -97,13 +97,17 @@ local init_config = function()
   vim.api.nvim_set_keymap('i', '<Tab>', ' pumvisible() ? "\\<C-n>" : "\\<Tab>"', { expr = true, silent = true })
   vim.api.nvim_set_keymap('i', '<S-Tab>', 'pumvisible() ? "\\<C-p>" : "\\<S-Tab>"', { expr = true, silent = true })
 
-  vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-      pattern = { "*.js", "*.ts", "*.jsx", "*.tsx" },  -- используйте wildcards
-      callback = function()
-        vim.lsp.buf.code_action({ context = { only = { 'source.fixAll.eslint' } }, apply = true })
-        vim.cmd('e!')
-      end
-    })
+  vim.keymap.set(
+    'n',
+    'ff',
+    function()
+      vim.lsp.buf.code_action({
+        context = { only = { 'source.fixAll.eslint' } },
+        apply = true
+      })
+    end,
+    { expr = true, silent = true }
+  )
 end
 
 return {
