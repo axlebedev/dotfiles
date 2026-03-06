@@ -37,6 +37,35 @@ local plugins = {
           })
       end,
     },
+
+    { 'hedyhli/outline.nvim',
+      lazy = true,
+      cmd = { "Outline", "OutlineOpen" },
+      keys = { -- Example mapping to toggle outline
+        { "<F4>", "<cmd>Outline<CR>", desc = "Toggle outline" },
+      },
+      config = function()
+        require('outline').setup({
+          outline_items = {
+            show_symbol_lineno = true,
+            auto_set_cursor = false,
+          },
+          guides = {
+            enabled = true,
+            markers = {
+              -- It is recommended for bottom and middle markers to use the same number
+              -- of characters to align all child nodes vertically.
+              bottom = '',
+              middle = '',
+              vertical = '┊',
+            },
+            auto_unfold = {
+              hovered = false,
+            },
+          },
+        })
+      end,
+    },
 }
 
 local init_config = function()
