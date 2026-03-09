@@ -121,3 +121,5 @@ vim.api.nvim_set_hl(0, 'CocCodeLens', { link = 'Comment' })
 -- highlight link ChaseSeparator DiffChange
 
 vim.api.nvim_set_hl(0, 'MoreMsg', { bg = '#cecfeb', bold = true })
+
+vim.api.nvim_set_hl(0, 'SnacksIndentScope', { fg = '#979797' })
