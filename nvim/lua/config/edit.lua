@@ -79,7 +79,7 @@ local plugins = {
         textobjs.setup({
           keymaps = {
             useDefaults = true,
-            disabledDefaults = { 'r' },
+            disabledDefaults = { 'r', 'n' },
           }
         })
         vim.keymap.set({ "o", "x" }, "as", function() textobjs.subword("outer") end)
