@@ -178,6 +178,8 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
   end,
 })
 
+vim.opt.wrap = false
+
 vim.api.nvim_create_autocmd({ "FileType" }, {
   group = au_vimrc_settings,
   pattern = "gitcommit",
