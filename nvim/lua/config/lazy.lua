@@ -136,7 +136,7 @@ require('lazy').setup({
           },
           indent = {
             enabled = true,
-            char = "┊",
+            char = "⁚",
           },
           char = "┊",
           scope = {
