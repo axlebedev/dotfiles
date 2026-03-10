@@ -137,6 +137,10 @@ autoload/ -- OK
 ftplugin/ -- TODO
 
 TODOs:
-+ lint
-  + *telescope.builtin.diagnostics()*
 chase
+refactor:
+ - file references
+ - file rename
+
+ TODO:
+findcursor on 'n'
