@@ -120,6 +120,8 @@ local init_config = function()
               col = 20, -- Offset right to avoid "under" cursor overlap
             })
         end, { buffer = ev.buf })
+
+      vim.keymap.set('n', 'ca', vim.lsp.buf.code_action)
       end,
   })
 
