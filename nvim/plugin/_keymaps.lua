@@ -342,3 +342,6 @@ vim.keymap.set("n", "sw", function() vim.o.wrap = not vim.o.wrap end)
 vim.keymap.set("n", "<F1>", "<cmd>Telescope help_tags<cr>")
 
 vim.keymap.set("n", "<C-t>", "<cmd>Telescope<cr>")
+
+vim.keymap.set("n", "n", "n<CMD>FindCursor #d6d8fa 500<CR>")
+vim.keymap.set("n", "N", "N<CMD>FindCursor #d6d8fa 500<CR>")

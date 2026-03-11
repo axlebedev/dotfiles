@@ -30,6 +30,7 @@ local init_config = function()
       vim.o.hlsearch = true
       vim.fn.search(pat, "n")  -- 'n' flag = no movement
     end
+    vim.fn.timer_start(10, function() vim.cmd('FindCursor #d6d8fa 0') end)
   end)
 end
 
