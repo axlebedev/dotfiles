@@ -103,9 +103,9 @@ require('lazy').setup({
         require("inc_rename").setup {
           input_buffer_type = "snacks",
         }
-        -- vim.keymap.set("n", "<leader>rn", function()
-        --   return ":IncRename " .. vim.fn.expand("<cword>")
-        -- end, { expr = true })
+        vim.keymap.set("n", "<leader>r", function()
+          return ":IncRename " .. vim.fn.expand("<cword>")
+        end, { expr = true })
     end
     },
 
@@ -137,8 +137,8 @@ require('lazy').setup({
           indent = {
             enabled = true,
             char = "⁚",
+            hl = "SnacksIndentBlank"
           },
-          char = "┊",
           scope = {
             enabled = false, -- enable highlighting the current scope
             priority = 200,
@@ -147,7 +147,7 @@ require('lazy').setup({
           },
           chunk = {
             enabled = true,
-            hl = "SnacksIndentChunk",
+            hl = "SnacksIndentBlank",
             char = {
               corner_top = "╭",
               corner_bottom = "╰",
