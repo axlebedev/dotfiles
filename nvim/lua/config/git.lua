@@ -1,0 +1,103 @@
+local plugins = {
+    -- git
+    { 'tpope/vim-fugitive',
+        config = function()
+            vim.keymap.set("n", "<C-g><C-b>", function() vim.cmd('G blame') end)
+            vim.keymap.set("n", "<C-g><C-w>", function()
+                vim.cmd('G add %')
+                print('Git add ' .. vim.fn.expand('%:.'))
+            end)
+        end
+    },
+    { 'jreybert/vimagit',
+        config = function()
+            vim.keymap.set("n", "<C-g><C-g>", function() --  MagitF
+                if vim.o.ft == 'qf' then
+                    vim.cmd('wincmd k | wincmd l')
+                end
+                vim.cmd('Magit')
+            end)
+
+            vim.api.nvim_create_autocmd('User', {
+                group = vim.api.nvim_create_augroup('autoupdate_on_vimagit', { clear = true }),
+                pattern = 'VimagitUpdateFile',
+                command = 'checktime'
+            })
+        end
+    },
+    { 'junegunn/gv.vim',
+        cmd = 'GV',
+        config = function()
+            vim.keymap.set("n", "<C-g><C-v>", function() vim.cmd('GV!') end)
+        end
+    },
+    { 'akinsho/git-conflict.nvim',
+        version = "*",
+        config = true,
+        opts = {
+            default_mappings = {
+                ours = 'co',
+                theirs = 'ct',
+                both = 'cb',
+                next = ']c',
+                prev = '[c',
+            },
+        }
+    },
+    { 'sindrets/diffview.nvim',
+        config = function()
+            local actions = require("diffview/actions")
+            require("diffview").setup({
+                keymaps = {
+                    view = {
+                        -- Navigate to the next/previous commit in the history from the diff buffer
+                        -- TODO: форкнуть diffview и сделать чтобы select_next_entry не ходил по кругу (не wrap)
+                        { "n", "<C-n>", actions.select_next_entry, { desc = "Next commit (newer)" } },
+                        { "n", "<C-p>", actions.select_prev_entry, { desc = "Previous commit (older)" } },
+                    },
+                    file_history_panel = {
+                        -- Same mappings for the sidebar for consistency
+                        { "n", "<C-n>", actions.select_next_entry, { desc = "Next commit" } },
+                        { "n", "<C-p>", actions.select_prev_entry, { desc = "Previous commit" } },
+                    },
+                },
+            })
+
+        vim.api.nvim_set_hl(0, "DiffviewFilePanelSelected", { bg = "#ffa500", bold = true, fg = "#FFFFFF" })
+        end,
+    },
+}
+
+local init_config = function()
+    local builtin = require('telescope/builtin')
+    vim.keymap.set("n", "<C-g><C-u>", function()
+      builtin.find_files({
+          prompt_title = "Unmerged Files",
+          find_command = { "git", "diff", "--name-only", "--diff-filter=U" },
+        })
+    end, { desc = "Git unmerged files" })
+
+    -- function GeditFile(branch)
+    --     vim.cmd('Gedit ' .. branch .. ':%')
+    -- end
+    -- vim.keymap.set("n", "<C-g><C-f>", function() vim.cmd('Gw') end)
+    -- nnoremap <silent> <C-g><C-f> <ScriptCmd>fzf#run(fzf#wrap({ source: 'sh ~/dotfiles/fish/sortedBranch.sh', sink: g:GeditFile }))<CR>
+
+    -- def Cgci()
+    --     if (&ft == 'nerdtree')
+    --         wincmd l
+    --     endif
+    --     var current_branch = fugitive#Head()
+    --     if (current_branch == 'master')
+    --         Commits --first-parent
+    --     else
+    --         Commits --branches --not master
+    --     endif
+    -- enddef
+    -- nnoremap <C-g><C-i> <ScriptCmd>Cgci()<CR>
+end
+
+return {
+    plugins = plugins,
+    init_config = init_config,
+}

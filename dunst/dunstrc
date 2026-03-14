@@ -23,7 +23,7 @@
     ### Display ###
 
     # Which monitor should the notifications be displayed on.
-    monitor = VMON_BOTTOM
+    monitor = DP-1
 
     # Display notification on focused monitor.  Possible modes are:
     #   mouse: follow mouse pointer
@@ -36,7 +36,7 @@
     #
     # If this option is set to mouse or keyboard, the monitor option
     # will be ignored.
-    follow = none
+    follow = keyboard
 
     # dynamic width from 0 to 300
     width = 1000

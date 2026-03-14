@@ -92,6 +92,8 @@ x11-utils \
 arandr \
 rofi \
 xzoom \
+tree-sitter-cli \
+fd-find \
 flameshot
 
 # lazygit - run it in bash
@@ -130,7 +132,15 @@ diff-so-fancy \
 indicator-sound-switcher \
 gromit-mpx
 
-sudo snap install --classic cmake
+sudo snap install --classic \
+cmake \
+nvim
+
+sudo npm i -g \
+tree-sitter-cli
+typescript \
+typescript-language-server \
+yarn
 
 # ----- install Chrome
 

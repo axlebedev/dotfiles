@@ -45,6 +45,9 @@ ln -s ~/dotfiles/.fonts ~/.fonts
 rm -rf ~/.config/dunst
 ln -s ~/dotfiles/dunst ~/.config/dunst
 
+rm -rf ~/.config/nvim
+ln -s ~/dotfiles/nvim ~/.config/nvim
+
 mkdir ~/.config/fish/
 rm -rf ~/.config/fish/config.fish
 ln -s ~/dotfiles/fish/config.fish ~/.config/fish/config.fish

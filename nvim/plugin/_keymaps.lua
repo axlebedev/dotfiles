@@ -1,0 +1,347 @@
+-- import 'vim-js-fastlog.vim' as jsLog
+-- import 'chase.vim' as chase
+--
+-- import autoload '../autoload/globalfind.vim'
+-- import autoload '../autoload/opennextbuf.vim'
+-- import autoload '../autoload/htmlbeautify.vim'
+-- import autoload '../autoload/increasefoldlevel.vim'
+-- import autoload '../autoload/logfunction.vim'
+-- import autoload '../autoload/removeqfitem.vim'
+-- import autoload '../autoload/updatebuffer.vim'
+-- import autoload './refactor.vim'
+-- import autoload './quickfix-utils.vim' as quickfixUtils
+
+vim.g.mapleader = " "
+
+vim.keymap.set("n", "<Tab>", "%<CMD>FindCursor 0 500<CR>", { remap = true })
+vim.keymap.set("v", "<Tab>", "%", { remap = true })
+
+-- Make moving in line a bit more convenient
+vim.keymap.set("n", "gg", ":lua vim.fn.cursor(1, 1)<CR>", { silent = true })
+vim.keymap.set({ "n", "v", "o" }, "$", "g_")
+vim.keymap.set({ "n", "v", "o" }, "$$", "$")
+vim.keymap.set({ "n", "v", "o" }, "0", "^")
+vim.keymap.set({ "n", "v", "o" }, "00", "0")
+vim.keymap.set({ "n", "v", "o" }, "f;", "g_")
+
+-- fast save file, close file
+vim.keymap.set({ "n", "v" }, "<leader>w", "<cmd>w!<cr>")
+
+-- Если просто закрыть fugitive-буфер - то закроется весь вим.
+-- Поэтому делаем такой костыль
+local au_dont_close_fugitive = vim.api.nvim_create_augroup("au_dont_close_fugitive", { clear = true })
+vim.api.nvim_create_autocmd({ "BufReadPost" }, {
+  pattern = "fugitive://*",
+  group = au_dont_close_fugitive,
+  callback = function()
+    -- By default it's set bufhidden=delete in plugin source. I dont need it
+    vim.opt.bufhidden = ''
+  end,
+})
+local CloseBufferSafeFugitive = function()
+    local curBuf = vim.fn.bufnr('%')
+    if vim.bo.filetype == 'fugitiveblame' then
+      vim.cmd('q')
+      return
+    end
+
+    local bufs = require('utils/array').filter(
+      vim.api.nvim_list_bufs(),
+      function(buf)
+        return vim.api.nvim_buf_get_option(buf, "filetype") ~= 'NvimTree'
+      end
+    )
+    if #bufs <= 1 then
+      if vim.bo.filetype == 'startify' then
+        vim.cmd('qa!')
+      else
+        vim.cmd('Startify')
+      end
+    else
+      vim.cmd('set nowinfixbuf')
+      vim.cmd('bprev')
+    end
+
+    vim.api.nvim_buf_delete(curBuf, {})
+
+    if vim.bo.buftype == 'quickfix' or vim.bo.buftype == 'terminal' then
+      vim.cmd('Startify')
+    end
+end
+vim.keymap.set('n', '<leader>q', CloseBufferSafeFugitive, { silent = true })
+
+-- new empty buffer
+vim.keymap.set({ "n", "v" }, "<leader>x", "<cmd>Startify<cr>")
+
+-- split line
+vim.keymap.set("n", "<leader>s", "a<CR><Esc>")
+
+-- comfortable navigation through windows
+vim.keymap.set("n", "<C-h>", "<C-w>h")
+vim.keymap.set("n", "<C-j>", "<C-w>j")
+vim.keymap.set("n", "<C-k>", "<C-w>k")
+vim.keymap.set("n", "<C-l>", "<C-w>l")
+
+-- visual select last visual selection
+-- ХЗ почему я постоянно путаю
+vim.keymap.set("n", "vg", "gv")
+
+-- visual select last pasted text
+vim.keymap.set("n", "vp", "`[v`]")
+
+-- NvimTree mappings
+vim.keymap.set('n', '<F2>', ':NvimTreeToggle<CR>')
+vim.keymap.set('n', '<leader>tt', ':NvimTreeFindFile<CR>')
+
+-- don't reset visual selection after indent
+vim.keymap.set("x", ">", ">gv", { silent = true })
+vim.keymap.set("x", "<", "<gv", { silent = true })
+
+-- Movement in wrapped lines
+vim.keymap.set("n", "j", "gj")
+vim.keymap.set("n", "k", "gk")
+vim.keymap.set("v", "j", "gj")
+vim.keymap.set("v", "k", "gk")
+
+-- insert blank line
+vim.keymap.set("n", "<leader>o", "o<Esc>")
+
+-- save file under root
+vim.keymap.set("c", "w!!", "w !sudo tee % >/dev/null")
+
+-- replace selection
+vim.keymap.set("v", "<C-h>", '"hy:%s/<C-r>h//gc<left><left><left><C-r>h')
+
+-- pretty find
+vim.keymap.set("v", "//", '"py/<C-R>p<CR>')
+
+-- Now we don't have to move our fingers so far when we want to scroll through
+-- the command history; also, don't forget the q: command
+vim.keymap.set("c", "<c-j>", "<down>")
+vim.keymap.set("c", "<c-k>", "<up>")
+
+-- dont insert annoying 'PrtSc' code
+vim.keymap.set("i", "<t_%9>", "<nop>")
+
+local submode = require("submode")
+submode.create("Resize", {
+    mode = "n",
+    enter = "<C-r>",
+    leave = { "q", "<Esc>" },
+    default = function(register)
+        register('h', ':vertical resize -1<cr>')
+        register('l', ':vertical resize +1<cr>')
+        register('k', ':resize -1<cr>')
+        register('j', ':resize +1<cr>')
+    end
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "help", "qf" },
+  callback = function()
+    vim.keymap.set("n", "q", "<cmd>q<cr>", { buffer = true })
+  end,
+})
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "fugitive*", "git" },
+  callback = function()
+    vim.keymap.set("n", "q", CloseBufferSafeFugitive, { buffer = true })
+  end,
+})
+
+vim.keymap.set("n", "<leader>a", "<cmd>ArgWrap<CR>", { silent = true })
+
+-- TODO- refactor (after lsp)
+-- nnoremap <silent> <leader>r <Plug>(refactor-commands)
+-- vnoremap <silent> <leader>r <Plug>(refactor-commands)
+-- nnoremap <silent> rr <Plug>(refactor-commands)
+-- vnoremap <silent> rr <Plug>(refactor-commands)
+
+-- get current highlight group under cursor
+vim.keymap.set({ "n", "v" }, "<F10>", function()
+  local line = vim.fn.line('.')
+  local col = vim.fn.col('.')
+
+  local hi_id = vim.fn.synID(line, col, 1)
+  local hi_name = vim.fn.synIDattr(hi_id, 'name')
+
+  local trans_id = vim.fn.synID(line, col, 0)
+  local trans_name = vim.fn.synIDattr(trans_id, 'name')
+
+  local lo_name = vim.fn.synIDattr(vim.fn.synIDtrans(hi_id), 'name')
+
+  print(string.format('hi<%s> transparent<%s> lo<%s>', hi_name, trans_name, lo_name))
+end)
+
+vim.keymap.set("n", "Y", "y$")
+vim.keymap.set("v", "p", "pgvy")
+-- replace word under cursor with last yanked
+vim.keymap.set("n", "wp", "mmviwpgvy`m")
+vim.keymap.set("n", "p", "p`]", { silent = true })
+
+-- I dont need ex mode
+vim.keymap.set("n", "Q", "@@")
+
+-- beautify json, need "sudo apt install jq"
+vim.keymap.set("n", "<leader>bj", "<cmd>%!jq .<cr>")
+vim.keymap.set("v", "<leader>bj", "<cmd>'<,'>!jq .<cr>")
+
+vim.keymap.set("n", "<leader>f", "<cmd>FindCursor #CC0000 500<cr>")
+
+-- jsLog.JsFastLog mapping {{{
+local fastlog = require('nvim-js-fastlog')
+vim.keymap.set({ 'n', 'v' }, '<leader>l', fastlog.JsFastLog_simple)
+vim.keymap.set({ 'n', 'v' }, '<leader>lt', fastlog.JsFastLog_simple_trace)
+vim.keymap.set({ 'n', 'v' }, '<leader>ll', fastlog.JsFastLog_JSONstringify)
+vim.keymap.set({ 'n', 'v' }, '<leader>lk', fastlog.JsFastLog_variable)
+vim.keymap.set({ 'n', 'v' }, '<leader>lkt', fastlog.JsFastLog_variable_trace)
+vim.keymap.set('n', '<leader>lkk', function()
+  fastlog.JsFastLog_variable()
+  vim.api.nvim_input("iW")
+end)
+vim.keymap.set({ 'n', 'v' }, '<leader>ld', fastlog.JsFastLog_function)
+vim.keymap.set({ 'n', 'v' }, '<leader>ls', fastlog.JsFastLog_string)
+vim.keymap.set({ 'n', 'v' }, '<leader>lss', fastlog.JsFastLog_separator)
+vim.keymap.set({ 'n', 'v' }, '<leader>lsn', fastlog.JsFastLog_lineNumber)
+-- }}}
+
+vim.keymap.set({ 'n' }, 'gd', function()
+  vim.lsp.buf.definition()
+  vim.fn.timer_start(100, function() vim.cmd('FindCursor #d6d8fa 0') end)
+end)
+vim.keymap.set({ 'n' }, 'gt', function()
+  vim.lsp.buf.type_definition()
+  vim.fn.timer_start(100, function() vim.cmd('FindCursor #d6d8fa 0') end)
+end)
+vim.keymap.set({ 'n' }, 'gi', function()
+  vim.lsp.buf.implementation()
+  vim.fn.timer_start(100, function() vim.cmd('FindCursor #d6d8fa 0') end)
+end)
+vim.keymap.set({ 'n' }, 'gr', function()
+  vim.fn.setreg('/', vim.fn.expand('<cword>'))
+  vim.lsp.buf.references()
+end)
+vim.keymap.set({ 'n' }, '<leader>m', require('telescope/builtin').diagnostics)
+-- vim.keymap.set({ 'n' }, 'grr', function()
+--   vim.lsp.buf.references()
+--   local function DoCleanImports()
+--     if vim.bo.filetype == 'qf' then
+--       require('removeqfitem').FilterQFWithWord('import')
+--       require('removeqfitem').FilterQFWithWord('\\<\\/')
+--     else
+--       vim.defer_fn(DoCleanImports, 100)
+--     end
+--   end
+--
+--   vim.defer_fn(DoCleanImports, 300)
+-- end)
+
+-- TODO plugin vim-indexed-search
+-- noremap <silent> <plug>(slash-after) <CMD>execute("FindCursor #d6d8fa 0<bar>ShowSearchIndex")<CR>
+
+-- этот момент заебал
+vim.keymap.set("c", "<C-f>", "<NOP>")
+
+vim.keymap.set("n", "<BS>", "==")
+vim.keymap.set("v", "<BS>", "=")
+
+vim.keymap.set("n", "x", "\"_x", { silent = true })
+-- Для того чтобы поменять местами буквы - оставляем дефолтное поведение
+vim.keymap.set("n", "xp", "xp")
+
+-- TODO- autoload refactor after lsp
+-- nnoremap <silent> elf <ScriptCmd>refactor.EslintFile()<CR>
+
+-- TODO plugin Chase
+-- nnoremap ~ <ScriptCmd>chase.Next()<CR>
+-- vnoremap ~ <ScriptCmd>chase.Next()<CR>
+-- nnoremap ! <ScriptCmd>chase.Prev()<CR>
+-- vnoremap ! <ScriptCmd>chase.Prev()<CR>
+
+vim.keymap.set("n", "q", "<NOP>")
+vim.keymap.set("n", "<C-q>", "q")
+
+-- TODO- linting
+-- nnoremap ad <ScriptCmd>ALEDisable<CR>
+
+-- wrap visual selection into function block
+vim.keymap.set("v", "<C-b>", '"bdi{<CR>return <C-r>b;<CR>}<Esc>=ib')
+
+local FoldSelection = function()
+  -- local saved = vim.opt.foldmethod
+  vim.opt_local.foldmethod = 'manual'
+  vim.cmd('normal! zf')
+end
+vim.keymap.set('v', 'zf', FoldSelection)
+
+vim.keymap.set("n", "ZC", "zC")
+vim.keymap.set("n", "ZO", "zO")
+
+vim.keymap.set("n", "H", "zc")
+
+-- Yank with keeping cursor position in visual mode {{{ TODO: работает глючно!
+-- local Keepcursor_visual_wrapper = function(command)
+--   vim.cmd("normal! gv" .. command)
+--   vim.cmd("normal! gv<ESC>")
+-- end
+-- vim.keymap.set("x", "y", function() Keepcursor_visual_wrapper("y") end, { silent = true })
+-- vim.keymap.set("x", "Y", function() Keepcursor_visual_wrapper("Y") end, { silent = true })
+-- }}}
+
+-- Repeat on every line {{{
+-- repeat last command for each line of a visual selection
+vim.keymap.set("v", ".", "<cmd>normal .<CR>")
+vim.keymap.set("x", ".", "<cmd>normal .<CR>")
+-- replay @q macro for each line of a visual selection
+vim.keymap.set("v", "@q", ":normal @q<CR>")
+vim.keymap.set("v", "@@", ":normal @@<CR>")
+-- }}}
+
+vim.keymap.set("n", "U", "<C-r>")
+
+vim.keymap.set('n', 'yf', '<cmd>YankFileName<cr>')
+vim.keymap.set('n', 'yff', '<cmd>YankFileNameForDebug<cr>')
+vim.keymap.set('n', 'yg', '<cmd>YankGithubURLMaster<cr>')
+vim.keymap.set('n', 'ygg', '<cmd>YankGithubURL<cr>')
+
+-- TODO: plugin vim-require-to-import
+-- nnoremap rti <ScriptCmd>RequireToImport<CR>
+-- nnoremap itr <ScriptCmd>ImportToRequire<CR>
+
+vim.keymap.set("n", "<2-LeftMouse>", "yiW")
+
+-- TODO- lsp coctree analog
+-- def CloseCoctreeWindowsPreserveCursor(): void
+--   var save_view = winsaveview()
+--   var save_win = winnr()
+--
+--   var have_coctree = false
+--
+--   for w in range(winnr('$'), 1, -1)
+--     execute(':' .. w .. 'wincmd w')
+--     if &filetype ==# 'coctree'
+--       have_coctree = true
+--       execute 'close'
+--     endif
+--   endfor
+--
+--   if win_gotoid(win_getid(save_win)) == 0
+--     wincmd w
+--   endif
+--   winrestview(save_view)
+--
+--   if !have_coctree
+--     execute 'call CocAction("showOutline")'
+--   endif
+-- enddef
+--
+-- nnoremap <F4> <ScriptCmd>CloseCoctreeWindowsPreserveCursor()<CR>
+
+vim.keymap.set("n", "sw", function() vim.o.wrap = not vim.o.wrap end)
+
+vim.keymap.set("n", "<F1>", "<cmd>Telescope help_tags<cr>")
+
+vim.keymap.set("n", "<C-t>", "<cmd>Telescope<cr>")
+
+vim.keymap.set("n", "n", "n<CMD>FindCursor #d6d8fa 500<CR>")
+vim.keymap.set("n", "N", "N<CMD>FindCursor #d6d8fa 500<CR>")
