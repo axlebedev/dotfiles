@@ -59,20 +59,9 @@ vim.api.nvim_create_autocmd('User', {
 })
 
 -- vim-illuminate
-local illuminate_group = vim.api.nvim_create_augroup('illuminate_augroup', { clear = true })
-vim.api.nvim_create_autocmd('VimEnter', {
-  group = illuminate_group,
-  callback = function()
-    vim.api.nvim_set_hl(0, 'illuminatedWord', {
-      underline = true,
-      bg = '#D6E3E9'
-    })
-    vim.api.nvim_set_hl(0, 'illuminatedCurWord', {
-      underline = true,
-      bg = '#D6E3E9'
-    })
-  end,
-})
+vim.api.nvim_set_hl(0, "IlluminatedWordText", { bg = "#c1d3db", underline = true })
+vim.api.nvim_set_hl(0, "IlluminatedWordRead", { bg = "#c1d3db", underline = true })
+vim.api.nvim_set_hl(0, "IlluminatedWordWrite", { bg = "#c1d3db", underline = true })
 
 -- Line numbers
 local sidebar_bg_cursor = '#e3e3e3'

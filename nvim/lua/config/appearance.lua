@@ -30,25 +30,19 @@ local plugins = {
       },
     },
 
-    { dir = "~/github/nvim-footprints",
+    { "axlebedev/nvim-footprints",
       opts = { footprintsColor = "#D9D9D9" }
     },
 
     { 'RRethy/vim-illuminate',
       dependencies = { "nvim-lua/plenary.nvim" },
       config = function()
-        vim.g.Illuminate_delay = 100
-        vim.g.Illuminate_ftblacklist = { 'nerdtree', 'magit' }
-        vim.g.Illuminate_ftHighlightGroups = {
-          javascript = {
-            blacklist = {
-              'Statement', 'Noise', 'PreProc', 'Type',
-              'jsStorageClass', 'jsImport', 'Include'
-            }
-          }
-        }
         require('illuminate').configure({
-          providers = { 'lsp', 'treesitter', 'regex' },
+          providers = {
+            'lsp',
+            'treesitter',
+            'regex'
+          },
           delay = 100,
           filetypes_denylist = { 'quickfix', 'fugitive' },
         })
