@@ -115,6 +115,14 @@ function g-sortedbranch -d 'git or arc sorted branch'
 end
 bind \cg g-sortedbranch
 
+function cd-working -d 'cd to dir in ~/worktrees'
+  ls ~/worktrees -N | fzf --no-sort -i --reverse --height=50% | read -l result
+  [ "$result" ]; or return
+  eval "cd ~/worktrees/$result"
+  commandline -f repaint
+end
+abbr -a cdd cd-working
+
 abbr -a gco g checkout
 abbr -a gor g checkout users/l-e-b-e-d-e-v/
 function gom
@@ -131,6 +139,11 @@ function gobs
     commandline -f repaint
 end
 abbr -a gbl g blame
+
+function gwob
+    read -P "Create new branch: " branchName
+    eval "git worktree add -b feature-S-$branchName ~/worktrees/$branchName && cd ~/worktrees/$branchName"
+end
 
 abbr -a gs g status .
 
