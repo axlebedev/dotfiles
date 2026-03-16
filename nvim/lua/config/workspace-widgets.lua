@@ -290,4 +290,14 @@ return {
         vim.keymap.set('n', 'sft', builtin.filetypes, { noremap = false })
       end
     },
+
+    {
+      "hedyhli/outline.nvim",
+      lazy = true,
+      command = "Outline",
+      config = function()
+        require("outline").setup {
+        }
+      end,
+    },
 }
