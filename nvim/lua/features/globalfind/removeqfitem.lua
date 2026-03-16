@@ -29,7 +29,7 @@ function M.RemoveQFItemsVisual()
   local vpos = vim.fn.getpos("v")
 
   local line_start = math.min(curpos[2], vpos[2])
-  local line_end   = math.max(curpos[2], vpos[2])
+  local line_end   = math.max(curpos[2], vpos[2]) + 1
 
   local filename = vim.fn.expand("%")
   if #filename > 0 then
