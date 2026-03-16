@@ -18,7 +18,7 @@ local ignored = {
 
 local ignoredList = array.join(array.map(ignored, function(item) return '--iglob !' .. item end), ' ')
 
-local basegrepprg = 'rg --hidden --vimgrep ' .. ignoredList
+local basegrepprg = 'rg --hidden --vimgrep --one-file-system ' .. ignoredList
 
 local charsForEscape = '*'
 -- -w --word-regexp
@@ -105,13 +105,14 @@ M.Grep = function()
         prg = prg .. ' ' .. case
 
         local uniqByFilenameLine = "| awk -F: '!seen[$1,$2]++'"
-        local output = vim.fn.systemlist(prg .. ' "' .. word .. '" . ' .. uniqByFilenameLine)
+        local output = vim.fn.systemlist(prg .. ' "' .. word .. '" ' .. uniqByFilenameLine)
         vim.fn.setqflist({}, ' ', { lines = output })
         vim.cmd.copen()
         resizeQFHeight()
 
         vim.fn.setreg('/', word)
         vim.fn.search(word)
+        vim.fn.cursor(1, 1)
     end
 
     vim.keymap.del('c', '<C-w>')
