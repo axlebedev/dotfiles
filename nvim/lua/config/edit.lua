@@ -99,6 +99,31 @@ local plugins = {
 
     -- dont move cursor to start of yanked text
     { 'svban/YankAssassin.vim', event = 'VeryLazy' },
+
+    -- expand selection
+    {
+      "terryma/vim-expand-region",
+      lazy = false,  -- Load immediately like VimEnter
+      keys = {
+        { "v",  "<Plug>(expand_region_expand)",  mode = "v", silent = true, nowait = true },
+        { "V",  "<Plug>(expand_region_shrink)", mode = "v", silent = true, nowait = true },
+        { "<S-v>", "<Plug>(expand_region_shrink)", mode = "v", silent = true, nowait = true },
+      },
+      config = function()
+        vim.g.CustomTextObjects = {
+          a = 1,  -- Support nesting of 'around' brackets
+          i = 1,
+          ab = 1, -- Support nesting of 'around' parentheses
+          ib = 1, -- Support nesting of 'around' parentheses
+          aB = 1, -- Support nesting of 'around' braces
+          iB = 1, -- Support nesting of 'around' braces
+          ii = 0, -- 'inside indent' (requires vim-textobj-indent)
+          ai = 0, -- 'around indent' (requires vim-textobj-indent)
+          ia = 1,
+          aa = 1,
+        }
+      end,
+    }
 }
 
 local init_config = function()
