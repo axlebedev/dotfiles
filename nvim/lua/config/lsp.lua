@@ -70,24 +70,34 @@ local plugins = {
 
 local init_config = function()
   -- Enable TypeScript via the Language Server Protocol (LSP)
-  vim.lsp.enable('tsserver')
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities.textDocument.foldingRange = {
     dynamicRegistration = false,
     lineFoldingOnly = true
   }
-  -- Set the TS config for the LSP
-  vim.lsp.config('tsserver', {
-      -- Make sure this is on your path
-      cmd = {'typescript-language-server', '--stdio'},
-      filetypes = { 'javascript', 'typescript', 'typescriptreact', 'javascriptreact' },
-      -- This is a hint to tell nvim to find your project root from a file within the tree
-      root_dir = vim.fs.root(0, {'package.json', '.git'}),
-      capabilities = capabilities,
+
+  vim.lsp.config('vtsls', {
       settings = {
-        diagnostics = { ignoredCodes = { 6133 } }
-      }
+        typescript = {
+          updateImportsOnFileMove = { enabled = "always" },
+          inlayHints = {
+            parameterNames = { enabled = "literals" },
+            parameterTypes = { enabled = true },
+            variableTypes = { enabled = true },
+            propertyDeclarationTypes = { enabled = true },
+            functionLikeReturnTypes = { enabled = true },
+            enumMemberValues = { enabled = true },
+          },
+        },
+        vtsls = {
+          enableMoveToFileCodeAction = true,
+          autoUseWorkspaceTsdk = true, -- Use project-specific TS version
+        },
+      },
     })
+
+  -- npm install -g @vtsls/language-server
+  vim.lsp.enable('vtsls')
 
   vim.o.complete = ".,o" -- use buffer and omnifunc
   vim.o.completeopt = "fuzzy,menuone,noselect" -- add 'popup' for docs (sometimes)
