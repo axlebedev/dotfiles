@@ -26,7 +26,7 @@ conky.config = {
   -- How strict should if_up be when testing an interface for being up?
   -- The value is one of up, link or address, to check for the interface
   -- being solely up, being up and having link or being up, having link
-  -- and an assigned IP address. 
+  -- and an assigned IP address.
   if_up_strictness = 'address',
 
   -- Add spaces to keep things from moving about?  This only affects certain objects.
@@ -53,8 +53,8 @@ function numLock()
   return [[{
     "name": "NumLock",
     "full_text":"${lua numLock_str}",
-    "color": "]] .. errorColorBg .. [[",  
-    "background": "]] .. errorColorFg .. [[",  
+    "color": "]] .. errorColorBg .. [[",
+    "background": "]] .. errorColorFg .. [[",
     "align": "center",
     "min_width":"]] .. stringWidth(32) .. [["
   },]]
@@ -64,8 +64,8 @@ function capsLock()
   return [[{
     "name": "CapsLock",
     "full_text":"${lua capsLock_str}",
-    "color": "]] .. errorColorBg .. [[",  
-    "background": "]] .. errorColorFg .. [[",  
+    "color": "]] .. errorColorBg .. [[",
+    "background": "]] .. errorColorFg .. [[",
     "align": "center",
     "min_width":"]] .. stringWidth(32) .. [["
   },]]
@@ -85,8 +85,8 @@ end
 
 function keyboardLayout()
   return [[
-    { 
-      "name": "Language", 
+    {
+      "name": "Language",
     ${if_match ${exec xset -q|grep LED| awk '{ print $10 }'}<10}
       "full_text": " EN ",
       "color": "]] .. textColorFg .. [["
@@ -94,19 +94,19 @@ function keyboardLayout()
       "full_text": " RU ",
       "color": "]] .. black .. [[",
       "background": "]] .. errorColorFg .. [["
-    ${endif} 
+    ${endif}
     },
   ]]
 end
 
 function time()
   return [[
-    { 
+    {
       "name": "Time",
-      "full_text": " ${time  %H:%M} ", 
+      "full_text": " ${time  %H:%M} ",
       "color": "]] .. black .. [[",
       "background": "]] .. textColorFg .. [[",
-      "separator": false 
+      "separator": false
     },
   ]]
 end
@@ -132,18 +132,18 @@ end
 
 function memory()
   return [[
-    { 
+    {
       "name": "Memory",
       "full_text": " ",
       "min_width": "",
       "separator_block_width": 3,
       "separator": false
     },
-    { 
+    {
       "name": "Memory",
       "min_width": "▁",
       "full_text": "${lua memory_str}",
-      "color": "${lua memory_color}", 
+      "color": "${lua memory_color}",
       "separator_block_width": 10
     },
   ]]
@@ -151,7 +151,7 @@ end
 
 function vpn()
   return [[
-    { 
+    {
       "name": "Network",
       "full_text": "${execi 1 (bash ~/dotfiles/.i3/getVPN.sh)}",
       "color": "]] .. black .. [[",
@@ -163,10 +163,10 @@ end
 
 function ip()
   return [[
-    { 
+    {
       "name": "Network",
       "full_text": "${addr ]] .. internetInterface .. [[}",
-      "color": "]] .. textColorFg .. [[" 
+      "color": "]] .. textColorFg .. [["
     },
   ]]
 end
@@ -194,7 +194,7 @@ end
 
 function cpuTemperature()
   return [[
-    { 
+    {
       "name": "CPU",
       "separator_block_width": 3,
       "min_width": "▁▁▁",
@@ -207,7 +207,7 @@ end
 
 function cpuTopN(n)
   return [[
-    { 
+    {
       "name": "CPU",
       "separator_block_width": 3,
       "min_width": "▁",
