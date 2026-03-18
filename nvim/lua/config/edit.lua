@@ -72,22 +72,14 @@ local plugins = {
     },
 
     -- textobj
-    { "chrisgrieser/nvim-various-textobjs",
-      event = "VeryLazy",
-      config = function()
-        local textobjs = require('various-textobjs')
-        textobjs.setup({
-          keymaps = {
-            useDefaults = true,
-            disabledDefaults = { 'r', 'n' },
-          }
-        })
-        vim.keymap.set({ "o", "x" }, "as", function() textobjs.subword("outer") end)
-        vim.keymap.set({ "o", "x" }, "is", function() textobjs.subword("inner") end)
-        vim.keymap.set({ "o", "x" }, "ie", function() textobjs.entireBuffer() end)
-        vim.keymap.set({ "o", "x" }, "il", function() textobjs.lineCharacterwise("inner") end)
-      end
-    },
+    { 'kana/vim-textobj-entire', dependencies = { 'kana/vim-textobj-user'  } }, -- ae, ie
+    { 'kana/vim-textobj-indent', dependencies = { 'kana/vim-textobj-user'  } }, -- ai, ii, aI, iI
+    { 'kana/vim-textobj-lastpat', dependencies = { 'kana/vim-textobj-user'  } }, -- last search pattern a/, i/, a?, i?
+    { 'kana/vim-textobj-line', dependencies = { 'kana/vim-textobj-user'  } }, -- al, il
+    { 'kana/vim-textobj-underscore', dependencies = { 'kana/vim-textobj-user'  } }, -- a_, i_
+    { 'Julian/vim-textobj-variable-segment', dependencies = { 'kana/vim-textobj-user'  } }, -- Variable (CamelCase or underscore) segment text object (iv / av).
+    { 'rhysd/vim-textobj-anyblock', dependencies = { 'kana/vim-textobj-user'  } },
+    { 'glts/vim-textobj-comment', dependencies = { 'kana/vim-textobj-user'  } }, -- comment: ic, ac
 
     { 'axlebedev/nvim-js-fastlog',
       opts = { js_fastlog_prefix = '11111' },
@@ -110,18 +102,16 @@ local plugins = {
         { "<S-v>", "<Plug>(expand_region_shrink)", mode = "v", silent = true, nowait = true },
       },
       config = function()
-        vim.g.CustomTextObjects = {
-          a = 1,  -- Support nesting of 'around' brackets
-          i = 1,
-          ab = 1, -- Support nesting of 'around' parentheses
-          ib = 1, -- Support nesting of 'around' parentheses
-          aB = 1, -- Support nesting of 'around' braces
-          iB = 1, -- Support nesting of 'around' braces
-          ii = 0, -- 'inside indent' (requires vim-textobj-indent)
-          ai = 0, -- 'around indent' (requires vim-textobj-indent)
-          ia = 1,
-          aa = 1,
-        }
+        vim.fn['expand_region#custom_text_objects']({
+            ['a]'] = 1, -- Support nesting of 'around' brackets
+            ['ib'] = 1, -- Support nesting of 'around' parentheses
+            ['ab'] = 1, -- Support nesting of 'around' parentheses
+            ['aB'] = 1, -- Support nesting of 'around' braces
+            ['ii'] = 0, -- 'inside indent'. Available through https://github.com/kana/vim-textobj-indent
+            ['ai'] = 0, -- 'around indent'. Available through https://github.com/kana/vim-textobj-indent
+            ['ia'] = 1,
+            ['aa'] = 1,
+        })
       end,
     }
 }
