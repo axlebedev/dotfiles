@@ -4,6 +4,21 @@
 dofile(os.getenv("HOME") .. '/dotfiles/conky/' .. 'localConfig.lua')
 dofile(os.getenv("HOME") .. '/dotfiles/conky/' .. 'automaticLocalVars.lua')
 
+local cpu_cache = {}
+
+function conky_pre_draw()
+  cpu_cache = {}
+end
+
+local function cpu(n)
+  if cpu_cache[n + 1] ~= nil then
+    return cpu_cache[n + 1]
+  end
+
+  cpu_cache[n + 1] = tonumber(conky_parse(string.format("${cpu cpu%d}", n)))
+  return cpu_cache[n + 1]
+end
+
 local function clamp(value, min, max)
     return math.max(min, math.min(max, value))
 end
@@ -121,7 +136,7 @@ function conky_top_cpu(topN)
   topN = tonumber(topN)
   local cpuCores = {}
   for i = 0, coresNum - 1 do
-    cpuCores[i+1] = tonumber(conky_parse(string.format("${cpu cpu%d}", i)))
+    cpuCores[i+1] = cpu(i)
   end
 
   return math.floor(avg(getMaxN(cpuCores, topN)))
