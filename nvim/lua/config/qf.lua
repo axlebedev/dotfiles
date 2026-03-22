@@ -39,23 +39,17 @@ local init_config = function()
                     vim.cmd('wincmd k | wincmd l')
                 end, { buffer = true, silent = true })
 
-                vim.keymap.set("n", "co", function()
-                    local isQuickfixHere = require('utils/array').some(
-                        vim.fn.getwininfo(),
-                        function(i) return i.quickfix ~= 0 end
-                    )
-                    if isQuickfixHere then
-                        if vim.bo.filetype == "qf" then
-                            vim.cmd('cclose | wincmd l')
-                        else
-                            vim.cmd('cclose')
-                        end
-                    else
-                        vim.cmd('copen')
-                    end
-                end, { desc = "Toggle quickfix", })
+                vim.api.nvim_set_hl(0, 'qfLineNr', { fg = '#ef7932', bold = true })
 
-            vim.api.nvim_set_hl(0, 'qfLineNr', { fg = '#ef7932', bold = true })
+                local api = require("nvim-tree.api")
+                local is_open = api.tree.is_visible()
+                if (is_open) then
+                    api.tree.focus()
+                    local nt_width = vim.api.nvim_win_get_width(0)
+                    vim.cmd.wincmd("H")
+                    vim.api.nvim_win_set_width(0, nt_width)
+                    vim.cmd.wincmd("p")
+                end
             end,
         })
 
@@ -84,6 +78,22 @@ local init_config = function()
 
     -- Enable the custom function
     vim.o.quickfixtextfunc = "{info -> v:lua._G.qftf(info)}"
+
+    vim.keymap.set("n", "co", function()
+        local isQuickfixHere = require('utils/array').some(
+            vim.fn.getwininfo(),
+            function(i) return i.quickfix ~= 0 end
+            )
+        if isQuickfixHere then
+            if vim.bo.filetype == "qf" then
+                vim.cmd('cclose | wincmd l')
+            else
+                vim.cmd('cclose')
+            end
+        else
+            vim.cmd.copen()
+        end
+    end, { desc = "Toggle quickfix", })
 end
 
 return {

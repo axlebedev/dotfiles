@@ -228,31 +228,3 @@ diagnostic.init_config()
 search.init_config()
 qf.init_config()
 fold.init_config()
-
--- vim.api.nvim_create_autocmd("FileType", {
-    --     -- обычно когда открывается quickfix - он залезает под nvimtree
-    --     pattern = "qf",
-    --     callback = function()
-      --       local api = require("nvim-tree.api")
-      --       local is_open = api.tree.is_visible()
-      --       if (is_open) then
-        --         api.tree.focus()
-        --         local nt_width = vim.api.nvim_win_get_width(0)
-        --         vim.cmd.wincmd("H")
-        --         vim.api.nvim_win_set_width(0, nt_width)
-        --         vim.cmd.wincmd("p")
-      --       end
-      --     -- local nt_width = vim.api.nvim_win_get_width(0)
-      --     -- vim.cmd("wincmd H")
-      --     -- vim.api.nvim_win_set_width(0, nt_width)
-      --     -- vim.cmd("wincmd p") -- Jump back to the quickfix window
-      --     -- Use pcall to avoid errors if Nvim-Tree isn't open
-        --     -- pcall(function()
-            --     --   vim.cmd("NvimTreeFocus")
-            --     --   local nt_width = vim.api.nvim_win_get_width(0)
-            --     --   vim.cmd("wincmd H")
-            --     --   vim.api.nvim_win_set_width(0, nt_width)
-            --     --   vim.cmd("wincmd p") -- Jump back to the quickfix window
-          --     -- end)
-      --   end,
-    -- })
