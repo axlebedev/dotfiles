@@ -15,18 +15,20 @@ return {
           light_green = '#83a598',
           orange = '#fe8019',
           green = '#8ec07c',
+          blue = '#005F87',
+          lightblue = '#227DC4',
         }
 
         local theme = {
           normal = {
-            a = { fg = colors.white, bg = colors.black },
-            b = { fg = colors.white, bg = colors.grey },
-            c = { fg = colors.black, bg = colors.lightgrey },
+            a = { fg = colors.white, bg = colors.blue },
+            b = { fg = colors.white, bg = colors.blue },
+            c = { fg = colors.white, bg = colors.blue },
             z = { fg = colors.white, bg = colors.black },
           },
           insert = { a = { fg = colors.black, bg = colors.light_green } },
-          visual = { a = { fg = colors.black, bg = colors.orange } },
-          replace = { a = { fg = colors.black, bg = colors.green } },
+          visual = { a = { fg = colors.white, bg = colors.lightblue } },
+          replace = { a = { fg = colors.white, bg = colors.green } },
         }
 
         local empty = require('lualine.component'):extend()
@@ -138,7 +140,14 @@ return {
     { 'akinsho/bufferline.nvim',
       dependencies = 'nvim-tree/nvim-web-devicons',
       config = function()
+        vim.api.nvim_set_hl(0, "BufferLineOffset", { bg = "#005F87", fg = "#DDDDDD" })
         require('bufferline').setup({
+            highlights = {
+              fill = { bg = '#005F87' },
+              separator = { fg = '#005F87' },
+              separator_visible = { fg = '#005F87' },
+              separator_selected = { fg = '#005F87' },
+            },
           options = {
             right_mouse_command = "bdelete! %d",
             tab_size = 3,
@@ -153,9 +162,10 @@ return {
             offsets = {
               {
                 filetype = "NvimTree",
-                text = "File Explorer",
+                text = "",
                 text_align = "left",
                 separator = false,
+                highlight = 'BufferLineOffset',
               }
             },
             separator_style = 'slant',
