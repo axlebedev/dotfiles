@@ -44,7 +44,7 @@ local plugins = {
             'regex'
           },
           delay = 100,
-          filetypes_denylist = { 'quickfix', 'fugitive' },
+          filetypes_denylist = { 'quickfix', 'fugitive', 'NvimTree' },
         })
       end,
     },
