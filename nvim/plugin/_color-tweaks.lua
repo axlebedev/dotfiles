@@ -101,3 +101,14 @@ vim.api.nvim_set_hl(0, 'IndexedSearchPopup', { bold = true, bg = '#FDBED4', fg =
 vim.api.nvim_set_hl(0, 'MoreMsg', { bg = '#cecfeb', bold = true })
 
 vim.api.nvim_set_hl(0, 'SnacksIndentScope', { fg = '#979797' })
+
+-- BACKGROUND
+local normal_bg = '#EEEEEE'
+vim.api.nvim_set_hl(0, "Normal", { bg = normal_bg })  -- Your desired color
+vim.api.nvim_set_hl(0, "NormalNC", { bg = normal_bg }) -- Inactive windows
+vim.api.nvim_set_hl(0, "CmdLine", { bg = normal_bg })
+vim.api.nvim_set_hl(0, "CmdLineBg", { bg = normal_bg })
+vim.api.nvim_set_hl(0, "Pmenu", { bg = normal_bg })  -- Popup menus too
+vim.api.nvim_set_hl(0, "NvimTreeNormal", { bg = normal_bg })
+vim.api.nvim_set_hl(0, "NvimTreeNormalNC", { bg = normal_bg }) -- Inactive
+vim.api.nvim_set_hl(0, "NvimTreeEndOfBuffer", { bg = normal_bg })
