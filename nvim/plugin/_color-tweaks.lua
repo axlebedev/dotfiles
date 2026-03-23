@@ -7,10 +7,6 @@ vim.api.nvim_set_hl(0, 'SpellBad', {
 -- PmenuThumb
 vim.api.nvim_set_hl(0, 'PmenuThumb', { bg = '#999999' })
 
--- Custom highlight links
-vim.api.nvim_set_hl(0, 'ChaseChangedLetter', { link = 'DiffAdd' })
-vim.api.nvim_set_hl(0, 'ChaseSeparator', { link = 'DiffChange' })
-
 -- Conceal (for unused warnings)
 vim.api.nvim_set_hl(0, 'Conceal', { fg = 'NONE', bg = '#f6b7ac' })
 
@@ -70,15 +66,11 @@ vim.api.nvim_set_hl(0, 'CursorLineSign', { bg = sidebar_bg_cursor, bold = true }
 vim.api.nvim_set_hl(0, 'CursorLineFold', { bg = sidebar_bg_cursor, bold = true })
 vim.api.nvim_set_hl(0, 'CursorLine', { bg = sidebar_bg_cursor })
 
-local sidebar_bg = '#CBCCCB'
+local sidebar_bg = '#d9d9d9'
 vim.api.nvim_set_hl(0, 'LineNr', { bg = sidebar_bg })
 vim.api.nvim_set_hl(0, 'SignColumn', { bg = sidebar_bg })
 vim.api.nvim_set_hl(0, 'FoldColumn', { bg = sidebar_bg })
--- VertSplit
-vim.api.nvim_set_hl(0, 'VertSplit', { bg = sidebar_bg, fg = '#d9d9d9' })
-
--- ALE (skip if not using ALE)
-vim.api.nvim_set_hl(0, 'ALESignColumnWithErrors', { bg = '#f6b7ac' })
+vim.api.nvim_set_hl(0, 'WinSeparator', { bg = sidebar_bg, fg = sidebar_bg })
 
 -- Diff / GitSigns
 vim.api.nvim_set_hl(0, 'diffAdded', { bg = '#d0f2d4', fg = 'NONE' })
@@ -102,12 +94,9 @@ vim.api.nvim_set_hl(0, 'PopupScrollbar', { fg = '#A7A7A7', bg = 'NONE' })
 -- Indexed search popup
 vim.api.nvim_set_hl(0, 'IndexedSearchPopup', { bold = true, bg = '#FDBED4', fg = 'NONE' })
 
--- Coc
-vim.api.nvim_set_hl(0, 'CocCodeLens', { link = 'Comment' })
-
 -- TODO: when supported
--- highlight link ChaseChangedLetter DiffAdd
--- highlight link ChaseSeparator DiffChange
+-- vim.api.nvim_set_hl(0, 'ChaseChangedLetter', { link = 'DiffAdd' })
+-- vim.api.nvim_set_hl(0, 'ChaseSeparator', { link = 'DiffChange' })
 
 vim.api.nvim_set_hl(0, 'MoreMsg', { bg = '#cecfeb', bold = true })
 
