@@ -66,6 +66,8 @@ local plugins = {
         })
       end,
     },
+
+    { "axlebedev/codelens.nvim", opts = { sections = { git_authors = nil }} },
 }
 
 local init_config = function()
