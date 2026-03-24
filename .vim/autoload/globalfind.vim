@@ -121,7 +121,7 @@ export def Grep()
         prg = prg .. ' ' .. case
 
         cgetexpr system(join(
-            [prg, '"' .. word .. '"', '.'], 
+            [prg, '"' .. word .. '"', '.'],
             ' '
         ))
         copen
