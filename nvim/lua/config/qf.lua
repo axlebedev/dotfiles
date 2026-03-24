@@ -97,7 +97,7 @@ local init_config = function()
                 vim.cmd('cclose')
             end
         else
-            vim.cmd.copen()
+            vim.cmd('hor copen')
         end
     end, { desc = "Toggle quickfix", })
 end

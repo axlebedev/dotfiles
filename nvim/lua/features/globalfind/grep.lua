@@ -107,7 +107,7 @@ M.Grep = function()
         local uniqByFilenameLine = "| awk -F: '!seen[$1,$2]++'"
         local output = vim.fn.systemlist(prg .. ' "' .. word .. '" ' .. uniqByFilenameLine)
         vim.fn.setqflist({}, ' ', { lines = output })
-        vim.cmd.copen()
+        vim.cmd('hor copen')
         resizeQFHeight()
 
         vim.fn.setreg('/', word)
