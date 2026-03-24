@@ -215,6 +215,37 @@ return {
     { 'nvim-tree/nvim-tree.lua',
       dependencies = { 'nvim-tree/nvim-web-devicons' },
       config = function()
+        -- Custom highlight for filetypes {{{
+        vim.api.nvim_set_hl(0, "MyNvimTreeBrown", { fg = "#ab6924" })
+        vim.api.nvim_set_hl(0, "MyNvimTreeOrange", { fg = "#DC4D01" })
+        vim.api.nvim_set_hl(0, "MyNvimTreePink", { fg = "#D370D5" })
+        vim.api.nvim_set_hl(0, "MyNvimTreeBlack", { fg = "#000000" })
+        vim.api.nvim_set_hl(0, "MyNvimTreeGray", { fg = "#777777" })
+        vim.api.nvim_set_hl(0, "MyNvimTreeGreen", { fg = "#119603" })
+        vim.api.nvim_set_hl(0, "MyNvimTreeLightgreen", { fg = "#16bf04" })
+        vim.api.nvim_set_hl(0, "MyNvimTreeBlue", { fg = "#6363F7" })
+        local MyDecorator = require("nvim-tree.api").decorator.UserDecorator:extend()
+        ---Mandatory constructor  :new()  will be called once per tree render, with no arguments.
+        function MyDecorator:new()
+          self.enabled            = true
+          self.highlight_range    = "name"
+        end
+
+        function MyDecorator:highlight_group(node)
+          local s = node.name
+          if s:match('%.[jt]sx?$') or s:match('%.cpp$') or s:match('%.lua$') then
+            return 'MyNvimTreeGreen'
+          elseif s:match('%.txt$') or s:match('%.md$') then
+            return 'MyNvimTreeBrown'
+          elseif s:match('%.h$') or s:match('%.html$') then
+            return 'MyNvimTreeBlue'
+          elseif s:match("%.css$") or s:match("%.less$") or s:match("%.scss$") then
+            return 'MyNvimTreePink'
+          end
+          return nil
+        end
+        -- }}}
+
         require('nvim-tree').setup {
           view = {
             width = 35,
@@ -244,6 +275,9 @@ return {
                   ignored = '◌',
                 },
               },
+            },
+            decorators = {
+              MyDecorator,
             },
             highlight_git = false,
           },
