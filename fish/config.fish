@@ -116,7 +116,7 @@ end
 bind \cg g-sortedbranch
 
 function cd-working -d 'cd to dir in ~/worktrees'
-  ls ~/worktrees -N | fzf --no-sort -i --reverse --height=50% | read -l result
+  ls ~/worktrees -t | fzf --no-sort -i --reverse --height=50% | read -l result
   [ "$result" ]; or return
   eval "cd ~/worktrees/$result"
   commandline -f repaint
