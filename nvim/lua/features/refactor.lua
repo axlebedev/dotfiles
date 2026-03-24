@@ -35,11 +35,11 @@ local action_state = require("telescope.actions.state")
 local opts = {
   {
     name = 'Remove unused code',
-    lspAction = "source.removeUnused",
+    lspAction = "source.removeUnused.ts",
   },
   {
     name = 'Add missing imports',
-    lspAction = "source.addMissingImports",
+    lspAction = "source.addMissingImports.ts",
   },
   {
     name = 'Remove unused imports',
@@ -68,6 +68,10 @@ local opts = {
     -- 'COC: Rename file (ts)': {
     --     command: 'CocCommand tsserver.renameFile',
     -- },
+  {
+    name = 'refactor.rewrite.arrow.braces',
+    lspAction = 'refactor.rewrite.arrow.braces',
+  }
 }
 
 local custom_menu = function()
