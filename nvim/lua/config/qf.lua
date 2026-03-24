@@ -41,15 +41,21 @@ local init_config = function()
 
                 vim.api.nvim_set_hl(0, 'qfLineNr', { fg = '#ef7932', bold = true })
 
-                local api = require("nvim-tree.api")
-                local is_open = api.tree.is_visible()
+                -- qf не должен залезать под nvimtree {{{
+                local nvimtreeapi = require("nvim-tree.api")
+                local is_open = nvimtreeapi.tree.is_visible()
                 if (is_open) then
-                    api.tree.focus()
-                    local nt_width = vim.api.nvim_win_get_width(0)
-                    vim.cmd.wincmd("H")
-                    vim.api.nvim_win_set_width(0, nt_width)
-                    vim.cmd.wincmd("p")
+                    -- вся история ниже делает правильную картинку, но создаёт мерцание
+                    -- поэтому где можем - пишем 'hor copen'
+                    vim.schedule(function()
+                        nvimtreeapi.tree.focus()
+                        local nt_width = vim.api.nvim_win_get_width(0)
+                        vim.cmd.wincmd("H")
+                        vim.api.nvim_win_set_width(0, nt_width)
+                        vim.cmd.wincmd("p")
+                    end)
                 end
+                -- }}}
             end,
         })
 
