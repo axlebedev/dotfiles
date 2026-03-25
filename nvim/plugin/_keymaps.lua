@@ -272,7 +272,10 @@ local FoldSelection = function()
   vim.opt_local.foldmethod = 'manual'
   vim.cmd('normal! zf')
 end
-vim.keymap.set('v', 'zf', FoldSelection)
+vim.keymap.set('v', 'zc', FoldSelection)
+
+vim.keymap.set('n', 'h', require('features/fold-unfold').foldOrMoveLeft)
+vim.keymap.set('n', 'L', require('features/fold-unfold').unfoldOrMoveRight)
 
 vim.keymap.set("n", "ZC", "zC")
 vim.keymap.set("n", "ZO", "zO")
