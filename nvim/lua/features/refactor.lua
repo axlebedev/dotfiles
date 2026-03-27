@@ -59,7 +59,9 @@ local opts = {
   },
   {
     name = 'Rename',
-    callback = vim.lsp.buf.rename,
+    callback = function()
+      vim.api.nvim_feedkeys(":IncRename " .. vim.fn.expand("<cword>"), 'n', false)
+    end,
   },
     -- 'COC: Show super types': {
     --     command: 'call CocActionAsync("showSuperTypes")',
@@ -113,6 +115,6 @@ local custom_menu = function()
 end
 
 -- Map it to a key
-vim.keymap.set('n', '<leader>1', custom_menu, { desc = 'Custom Menu' })
+vim.keymap.set('n', '<leader>r', custom_menu, { desc = 'Custom Menu' })
 
 return M
