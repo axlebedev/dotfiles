@@ -275,7 +275,8 @@ end
 vim.keymap.set('v', 'zc', FoldSelection)
 
 vim.keymap.set('n', 'h', require('features/fold-unfold').foldOrMoveLeft)
-vim.keymap.set('n', 'L', require('features/fold-unfold').unfoldOrMoveRight)
+vim.keymap.set('n', 'L', require('features/fold-unfold').unfoldOrMoveRightRecurs)
+vim.keymap.set('n', 'l', require('features/fold-unfold').unfoldOrMoveRight)
 
 vim.keymap.set("n", "ZC", "zC")
 vim.keymap.set("n", "ZO", "zO")
