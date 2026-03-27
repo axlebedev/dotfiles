@@ -52,7 +52,8 @@ local init_config = function()
                         local nt_width = vim.api.nvim_win_get_width(0)
                         vim.cmd.wincmd("H")
                         vim.api.nvim_win_set_width(0, nt_width)
-                        vim.cmd.wincmd("p")
+                        vim.cmd.wincmd("l")
+                        vim.cmd.wincmd("j")
                     end)
                 end
                 -- }}}
