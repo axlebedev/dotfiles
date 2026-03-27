@@ -262,6 +262,12 @@ return {
           actions = { open_file = { quit_on_open = false } },
           renderer = {
             icons = {
+              show = {
+                file = false,
+                folder = false,
+                git = true,
+                modified = true,
+              },
               git_placement = "after",
               glyphs = {
                 default = '',
@@ -278,19 +284,13 @@ return {
                 folder = {
                   arrow_closed = "❭",
                   arrow_open = "⌵",
-                  default = "",
-                  open = "",
-                  empty = "",
-                  empty_open = "",
-                  symlink = "",
-                  symlink_open = "",
                 },
               },
             },
             decorators = {
               MyDecorator,
             },
-            highlight_git = false,
+            highlight_git = true,
           },
         }
 
