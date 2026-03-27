@@ -15,9 +15,9 @@ function M.RemoveQFItem()
   local curpos = vim.fn.getpos(".")
   local winview = vim.fn.winsaveview()
   local qfall = vim.fn.getqflist()
-  local curqfidx = vim.fn.line(".") - 1  -- Lua: 1-based → 0-based индекс в таблице qfall
+  local curqfidx = vim.fn.line(".")
 
-  table.remove(qfall, curqfidx + 1)      -- table.remove 1-based
+  table.remove(qfall, curqfidx)
 
   vim.fn.setqflist(qfall, "r")
   vim.fn.winrestview(winview)
@@ -28,7 +28,7 @@ function M.RemoveQFItemsVisual()
   local curpos = vim.fn.getpos(".")
   local vpos = vim.fn.getpos("v")
 
-  local line_start = math.min(curpos[2], vpos[2])
+  local line_start = math.min(curpos[2], vpos[2]) + 1
   local line_end   = math.max(curpos[2], vpos[2]) + 1
 
   local filename = vim.fn.expand("%")
