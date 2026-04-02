@@ -73,7 +73,7 @@ Plug 'axlebedev/vim-gotoline-popup'
 + Plug 'axlebedev/vim-yank-filename'
 Plug 'axlebedev/vim-require-to-import'
 Plug 'axlebedev/popup_scrollbar.vim'
-Plug 'axlebedev/vim-fold-unfold'
++ Plug 'axlebedev/vim-fold-unfold'
 + Plug 'axlebedev/vim-detect-indent'
 Plug 'axlebedev/vim-chase' -- TODO: rewrite to lua. Look at 'textcase' plugin
 Plug 'axlebedev/vim-indexed-search' -- переписать! Плагин не nvim-frienly
