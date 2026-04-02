@@ -71,7 +71,7 @@ local init_config = function()
             local e = items[i]
             local fname = e.bufnr > 0 and vim.fn.bufname(e.bufnr) or ""
             -- Shorten home directory to ~
-            fname = vim.fn.fnamemodify(fname, ":."):gsub("^" .. vim.env.HOME, "~"):gsub("^%.%/", "")
+            fname = vim.fn.fnamemodify(fname, ":.") -- :gsub("^" .. vim.env.HOME, "~"):gsub("^%.%/", "")
 
             -- Format: filename:line:col: type text
             local str = string.format("%s|%d|  %s", fname, e.lnum, utils.trim(e.text))
