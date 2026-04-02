@@ -55,9 +55,9 @@ vim.api.nvim_create_autocmd('User', {
 })
 
 -- vim-illuminate
-vim.api.nvim_set_hl(0, "IlluminatedWordText", { bg = "#c1d3db", underline = true })
-vim.api.nvim_set_hl(0, "IlluminatedWordRead", { bg = "#c1d3db", underline = true })
-vim.api.nvim_set_hl(0, "IlluminatedWordWrite", { bg = "#c1d3db", underline = true })
+vim.api.nvim_set_hl(0, "IlluminatedWordText", { bg = "#D6E3E9", underline = true })
+vim.api.nvim_set_hl(0, "IlluminatedWordRead", { bg = "#D6E3E9", underline = true })
+vim.api.nvim_set_hl(0, "IlluminatedWordWrite", { bg = "#D6E3E9", underline = true })
 
 -- Line numbers
 local sidebar_bg_cursor = '#e3e3e3'
