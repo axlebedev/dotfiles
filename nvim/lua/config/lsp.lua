@@ -69,8 +69,8 @@ local plugins = {
 
     { "axlebedev/codelens.nvim", opts = { sections = { git_authors = nil }} },
 
-    {
-      'stevearc/conform.nvim',
+    -- format under cursor, or selection
+    { 'stevearc/conform.nvim',
       opts = {},
       config = function()
         require("conform").setup({
@@ -86,7 +86,14 @@ local plugins = {
           require("conform").format({ lsp_fallback = true, async = false, timeout_ms = 500, })
         end, { desc = "Format file or range (in visual mode)" })
       end,
-    }
+    },
+
+    -- show function signature
+    { "ray-x/lsp_signature.nvim",
+      event = "VeryLazy",
+      opts = {},
+      config = function(_, opts) require'lsp_signature'.setup(opts) end
+    },
 }
 
 local init_config = function()
@@ -98,6 +105,13 @@ local init_config = function()
   }
 
   vim.lsp.config('vtsls', {
+      on_attach = function(client, bufnr)
+        require("lsp_signature").on_attach({
+          bind = true,
+          handler_opts = { border = "rounded" },
+          hint_enable = true, -- Show parameter hints at end of line
+        }, bufnr)
+      end,
       settings = {
         typescript = {
           updateImportsOnFileMove = { enabled = "always" },
