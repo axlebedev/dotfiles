@@ -83,8 +83,23 @@ local plugins = {
         })
 
         vim.keymap.set({ "n", "v" }, "<BS>", function()
-          require("conform").format({ lsp_fallback = true, async = false, timeout_ms = 500, })
-        end, { desc = "Format file or range (in visual mode)" })
+          local target_fts = {
+            typescript = true,
+            typescriptreact = true,
+            javascript = true,
+            javascriptreact = true
+          }
+
+          if target_fts[vim.bo.filetype] then
+            -- Run conform for JS/TS files
+            require("conform").format({ lsp_fallback = true, async = false, timeout_ms = 500 })
+          else
+            -- Fallback to built-in indentation
+            local mode = vim.api.nvim_get_mode().mode
+            local keys = (mode == "v" or mode == "V" or mode == " ") and "=" or "=="
+            vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(keys, true, false, true), "n", false)
+          end
+        end, { desc = "Format or indent based on filetype" })
       end,
     },
 
