@@ -219,44 +219,6 @@ local init_config = function()
 
   vim.api.nvim_set_keymap('i', '<Tab>', ' pumvisible() ? "\\<C-n>" : "\\<Tab>"', { expr = true, silent = true })
   vim.api.nvim_set_keymap('i', '<S-Tab>', 'pumvisible() ? "\\<C-p>" : "\\<S-Tab>"', { expr = true, silent = true })
-
-  vim.keymap.set('n', 'ff', function()
-    vim.lsp.buf.code_action({
-      context = { only = { 'source.fixAll.eslint' } },
-      apply = true
-    })
-  end,
-  { expr = true, silent = true })
-
-  -- vim.lsp.handlers["textDocument/codeAction"] = function(_, result, ctx, config)
-  --   print(vim.inspect(action))
-  --   -- if not result or vim.tbl_isempty(result) then
-  --   --   vim.notify("No code actions available", vim.log.levels.INFO)
-  --   --   return
-  --   -- end
-  --   --
-  --   -- -- List of titles to blacklist
-  --   -- local blacklist = {
-  --   --   ["Remove unused import"] = true,
-  --   --   ["Some other action"] = true,
-  --   -- }
-  --   --
-  --   -- local filtered_actions = {}
-  --   -- for _, action in ipairs(result) do
-  --   --   -- Check if the action title is in the blacklist
-  --   --     if not blacklist[action.title] then
-  --   --       table.insert(filtered_actions, action)
-  --   --     end
-  --   --   end
-  --   --
-  --   --   -- Use the default UI to select from filtered actions
-  --   --   vim.lsp.buf.code_action({
-  --   --       context = {
-  --   --         diagnostics = vim.lsp.diagnostic.get_line_diagnostics(),
-  --   --         only = nil, -- Add filter here if needed (e.g., {'quickfix'})
-  --   --         },
-  --   --       })
-  -- end
 end
 
 return {
