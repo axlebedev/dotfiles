@@ -242,8 +242,8 @@ vim.keymap.set({ 'n' }, '<leader>m', require('telescope/builtin').diagnostics)
 -- этот момент заебал
 vim.keymap.set("c", "<C-f>", "<NOP>")
 
-vim.keymap.set("n", "<BS>", "==")
-vim.keymap.set("v", "<BS>", "=")
+-- vim.keymap.set("n", "<BS>", "==")
+-- vim.keymap.set("v", "<BS>", "=")
 
 vim.keymap.set("n", "x", "\"_x", { silent = true })
 -- Для того чтобы поменять местами буквы - оставляем дефолтное поведение
