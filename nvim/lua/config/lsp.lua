@@ -68,6 +68,25 @@ local plugins = {
     },
 
     { "axlebedev/codelens.nvim", opts = { sections = { git_authors = nil }} },
+
+    {
+      'stevearc/conform.nvim',
+      opts = {},
+      config = function()
+        require("conform").setup({
+          formatters_by_ft = {
+            javascript = { "eslint_d" },
+            typescript = { "eslint_d" },
+            javascriptreact = { "eslint_d" },
+            typescriptreact = { "eslint_d" },
+          },
+        })
+
+        vim.keymap.set({ "n", "v" }, "<BS>", function()
+          require("conform").format({ lsp_fallback = true, async = false, timeout_ms = 500, })
+        end, { desc = "Format file or range (in visual mode)" })
+      end,
+    }
 }
 
 local init_config = function()
