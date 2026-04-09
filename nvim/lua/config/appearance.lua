@@ -20,19 +20,19 @@ local plugins = {
       cmd = 'FindCursor',
       opts = {
         FindCursorHookPre = function()
-          vim.cmd('FootprintsDisable')
+          -- vim.cmd('FootprintsDisable')
           vim.cmd('IlluminatePause')
         end,
         FindCursorHookPost = function()
-          vim.cmd('FootprintsEnable')
+          -- vim.cmd('FootprintsEnable')
           vim.cmd('IlluminateResume')
         end,
       },
     },
 
-    { "axlebedev/nvim-footprints",
-      opts = { footprintsColor = "#D9D9D9" }
-    },
+    -- { dir = "~/github/nvim-footprints",
+    --   opts = { footprintsColor = "#D9D9D9" }
+    -- },
 
     { 'RRethy/vim-illuminate',
       dependencies = { "nvim-lua/plenary.nvim" },

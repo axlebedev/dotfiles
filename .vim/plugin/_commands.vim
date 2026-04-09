@@ -2,7 +2,7 @@ vim9script
 
 import autoload '../autoload/showmapping.vim'
 
-# Scroll/cursor bind the current window and the previous window. 
+# Scroll/cursor bind the current window and the previous window.
 # TODO: fix it (сейчас если поскроллить - то они разъедутся)
 command! BindBoth set scrollbind cursorbind | wincmd p | set scrollbind cursorbind | wincmd p
 command! BindBothOff set noscrollbind nocursorbind | wincmd p | set noscrollbind nocursorbind | wincmd p
@@ -23,7 +23,7 @@ command! Lprev try | lprev | catch | llast | catch | endtry
 var FindCursorPostSaved: func
 def SetDemoMode(on: bool)
     if (on)
-        FootprintsDisable
+        " FootprintsDisable
         ALEDisable
         FindCursorPostSaved = g:FindCursorPost
         g:FindCursorPost = () => null
