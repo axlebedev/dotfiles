@@ -60,7 +60,7 @@ vim.api.nvim_set_hl(0, "IlluminatedWordRead", { bg = "#D6E3E9", underline = true
 vim.api.nvim_set_hl(0, "IlluminatedWordWrite", { bg = "#D6E3E9", underline = true })
 
 -- Line numbers
-local sidebar_bg_cursor = '#e3e3e3'
+local sidebar_bg_cursor = '#e5e5e5'
 vim.api.nvim_set_hl(0, 'CursorLineNr', { bg = sidebar_bg_cursor, bold = true })
 vim.api.nvim_set_hl(0, 'CursorLineSign', { bg = sidebar_bg_cursor, bold = true })
 vim.api.nvim_set_hl(0, 'CursorLineFold', { bg = sidebar_bg_cursor, bold = true })
