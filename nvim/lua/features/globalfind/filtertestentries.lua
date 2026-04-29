@@ -24,6 +24,10 @@ local filtered = {
     'test',
     'Tests',
     'QtEditor',
+    'apps/[a-v]', 'apps/[x-z]',
+    'apps/w[a-d]', 'apps/w[f-z]',
+    'basket',
+    'Content/j',
 }
 M.filterTestEntries = function()
     local list = vim.fn.getqflist()
