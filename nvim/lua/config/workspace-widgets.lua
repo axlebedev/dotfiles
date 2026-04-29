@@ -251,6 +251,7 @@ return {
             width = 35,
             side = 'left',
             number = false,
+            signcolumn = 'no',
             relativenumber = false,
             adaptive_size = false,
           },
@@ -261,6 +262,9 @@ return {
           git = { enable = true, ignore = false },
           actions = { open_file = { quit_on_open = false } },
           renderer = {
+            add_trailing = true,
+            full_name = true,
+            indent_width = 1,
             icons = {
               show = {
                 file = false,
@@ -280,10 +284,9 @@ return {
                   deleted = '',
                   ignored = '◌',
                 },
-
                 folder = {
-                  arrow_closed = "❭",
-                  arrow_open = "⌵",
+                  arrow_closed = "›",
+                  arrow_open = "⌄",
                 },
               },
             },
@@ -311,7 +314,11 @@ return {
 
         require('telescope').setup{
           defaults = {
+            path_display = { "truncate" },
             preview = false,
+            file_ignore_patterns = {
+              "%.git/", -- Escaped dot and trailing slash to target the directory
+            },
             mappings = {
               i = {
                 ["<C-j>"] = actions.move_selection_next,
