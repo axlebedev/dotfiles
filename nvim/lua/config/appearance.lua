@@ -3,7 +3,13 @@ local plugins = {
     { "yorik1984/newpaper.nvim",
       priority = 1000,
       config = function()
-        require("newpaper").setup({ style = "light" })
+        require("newpaper").setup({
+          style = "light",
+          colors = {
+            neovim_green = "#376b28",
+            redorange = "#376b28",
+          },
+        })
         vim.cmd.colorscheme("newpaper")
         vim.opt.foldcolumn = "1"
       end,
