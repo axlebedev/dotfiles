@@ -207,15 +207,33 @@ vim.keymap.set({ 'n', 'v' }, '<leader>lsn', fastlog.JsFastLog_lineNumber)
 
 vim.keymap.set({ 'n' }, 'gd', function()
   vim.lsp.buf.definition()
-  vim.fn.timer_start(100, function() vim.cmd('FindCursor #d6d8fa 0') end)
+  vim.fn.timer_start(100, function()
+    if #vim.fn.getqflist() == 1 then
+      pcall(vim.cmd, "colder")
+      vim.cmd('cclose')
+    end
+    vim.cmd('FindCursor #d6d8fa 0')
+  end)
 end)
 vim.keymap.set({ 'n' }, 'gt', function()
   vim.lsp.buf.type_definition()
-  vim.fn.timer_start(100, function() vim.cmd('FindCursor #d6d8fa 0') end)
+  vim.fn.timer_start(100, function()
+    if #vim.fn.getqflist() == 1 then
+      pcall(vim.cmd, "colder")
+      vim.cmd('cclose')
+    end
+    vim.cmd('FindCursor #d6d8fa 0')
+  end)
 end)
 vim.keymap.set({ 'n' }, 'gi', function()
   vim.lsp.buf.implementation()
-  vim.fn.timer_start(100, function() vim.cmd('FindCursor #d6d8fa 0') end)
+  vim.fn.timer_start(100, function()
+    if #vim.fn.getqflist() == 1 then
+      pcall(vim.cmd, "colder")
+      vim.cmd('cclose')
+    end
+    vim.cmd('FindCursor #d6d8fa 0')
+  end)
 end)
 vim.keymap.set({ 'n' }, 'gr', function()
   vim.fn.setreg('/', vim.fn.expand('<cword>'))
