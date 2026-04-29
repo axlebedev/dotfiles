@@ -121,10 +121,16 @@ local init_config = function()
 
   vim.lsp.config('vtsls', {
       on_attach = function(client, bufnr)
+        -- vim.api.nvim_set_hl(0, "LspSigNormal", { fg = "#24273a", bg = "#cad3f5" })
+        vim.api.nvim_set_hl(0, "LspSigActive", { fg = "#494d64", bg = "#f2c9cf", bold = true })
+
         require("lsp_signature").on_attach({
           bind = true,
-          handler_opts = { border = "rounded" },
-          hint_enable = true, -- Show parameter hints at end of line
+          handler_opts = {
+            border = "single",
+          },
+          hi_parameter = "LspSigActive",
+          hint_enable = false,
         }, bufnr)
       end,
       settings = {
