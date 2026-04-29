@@ -148,9 +148,7 @@ function lerna-checks -d 'npx lerna run <check>'
 
     # 4. Run the selected script
     if test -n "$selected_script"
-        echo "🚀 Running: npx lerna run $selected_script"
-        eval "npx lerna run $selected_script"
-        commandline -f repaint
+        commandline -r -- "npx lerna run $selected_script"
     end
 end
 abbr -a check lerna-checks
@@ -175,6 +173,19 @@ abbr -a gbl g blame
 function gwob
     read -P "Create new branch: " branchName
     eval "git worktree add -b feature-S-$branchName ~/worktrees/$branchName && cd ~/worktrees/$branchName"
+end
+
+function gcob
+    read -P "Checkout branch: " branchName
+
+    # Check if branchName starts with a number (0-9)
+    if string match -r '^[0-9]' "$branchName"
+        set fullBranch "feature-S-$branchName"
+    else
+        set fullBranch "$branchName"
+    end
+
+    eval "git fetch --all && git worktree add ~/worktrees/$branchName origin/$fullBranch && cd ~/worktrees/$branchName && git checkout $fullBranch"
 end
 
 abbr -a gs g status .
@@ -266,8 +277,8 @@ abbr -a nis npm i --save
 abbr -a ncc npm cache clean -f
 abbr -a nb npm run build
 abbr -a ns npm start
-abbr -a nd npm run start:dev:all
-abbr -a ndd "npm i && npm run start:dev:all"
+abbr -a nd npm run start:dev project=website
+abbr -a ndd "npm i && npm run start:dev project=website"
 abbr -a nl npm run lint
 abbr -a nt npm run test
 abbr -a nta npm run test-all
