@@ -42,7 +42,7 @@ export def RemoveQFItemsVisual()
 
     setqflist(qfnew, 'r')
     winrestview(winview)
-    execute 'normal! ' .. lineStart .. 'G'
+    execute 'normal! ' .. lineStart - 1 .. 'G'
     execute 'normal! ' .. mode()
 enddef
 
