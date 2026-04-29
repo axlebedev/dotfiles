@@ -82,7 +82,7 @@ local plugins = {
           },
         })
 
-        vim.keymap.set({ "n", "v" }, "<BS>", function()
+        vim.keymap.set({ "n", "v" }, "<BS><BS>", function()
           local target_fts = {
             typescript = true,
             typescriptreact = true,
@@ -106,7 +106,7 @@ local plugins = {
     -- show function signature
     { "ray-x/lsp_signature.nvim",
       event = "VeryLazy",
-      opts = {},
+      opts = { hint_enable = false },
       config = function(_, opts) require'lsp_signature'.setup(opts) end
     },
 }
