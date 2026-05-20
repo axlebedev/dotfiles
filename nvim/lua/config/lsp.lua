@@ -129,6 +129,22 @@ local init_config = function()
   })
   vim.lsp.enable('cssls')
 
+  vim.api.nvim_create_autocmd("FileType", {
+      pattern = "json",
+      callback = function(args)
+        -- Requires 'vscode-json-language-server' installed via Mason or npm
+        vim.lsp.enable("jsonls", {
+            root_dir = vim.fs.root(args.buf, { "package.json", ".git" }) or vim.uv.cwd(),
+            settings = {
+              json = {
+                format = { enable = true },
+                validate = { enable = true },
+              },
+            },
+          })
+      end,
+    })
+
   vim.lsp.config('vtsls', {
       on_attach = function(client, bufnr)
         -- vim.api.nvim_set_hl(0, "LspSigNormal", { fg = "#24273a", bg = "#cad3f5" })
