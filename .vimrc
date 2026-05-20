@@ -527,7 +527,7 @@ g:ale_javascript_eslint_executable = 'npm -s run lint %'
 g:ale_typescript_tslint_executable = 'npm -s run lint %'
 
 nmap <silent> <C-m> <Plug>(ale_next_wrap)
-nmap <silent> <C-M> <Plug>(ale_next_wrap)
+nmap <silent> <C-n> <Plug>(ale_prev_wrap)
 
 # -----------------------------------------------------------------------------
 # Last good commit: 3381d89d
