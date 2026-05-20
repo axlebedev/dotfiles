@@ -26,6 +26,8 @@ if has('gui_running')
     # Maximize gvim window.
     set lines=999 columns=999
 else
+    &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
     # number of colors in terminal: use gui-colors, assuming terminal supports it
     set termguicolors
     &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
