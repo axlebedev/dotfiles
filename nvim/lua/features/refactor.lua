@@ -67,9 +67,10 @@ local opts = {
     --     command: 'call CocActionAsync("showSuperTypes")',
     -- },
     --
-    -- 'COC: Rename file (ts)': {
-    --     command: 'CocCommand tsserver.renameFile',
-    -- },
+  {
+    name = 'Find file refs',
+    lspAction = 'vtsls.fileReferences',
+  },
   {
     name = 'refactor.rewrite.arrow.braces',
     lspAction = 'refactor.rewrite.arrow.braces',
