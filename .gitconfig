@@ -15,7 +15,7 @@
 	logfilelines = log -p -M --stat -L;N,M:filename - log for lines
 [core]
 ; https://github.com/so-fancy/diff-so-fancy
-	pager = diff-so-fancy | less --tabs=4 -RFX
+	pager = delta --light
 	editor = gnome-terminal --wait -- vim
 	autoclrf
 [credential]
@@ -29,10 +29,10 @@
 [difftool]
 	prompt = false
 [color]
-	ui = true
+	ui = auto
 
 [color "status"]
-;header (the header text of the status message), 
+;header (the header text of the status message),
     ;header = yellow
 ;added or updated (files which are added but not committed),
     ;added = cyan
@@ -49,6 +49,7 @@
 
 [color "diff"]
     meta = magenta
+	frag = yellow black bold
 
 [hub]
 	protocol = https
@@ -58,3 +59,8 @@
 	defaultBranch = master
 
 ; TODO: 'git rerere', google it
+[interactive]
+	diffFilter = delta --color-only --light
+[delta]
+	navigate = true
+    line-numbers = true
