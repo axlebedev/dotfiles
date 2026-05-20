@@ -290,6 +290,9 @@ bindsym $mod+u exec --no-startup-id ~/.i3/tools-rofi.sh "Gromit-mpx\nVokoscreenN
 bindsym $mod+F5 exec brightnessctl set 10-
 bindsym $mod+F6 exec brightnessctl set 10+
 
+bindsym $mod+Shift+f exec --no-startup-id ~/dotfiles/regolith3/i3/float_fullscreen.sh
+
+
 ###################################################################################################
 # bindings }}}
 ###################################################################################################
