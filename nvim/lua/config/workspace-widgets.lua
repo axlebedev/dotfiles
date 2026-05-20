@@ -314,7 +314,9 @@ return {
 
         require('telescope').setup{
           defaults = {
-            path_display = { "truncate" },
+            path_display = function(opts, path)
+              return require('features/telescope_utils').rainbow_path_display(optsArg, path)
+            end,
             preview = false,
             file_ignore_patterns = {
               "%.git/", -- Escaped dot and trailing slash to target the directory
