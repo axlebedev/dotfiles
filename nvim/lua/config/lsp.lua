@@ -1,6 +1,8 @@
 local plugins = {
     -- npm install -g vscode-langservers-extracted (?)
     -- npm install -g @fsouza/prettierd vscode-langservers-extracted
+    { 'neovim/nvim-lspconfig',
+    },
 
     { 'esmuellert/nvim-eslint',
       config = function()
@@ -95,69 +97,71 @@ local init_config = function()
     lineFoldingOnly = true
   }
 
+  vim.lsp.config('cssls', {
+      root_dir = vim.fs.root(args and args.buf or 0, { "package.json", ".git" }) or vim.uv.cwd(),
+      settings = {
+        css = { validate = true },
+        scss = { validate = true },
+        less = { validate = true },
+      },
+    })
   vim.api.nvim_create_autocmd("FileType", {
       pattern = { "css", "scss", "less" },
       callback = function(args)
-        -- Configures and enables cssls simultaneously
-        vim.lsp.enable("cssls", {
-            root_dir = vim.fs.root(args.buf, { "package.json", ".git" }) or vim.uv.cwd(),
-            settings = {
-              css = { validate = true },
-              scss = { validate = true },
-              less = { validate = true },
-            },
-          })
+        vim.lsp.enable("cssls")
       end,
     })
 
+  vim.lsp.config('jsonlsj', {
+      root_dir = vim.fs.root(args and args.buf or 0, { "package.json", ".git" }) or vim.uv.cwd(),
+      settings = {
+        json = {
+          format = { enable = true },
+          validate = { enable = true },
+        },
+      },
+    })
   vim.api.nvim_create_autocmd("FileType", {
       pattern = "json",
       callback = function(args)
         -- Requires 'vscode-json-language-server' installed via Mason or npm
-        vim.lsp.enable("jsonls", {
-            root_dir = vim.fs.root(args.buf, { "package.json", ".git" }) or vim.uv.cwd(),
-            settings = {
-              json = {
-                format = { enable = true },
-                validate = { enable = true },
-              },
-            },
-          })
+        vim.lsp.enable("jsonls")
       end,
     })
 
+  vim.lsp.config("lua_ls", {
+      -- Look for configuration files or project markers
+      root_dir = vim.fs.root(args and args.buf or 0, { ".luarc.json", ".luarc.jsonc", ".git" }) or vim.uv.cwd(),
+      settings = {
+        Lua = {
+          runtime = {
+            -- Neovim 0.12 natively runs on top of LuaJIT
+            version = "LuaJIT",
+          },
+          diagnostics = {
+            -- Prevents the "Undefined global `vim`" error
+            globals = { "vim" },
+          },
+          workspace = {
+            -- Prevents prompt asking to configure your workspace environment
+            checkThirdParty = false,
+            -- Makes the server aware of all native Neovim APIs and paths
+            library = {
+              vim.env.VIMRUNTIME,
+              -- Optional: Include your local nvim configuration directory
+              vim.fn.stdpath("config"),
+            },
+          },
+          telemetry = {
+            enable = false,
+          },
+        },
+      },
+    })
   vim.api.nvim_create_autocmd("FileType", {
       pattern = "lua",
       callback = function(args)
-        vim.lsp.enable("lua_ls", {
-            -- Look for configuration files or project markers
-            root_dir = vim.fs.root(args.buf, { ".luarc.json", ".luarc.jsonc", ".git" }) or vim.uv.cwd(),
-            settings = {
-              Lua = {
-                runtime = {
-                  -- Neovim 0.12 natively runs on top of LuaJIT
-                  version = "LuaJIT",
-                },
-                diagnostics = {
-                  -- Prevents the "Undefined global `vim`" error
-                  globals = { "vim" },
-                },
-                workspace = {
-                  -- Prevents prompt asking to configure your workspace environment
-                  checkThirdParty = false,
-                  -- Makes the server aware of all native Neovim APIs and paths
-                  library = {
-                    vim.env.VIMRUNTIME,
-                    -- Optional: Include your local nvim configuration directory
-                    vim.fn.stdpath("config"),
-                  },
-                },
-                telemetry = {
-                  enable = false,
-                },
-              },
-            },
-          })
+        vim.lsp.enable("lua_ls")
       end,
     })
 
@@ -167,13 +171,13 @@ local init_config = function()
         vim.api.nvim_set_hl(0, "LspSigActive", { fg = "#494d64", bg = "#f2c9cf", bold = true })
 
         require("lsp_signature").on_attach({
-          bind = true,
-          handler_opts = {
-            border = "single",
-          },
-          hi_parameter = "LspSigActive",
-          hint_enable = false,
-        }, bufnr)
+            bind = true,
+            handler_opts = {
+              border = "single",
+            },
+            hi_parameter = "LspSigActive",
+            hint_enable = false,
+          }, bufnr)
       end,
       settings = {
         typescript = {
