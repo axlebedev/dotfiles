@@ -153,11 +153,7 @@ return {
             tab_size = 3,
             max_name_length = 100,
             name_formatter = function(buf)
-              if string.find(buf.name, 'index') then
-                tail = buf.path:sub(1, buf.path:len() - buf.name:len())
-                return tail:match("([^/]+)/$") .. '/' .. buf.name
-              end
-              return buf.name
+              return require('features/bufferline_utils').getValue(buf.path)
             end,
             offsets = {
               {
