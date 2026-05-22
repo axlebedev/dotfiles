@@ -1,6 +1,4 @@
 local plugins = {
-    -- npm install -g vscode-langservers-extracted (?)
-    -- npm install -g @fsouza/prettierd vscode-langservers-extracted
     { 'neovim/nvim-lspconfig',
     },
 
@@ -99,21 +97,17 @@ local init_config = function()
 
   vim.lsp.config('cssls', {
       root_dir = vim.fs.root(args and args.buf or 0, { "package.json", ".git" }) or vim.uv.cwd(),
+      filetypes = { "css", "scss", "less" },
       settings = {
         css = { validate = true },
         scss = { validate = true },
         less = { validate = true },
       },
     })
-  vim.api.nvim_create_autocmd("FileType", {
-      pattern = { "css", "scss", "less" },
-      callback = function(args)
-        vim.lsp.enable("cssls")
-      end,
-    })
 
   vim.lsp.config('jsonlsj', {
       root_dir = vim.fs.root(args and args.buf or 0, { "package.json", ".git" }) or vim.uv.cwd(),
+      filetypes = { "json" },
       settings = {
         json = {
           format = { enable = true },
@@ -121,17 +115,11 @@ local init_config = function()
         },
       },
     })
-  vim.api.nvim_create_autocmd("FileType", {
-      pattern = "json",
-      callback = function(args)
-        -- Requires 'vscode-json-language-server' installed via Mason or npm
-        vim.lsp.enable("jsonls")
-      end,
-    })
 
   vim.lsp.config("lua_ls", {
       -- Look for configuration files or project markers
       root_dir = vim.fs.root(args and args.buf or 0, { ".luarc.json", ".luarc.jsonc", ".git" }) or vim.uv.cwd(),
+      filetypes = { "lua" },
       settings = {
         Lua = {
           runtime = {
@@ -157,12 +145,6 @@ local init_config = function()
           },
         },
       },
-    })
-  vim.api.nvim_create_autocmd("FileType", {
-      pattern = "lua",
-      callback = function(args)
-        vim.lsp.enable("lua_ls")
-      end,
     })
 
   vim.lsp.config('vtsls', {
@@ -196,10 +178,16 @@ local init_config = function()
           autoUseWorkspaceTsdk = true, -- Use project-specific TS version
         },
       },
-    })
 
+      -- cmd = { "vtsls", "--stdio" },
+      -- reuse_client = function()
+        --   return true
+      -- end,
+    })
   -- npm install -g @vtsls/language-server
-  vim.lsp.enable('vtsls')
+  -- npm install -g vscode-langservers-extracted (?)
+  -- npm install -g @fsouza/prettierd vscode-langservers-extracted
+  vim.lsp.enable({ 'vtsls', 'lua_ls', 'cssls', jsonls })
 
   vim.o.complete = ".,o" -- use buffer and omnifunc
   vim.o.completeopt = "fuzzy,menuone,noselect" -- add 'popup' for docs (sometimes)
@@ -268,9 +256,6 @@ local init_config = function()
         end)
       end,
   })
-
-  vim.api.nvim_set_keymap('i', '<Tab>', ' pumvisible() ? "\\<C-n>" : "\\<Tab>"', { expr = true, silent = true })
-  vim.api.nvim_set_keymap('i', '<S-Tab>', 'pumvisible() ? "\\<C-p>" : "\\<S-Tab>"', { expr = true, silent = true })
 end
 
 return {

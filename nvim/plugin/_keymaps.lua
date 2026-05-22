@@ -367,3 +367,6 @@ vim.keymap.set("n", "<C-t>", "<cmd>Telescope<cr>")
 
 vim.keymap.set("n", "n", "n<CMD>FindCursor #d6d8fa 500<CR>")
 vim.keymap.set("n", "N", "N<CMD>FindCursor #d6d8fa 500<CR>")
+
+  vim.api.nvim_set_keymap('i', '<Tab>', ' pumvisible() ? "\\<C-n>" : "\\<Tab>"', { expr = true, silent = true })
+  vim.api.nvim_set_keymap('i', '<S-Tab>', 'pumvisible() ? "\\<C-p>" : "\\<S-Tab>"', { expr = true, silent = true })
