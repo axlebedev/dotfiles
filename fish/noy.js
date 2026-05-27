@@ -60,15 +60,14 @@ const main = () => {
         return
     }
 
-    // console.log('%c11111', 'background:#d0ff00', 'getWorkspaces(PACKAGE_JSON)=', getWorkspaces(PACKAGE_JSON));
     const program = getPackageManager()
     const scripts = child_process.execSync(`jq -r '.scripts | keys[]' ${PACKAGE_JSON}`).toString()
 
     try {
         const result = child_process.execSync(
-            `echo "${scripts}" | ${FZF_CMD}`,
-            { encoding: "UTF-8" },
-        )
+            FZF_CMD,
+            { encoding: "UTF-8", input: scripts, stdio: ['pipe', 'pipe', 'inherit'] }
+        );
         console.log(`${program} run ${result}`)
     } catch (error) {}
 }
