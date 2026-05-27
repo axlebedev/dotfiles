@@ -3,7 +3,6 @@
 # https://git-scm.com/book/en/v2/Git-Tools-Rerere
 # https://github.com/tj/git-extras/blob/main/Commands.md
 #
-# TODO: git-delta 
 # =================================================================================================
 # === LINUX INSTALL ===============================================================================
 mkdir ~/github
@@ -16,7 +15,7 @@ sudo add-apt-repository ppa:agornostal/ulauncher -y
 sudo apt update
 
 # Убрать заголовок в окне gnome-terminal
-gsettings set org.gnome.Terminal.Legacy.Settings headerbar "@mb false"   
+gsettings set org.gnome.Terminal.Legacy.Settings headerbar "@mb false"
 # Или в dconf-editor: org.gnome.Terminal.Legacy.Settings headerbar - uncheck "use default" - В custom ввести "False"
 # menubar убрать в гуи настройках самого терминала
 # После этого перелогиниться
@@ -94,7 +93,8 @@ rofi \
 xzoom \
 tree-sitter-cli \
 fd-find \
-flameshot
+flameshot \
+git-delta
 
 # lazygit - run it in bash
 LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": *"v\K[^"]*')
@@ -137,10 +137,14 @@ cmake \
 nvim
 
 sudo npm i -g \
-tree-sitter-cli
+tree-sitter-cli \
 typescript \
 typescript-language-server \
-yarn
+yarn \
+n \
+@vtsls/language-server \
+vscode-langservers-extracted \
+@fsouza/prettierd vscode-langservers-extracted
 
 # ----- install Chrome
 
@@ -177,7 +181,7 @@ make && sudo make install
 
 sudo apt build-dep vim
 cd ~/github
-git clone git@github.com:vim/vim.git 
+git clone git@github.com:vim/vim.git
 cd vim/src
 sudo make distclean
 
@@ -195,7 +199,7 @@ sudo make distclean
 --enable-fontset \
 --with-features=huge \
 --enable-gui=auto \
---enable-gtk2-check 
+--enable-gtk2-check
 
 sudo make && sudo make install
 
@@ -226,7 +230,7 @@ omf install sudope # TODO: разобраться и настроить
 omf install z # TODO разобраться и навешать алиасов
 
 # ----- install i3-lock (now it is i3lock-color)
-# i3lock установить в соотв. с инструкцией, всё должно собраться 
+# i3lock установить в соотв. с инструкцией, всё должно собраться
 # https://github.com/Raymo111/i3lock-color
 
 # ===== dotfiles ==================================================================================
