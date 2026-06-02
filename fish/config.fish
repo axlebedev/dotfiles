@@ -172,7 +172,13 @@ abbr -a gbl g blame
 
 function gwob
     read -P "Create new branch: " branchName
-    eval "git worktree add -b feature-S-$branchName ~/worktrees/$branchName && cd ~/worktrees/$branchName"
+    set -l wt_dir "$HOME/worktrees/$branchName"
+    git worktree add -b feature-S-$branchName $wt_dir
+    git diff > $wt_dir/tmp.diff
+    cd $wt_dir
+    wait
+    git apply $wt_dir/tmp.diff
+    rm tmp.diff
 end
 
 function gcob
