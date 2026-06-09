@@ -94,7 +94,9 @@ xzoom \
 tree-sitter-cli \
 fd-find \
 flameshot \
-git-delta
+git-delta \
+stress \
+dunst
 
 # lazygit - run it in bash
 LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": *"v\K[^"]*')
@@ -278,6 +280,7 @@ systemctl enable autorandr.service
 #
 # awoid node ENOSPC error
 echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+# sudo sysctl fs.inotify.max_user_watches=100000
 
 # turn off show device on auto-mount
 # org -> gnome -> desktop - media-handling automount-open uncheck
