@@ -91,6 +91,12 @@ local plugins = {
     { 'Julian/vim-textobj-variable-segment', dependencies = { 'kana/vim-textobj-user'  } }, -- Variable (CamelCase or underscore) segment text object (iv / av).
     { 'rhysd/vim-textobj-anyblock', dependencies = { 'kana/vim-textobj-user'  } },
     { 'glts/vim-textobj-comment', dependencies = { 'kana/vim-textobj-user'  } }, -- comment: ic, ac
+    {
+      "sgur/vim-textobj-parameter", dependencies = { "kana/vim-textobj-user" }, -- argument
+      init = function()
+        vim.g.vim_textobj_parameter_mapping = 'a'
+      end,
+    },
 
     { 'axlebedev/nvim-js-fastlog',
       opts = { js_fastlog_prefix = '11111' },
