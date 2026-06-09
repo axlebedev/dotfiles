@@ -1,3 +1,4 @@
+-- TODO: переход к closing tag в jsx (баг в selfclosing tags)
 vim.opt.shell = 'bash'
 
 local dotfiles_path = vim.fn.expand('~') .. '/dotfiles/nvim'
