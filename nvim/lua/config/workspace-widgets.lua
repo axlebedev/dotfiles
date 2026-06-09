@@ -149,7 +149,7 @@ return {
               separator_selected = { fg = '#005F87' },
             },
           options = {
-            right_mouse_command = "bdelete! %d",
+            right_mouse_command = "Bdelete! %d",
             tab_size = 3,
             max_name_length = 100,
             name_formatter = function(buf)
@@ -170,6 +170,7 @@ return {
               delay = 150,
               reveal = {'close'}
             },
+            close_command = "Bdelete %d", -- If using bufdelete.nvim plugin
             custom_filter = function(buf_number, buf_numbers)
               -- filter out filetypes you don't want to see
               if vim.bo[buf_number].filetype ~= "qf" then

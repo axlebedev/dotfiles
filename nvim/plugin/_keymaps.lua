@@ -62,7 +62,7 @@ local CloseBufferSafeFugitive = function()
       vim.cmd('bprev')
     end
 
-    vim.api.nvim_buf_delete(curBuf, {})
+    vim.cmd('Bdelete ' .. curBuf)
 
     if vim.bo.buftype == 'quickfix' or vim.bo.buftype == 'terminal' then
       vim.cmd('Startify')
