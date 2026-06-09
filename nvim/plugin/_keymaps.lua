@@ -362,6 +362,10 @@ vim.keymap.set("n", "<2-LeftMouse>", "yiW")
 vim.keymap.set("n", "sw", function() vim.o.wrap = not vim.o.wrap end)
 
 vim.keymap.set("n", "<F1>", "<cmd>Telescope help_tags<cr>")
+local utils = require('utils/utils')
+vim.keymap.set("v", "<F1>", function()
+  require('telescope.builtin').help_tags({ default_text = utils.get_visual_selection() })
+end)
 
 vim.keymap.set("n", "<C-t>", "<cmd>Telescope<cr>")
 
