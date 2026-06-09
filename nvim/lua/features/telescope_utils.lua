@@ -1,5 +1,6 @@
 local M = {}
 
+-- COLORS {{{ ------
 -- 1. Define distinct highlight groups for each nested directory level
 local path_colors = {
   "TelescopePathDir1",
@@ -55,5 +56,6 @@ M.rainbow_path_display = function(opts, path)
 
   return display_str, highlights
 end
+-- COLORS }}} ------
 
 return M

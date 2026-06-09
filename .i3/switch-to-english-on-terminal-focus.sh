@@ -9,7 +9,7 @@ doSwitchToEnglishOnTerminalFocus() {
     fi
 }
 
-i3-msg -t subscribe -m '[ "window" ]' | while read -r line ; do 
-    doSwitchToEnglishOnTerminalFocus "$line"; 
+i3-msg -t subscribe -m '[ "window" ]' | while read -r line ; do
+    doSwitchToEnglishOnTerminalFocus "$line";
 done
 
