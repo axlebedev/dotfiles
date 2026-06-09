@@ -14,26 +14,49 @@ client.focused_inactive #444444 #444444 #ffffff #444444
 client.unfocused        #28282b #28282b #666666 #444444
 client.urgent           #cc1866 #cc1866 #ffffff #000000
 
-font pango:Ubuntu Nerd Font 14
-
+font pango:DroidSans Nerd Font 12
 
 ###############################################################################
 # WM Bar
 ###############################################################################
-
+# SINGLE NOTEBOOK {{{
+# exec --no-startup-id xrdb -merge ~/.Xresources
+# SINGLE NOTEBOOK }}}
 bar {
+    id left-bar
     status_command $HOME/.i3/i3status.sh
 
-    font pango:Ubuntu Nerd Font 14
-    height 37
+    font pango:DroidSans Nerd Font 14
+    height 12
 
     # padding top[px] right[px] bottom[px] left[px]
     # paddings same as gaps;
-    padding 2px 440px 2px 260px
-    output eDP-1
+    padding 0px 440px 0px 260px
     output DP-1
-    tray_output eDP-1
+    tray_output DP-1
     separator_symbol " "
+
+    colors {
+        #                  foreground   background   border
+        focused_workspace  #227DC4      #227DC4      #eeeeee
+        active_workspace   #3A0891      #324420      #ffffff
+        inactive_workspace #000000      #000000      #999999
+        urgent_workspace   #ffffff      #cc1866
+    }
+}
+
+bar {
+    id right-bar
+
+    font pango:DroidSans Nerd Font 14
+    height 32
+
+    output eDP-1
+    separator_symbol " "
+
+    # padding top[px] right[px] bottom[px] left[px]
+    # paddings same as gaps;
+    padding 0px 100px 0px 100px
 
     colors {
         #                  foreground   background   border
@@ -85,9 +108,15 @@ exec --no-startup-id indicator-sound-switcher
 # exec --no-startup-id $HOME/.i3/monitors.sh HDMI-0
 
 # Чтобы numpad-dot всегда давал точку а не запятую - надо в /usr/share/X11/xkb/symbols/ru удалить вызов kpdl(comma)
-exec_always setxkbmap -model pc105 -layout us,ru -option grp:shift_caps_switch -option kpdl:dot
 
-exec $HOME/.i3/switch-to-english-on-terminal-focus.sh
+# gnome version:
+# exec_always setxkbmap -model pc105 -layout us,ru -option grp:shift_caps_switch -option kpdl:dot
+# wayland version:
+exec_always gsettings set org.gnome.desktop.input-sources "['xkb', 'us+rv', 'xkb', 'ru +dv] "
+exec_always gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'us'), ('xkb', 'ru')]"
+exec_always gsettings set org.gnome.desktop.input-sources xkb-options "['grp:shift_caps_switch', 'kpdl:dot']"
+
+# exec $HOME/.i3/switch-to-english-on-terminal-focus.sh
 
 # Чтобы выключать тачпад при наборе текста
 exec --no-startup-id syndaemon -i .3 -d -t -K
