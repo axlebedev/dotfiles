@@ -13,6 +13,7 @@ local fold = require("config.fold")
 
 -- Setup lazy.nvim
 require('lazy').setup({
+  concurrency = 8,
   checker = {
     enabled = false,  -- Полностью отключить проверки обновлений
     notify = false,   -- Отключить уведомления (на всякий случай)
