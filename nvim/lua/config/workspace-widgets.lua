@@ -58,52 +58,24 @@ return {
           return sections
         end
 
-        local function search_result()
-          if vim.v.hlsearch == 0 then
-            return ''
-          end
-          local last_search = vim.fn.getreg('/')
-          if not last_search or last_search == '' then
-            return ''
-          end
-          local searchcount = vim.fn.searchcount { maxcount = 9999 }
-          return last_search .. '(' .. searchcount.current .. '/' .. searchcount.total .. ')'
-        end
-
-        local function modified()
-          if vim.bo.modified then
-            return '+'
-          elseif vim.bo.modifiable == false or vim.bo.readonly == true then
-            return '-'
-          end
-          return ''
-        end
-
         require('lualine').setup({
           options = {
             theme = theme,
             component_separators = '',
             section_separators = { left = '', right = '' },
+            ignore_focus = { 'NvimTree', 'qf' },
+            disabled_filetypes = {
+              statusline = { 'NvimTree', 'qf' },
+              winbar = {},
+            },
           },
           sections = process_sections {
-            lualine_a = { 'mode' },
+            lualine_a = {
+              { 'mode' },
+            },
             lualine_b = {
-              'branch',
-              'diff',
-              {
-                'diagnostics',
-                source = { 'nvim' },
-                sections = { 'error' },
-                diagnostics_color = { error = { bg = colors.red, fg = colors.white } },
-              },
-              {
-                'diagnostics',
-                source = { 'nvim' },
-                sections = { 'warn' },
-                diagnostics_color = { warn = { bg = colors.orange, fg = colors.white } },
-              },
-              { 'filename', file_status = false, path = 1 },
-              { modified, color = { bg = colors.red } },
+              { 'lsp_status' },
+              { 'diagnostics' },
               {
                 '%w',
                 cond = function()
@@ -125,7 +97,10 @@ return {
             },
             lualine_c = {},
             lualine_x = {},
-            lualine_y = { search_result, 'filetype' },
+            lualine_y = {
+              { 'searchcount' },
+              { 'filetype', icons_enabled = false }
+            },
             lualine_z = { '%l:%c', '%p%%/%L' },
           },
           inactive_sections = {
