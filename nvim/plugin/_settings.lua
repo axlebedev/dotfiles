@@ -120,11 +120,7 @@ vim.g.markdown_folding = 1
 vim.g.markdown_fenced_languages = { "javascript", "html", "css" }
 
 -- Clipboard
-if vim.fn.has("unnamedplus") == 1 then
-  vim.opt.clipboard = "unnamedplus,unnamed"
-else
-  vim.opt.clipboard:append("unnamed")
-end
+vim.opt.clipboard = "unnamedplus,unnamed"
 
 -- Автогруппа
 local au_vimrc_settings = vim.api.nvim_create_augroup("au_vimrc_settings", { clear = true })
