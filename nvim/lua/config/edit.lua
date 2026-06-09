@@ -50,16 +50,27 @@ local plugins = {
     { 'windwp/nvim-ts-autotag' },
 
     { 'numToStr/Comment.nvim',
-      opts = {
-        toggler = {
-          line = "<C-_>",
-          block = '<C-_><C-_>',
-        },
-        opleader = {
-          line = '<C-_>',
-          block = '<C-_><C-_>',
-        },
-      }
+      dependencies = {
+        'JoosepAlviste/nvim-ts-context-commentstring',
+      },
+      config = function()
+        require('ts_context_commentstring').setup({
+            enable_autocmd = false,
+          })
+
+        -- 2. Setup Comment.nvim with the pre_hook integration
+        require('Comment').setup({
+            pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
+            toggler = {
+              line = "<C-_>",
+              block = '<C-_><C-_>',
+            },
+            opleader = {
+              line = '<C-_>',
+              block = '<C-_><C-_>',
+            },
+          })
+      end
     },
 
     -- <C-a> and <C-x> for negative values
