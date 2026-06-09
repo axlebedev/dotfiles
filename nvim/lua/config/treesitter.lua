@@ -7,7 +7,7 @@ return {
         require("nvim-treesitter").setup({
           ensure_installed = { 'javascript', 'awk', 'bash', 'c', 'cmake', 'cpp', 'css', 'csv', 'diff', 'dockerfile',
             'fish', 'git_config', 'git_rebase', 'gitattributes', 'gitcommit', 'gitignore', 'go', 'html', 'http', 'ini', 'jq', 'jsdoc',
-            'json', 'json5', 'jsx', 'lua', 'make', 'markdown', 'markdown_inline', 'printf', 'regex', 'scss', 'typescript', 'vim',
+            'json', 'json5', 'tsx', 'jsx', 'lua', 'make', 'markdown', 'markdown_inline', 'printf', 'regex', 'scss', 'typescript', 'vim',
           'vimdoc', 'vue', 'yaml' },
           highlight = {
             enable = true,

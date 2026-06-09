@@ -105,7 +105,7 @@ local init_config = function()
       },
     })
 
-  vim.lsp.config('jsonlsj', {
+  vim.lsp.config('jsonls', {
       root_dir = vim.fs.root(args and args.buf or 0, { "package.json", ".git" }) or vim.uv.cwd(),
       filetypes = { "json" },
       settings = {
@@ -187,7 +187,7 @@ local init_config = function()
   -- npm install -g @vtsls/language-server
   -- npm install -g vscode-langservers-extracted (?)
   -- npm install -g @fsouza/prettierd vscode-langservers-extracted
-  vim.lsp.enable({ 'vtsls', 'lua_ls', 'cssls', jsonls })
+  vim.lsp.enable({ 'vtsls', 'lua_ls', 'cssls', 'jsonls' })
 
   vim.o.complete = ".,o" -- use buffer and omnifunc
   vim.o.completeopt = "fuzzy,menuone,noselect" -- add 'popup' for docs (sometimes)
