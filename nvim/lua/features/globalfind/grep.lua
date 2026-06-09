@@ -112,7 +112,9 @@ M.Grep = function()
 
         vim.fn.setreg('/', word)
         vim.fn.search(word)
+        require('features/globalfind/filtertestentries').filterTestEntries()
         vim.fn.cursor(1, 1)
+        vim.api.nvim_input('n')
     end
 
     vim.keymap.del('c', '<C-w>')
