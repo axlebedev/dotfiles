@@ -97,7 +97,6 @@ vim.opt.fillchars = {
   foldinner = ' ',
   foldclose = '+',
   vert = '░',
-  eob = "░"
 }
 
 -- UI
