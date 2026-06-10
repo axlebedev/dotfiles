@@ -153,7 +153,7 @@ return {
               delay = 150,
               reveal = {'close'}
             },
-            close_command = "Bdelete %d", -- If using bufdelete.nvim plugin
+            close_command = "Bdelete! %d", -- If using bufdelete.nvim plugin
             custom_filter = function(buf_number, buf_numbers)
               -- filter out filetypes you don't want to see
               if vim.bo[buf_number].filetype ~= "qf" then
