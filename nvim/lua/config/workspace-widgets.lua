@@ -75,7 +75,15 @@ return {
             },
             lualine_b = {
               { 'lsp_status' },
-              { 'diagnostics' },
+              {
+                'diagnostics',
+                diagnostics_color = {
+                  error = { bg = colors.red, fg = colors.white, },
+                  warn  = { bg = colors.orange, fg = colors.white, },
+                  info = { bg = colors.blue, fg = colors.white, },
+                  hint = { bg = colors.light_green, fg = colors.white, },
+                },
+              },
               {
                 '%w',
                 cond = function()
