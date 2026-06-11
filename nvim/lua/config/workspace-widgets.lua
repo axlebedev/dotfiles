@@ -168,10 +168,11 @@ return {
     { 'axlebedev/vim-startify',
       config = function()
         vim.g.startify_lists = {
-          { type = 'dir',      header = { '   MRU ' .. vim.fn.getcwd() } },
-          { type = 'files',    header = { '   MRU ' } },
-          { type = 'sessions', header = { '   Sessions' } },
-          { type = 'commands', header = { '   Commands' } },
+          { type = 'dir',       header = { '   MRU ' .. vim.fn.getcwd() } },
+          { type = 'files',     header = { '   MRU ' } },
+          { type = 'bookmarks', header = { '   Bookmarks' } },
+          { type = 'sessions',  header = { '   Sessions' } },
+          { type = 'commands',  header = { '   Commands' } },
         }
 
         vim.g.startify_commands = { ':Lazy update', ':TSUpdate' }
@@ -179,6 +180,7 @@ return {
         vim.g.startify_update_oldfiles = 1
         vim.g.startify_change_to_dir = 0
         vim.g.startify_custom_header = {}
+        vim.g.startify_bookmarks = { { l = vim.fn.getcwd().. '/apps/website/src/shared/i18n/translations/lang.ru.json' } }
 
         -- Remap 'o' to open file in Startify window
         vim.api.nvim_create_autocmd('User', {
