@@ -84,6 +84,7 @@ return {
                   hint = { bg = colors.light_green, fg = colors.white, },
                 },
               },
+              { 'searchcount', color = { bg = '#cdadf7', fg = colors.black } },
               {
                 '%w',
                 cond = function()
@@ -106,7 +107,6 @@ return {
             lualine_c = {},
             lualine_x = {},
             lualine_y = {
-              { 'searchcount' },
               { 'filetype', icons_enabled = false }
             },
             lualine_z = { '%l:%c', '%p%%/%L' },
