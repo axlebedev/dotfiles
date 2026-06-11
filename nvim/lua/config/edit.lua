@@ -34,7 +34,12 @@ local plugins = {
     -- surround
     { 'tpope/vim-surround' },
 
-    { 'FooSoft/vim-argwrap' },
+    { 'FooSoft/vim-argwrap',
+      config = function()
+        vim.g.argwrap_padded_braces = '{'
+        vim.g.argwrap_tail_comma = 1
+      end
+    },
 
     { 'isomoar/vim-css-to-inline' },
 
