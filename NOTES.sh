@@ -96,6 +96,7 @@ fd-find \
 flameshot \
 git-delta \
 stress \
+jq \
 dunst
 
 # lazygit - run it in bash
