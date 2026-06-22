@@ -14,10 +14,11 @@ vim.api.nvim_set_hl(0, 'Conceal', { fg = 'NONE', bg = '#f6b7ac' })
 vim.api.nvim_set_hl(0, 'Visual', { bg = '#ADCBFF', fg = 'NONE' })
 
 -- Search highlights
-vim.api.nvim_set_hl(0, 'QuickFixLine', { bg = '#cdadf7' })
-vim.api.nvim_set_hl(0, 'Search', { bg = '#cdadf7', fg = 'NONE' })
-vim.api.nvim_set_hl(0, 'IncSearch', { bg = '#cdadf7', fg = 'NONE' })
-vim.api.nvim_set_hl(0, 'CurSearch', { bg = '#ba91f2', fg = 'NONE' })
+local purrple = '#cdadf7'
+vim.api.nvim_set_hl(0, 'QuickFixLine', { bg = purrple })
+vim.api.nvim_set_hl(0, 'Search', { bg = purrple, fg = 'NONE' })
+vim.api.nvim_set_hl(0, 'IncSearch', { bg = purrple, fg = 'NONE' })
+vim.api.nvim_set_hl(0, 'CurSearch', { bg = purrple, fg = 'NONE' })
 
 -- Highlightedyank
 vim.api.nvim_set_hl(0, 'HighlightedyankRegion', { bg = '#acde95' })
