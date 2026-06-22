@@ -31,6 +31,7 @@ vim.cmd.source("$VIMRUNTIME/menu.vim")
 vim.opt.hidden = true
 vim.opt.autoread = true
 vim.opt.scrolloff = 5
+vim.opt.sidescrolloff = 5
 
 -- Diff настройки
 if vim.opt.diff:get() then
