@@ -284,7 +284,7 @@ abbr -a ncc npm cache clean -f
 abbr -a nb npm run build
 abbr -a ns npm start
 abbr -a nd npm run start:dev project=website
-abbr -a ndd "npm i && npm run start:dev project=website"
+abbr -a ndd "npm i && npm run build:packages && npm run start:dev project=website"
 abbr -a nl npm run lint
 abbr -a nt npm run test
 abbr -a nta npm run test-all
