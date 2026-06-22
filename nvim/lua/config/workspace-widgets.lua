@@ -43,7 +43,7 @@ return {
         -- Put proper separators and gaps between components in sections
         local function process_sections(sections)
           for name, section in pairs(sections) do
-            local left = name:sub(9, 10) < 'x'
+            local left = name:sub(9, 10) < 'w'
             for pos = 1, name ~= 'lualine_z' and #section or #section - 1 do
               table.insert(section, pos * 2, { empty, color = { fg = colors.white, bg = colors.white } })
             end
@@ -71,10 +71,17 @@ return {
           },
           sections = process_sections {
             lualine_a = {
-              { 'mode' },
+              { 'filetype', icons_enabled = false }
             },
             lualine_b = {
-              { 'lsp_status' },
+              {
+                'lsp_status',
+                icon = '',
+                symbols = {
+                  spinner = { '◐',  '◓',  '◑', '◒' },
+                  done = '✓',
+                },
+              },
               {
                 'diagnostics',
                 diagnostics_color = {
@@ -87,29 +94,24 @@ return {
               { 'searchcount', color = { bg = '#cdadf7', fg = colors.black } },
               {
                 '%w',
-                cond = function()
-                  return vim.wo.previewwindow
-                end,
+                cond = function() return vim.wo.previewwindow end,
               },
               {
                 '%r',
-                cond = function()
-                  return vim.bo.readonly
-                end,
+                cond = function() return vim.bo.readonly end,
               },
               {
                 '%q',
-                cond = function()
-                  return vim.bo.buftype == 'quickfix'
-                end,
+                cond = function() return vim.bo.buftype == 'quickfix' end,
               },
             },
-            lualine_c = {},
+            lualine_c = { 'branch' },
             lualine_x = {},
-            lualine_y = {
-              { 'filetype', icons_enabled = false }
+            lualine_y = {},
+            lualine_z = {
+              { '%l:%c' },
+              { '%p%%/%L' },
             },
-            lualine_z = { '%l:%c', '%p%%/%L' },
           },
           inactive_sections = {
             lualine_c = { '%f %y %m' },
