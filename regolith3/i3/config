@@ -48,6 +48,7 @@ bar {
 bar {
     id right-bar
 
+    status_command $HOME/.i3/i3status.sh
     font pango:DroidSans Nerd Font 14
     height 32
 
@@ -144,10 +145,19 @@ floating_modifier $mod
 smart_gaps off
 # smart_gaps on|off|inverse_outer
 gaps inner 10
+# desktop {{{
 gaps top 36
 gaps left 260
 gaps bottom 140
 gaps right 440
+# }}}
+
+# notebook {{{
+# gaps top 16
+# gaps left 100
+# gaps bottom 40
+# gaps right 380
+# }}}
 
 smart_borders no_gaps
 hide_edge_borders smart_no_gaps
@@ -321,6 +331,14 @@ bindsym $mod+F6 exec brightnessctl set 10+
 
 bindsym $mod+Shift+f exec --no-startup-id ~/dotfiles/regolith3/i3/float_fullscreen.sh
 
+# for notebook: make smaller gaps
+bindsym $mod+g \
+gaps top all set 16; \
+gaps left all set 100; \
+gaps bottom all set 40; \
+gaps right all set 380
+
+bindsym $mod+Shift+b exec --no-startup-id 'pkill conky; conky; pkill i3bar; i3bar'
 
 ###################################################################################################
 # bindings }}}
