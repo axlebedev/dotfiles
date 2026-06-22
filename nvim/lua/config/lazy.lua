@@ -214,7 +214,7 @@ require('lazy').setup({
     --   },
     -- },
 
-    { 'famiu/bufdelete.nvim' }
+    { 'famiu/bufdelete.nvim' },
   },
 
   -- TODO chrisgrieser/nvim-origami

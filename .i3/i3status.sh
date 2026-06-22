@@ -25,12 +25,12 @@ do
 
     getname=`echo $line | jshon -e name -u`
 
-    if [ "$getname" = "Date" ] || [ "$getname" = "Time" ] 
+    if [ "$getname" = "Date" ] || [ "$getname" = "Time" ]
     then
         google-chrome --app="$URL_CALENDAR" > /dev/null 2>&1 &
     fi
 
-    if [ "$getname" = "Memory" ] || [ "$getname" = "CPU" ]  
+    if [ "$getname" = "Memory" ] || [ "$getname" = "CPU" ]
     then
         gnome-system-monitor > /dev/null 2>&1 &
     fi
@@ -40,23 +40,24 @@ do
         xdg-open ~/Downloads > /dev/null 2>&1 &
     fi
 
-    if [ "$getname" = "Volume" ] 
+    if [ "$getname" = "Volume" ]
     then
         regolith-control-center sound > /dev/null 2>&1 &
     fi
-    
-    if [ "$getname" = "Language" ] 
+
+    if [ "$getname" = "Language" ]
     then
-        setxkbmap -layout us,ru -option 'grp:shift_caps_switch' -option 'kpdl:dot'
-        xkb-switch -n
+        current=$(gsettings get org.gnome.desktop.input-sources current | awk '{print $2}')
+        next=$(( (current + 1) % 2 ))
+        gsettings set org.gnome.desktop.input-sources current $next
     fi
 
-    if [ "$getname" = "Network" ] 
+    if [ "$getname" = "Network" ]
     then
         ~/dotfiles/.i3/setVpn.sh > /dev/null 2>&1
     fi
 
-    if [ "$getname" = "VirtMon" ] 
+    if [ "$getname" = "VirtMon" ]
     then
         ~/dotfiles/.i3/virtual-monitors.js
     fi

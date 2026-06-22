@@ -324,7 +324,6 @@ function simulate_empty_commands
 end
 bind \cl simulate_empty_commands
 
-
 # bind \eb backward-word
 # bind \ef forward-word
 # bind \cw backward-kill-word
