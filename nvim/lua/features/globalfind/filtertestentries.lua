@@ -35,7 +35,12 @@ M.filterTestEntries = function()
 
     for _, v in pairs(list) do
         local bufname = vim.fn.bufname(v.bufnr)
-        if not array.some(filtered, function(v) return bufname:match(v) end) then
+        if not array.some(filtered, function(v)
+            if v == 'json' then
+                return bufname:match(v) and not bufname:match('lang.ru.json')
+            end
+            return bufname:match(v)
+        end) then
             table.insert(res, v)
         end
     end
