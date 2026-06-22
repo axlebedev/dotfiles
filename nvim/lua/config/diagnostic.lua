@@ -1,6 +1,6 @@
 local init_config = function()
-    vim.keymap.set('n', '<C-m>', vim.diagnostic.goto_next, { noremap = true, silent = true })
-    vim.keymap.set('n', '<C-n>', vim.diagnostic.goto_prev, { noremap = true, silent = true })
+    vim.keymap.set('n', '<C-m>', function() vim.diagnostic.jump({ count = 1, float = true }) end, { noremap = true, silent = true })
+    vim.keymap.set('n', '<C-n>', function() vim.diagnostic.jump({ count = -1, float = true }) end, { noremap = true, silent = true })
 
     vim.diagnostic.config({
             signs = {
