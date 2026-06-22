@@ -125,7 +125,7 @@ abbr -a cdd cd-working
 
 function lerna-checks -d 'npx lerna run <check>'
     # 1. Path to your file
-    set -l script_file "scripts/checks.mjs"
+    set -l script_file "scripts/checks.js"
 
     # 2. Check if file exists
     if not test -f $script_file
@@ -135,13 +135,13 @@ function lerna-checks -d 'npx lerna run <check>'
 
     # 3. Parse the array and launch fzf
     # - sed -n: Only print what we tell it to
-    # - /const scriptsToCheck/,/];/p: Look inside the specific array block
+    # - /const baseScriptsToCheck/,/];/p: Look inside the specific array block
     # - grep -v '//': Exclude lines that are commented out
     # - sed -E: Extract just the text inside single or double quotes
-    set -l selected_script (sed -n '/const scriptsToCheck = \[/,/\];/p' $script_file | \
+    set -l selected_script (sed -n '/const baseScriptsToCheck = \[/,/\];/p' $script_file | \
         grep -v '//' | \
         sed -E "s/.*['\"](.*)['\"],?/\1/" | \
-        grep -v 'scriptsToCheck' | \
+        grep -v 'baseScriptsToCheck' | \
         grep -v '\];' | \
         string trim | \
         fzf --no-sort -i --reverse --height=50% )
@@ -151,7 +151,7 @@ function lerna-checks -d 'npx lerna run <check>'
         commandline -r -- "npx lerna run $selected_script"
     end
 end
-abbr -a check lerna-checks
+abbr -a ch lerna-checks
 
 abbr -a gco g checkout
 abbr -a gor g checkout users/l-e-b-e-d-e-v/
