@@ -106,6 +106,8 @@ tar xf lazygit.tar.gz lazygit
 sudo install lazygit /usr/local/bin/
 rm -f lazygit.tar.gz lazygit
 
+# deno
+curl -fsSL https://deno.land/install.sh | sh
 
 # xkb-switch \ budet ustanovleno v razdele s vim
 
