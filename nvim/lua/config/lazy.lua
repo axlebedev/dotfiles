@@ -156,44 +156,8 @@ require('lazy').setup({
         },
       },
 
-      -- TODO: notifier, notify https://github.com/folke/snacks.nvim/blob/main/docs/notifier.md https://github.com/folke/snacks.nvim/blob/main/docs/notify.md
-
-      -- keys = {
-      --   { "<c-t>", function() require('snacks').picker() end, desc = "meta picker", mode = { 'n', 'v' } },
-      --   { "<leader>t",
-      --     function()
-      --       require('snacks').picker.smart({
-      --         pattern = require('utils/utils').get_visual_selection()
-      --       })
-      --     end,
-      --     desc = "Smart Find Files",
-      --     mode = { 'n', 'v' },
-      --   },
-      --   { "<leader>b", function() require('snacks').picker.buffers() end, desc = "Buffers" },
-      --   { "<C-S-p>", function() require('snacks').picker.command_history() end, desc = "Command History" },
-      --   { "<C-p>", function() require('snacks').picker.commands() end, desc = "Commands" },
-      --   { "<c-q>", function() require('snacks').picker.diagnostics() end, desc = "Diagnostics" },
-      --   { "<F1>", function() require('snacks').picker.help() end, desc = "Help Pages" },
-      --   { "sft", function()
-      --       local filetypes = vim.fn.getcompletion("", "filetype")
-      --       vim.ui.select(filetypes, {
-      --           prompt = "Set Filetype:",
-      --         }, function(choice)
-      --           if choice then
-      --             vim.bo.filetype = choice
-      --           end
-      --         end)
-      --     end
-      --   }
-      -- },
-    },
-
-    { 'rcarriga/nvim-notify',
-      event = "VeryLazy",
-      opts = {
-        timeout = 2000,
-        top_down = false,
-        render = 'compact',
+      keys = {
+        { "<c-space>", function() Snacks.notifier.hide() end }
       },
     },
 
