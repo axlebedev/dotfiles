@@ -14,7 +14,7 @@ client.focused_inactive #444444 #444444 #ffffff #444444
 client.unfocused        #28282b #28282b #666666 #444444
 client.urgent           #cc1866 #cc1866 #ffffff #000000
 
-font pango:DroidSans Nerd Font 12
+font pango:Ubuntu Nerd Font 14
 
 ###############################################################################
 # WM Bar
@@ -26,7 +26,7 @@ bar {
     id left-bar
     status_command $HOME/.i3/i3status.sh
 
-    font pango:DroidSans Nerd Font 14
+    font pango:Ubuntu Nerd Font 14
     height 12
 
     # padding top[px] right[px] bottom[px] left[px]

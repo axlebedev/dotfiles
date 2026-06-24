@@ -77,7 +77,7 @@ function wifi()
     {
       "name": "Network",
 
-      "full_text": "⭳ ${downspeed ]] .. internetInterface .. [[ }/s",
+      "full_text": "  ${downspeed ]] .. internetInterface .. [[ }/s",
       "color": "]] .. textColorFg .. [[",
       "min_width": "]] .. stringWidth(8) .. [[",
       "align": "center"
@@ -126,7 +126,7 @@ function volume()
   return [[
     {
       "name": "Volume",
-      "full_text": "   ${exec ~/.i3/getVolume.sh}",
+      "full_text": "  ${execi 1 (bash ~/.i3/getVolume.sh)}",
       "color": "]] .. textColorFg .. [["
     },
   ]]
@@ -136,8 +136,8 @@ function memory()
   return [[
     {
       "name": "Memory",
-      "full_text": " ",
-      "min_width": "",
+      "full_text": "  ",
+      "min_width": " ",
       "separator_block_width": 3,
       "separator": false
     },
