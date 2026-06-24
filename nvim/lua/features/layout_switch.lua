@@ -1,5 +1,4 @@
--- Variable to track the last used Insert-mode layout (default to 1)
-local last_insert_layout = 1
+local last_insert_layout = 0
 
 -- Group to prevent duplicate autocommands if config reloads
 local xkb_group = vim.api.nvim_create_augroup("GsettingsXkbSwitch", { clear = true })
