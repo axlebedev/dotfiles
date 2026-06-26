@@ -78,7 +78,7 @@ return {
                 'lsp_status',
                 icon = '',
                 symbols = {
-                  spinner = { '◐',  '◓',  '◑', '◒' },
+                  spinner = {'⡀', '⡄', '⡆', '⡇', '⡆', '⡄', '⡀'},
                   done = '✓',
                 },
               },
