@@ -89,8 +89,7 @@ vim.opt.splitright = true
 -- Фолдинг
 vim.opt.foldenable = true
 
-vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldmethod = "syntax"
 
 vim.opt.foldlevel = 99
 vim.opt.fillchars = {
