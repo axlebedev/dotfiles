@@ -28,7 +28,7 @@ local initSearchPopup = function()
     closeWinAndStopTimer()
 
     local result = vim.fn.searchcount({ maxcount = -1, timeout = 500 })
-    local line = result.current .. '/' .. result.total
+    local line = ' ' .. result.current .. '/' .. result.total .. ' '
     vim.api.nvim_buf_set_lines(buf, 0, -1, false, { line })
     opts.width = #line
 
