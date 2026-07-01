@@ -1,0 +1,57 @@
+.requests-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.requests-groups {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.request-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 8px 10px;
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid #e5e5ef;
+}
+
+.request-group-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.request-group-action {
+    border: 1px solid #d8d8e8;
+    border-radius: 6px;
+    background: #fff;
+    color: #4a4a66;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 8px;
+    cursor: pointer;
+}
+
+.request-group-action:hover {
+    border-color: #c2189b;
+    color: #c2189b;
+}
+
+.request-group-action:disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+.request-group-action-hidden {
+    display: none;
+}
+
+.requests-buttons {
+    display: flex;
+    gap: 8px;
+}

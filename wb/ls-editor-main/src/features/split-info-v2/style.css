@@ -1,0 +1,134 @@
+.split-info-v2-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.split-info-v2-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+}
+
+.split-info-v2-title {
+    margin: 0;
+    font-size: 15px;
+    color: #172b4d;
+}
+
+.split-info-v2-actions {
+    display: flex;
+    gap: 8px;
+    margin-left: auto;
+}
+
+.split-info-v2-sections {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.split-info-v2-section {
+    border: 1px solid #e5e5ef;
+    border-radius: 8px;
+    background: #fff;
+    padding: 10px;
+}
+
+.split-info-v2-section-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.split-info-v2-section-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #172b4d;
+}
+
+.split-info-v2-section-controls {
+    display: flex;
+    gap: 6px;
+}
+
+.split-info-v2-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.split-info-v2-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 6px;
+}
+
+.split-info-v2-remove-row,
+.split-info-v2-remove-section {
+    width: 32px;
+    height: 32px;
+    border: 1px solid #e5e5ef;
+    border-radius: 6px;
+    background: #fff;
+    color: #8a6bb8;
+    cursor: pointer;
+    font-size: 18px;
+    line-height: 1;
+}
+
+.split-info-v2-remove-row:hover,
+.split-info-v2-remove-section:hover {
+    background: #f5ecff;
+    color: #a73afd;
+}
+
+.split-info-v2-meta-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #5a5a7a;
+}
+
+.split-info-v2-meta-block {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.split-info-v2-meta-toggle-btn {
+    width: fit-content;
+}
+
+.split-info-v2-changed-toggle-btn {
+    width: fit-content;
+}
+
+.split-info-v2-meta-json {
+    min-height: 110px;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 12px;
+    resize: vertical;
+}
+
+.split-info-v2-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.split-info-v2-buttons .button {
+    margin-bottom: 0;
+}
+
+.split-info-v2-changed {
+    max-height: 140px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+.status-message.warning {
+    background: #fff4e6;
+    color: #8a5d00;
+}

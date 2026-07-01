@@ -1,0 +1,37 @@
+{
+    "manifest_version": 3,
+    "name": "LocalStorage Editor",
+    "version": "1.2",
+    "description": "Управляет значениями объекта в localStorage активной вкладки.",
+    "permissions": [
+      "activeTab",
+      "scripting",
+      "storage",
+      "declarativeNetRequest",
+      "webRequest"
+    ],
+    "host_permissions": [
+      "<all_urls>"
+    ],
+    "background": {
+      "service_worker": "src/features/requests-intercept/background.js"
+    },
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["src/features/requests-intercept/content-fetch-interceptor.js"],
+        "world": "MAIN",
+        "run_at": "document_start"
+      },
+      {
+        "matches": ["<all_urls>"],
+        "js": ["src/features/requests-intercept/content-bridge.js"],
+        "run_at": "document_start"
+      }
+    ],
+    "action": {
+      "default_popup": "popup.html",
+      "default_title": "LocalStorage Editor",
+      "default_icon": "icons/icon.png"
+    }
+  }

@@ -1,0 +1,52 @@
+пайплайны смотреть здесь
+https://gitlab.wildberries.ru/wbx-team/wbx-site/frontend/-/pipelines?page=1&scope=all&ref=release-v14.16.0
+--
+smId и deliveryType - это одно и то же! (по смыслу, а в коде это может быть string или number)
+https://gitlab.wildberries.ru/wbx-team/wbx-site/frontend/blob/dev/packages/common/src/constants/deliveries.ts#L164
+--
+nm_id и code1S - это одно и то же!
+--
+Как связан заказ в /orders и статус в /statuses
+orders[].uid === statuses[].rid
+"uid": "eBq.882ff929b1d24790a318a8645fa24846.0.0", // orders
+"rid": "eBq.882ff929b1d24790a318a8645fa24846.0.0", // statuses
+--
+DeliveryTypes
+gitlab.wildberries.ru/wbx-team/wbx-site/frontend/blob/dev/packages/common/src/constants/deliveries.ts#L164
+--
+Откуда берётся статус, что значит "285" и пр
+statuses[].status_id = 285 // GroupsForDisplayingDeliveryStatuses https://gitlab.wildberries.ru/wbx-team/wbx-site/frontend/blob/dev/packages/business-types/src/config/objects.ts#L111
+{
+    "fitting": [ 812 ],
+    "ready": [ 210, 235, 509, 805 ],
+    "cancelled": [ 503, 511, 562, 510, 193, 241 ],
+    "returned": [ 250, 270, 275, 280, 285, 290 ],
+    "delivered": [ 176, 230, 506, 601 ],
+    "rejected": [ 240 ],
+    "productsFromCourier": [ 260, 265, 600, 803, 807 ],
+    "chatWithCourier": [ 803, 804, 807 ]
+}
+
+--
+pay_state
+/*pay_state
+Список возможных статусов оплаты и их значения:
+    1: "Не оплачен"
+    2: "Обработка платежа"
+    3: "Ошибка оплаты"
+    4: "Оплачен"
+    5: "Возврат оплаты"
+    6: "Инициирован возврат дс"
+ */
+export const PayStatus = {
+    Unknown: -1,
+    Accepted: 0,
+    NotPaid: 1,
+    PaySent: 2,
+    PayFail: 3,
+    Paid: 4,
+    Refunded: 5,
+    RefundRequested: 6,
+    NoPaid: 7,
+} as const;
+

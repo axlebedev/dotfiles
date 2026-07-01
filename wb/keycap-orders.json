@@ -1,0 +1,82 @@
+{
+    "data": [
+        {
+            "state": 4,
+            "order_dt": 1776688339,
+            "pay_type": 1,
+            "dst_office_id": 50134030,
+            "order_type": 1,
+            "latitude": 59.878939,
+            "longitude": 30.41847,
+            "currency": "RUB",
+            "id": "882ff929b1d24790a318a8645fa24846",
+            "shard_key": "eBq",
+            "locale": "ru",
+            "source_wbpay_id": "37f22091-ba36-11f0-b389-52a85850efdf",
+            "session_id": "a92467b52f4e480a959fff0b7be154fc",
+            "logistic_with": true,
+            "client_id": 3,
+            "rids": [
+                {
+                    "state": 3,
+                    "pay_state": 1,
+                    "delivery_type": 6,
+                    "can_reject_delayed": false,
+                    "update_dt": 1776688340,
+                    "store_id": 211730,
+                    "delivery_time": 1777116739,
+                    "estimated_delivery_time": 1777116739,
+                    "delivery_id": "882ff929b1d24790a318a8645fa24846",
+                    "chrt_id": 1420247123,
+                    "nm_id": 944157026,
+                    "subject_id": 297,
+                    "seller_id": 1351494,
+                    "sale_conditions": 134217728,
+                    "easy_return_cost": 0,
+                    "logistic_cost": 0,
+                    "total_price": 32700,
+                    "product_cost": 32700,
+                    "uid": "eBq.882ff929b1d24790a318a8645fa24846.0.0",
+                    "brand": "Кейкап антистресс с подсветкой",
+                    "name": "Брелок кейкап антистресс клавиатура с кликом и подсветкой",
+                    "size": "0",
+                    "link_3_ds": "",
+                    "error": "",
+                    "services": [
+                        {
+                            "id": "882ff929b1d24790a318a8645fa24846",
+                            "pay_state": 7,
+                            "type": 7,
+                            "price": 0
+                        }
+                    ],
+                    "dst_office_id": 50134030,
+                    "supplier_flags": 12224,
+                    "dtype": 1,
+                    "dtype_v2": 6597069767169,
+                    "flags": 37,
+                    "color": "красно-сиреневый",
+                    "basic_price": 150000,
+                    "price": 32700,
+                    "view_flags": 1581074,
+                    "type_point": 8,
+                    "pay_mode": 20,
+                    "pay_type": 1
+                }
+            ],
+            "deliveries": [
+                {
+                    "delivery_type": 6,
+                    "flags": 0,
+                    "id": "882ff929b1d24790a318a8645fa24846",
+                    "full_address": "",
+                    "latitude": 59.878939,
+                    "longitude": 30.41847,
+                    "delivery_time": 0,
+                    "time_from": 0,
+                    "time_to": 0
+                }
+            ]
+        }
+    ]
+}

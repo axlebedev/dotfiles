@@ -1,0 +1,18 @@
+/** @type {import('./recipes.types.js').SettingsRecipe[]} */
+export const BUILTIN_SETTINGS_RECIPES = [
+    {
+        id: 'wb-disable-2fa-for-employee',
+        title: 'Отключить 2FA для сотрудника',
+        description: 'Быстрый переключатель для входа в WB Банк без 2FA для сотрудника.',
+        mode: 'toggle',
+        on: [
+            { path: 'data.switches.enable2faForEmployee', value: false },
+            { path: 'data.mobileAppVariables.objects.2FARange.0.toId', value: 2 }
+        ],
+        off: [
+            { path: 'data.switches.enable2faForEmployee', value: true },
+            { path: 'data.mobileAppVariables.objects.2FARange.0.toId', value: 1 }
+        ],
+        source: 'builtin'
+    }
+];
