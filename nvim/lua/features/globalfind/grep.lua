@@ -107,12 +107,24 @@ M.Grep = function()
         local uniqByFilenameLine = "| awk -F: '!seen[$1,$2]++'"
         local output = vim.fn.systemlist(prg .. ' "' .. word .. '" ' .. uniqByFilenameLine)
         vim.fn.setqflist({}, ' ', { lines = output })
+        local initialCount = #vim.fn.getqflist()
         vim.cmd('hor copen')
         resizeQFHeight()
 
+        local initialCount = #vim.fn.getqflist()
         vim.fn.setreg('/', word)
         vim.fn.search(word)
-        require('features/globalfind/filtertestentries').filterTestEntries()
+        if initialCount == 0 then
+            vim.notify('SEARCH COUNT = ' .. initialCount, vim.log.levels.WARN)
+            return
+        end
+        -- require('features/globalfind/filtertestentries').filterTestEntries()
+        if #vim.fn.getqflist() == 0 then
+            vim.notify('SEARCH COUNT = ' .. initialCount, vim.log.levels.WARN)
+            vim.cmd('colder')
+        else
+            vim.notify('SEARCH COUNT = ' .. #vim.fn.getqflist(), vim.log.levels.INFO)
+        end
         vim.fn.cursor(1, 1)
         vim.api.nvim_input('n')
     end
