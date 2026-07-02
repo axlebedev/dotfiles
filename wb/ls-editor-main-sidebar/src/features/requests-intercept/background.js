@@ -36,6 +36,10 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
     ['requestHeaders', 'extraHeaders'],
 );
 
+chrome.sidePanel
+  .setPanelBehavior({ openPanelOnActionClick: true })
+  .catch((error) => console.error(error));
+
 // --- Создаём modifyHeaders-правила для стейдж-URL ---
 const escapeRegExp = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 

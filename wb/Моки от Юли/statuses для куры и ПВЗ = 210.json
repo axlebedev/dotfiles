@@ -1,0 +1,58 @@
+[
+    [
+        {
+            "rid": "eBt.336a26e391c042d9b13962017bd0ccd4.0.0",
+            "user_shard_id": "4",
+            "user_id": "18987811",
+            "place_id": " ",
+            "place_name": " ",
+            "status_id": "300",
+            "status_name": "Вы оформили заказ",
+            "group_id": "1",
+            "date": 1782979904000000000,
+            "is_final": false,
+            "delivery_task_id": ""
+        },
+ {
+            "rid": "eBt.336a26e391c042d9b13962017bd0ccd4.0.0",
+            "user_shard_id": "4",
+            "user_id": "18987811",
+            "place_id": " ",
+            "place_name": " ",
+            "status_id": "210",
+            "status_name": "Вы оформили заказ",
+            "group_id": "5",
+            "date": 1782979904000000000,
+            "is_final": false,
+            "delivery_task_id": ""
+        }
+    ],
+    [
+        {
+            "rid": "eBt.4c4a1e7677484b8e87e702a6fe81dd92.0.0",
+            "user_shard_id": "4",
+            "user_id": "18987811",
+            "place_id": " ",
+            "place_name": " ",
+            "status_id": "300",
+            "status_name": "Вы оформили заказ",
+            "group_id": "1",
+            "date": 1782979892000000000,
+            "is_final": false,
+            "delivery_task_id": ""
+        },
+{
+            "rid": "eBt.4c4a1e7677484b8e87e702a6fe81dd92.0.0",
+            "user_shard_id": "4",
+            "user_id": "18987811",
+            "place_id": " ",
+            "place_name": " ",
+            "status_id": "210",
+            "status_name": "Вы оформили заказ",
+            "group_id": "5",
+            "date": 1782979892000000000,
+            "is_final": false,
+            "delivery_task_id": ""
+        }
+    ]
+]

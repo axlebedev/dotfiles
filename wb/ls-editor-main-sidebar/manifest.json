@@ -1,14 +1,15 @@
 {
     "manifest_version": 3,
-    "name": "LocalStorage Editor",
-    "version": "1.2",
+    "name": "LocalStorage Editor SB edition",
+    "version": "1.2.0777",
     "description": "Управляет значениями объекта в localStorage активной вкладки.",
     "permissions": [
       "activeTab",
       "scripting",
       "storage",
       "declarativeNetRequest",
-      "webRequest"
+      "webRequest",
+      "sidePanel"
     ],
     "host_permissions": [
       "<all_urls>"
@@ -29,8 +30,10 @@
         "run_at": "document_start"
       }
     ],
+    "side_panel": {
+      "default_path": "popup.html"
+    },
     "action": {
-      "default_popup": "popup.html",
       "default_title": "LocalStorage Editor",
       "default_icon": "icons/icon.png"
     }

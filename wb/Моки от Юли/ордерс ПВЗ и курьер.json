@@ -1,0 +1,175 @@
+{
+    "data": [
+        {
+            "state": 4,
+            "order_dt": 1782979892,
+            "pay_type": 12,
+            "dst_office_id": 2651,
+            "order_type": 1,
+            "latitude": 51.52856245,
+            "longitude": 46.027272100000005,
+            "full_address": "Саратовская область, улица Пушкина, д. 3, кв. тест",
+            "currency": "RUB",
+            "id": "4c4a1e7677484b8e87e702a6fe81dd92",
+            "shard_key": "eBt",
+            "locale": "ru",
+            "session_id": "8f5c9b74b8f84bff9d9e770d3a59f6f3",
+            "logistic_with": true,
+            "client_id": 14,
+            "rids": [
+                {
+                    "state": 3,
+                    "pay_state": 1,
+                    "delivery_type": 5,
+                    "can_reject_delayed": false,
+                    "update_dt": 1782979892,
+                    "store_id": 120762,
+                    "delivery_time": 1783148400,
+                    "delivery_id": "4c4a1e7677484b8e87e702a6fe81dd92",
+                    "chrt_id": 277469025,
+                    "nm_id": 166773010,
+                    "subject_id": 381,
+                    "seller_id": 10700,
+                    "sale_conditions": 150994944,
+                    "easy_return_cost": 0,
+                    "logistic_cost": 0,
+                    "total_price": 10600,
+                    "product_cost": 10600,
+                    "uid": "eBt.4c4a1e7677484b8e87e702a6fe81dd92.0.0",
+                    "brand": "Азбука",
+                    "name": "Дитя цивилизации. Эссе",
+                    "size": "0",
+                    "link_3_ds": "",
+                    "error": "",
+                    "services": [
+                        {
+                            "id": "4c4a1e7677484b8e87e702a6fe81dd92",
+                            "pay_state": 1,
+                            "type": 7,
+                            "price": 14900,
+                            "flags": 0
+                        }
+                    ],
+                    "wctype_id": 1,
+                    "discount": 700,
+                    "premium_discount": 500,
+                    "dst_office_id": 2651,
+                    "supplier_flags": 12224,
+                    "dtype": 4,
+                    "dtype_v2": 6597069766664,
+                    "flags": 266276,
+                    "color": "",
+                    "basic_price": 76700,
+                    "price": 10100,
+                    "view_flags": 135282697,
+                    "type_point": 1,
+                    "pay_mode": 20,
+                    "pay_type": 12
+                }
+            ],
+            "deliveries": [
+                {
+                    "delivery_type": 5,
+                    "flags": 0,
+                    "id": "4c4a1e7677484b8e87e702a6fe81dd92",
+                    "full_address": "Саратовская область, улица Пушкина, д. 3, кв. тест",
+                    "latitude": 51.52856245,
+                    "longitude": 46.027272100000005,
+                    "delivery_time": 0,
+                    "time_from": 1783148400,
+                    "time_to": 1783159200
+                }
+            ],
+            "duty_info": {
+                "duty_free_limit": 0,
+                "fixed_amount": 0,
+                "duty": 0
+            }
+        },
+        {
+            "state": 4,
+            "order_dt": 1782979904,
+            "pay_type": 12,
+            "dst_office_id": 103981,
+            "order_type": 1,
+            "latitude": 59.94253,
+            "longitude": 30.360291,
+            "currency": "RUB",
+            "id": "336a26e391c042d9b13962017bd0ccd4",
+            "shard_key": "eBt",
+            "locale": "ru",
+            "session_id": "8f5c9b74b8f84bff9d9e770d3a59f6f3",
+            "logistic_with": true,
+            "client_id": 14,
+            "rids": [
+                {
+                    "state": 3,
+                    "pay_state": 1,
+                    "delivery_type": 6,
+                    "can_reject_delayed": false,
+                    "update_dt": 1782979905,
+                    "store_id": 120762,
+                    "delivery_time": 1783109504,
+                    "delivery_id": "336a26e391c042d9b13962017bd0ccd4",
+                    "chrt_id": 137503738,
+                    "nm_id": 83885241,
+                    "subject_id": 381,
+                    "seller_id": 10700,
+                    "sale_conditions": 150994944,
+                    "easy_return_cost": 0,
+                    "logistic_cost": 0,
+                    "total_price": 29300,
+                    "product_cost": 29300,
+                    "uid": "eBt.336a26e391c042d9b13962017bd0ccd4.0.0",
+                    "brand": "Азбука",
+                    "name": "Набережная Неисцелимых. Watermark (билингва)",
+                    "size": "0",
+                    "link_3_ds": "",
+                    "error": "",
+                    "services": [
+                        {
+                            "id": "336a26e391c042d9b13962017bd0ccd4",
+                            "pay_state": 7,
+                            "type": 7,
+                            "price": 0,
+                            "flags": 0
+                        }
+                    ],
+                    "wctype_id": 1,
+                    "discount": 1700,
+                    "premium_discount": 1200,
+                    "dst_office_id": 103981,
+                    "supplier_flags": 12224,
+                    "dtype": 4,
+                    "dtype_v2": 6597069766664,
+                    "flags": 266276,
+                    "color": "",
+                    "basic_price": 76700,
+                    "price": 28100,
+                    "view_flags": 135282697,
+                    "type_point": 34,
+                    "pay_mode": 20,
+                    "pay_type": 12
+                }
+            ],
+            "deliveries": [
+                {
+                    "delivery_type": 6,
+                    "flags": 0,
+                    "id": "336a26e391c042d9b13962017bd0ccd4",
+                    "full_address": "",
+                    "latitude": 59.94253,
+                    "longitude": 30.360291,
+                    "delivery_time": 0,
+                    "time_from": 0,
+                    "time_to": 0
+                }
+            ],
+            "duty_info": {
+                "duty_free_limit": 0,
+                "fixed_amount": 0,
+                "duty": 0
+            }
+        }
+    ]
+}
