@@ -220,7 +220,7 @@ return {
 
         function MyDecorator:highlight_group(node)
           local s = node.name
-          if s:match('%.[jt]sx?$') or s:match('%.cpp$') or s:match('%.lua$') then
+          if s:match('%.[jt]sx?$') or s:match('%.cpp$') or s:match('%.lua$') or s:match('%.sh$')  then
             return 'MyNvimTreeGreen'
           elseif s:match('%.txt$') or s:match('%.md$') then
             return 'MyNvimTreeBrown'
