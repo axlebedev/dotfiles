@@ -2,7 +2,16 @@ local initSearchPopup = function()
   vim.api.nvim_set_hl(0, "PopupPink", { bg = "#FFB6C1", fg = "#000000" })
 
   -- 1. Create an unlisted, scratch buffer for the popup content
-  local buf = vim.api.nvim_create_buf(false, true)
+  local buf = nil
+  function recreateBuf()
+    local is_valid = buf ~= nil and vim.api.nvim_buf_is_valid(buf)
+    if is_valid == false then
+      buf = vim.api.nvim_create_buf(false, true)
+    end
+    return buf
+  end
+
+
   local opts = {
     relative = "cursor", -- Anchors the window position relative to the cursor
     row = 1,            -- Moves the popup 1 line directly below the cursor
@@ -11,6 +20,7 @@ local initSearchPopup = function()
     height = 1,          -- Height of the popup in lines
     style = "minimal",   -- Strips UI bloat like line numbers and statuslines
   }
+
   local win = nil
   local timerId = nil
 
@@ -26,9 +36,14 @@ local initSearchPopup = function()
 
   function openWinAndStartTimer()
     closeWinAndStopTimer()
+    if vim.bo.filetype == "magit" then return end
+    if vim.v.hlsearch == 0 then return end
 
     local result = vim.fn.searchcount({ maxcount = -1, timeout = 500 })
+    if result.total == 0 then return end
+
     local line = ' ' .. result.current .. '/' .. result.total .. ' '
+    recreateBuf()
     vim.api.nvim_buf_set_lines(buf, 0, -1, false, { line })
     opts.width = #line
 
@@ -44,7 +59,6 @@ local initSearchPopup = function()
       callback = function()
         vim.schedule(function()
           closeWinAndStopTimer()
-          if vim.v.hlsearch == 0 then return end
           openWinAndStartTimer()
         end)
       end
