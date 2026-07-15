@@ -46,6 +46,7 @@ local plugins = {
     { "axlebedev/codelens.nvim", opts = { sections = { git_authors = nil }} },
 
     -- format under cursor, or selection
+    -- sudo npm i -g eslint_d
     { 'stevearc/conform.nvim',
       opts = {},
       config = function()
@@ -116,29 +117,36 @@ local init_config = function()
       },
     })
 
-  vim.lsp.config("lua_ls", {
-      -- Look for configuration files or project markers
-      root_dir = vim.fs.root(args and args.buf or 0, { ".luarc.json", ".luarc.jsonc", ".git" }) or vim.uv.cwd(),
-      filetypes = { "lua" },
+  local root_markers1 = {
+    '.emmyrc.json',
+    '.luarc.json',
+    '.luarc.jsonc',
+  }
+  local root_markers2 = {
+    '.luacheckrc',
+    '.stylua.toml',
+    'stylua.toml',
+    'selene.toml',
+    'selene.yml',
+  }
+
+  vim.lsp.config('lua_ls', {
+      cmd = { 'lua-language-server' },
+      filetypes = { 'lua' },
+      root_markers = vim.fn.has('nvim-0.11.3') == 1 and { root_markers1, root_markers2, { '.git' } }
+      or vim.list_extend(vim.list_extend(root_markers1, root_markers2), { '.git' }),
+      ---@type lspconfig.settings.lua_ls
       settings = {
         Lua = {
           runtime = {
-            -- Neovim 0.12 natively runs on top of LuaJIT
             version = "LuaJIT",
           },
           diagnostics = {
-            -- Prevents the "Undefined global `vim`" error
             globals = { "vim" },
           },
           workspace = {
-            -- Prevents prompt asking to configure your workspace environment
+            library = vim.api.nvim_get_runtime_file("", true),
             checkThirdParty = false,
-            -- Makes the server aware of all native Neovim APIs and paths
-            library = {
-              vim.env.VIMRUNTIME,
-              -- Optional: Include your local nvim configuration directory
-              vim.fn.stdpath("config"),
-            },
           },
           telemetry = {
             enable = false,
