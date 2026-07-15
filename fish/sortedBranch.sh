@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # allBranches=""
-# while read -r line 
+# while read -r line
 # do
 #     allBranches=$"${allBranches}\n${line}"
 # done < $(git branch --all |\
@@ -12,9 +12,10 @@
 
 allBranches="$(git branch --all |\
     grep -v HEAD |\
-    # sed -r 's/( *remotes\/)(origin\/)(.*)/\2\3\n\3/' |\
     sed -r 's/\s*(remotes\/)(origin\/)(.*)/\2\3\n\3/' |\
-    sed -r 's/\* //')"
+    sed -r 's/\* //' |\
+    sed -r 's/\+ //'
+    )"
 
 localBranches="$(git log -g --grep-reflog "checkout:" --format="%gs" |\
     cat -n |\
