@@ -11,4 +11,6 @@ ge=10.246.133.152
 "/usr/bin/google-chrome-stable" \
 --ignore-certificate-errors \
 --user-data-dir=/home/lebedev.aleksey101/chrome-users/wildberries-test-release \
+--disable-web-security \
+--ignore-certificate-errors \
 --host-resolver-rules="MAP www.wildberries.ru $ru, MAP ru-basket-api.wildberries.ru $rubas, MAP www.wildberries.by $by, MAP www.global.wildberries.ru $gl, MAP www.wildberries.ge $ge"
