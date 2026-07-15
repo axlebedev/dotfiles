@@ -1,4 +1,7 @@
 -- TODO: переход к closing tag в jsx (баг в selfclosing tags)
+-- Plug 'shime/vim-livedown', { 'for': 'markdown', 'do': 'sudo npm i -g livedown' }
+
+vim.loader.enable()
 vim.opt.shell = 'bash'
 
 local dotfiles_path = vim.fn.expand('~') .. '/dotfiles/nvim'
