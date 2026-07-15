@@ -1,5 +1,5 @@
 local defaults = vim.fn.has('multi_byte') == 1
-    and { placeholder = '⋯ ', countFormat = ' %s↘' }
+    and { placeholder = '⋯ ', countFormat = ' %s↘ ' }
     or { placeholder = '...', countFormat = ' %s' }
 
 -- Global variables with defaults
