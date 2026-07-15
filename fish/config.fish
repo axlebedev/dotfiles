@@ -208,6 +208,7 @@ end
 
 # maybe git diff --patience
 abbr -a gd g diff --histogram --minimal --ignore-space-change --relative
+abbr -a gdh g diff --histogram --minimal --ignore-space-change --relative HEAD^!
 abbr -a gdc g diff --histogram --minimal --ignore-space-change --relative --cached
 abbr -a gh g-gh
 abbr -a ghh g-gh -n 10
