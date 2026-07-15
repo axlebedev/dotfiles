@@ -122,6 +122,7 @@ function cd-working -d 'cd to dir in ~/worktrees'
   commandline -f repaint
 end
 abbr -a cdd cd-working
+abbr -a cdv cd ~/dev
 
 function lerna-checks -d 'npx lerna run <check>'
     # 1. Path to your file
