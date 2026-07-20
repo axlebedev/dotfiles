@@ -13,8 +13,8 @@ end
 local function parse_unix_at_cursor()
     local token = vim.fn.expand('<cword>')
 
-    if vim.regex([[\v^\d{10,13}$]]):match_str(token) then
-        return token
+    if vim.regex([[\v^\d{10,23}$]]):match_str(token) then
+        return token:sub(1, 10)
     end
 
     return nil
