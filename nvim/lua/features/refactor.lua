@@ -59,9 +59,7 @@ local opts = {
   },
   {
     name = 'Rename',
-    callback = function()
-      vim.api.nvim_feedkeys(":IncRename " .. vim.fn.expand("<cword>"), 'n', false)
-    end,
+    callback = vim.lsp.buf.rename
   },
     -- 'COC: Show super types': {
     --     command: 'call CocActionAsync("showSuperTypes")',
