@@ -45,9 +45,9 @@ local function toggle_file_path_virtual_text()
   })
 end
 
--- 3. Map the function to the "P" key in Normal mode
-vim.keymap.set("n", "P", toggle_file_path_virtual_text, {
-  desc = "Toggle current file path as virtual text on column 0",
+-- 3. Map the function to the "sp" key in Normal mode
+vim.keymap.set("n", "sp", toggle_file_path_virtual_text, {
+  desc = "Show path",
   silent = true,
 })
 
