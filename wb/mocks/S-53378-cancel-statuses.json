@@ -1,0 +1,17 @@
+[
+    [
+        {
+            "rid": "ebc.681e6c2ff1c54753b34177d0d5897530.0.0",
+            "user_shard_id": "7",
+            "user_id": "18745985",
+            "place_id": " ",
+            "place_name": " ",
+            "status_id": "199",
+            "status_name": "Вы оформили заказ",
+            "group_id": "3",
+            "date": 1784561798000000000,
+            "is_final": false,
+            "delivery_task_id": ""
+        }
+    ]
+]

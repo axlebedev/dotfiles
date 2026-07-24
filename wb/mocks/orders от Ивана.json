@@ -1,0 +1,102 @@
+{
+    "data": [
+        {
+            "state": 4,
+            "order_dt": 1779882490,
+            "pay_type": 1,
+            "dst_office_id": 308642,
+            "order_type": 1,
+            "latitude": 55.923523,
+            "longitude": 37.817897,
+            "full_address": "Королёв, улица Карла Маркса, д. 6, кв. 11, под. 1, дмф. 1, этаж 12",
+            "currency": "RUB",
+            "id": "15c315a901144faebe0b98b5c6f73090",
+            "shard_key": "eBc",
+            "locale": "ru",
+            "source_wbpay_id": "bd4f6823-af6f-11ed-a40f-3aa1d117b6d9",
+            "session_id": "7d28863c117a4f329d43ff2ca79c0ec5",
+            "logistic_with": true,
+            "client_id": 3,
+            "rids": [
+                {
+                    "state": 3,
+                    "pay_state": 4,
+                    "delivery_type": 127,
+                    "can_reject_delayed": true,
+                    "update_dt": 1779882493,
+                    "store_id": 50174705,
+                    "delivery_time": 1779948000,
+                    "estimated_delivery_time": 1779948000,
+                    "delivery_id": "15c315a901144faebe0b98b5c6f73090_0_8759",
+                    "chrt_id": 1254455497,
+                    "nm_id": 835511106,
+                    "subject_id": 7608,
+                    "seller_id": 8759,
+                    "sale_conditions": 134217728,
+                    "easy_return_cost": 0,
+                    "logistic_cost": 0,
+                    "total_price": 1800,
+                    "product_cost": 1800,
+                    "uid": "eBc.15c315a901144faebe0b98b5c6f73090.0.0",
+                    "brand": "",
+                    "name": "КГТ товарыч не объем от Ивана",
+                    "size": "0",
+                    "link_3_ds": "",
+                    "error": "",
+                    "services": [
+                        {
+                            "id": "15c315a901144faebe0b98b5c6f73090.0_7",
+                            "pay_state": 4,
+                            "type": 10,
+                            "price": 8000,
+                            "flags": 0
+                        },
+                        {
+                            "id": "15c315a901144faebe0b98b5c6f73090_0_8759",
+                            "pay_state": 4,
+                            "type": 7,
+                            "price": 8100,
+                            "flags": 0
+                        }
+                    ],
+                    "dst_office_id": 308642,
+                    "supplier_flags": 12285,
+                    "dtype": 18,
+                    "dtype_v2": 6738803687426,
+                    "flags": 266277,
+                    "color": "жимолость",
+                    "basic_price": 5000,
+                    "price": 1800,
+                    "view_flags": 1434240,
+                    "type_point": 1,
+                    "pay_mode": 10,
+                    "pay_type": 1
+                }
+            ],
+            "deliveries": [
+                {
+                    "delivery_type": 127,
+                    "flags": 0,
+                    "id": "15c315a901144faebe0b98b5c6f73090_0_8759",
+                    "full_address": "Королёв, улица Карла Маркса, д. 6, кв. 11, под. 1, дмф. 1, этаж 12",
+                    "latitude": 55.923523,
+                    "longitude": 37.817897,
+                    "delivery_time": 0,
+                    "time_from": 1779948000,
+                    "time_to": 1779998400
+                }
+            ],
+            "dbs_services": [
+                {
+                    "id": "15c315a901144faebe0b98b5c6f73090.0_7",
+                    "dbs_additional_type_id": 7
+                }
+            ],
+            "duty_info": {
+                "duty_free_limit": 0,
+                "fixed_amount": 0,
+                "duty": 0
+            }
+        }
+    ]
+}

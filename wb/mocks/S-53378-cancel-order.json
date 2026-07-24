@@ -1,0 +1,94 @@
+{
+    "data":
+    [
+        {
+            "state": 4,
+            "order_dt": 1773828250,
+            "pay_type": 12,
+            "dst_office_id": 50045287,
+            "order_type": 1,
+            "latitude": 55.733508,
+            "longitude": 37.66037,
+            "currency": "RUB",
+            "id": "681e6c2ff1c54753b34177d0d5897530",
+            "shard_key": "ebc",
+            "locale": "ru",
+            "session_id": "7915b78f2bab44eb868214a51aac826b",
+            "logistic_with": true,
+            "client_id": 3,
+            "rids":
+            [
+                {
+                    "state": 1,
+                    "pay_state": 4,
+                    "delivery_type": 6,
+                    "can_reject_delayed": true,
+                    "update_dt": 1773828914,
+                    "store_id": 507,
+                    "delivery_time": 1773918250,
+                    "estimated_delivery_time": 1773918250,
+                    "delivery_id": "681e6c2ff1c54753b34177d0d5897530",
+                    "chrt_id": 726006829,
+                    "nm_id": 526350242,
+                    "subject_id": 317,
+                    "seller_id": 32693,
+                    "sale_conditions": 134217728,
+                    "easy_return_cost": 0,
+                    "logistic_cost": 0,
+                    "total_price": 11100,
+                    "product_cost": 11100,
+                    "uid": "ebc.681e6c2ff1c54753b34177d0d5897530.0.0",
+                    "brand": "ErichKrause",
+                    "name": "Ручки шариковые синие набор для школы 4 штуки",
+                    "size": "0",
+                    "link_3_ds": "",
+                    "error": "",
+                    "expiry_dt": 1775163599,
+                    "services":
+                    [
+                        {
+                            "id": "681e6c2ff1c54753b34177d0d5897530",
+                            "pay_state": 4,
+                            "type": 9,
+                            "price": 149000,
+                            "dbs_additional_type_id": 8
+                        }
+                    ],
+                    "dst_office_id": 50045287,
+                    "supplier_flags": 12240,
+                    "dtype": 4,
+                    "dtype_v2": 14,
+                    "flags": 4133,
+                    "color": "синий",
+                    "basic_price": 28600,
+                    "price": 11100,
+                    "view_flags": 135536648,
+                    "type_point": 8,
+                    "pay_mode": 10,
+                    "pay_type": 12
+                }
+            ],
+            "dbs_services":
+            [
+                {
+                    "id": "681e6c2ff1c54753b34177d0d5897530",
+                    "dbs_additional_type_id": 8
+                }
+            ],
+            "deliveries":
+            [
+                {
+                    "delivery_type": 6,
+                    "flags": 0,
+                    "id": "681e6c2ff1c54753b34177d0d5897530",
+                    "full_address": "",
+                    "latitude": 55.733508,
+                    "longitude": 37.66037,
+                    "delivery_time": 0,
+                    "time_from": 0,
+                    "time_to": 0
+                }
+            ]
+        }
+    ]
+}
