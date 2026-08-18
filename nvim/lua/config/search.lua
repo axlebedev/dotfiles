@@ -37,6 +37,7 @@ local initSearchPopup = function()
   function openWinAndStartTimer()
     closeWinAndStopTimer()
     if vim.bo.filetype == "magit" then return end
+    if vim.bo.filetype == "nvimtree" then return end
     if vim.v.hlsearch == 0 then return end
 
     local result = vim.fn.searchcount({ maxcount = -1, timeout = 500 })
