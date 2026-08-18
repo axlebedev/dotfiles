@@ -331,12 +331,24 @@ bindsym $mod+F6 exec brightnessctl set 10+
 
 bindsym $mod+Shift+f exec --no-startup-id ~/dotfiles/regolith3/i3/float_fullscreen.sh
 
-# for notebook: make smaller gaps
-bindsym $mod+g \
-gaps top all set 16; \
-gaps left all set 100; \
-gaps bottom all set 40; \
-gaps right all set 380
+set $mode_gaps_toggle "Toggle gaps: (D)esktop (N)otebook"
+mode $mode_gaps_toggle {
+    bindsym $mod+Shift+d gaps top all set 36, \
+        gaps left all set 260, \
+        gaps bottom all set 140, \
+        gaps right all set 440; \
+        mode "default"
+    bindsym $mod+Shift+n gaps top all set 16, \
+        gaps left all set 100, \
+        gaps bottom all set 40, \
+        gaps right all set 380; \
+        mode "default"
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+g mode $mode_gaps_toggle
 
 bindsym $mod+Shift+b exec --no-startup-id 'pkill conky; conky; pkill i3bar; i3bar'
 
@@ -451,9 +463,10 @@ mode $mode_gaps_bottom {
 bindsym $mod+Shift+g mode $mode_gaps
 
 # Work
-set $mode_work "Work (b)rowser (d)ebug (t)band"
+set $mode_work "Work (b)rowser (d)ebug (t)band (r)elease"
 mode $mode_work {
 	bindsym $mod+b mode "default" ; exec --no-startup-id nohup google-chrome --user-data-dir=chrome-users/wildberries & disown
+	bindsym $mod+r mode "default" ; exec ~/dotfiles/wb/test-release.sh
 	bindsym $mod+d mode "default" ; exec --no-startup-id nohup google-chrome --user-data-dir=chrome-users/wildberriesdebug & disown
   bindsym $mod+t mode "default" ; exec google-chrome --new-window  --app="https://band.wb.ru/site" --user-data-dir=chrome-users/wildberries
 	# bindsym $mod+b mode "default" ; exec --no-startup-id nohup google-chrome --app="https://band.wb.ru/wb" --user-data-dir=chrome-users/wildberries & disown
