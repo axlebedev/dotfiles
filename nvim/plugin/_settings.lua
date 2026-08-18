@@ -177,6 +177,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 })
 
 vim.opt.wrap = false
+vim.opt.linebreak = true
 
 vim.api.nvim_create_autocmd({ "FileType" }, {
   group = au_vimrc_settings,
