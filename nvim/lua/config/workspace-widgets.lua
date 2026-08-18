@@ -302,6 +302,7 @@ return {
       },
       config = function()
         local actions = require("telescope.actions")
+        local action_state = require("telescope.actions.state")
 
         require('telescope').setup{
           defaults = {
@@ -330,7 +331,31 @@ return {
                 height = 0.6,
             }
           },
-          pickers = {},
+          pickers = {
+            buffers = {
+              mappings = {
+                i = {
+                  ["<C-d>"] = function(prompt_bufnr) -- delete buffer if is not active in any window
+                    local selection = action_state.get_selected_entry(prompt_bufnr)
+                    if not selection then
+                      return
+                    end
+                    vim.print(actions)
+
+                    -- Do nothing if trying to delete current buffer
+                    if vim.fn.bufwinnr(selection.bufnr) ~= -1 then
+                      -- Optional: show a notification
+                      vim.notify("Cannot delete current buffer", vim.log.levels.WARN)
+                      return
+                    end
+
+                    -- Safe to delete
+                    actions.delete_buffer(prompt_bufnr)
+                  end
+                },
+              },
+            },
+          },
           extensions = {},
         }
 
