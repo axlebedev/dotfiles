@@ -285,7 +285,11 @@ return {
         }
 
         vim.defer_fn(function()
-          require("nvim-tree.api").tree.toggle({ focus = false })
+           local width = vim.api.nvim_win_get_width(0)
+           -- if vim window is more than 200 chars width - open nvim tree
+           if width > 200 then
+             require("nvim-tree.api").tree.toggle({ focus = false })
+           end
         end, 10)
       end,
     },
