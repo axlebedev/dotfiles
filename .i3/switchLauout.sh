@@ -7,8 +7,10 @@ if [ $# -eq 1 ]; then
     TARGET=$1
 
     if [[ $1 == "en" ]]; then
+        # to russion
         gsettings set org.gnome.desktop.input-sources current 1
     else
+        # to english
         gsettings set org.gnome.desktop.input-sources current 0
     fi
 else
