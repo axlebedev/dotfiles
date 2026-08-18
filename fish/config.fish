@@ -192,7 +192,16 @@ function gcob
         set fullBranch "$branchName"
     end
 
-    eval "git fetch --all && git worktree add ~/worktrees/$branchName origin/$fullBranch && cd ~/worktrees/$branchName && git checkout $fullBranch"
+    set worktreeDir ~/worktrees/$branchName
+
+    if test -d "$worktreeDir"
+        cd "$worktreeDir"
+        echo "Already exists, cd to $worktreeDir"
+    else
+        git worktree add "$worktreeDir" "origin/$fullBranch"
+        cd "$worktreeDir"
+        git checkout "$fullBranch"
+    end
 end
 
 abbr -a gs g status .
