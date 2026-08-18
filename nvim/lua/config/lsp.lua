@@ -169,8 +169,12 @@ local init_config = function()
             hint_enable = false,
           }, bufnr)
       end,
+      root_dir = vim.fs.root(0, { 'tsconfig.json', 'jsconfig.json', 'package.json', '.git' }),
       settings = {
         typescript = {
+          autoUseWorkspaceTsdk = true,
+          enableMoveToFileCodeAction = true,
+          -- preferGoToSourceDefinition = true, -- я хотел чтобы go to definition вёл в сорц, а он ведёт в .d.ts Этот конфиг ведёт в ещё бОльшую пердь
           updateImportsOnFileMove = { enabled = "always" },
           inlayHints = {
             parameterNames = { enabled = "literals" },
@@ -180,7 +184,24 @@ local init_config = function()
             functionLikeReturnTypes = { enabled = true },
             enumMemberValues = { enabled = true },
           },
+
+          preferences = {
+            includeCompletionsForModuleExports = true,
+            includeCompletionsForImportStatements = true,
+          },
+          -- This is the key setting
+          implementCodeActions = {
+            preferredImplementation = "source"
+          }
         },
+
+        javascript = {
+          -- Same for JavaScript
+          implementCodeActions = {
+            preferredImplementation = "source"
+          }
+        },
+
         vtsls = {
           enableMoveToFileCodeAction = true,
           autoUseWorkspaceTsdk = true, -- Use project-specific TS version
@@ -195,6 +216,7 @@ local init_config = function()
   -- npm install -g @vtsls/language-server
   -- npm install -g vscode-langservers-extracted (?)
   -- npm install -g @fsouza/prettierd vscode-langservers-extracted
+  -- luarocks install lua-language-server
   vim.lsp.enable({ 'vtsls', 'lua_ls', 'cssls', 'jsonls' })
 
   vim.o.complete = ".,o" -- use buffer and omnifunc
