@@ -241,14 +241,43 @@ local init_config = function()
             end,
           })
 
+        local diagnosticWin = nil
         vim.keymap.set("n", "K", function()
-          vim.lsp.buf.hover({
-              border = "rounded",
-              focusable = false,
-              relative = "cursor",
-              row = 1,  -- Positions above cursor (use vim.api.nvim_win_get_cursor(0)[1] for dynamic)
-              col = 20, -- Offset right to avoid "under" cursor overlap
-            })
+          local showHover = function()
+            vim.lsp.buf.hover({
+                border = "rounded",
+                focusable = false,
+                relative = "cursor",
+                row = 1,  -- Positions above cursor (use vim.api.nvim_win_get_cursor(0)[1] for dynamic)
+                col = 20, -- Offset right to avoid "under" cursor overlap
+              })
+          end
+
+          local showDiagnostic = function()
+            return vim.diagnostic.open_float({
+                border = "rounded",
+                focusable = false,
+                relative = "cursor",
+                close_events = {
+                  "CursorMoved",
+                  "CursorMovedI",
+                  "BufHidden",
+                  "InsertEnter",
+                  "TextChanged",
+                  "WinLeave",
+                },
+              })
+          end
+
+          if diagnosticWin and vim.api.nvim_buf_is_valid(diagnosticWin) then
+            vim.print('if')
+            showHover()
+            diagnosticWin = nil
+          else
+            vim.print('else')
+            diagnosticWin = showDiagnostic()
+            if diagnosticWin == nil then showHover() end
+          end
         end, { buffer = ev.buf })
 
       local isCommandVisible = function(cmd)
