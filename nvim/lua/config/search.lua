@@ -52,7 +52,7 @@ local initSearchPopup = function()
     win = vim.api.nvim_open_win(buf, false, opts)
     vim.api.nvim_win_set_option(win, "winhighlight", "Normal:PopupPink")
     timerId = vim.uv.new_timer()
-    timerId:start(1000, 0, vim.schedule_wrap(closeWinAndStopTimer))
+    timerId:start(1500, 0, vim.schedule_wrap(closeWinAndStopTimer))
   end
 
   vim.api.nvim_create_autocmd({ 'CursorMoved' }, {
