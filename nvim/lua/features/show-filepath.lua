@@ -33,9 +33,9 @@ local function toggle_file_path_virtual_text()
   -- Fetch the absolute path of the current buffer
   local file_path = vim.api.nvim_buf_get_name(bufnr)
   if file_path == "" then
-    file_path = "[No Name]"
+    file_path = " [No Name] "
   end
-  local rel_path = vim.fn.fnamemodify(file_path, ":.")
+  local rel_path = ' ' .. vim.fn.fnamemodify(file_path, ":.") .. ' '
 
   -- Apply the virtual text at window column 0
   vim.api.nvim_buf_set_extmark(bufnr, path_ns, cursor_line, 0, {
