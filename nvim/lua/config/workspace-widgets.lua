@@ -178,7 +178,11 @@ return {
           { type = 'commands',  header = { '   Commands' } },
         }
 
-        vim.g.startify_commands = { ':Lazy update', ':TSUpdate' }
+        vim.g.startify_commands = {
+          ':Lazy update',
+          ':TSUpdate',
+          'edit +149 ' .. vim.fn.getcwd().. '/packages/build-utils/src/index.ts',
+        }
         vim.g.startify_files_number = 10
         vim.g.startify_update_oldfiles = 1
         vim.g.startify_change_to_dir = 0
