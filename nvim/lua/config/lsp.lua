@@ -22,24 +22,32 @@ local plugins = {
       },
       config = function()
         require('outline').setup({
-          outline_items = {
-            show_symbol_lineno = true,
-            auto_set_cursor = false,
-          },
-          guides = {
-            enabled = true,
-            markers = {
-              -- It is recommended for bottom and middle markers to use the same number
-              -- of characters to align all child nodes vertically.
-              bottom = '',
-              middle = '',
-              vertical = '┊',
+            outline_items = {
+              show_symbol_lineno = true,
+              auto_set_cursor = false,
             },
-            auto_unfold = {
-              hovered = false,
+            guides = {
+              enabled = true,
+              markers = {
+                bottom = '',
+                middle = '',
+                vertical = '┊',
+              },
+              auto_unfold = {
+                hovered = false,
+              },
             },
-          },
-        })
+            -- Exclude properties/fields (but keep methods and functions)
+            symbols = {
+              filter = {
+                'Property',
+                'Field',
+                'Variable',
+                'Constant',
+                exclude = true,  -- exclusive filter: hide these kinds
+              },
+            },
+          })
       end,
     },
 
