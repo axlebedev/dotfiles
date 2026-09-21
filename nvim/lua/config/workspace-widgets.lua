@@ -8,6 +8,7 @@ return {
       config = function()
         local colors = {
           red = '#ca1243',
+          pink = '#FFB6C1',
           grey = '#a0a1a7',
           lightgrey = '#cbcccb',
           black = '#383a42',
@@ -91,7 +92,7 @@ return {
                   hint = { bg = colors.light_green, fg = colors.white, },
                 },
               },
-              { 'searchcount', color = { bg = '#cdadf7', fg = colors.black } },
+              { 'searchcount', color = { bg = colors.pink, fg = colors.black } },
               {
                 '%w',
                 cond = function() return vim.wo.previewwindow end,
