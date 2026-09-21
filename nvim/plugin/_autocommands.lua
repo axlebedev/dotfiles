@@ -90,3 +90,53 @@ vim.api.nvim_create_autocmd("BufEnter", {
     end
   end
 })
+
+-- auto set filetype (especially json, yaml, lua, python)
+vim.api.nvim_create_autocmd({ "BufRead", "TextChanged", "InsertLeave" }, {
+  group = vim.api.nvim_create_augroup("PasteFiletypeDetect", { clear = true }),
+  callback = function()
+    -- Only run if the buffer has no name and no filetype set
+    if vim.bo.filetype == "" then
+      vim.print(100)
+
+      -- Grab current buffer contents
+      local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+
+      -- Skip empty buffers
+      if #lines == 0 or (#lines == 1 and lines[1] == "") then
+        return
+      end
+
+      local ft = vim.filetype.match({ buf = 0, contents = lines})
+
+      if not ft then
+        local first = lines[1] or ""
+
+        -- JSON: starts with { or [ and is valid JSON
+        if first:match("^%s*[%[{]") then
+          local ok, _ = pcall(vim.json.decode, table.concat(lines, "\n"))
+          if ok then ft = "json" end
+        end
+
+        -- YAML: starts with --- or has key: value patterns
+        if not ft and (first:match("^%-%-%-") or first:match("^%s*%w[%w_]*%s*:")) then
+          ft = "yaml"
+        end
+
+        -- Lua: common patterns
+        if not ft and (first:match("^%s*local%s") or first:match("^%s*function%s") or first:match("^%s*return%s")) then
+          ft = "lua"
+        end
+
+        -- Python: shebang or common imports
+        if not ft and (first:match("^#!/.*python") or first:match("^%s*import%s") or first:match("^%s*from%s.*import")) then
+          ft = "python"
+        end
+      end
+
+      if ft then
+        vim.bo.filetype = ft
+      end
+    end
+  end,
+})
