@@ -104,7 +104,14 @@ local plugins = {
     },
 
     -- dont move cursor to start of yanked text
-    { 'svban/YankAssassin.vim', event = 'VeryLazy' },
+    { "svban/YankAssassin.nvim",
+      config = function()
+        require("YankAssassin").setup({
+            auto_normal = true,
+            auto_visual = true,
+          })
+      end,
+    },
 
     -- expand selection
     {
