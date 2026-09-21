@@ -140,3 +140,25 @@ vim.api.nvim_create_autocmd({ "BufRead", "TextChanged", "InsertLeave" }, {
     end
   end,
 })
+
+vim.api.nvim_create_autocmd({ "BufRead" }, {
+    callback = function(args)
+      if vim.bo[args.buf].filetype ~= "git" or vim.b[args.buf].commit_hash_added then
+        return
+      end
+
+      local hash = vim.fn["fugitive#Object"](
+        vim.api.nvim_buf_get_name(args.buf)
+        )
+
+      if hash == "" then
+        return
+      end
+
+      vim.api.nvim_buf_set_lines(args.buf, 0, 0, false, {
+          "Commit " .. hash,
+        })
+
+      vim.b[args.buf].commit_hash_added = true
+    end
+  })
