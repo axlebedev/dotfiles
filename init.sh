@@ -60,6 +60,9 @@ mkdir ~/.config/alacritty
 rm -rf ~/.config/alacritty/alacritty.toml
 ln -s ~/dotfiles/alacritty.toml ~/.config/alacritty/alacritty.toml
 
+mkdir ~/.config/mpv
+ln -s ~/dotfiles/mpv ~/.config/mpv
+
 echo "source ~/dotfiles/.env" >> ~/.profile
 
 rm -rf ~/.bin
