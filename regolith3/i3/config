@@ -467,7 +467,7 @@ set $mode_work "Work (b)rowser (d)ebug (t)band (r)elease"
 mode $mode_work {
 	bindsym $mod+b mode "default" ; exec --no-startup-id nohup google-chrome --user-data-dir=chrome-users/wildberries & disown
 	bindsym $mod+r mode "default" ; exec ~/dotfiles/wb/test-release.sh
-	bindsym $mod+d mode "default" ; exec --no-startup-id nohup google-chrome --user-data-dir=chrome-users/wildberriesdebug & disown
+	bindsym $mod+d mode "default" ; exec --no-startup-id nohup google-chrome --user-data-dir=chrome-users/wildberriesdebug --ignore-certificate-errors --allow-running-insecure-content --test-type & disown
   bindsym $mod+t mode "default" ; exec google-chrome --new-window  --app="https://band.wb.ru/site" --user-data-dir=chrome-users/wildberries
 	# bindsym $mod+b mode "default" ; exec --no-startup-id nohup google-chrome --app="https://band.wb.ru/wb" --user-data-dir=chrome-users/wildberries & disown
 
