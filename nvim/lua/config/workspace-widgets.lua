@@ -239,6 +239,14 @@ return {
         -- }}}
 
         require('nvim-tree').setup {
+          on_attach = function(bufnr)
+            local api = require("nvim-tree.api")
+            local function opts(desc)
+              return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+            end
+            api.map.on_attach.default(bufnr) -- apply all default mappings
+            vim.keymap.set("n", "[[", api.node.navigate.parent, opts("Up"))
+          end,
           view = {
             width = 35,
             side = 'left',
