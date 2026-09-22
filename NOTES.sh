@@ -97,6 +97,7 @@ flameshot \
 git-delta \
 stress \
 jq \
+mpv \
 dunst
 
 # lazygit - run it in bash
