@@ -231,7 +231,7 @@ abbr -a gpsf g push -f origin HEAD
 abbr -a gpsfu g push -f -u origin HEAD
 
 abbr -a grb g rebase --autostash
-abbr -a grbc g rebase --continue
+abbr -a grbc GIT_EDITOR=true g rebase --continue
 abbr -a grba g rebase --abort
 function grbm
   set masterBranch (get_master_branch)
