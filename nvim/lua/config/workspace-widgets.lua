@@ -106,7 +106,23 @@ return {
                 cond = function() return vim.bo.buftype == 'quickfix' end,
               },
             },
-            lualine_c = { 'branch' },
+            lualine_c = {
+              { 'branch' },
+              {
+                -- The function that returns the path string
+                function() return require("jsonpath").get() end,
+                -- Only show the component when a JSON path is available
+                cond = function() return vim.bo.filetype == "json" and require("jsonpath").get() ~= "" end,
+                color = { bg = colors.light_green, fg = colors.black },
+              },
+              { 'filename',
+                path = 1,
+                cond = function()
+                  return not(vim.bo.filetype == "json" and require("jsonpath").get() ~= "")
+                    and vim.api.nvim_buf_get_name(0)
+                end,
+              }
+            },
             lualine_x = {},
             lualine_y = {},
             lualine_z = {
@@ -384,8 +400,7 @@ return {
       end
     },
 
-    {
-      "hedyhli/outline.nvim",
+    { "hedyhli/outline.nvim",
       lazy = true,
       command = "Outline",
       config = function()
@@ -406,4 +421,13 @@ return {
         })
       end
     },
+
+    { "phelipetls/jsonpath.nvim",
+      ft = 'json',
+      config = function()
+        require("jsonpath").setup({
+            show_on_winbar = true
+          })
+      end
+    }
 }
