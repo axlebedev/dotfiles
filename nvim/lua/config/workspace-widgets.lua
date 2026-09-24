@@ -110,7 +110,7 @@ return {
               { 'branch' },
               {
                 -- The function that returns the path string
-                function() return require("jsonpath").get() end,
+                function() return require("jsonpath").get():sub(2) end,
                 -- Only show the component when a JSON path is available
                 cond = function() return vim.bo.filetype == "json" and require("jsonpath").get() ~= "" end,
                 color = { bg = colors.light_green, fg = colors.black },
@@ -119,7 +119,7 @@ return {
                 path = 1,
                 cond = function()
                   return not(vim.bo.filetype == "json" and require("jsonpath").get() ~= "")
-                    and vim.api.nvim_buf_get_name(0)
+                    and vim.api.nvim_buf_get_name(0) ~= ""
                 end,
               }
             },
@@ -223,6 +223,8 @@ return {
     { 'nvim-tree/nvim-tree.lua',
       dependencies = { 'nvim-tree/nvim-web-devicons' },
       config = function()
+        local api = require("nvim-tree.api")
+
         -- Custom highlight for filetypes {{{
         vim.api.nvim_set_hl(0, "MyNvimTreeBrown", { fg = "#ab6924" })
         vim.api.nvim_set_hl(0, "MyNvimTreeOrange", { fg = "#DC4D01" })
@@ -232,7 +234,7 @@ return {
         vim.api.nvim_set_hl(0, "MyNvimTreeGreen", { fg = "#119603" })
         vim.api.nvim_set_hl(0, "MyNvimTreeLightgreen", { fg = "#16bf04" })
         vim.api.nvim_set_hl(0, "MyNvimTreeBlue", { fg = "#6363F7" })
-        local MyDecorator = require("nvim-tree.api").decorator.UserDecorator:extend()
+        local MyDecorator = api.decorator.UserDecorator:extend()
         ---Mandatory constructor  :new()  will be called once per tree render, with no arguments.
         function MyDecorator:new()
           self.enabled            = true
@@ -256,12 +258,28 @@ return {
 
         require('nvim-tree').setup {
           on_attach = function(bufnr)
-            local api = require("nvim-tree.api")
             local function opts(desc)
               return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
             end
             api.map.on_attach.default(bufnr) -- apply all default mappings
             vim.keymap.set("n", "[[", api.node.navigate.parent, opts("Up"))
+            vim.keymap.set("n", "h", function()
+              local node = api.tree.get_node_under_cursor()
+              if node and node.nodes and node.open then
+                api.node.open.edit()
+              else
+                api.node.navigate.parent()
+              end
+            end,       opts("Collapse"))
+            vim.keymap.set("n", "l", function()
+              local node = api.tree.get_node_under_cursor()
+
+              if node and node.open then
+                vim.cmd("normal! l")
+              else
+                api.node.open.edit()
+              end
+            end, opts("Expand"))
           end,
           view = {
             width = 35,
@@ -317,7 +335,7 @@ return {
            local width = vim.api.nvim_win_get_width(0)
            -- if vim window is more than 200 chars width - open nvim tree
            if width > 200 then
-             require("nvim-tree.api").tree.toggle({ focus = false })
+             api.tree.toggle({ focus = false })
            end
         end, 10)
       end,
