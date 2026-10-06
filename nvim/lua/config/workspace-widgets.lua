@@ -6,19 +6,7 @@ return {
         icons_enabled = true
       },
       config = function()
-        local colors = {
-          red = '#ca1243',
-          pink = '#FFB6C1',
-          grey = '#a0a1a7',
-          lightgrey = '#cbcccb',
-          black = '#383a42',
-          white = '#f3f3f3',
-          light_green = '#83a598',
-          orange = '#fe8019',
-          green = '#8ec07c',
-          blue = '#005F87',
-          lightblue = '#227DC4',
-        }
+        local colors = require('const').colors
 
         local theme = {
           normal = {
@@ -374,8 +362,8 @@ return {
               },
             },
             layout_config = {
-                width = 0.55,
-                height = 0.6,
+              width = 0.55,
+              height = 0.6,
             }
           },
           pickers = {
