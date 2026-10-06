@@ -42,7 +42,7 @@ local plugins = {
                 next = ']c',
                 prev = '[c',
             },
-        }
+        },
     },
     { 'sindrets/diffview.nvim',
         config = function()
