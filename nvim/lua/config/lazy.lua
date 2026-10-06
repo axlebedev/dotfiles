@@ -10,6 +10,7 @@ local diagnostic = require("config.diagnostic")
 local edit = require("config.edit")
 local qf = require("config.qf")
 local fold = require("config.fold")
+local robot = require("config.robot")
 
 -- Setup lazy.nvim
 require('lazy').setup({
@@ -28,6 +29,7 @@ require('lazy').setup({
     appearance.plugins,
     edit.plugins,
     lsp.plugins,
+    robot.plugins,
     qf.plugins,
     { import = "config.treesitter" },
 
@@ -188,6 +190,7 @@ edit.init_config()
 git.init_config()
 appearance.init_config()
 lsp.init_config()
+robot.init_config()
 diagnostic.init_config()
 search.init_config()
 qf.init_config()
