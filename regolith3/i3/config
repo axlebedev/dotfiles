@@ -331,17 +331,17 @@ bindsym $mod+F6 exec brightnessctl set 10+
 
 bindsym $mod+Shift+f exec --no-startup-id ~/dotfiles/regolith3/i3/float_fullscreen.sh
 
-set $mode_gaps_toggle "Toggle gaps: (D)esktop (N)otebook"
+set $mode_gaps_toggle "Toggle gaps: (mod+d)esktop (mod+n)otebook"
 mode $mode_gaps_toggle {
-    bindsym $mod+Shift+d gaps top all set 36, \
-        gaps left all set 260, \
+    bindsym $mod+d gaps top all set 36, \
+        gaps left all set 222, \
         gaps bottom all set 140, \
         gaps right all set 440; \
         mode "default"
-    bindsym $mod+Shift+n gaps top all set 16, \
+    bindsym $mod+n gaps top all set 16, \
         gaps left all set 100, \
         gaps bottom all set 40, \
-        gaps right all set 380; \
+        gaps right all set 300; \
         mode "default"
 
     bindsym Return mode "default"
