@@ -1,53 +1,53 @@
 return {
-    -- airline
-    { 'nvim-lualine/lualine.nvim',
-      dependencies = { 'nvim-tree/nvim-web-devicons' },
-      options = {
-        icons_enabled = true
-      },
-      config = function()
-        local colors = require('const').colors
+  -- airline
+  { 'nvim-lualine/lualine.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    options = {
+      icons_enabled = true
+    },
+    config = function()
+      local colors = require('const').colors
 
-        local theme = {
-          normal = {
-            a = { fg = colors.white, bg = colors.blue },
-            b = { fg = colors.white, bg = colors.blue },
-            c = { fg = colors.white, bg = colors.blue },
-            z = { fg = colors.white, bg = colors.black },
-          },
-          insert = { a = { fg = colors.black, bg = colors.light_green } },
-          visual = { a = { fg = colors.white, bg = colors.lightblue } },
-          replace = { a = { fg = colors.white, bg = colors.green } },
-        }
+      local theme = {
+        normal = {
+          a = { fg = colors.white, bg = colors.blue },
+          b = { fg = colors.white, bg = colors.blue },
+          c = { fg = colors.white, bg = colors.blue },
+          z = { fg = colors.white, bg = colors.black },
+        },
+        insert = { a = { fg = colors.black, bg = colors.light_green } },
+        visual = { a = { fg = colors.white, bg = colors.lightblue } },
+        replace = { a = { fg = colors.white, bg = colors.green } },
+      }
 
-        local empty = require('lualine.component'):extend()
-        function empty:draw(default_highlight)
-          self.status = ''
-          self.applied_separator = ''
-          self:apply_highlights(default_highlight)
-          self:apply_section_separators()
-          return self.status
-        end
+      local empty = require('lualine.component'):extend()
+      function empty:draw(default_highlight)
+        self.status = ''
+        self.applied_separator = ''
+        self:apply_highlights(default_highlight)
+        self:apply_section_separators()
+        return self.status
+      end
 
-        -- Put proper separators and gaps between components in sections
-        local function process_sections(sections)
-          for name, section in pairs(sections) do
-            local left = name:sub(9, 10) < 'w'
-            for pos = 1, name ~= 'lualine_z' and #section or #section - 1 do
-              table.insert(section, pos * 2, { empty, color = { fg = colors.white, bg = colors.white } })
-            end
-            for id, comp in ipairs(section) do
-              if type(comp) ~= 'table' then
-                comp = { comp }
-                section[id] = comp
-              end
-              comp.separator = left and { right = '' } or { left = '' }
-            end
+      -- Put proper separators and gaps between components in sections
+      local function process_sections(sections)
+        for name, section in pairs(sections) do
+          local left = name:sub(9, 10) < 'w'
+          for pos = 1, name ~= 'lualine_z' and #section or #section - 1 do
+            table.insert(section, pos * 2, { empty, color = { fg = colors.white, bg = colors.white } })
           end
-          return sections
+          for id, comp in ipairs(section) do
+            if type(comp) ~= 'table' then
+              comp = { comp }
+              section[id] = comp
+            end
+            comp.separator = left and { right = '' } or { left = '' }
+          end
         end
+        return sections
+      end
 
-        require('lualine').setup({
+      require('lualine').setup({
           options = {
             theme = theme,
             component_separators = '',
@@ -98,31 +98,31 @@ return {
               { 'branch' },
               {
                 -- The function that returns the path string
-                function() return require("jsonpath").get():sub(2) end,
-                -- Only show the component when a JSON path is available
-                cond = function() return vim.bo.filetype == "json" and require("jsonpath").get() ~= "" end,
-                color = { bg = colors.light_green, fg = colors.black },
-              },
-              { 'filename',
-                path = 1,
-                cond = function()
-                  return not(vim.bo.filetype == "json" and require("jsonpath").get() ~= "")
+                  function() return require("jsonpath").get():sub(2) end,
+                  -- Only show the component when a JSON path is available
+                  cond = function() return vim.bo.filetype == "json" and require("jsonpath").get() ~= "" end,
+                  color = { bg = colors.light_green, fg = colors.black },
+                },
+                { 'filename',
+                  path = 1,
+                  cond = function()
+                    return not(vim.bo.filetype == "json" and require("jsonpath").get() ~= "")
                     and vim.api.nvim_buf_get_name(0) ~= ""
-                end,
-              }
+                  end,
+                }
+              },
+              lualine_x = {},
+              lualine_y = {},
+              lualine_z = {
+                { '%l:%c' },
+                { '%p%%/%L' },
+              },
             },
-            lualine_x = {},
-            lualine_y = {},
-            lualine_z = {
-              { '%l:%c' },
-              { '%p%%/%L' },
+            inactive_sections = {
+              lualine_c = { '%f %y %m' },
+              lualine_x = {},
             },
-          },
-          inactive_sections = {
-            lualine_c = { '%f %y %m' },
-            lualine_x = {},
-          },
-        })
+          })
       end
     },
 
@@ -138,37 +138,37 @@ return {
               separator_visible = { fg = '#005F87' },
               separator_selected = { fg = '#005F87' },
             },
-          options = {
-            right_mouse_command = "Bdelete! %d",
-            tab_size = 3,
-            max_name_length = 100,
-            name_formatter = function(buf)
-              return require('features/bufferline_utils').getValue(buf.path)
-            end,
-            offsets = {
-              {
-                filetype = "NvimTree",
-                text = "",
-                text_align = "left",
-                separator = false,
-                highlight = 'BufferLineOffset',
-              }
-            },
-            separator_style = 'slant',
-            hover = {
-              enabled = true,
-              delay = 150,
-              reveal = {'close'}
-            },
-            close_command = "Bdelete! %d", -- If using bufdelete.nvim plugin
-            custom_filter = function(buf_number, buf_numbers)
-              -- filter out filetypes you don't want to see
-              if vim.bo[buf_number].filetype ~= "qf" then
-                return true
-              end
-            end,
-          }
-        })
+            options = {
+              right_mouse_command = "Bdelete! %d",
+              tab_size = 3,
+              max_name_length = 100,
+              name_formatter = function(buf)
+                return require('features/bufferline_utils').getValue(buf.path)
+              end,
+              offsets = {
+                {
+                  filetype = "NvimTree",
+                  text = "",
+                  text_align = "left",
+                  separator = false,
+                  highlight = 'BufferLineOffset',
+                }
+              },
+              separator_style = 'slant',
+              hover = {
+                enabled = true,
+                delay = 150,
+                reveal = {'close'}
+              },
+              close_command = "Bdelete! %d", -- If using bufdelete.nvim plugin
+              custom_filter = function(buf_number, buf_numbers)
+                -- filter out filetypes you don't want to see
+                if vim.bo[buf_number].filetype ~= "qf" then
+                  return true
+                end
+              end,
+            }
+          })
       end,
     },
 
@@ -198,12 +198,12 @@ return {
 
         -- Remap 'o' to open file in Startify window
         vim.api.nvim_create_autocmd('User', {
-          pattern = 'Startified',
-          callback = function()
-            vim.keymap.set('n', 'o', '<plug>(startify-open-buffers)', { buffer = true })
-            vim.wo.cursorline = true
-          end,
-        })
+            pattern = 'Startified',
+            callback = function()
+              vim.keymap.set('n', 'o', '<plug>(startify-open-buffers)', { buffer = true })
+              vim.wo.cursorline = true
+            end,
+          })
       end,
     },
 
@@ -214,34 +214,34 @@ return {
         local api = require("nvim-tree.api")
 
         -- Custom highlight for filetypes {{{
-        vim.api.nvim_set_hl(0, "MyNvimTreeBrown", { fg = "#ab6924" })
-        vim.api.nvim_set_hl(0, "MyNvimTreeOrange", { fg = "#DC4D01" })
-        vim.api.nvim_set_hl(0, "MyNvimTreePink", { fg = "#D370D5" })
-        vim.api.nvim_set_hl(0, "MyNvimTreeBlack", { fg = "#000000" })
-        vim.api.nvim_set_hl(0, "MyNvimTreeGray", { fg = "#777777" })
-        vim.api.nvim_set_hl(0, "MyNvimTreeGreen", { fg = "#119603" })
-        vim.api.nvim_set_hl(0, "MyNvimTreeLightgreen", { fg = "#16bf04" })
-        vim.api.nvim_set_hl(0, "MyNvimTreeBlue", { fg = "#6363F7" })
-        local MyDecorator = api.decorator.UserDecorator:extend()
-        ---Mandatory constructor  :new()  will be called once per tree render, with no arguments.
-        function MyDecorator:new()
-          self.enabled            = true
-          self.highlight_range    = "name"
-        end
+              vim.api.nvim_set_hl(0, "MyNvimTreeBrown", { fg = "#ab6924" })
+              vim.api.nvim_set_hl(0, "MyNvimTreeOrange", { fg = "#DC4D01" })
+              vim.api.nvim_set_hl(0, "MyNvimTreePink", { fg = "#D370D5" })
+              vim.api.nvim_set_hl(0, "MyNvimTreeBlack", { fg = "#000000" })
+              vim.api.nvim_set_hl(0, "MyNvimTreeGray", { fg = "#777777" })
+              vim.api.nvim_set_hl(0, "MyNvimTreeGreen", { fg = "#119603" })
+              vim.api.nvim_set_hl(0, "MyNvimTreeLightgreen", { fg = "#16bf04" })
+              vim.api.nvim_set_hl(0, "MyNvimTreeBlue", { fg = "#6363F7" })
+              local MyDecorator = api.decorator.UserDecorator:extend()
+              ---Mandatory constructor  :new()  will be called once per tree render, with no arguments.
+              function MyDecorator:new()
+                self.enabled            = true
+                self.highlight_range    = "name"
+              end
 
-        function MyDecorator:highlight_group(node)
-          local s = node.name
-          if s:match('%.[jt]sx?$') or s:match('%.cpp$') or s:match('%.lua$') or s:match('%.sh$')  then
-            return 'MyNvimTreeGreen'
-          elseif s:match('%.txt$') or s:match('%.md$') then
-            return 'MyNvimTreeBrown'
-          elseif s:match('%.h$') or s:match('%.html$') then
-            return 'MyNvimTreeBlue'
-          elseif s:match("%.css$") or s:match("%.less$") or s:match("%.scss$") then
-            return 'MyNvimTreePink'
-          end
-          return nil
-        end
+              function MyDecorator:highlight_group(node)
+                local s = node.name
+                if s:match('%.[jt]sx?$') or s:match('%.cpp$') or s:match('%.lua$') or s:match('%.sh$')  then
+                  return 'MyNvimTreeGreen'
+                elseif s:match('%.txt$') or s:match('%.md$') then
+                  return 'MyNvimTreeBrown'
+                elseif s:match('%.h$') or s:match('%.html$') then
+                  return 'MyNvimTreeBlue'
+                elseif s:match("%.css$") or s:match("%.less$") or s:match("%.scss$") then
+                  return 'MyNvimTreePink'
+                end
+                return nil
+              end
         -- }}}
 
         require('nvim-tree').setup {
@@ -259,125 +259,125 @@ return {
                 api.node.navigate.parent()
               end
             end,       opts("Collapse"))
-            vim.keymap.set("n", "l", function()
-              local node = api.tree.get_node_under_cursor()
+          vim.keymap.set("n", "l", function()
+            local node = api.tree.get_node_under_cursor()
 
-              if node and node.open then
-                vim.cmd("normal! l")
-              else
-                api.node.open.edit()
-              end
-            end, opts("Expand"))
-          end,
-          view = {
-            width = 35,
-            side = 'left',
-            number = false,
-            signcolumn = 'no',
-            relativenumber = false,
-            adaptive_size = false,
-          },
-          filters = {
-            dotfiles = false, -- Show hidden files (like NERDTree)
-            custom = { "^node_modules$" }, -- Exclude node_modules
-          },
-          git = { enable = true, ignore = false },
-          actions = { open_file = { quit_on_open = false } },
-          renderer = {
-            add_trailing = true,
-            full_name = true,
-            indent_width = 1,
-            icons = {
-              show = {
-                file = false,
-                folder = false,
-                git = true,
-                modified = true,
-              },
-              git_placement = "after",
-              glyphs = {
-                default = '',
-                git = {
-                  unstaged = '●',
-                  staged = '➕',
-                  unmerged = '⚡',
-                  renamed = '➜',
-                  untracked = '❓',
-                  deleted = '',
-                  ignored = '◌',
-                },
-                folder = {
-                  arrow_closed = "›",
-                  arrow_open = "⌄",
-                },
-              },
-            },
-            decorators = {
-              MyDecorator,
-            },
-            highlight_git = true,
-          },
-        }
-
-        vim.defer_fn(function()
-           local width = vim.api.nvim_win_get_width(0)
-           -- if vim window is more than 200 chars width - open nvim tree
-           if width > 200 then
-             api.tree.toggle({ focus = false })
-           end
-        end, 10)
+            if node and node.open then
+              vim.cmd("normal! l")
+            else
+              api.node.open.edit()
+            end
+          end, opts("Expand"))
       end,
-    },
-
-    -- fzf
-    { 'nvim-telescope/telescope.nvim',
-      dependencies = {
-        'nvim-lua/plenary.nvim',
-        { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+      view = {
+        width = 35,
+        side = 'left',
+        number = false,
+        signcolumn = 'no',
+        relativenumber = false,
+        adaptive_size = false,
       },
-      config = function()
-        local actions = require("telescope.actions")
-        local action_state = require("telescope.actions.state")
-
-        require('telescope').setup{
-          defaults = {
-            path_display = function(opts, path)
-              return require('features/telescope_utils').rainbow_path_display(optsArg, path)
-            end,
-            preview = false,
-            file_ignore_patterns = {
-              "%.git/", -- Escaped dot and trailing slash to target the directory
-            },
-            mappings = {
-              i = {
-                ["<C-j>"] = actions.move_selection_next,
-                ["<C-k>"] = actions.move_selection_previous,
-                ["<esc>"] = actions.close,
-                ["<C-u>"] = false,
-              },
-              n = {
-                ["<C-j>"] = actions.move_selection_next,
-                ["<C-k>"] = actions.move_selection_previous,
-                ["<esc>"] = actions.close,
-              },
-            },
-            layout_config = {
-              width = 0.55,
-              height = 0.6,
-            }
+      filters = {
+        dotfiles = false, -- Show hidden files (like NERDTree)
+        custom = { "^node_modules$" }, -- Exclude node_modules
+      },
+      git = { enable = true, ignore = false },
+      actions = { open_file = { quit_on_open = false } },
+      renderer = {
+        add_trailing = true,
+        full_name = true,
+        indent_width = 1,
+        icons = {
+          show = {
+            file = false,
+            folder = false,
+            git = true,
+            modified = true,
           },
-          pickers = {
-            buffers = {
-              mappings = {
-                i = {
-                  ["<C-d>"] = function(prompt_bufnr) -- delete buffer if is not active in any window
-                    local selection = action_state.get_selected_entry(prompt_bufnr)
-                    if not selection then
-                      return
-                    end
-                    vim.print(actions)
+          git_placement = "after",
+          glyphs = {
+            default = '',
+            git = {
+              unstaged = '●',
+              staged = '➕',
+              unmerged = '⚡',
+              renamed = '➜',
+              untracked = '❓',
+              deleted = '',
+              ignored = '◌',
+            },
+            folder = {
+              arrow_closed = "›",
+              arrow_open = "⌄",
+            },
+          },
+        },
+        decorators = {
+          MyDecorator,
+        },
+        highlight_git = true,
+      },
+    }
 
-                    -- Do nothing if trying to delete current buffer
+    vim.defer_fn(function()
+      local width = vim.api.nvim_win_get_width(0)
+      -- if vim window is more than 200 chars width - open nvim tree
+        if width > 200 then
+          api.tree.toggle({ focus = false })
+        end
+      end, 10)
+  end,
+},
+
+-- fzf
+{ 'nvim-telescope/telescope.nvim',
+  dependencies = {
+    'nvim-lua/plenary.nvim',
+    { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+  },
+  config = function()
+    local actions = require("telescope.actions")
+    local action_state = require("telescope.actions.state")
+
+    require('telescope').setup{
+      defaults = {
+        path_display = function(opts, path)
+          return require('features/telescope_utils').rainbow_path_display(optsArg, path)
+        end,
+        preview = false,
+        file_ignore_patterns = {
+          "%.git/", -- Escaped dot and trailing slash to target the directory
+        },
+        mappings = {
+          i = {
+            ["<C-j>"] = actions.move_selection_next,
+            ["<C-k>"] = actions.move_selection_previous,
+            ["<esc>"] = actions.close,
+            ["<C-u>"] = false,
+          },
+          n = {
+            ["<C-j>"] = actions.move_selection_next,
+            ["<C-k>"] = actions.move_selection_previous,
+            ["<esc>"] = actions.close,
+          },
+        },
+        layout_config = {
+          width = 0.55,
+          height = 0.6,
+        }
+      },
+      pickers = {
+        buffers = {
+          mappings = {
+            i = {
+              ["<C-d>"] = function(prompt_bufnr) -- delete buffer if is not active in any window
+                  local selection = action_state.get_selected_entry(prompt_bufnr)
+                  if not selection then
+                    return
+                  end
+                  vim.print(actions)
+
+                  -- Do nothing if trying to delete current buffer
                     if vim.fn.bufwinnr(selection.bufnr) ~= -1 then
                       -- Optional: show a notification
                       vim.notify("Cannot delete current buffer", vim.log.levels.WARN)
@@ -395,45 +395,60 @@ return {
         }
 
         local builtin = require('telescope/builtin')
-        vim.keymap.set('n', '<leader>t', function() builtin.find_files({ hidden = true }) end, { noremap = false })
-        vim.keymap.set('v', '<leader>t', function() builtin.find_files({
-                default_text = require('utils/utils').get_visual_selection(),
-                hidden = true,
-          }) end, {noremap = false})
-        vim.keymap.set('n', '<leader>b', builtin.buffers, { noremap = false })
-        vim.keymap.set('n', '<C-p>', builtin.commands, { noremap = false })
-        vim.keymap.set('n', 'sft', builtin.filetypes, { noremap = false })
-      end
-    },
+        vim.keymap.set('v', '<leader>t', function()
+          builtin.find_files({
+              default_text = require('utils/utils').get_visual_selection(),
+              hidden = true,
+            })
+        end, { noremap = false })
+      vim.keymap.set('n', '<leader>t', function()
+        local clipboard = vim.fn.getreg('+')
+        clipboard = clipboard:gsub('[\r\n]+$', '')  -- обрезаем хвостовые переводы строк
 
-    { "hedyhli/outline.nvim",
-      lazy = true,
-      command = "Outline",
-      config = function()
-        require("outline").setup {
-        }
-      end,
-    },
+        local looks_like_path = clipboard ~= ''
+        and #clipboard < 512
+        and clipboard:match('^[%w%._%-~][%w%._%-/\\~ ]*$') ~= nil
+        and clipboard:find('/') ~= nil
 
-    { 'dstein64/nvim-scrollview',
-      opts = {
-      },
-      config = function()
-        vim.api.nvim_set_hl(0, "ScrollView", { bg = "#bfbfbf" })
-        vim.api.nvim_set_hl(0, "ScrollViewHover", { bg = "#9f9f9f" })
-
-        require('scrollview').setup({
-          signs_on_startup = {},
-        })
-      end
-    },
-
-    { "phelipetls/jsonpath.nvim",
-      ft = 'json',
-      config = function()
-        require("jsonpath").setup({
-            show_on_winbar = true
+        builtin.find_files({
+            default_text = looks_like_path and clipboard or '',
+            hidden = true,
           })
-      end
+      end, { noremap = false })
+    vim.keymap.set('n', '<leader>b', builtin.buffers, { noremap = false })
+    vim.keymap.set('n', '<C-p>', builtin.commands, { noremap = false })
+    vim.keymap.set('n', 'sft', builtin.filetypes, { noremap = false })
+  end
+},
+
+{ "hedyhli/outline.nvim",
+  lazy = true,
+  command = "Outline",
+  config = function()
+    require("outline").setup {
     }
+  end,
+},
+
+{ 'dstein64/nvim-scrollview',
+  opts = {
+  },
+  config = function()
+    vim.api.nvim_set_hl(0, "ScrollView", { bg = "#bfbfbf" })
+    vim.api.nvim_set_hl(0, "ScrollViewHover", { bg = "#9f9f9f" })
+
+    require('scrollview').setup({
+        signs_on_startup = {},
+      })
+  end
+},
+
+{ "phelipetls/jsonpath.nvim",
+  ft = 'json',
+  config = function()
+    require("jsonpath").setup({
+        show_on_winbar = true
+      })
+  end
+}
 }
