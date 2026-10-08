@@ -1,5 +1,16 @@
 local custom_menu = require('features/custom_menu').custom_menu
 
+local opts = {
+  {
+    name = '#{buffer}',
+    callback = function() vim.api.nvim_feedkeys('a#{buffer}', 'i', false) end
+  },
+  {
+    name = '@{insert_edit_into_file}',
+    callback = function() vim.api.nvim_feedkeys('a@{insert_edit_into_file}', 'i', false) end
+  },
+}
+
 local plugins = {
   {
     "MeanderingProgrammer/render-markdown.nvim",
@@ -161,6 +172,7 @@ local init_config = function()
       callback = function(args)
         callbackOnEnter()
         vim.keymap.set("i", "<C-b>", "#{buffer}", { buffer = args.buf })
+        vim.keymap.set("n", "<leader>r", function() custom_menu(opts) end, { buffer = args.buf })
       end,
       })
   end
