@@ -96,8 +96,7 @@ return {
             },
             lualine_c = {
               { 'branch' },
-              {
-                -- The function that returns the path string
+              { -- JSON: the path string
                   function() return require("jsonpath").get():sub(2) end,
                   -- Only show the component when a JSON path is available
                   cond = function() return vim.bo.filetype == "json" and require("jsonpath").get() ~= "" end,
