@@ -162,3 +162,34 @@ vim.api.nvim_create_autocmd({ "BufRead" }, {
       vim.b[args.buf].commit_hash_added = true
     end
   })
+
+
+--
+-- Create an autocommand group to prevent duplicate event listener hydration
+local json_yank_group = vim.api.nvim_create_augroup("JsonPathYank", { clear = true })
+
+vim.api.nvim_create_autocmd("FileType", {
+  group = json_yank_group,
+  pattern = "json", -- Matches .json file extension environments
+  callback = function()
+    -- Set a buffer-local mapping that overrides 'yiw' strictly within this file
+    vim.keymap.set("n", "yiw", function()
+      -- Safely extract path using the jsonpath plugin
+      local path = require("jsonpath").get()
+
+      if path and #path > 1 then
+        -- Drop the first character using :sub(2)
+        local formatted_path = path:sub(2)
+
+        -- Set Neovim's default un-named register (") to the modified path string
+        vim.fn.setreg('"', formatted_path)
+        vim.fn.setreg('+', formatted_path)
+
+        -- Optional: Echo a clean confirmation block in the command-line area
+        vim.notify("Yanked JSON path: " .. formatted_path, vim.log.levels.INFO)
+      else
+        vim.notify("No valid JSON path found under cursor", vim.log.levels.WARN)
+      end
+    end, { buffer = true, desc = "Yank JSONPath skipping first char" })
+  end,
+})
