@@ -26,7 +26,9 @@ local plugins = {
         },
         -- Standard setup to turn raw blocks into clean UI elements
         heading = { sign = true, icons = { "   ", "   ", "   " } },
-        code = { left_pad = 2, right_pad = 2 },
+        code = {
+          language_icon = false, -- эта иконка забирает 2 символа слева - справа надпись обрезается. Подстава когда тип заканчиваеттая на []
+        },
       }
     },
   {
