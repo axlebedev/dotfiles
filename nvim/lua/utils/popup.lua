@@ -27,8 +27,23 @@ M.createPopup = function(text, opts)
             opts[k] = v
         end
     end
+
+    -- Store the close timeout (in milliseconds) if provided
+    local closeTimeout = opts.closeTimeout
+    opts.closeTimeout = nil  -- Remove this custom key before passing to nvim_open_win
+
     local win = vim.api.nvim_open_win(buf, 1, opts)
     vim.cmd('redraw')
+
+    -- Auto-close the popup after the specified timeout (in milliseconds)
+    if closeTimeout then
+        vim.defer_fn(function()
+            if vim.api.nvim_win_is_valid(win) then
+                vim.api.nvim_win_close(win, true)
+                vim.api.nvim_buf_delete(buf, { force = true })
+            end
+        end, closeTimeout)
+    end
 
     vim.cmd('wincmd p')
 

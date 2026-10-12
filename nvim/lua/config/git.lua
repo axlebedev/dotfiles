@@ -6,6 +6,19 @@ local plugins = {
             vim.keymap.set("n", "<C-g><C-w>", function()
                 vim.cmd('G add %')
                 print('Git add ' .. vim.fn.expand('%:.'))
+                local popupUtils = require('utils/popup')
+
+                local message = '  Git add %'
+                local width = #message + 4
+                popupUtils.createPopup(
+                  { '', message },
+                  {
+                    closeTimeout = 700,
+                    width = width,
+                    height = 3,
+                    row = 5,
+                    col = math.floor((vim.o.columns - width) / 2),
+                  })
             end)
         end
     },
