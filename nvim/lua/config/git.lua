@@ -90,24 +90,34 @@ local init_config = function()
         })
     end, { desc = "Git unmerged files" })
 
-    -- function GeditFile(branch)
-    --     vim.cmd('Gedit ' .. branch .. ':%')
-    -- end
-    -- vim.keymap.set("n", "<C-g><C-f>", function() vim.cmd('Gw') end)
-    -- nnoremap <silent> <C-g><C-f> <ScriptCmd>fzf#run(fzf#wrap({ source: 'sh ~/dotfiles/fish/sortedBranch.sh', sink: g:GeditFile }))<CR>
 
-    -- def Cgci()
-    --     if (&ft == 'nerdtree')
-    --         wincmd l
-    --     endif
-    --     var current_branch = fugitive#Head()
-    --     if (current_branch == 'master')
-    --         Commits --first-parent
-    --     else
-    --         Commits --branches --not master
-    --     endif
-    -- enddef
-    -- nnoremap <C-g><C-i> <ScriptCmd>Cgci()<CR>
+    vim.keymap.set('n', '<C-g><C-f>', function()
+      local pickers = require('telescope.pickers')
+      local finders = require('telescope.finders')
+      local conf = require('telescope.config').values
+      local actions = require('telescope.actions')
+      local action_state = require('telescope.actions.state')
+
+      pickers.new({}, {
+          prompt_title = 'Branches',
+          finder = finders.new_oneshot_job(
+            { 'sh', vim.env.HOME .. '/dotfiles/fish/sortedBranch.sh' },
+            {}
+            ),
+          sorter = conf.generic_sorter({}),
+          attach_mappings = function(prompt_bufnr, map)
+            actions.select_default:replace(function()
+              actions.close(prompt_bufnr)
+              local selection = action_state.get_selected_entry()
+              if selection then
+                vim.cmd('Gedit ' .. (selection.value or selection[1]) .. ':%')
+              end
+            end)
+            return true
+          end,
+        }):find()
+    end, { silent = true })
+    -- nnoremap <silent> <C-g><C-f> <ScriptCmd>fzf#run(fzf#wrap({ source: 'sh ~/dotfiles/fish/sortedBranch.sh', sink: g:GeditFile }))<CR>
 end
 
 return {
