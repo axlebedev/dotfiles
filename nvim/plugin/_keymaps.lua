@@ -391,3 +391,24 @@ vim.keymap.set({'n', 'i', 'v', 't'}, '<Esc>', function()
 
   vim.cmd('set nohlsearch')
 end, { desc = 'Close floats and normal Esc behavior' })
+
+-- Go to next/prev paragraph, ignoring empty lines
+vim.keymap.set('n', ')', function()
+  -- Emulate pressing ')'
+  vim.cmd('normal! )')
+
+  -- Keep pressing ')' while current line is empty
+  while vim.fn.getline('.') == '' do
+    vim.cmd('normal! )')
+  end
+end, { silent = true })
+--
+vim.keymap.set('n', '(', function()
+  -- Emulate pressing ')'
+  vim.cmd('normal! (')
+
+  -- Keep pressing ')' while current line is empty
+  while vim.fn.getline('.') == '' do
+    vim.cmd('normal! (')
+  end
+end, { silent = true })
