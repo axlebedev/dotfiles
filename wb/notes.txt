@@ -7,6 +7,8 @@ https://gitlab.wildberries.ru/wbx-team/wbx-site/frontend/blob/dev/packages/commo
 --
 nm_id и code1S - это одно и то же!
 --
+Локально запустить с другой локалью:: с параметром --locale, например npm run start:dev website orders --locale=et
+--
 Как связан заказ в /orders и статус в /statuses
 orders[].uid === statuses[].rid
 "uid": "eBq.882ff929b1d24790a318a8645fa24846.0.0", // orders
