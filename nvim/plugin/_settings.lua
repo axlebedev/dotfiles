@@ -205,3 +205,13 @@ vim.api.nvim_create_autocmd({ "FocusLost" }, {
 
 -- always show signcolumn, избегаем дёргания через пару секунд после открытия буфера
 vim.opt.signcolumn = 'yes'
+
+-- BUG:
+-- current line is:
+-- export { ActiveOrdersViewModel as default } from './ActiveOrdersViewModel';
+-- cursor is on last word
+-- I press "gf"
+-- see error "cant find file ./ActiveOrdersViewModel/index.ts'
+-- but there is file "./ActiveOrdersViewModel.ts"
+vim.opt.suffixesadd:append({ '.ts', '.tsx', '.js', '.jsx' })
+-- If you find suffixesadd alone isn't enough for all your imports, you might need a more custom includeexpr or a plugin that fully implements TypeScript's resolution logic
