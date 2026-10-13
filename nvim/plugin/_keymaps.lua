@@ -378,6 +378,9 @@ vim.keymap.set("n", "N", "N<CMD>FindCursor #d6d8fa 500<CR>")
 vim.keymap.set('i', '<Tab>', ' pumvisible() ? "\\<C-n>" : "\\<Tab>"', { expr = true, silent = true })
 vim.keymap.set('i', '<S-Tab>', 'pumvisible() ? "\\<C-p>" : "\\<S-Tab>"', { expr = true, silent = true })
 
+-- Так проще нажимать мизинцем
+vim.keymap.set('n', '[[', '[{')
+
 vim.keymap.set({'n', 'i', 'v', 't'}, '<Esc>', function()
   -- Close all floating windows first
   for _, win in ipairs(vim.api.nvim_list_wins()) do
