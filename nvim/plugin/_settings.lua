@@ -64,7 +64,7 @@ vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 
 -- Производительность
-vim.opt.timeoutlen = 300
+vim.opt.timeoutlen = 700
 vim.opt.lazyredraw = true
 vim.opt.history = 500
 
