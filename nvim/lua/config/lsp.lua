@@ -163,69 +163,141 @@ local init_config = function()
       },
     })
 
-  vim.lsp.config('vtsls', {
-      on_attach = function(client, bufnr)
-        -- vim.api.nvim_set_hl(0, "LspSigNormal", { fg = "#24273a", bg = "#cad3f5" })
-        vim.api.nvim_set_hl(0, "LspSigActive", { fg = "#494d64", bg = "#f2c9cf", bold = true })
+vim.lsp.config('vtsls', {
+  cmd = { 'vtsls', '--stdio' },
+  filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'typescript.tsx' },
+  -- Force the LSP to evaluate from the monorepo root, not the sub-packages
+  root_markers = { '.git' },
 
-        require("lsp_signature").on_attach({
-            bind = true,
-            handler_opts = {
-              border = "single",
-            },
-            hi_parameter = "LspSigActive",
-            hint_enable = false,
-          }, bufnr)
-      end,
-      root_dir = vim.fs.root(0, { 'tsconfig.json', 'jsconfig.json', 'package.json', '.git' }),
-      settings = {
-        typescript = {
-          autoUseWorkspaceTsdk = true,
-          enableMoveToFileCodeAction = true,
-          -- preferGoToSourceDefinition = true, -- я хотел чтобы go to definition вёл в сорц, а он ведёт в .d.ts Этот конфиг ведёт в ещё бОльшую пердь
-          updateImportsOnFileMove = { enabled = "always" },
-          inlayHints = {
-            parameterNames = { enabled = "literals" },
-            parameterTypes = { enabled = true },
-            variableTypes = { enabled = true },
-            propertyDeclarationTypes = { enabled = true },
-            functionLikeReturnTypes = { enabled = true },
-            enumMemberValues = { enabled = true },
-          },
+  handlers = {
+    -- Intercept "Go to Definition" using the modern client method
+    ['textDocument/definition'] = function(err, result, ctx, config)
+      local client = vim.lsp.get_client_by_id(ctx.client_id)
+      if not client then return end
 
-          preferences = {
-            includeCompletionsForModuleExports = true,
-            includeCompletionsForImportStatements = true,
-          },
-          -- This is the key setting
-          implementCodeActions = {
-            preferredImplementation = "source"
-          }
-        },
+      local params = vim.lsp.util.make_position_params()
 
-        javascript = {
-          -- Same for JavaScript
-          implementCodeActions = {
-            preferredImplementation = "source"
-          }
-        },
+      -- Modern replacement for execute_command
+      client:exec_cmd({
+        command = 'typescript.goToSourceDefinition',
+        arguments = { params.textDocument.uri, params.position },
+      }, { bufnr = ctx.bufnr }, function(cmd_err, cmd_result)
+        if not cmd_err and cmd_result and #cmd_result > 0 then
+          -- Modern implementation to show the code file
+          vim.lsp.util.show_document(cmd_result, client.offset_encoding, { focus = true })
+        else
+          -- Fallback if no source implementation exists
+          vim.lsp.handlers['textDocument/definition'](err, result, ctx, config)
+        end
+      end)
+    end,
+  },
+  settings = {
+    typescript = { preferGoToSourceDefinition = true },
+    javascript = { preferGoToSourceDefinition = true },
+  },
+})
 
-        vtsls = {
-          enableMoveToFileCodeAction = true,
-          autoUseWorkspaceTsdk = true, -- Use project-specific TS version
-        },
-      },
+vim.lsp.enable('vtsls')
 
-      -- cmd = { "vtsls", "--stdio" },
-      -- reuse_client = function()
-        --   return true
-      -- end,
-    })
+  -- vim.lsp.config('vtsls', {
+  --     on_attach = function(client, bufnr)
+  --       -- vim.api.nvim_set_hl(0, "LspSigNormal", { fg = "#24273a", bg = "#cad3f5" })
+  --       vim.api.nvim_set_hl(0, "LspSigActive", { fg = "#494d64", bg = "#f2c9cf", bold = true })
+  --
+  --       require("lsp_signature").on_attach({
+  --           bind = true,
+  --           handler_opts = {
+  --             border = "single",
+  --           },
+  --           hi_parameter = "LspSigActive",
+  --           hint_enable = false,
+  --         }, bufnr)
+  --     end,
+  --     root_dir = vim.fs.root(0, { 'tsconfig.json', 'jsconfig.json', 'package.json', '.git' }),
+  --     settings = {
+  --       typescript = {
+  --         autoUseWorkspaceTsdk = true,
+  --         enableMoveToFileCodeAction = true,
+  --         preferGoToSourceDefinition = true, -- я хотел чтобы go to definition вёл в сорц, а он ведёт в .d.ts Этот конфиг ведёт в ещё бОльшую пердь
+  --         updateImportsOnFileMove = { enabled = "always" },
+  --         inlayHints = {
+  --           parameterNames = { enabled = "literals" },
+  --           parameterTypes = { enabled = true },
+  --           variableTypes = { enabled = true },
+  --           propertyDeclarationTypes = { enabled = true },
+  --           functionLikeReturnTypes = { enabled = true },
+  --           enumMemberValues = { enabled = true },
+  --         },
+  --
+  --         preferences = {
+  --           includeCompletionsForModuleExports = true,
+  --           includeCompletionsForImportStatements = true,
+  --         },
+  --         -- This is the key setting
+  --         implementCodeActions = {
+  --           preferredImplementation = "source"
+  --         }
+  --       },
+  --
+  --       javascript = {
+  --         preferGoToSourceDefinition = true, -- я хотел чтобы go to definition вёл в сорц, а он ведёт в .d.ts Этот конфиг ведёт в ещё бОльшую пердь
+  --         -- Same for JavaScript
+  --         implementCodeActions = {
+  --           preferredImplementation = "source"
+  --         }
+  --       },
+  --
+  --       vtsls = {
+  --         settings = { typescript = { preferGoToSourceDefinition = true } },
+  --         enableMoveToFileCodeAction = true,
+  --         autoUseWorkspaceTsdk = true, -- Use project-specific TS version
+  --       },
+  --     },
+  --
+  --     -- cmd = { "vtsls", "--stdio" },
+  --     -- reuse_client = function()
+  --       --   return true
+  --     -- end,
+  --   })
+
+-- vim.lsp.config('ts_ls', {
+--   cmd = { 'typescript-language-server', '--stdio' },
+--   filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'typescript.tsx' },
+--   root_markers = { '.git', 'package.json' },
+--   handlers = {
+--     ['textDocument/definition'] = function(err, result, ctx, config)
+--       local client = vim.lsp.get_client_by_id(ctx.client_id)
+--       if not client then return end
+--
+--       local params = vim.lsp.util.make_position_params()
+--
+--       -- Note the leading underscore for ts_ls
+--       client:request('workspace/executeCommand', {
+--         command = '_typescript.goToSourceDefinition',
+--         arguments = { params.textDocument.uri, params.position },
+--       }, function(cmd_err, cmd_result)
+--         if not cmd_err and cmd_result and #cmd_result > 0 then
+--           vim.lsp.util.show_document(cmd_result, client.offset_encoding, { focus = true })
+--         else
+--           vim.lsp.handlers['textDocument/definition'](err, result, ctx, config)
+--         end
+--       end)
+--     end,
+--   },
+-- })
+
   -- npm install -g @vtsls/language-server
   -- npm install -g vscode-langservers-extracted (?)
   -- npm install -g @fsouza/prettierd vscode-langservers-extracted
   -- luarocks install lua-language-server
-  vim.lsp.enable({ 'vtsls', 'lua_ls', 'cssls', 'jsonls' })
+  vim.lsp.enable({
+    'vtsls',
+    -- 'ts_ls',
+    'lua_ls',
+    'cssls',
+    'jsonls',
+  })
 
   vim.o.complete = ".,o" -- use buffer and omnifunc
   vim.o.completeopt = "fuzzy,menuone,noselect" -- add 'popup' for docs (sometimes)
