@@ -215,3 +215,12 @@ vim.opt.signcolumn = 'yes'
 -- but there is file "./ActiveOrdersViewModel.ts"
 vim.opt.suffixesadd:append({ '.ts', '.tsx', '.js', '.jsx' })
 -- If you find suffixesadd alone isn't enough for all your imports, you might need a more custom includeexpr or a plugin that fully implements TypeScript's resolution logic
+
+-- Не показывать ошибки при right click
+vim.cmd([[
+  anoremenu PopUp.Go\ to\ definition <Nop>
+  anoremenu PopUp.Open\ in\ web\ browser <Nop>
+  anoremenu PopUp.Show\ Diagnostics <Nop>
+  anoremenu PopUp.Show\ All\ Diagnostics <Nop>
+  anoremenu PopUp.Configure\ Diagnostics <Nop>
+]])
