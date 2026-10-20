@@ -90,6 +90,19 @@ local init_config = function()
         })
     end, { desc = "Git unmerged files" })
 
+    vim.api.nvim_create_autocmd('VimEnter', {
+        callback = function()
+          local is_rebasing = vim.fn.system(
+            'test -d "$(git rev-parse --git-path rebase-merge)" -o -d "$(git rev-parse --git-path rebase-apply)" && echo "REBASING" || echo "not rebasing"'
+            ):gsub("%s+$", "")
+          if is_rebasing == "REBASING" then
+            builtin.find_files({
+                prompt_title = "Unmerged Files",
+                find_command = { "git", "diff", "--name-only", "--diff-filter=U" },
+              })
+          end
+        end,
+      })
 
     vim.keymap.set('n', '<C-g><C-f>', function()
       local pickers = require('telescope.pickers')
