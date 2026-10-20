@@ -1,55 +1,127 @@
+"returnable" - отказной
+"refundable" - ?
+"refusable" - ?
+--
+
+товары егросери ТЕСТОВЫЕ
+адрес Воркута, Парковая улица, д. 40, кв. 1 курьером продавец https://www.wildberries.ru/seller/250139746
+весовые товары 1298356539 1298356320 1298356840
+--
+
+Если id.wb.ru не логинит
+попробовать скинуть сессии через заявку
+https://sd.wb.ru/catalog/bezopasnost/avtorizatsiya-i-autentifikatsiya/sbros-aktivnykh-sessiy
+--
+
 пайплайны смотреть здесь
 https://gitlab.wildberries.ru/wbx-team/wbx-site/frontend/-/pipelines?page=1&scope=all&ref=release-v14.16.0
 --
+
+sale_conditions в /orders...
+saleConditions & 4 - is unreturnable
+--
+
 smId и deliveryType - это одно и то же! (по смыслу, а в коде это может быть string или number)
 pay_state и pay_status - это одно и то же!
 https://gitlab.wildberries.ru/wbx-team/wbx-site/frontend/blob/dev/packages/common/src/constants/deliveries.ts#L164
 --
+
 nm_id и code1S - это одно и то же!
 --
+
 Локально запустить с другой локалью:: с параметром --locale, например npm run start:dev website orders --locale=et
 --
+
 Как связан заказ в /orders и статус в /statuses
 orders[].uid === statuses[].rid
 "uid": "eBq.882ff929b1d24790a318a8645fa24846.0.0", // orders
 "rid": "eBq.882ff929b1d24790a318a8645fa24846.0.0", // statuses
 --
-DeliveryTypes
-gitlab.wildberries.ru/wbx-team/wbx-site/frontend/blob/dev/packages/common/src/constants/deliveries.ts#L164
+
+оформить заказ С ПОШЛИНОЙ
+С пошлиной: ввести в поиск "найк пойзон" и выбрать сортировку по уменьшению цены, любые дорогие кроссовки добавить и выбрать для оплаты карту, где не хватит средств - оформится с пошлиной отложенный ордер
 --
-Откуда берётся статус, что значит "285" и пр
-statuses[].status_id = 285 // GroupsForDisplayingDeliveryStatuses https://gitlab.wildberries.ru/wbx-team/wbx-site/frontend/blob/dev/packages/business-types/src/config/objects.ts#L111
+
+Splitter
+Данные по АБ-тестированию приходят от ручки:
+https://splitter.wb.ru/v2/result
+Хранятся они в local storage :: splitInfoV2
+--
+
+
+Восстановление пароля outlook
+https://sd.wb.ru/issue/ITSOFT-10801/description
+--
+
+docdoc Как создать b2b пользователя
+Зайти под своим обычным пользователем
+зайти сюда https://www.wildberries.ru/promo/b2b
+добавить бизнес (примеры ниже)
+ИНН которые можно добавить для B2B
+Покупатель 2 от Ивана (заказ создали, ждем доставки) ИНН 7733333677 ID 2BM-7733333677-773301001-201902120732585318586
+Покупатель 3. С покупкой - заказ создадут сами ИНН: 7807279106 ЭДО: 2BM-7807279106-780701001-202408261244194869469
+Покупатель 4. Без покупки ИНН: 9724114714 ЭДО: 2BM-9705118142-770501001-201808140708520629143
+--
+
+ОФОРМИТЬ eDBS заказ с доставкой
+1. в углу - способ доставки "курьером" - реутов ул. ленина д. 1
+2. товар 330885364
+--
+
+Чтобы предложило ОЦЕНИТЬ пвз/курьера
+подменять ответ от webapi/lk/myorders/delivery/foreval
+чтобы увидеть оценку пвЗ
+
 {
-    "fitting": [ 812 ],
-    "ready": [ 210, 235, 509, 805 ],
-    "cancelled": [ 503, 511, 562, 510, 193, 241 ],
-    "returned": [ 250, 270, 275, 280, 285, 290 ],
-    "delivered": [ 176, 230, 506, 601 ],
-    "rejected": [ 240 ],
-    "productsFromCourier": [ 260, 265, 600, 803, 807 ],
-    "chatWithCourier": [ 803, 804, 807 ]
+    "resultState": 0,
+    "value": [
+        {
+            "id": "123",
+            "smId": 6,
+            "surveyType": 2,
+            "totalPrepaid": 0,
+            "receiveDate": "23 декабря",
+            "employeeName": "Тестовый сотрудник",
+            "deliveryWay": "Self",
+            "address": "Москва, Москва, Тестовая улица, 76к2"
+        }
+    ]
+}
+чтобы увидеть оценку курьера
+{
+    "resultState": 0,
+    "value": [
+        {
+            "id": "123",
+            "smId": 5,
+            "surveyType": 1,
+            "totalPrepaid": 0,
+            "receiveDate": "23 декабря",
+            "employeeName": "Тестовый сотрудник",
+            "deliveryWay": "Courier"
+        }
+    ]
 }
 
 --
-pay_state
-/*pay_state
-Список возможных статусов оплаты и их значения:
-    1: "Не оплачен"
-    2: "Обработка платежа"
-    3: "Ошибка оплаты"
-    4: "Оплачен"
-    5: "Возврат оплаты"
-    6: "Инициирован возврат дс"
- */
-export const PayStatus = {
-    Unknown: -1,
-    Accepted: 0,
-    NotPaid: 1,
-    PaySent: 2,
-    PayFail: 3,
-    Paid: 4,
-    Refunded: 5,
-    RefundRequested: 6,
-    NoPaid: 7,
-} as const;
 
+Фигма
+lebedev.aleksey101@world-business.ae
+
+--
+
+Токен в wbx__tokenData
+
+--
+
+subjectId это принадлежность к категории товаров, есть в карточках товаров. Например, все мобильные телефоны будут иметь сабджект айди 6445 (условно), а все планшеты сабджекайди 5678
+
+--
+
+Как сделать что-то юзеру
+они обычно быстро делают, но я скину https://band.wb.ru/wb/channels/user-grade-dev вот сюда надо написать, скинуть sys_auth аккаунта своего и попросить накинуть постоплату (можно сразу обычную и курьерскую)
+
+--
+
+Почта
+THR_2o 2wsxCDE
