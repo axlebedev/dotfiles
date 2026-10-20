@@ -415,3 +415,8 @@ vim.keymap.set('n', '(', function()
     vim.cmd('normal! (')
   end
 end, { silent = true })
+
+vim.keymap.set({'n', 'v'}, '<MiddleMouse>', function()
+  vim.cmd(':%y+')  -- yank all lines to system clipboard
+  vim.notify('COPIED ALL', vim.log.levels.INFO)
+end, { desc = 'Copy all to clipboard' })
