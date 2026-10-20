@@ -124,6 +124,7 @@ local plugins = {
       },
       config = function()
         vim.fn['expand_region#custom_text_objects']({
+            ['iv'] = 0, -- variable segment
             ['a]'] = 1, -- Support nesting of 'around' brackets
             ['ib'] = 1, -- Support nesting of 'around' parentheses
             ['ab'] = 1, -- Support nesting of 'around' parentheses
