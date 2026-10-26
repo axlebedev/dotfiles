@@ -1,7 +1,7 @@
 #!/bin/sh
 i3-msg floating enable
 sleep 0.05
-i3-msg resize set 100 ppt 100 ppt
+i3-msg resize set 50 ppt 100 ppt
 # shrink 2 border widths
 i3-msg resize shrink width 4 px
 # shrink 2 border heights + statusbar height
