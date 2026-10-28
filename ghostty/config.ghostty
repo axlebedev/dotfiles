@@ -1,0 +1,12 @@
+command = /usr/bin/fish --login --interactive
+confirm-close-surface = false
+
+font-family = ComicShannsMono Nerd Font Mono
+font-size = 14
+
+theme = Atom One Light
+cursor-color = cell-foreground
+cursor-text = cell-background
+
+gtk-tabs-location = hidden
+gtk-titlebar = false

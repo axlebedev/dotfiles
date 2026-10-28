@@ -63,6 +63,10 @@ ln -s ~/dotfiles/alacritty.toml ~/.config/alacritty/alacritty.toml
 mkdir ~/.config/mpv
 ln -s ~/dotfiles/mpv ~/.config/mpv
 
+rm -rf ~/.config/ghostty
+ln -s ~/dotfiles/ghostty ~/.config/ghostty
+
+
 echo "source ~/dotfiles/.env" >> ~/.profile
 
 rm -rf ~/.bin

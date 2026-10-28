@@ -16,7 +16,7 @@
 [core]
 ; https://github.com/so-fancy/diff-so-fancy
 	pager = delta --light
-	editor = gnome-terminal --wait -- nvim
+	editor = ghostty --wait -- nvim
 	autoclrf
 [credential]
 	helper = cache --timeout=86400

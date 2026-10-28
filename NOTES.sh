@@ -140,6 +140,7 @@ gromit-mpx
 
 sudo snap install --classic \
 cmake \
+ghostty \
 nvim
 
 sudo npm i -g \
