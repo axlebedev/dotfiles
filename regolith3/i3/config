@@ -81,6 +81,9 @@ exec --no-startup-id [ -z "${NOTIFY_SOCKET-}" ] \
   && systemctl --user start regolith-x11.target \
   || systemd-notify --ready
 
+# launch ghostty service, чтобы первый раз запускалось быстро
+exec --no-startup-id systemctl enable --user app-com.mitchellh.ghostty.service
+
 # Launch first time user experience script
 exec --no-startup-id /usr/bin/regolith-ftue
 # Load nm-applet to provide auth dialogs for network access

@@ -59,12 +59,12 @@ local plugins = {
         require('Comment').setup({
             pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
             toggler = {
-              line = "<C-_>",
-              block = '<C-_><C-_>',
+              line = "<C-/>",
+              block = '<C-/><C-/>',
             },
             opleader = {
-              line = '<C-_>',
-              block = '<C-_><C-_>',
+              line = '<C-/>',
+              block = '<C-/><C-/>',
             },
           })
       end

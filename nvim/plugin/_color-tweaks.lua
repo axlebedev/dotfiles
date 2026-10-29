@@ -1,115 +1,124 @@
-vim.opt.termguicolors = true
--- SpellBad
-vim.api.nvim_set_hl(0, 'SpellBad', {
-  bg = '#532120',
+vim.api.nvim_create_autocmd("ColorScheme", {
+    pattern = "*", -- Matches any colorscheme. Change to "habamax" to target a specific one.
+    callback = function()
+      vim.opt.termguicolors = true
+      -- SpellBad
+      vim.api.nvim_set_hl(0, 'SpellBad', {
+          bg = '#532120',
+        })
+
+      -- PmenuThumb
+      vim.api.nvim_set_hl(0, 'PmenuThumb', { bg = '#999999' })
+
+      -- Conceal (for unused warnings)
+      vim.api.nvim_set_hl(0, 'Conceal', { fg = 'NONE', bg = '#f6b7ac' })
+
+      -- Visual selection
+      vim.api.nvim_set_hl(0, 'Visual', { bg = '#ADCBFF', fg = 'NONE' })
+
+      -- Search highlights
+      local purrple = '#cdadf7'
+      vim.api.nvim_set_hl(0, 'QuickFixLine', { bg = purrple })
+      vim.api.nvim_set_hl(0, 'Search', { bg = purrple, fg = 'NONE' })
+      vim.api.nvim_set_hl(0, 'IncSearch', { bg = purrple, fg = 'NONE' })
+      vim.api.nvim_set_hl(0, 'CurSearch', { bg = purrple, fg = 'NONE' })
+
+      -- Highlightedyank
+      vim.api.nvim_set_hl(0, 'HighlightedyankRegion', { bg = '#acde95' })
+
+      -- MatchParen
+      vim.api.nvim_set_hl(0, 'MatchParen', {
+          bold = true,
+          bg = '#FDBED4',
+          fg = 'NONE'
+        })
+
+      -- Fold column
+      vim.api.nvim_set_hl(0, 'FoldColumn', { bg = '#d9d9d9', fg = '#34352E' })
+      vim.api.nvim_set_hl(0, 'Folded', { bg = '#cee6eb' })
+      vim.api.nvim_set_hl(0, 'UfoFoldedBg', { bg = '#cee6eb' })
+
+      -- SignColumn
+      vim.api.nvim_set_hl(0, 'SignColumn', { bg = '#d9d9d9' })
+
+      -- Clap autocmds (plugin-specific, likely OBSOLETE)
+      local clap_group = vim.api.nvim_create_augroup('ClapHighlights', { clear = true })
+      vim.api.nvim_create_autocmd('User', {
+          group = clap_group,
+          pattern = 'ClapOnExit',
+          callback = function()
+            vim.api.nvim_set_hl(0, 'SignColumn', { bg = '#d9d9d9' })
+          end,
+        })
+      vim.api.nvim_create_autocmd('User', {
+          group = clap_group,
+          pattern = 'ClapOnEnter',
+          callback = function()
+            vim.api.nvim_set_hl(0, 'SignColumn', { bg = '#d9d9d9' })
+          end,
+        })
+
+      -- vim-illuminate
+      vim.api.nvim_set_hl(0, "IlluminatedWordText", { bg = "#D6E3E9", underline = true })
+      vim.api.nvim_set_hl(0, "IlluminatedWordRead", { bg = "#D6E3E9", underline = true })
+      vim.api.nvim_set_hl(0, "IlluminatedWordWrite", { bg = "#D6E3E9", underline = true })
+
+      -- Line numbers
+      local sidebar_bg_cursor = '#e5e5e5'
+      vim.api.nvim_set_hl(0, 'CursorLineNr', { bg = sidebar_bg_cursor, bold = true })
+      vim.api.nvim_set_hl(0, 'CursorLineSign', { bg = sidebar_bg_cursor, bold = true })
+      vim.api.nvim_set_hl(0, 'CursorLineFold', { bg = sidebar_bg_cursor, bold = true })
+      vim.api.nvim_set_hl(0, 'CursorLine', { bg = sidebar_bg_cursor })
+
+      local sidebar_bg = '#d9d9d9'
+      vim.api.nvim_set_hl(0, 'LineNr', { bg = sidebar_bg })
+      vim.api.nvim_set_hl(0, 'SignColumn', { bg = sidebar_bg })
+      vim.api.nvim_set_hl(0, 'FoldColumn', { bg = sidebar_bg })
+      vim.api.nvim_set_hl(0, 'WinSeparator', { bg = sidebar_bg, fg = sidebar_bg })
+
+      -- Diff / GitSigns
+      vim.api.nvim_set_hl(0, 'diffAdded', { bg = '#d0f2d4', fg = 'NONE' })
+      vim.api.nvim_set_hl(0, 'DiffAdd', { bg = '#d0f2d4', fg = 'NONE', bold = true })
+      vim.api.nvim_set_hl(0, 'GitSignsAdd', { fg = '#b1f5b9', bg = '#b1f5b9' })
+
+      vim.api.nvim_set_hl(0, 'diffRemoved', { bg = '#f2d1ce', fg = 'NONE' })
+      vim.api.nvim_set_hl(0, 'DiffDelete', { bg = '#f2d1ce', fg = 'NONE' })
+      vim.api.nvim_set_hl(0, 'GitSignsDelete', { fg = '#f2b7b1', bg = '#f2b7b1' })
+
+      vim.api.nvim_set_hl(0, 'DiffChange', { bg = '#ebdfce', fg = 'NONE' })
+      vim.api.nvim_set_hl(0, 'diffChanged', { bg = '#ebdfce', fg = 'NONE' })
+      vim.api.nvim_set_hl(0, 'GitSignsChange', { fg = '#ffe79f', bg = '#ffe79f' })
+      vim.api.nvim_set_hl(0, 'diffFile', { bg = '#ebdfce', fg = 'NONE' })
+      vim.api.nvim_set_hl(0, 'diffLine', { bg = '#ebdfce', fg = 'NONE', bold = true })
+      vim.api.nvim_set_hl(0, 'DiffText', { bg = '#ebdfce', fg = 'NONE', bold = true })
+
+      -- Popup scrollbar
+      vim.api.nvim_set_hl(0, 'PopupScrollbar', { fg = '#A7A7A7', bg = 'NONE' })
+
+      -- Indexed search popup
+      vim.api.nvim_set_hl(0, 'IndexedSearchPopup', { bold = true, bg = '#FDBED4', fg = 'NONE' })
+
+      -- TODO: when supported
+      -- vim.api.nvim_set_hl(0, 'ChaseChangedLetter', { link = 'DiffAdd' })
+      -- vim.api.nvim_set_hl(0, 'ChaseSeparator', { link = 'DiffChange' })
+
+      vim.api.nvim_set_hl(0, 'MoreMsg', { bg = '#cecfeb', bold = true })
+
+      vim.api.nvim_set_hl(0, 'SnacksIndentScope', { fg = '#979797' })
+
+      -- BACKGROUND
+      local normal_bg = '#EEEEEE'
+      vim.api.nvim_set_hl(0, "Normal", { bg = normal_bg })  -- Your desired color
+      vim.api.nvim_set_hl(0, "NormalNC", { bg = normal_bg }) -- Inactive windows
+      vim.api.nvim_set_hl(0, "CmdLine", { bg = normal_bg })
+      vim.api.nvim_set_hl(0, "CmdLineBg", { bg = normal_bg })
+      vim.api.nvim_set_hl(0, "Pmenu", { bg = '#DDDDDD' })  -- Popup menus too
+      vim.api.nvim_set_hl(0, "NvimTreeNormal", { bg = normal_bg })
+      vim.api.nvim_set_hl(0, "NvimTreeNormalNC", { bg = normal_bg }) -- Inactive
+      vim.api.nvim_set_hl(0, "NvimTreeEndOfBuffer", { bg = normal_bg })
+
+      -- scrollbar
+      vim.api.nvim_set_hl(0, "ScrollView", { bg = "#bfbfbf" })
+      vim.api.nvim_set_hl(0, "ScrollViewHover", { bg = "#9f9f9f" })
+    end,
 })
-
--- PmenuThumb
-vim.api.nvim_set_hl(0, 'PmenuThumb', { bg = '#999999' })
-
--- Conceal (for unused warnings)
-vim.api.nvim_set_hl(0, 'Conceal', { fg = 'NONE', bg = '#f6b7ac' })
-
--- Visual selection
-vim.api.nvim_set_hl(0, 'Visual', { bg = '#ADCBFF', fg = 'NONE' })
-
--- Search highlights
-local purrple = '#cdadf7'
-vim.api.nvim_set_hl(0, 'QuickFixLine', { bg = purrple })
-vim.api.nvim_set_hl(0, 'Search', { bg = purrple, fg = 'NONE' })
-vim.api.nvim_set_hl(0, 'IncSearch', { bg = purrple, fg = 'NONE' })
-vim.api.nvim_set_hl(0, 'CurSearch', { bg = purrple, fg = 'NONE' })
-
--- Highlightedyank
-vim.api.nvim_set_hl(0, 'HighlightedyankRegion', { bg = '#acde95' })
-
--- MatchParen
-vim.api.nvim_set_hl(0, 'MatchParen', {
-  bold = true,
-  bg = '#FDBED4',
-  fg = 'NONE'
-})
-
--- Fold column
-vim.api.nvim_set_hl(0, 'FoldColumn', { bg = '#d9d9d9', fg = '#34352E' })
-vim.api.nvim_set_hl(0, 'Folded', { bg = '#cee6eb' })
-vim.api.nvim_set_hl(0, 'UfoFoldedBg', { bg = '#cee6eb' })
-
--- SignColumn
-vim.api.nvim_set_hl(0, 'SignColumn', { bg = '#d9d9d9' })
-
--- Clap autocmds (plugin-specific, likely OBSOLETE)
-local clap_group = vim.api.nvim_create_augroup('ClapHighlights', { clear = true })
-vim.api.nvim_create_autocmd('User', {
-  group = clap_group,
-  pattern = 'ClapOnExit',
-  callback = function()
-    vim.api.nvim_set_hl(0, 'SignColumn', { bg = '#d9d9d9' })
-  end,
-})
-vim.api.nvim_create_autocmd('User', {
-  group = clap_group,
-  pattern = 'ClapOnEnter',
-  callback = function()
-    vim.api.nvim_set_hl(0, 'SignColumn', { bg = '#d9d9d9' })
-  end,
-})
-
--- vim-illuminate
-vim.api.nvim_set_hl(0, "IlluminatedWordText", { bg = "#D6E3E9", underline = true })
-vim.api.nvim_set_hl(0, "IlluminatedWordRead", { bg = "#D6E3E9", underline = true })
-vim.api.nvim_set_hl(0, "IlluminatedWordWrite", { bg = "#D6E3E9", underline = true })
-
--- Line numbers
-local sidebar_bg_cursor = '#e5e5e5'
-vim.api.nvim_set_hl(0, 'CursorLineNr', { bg = sidebar_bg_cursor, bold = true })
-vim.api.nvim_set_hl(0, 'CursorLineSign', { bg = sidebar_bg_cursor, bold = true })
-vim.api.nvim_set_hl(0, 'CursorLineFold', { bg = sidebar_bg_cursor, bold = true })
-vim.api.nvim_set_hl(0, 'CursorLine', { bg = sidebar_bg_cursor })
-
-local sidebar_bg = '#d9d9d9'
-vim.api.nvim_set_hl(0, 'LineNr', { bg = sidebar_bg })
-vim.api.nvim_set_hl(0, 'SignColumn', { bg = sidebar_bg })
-vim.api.nvim_set_hl(0, 'FoldColumn', { bg = sidebar_bg })
-vim.api.nvim_set_hl(0, 'WinSeparator', { bg = sidebar_bg, fg = sidebar_bg })
-
--- Diff / GitSigns
-vim.api.nvim_set_hl(0, 'diffAdded', { bg = '#d0f2d4', fg = 'NONE' })
-vim.api.nvim_set_hl(0, 'DiffAdd', { bg = '#d0f2d4', fg = 'NONE', bold = true })
-vim.api.nvim_set_hl(0, 'GitSignsAdd', { fg = '#b1f5b9', bg = '#b1f5b9' })
-
-vim.api.nvim_set_hl(0, 'diffRemoved', { bg = '#f2d1ce', fg = 'NONE' })
-vim.api.nvim_set_hl(0, 'DiffDelete', { bg = '#f2d1ce', fg = 'NONE' })
-vim.api.nvim_set_hl(0, 'GitSignsDelete', { fg = '#f2b7b1', bg = '#f2b7b1' })
-
-vim.api.nvim_set_hl(0, 'DiffChange', { bg = '#ebdfce', fg = 'NONE' })
-vim.api.nvim_set_hl(0, 'diffChanged', { bg = '#ebdfce', fg = 'NONE' })
-vim.api.nvim_set_hl(0, 'GitSignsChange', { fg = '#ffe79f', bg = '#ffe79f' })
-vim.api.nvim_set_hl(0, 'diffFile', { bg = '#ebdfce', fg = 'NONE' })
-vim.api.nvim_set_hl(0, 'diffLine', { bg = '#ebdfce', fg = 'NONE', bold = true })
-vim.api.nvim_set_hl(0, 'DiffText', { bg = '#ebdfce', fg = 'NONE', bold = true })
-
--- Popup scrollbar
-vim.api.nvim_set_hl(0, 'PopupScrollbar', { fg = '#A7A7A7', bg = 'NONE' })
-
--- Indexed search popup
-vim.api.nvim_set_hl(0, 'IndexedSearchPopup', { bold = true, bg = '#FDBED4', fg = 'NONE' })
-
--- TODO: when supported
--- vim.api.nvim_set_hl(0, 'ChaseChangedLetter', { link = 'DiffAdd' })
--- vim.api.nvim_set_hl(0, 'ChaseSeparator', { link = 'DiffChange' })
-
-vim.api.nvim_set_hl(0, 'MoreMsg', { bg = '#cecfeb', bold = true })
-
-vim.api.nvim_set_hl(0, 'SnacksIndentScope', { fg = '#979797' })
-
--- BACKGROUND
-local normal_bg = '#EEEEEE'
-vim.api.nvim_set_hl(0, "Normal", { bg = normal_bg })  -- Your desired color
-vim.api.nvim_set_hl(0, "NormalNC", { bg = normal_bg }) -- Inactive windows
-vim.api.nvim_set_hl(0, "CmdLine", { bg = normal_bg })
-vim.api.nvim_set_hl(0, "CmdLineBg", { bg = normal_bg })
-vim.api.nvim_set_hl(0, "Pmenu", { bg = '#DDDDDD' })  -- Popup menus too
-vim.api.nvim_set_hl(0, "NvimTreeNormal", { bg = normal_bg })
-vim.api.nvim_set_hl(0, "NvimTreeNormalNC", { bg = normal_bg }) -- Inactive
-vim.api.nvim_set_hl(0, "NvimTreeEndOfBuffer", { bg = normal_bg })

@@ -72,6 +72,7 @@ local init_config = function()
   vim.opt.hlsearch = true
 
   vim.opt.background = 'light'
+  vim.cmd.colorscheme("newpaper")
 
   vim.opt.termguicolors = true
   vim.defer_fn(function()

@@ -433,9 +433,6 @@ return {
   opts = {
   },
   config = function()
-    vim.api.nvim_set_hl(0, "ScrollView", { bg = "#bfbfbf" })
-    vim.api.nvim_set_hl(0, "ScrollViewHover", { bg = "#9f9f9f" })
-
     require('scrollview').setup({
         signs_on_startup = {},
       })

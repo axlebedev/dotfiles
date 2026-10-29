@@ -10,3 +10,9 @@ cursor-text = cell-background
 
 gtk-tabs-location = hidden
 gtk-titlebar = false
+window-decoration = none
+
+gtk-single-instance = true
+
+selection-background = #ADCBFF
+selection-foreground = cell-foreground
