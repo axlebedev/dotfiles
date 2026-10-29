@@ -34,12 +34,11 @@
 [color "status"]
 ;header (the header text of the status message),
     ;header = yellow
-;added or updated (files which are added but not committed),
-    ;added = cyan
-;changed (files which are changed but not added in the index),
-    changed = cyan
+;STAGED: added or updated (files which are added but not committed),
+    ;added = "#D370D5"
+;UNSTAGED: changed (files which are changed but not added in the index),
+    changed = "#7B75CF"
 ;untracked (files which are not tracked by Git),
-    untracked = magenta
 ;branch (the current branch),
     branch = yellow
 ;nobranch (the color the no branch warning is shown in, defaulting to red),
