@@ -193,6 +193,7 @@ return {
         vim.g.startify_bookmarks = {
           { l = vim.fn.getcwd().. '/apps/website/src/shared/i18n/translations/lang.ru.json' },
           { d = vim.fn.getcwd().. '/packages/common/src/constants/deliveries.ts' },
+          { s = vim.fn.getcwd().. '/packages/build-utils/src/index.ts' },
         }
 
         -- Remap 'o' to open file in Startify window
