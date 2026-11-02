@@ -4,6 +4,8 @@ confirm-close-surface = false
 font-family = ComicShannsMono Nerd Font Mono
 font-size = 14
 
+window-inherit-working-directory = false
+
 theme = Atom One Light
 cursor-color = cell-foreground
 cursor-text = cell-background
