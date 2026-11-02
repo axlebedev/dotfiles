@@ -19,6 +19,24 @@ local plugins = {
       heading = {
         sign = true,
         icons = { "   ", "   ", "   " },
+        above = '▄',
+        below = '▀',
+
+        custom = {
+          {
+            -- Match headers containing "## Me" (adjust based on your actual header text)
+            pattern = "^## Me",
+            foreground = "TodoBgNOTE",
+            background = "TodoBgNOTE",
+          },
+          {
+            -- Match headers containing "## CodeCompanion"
+            pattern = "^## CodeCompanion",
+            foreground = "TodoBgTODO",
+            background = "TodoBgTODO",
+
+          },
+        },
       },
       code = { language_icon = false },
 
