@@ -8,6 +8,9 @@ set -g theme_color_scheme light
 set -g theme_nerd_fonts yes
 set -g theme_date_format "+%H:%M"
 
+# light gray
+set -g fish_color_autosuggestion 868aa3
+
 alias g="~/dotfiles/fish/goa.sh"
 
 function get_master_branch
